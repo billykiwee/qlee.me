@@ -7,14 +7,15 @@ import Container from '../App/components/Container'
 import Header from '../App/components/Header';
 import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
+import { isValidUrl } from '../App/utils/isValidUrl';
 import { minimizeString } from '../App/utils/minimizeString';
 import { ProfilImg } from '../Website/Home';
 
 
-const MAX_LINK_BEFORE_UPDATE = 100
+const MAX_LINK_BEFORE_UPDATE = 10
 
 
-export default function Game() {
+export default function Dashboard() {
 
 
     const [UserLinks, setUserLinks] = useState([])
@@ -25,58 +26,53 @@ export default function Game() {
     }, [])
 
 
-    const [Input,setInput] = useState(window.location.href)
+    const [Input,setInput] = useState('')
+    const [NameLink,setNameLink] = useState('')
 
     const [QrCodeGenerated, setQRCodeGenerated] = useState('')
 
 
-    
     const [Error, setError] = useState('')
+
+
+
+
+
+
     
-    function generateQRCode(input) {
+    function createLink(input) {
+
+        if (Input.length < 1 || !isValidUrl(Input)) throw setError('Tu dois rentrer un URL valide')
         
-        const char = 'azertyuiopqsdfghjklmwxcvbn_' + 'azertyuiopqsdfghjklmwxcvbn'.toLocaleUpperCase() + '1234567890'
-        let linkID = 'loop.me/'
+        
+        const char = 'azertyuiopqsdfghjklmwxcvbn_/' + 'azertyuiopqsdfghjklmwxcvbn'.toLocaleUpperCase() + '1234567890'
+        let linkID = 'localhost:3000/'
                     
         for (let i = 0; i < 5; i++) {
             linkID += char[Math.floor(Math.random() * char.length)]
         }   
 
+        if (MAX_LINK_BEFORE_UPDATE > UserLinks.length) {
 
-        for (const v in UserLinks) {
+            setQRCodeGenerated(input) 
+    
+            let link = {
+                name: NameLink.length < 1 ? isValidUrl(Input).hostname : NameLink,
+                id : linkID.split('/')[1],
+                user: 'user',
+                link: isValidUrl(Input).href,
+                shortLink: linkID,
+                date: Date(),
+                views: 0
+            }    
 
-            if (UserLinks[v].id !== linkID.split('/')[1]) {
+            
+            setUserLinks([...UserLinks, link])
 
-                if (MAX_LINK_BEFORE_UPDATE > UserLinks.length) {
-        
-                    if (Input.includes('.')) {
-        
-                        setQRCodeGenerated(input) 
-                
-                        let link = {
-                            name: '',
-                            id : linkID.split('/')[1],
-                            user: 'user',
-                            link: input.toLowerCase(),
-                            shortLink: linkID,
-                            date: Date()
-                        }    
-        
-                        
-                        setUserLinks([...UserLinks, link])
-        
-                        db.collection('DB').doc('links').collection(link.user).doc(link.link).set(link)
-        
-                        db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
-                    }
-                    else {
-                        setError('Tu dois rentrer un URL valide')
-                    }
-                }
-            }
+            db.collection('DB').doc('links').collection(link.user).doc(link.id).set(link)
+
+            db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
         }
-
-
     }    
 
 
@@ -89,62 +85,62 @@ export default function Game() {
 
             <div className='grid gap-2rem blocks' >
 
-                <div className='grid gap-2rem'>
+                <div className='grid gap-2rem '>
                     <div className='grid gap'>
                         <div>
                             <span className='f-s-25 f-w-500'>Créer un lien</span>
                         </div>
-                        <div className='display gap'>
-                            <div className='display w-100p'>
-                                <input type='text' onChange={e=> {setInput(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                        <div className='grid gap-1rem'>
+                            <div className='grid gap'>
+                                <div className='display w-100p'>
+                                    <input type='text' onChange={e=> {setNameLink(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
+                                </div>
+                                <div className='display w-100p'>
+                                    <input type='text' onChange={e=> {setInput(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                                </div>
                             </div>
                             <div className='display'>
-                                <button onClick={e=> generateQRCode(Input)} className='border-r-1 blue h-3 p-lr-2 border-b' >
+                                <button onClick={e=> createLink(Input)} className='border-r-1 blue h-3 p-lr-2 border-b hover-blue' >
                                     <span className='f-s-16'>Créer</span>
                                 </button>
                             </div>
                         </div>
+
                         {
                             Error && 
-                            <div className='display'>
+                            <div className='display justify-c'>
                                 <small className='c-red'>{Error}</small>
                             </div>
                         }
                     </div>
-
                 </div>
 
                 <div className='grid gap-2rem'>
                     <div className='grid gap'>
-                        <div>
+                        <div className='display justify-s-b'>
                             <span className='f-s-25 f-w-500'>Mes liens</span>
+                            <div className='border-r-04 yellow p-lr-04'>
+                                <small>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                            </div>
                         </div>
                         {
                             UserLinks
                             .filter(e=> e.date)
                             .map(userlink=> {
                                 return (
-                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b white' id={userlink.id}>
+                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b white' key={userlink.id}>
                                         <div className='display gap-1rem w-50'>
                                             <a href={'https://' + QrCodeGenerated}>
-                                                {/* <QRCode
-                                                    bgColor={'white'}
-                                                    fgColor={'black'}
-                                                    className='click'
-                                                    size={44}
-                                                    value={QrCodeGenerated}
-                                                /> */}
                                                 <img src={getFavicon(userlink.link)} className='w-2 h-2 border-r-100' />
                                             </a>
                                             <div className='grid '> 
                                                 <div className='display gap'>
-                                                    <span className='f-s-16'>Lien</span>
-                                                    <small className='c-grey f-w-300' style={{fontStyle: 'italic'}}>{minimizeString(userlink.link, 10)}</small>
+                                                    <span className='f-s-16'>{minimizeString(userlink.name, 10)}</span>
                                                 </div>
 
                                                 <div className='grid gap'>
                                                     <div className='display gap'>
-                                                        <a href={Input} className='link'>{userlink.shortLink}</a>
+                                                        <a href={userlink.link} rel="noopener noreferrer" className='link'>{userlink.shortLink}</a>
                                                         <div>
                                                             <button className='display border-r-04 w-2 h-2 border border-b' onClick={e=> navigator.clipboard.writeText(userlink.shortLink)} >
                                                                 <img src='/images/copy.svg' className='w-1 h-1' />
@@ -156,7 +152,7 @@ export default function Game() {
                                         </div>
                                         <div>
                                             <Link to={'/edit/' + userlink.shortLink.split('/')[1]}>
-                                                <button className='grey'>
+                                                <button className='grey hover'>
                                                     <span className='f-w-300'>Modifier</span>
                                                 </button>
                                             </Link>

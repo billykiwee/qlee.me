@@ -11,6 +11,7 @@
     --blue-dark: #0760d0;
     --background: #fafafa;
     --black: black;
+    --yellow: #f9ca24;
     --black-200 : rgb(49, 49, 49);
     --grey : #F8F8F8;
     --grey-200: #cccccc;
@@ -20,7 +21,7 @@
     --sucess: #1DD1A1;
     --sucess-txt: #1dd1a121;
     --error: #EB3B5A;
-    --red: var(--error);
+    --red: #ee5253;
     --red-dark: #dd3352;
     --red-secondary : #EB3B5A1A;
     --error-txt: #ff47561e;
@@ -176,10 +177,6 @@ button {
     background-color: transparent;
     transition: 0.1s ease-out;
 }
-button:active {
-    transform: scale(0.98);
-}
-
 
 .error-message,
 .sucess-message,
@@ -288,6 +285,12 @@ button:active {
     background-color: var(--black);
     color: var(--background);
 }
+
+.yellow {
+    background-color: var(--yellow);
+    color: var(--background);
+}
+
 .transparent {
     background-color: transparent;
     border: 1px solid var(--border);
@@ -720,7 +723,8 @@ padding: 0.4rem;
 
 
 .div-input:focus-within {
-    border: 1px solid var(--blue)
+    border: 1px solid var(--blue);
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 10%);
 }
 .div-input:focus-within > span > svg > path {
     stroke: var(--blue);

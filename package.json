@@ -46,6 +46,7 @@
     "react-use-scroll-direction": "^0.1.0",
     "stripe": "^9.12.0",
     "swiper": "^8.4.5",
+    "url-exist": "^3.0.1",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
