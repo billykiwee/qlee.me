@@ -1,16 +1,11 @@
-export default function UniqueID(lenght) {
+export default function UniqueID(name, lenght) {
 
     var UID = ''
-    var char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\/_";
   
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < lenght; i++)
       UID += char.charAt(Math.floor(Math.random() * char.length))
   
-    return UID
+    return name + '-' + UID
 }
 
-
-
-export function incrementalID() {
-    return new Date().valueOf()
-}

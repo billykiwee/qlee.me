@@ -9,6 +9,7 @@ import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import { minimizeString } from '../App/utils/minimizeString';
+import UniqueID from '../App/utils/uniqueID';
 import { ProfilImg } from '../Website/Home';
 
 
@@ -29,32 +30,16 @@ export default function Dashboard() {
     const [Input,setInput] = useState('')
     const [NameLink,setNameLink] = useState('')
 
-    const [QrCodeGenerated, setQRCodeGenerated] = useState('')
-
-
     const [Error, setError] = useState('')
-
-
-
-
-
 
     
     function createLink(input) {
 
         if (Input.length < 1 || !isValidUrl(Input)) throw setError('Tu dois rentrer un URL valide')
         
-        
-        const char = 'azertyuiopqsdfghjklmwxcvbn_/' + 'azertyuiopqsdfghjklmwxcvbn'.toLocaleUpperCase() + '1234567890'
-        let linkID = 'localhost:3000/'
+        const linkID = 'localhost:3000/' + UniqueID('', 5)
                     
-        for (let i = 0; i < 5; i++) {
-            linkID += char[Math.floor(Math.random() * char.length)]
-        }   
-
         if (MAX_LINK_BEFORE_UPDATE > UserLinks.length) {
-
-            setQRCodeGenerated(input) 
     
             let link = {
                 name: NameLink.length < 1 ? isValidUrl(Input).hostname : NameLink,
@@ -130,9 +115,9 @@ export default function Dashboard() {
                                 return (
                                     <div className='display gap p-1 border-b border-r-1 border justify-s-b white' key={userlink.id}>
                                         <div className='display gap-1rem w-50'>
-                                            <a href={'https://' + QrCodeGenerated}>
+                                            <Link to={'/edit/' + userlink.shortLink.split('/')[1]}>
                                                 <img src={getFavicon(userlink.link)} className='w-2 h-2 border-r-100' />
-                                            </a>
+                                            </Link>
                                             <div className='grid '> 
                                                 <div className='display gap'>
                                                     <span className='f-s-16'>{minimizeString(userlink.name, 10)}</span>

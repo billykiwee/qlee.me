@@ -43,11 +43,13 @@ export default function Edit() {
     function preDeleteLink() {
         setMessage({
             title: 'Attention',
-            question: 'Voulez-vous continuer ?',
             message: 'Vous êtes sur le point de supprimer ce lien',
+            question: 'Voulez-vous continuer ?',
             buttonText: 'Supprimer',
+            buttonColor: 'red',
             doubleChoice: true,
             valid: () => deleteLink(),
+            close: () => setMessage({}),
             statu: 'error'
         })
 
@@ -72,6 +74,7 @@ export default function Edit() {
         db.collection('DB').doc('links').collection('links').doc(Link[0].id).update(editLink)
         db.collection('DB').doc('links').collection('user').doc(Link[0].id).update(editLink)
     }
+
 
 
    /*  document.querySelector('.tiktok-1czmy9n-DivVideoList').remove()
@@ -110,38 +113,40 @@ export default function Edit() {
 
                                         <div className='grid blocks gap-2rem'>
 
-                                            <div className='grid gap white border-r-1 border-b p-1'>
-                                                <div className='display justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <img src={getFavicon(data.link)} className='w-3 h-3 border-r-100' />
-                                                        <div className='grid'>
-                                                            <span className='f-s-18'>{minimizeString(data.name, 90)}</span>
-                                                            <div className='display gap'>
-                                                                <a href={data.link} rel="noopener noreferrer" className='link f-s-18'>{data.shortLink}</a>
-                                                                <div>
-                                                                    <button className='display border-r-04 w-2 h-2 border border-b' onClick={e=> navigator.clipboard.writeText(data.shortLink)} >
-                                                                        <img src='/images/copy.svg' className='w-1 h-1' />
-                                                                    </button>
+                                            <div className='display align-top'>
+                                                <div className='grid gap white border-r-1 border-b p-1 w-100p'>
+                                                    <div className='display justify-s-b'>
+                                                        <div className='display gap'>
+                                                            <img src={getFavicon(data.link)} className='w-3 h-3 border-r-100' />
+                                                            <div className='grid'>
+                                                                <span className='f-s-18'>{minimizeString(data.name, 30)}</span>
+                                                                <div className='display gap'>
+                                                                    <a href={data.link} rel="noopener noreferrer" className='link f-s-18'>{data.shortLink}</a>
+                                                                    <div>
+                                                                        <button className='display border-r-04 w-2 h-2 border border-b' onClick={e=> navigator.clipboard.writeText(data.shortLink)} >
+                                                                            <img src='/images/copy.svg' className='w-1 h-1' />
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div className='display gap'>
+                                                            <img src='/images/eye.svg' className='opacity w-1 h-1' />
+                                                            <span className='c-grey f-w-300'>{data.views} clics</span>
+                                                        </div>
                                                     </div>
-                                                    <div className='display gap'>
-                                                        <img src='/images/eye.svg' className='opacity w-1 h-1' />
-                                                        <span className='c-grey f-w-300'>{data.views} clics</span>
+                                                    <div className='grid shadow margin-auto p-1 border-r-1 border gap-1rem'>
+                                                        <div className='display justify-c'>
+                                                            <span className='f-s-20'>Qr code</span>
+                                                        </div>
+                                                        <QRCode
+                                                            bgColor={'white'}
+                                                            fgColor={'black'}
+                                                            className='click'
+                                                            size={122}
+                                                            value={data.link}
+                                                        />
                                                     </div>
-                                                </div>
-                                                <div className='grid shadow margin-auto p-1 border-r-1 border gap-1rem'>
-                                                    <div className='display justify-c'>
-                                                        <span className='f-s-20'>Qr code</span>
-                                                    </div>
-                                                    <QRCode
-                                                        bgColor={'white'}
-                                                        fgColor={'black'}
-                                                        className='click'
-                                                        size={122}
-                                                        value={data.link}
-                                                    />
                                                 </div>
                                             </div>
 
@@ -149,7 +154,7 @@ export default function Edit() {
                                                 <div className='grid gap-1rem'>
                                                     <div className='grid gap-04 w-100p'>
                                                         <span>Modifier le nom</span>
-                                                        <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' onChange={e=> seteditLink({...editLink, name : e.target.value})} />
+                                                        <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={data.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
                                                     </div>
                                                     <div className='grid gap-04 w-100p'>
                                                         <span>Modifier le lien principal</span>
@@ -159,19 +164,36 @@ export default function Edit() {
                                                     {
                                                         2 + 2 === 4 
                                                         ?
-                                                        <div className='grid gap-04 w-100p'>
-                                                            <div className='display gap'>
-                                                                <span>Modifier le lien court</span>
-                                                                <div className='display click'>
-                                                                    <div className='display justify-c yellow border-r-04 w-1 p-04'>
-                                                                        <span className='display'>
-                                                                            <img src='/images/lock-solid.svg' width={14} />
-                                                                        </span>
+                                                        <>
+                                                            <div className='grid gap-04 w-100p'>
+                                                                <div className='display gap'>
+                                                                    <span>Modifier le lien court</span>
+                                                                    <div className='display click'>
+                                                                        <div className='display justify-c yellow border-r-04 w-1 p-04'>
+                                                                            <span className='display'>
+                                                                                <img src='/images/lock-solid.svg' width={14} />
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <input type='text' className='div-input h-3 border-r-1 w-100p opacity no-click' placeholder={data.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
                                                             </div>
-                                                            <input type='text' className='div-input h-3 border-r-1 w-100p opacity no-click' placeholder={data.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
-                                                        </div>
+                                                            <div className='grid gap-04 opacity no-click'>
+                                                                <div className='display'>
+                                                                    <label htmlFor='active_views' className='display gap click'>
+                                                                        <input type='checkbox' className='h-1' id='active_views' />
+                                                                        <span className='f-w-300'>Activer les publicités</span>
+                                                                    </label>
+                                                                </div>
+
+                                                                <div className='display'>
+                                                                    <label htmlFor='active_adds' className='display gap click'>
+                                                                        <input type='checkbox' className='h-1' id='active_adds' />
+                                                                        <span className='f-w-300'>Activer les clics</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </>
                                                         :
                                                         <div className='grid gap-04 w-100p'>
                                                             <div className='display gap'>
@@ -188,19 +210,6 @@ export default function Edit() {
                                                         </div>
                                                     }
 
-                                                    <div className='display'>
-                                                        <label htmlFor='active_views' className='display gap click'>
-                                                            <input type='checkbox' className='h-1' id='active_views' />
-                                                            <span className='f-w-300'>Activer les publicités</span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div className='display'>
-                                                        <label htmlFor='active_adds' className='display gap click'>
-                                                            <input type='checkbox' className='h-1' id='active_adds' />
-                                                            <span className='f-w-300'>Activer les clics</span>
-                                                        </label>
-                                                    </div>
                                                     <div className='grid gap-04 w-100p'>
                                                         <span>Ajouter des tags</span>
                                                         <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
