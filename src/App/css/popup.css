@@ -1,0 +1,15 @@
+.frame-popup {
+    position: fixed;
+    z-index: 92;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.frame-popup > div {
+    box-shadow: 1px 4px 13Px 3px rgb(0 0 0 / 9%);
+    max-width: 244px;
+}

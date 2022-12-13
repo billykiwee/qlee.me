@@ -4,6 +4,9 @@ import { useStateValue } from './StateProvider'
 
 export default function Header() {
 
+
+    const [{user}] = useStateValue()
+
     
     return (
         <div className='m-b-2'>
@@ -14,8 +17,8 @@ export default function Header() {
                     </a>
                 </div>
                 <div className='display gap'>
-                    <a href='/dashboard' className='display'>
-                        <img src={ProfilImg} className='border-r-100 w-2 h-2' />
+                    <a href='/dashboard' className='display avatar-header'>
+                        <img src={user?.photoURL} className='border-r-100' />
                     </a>
                     <button className='w-2 h-2'>
                         <svg width="100" height="80" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
