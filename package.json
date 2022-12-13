@@ -1,0 +1,81 @@
+{
+  "name": "game-bet",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@coingecko/cryptoformat": "^0.5.4",
+    "@googlemaps/js-api-loader": "^1.14.3",
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@heroicons/react": "^2.0.12",
+    "@smakss/react-scroll-direction": "^1.0.1",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.36.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "cleave.js": "^1.6.0",
+    "coinbase-commerce-node": "^1.0.4",
+    "cors": "^2.8.5",
+    "crypto-price": "^0.0.6",
+    "env-cmd": "^10.1.0",
+    "eth-price": "^0.1.1",
+    "ethers": "^5.6.9",
+    "firebase": "^9.8.4",
+    "firebase-admin": "^11.0.1",
+    "firebase-functions": "^3.22.0",
+    "get-eth-price": "^1.0.0",
+    "get-website-favicon": "^0.0.7",
+    "google-map-react": "^2.2.0",
+    "google-maps-reviews": "^0.3.0",
+    "process": "^0.11.10",
+    "rainbow-code": "^2.1.7",
+    "react": "^18.2.0",
+    "react-calendar": "^4.0.0",
+    "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
+    "react-firebase-hooks": "^5.0.3",
+    "react-google-autocomplete": "^2.7.0",
+    "react-map-gl": "^7.0.19",
+    "react-number-format": "^4.9.3",
+    "react-phone-input-2": "^2.15.1",
+    "react-qr-code": "^2.0.9",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^4.0.3",
+    "react-use-scroll-direction": "^0.1.0",
+    "stripe": "^9.12.0",
+    "swiper": "^8.4.5",
+    "use-sound": "^4.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.5",
+    "react-error-overlay": "6.0.9"
+  },
+  "scripts": {
+    "start": "react-scripts --openssl-legacy-provider start || react-scripts start",
+    "build": "react-scripts --openssl-legacy-provider build || react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
