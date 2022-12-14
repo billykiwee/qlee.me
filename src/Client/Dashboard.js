@@ -78,8 +78,6 @@ export default function Dashboard() {
 
         <Container>
 
-            <Header/>
-
             <div className='grid gap-2rem blocks' >
 
                 <div className='grid gap-2rem'>

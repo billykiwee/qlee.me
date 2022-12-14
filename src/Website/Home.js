@@ -5,7 +5,7 @@ import Header from '../App/components/Header'
 export default function Home() {
     return (
         <Container>
-            <Header />
+
         </Container>
     )
 }

@@ -11,13 +11,6 @@ import { StateProvider } from './App/components/StateProvider'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 
-const btn = document.querySelectorAll('button')
-
-btn.forEach(btn=> {
-    btn.onmousedown = () => btn.style.borderBottom = 'unset'
-    btn.onmouseup = () => btn.style.borderBottom = '6px solid #00000017'
-})
-
 root.render(
     <React.StrictMode>
         <StateProvider initialState={initialState} reducer={reducer} >

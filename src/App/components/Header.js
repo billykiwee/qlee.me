@@ -8,7 +8,8 @@ export default function Header() {
 
     const [{user}] = useStateValue()
 
-
+    const [Menu, setMenu] = useState(false)
+    
     const menu = [
         {
             name: 'Acceuil',
@@ -16,24 +17,23 @@ export default function Header() {
         },
         {
             name: 'Créer un lien',
-            link: '/',
+            link: '/dashboard',
         },
         {
             name: 'Créer un Link in bio',
-            link: '/',
+            link: '/dashboard',
         },
         {
             name: 'Pricing',
-            link: '/',
+            link: '/pricing',
         }
         ,
         {
             name: 'Terms',
-            link: '/',
+            link: '/terms',
         }
     ]
 
-    const [Menu, setMenu] = useState(false)
     
     return (
         <div className='m-b-2 m-t-1'>
@@ -57,14 +57,16 @@ export default function Header() {
                 </div>
                 {
                     Menu &&
-                    <div className='justify-c m-t-2 menu' >
-                        <div className='grid gap-04'>
+                    <div className='display justify-c m-t-2 menu'>
+                        <div className='grid gap-04 w-100p'>
                             {
                                 menu.map(menu=> {
                                     return (
-                                        <button className='h-3 hover border-r-1'>
-                                            <span className='f-s-16'>{menu.name}</span>
-                                        </button>
+                                        <Link to={menu.link} className='w-100p' key={menu.name}>
+                                            <button className='h-3 hover border-r-1 '>
+                                                <span className='f-s-16'>{menu.name}</span>
+                                            </button>
+                                        </Link>
                                     )
                                 })
                             }

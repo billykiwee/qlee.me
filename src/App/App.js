@@ -9,6 +9,10 @@ import Dashboard from '../Client/Dashboard'
 import Edit from '../Client/Edit'
 import Link from '../Client/Link'
 import Popup from './components/Popup'
+import Header from './components/Header'
+import Container from './components/Container'
+import Footer from './components/Footer'
+import Main from './components/Main'
 
 
 export default function App() {
@@ -37,16 +41,27 @@ export default function App() {
     }, [dispatch, auth])
 
 
+
+
+
     return (
         <BrowserRouter>
-            <main>
-                <Routes>
-                    <Route path="/" exact element={<Home />} />
-                    <Route path="/dashboard" exact element={<Dashboard />} />
-                    <Route path="/edit/:LinkID" exact element={<Edit />} />
-                    <Route path="/:LinkID" exact element={<Link />} />
-                </Routes>
-            </main>
+
+            <Container>
+                <Main>
+                    <Header />
+
+                    <Routes>
+                        <Route path="/" exact element={<Home />} />
+                        <Route path="/dashboard" exact element={<Dashboard />} />
+                        <Route path="/edit/:LinkID" exact element={<Edit />} />
+                        <Route path="/:LinkID" exact element={<Link />} />
+                    </Routes>
+
+                </Main>
+                <Footer />
+            </Container>
+
         </BrowserRouter>
                 
     )

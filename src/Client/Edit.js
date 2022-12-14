@@ -205,9 +205,8 @@ export default function Edit() {
         <>
             <Popup content={Message} />
             <QRcode link={QrCode} close={e=> setQrCode('')} />
+            
             <Container>
-                
-                    <Header />
 
                     <div>
                         <h2>Modifier le lien</h2>
@@ -262,7 +261,7 @@ export default function Edit() {
                                             <div className='grid gap white border-r-1 border-b p-1 w-100p'>
                                                 <div className='display justify-s-b'>
                                                     <div className='display gap'>
-                                                        <div className='display p-04 border-r-04 border shadow' onClick={e=> setQrCode(Link.link)}>
+                                                        <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.link)}>
                                                             <QRCode
                                                                 onClick={e=> setQrCode(Link.link)}
                                                                 bgColor='white'
@@ -276,7 +275,10 @@ export default function Edit() {
                                                         </div>
                                                     </div>
                                                     <div className='display gap'>
-                                                        <button className='border-b white h-2 w-2 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.link)} >
+                                                        <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(Link.link)} >
+                                                            <span className='display'>Modifier</span>
+                                                        </button>
+                                                        <button className='border-b white hover h-2 w-2 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.link)} >
                                                             <span className='display'>
                                                                 <img src='/images/dowload.svg' width={20} height={20} />
                                                             </span>
