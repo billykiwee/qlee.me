@@ -4,7 +4,7 @@ export default function Container({children, style}) {
 
     return (
         <div className={'container'}>
-            <div className='grid'>{children}</div>
+            {children}
         </div>
     )
 

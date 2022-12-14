@@ -46,22 +46,16 @@ export default function App() {
 
     return (
         <BrowserRouter>
-
-            <Container>
-                <Main>
-                    <Header />
-
+            <Header />
+                <Container>
                     <Routes>
                         <Route path="/" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
                         <Route path="/:LinkID" exact element={<Link />} />
                     </Routes>
-
-                </Main>
-                <Footer />
-            </Container>
-
+                </Container>
+            <Footer />  
         </BrowserRouter>
                 
     )

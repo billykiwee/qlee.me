@@ -76,7 +76,7 @@ export default function Dashboard() {
 
     return (
 
-        <Container>
+        <>
 
             <div className='grid gap-2rem blocks' >
 
@@ -213,6 +213,6 @@ export default function Dashboard() {
 
             
 
-        </Container>
+        </>
     )
 }
