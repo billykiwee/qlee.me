@@ -9,7 +9,7 @@ export default function Header() {
 
     
     return (
-        <div className='m-b-2'>
+        <div className='m-b-2 m-t-1'>
             <header className='display justify-s-b shadow border-r-2 p-1 border'>
                 <div className='display gap click'>
                     <a href='/' className='display'>

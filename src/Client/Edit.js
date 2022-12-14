@@ -10,6 +10,7 @@ import { minimizeString } from '../App/utils/minimizeString'
 import { isValidUrl } from '../App/utils/isValidUrl'
 import Popup, { PopUpcontent } from '../App/components/Popup'
 import { useStateValue } from '../App/components/StateProvider'
+import QRcode from './views/QRcode'
 
 
 
@@ -149,13 +150,13 @@ export default function Edit() {
 
 
 
-
-
+    const [QrCode,setQrCode] = useState('')
 
      return (
 
         <>
             <Popup content={Message} />
+            <QRcode link={QrCode} close={e=> setQrCode('')} />
             <Container>
                 
                     <Header />
@@ -200,6 +201,7 @@ export default function Edit() {
                                                             <span className='f-s-20'>Qr code</span>
                                                         </div>
                                                         <QRCode
+                                                            onClick={e=> setQrCode(data.link)}
                                                             bgColor={'white'}
                                                             fgColor={'black'}
                                                             className='click'
