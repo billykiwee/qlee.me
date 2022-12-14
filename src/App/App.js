@@ -36,16 +36,6 @@ export default function App() {
         })
     }, [dispatch, auth])
 
-    
-
-
-    const btn = document.querySelectorAll('button')
-
-    btn.forEach(btn=> {
-        btn.onmousedown = () => btn.style.borderBottom = 'unset'
-        btn.onmouseup = () => btn.style.borderBottom = '6px solid #00000017'
-    })
-
 
     return (
         <BrowserRouter>
