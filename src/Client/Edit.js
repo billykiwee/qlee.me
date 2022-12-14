@@ -185,6 +185,19 @@ export default function Edit() {
 
 
 
+    function downloadQRCode(data) {
+        const svg = document.getElementById('qr-code-svg');
+        let downloadLink = document.createElement('a');
+        downloadLink.href = 'data:image/svg;base64,' + btoa(svg.outerHTML)
+
+        downloadLink.download = 'qr-code.svg'
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+
+
+
     const [QrCode,setQrCode] = useState('')
 
      return (
@@ -207,51 +220,69 @@ export default function Edit() {
 
                                 <div className='grid blocks gap-2rem'>
 
-                                    <div className='display align-top'>
-                                        <div className='grid gap white border-r-1 border-b p-1 w-100p'>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <img src={getFavicon(editLink.link ? editLink.link : Link.link)} className='w-3 h-3 border-r-100' />
-                                                    <div className='grid'>
-                                                        <span className='f-s-18'>{editLink.name ?? minimizeString(Link.name, 30)}</span>
-                                                        <div className='display gap'>
-                                                            <a href={Link.link} rel="noopener noreferrer" className='link f-s-18 f-w-300'>{Link.shortLink}</a>
+                                    <div className='grid gap'>
+
+                                        <div className='display align-top'>
+                                            <div className='grid gap white border-r-1 border-b p-1 w-100p'>
+                                                <div className='display justify-s-b'>
+                                                    <div className='display gap'>
+                                                        <img src={getFavicon(editLink.link ? editLink.link : Link.link)} className='w-2 h-2 border-r-100' />
+                                                        <div className='grid'>
+                                                            <span>{editLink.name ?? minimizeString(Link.name, 30)}</span>
                                                             <div className='display gap'>
-                                                            <button 
-                                                                className='display border-r-04 w-2 hover h-2 border border-b' 
-                                                                onClick={e=> {
-                                                                    navigator.clipboard.writeText(Link.shortLink)
-                                                                    let div = document.querySelector('#link-' + Link.id)
-                                                                    div.style.display = 'flex'
-                                                                    setTimeout(e=> div.style.display = 'none', 1500)
-                                                                }} 
-                                                            >
-                                                                <img src='/images/copy.svg' width={16} />
-                                                            </button>
-                                                            <div className='display disable green absolute border-r-04 p-04' id={'link-' + Link.id} >
-                                                                <small>Copié</small>
+                                                                <a href={Link.link} rel="noopener noreferrer" className='link f-w-300'>{Link.shortLink}</a>
+                                                                <div className='display gap'>
+                                                                <button 
+                                                                    className='display border-r-04 w-2 hover h-2 border border-b' 
+                                                                    onClick={e=> {
+                                                                        navigator.clipboard.writeText(Link.shortLink)
+                                                                        let div = document.querySelector('#link-' + Link.id)
+                                                                        div.style.display = 'flex'
+                                                                        setTimeout(e=> div.style.display = 'none', 1500)
+                                                                    }} 
+                                                                >
+                                                                    <img src='/images/copy.svg' width={16} />
+                                                                </button>
+                                                                <div className='display disable green absolute border-r-04 p-04' id={'link-' + Link.id} >
+                                                                    <small>Copié</small>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        </div>
                                                     </div>
+                                                    <div className='display gap'>
+                                                        <img src='/images/eye.svg' className='opacity w-1 h-1' />
+                                                        <span className='c-grey f-w-300'>{Link.views} vues</span>
                                                     </div>
-                                                </div>
-                                                <div className='display gap'>
-                                                    <img src='/images/eye.svg' className='opacity w-1 h-1' />
-                                                    <span className='c-grey f-w-300'>{Link.views} vues</span>
                                                 </div>
                                             </div>
-                                            <div className='grid shadow margin-auto p-1 border-r-1 border gap'>
-                                                <div className='display justify-c'>
-                                                    <span className='f-s-20' style={{fontFamily :"'Space Mono', monospace"}}>Qr code</span>
+                                        </div>
+                                        
+                                        <div className='display align-top'>
+                                            <div className='grid gap white border-r-1 border-b p-1 w-100p'>
+                                                <div className='display justify-s-b'>
+                                                    <div className='display gap'>
+                                                        <div className='display p-04 border-r-04 border shadow' onClick={e=> setQrCode(Link.link)}>
+                                                            <QRCode
+                                                                onClick={e=> setQrCode(Link.link)}
+                                                                bgColor='white'
+                                                                fgColor='black'
+                                                                className='w-2 h-2'
+                                                                value={Link.link}
+                                                            />
+                                                        </div>
+                                                        <div className='grid'>
+                                                            <span>Qr code</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='display gap'>
+                                                        <button className='border-b white h-2 w-2 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.link)} >
+                                                            <span className='display'>
+                                                                <img src='/images/dowload.svg' width={20} height={20} />
+                                                            </span>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <QRCode
-                                                    onClick={e=> setQrCode(Link.link)}
-                                                    bgColor='white'
-                                                    fgColor='black'
-                                                    className='click'
-                                                    size={122}
-                                                    value={Link.link}
-                                                />
                                             </div>
                                         </div>
                                     </div>

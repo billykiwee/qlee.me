@@ -43,7 +43,7 @@ body {
     color: var(--text-color);
     background-color: var(--background);
     height: 100%;
-   /*  scroll-behavior: smooth; */
+    scroll-behavior: smooth;
 }
 
 main {

@@ -129,7 +129,7 @@ export default function Dashboard() {
                     <div className='grid gap'>
                         <div className='display justify-s-b'>
                             <span className='f-s-25 f-w-500'>Mes liens</span>
-                            <div className='display gap-04 border-r-04 yellow p-04'>
+                            <div className='display gap-04 border-r-04 yellow p-04 click'>
                                 <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
                                 <div className='display justify-c'>
                                     <span className='display'>
