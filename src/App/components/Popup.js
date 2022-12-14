@@ -15,9 +15,9 @@ export default function Popup({content, children}) {
                     <div className='display justify-s-b'>
                         <span className='f-s-20 f-w-500'>{content.title}</span>
                         <div className='display'>
-                            <button className='border-b border border-r-04 w-2 h-2' onClick={content.close}>
+                            <button className='w-2 h-2' onClick={content.close}>
                                 <span className='display'>
-                                    <img src='/images/x.svg' className='w-1 h-1' />
+                                    <img src='/images/x.svg' width={20} height={20} />
                                 </span>
                             </button>
                         </div>

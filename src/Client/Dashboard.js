@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import Container from '../App/components/Container'
 import Header from '../App/components/Header';
+import { useStateValue } from '../App/components/StateProvider';
 import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
@@ -19,12 +20,23 @@ const MAX_LINK_BEFORE_UPDATE = 10
 export default function Dashboard() {
 
 
+    const [{user}] = useStateValue()
+
     const [UserLinks, setUserLinks] = useState([])
+
     useEffect(e=> {
-        db.collection('DB').doc('links').collection('user').orderBy('date').onSnapshot(snapshot => {
-            setUserLinks(snapshot.docs.map(doc => doc.data()))
+        const getUser = new Promise((resolve, reject) => {
+            resolve(user?.email)
         })
-    }, [])
+
+        getUser
+        .then(userEmail => {
+            db.collection('DB').doc('links').collection(userEmail).orderBy('date').onSnapshot(snapshot => {
+                setUserLinks(snapshot.docs.map(doc => doc.data()))
+            })
+        })
+
+    }, [user])
 
 
     const [Input,setInput] = useState('')
@@ -44,7 +56,7 @@ export default function Dashboard() {
             let link = {
                 name: NameLink.length < 1 ? isValidUrl(Input).hostname : NameLink,
                 id : linkID.split('/')[1],
-                user: 'user',
+                user: user?.email,
                 link: isValidUrl(Input).href,
                 shortLink: linkID,
                 date: Date(),
@@ -69,6 +81,17 @@ export default function Dashboard() {
             <Header/>
 
             <div className='grid gap-2rem blocks' >
+
+                <div>
+                    <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
+                        <div className='display'>
+                            <img width={244} height={244} className='border-r-2' src='https://images.unsplash.com/photo-1664574654589-8f6c9b94c02d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' />
+                        </div>
+                        <div className='display'>
+                            <img width={244} height={244} className='border-r-2' src='https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60' />
+                        </div>
+                    </div>
+                </div>
 
                 <div className='grid gap-2rem '>
                     <div className='grid gap'>
@@ -104,30 +127,34 @@ export default function Dashboard() {
                     <div className='grid gap'>
                         <div className='display justify-s-b'>
                             <span className='f-s-25 f-w-500'>Mes liens</span>
-                            <div className='border-r-04 yellow p-lr-04'>
-                                <small>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                            <div className='display gap-04 border-r-04 yellow p-04'>
+                                <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                                <div className='display justify-c'>
+                                    <span className='display'>
+                                        <img src='/images/lock-solid.svg' width={14} />
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         {
                             UserLinks
-                            .filter(e=> e.date)
                             .map(userlink=> {
                                 return (
-                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b white' key={userlink.id}>
-                                        <div className='display gap-1rem w-50'>
-                                            <Link to={'/edit/' + userlink.shortLink.split('/')[1]}>
-                                                <img src={getFavicon(userlink.link)} className='w-2 h-2 border-r-100' />
+                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b white' key={userlink?.id}>
+                                        <div className='display gap-1rem'>
+                                            <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
+                                                <img src={getFavicon(userlink?.link)} className='w-2 h-2 border-r-100' />
                                             </Link>
                                             <div className='grid '> 
                                                 <div className='display gap'>
-                                                    <span className='f-s-16'>{minimizeString(userlink.name, 10)}</span>
+                                                    <span className='f-s-16'>{minimizeString(userlink?.name, 10)}</span>
                                                 </div>
 
                                                 <div className='grid gap'>
                                                     <div className='display gap'>
-                                                        <a href={userlink.link} rel="noopener noreferrer" className='link'>{userlink.shortLink}</a>
+                                                        <a href={userlink?.link} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
                                                         <div>
-                                                            <button className='display border-r-04 w-2 h-2 border border-b' onClick={e=> navigator.clipboard.writeText(userlink.shortLink)} >
+                                                            <button className='display border-r-04 w-2 h-2 border border-b' onClick={e=> navigator.clipboard.writeText(userlink?.shortLink)} >
                                                                 <img src='/images/copy.svg' className='w-1 h-1' />
                                                             </button>
                                                         </div>
@@ -136,7 +163,7 @@ export default function Dashboard() {
                                             </div>
                                         </div>
                                         <div>
-                                            <Link to={'/edit/' + userlink.shortLink.split('/')[1]}>
+                                            <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
                                                 <button className='grey hover'>
                                                     <span className='f-w-300'>Modifier</span>
                                                 </button>
