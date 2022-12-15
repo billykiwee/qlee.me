@@ -87,10 +87,14 @@ export default function Dashboard() {
 
         setUserLinks([...UserLinks, link])
 
-        db.collection('DB').doc('links').collection(link.user).doc(link.id).set(link)
 
         db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
+        db.collection('DB').doc('links').collection(user?.email).doc(link.id).set(link)
+        .then(e=> {
+            document.querySelectorAll('input').forEach(e=> e.value = '')
+        })
     }    
+
 
 
 

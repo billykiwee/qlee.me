@@ -5,7 +5,6 @@ import { db } from '../App/database/firebase'
 import getFavicon from '../App/utils/getFavicon'
 import formatDate from '../App/utils/formatDate'
 import QRCode from 'react-qr-code'
-import Header from '../App/components/Header'
 import { minimizeString } from '../App/utils/minimizeString'
 import { isValidUrl } from '../App/utils/isValidUrl'
 import Popup, { PopUpcontent } from '../App/components/Popup'
@@ -71,7 +70,7 @@ export default function Edit() {
         })
     }
 
-   function deleteLink() {
+    function deleteLink() {
 
         db.collection('DB').doc('links').collection('links').doc(Link.id).delete()
 
@@ -82,7 +81,7 @@ export default function Edit() {
     }
 
 
-    const [editLink, seteditLink] = useState({name: 'lien-' + window.location.href.split('edit/')[1]})
+    const [editLink, seteditLink] = useState({})
 
     const [tag, settag] = useState('')
 
@@ -146,12 +145,11 @@ export default function Edit() {
 
     function EditLink() {
 
-        if (document.querySelectorAll('input').length) {
+        if (Object.values(editLink).length) {
 
             db.collection('DB').doc('links').collection('links').doc(Link.id).update(editLink)
             db.collection('DB').doc('links').collection(user?.email).doc(Link.id).update(editLink)
             .then(e=> {
-
                 document.querySelectorAll('input').forEach(e=> e.value = '')
     
                 setMessage({
@@ -169,23 +167,7 @@ export default function Edit() {
 
 
 
-
-   /*  document.querySelector('.tiktok-1czmy9n-DivVideoList').remove()
-    document.querySelector('.tiktok-1sb4dwc-DivPlayerContainer').remove()
-
-    
-    setInterval(e=> {
-        document.querySelector('html').scrollTop = 10000000
-        document.querySelectorAll(".tiktok-1h2vtn9-PReplyActionText").forEach(e=> e.click())
-        
-        console.warn(document.querySelectorAll('.tiktok-q9aj5z-PCommentText'));
-    }, 0)
-    
-    let allCommentsLenght = Number(document.querySelector('.tiktok-1xwyks2-PCommentTitle').innerHTML.split(' com'))
-
- */
-
-
+    const [QrCode,setQrCode] = useState('')
 
     function downloadQRCode(data) {
         const svg = document.getElementById('qr-code-svg');
@@ -199,8 +181,6 @@ export default function Edit() {
     }
 
 
-
-    const [QrCode,setQrCode] = useState('')
 
      return (
 
