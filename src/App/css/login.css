@@ -10,13 +10,12 @@
     .login {
         flex-direction: column;
     }
-    .login > div {
+    .form-block{
         display: flex;
         justify-content: center;
-        width: 100%;
+        width: 100%!important;
     }
-    .login > div > img {
-        width: 400px;
-        height: 400px;
+    .login-img {
+        display: none;
     }
 }

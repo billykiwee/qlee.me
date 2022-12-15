@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfilImg } from '../../Website/Home'
 import { useStateValue } from './StateProvider'
@@ -37,6 +37,14 @@ export default function Header() {
             link: '/terms',
         }
     ]
+
+    useEffect(e=> {
+        
+        window.onclick = e => {
+            if (!e.target.closest('header')) setMenu(false)
+        }
+
+    }, [Menu])
 
     
     return (

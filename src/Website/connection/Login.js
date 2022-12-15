@@ -174,14 +174,14 @@ export default function Signup() {
 
         <Main>
             <div className='login'>
-                <div>
+                <div className='login-img'>
                     <img className='border-r-2' width={444} height='100%' src='https://images.unsplash.com/photo-1665686306574-1ace09918530?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' />
                 </div>
                 <div className="form-block">
 
                     <RandomPhotoURL user={Name} />
 
-                    <form className='grid'>
+                    <form className='grid w-100p'>
 
                         <div className='grid m-b-1'>
                             <div className='display justify-c'>
@@ -272,28 +272,9 @@ export default function Signup() {
                         </div>
                         
                         <div className='grid m-t-1'>    
-
-                            <div className='display'>
-                                <div className='display gap'>
-                                    <input type='checkbox' id='accept_terms' required checked={AcceptTerms} onChange={e=> setAcceptTerms(e.target.checked)}/>   
-                                    <label className='f-w-300 f-s-14 click' htmlFor='accept_terms'>
-                                        <span>J'accepte les </span>
-                                        <Link to='terms'>
-                                            <span className='link hover-link'>conditions d'utilisation</span>
-                                        </Link>
-                                    </label>
-                                </div>
-                            </div>
                             <button className="blue f-s-16 border-r-1 border-b hover-blue" onClick={register} type="submit">
                                 <span className='f-s-16 p-1'>Se connecter</span>
                             </button>
-
-                            <Link to='/client-login'>
-                                <div className='display justify-c'>
-                                    <span className='f-s-14 p-1 link c-black'>Vous avez déjà un compte client ?</span>
-                                </div>
-                            </Link>
-                            
                         </div>
 
                     </form>
