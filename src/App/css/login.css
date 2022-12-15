@@ -1,0 +1,22 @@
+.login {
+    display : flex;
+    justify-content: space-between;
+}
+.login > div {
+    width: 50%;
+}
+@media screen and (max-width: 940px) {
+
+    .login {
+        flex-direction: column;
+    }
+    .login > div {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .login > div > img {
+        width: 400px;
+        height: 400px;
+    }
+}

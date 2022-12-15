@@ -54,7 +54,9 @@ export default function Footer() {
                     </div>
                 </div>
                 <div>
-                    <small className='c-grey'>made by Kiwee.site</small>
+                    <a href='https://www.kiwee.site' >
+                        <small className='c-grey click'>made by Kiwee.site</small>
+                    </a>
                 </div>
             </div>
         </footer>
