@@ -39,6 +39,7 @@ export default function Footer() {
                             Object.values(socialMedia).map(socialMedia=> {
                                 return (
                                     <a 
+                                        key={socialMedia.name}
                                         href={socialMedia.link}
                                         className='w-2 h-2 border-r-04 click' 
                                         onMouseMove={e=> e.target.style = 'opacity: 0.6'}

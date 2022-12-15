@@ -167,7 +167,7 @@ export default function Edit() {
 
 
 
-    const [QrCode,setQrCode] = useState('')
+    const [QrCode,setQrCode] = useState(false)
 
     function downloadQRCode(data) {
         const svg = document.getElementById('qr-code-svg');
@@ -186,9 +186,8 @@ export default function Edit() {
 
         <Main>
             <Popup content={Message} />
-            <QRcode link={QrCode} close={e=> setQrCode('')} />
 
-            <div>
+            <div className='display'>
                 <h2>Modifier le lien</h2>
             </div>
 
@@ -207,31 +206,27 @@ export default function Edit() {
                                             <div className='display gap'>
                                                 <img src={getFavicon(editLink.url ? editLink.url : Link.url)} className='w-2 h-2 border-r-100' />
                                                 <div className='grid'>
-                                                    <span>{editLink.name ?? minimizeString(Link.name, 30)}</span>
+                                                    <span>{editLink.name ? editLink.name : minimizeString(Link.name, 30)}</span>
                                                     <div className='display gap'>
-                                                        <a href={Link.url} rel="noopener noreferrer" className='link f-w-300'>{Link.shortLink}</a>
+                                                        <a href={Link.shortLink} rel="noopener noreferrer" className='link f-s-20 f-w-500'>{Link.shortLink}</a>
                                                         <div className='display gap'>
-                                                        <button 
-                                                            className='display border-r-04 w-2 hover h-2 border border-b' 
-                                                            onClick={e=> {
-                                                                navigator.clipboard.writeText(Link.shortLink)
-                                                                let div = document.querySelector('#link-' + Link.id)
-                                                                div.style.display = 'flex'
-                                                                setTimeout(e=> div.style.display = 'none', 1500)
-                                                            }} 
-                                                        >
-                                                            <img src='/images/copy.svg' width={16} />
-                                                        </button>
-                                                        <div className='display disable green absolute border-r-04 p-04' id={'link-' + Link.id} >
-                                                            <small>Copié</small>
+                                                            <button 
+                                                                className='display border-r-04 gap-04 hover h-2 border border-b' 
+                                                                onClick={e=> {
+                                                                    navigator.clipboard.writeText(Link.shortLink)
+                                                                    let div = document.querySelector('#link-' + Link.id)
+                                                                    div.style.display = 'flex'
+                                                                    setTimeout(e=> div.style.display = 'none', 1500)
+                                                                }} 
+                                                            >
+                                                                <img src='/images/copy.svg' width={16} />
+                                                            </button>
+                                                            <div className='display disable green absolute border-r-04 p-04' id={'link-' + Link.id} >
+                                                                <small>Copié</small>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </div>
-                                            </div>
-                                            <div className='display gap'>
-                                                <img src='/images/eye.svg' className='opacity w-1 h-1' />
-                                                <span className='c-grey f-w-300'>{Link.views} vues</span>
                                             </div>
                                         </div>
                                     </div>
@@ -255,8 +250,8 @@ export default function Edit() {
                                                 </div>
                                             </div>
                                             <div className='display gap'>
-                                                <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(Link.url)} >
-                                                    <span className='display'>Modifier</span>
+                                                <button className='border-b h-2 blue hover-blue p-1 border-r-1 border' onClick={e=> setQrCode(QrCode ===true ? false : true)} >
+                                                    <span className='display'>{QrCode ? 'Ok' : 'Modifier'}</span>
                                                 </button>
                                                 <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.url)} >
                                                     <span className='display'>
@@ -265,6 +260,22 @@ export default function Edit() {
                                                 </button>
                                             </div>
                                         </div>
+                                        {
+                                            QrCode &&
+                                            <div className='display w-100p justify-c'>
+                                                <div className='display white border-r-2 p-2 border border-b gap-1rem' id="qr-code-svg">
+                                                    <QRCode
+                                                        
+                                                        bgColor={'white'}
+                                                        fgColor={'black'}
+                                                        className='click'
+                                                        level='H'
+                                                        size={200}
+                                                        value={Link.shortLink}
+                                                    />
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

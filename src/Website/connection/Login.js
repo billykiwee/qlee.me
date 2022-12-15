@@ -191,13 +191,13 @@ export default function Signup() {
                                 <div className='display'>
                                     <button className='border hover h-3' type='button' onClick={GoogleRegister}>
                                         <span className='f-s-16 opacity p-04 c-black'>Google</span>
-                                        <img src='/images/google.svg' width={26} />
+                                        <img src='/images/google.svg' width={36} />
                                     </button>
                                 </div>
                                 <div className='display'>
                                     <button className='border hover h-3' type='button' onClick={GoogleRegister}>
                                         <span className='f-s-16 opacity p-04 c-black'>Facebook</span>
-                                        <img src='/images/facebook.svg' width={26} />
+                                        <img src='/images/facebook.svg' width={36} />
                                     </button>
                                 </div>
                             </div>
@@ -211,24 +211,6 @@ export default function Signup() {
 
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-
-                        <div className='grid w-100p m-b-1'>
-                            <div className='m-b-04'>
-                                <label>Nom</label>
-                            </div>
-                            <div className='div-input display border border-r-04'>
-                                <span className='display m-l-04'>
-                                    <svg width="22" height="22" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.7778 25V22.7778C23.7778 21.599 23.3095 20.4686 22.476 19.6351C21.6425 18.8016 20.5121 18.3333 19.3333 18.3333H10.4444C9.2657 18.3333 8.13524 18.8016 7.30175 19.6351C6.46825 20.4686 6 21.599 6 22.7778V25M19.3333 9.44444C19.3333 11.899 17.3435 13.8889 14.8889 13.8889C12.4343 13.8889 10.4444 11.899 10.4444 9.44444C10.4444 6.98985 12.4343 5 14.8889 5C17.3435 5 19.3333 6.98985 19.3333 9.44444Z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                </span>
-                                <input 
-                                    type="email"  
-                                    placeholder={NameShop ?? ''}
-                                    className='border-0 m-l-04 w-100p'
-                                    onChange={e => setName(e.target.value)} 
-                                    required                             
-                                />
-                            </div>
-                        </div>
 
                         <div className='grid w-100p m-b-1'>
                             <div className='m-b-04'>
@@ -259,8 +241,8 @@ export default function Signup() {
                                     className='border-0 m-l-04 w-100p'
                                     type={passwordShown ? "text" : "password"}  
                                     onChange={e => setPassword(e.target.value)} 
-                                    required>
-                                </input>
+                                    required
+                                />
                                 <img 
                                     className="display click m-r-04" 
                                     onClick={togglePassword} 

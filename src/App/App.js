@@ -13,6 +13,7 @@ import Header from './components/Header'
 import Container from './components/Container'
 import Footer from './components/Footer'
 import Login from '../Website/connection/Login'
+import LinkInBio from '../Client/views/LinkInBio'
 
 
 
@@ -55,6 +56,7 @@ export default function App() {
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
                         <Route path="/:LinkID" exact element={<Link />} />
                         <Route path="/login" exact element={<Login />} />
+                        <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
                     </Routes>
                 </Container>
             <Footer />  

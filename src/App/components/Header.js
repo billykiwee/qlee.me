@@ -39,7 +39,7 @@ export default function Header() {
     ]
 
     useEffect(e=> {
-        
+
         window.onclick = e => {
             if (!e.target.closest('header')) setMenu(false)
         }
@@ -73,7 +73,7 @@ export default function Header() {
                         {
                             menu.map(menu=> {
                                 return (
-                                    <Link to={menu.link} className='w-100p' key={menu.name}>
+                                    <Link to={menu.link} className='w-100p' key={menu.name} onClick={e=> setMenu(false)}>
                                         <button className='h-3 hover border-r-1 '>
                                             <span className='f-s-16'>{menu.name}</span>
                                         </button>

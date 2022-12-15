@@ -19,3 +19,15 @@
         display: none;
     }
 }
+
+
+input {
+    box-shadow: unset;
+}
+input:hover {
+    box-shadow:unset;
+}
+.div-input:hover {
+    border: 1px solid var(--border);
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 10%);
+}

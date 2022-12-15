@@ -16,12 +16,19 @@ export default function Link() {
     }, [])
 
 
+    function getUserOfLink() {
+        for (const v in UserLinks) {
+            if (UserLinks[v].id === LinkID) return UserLinks[v].user
+        }
+    }
+
+
     useEffect(e=> {
 
         for (const v in UserLinks) {
             if (UserLinks[v].id === LinkID) {
 
-                db.collection('DB').doc('links').collection('user').doc(Link.link).update({
+                db.collection('DB').doc('links').collection(getUserOfLink()).doc(Link.link).update({
                     views: UserLinks[v].views +1
                 })
                 db.collection('DB').doc('links').collection('links').doc(LinkID).update({
@@ -29,7 +36,7 @@ export default function Link() {
                 })
                 .then(e=> {
 
-                    window.location.href = 'https://www.' + UserLinks[v].link 
+                    window.location.href = UserLinks[v].url 
                 })
 
             } 

@@ -97,7 +97,16 @@ export default function Dashboard() {
 
 
 
+    const [PostisionMouse, setPositionMouse] = useState(0)
+    function mouse() {
+        window.onmousemove = m => {
+            setPositionMouse(m.clientX)
+        }
+    }
 
+
+
+  
     return (
 
         <Main>
@@ -107,13 +116,13 @@ export default function Dashboard() {
             <div className='grid gap-2rem blocks' >
 
                 <div className='grid gap-2rem'>
-                    <div className='grid'>
-                        <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
+                    <div className='grid swiper' style={{overflowX: 'scroll' }}>
+                        <div className='display gap-1rem transition' >
                             <div className='display'>
-                                <img width={244} height={244} className='border-r-2' src='https://images.unsplash.com/photo-1664574654589-8f6c9b94c02d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' />
+                                <img width={244} height={244} className='border-r-2 no-click' src='https://images.unsplash.com/photo-1664574654589-8f6c9b94c02d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' />
                             </div>
                             <div className='display'>
-                                <img width={244} height={244} className='border-r-2' src='https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60' />
+                                <img width={244} height={244} className='border-r-2 no-click' src='https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60' />
                             </div>
                         </div>
                     </div>
@@ -153,14 +162,18 @@ export default function Dashboard() {
                     <div className='grid gap'>
                         <div className='display justify-s-b'>
                             <span className='f-s-25 f-w-500'>Mes liens</span>
-                            <div className='display gap-04 border-r-04 yellow p-04 click'>
-                                <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
-                                <div className='display justify-c'>
-                                    <span className='display'>
-                                        <img src='/images/lock-solid.svg' width={14} />
-                                    </span>
+                            
+                            <Link to='/pricing'>
+                                <div className='display gap-04 border-r-04 yellow p-04 click'>
+                                    <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                                    <div className='display justify-c'>
+                                        <span className='display'>
+                                            <img src='/images/lock-solid.svg' width={14} />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
+
                         </div>
                         {
                             UserLinks
@@ -201,8 +214,10 @@ export default function Dashboard() {
                                         </div>
                                         <div>
                                             <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
-                                                <button className='grey hover'>
-                                                    <span className='f-w-300'>Modifier</span>
+                                                <button className=' hover'>
+                                                    <span className='display w-1 h-2'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                                                    </span>
                                                 </button>
                                             </Link>
                                         </div>
