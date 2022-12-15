@@ -7,13 +7,14 @@ import Home from '../Website/Home'
 
 import Dashboard from '../Client/Dashboard'
 import Edit from '../Client/Edit'
-import Link from '../Client/Link'
+import Link from '../Client/Link.jsx'
 import Popup from './components/Popup'
 import Header from './components/Header'
 import Container from './components/Container'
 import Footer from './components/Footer'
 import Login from '../Website/connection/Login'
 import LinkInBio from '../Client/views/LinkInBio'
+import Page404 from '../Website/views/Page404'
 
 
 
@@ -51,10 +52,11 @@ export default function App() {
             <Header />
                 <Container>
                     <Routes>
+                        <Route path="/page404" exact element={<Page404 />} />
                         <Route path="/" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
-                        <Route path="/:LinkID" exact element={<Link />} />
+                        <Route path={"/:LinkID"} exact element={<Link />} />
                         <Route path="/login" exact element={<Login />} />
                         <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
                     </Routes>

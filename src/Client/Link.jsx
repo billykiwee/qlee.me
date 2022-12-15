@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Main from '../App/components/Main'
 import { db } from '../App/database/firebase'
 import Messages from '../App/utils/Messages'
+import Page404 from '../Website/views/Page404'
 
 
 export default function Link() {
@@ -19,7 +20,6 @@ export default function Link() {
 
     const [loading, setLoading] = useState(true)
     
-
     useEffect(e=> {
         setTimeout(e=> {
             if (UserLinks.length > 0) setLoading(false)
@@ -42,17 +42,16 @@ export default function Link() {
                 })
                 return array[v].url
             }
+            else throw '/page404'
         }
     }
 
 
     function redirect() {
         view(UserLinks)
-        .then(redirect=> {
-            window.location.href = redirect
-        })
+        .then(redirect=> window.location.href = redirect)
+        .catch(page404=> window.location.href = page404)
     }
-
 
 
     

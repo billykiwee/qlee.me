@@ -1,5 +1,6 @@
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Sora', sans-serif;
+    font-family: 'Space Mono', monospace;
 }
 
 :root {
@@ -20,9 +21,9 @@
     --border: rgba(0, 0, 0, 0.1);
     --sucess: #1DD1A1;
     --sucess-txt: #1dd1a121;
-    --error: #EB3B5A;
-    --red: #ee5253;
-    --red-dark: #dd3352;
+    --error: #eb4d4b;
+    --red: #eb4d4b;
+    --red-dark: #d84240;
     --red-secondary : #EB3B5A1A;
     --error-txt: #ff47561e;
     --pending-txt: #ffa60241;

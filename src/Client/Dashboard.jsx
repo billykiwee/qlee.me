@@ -53,7 +53,7 @@ export default function Dashboard() {
 
     function createLink() {
 
-        if (LinkURL.length < 1 || !isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
+        if (LinkURL.length < 1 || NameLink.length < 1 || !isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
         if (isLinkAlreadyExist()) throw setError('Un lien exitse déjà avec ce nom et cette url')
         if (MAX_LINK_BEFORE_UPDATE <= UserLinks.length) {
             throw setMessage({
@@ -83,8 +83,25 @@ export default function Dashboard() {
         db.collection('DB').doc('links').collection(user?.email).doc(link.id).set(link)
         .then(e=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
+
+            setLinkURL(false)
+            setNameLink(false)
         })
     }    
+
+
+    const artcles = [
+        {
+            name : 'Mon compte',
+            img : 'https://images.unsplash.com/photo-1664574654578-d5a6a4f447bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
+            id: 'account'
+        },
+        {
+            name : 'Link in bio',
+            img : 'https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
+            id: 'linkinbio'
+        }
+    ]
 
 
 
@@ -99,23 +116,20 @@ export default function Dashboard() {
                 <div className='grid gap-2rem'>
                     <div className='grid swiper' style={{overflowX: 'scroll' }}>
                         <div className='display gap-1rem transition' >
-                            <div className='display'>
-                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
-                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' style={{backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1664574654578-d5a6a4f447bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80)'}}></div>
-                                </div>
-                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
-                                    <span className='f-s-20 c-white'>Link in bio</span>
-                                </div>
-                            </div>
-
-                            <div className='display'>
-                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
-                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' style={{backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60)'}}></div>
-                                </div>
-                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
-                                    <span className='f-s-20 c-white'>Mon compte</span>
-                                </div>
-                            </div>
+                            {
+                                artcles.map(article=> {
+                                    return (
+                                        <div className='display click'>
+                                            <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
+                                                <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
+                                            </div>
+                                            <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
+                                                <span className='f-s-20 c-white'>{article.name}</span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
 
@@ -133,8 +147,8 @@ export default function Dashboard() {
                                         <input type='text' onChange={e=> {setLinkURL(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
                                     </div>
                                 </div>
-                                <div className='display'>
-                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue h-3 p-lr-2 border-b hover-blue' >
+                                <div className='display h-4 align-top'>
+                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue p-1 p-lr-2 border-b hover-blue' >
                                         <span className='f-s-16'>Créer</span>
                                     </button>
                                 </div>
@@ -178,7 +192,7 @@ export default function Dashboard() {
                                             </Link>
                                             <div className='grid '> 
                                                 <div className='display gap'>
-                                                    <span className='f-s-16'>{minimizeString(userlink?.name, 10)}</span>
+                                                    <span className='f-s-16'>{minimizeString(userlink?.name, 20)}</span>
                                                 </div>
 
                                                 <div className='grid gap'>
@@ -205,7 +219,7 @@ export default function Dashboard() {
                                             </div>
                                         </div>
                                         <div>
-                                            <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
+                                            <Link to={'/edit/' + userlink?.id}>
                                                 <button className=' hover'>
                                                     <span className='display w-1 h-2'>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
@@ -225,7 +239,9 @@ export default function Dashboard() {
                             ?
                             <div className='display gap'>
                                 <img src='/images/info.svg' className='w-1 h-1 opacity'  />
-                                <small className='c-grey f-w-300'>Il te reste encore {MAX_LINK_BEFORE_UPDATE - UserLinks.length} liens gratuit</small>
+                                <small className='c-grey f-w-300'>
+                                    Il te reste encore {MAX_LINK_BEFORE_UPDATE - UserLinks.length} {MAX_LINK_BEFORE_UPDATE - UserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
+                                </small>
                             </div>
                             :
                             <div className='grid gap-04'>
