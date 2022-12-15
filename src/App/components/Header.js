@@ -16,11 +16,15 @@ export default function Header() {
             link: '/',
         },
         {
+            name: 'Se connecter',
+            link: '/login',
+        },
+        {
             name: 'Créer un lien',
             link: '/dashboard',
         },
         {
-            name: 'Créer un Link in bio',
+            name: 'Link in bio',
             link: '/dashboard',
         },
         {
@@ -47,7 +51,7 @@ export default function Header() {
                     <Link to='/dashboard' className='display avatar-header' >
                         <img src={user?.photoURL} className='border-r-100' width={40} height={40} />
                     </Link>
-                    <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)}>
+                    <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
                             <img src='/images/hamburger.svg' width={24} height={24}  />
                         </span>

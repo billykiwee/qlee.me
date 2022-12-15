@@ -12,7 +12,7 @@ import Popup from './components/Popup'
 import Header from './components/Header'
 import Container from './components/Container'
 import Footer from './components/Footer'
-import Main from './components/Main'
+
 
 
 export default function App() {
@@ -53,6 +53,7 @@ export default function App() {
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
                         <Route path="/:LinkID" exact element={<Link />} />
+
                     </Routes>
                 </Container>
             <Footer />  

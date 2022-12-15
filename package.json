@@ -51,8 +51,6 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.20.5",
     "react-error-overlay": "6.0.9"
   },
   "scripts": {

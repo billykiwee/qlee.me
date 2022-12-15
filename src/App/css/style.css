@@ -59,11 +59,17 @@ body {
 .container {
     flex: 1 0 auto;
     margin-bottom: 4rem;
+    position: relative;
 }
 
 main {
     display: flex;
     flex-direction: column;
+}
+
+footer {
+    margin-bottom: 1rem;
+    border-top: 1px solid var(--border);
 }
 
 
@@ -262,7 +268,10 @@ button:active {
 
 .yellow {
     background-color: var(--yellow);
-    color: var(--background);
+    color: var(--black);
+}
+.hover-yellow:hover {
+    background-color: #e5bb28;
 }
 
 .transparent {

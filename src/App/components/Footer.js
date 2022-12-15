@@ -10,15 +10,21 @@ export default function Footer() {
 
     
     return (
-        <footer className='shadow border-r-2 p-1 border'>
-            <div className='align-top display justify-s-b'>
-                <div className='display gap-1rem'>
-                    <Link to='/dashboard' className='display avatar-header' >
-                        <img src={user?.photoURL} className='border-r-100' width={40} height={40} />
-                    </Link>
+        <footer>
+            <div className='display justify-s-b'>
+                <div className='align-top display justify-s-b'>
+                    <div>
+                        <a href='https://github.com/billykiwee/loopme'>
+                            <span className='display'>
+                                <img src='/images/github.svg' className='w-3 h-3' />
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <small className='c-grey'>made by Kiwee.site</small>
                 </div>
             </div>
-
         </footer>
     )
 }

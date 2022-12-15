@@ -11,6 +11,7 @@ import { isValidUrl } from '../App/utils/isValidUrl'
 import Popup, { PopUpcontent } from '../App/components/Popup'
 import { useStateValue } from '../App/components/StateProvider'
 import QRcode from './views/QRcode'
+import Main from '../App/components/Main'
 
 
 const IS_USER_PREMIUM = false
@@ -86,6 +87,7 @@ export default function Edit() {
     const [tag, settag] = useState('')
 
     function addTags() {
+
         if (tag.length > 0) {
 
             let conditions = {
@@ -202,7 +204,7 @@ export default function Edit() {
 
      return (
 
-        <>
+        <Main>
             <Popup content={Message} />
             <QRcode link={QrCode} close={e=> setQrCode('')} />
 
@@ -223,11 +225,11 @@ export default function Edit() {
                                     <div className='grid gap white border-r-1 border-b p-1 w-100p'>
                                         <div className='display justify-s-b'>
                                             <div className='display gap'>
-                                                <img src={getFavicon(editLink.link ? editLink.link : Link.link)} className='w-2 h-2 border-r-100' />
+                                                <img src={getFavicon(editLink.url ? editLink.url : Link.url)} className='w-2 h-2 border-r-100' />
                                                 <div className='grid'>
                                                     <span>{editLink.name ?? minimizeString(Link.name, 30)}</span>
                                                     <div className='display gap'>
-                                                        <a href={Link.link} rel="noopener noreferrer" className='link f-w-300'>{Link.shortLink}</a>
+                                                        <a href={Link.url} rel="noopener noreferrer" className='link f-w-300'>{Link.shortLink}</a>
                                                         <div className='display gap'>
                                                         <button 
                                                             className='display border-r-04 w-2 hover h-2 border border-b' 
@@ -259,13 +261,13 @@ export default function Edit() {
                                     <div className='grid gap white border-r-1 border-b p-1 w-100p'>
                                         <div className='display justify-s-b'>
                                             <div className='display gap'>
-                                                <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.link)}>
+                                                <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.url)}>
                                                     <QRCode
-                                                        onClick={e=> setQrCode(Link.link)}
+                                                        onClick={e=> setQrCode(Link.url)}
                                                         bgColor='white'
                                                         fgColor='black'
                                                         className='w-2 h-2'
-                                                        value={Link.link}
+                                                        value={Link.url}
                                                     />
                                                 </div>
                                                 <div className='grid'>
@@ -273,10 +275,10 @@ export default function Edit() {
                                                 </div>
                                             </div>
                                             <div className='display gap'>
-                                                <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(Link.link)} >
+                                                <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(Link.url)} >
                                                     <span className='display'>Modifier</span>
                                                 </button>
-                                                <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.link)} >
+                                                <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.url)} >
                                                     <span className='display'>
                                                         <img src='/images/dowload.svg' width={20} height={20} />
                                                     </span>
@@ -295,7 +297,7 @@ export default function Edit() {
                                     </div>
                                     <div className='grid gap-04 w-100p'>
                                         <span>Modifier le lien principal</span>
-                                        <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.link} onChange={e=> seteditLink({...editLink, link : e.target.value})} />
+                                        <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, link : e.target.value})} />
                                     </div>
 
                                     {
@@ -416,6 +418,6 @@ export default function Edit() {
                 }
             </div>
 
-        </>
+        </Main>
     )
 }

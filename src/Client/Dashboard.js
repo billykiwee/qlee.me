@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import Container from '../App/components/Container'
 import Header from '../App/components/Header';
+import Main from '../App/components/Main';
+import Popup from '../App/components/Popup';
 import { useStateValue } from '../App/components/StateProvider';
 import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
@@ -19,8 +21,8 @@ const MAX_LINK_BEFORE_UPDATE = 10
 
 export default function Dashboard() {
 
-
     const [{user}] = useStateValue()
+
 
     const [UserLinks, setUserLinks] = useState([])
 
@@ -39,45 +41,65 @@ export default function Dashboard() {
     }, [user])
 
 
-    const [Input,setInput] = useState('')
+
+    const [LinkURL,setLinkURL] = useState('')
     const [NameLink,setNameLink] = useState('')
 
+
+    const [Message, setMessage] = useState('')
     const [Error, setError] = useState('')
 
-    
-    function createLink(input) {
 
-        if (Input.length < 1 || !isValidUrl(Input)) throw setError('Tu dois rentrer un URL valide')
+    const isLinkAlreadyExist = e => {
+        for (const v in UserLinks) {
+            if (UserLinks[v].name === NameLink && UserLinks[v].url === LinkURL) return true 
+            else return false
+        }
+    }
+
+    function createLink() {
+
+        if (LinkURL.length < 1 || !isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
+        if (isLinkAlreadyExist()) throw setError('Un lien exitse déjà avec ce nom et cette url')
+        if (MAX_LINK_BEFORE_UPDATE <= UserLinks.length) {
+            throw setMessage({
+                title: 'Oups...',
+                message: `Tu as atteints la limite de ${MAX_LINK_BEFORE_UPDATE} liens gratuits.`,
+                buttonText: 'Voir les plans',
+                buttonColor: 'yellow',
+                valid: () => setMessage({}),
+                close: () => setMessage({}),
+                statu: 'error'
+            })
+        }
         
         const linkID = 'localhost:3000/' + UniqueID('', 5)
-                    
-        if (MAX_LINK_BEFORE_UPDATE > UserLinks.length) {
-    
-            let link = {
-                name: NameLink.length < 1 ? isValidUrl(Input).hostname : NameLink,
-                id : linkID.split('/')[1],
-                user: user?.email,
-                link: isValidUrl(Input).href,
-                shortLink: linkID,
-                date: Date(),
-                views: 0
-            }    
+                
+        const link = {
+            name     : NameLink.length < 1 ? isValidUrl(LinkURL).hostname : NameLink,
+            id       : linkID.split('/')[1],
+            user     : user?.email,
+            url      : isValidUrl(LinkURL).href,
+            shortLink: linkID,
+            date     : Date(),
+            views    : 0
+        }    
 
-            
-            setUserLinks([...UserLinks, link])
+        setUserLinks([...UserLinks, link])
 
-            db.collection('DB').doc('links').collection(link.user).doc(link.id).set(link)
+        db.collection('DB').doc('links').collection(link.user).doc(link.id).set(link)
 
-            db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
-        }
+        db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
     }    
 
 
 
     return (
 
-        <>
+        <Main>
 
+            <Popup content={Message} />
+            
             <div className='grid gap-2rem blocks' >
 
                 <div className='grid gap-2rem'>
@@ -103,11 +125,11 @@ export default function Dashboard() {
                                         <input type='text' onChange={e=> {setNameLink(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
                                     </div>
                                     <div className='display w-100p'>
-                                        <input type='text' onChange={e=> {setInput(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                                        <input type='text' onChange={e=> {setLinkURL(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
                                     </div>
                                 </div>
                                 <div className='display'>
-                                    <button onClick={e=> createLink(Input)} className='border-r-1 blue h-3 p-lr-2 border-b hover-blue' >
+                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue h-3 p-lr-2 border-b hover-blue' >
                                         <span className='f-s-16'>Créer</span>
                                     </button>
                                 </div>
@@ -143,7 +165,7 @@ export default function Dashboard() {
                                     <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={userlink?.id}>
                                         <div className='display gap-1rem'>
                                             <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
-                                                <img src={getFavicon(userlink?.link)} className='w-2 h-2 border-r-100' />
+                                                <img src={getFavicon(userlink?.url)} className='w-2 h-2 border-r-100' />
                                             </Link>
                                             <div className='grid '> 
                                                 <div className='display gap'>
@@ -152,7 +174,7 @@ export default function Dashboard() {
 
                                                 <div className='grid gap'>
                                                     <div className='display gap'>
-                                                        <a href={userlink?.link} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
+                                                        <a href={userlink?.url} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
                                                         <div className='display gap'>
                                                             <button 
                                                                 className='display border-r-04 w-2 hover h-2 border border-b' 
@@ -209,10 +231,6 @@ export default function Dashboard() {
                 </div>
 
             </div>
-
-
-            
-
-        </>
+        </Main>
     )
 }
