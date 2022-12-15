@@ -1,3 +1,4 @@
+import { serverTimestamp } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -74,7 +75,7 @@ export default function Dashboard() {
             user     : user?.email,
             url      : isValidUrl(LinkURL).href,
             shortLink: linkID,
-            date     : Date(),
+            date     : serverTimestamp(),
             views    : 0
         }    
 
@@ -86,7 +87,7 @@ export default function Dashboard() {
     }    
 
 
-  
+
     return (
 
         <Main>
@@ -99,10 +100,21 @@ export default function Dashboard() {
                     <div className='grid swiper' style={{overflowX: 'scroll' }}>
                         <div className='display gap-1rem transition' >
                             <div className='display'>
-                                <img width={244} height={244} className='border-r-2 no-click' src='https://images.unsplash.com/photo-1664574654589-8f6c9b94c02d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' />
+                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
+                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' style={{backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1664574654578-d5a6a4f447bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80)'}}></div>
+                                </div>
+                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
+                                    <span className='f-s-20 c-white'>Link in bio</span>
+                                </div>
                             </div>
+
                             <div className='display'>
-                                <img width={244} height={244} className='border-r-2 no-click' src='https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60' />
+                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
+                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' style={{backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60)'}}></div>
+                                </div>
+                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
+                                    <span className='f-s-20 c-white'>Mon compte</span>
+                                </div>
                             </div>
                         </div>
                     </div>

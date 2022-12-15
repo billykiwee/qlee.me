@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfilImg } from '../../Website/Home'
+import { db } from '../database/firebase'
 import { useStateValue } from './StateProvider'
 
 export default function Header() {
 
 
     const [{user}] = useStateValue()
+
+    const [getUsers, setgetUsers] = useState([])
+
+    useEffect(e=> {
+        db.collection('users').onSnapshot(snapshot => {
+            setgetUsers(snapshot.docs.map(doc => doc.data()))
+        })
+    }, [])
+
+    function getUser() {
+        for (const v in getUsers) {
+            if (getUsers[v].email === user?.email) return getUsers[v]
+        }
+    }
+    const USER = getUser()
+
+
 
     const [Menu, setMenu] = useState(false)
     
@@ -57,7 +75,7 @@ export default function Header() {
                 </div>
                 <div className='display gap-1rem'>
                     <Link to='/dashboard' className='display avatar-header' >
-                        <img src={user?.photoURL} className='border-r-100' width={40} height={40} />
+                        <img src={USER?.photoURL} className='border-r-100' width={40} height={40} />
                     </Link>
                     <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>

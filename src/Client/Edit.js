@@ -182,9 +182,13 @@ export default function Edit() {
 
 
 
+
+
+
      return (
 
         <Main>
+
             <Popup content={Message} />
 
             <div className='display'>
@@ -263,9 +267,9 @@ export default function Edit() {
                                         {
                                             QrCode &&
                                             <div className='display w-100p justify-c'>
-                                                <div className='display white border-r-2 p-2 border border-b gap-1rem' id="qr-code-svg">
+                                                <div className='display white border-r-2 p-2 border border-b gap-1rem'>
                                                     <QRCode
-                                                        
+                                                        id="qr-code-svg"
                                                         bgColor={'white'}
                                                         fgColor={'black'}
                                                         className='click'

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { auth, db } from '../../App/database/firebase'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useStateValue } from '../../App/components/StateProvider'
-import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo} from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo, signOut} from "firebase/auth"
 import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../../App/utils/uniqueID'
 import Messages from '../../App/utils/Messages'
@@ -16,17 +16,18 @@ export default function Signup() {
 
     const { NameShop } = useParams()
     
-    const [password, setPassword] = useState('')
     const [Name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [AcceptTerms, setAcceptTerms] = useState(true)
+    const [password, setPassword] = useState('')
+
 
     const history = useNavigate()
     const [{user}] = useStateValue()
 
     const [MSG, setMSG] = useState({})   
 
-    const clientID = 'client-' + UniqueID()
+    const userID = UniqueID('user', 10)
+
 
     // User register by email
     function register(e) {
@@ -40,13 +41,10 @@ export default function Signup() {
         const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         const regexPWD = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)&é"'(§è!çà)-^$`ù=:;,]/
 
+        console.log(email);
 
         async function Check() {
 
-            if (Name.length < minLengthName && Name.length > maxLengthName) {
-                throw `Le nom doit contenir entre ${minLengthName} et ${maxLengthName} `
-            }
-        
             if (!email) {
                 throw 'Veuillez entrer un email valide'
             }
@@ -59,18 +57,12 @@ export default function Signup() {
                 throw 'Le mot de passe doit contenir au moins 6 caractères'
             }
     
-            // If password has special character
             if (!password.match(regexPWD)) {
                 throw 'Le mot de passe doit contenir un caractère spécial'
             }
     
-            // If password has number
             if (!password.match(/.[1234567890]/)) {
                 throw 'Le mot de passe doit contenir un nombre'
-            }
-
-            if (!AcceptTerms) {
-                throw "Vous devez accepter les conditions d'utilisation"
             }
 
             return true
@@ -81,22 +73,18 @@ export default function Signup() {
 
             const RandomPhotoUrl = document.querySelector('canvas')?.id
 
-            auth
-            .createUserWithEmailAndPassword(email, password)
-            .then(auth => {
-
+            
+            auth.createUserWithEmailAndPassword(email, password)
+            .then(e=> {
                     // Add this user on database
-                    db.collection('client').doc(email).set({
-                        id    : clientID,
-                        name  : Name,
-                        email : email,
-                        photo: RandomPhotoUrl,
-                        date  : serverTimestamp()
-                    }) 
-                    .then(e=> {
-                        //history('/' + clientID)
-                        console.log('Compte crée');
-                    })
+                db.collection('users').doc(email).set({
+                    id    : userID,
+                    name  : email.split('@')[0],
+                    email : email,
+                    photoURL: RandomPhotoUrl,
+                    date  : serverTimestamp()
+                }) 
+                .then(e=> history('/dashboard') )
             })
             .catch(error => {
                 console.log(error)
@@ -116,9 +104,9 @@ export default function Signup() {
         }) 
     }
 
+
     // User register with Google
-    function GoogleRegister(e) {
-        e.preventDefault()
+    function GoogleRegister() {
 
         const RandomPhotoUrl = document.querySelector('canvas')?.id
 
@@ -126,7 +114,6 @@ export default function Signup() {
 
         async function signup() {
 
-            
             await signInWithPopup(auth, provider)
             .then(async (result) => {
 
@@ -135,40 +122,37 @@ export default function Signup() {
                  
                 if (isFirstLogin) {
 
-                    db.collection('shop').doc(auth.currentUser.email).set({
-                        id    : clientID,
+                    db.collection('users').doc(auth.currentUser.email).set({
+                        id    : userID,
                         name  : NameShop ?? auth.currentUser.displayName,
                         email : auth.currentUser.email,
-                        photos: [RandomPhotoUrl ?? auth.currentUser.photoURL],
+                        photos: auth.currentUser.photoURL ?? RandomPhotoUrl,
                         logo: RandomPhotoUrl,
                         date  : serverTimestamp()
                     }) 
                 }
                 else {
-                    history('/' + clientID)
+                    history('/dashboard')
+                    console.log('Déjà client');
                 }
             })
-            return clientID
+            return userID
         }
 
         signup()
         .then(shop => {
-            history('/' + shop)
+            history('/dashboard')
+            console.log('compte créer avec google');
         }) 
     }
 
 
-    /* // Redirect when user logged
-    useEffect(() => {
-        if (user) history('/' + clientID)
-    }, [user, history])
- */
 
     // Hash password
     const [passwordShown, setPasswordShown] = useState(false)
-    const togglePassword = () => setPasswordShown(!passwordShown)
 
 
+//signOut(auth)
 
     return (
 
@@ -179,7 +163,7 @@ export default function Signup() {
                 </div>
                 <div className="form-block">
 
-                    <RandomPhotoURL user={Name} />
+                    <RandomPhotoURL user={email} />
 
                     <form className='grid w-100p'>
 
@@ -245,7 +229,7 @@ export default function Signup() {
                                 />
                                 <img 
                                     className="display click m-r-04" 
-                                    onClick={togglePassword} 
+                                    onClick={e=> setPasswordShown(passwordShown === true ? false : true)} 
                                     alt="" 
                                     width={20}
                                     src={passwordShown ? '/images/eye.svg' : '/images/eye-closed.svg'}

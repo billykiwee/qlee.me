@@ -6,9 +6,17 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    border-bottom: 0;
+    top: 25%;
 }
 
 .frame-popup > div {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+}
+
+.frame-popup > div > div {
     box-shadow: 1px 4px 13Px 3px rgb(0 0 0 / 9%);
     max-width: 244px;
     margin: auto;
