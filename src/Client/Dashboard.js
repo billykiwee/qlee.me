@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import QRCode from 'react-qr-code';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from "swiper/react";
-import Container from '../App/components/Container'
-import Header from '../App/components/Header';
 import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
 import { useStateValue } from '../App/components/StateProvider';
@@ -13,7 +9,6 @@ import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import { minimizeString } from '../App/utils/minimizeString';
 import UniqueID from '../App/utils/uniqueID';
-import { ProfilImg } from '../Website/Home';
 
 
 const MAX_LINK_BEFORE_UPDATE = 10
@@ -23,23 +18,21 @@ export default function Dashboard() {
 
     const [{user}] = useStateValue()
 
-
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
+
         const getUser = new Promise((resolve, reject) => {
             resolve(user?.email)
         })
-
+    
         getUser
         .then(userEmail => {
             db.collection('DB').doc('links').collection(userEmail).orderBy('date').onSnapshot(snapshot => {
                 setUserLinks(snapshot.docs.map(doc => doc.data()))
             })
         })
-
     }, [user])
-
 
 
     const [LinkURL,setLinkURL] = useState('')
@@ -85,25 +78,12 @@ export default function Dashboard() {
             views    : 0
         }    
 
-        setUserLinks([...UserLinks, link])
-
-
         db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
         db.collection('DB').doc('links').collection(user?.email).doc(link.id).set(link)
         .then(e=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
         })
     }    
-
-
-
-    const [PostisionMouse, setPositionMouse] = useState(0)
-    function mouse() {
-        window.onmousemove = m => {
-            setPositionMouse(m.clientX)
-        }
-    }
-
 
 
   
@@ -191,7 +171,7 @@ export default function Dashboard() {
 
                                                 <div className='grid gap'>
                                                     <div className='display gap'>
-                                                        <a href={userlink?.url} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
+                                                        <a href={userlink?.shortLink} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
                                                         <div className='display gap'>
                                                             <button 
                                                                 className='display border-r-04 w-2 hover h-2 border border-b' 
