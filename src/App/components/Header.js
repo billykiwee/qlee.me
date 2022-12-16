@@ -72,17 +72,31 @@ export default function Header() {
         <header className='shadow border-r-2 p-1 border m-b-2 m-t-1 transition'>
             <div className='align-top display justify-s-b'>
                 <div className='display gap click'>
-
-                    <Link to='/'>
+                    <Link to={user ? '/dashboard' : '/'}>
                         <span className='display'>
-                            <img src='/images/logo.svg' width={144} />
+                            <img src='/images/logo.svg' width={140} />
                         </span>
                     </Link>
                 </div>
                 <div className='display gap-1rem'>
-                    <Link to='/dashboard' className='display avatar-header' >
-                        <img src={USER?.photoURL} className='border-r-100' width={40} height={40} />
-                    </Link>
+                    {
+                        user 
+                        ?
+                        <Link to='/dashboard' className='display avatar-header' >
+                            <img src={USER?.photoURL} className='border-r-100' width={40} height={40} />
+                        </Link>
+                        : 
+                        <div className='display justify-c'>
+                            <Link to='/login'>
+                                <button className='border-b hover-blue border border-r-1 p-lr-1 gap-04 blue' style={{height: '40px'}}>
+                                    <span className='display'>
+                                        <img src='/images/user-solid.svg' width={14} style={{filter:' invert(100%)'}} />
+                                    </span>
+                                    <span className='display'>Se connecter</span>
+                                </button>
+                            </Link>
+                        </div>
+                    }
                     <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
                             <img src='/images/hamburger.svg' width={24} height={24}  />
