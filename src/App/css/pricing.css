@@ -1,0 +1,43 @@
+
+.pricing-blocks {
+    display: flex;
+}
+
+.card-pricing {
+    width:  244px;
+    height: 544px;
+}
+
+
+@media screen and (max-width: 980px) {
+
+    .pricing-blocks {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 780px) {
+
+    .pricing-blocks {
+        justify-content: center;
+    }
+    .card-pricing {
+        width:  322px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .pricing-blocks {
+        flex-wrap: grid;
+    }
+    .pricing-blocks > div {
+        width:  100%;
+
+    }   
+    
+    .card-pricing {
+        width:  unset;
+    }
+}
