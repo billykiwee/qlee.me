@@ -20,7 +20,6 @@ export default function Pricing() {
                 '10 liens',
                 'Nom de domaine personalisé',
                 'Système de paiement',
-                'Gestion de commande',
             ],
             payment: '',
         },
@@ -30,10 +29,9 @@ export default function Pricing() {
             price: 3.90,
             benefits: [
                 '500 liens',
-                'Link in bio',
-                'Vues',
+                '1 Link in bio',
+                'Lien personalisable',
                 'Monétisations',
-                'Personalisations',
             ],
             recommended: true,
             payment: '',
@@ -44,11 +42,10 @@ export default function Pricing() {
             price: 9.90,
             benefits: [
                 'Liens illimités',
-                'Link in bio',
-                'Création de votre site web',
-                'Vues',
+                'Link in bio illimités',
+                'Vendre en ligne',
+                'Lien personalisable',
                 'Monétisations',
-                'Personalisations',
             ],
             payment: '',
         }
@@ -72,7 +69,7 @@ export default function Pricing() {
                         Object.values(Plans)
                         .map(plan => {
                             return (
-                                <div className='grid'>
+                            <div className='grid' key={plan.plan}>
                                 <div className={(plan.recommended ? 'white' : 'white') + ' border-b border border-r-1 p-2 card-pricing'} >
                     
                                     <div className='grid align-l'>

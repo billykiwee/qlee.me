@@ -9,12 +9,9 @@ import { minimizeString } from '../App/utils/minimizeString'
 import { isValidUrl } from '../App/utils/isValidUrl'
 import Popup, { PopUpcontent } from '../App/components/Popup'
 import { useStateValue } from '../App/components/StateProvider'
-import QRcode from './views/QRcode'
 import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
 import {makeFriendly} from '../App/utils/makeFriendly'
-
-const IS_USER_PREMIUM = false
 
 
 
@@ -24,6 +21,18 @@ export default function Edit() {
     const { LinkID } = useParams()
 
     const [{user}] = useStateValue()
+
+
+    const [User, setUser] = useState([])
+
+    useEffect(e=> {
+        db.collection('users').onSnapshot(snapshot => {
+            setUser(snapshot.docs.map(doc => doc.data()))
+        })
+    }, [])
+
+    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)[0]?.plan !== 'FREE'
+
 
     const [UserLinks, setUserLinks] = useState([])
 
@@ -199,28 +208,33 @@ export default function Edit() {
     const [QrCode,setQrCode] = useState(false)
 
     function downloadQRCode(data) {
-       /*  const svg = document.getElementById('qr-code-svg');
+        const svg = document.getElementById('qr-code-svg');
         let downloadLink = document.createElement('a');
         downloadLink.href = 'data:image/svg;base64,' + btoa(svg.outerHTML)
 
         downloadLink.download = 'qr-code.svg'
         document.body.appendChild(downloadLink);
         downloadLink.click();
-        document.body.removeChild(downloadLink); */
+        document.body.removeChild(downloadLink);
     }
 
 
 
 
-     return (
+    console.log(isUserPremium);
 
-        <Main>
 
-            {
-                PopUpMessage?.loader
-                ? <Messages loader={PopUpMessage?.loader}/>
-                :
-                <>
+
+
+    return (
+
+         <>
+        {
+            PopUpMessage?.loader
+            ? <Messages loader={PopUpMessage?.loader}/>
+            :
+            <Main>
+
                     <Popup content={PopUpMessage} />
                     <div className='display'>
                         <h2>Modifier le lien</h2>
@@ -342,7 +356,7 @@ export default function Edit() {
                                             </div>
 
                                             {
-                                                IS_USER_PREMIUM === false
+                                                !isUserPremium
                                                 ?
                                                 <>
                                                     <div className='grid gap-04 w-100p'>
@@ -468,11 +482,11 @@ export default function Edit() {
                             </div>
                         }
                     </div>
-                </>
+            </Main>
             }
 
+        </>
 
-        </Main>
     )
 }
 

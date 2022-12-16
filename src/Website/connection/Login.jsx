@@ -10,10 +10,29 @@ import RandomPhotoURL from '../../App/utils/RandomPhotoURL'
 import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../App/api/unsplash'
+import { IS_USER_PREMIUM } from '../../Client/Edit'
 
 
 
 export default function Signup() {
+
+
+    const history = useNavigate()
+
+    const [{user}] = useStateValue()
+
+    const [User, setUser] = useState([])
+
+    useEffect(e=> {
+        db.collection('users').onSnapshot(snapshot => {
+            setUser(snapshot.docs.map(doc => doc.data()))
+        })
+    }, [])
+
+    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)
+
+
+
 
     const { NameShop } = useParams()
     
@@ -22,8 +41,6 @@ export default function Signup() {
     const [password, setPassword] = useState('')
 
 
-    const history = useNavigate()
-    const [{user}] = useStateValue()
 
     const [MSG, setMSG] = useState({})   
 
@@ -79,6 +96,7 @@ export default function Signup() {
             .then(e=> {
                     // Add this user on database
                 db.collection('users').doc(email).set({
+                    plan : 'FREE',
                     id    : userID,
                     name  : email.split('@')[0],
                     email : email,
@@ -124,6 +142,7 @@ export default function Signup() {
                 if (isFirstLogin) {
 
                     db.collection('users').doc(auth.currentUser.email).set({
+                        plan : 'FREE',
                         id    : userID,
                         name  : NameShop ?? auth.currentUser.displayName,
                         email : auth.currentUser.email,
@@ -153,16 +172,13 @@ export default function Signup() {
     const [passwordShown, setPasswordShown] = useState(false)
 
 
-//signOut(auth)
 
-
-    const [UnsplashImg, setUnsplashImg] = useState('https://images.unsplash.com/photo-1670918181822-3a135cfd0073?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80')
+    const [UnsplashImg, setUnsplashImg] = useState('')
     useEffect(e=> {
-        getUnsplashImage('christmas').then(img => {
-            setUnsplashImg(img)
+        getUnsplashImage('nature').then(img => {
+            setUnsplashImg(img ?? 'https://images.unsplash.com/photo-1445262102387-5fbb30a5e59d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1800&ixid=MnwxfDB8MXxyYW5kb218MHx8bmF0dXJlfHx8fHx8MTY3MTIwMDg5OQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200')
         })
     }, [])
-
 
 
     return (
@@ -186,7 +202,15 @@ export default function Signup() {
                                         <img src={user?.photoURL} width={68} height={68} />
                                     </span>
                                     <div className='grid'>
-                                        <h2 className='m-0'>{user?.displayName}</h2>
+                                        <div className='display gap-1rem'>
+                                            <h2 className='m-0'>{user?.displayName}</h2>
+                                            {
+                                                isUserPremium[0]?.plan !== 'FREE' &&
+                                                <div className='display justify-c yellow border-r-04 border-b h-1 p-04'>
+                                                    <span className='display'>{isUserPremium[0]?.plan}</span>
+                                                </div>
+                                            }
+                                        </div>
                                         <span>{user?.email}</span>
                                     </div>
                                 </div>
