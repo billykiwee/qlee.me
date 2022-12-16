@@ -21,7 +21,8 @@ export default function Pricing() {
                 'Nom de domaine personalisé',
                 'Système de paiement',
                 'Gestion de commande',
-            ]
+            ],
+            payment: '',
         },
         Pro : {
             plan: 'Pro',
@@ -34,7 +35,8 @@ export default function Pricing() {
                 'Monétisations',
                 'Personalisations',
             ],
-            recommended: true
+            recommended: true,
+            payment: '',
         },
         Entrprise : {
             plan: 'Entrprise',
@@ -48,6 +50,7 @@ export default function Pricing() {
                 'Monétisations',
                 'Personalisations',
             ],
+            payment: '',
         }
     }
 

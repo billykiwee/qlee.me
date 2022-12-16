@@ -53,7 +53,10 @@ export default function Dashboard() {
 
     function createLink() {
 
-        if (LinkURL.length < 1 || NameLink.length < 1 || !isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
+        if (NameLink.length) {
+            if (NameLink.length > 40) throw setError('Le nom doit comporté 40 charactères au maximum')
+        }
+        if (!isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
         if (isLinkAlreadyExist()) throw setError('Un lien exitse déjà avec ce nom et cette url')
         if (MAX_LINK_BEFORE_UPDATE <= UserLinks.length) {
             throw setMessage({
