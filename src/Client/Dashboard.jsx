@@ -151,7 +151,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div className='display h-4 align-top'>
-                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue p-1 p-lr-2 border-b hover-blue' >
+                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
                                         <span className='f-s-16'>Créer</span>
                                     </button>
                                 </div>
@@ -173,7 +173,7 @@ export default function Dashboard() {
                             <span className='f-s-25 f-w-500'>Mes liens</span>
                             
                             <Link to='/pricing'>
-                                <div className='display gap-04 border-r-04 yellow p-04 click'>
+                                <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
                                     <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
                                     <div className='display justify-c'>
                                         <span className='display'>
@@ -200,7 +200,7 @@ export default function Dashboard() {
 
                                                 <div className='grid gap'>
                                                     <div className='display gap'>
-                                                        <a href={userlink?.shortLink} rel="noopener noreferrer" className='link'>{userlink?.shortLink}</a>
+                                                        <a href={userlink?.shortLink}  rel="noopener noreferrer" className='hover-link link'>{userlink?.shortLink}</a>
                                                         <div className='display gap'>
                                                             <button 
                                                                 className='display border-r-04 w-2 hover h-2 border border-b' 

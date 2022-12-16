@@ -338,14 +338,14 @@ export default function Edit() {
                                             </div>
 
                                             {
-                                                IS_USER_PREMIUM === false
+                                                IS_USER_PREMIUM === true
                                                 ?
                                                 <>
                                                     <div className='grid gap-04 w-100p'>
                                                         <div className='display gap'>
                                                             <span>Modifier le lien court</span>
                                                             <div className='display click'>
-                                                                <div className='display justify-c yellow border-r-04 w-1 p-04'>
+                                                                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
                                                                     <span className='display'>
                                                                         <img src='/images/lock-solid.svg' width={14} />
                                                                     </span>
@@ -357,11 +357,11 @@ export default function Edit() {
                                                             <small className='c-grey'>ex: loop.me/mon-lien-perso</small>
                                                         </div>
                                                     </div>
-                                                    <div className='grid gap-04 no-click'>
+                                                    <div className='grid gap-04'>
                                                         <div className='display gap'>
                                                             <span>Fonctionnalités</span>
                                                             <div className='display click'>
-                                                                <div className='display justify-c yellow border-r-04 w-1 p-04'>
+                                                                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
                                                                     <span className='display'>
                                                                         <img src='/images/lock-solid.svg' width={14} />
                                                                     </span>
@@ -369,7 +369,37 @@ export default function Edit() {
                                                             </div>
                                                         </div>
 
-                                                        <div className='grid gap-04 opacity'>
+                                                        <div className='grid gap-04 opacity no-click'>
+                                                            <div className='display'>
+                                                                <label htmlFor='active_views' className='display gap click'>
+                                                                    <input type='checkbox' className='h-1' id='active_views' />
+                                                                    <span className='f-w-300'>Activer les vues</span>
+                                                                </label>
+                                                            </div>
+
+                                                            <div className='display no-click'>
+                                                                <label htmlFor='active_adds' className='display gap click'>
+                                                                    <input type='checkbox' className='h-1' id='active_adds' />
+                                                                    <span className='f-w-300'>Activer la monétisation</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className='grid gap-04 w-100p'>
+                                                        <div className='display gap'>
+                                                            <span>Modifier le lien court</span>
+                                                        </div>
+                                                        <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
+                                                    </div>
+                                                    <div className='grid gap-04'>
+                                                        <div className='display gap'>
+                                                            <span>Fonctionnalités</span>
+                                                        </div>
+
+                                                        <div className='grid gap-04'>
                                                             <div className='display'>
                                                                 <label htmlFor='active_views' className='display gap click'>
                                                                     <input type='checkbox' className='h-1' id='active_views' />
@@ -386,20 +416,7 @@ export default function Edit() {
                                                         </div>
                                                     </div>
                                                 </>
-                                                :
-                                                <div className='grid gap-04 w-100p'>
-                                                    <div className='display gap'>
-                                                        <span>Modifier le lien court</span>
-                                                        <div className='display'>
-                                                            <div className='display justify-c yellow border-r-04 w-1 p-04'>
-                                                                <span className='display'>
-                                                                    <img src='/images/lock-solid.svg' width={14} />
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
-                                                </div>
+
                                             }
 
                                             <div className='grid gap-04 w-100p'>
@@ -440,13 +457,13 @@ export default function Edit() {
 
 
                                         <div className='grid gap'>
-                                            <div className='display h-4 align-top'>
-                                                <button className='border-r-1 blue p-1 p-lr-2 border-b hover-blue' onClick={EditLink} >
+                                            <div className='display'>
+                                                <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' onClick={EditLink} >
                                                     <span className='f-s-16'>Modifier</span>
                                                 </button>
                                             </div>
-                                            <div className='display h-4 align-top'>
-                                                <button className='red hover-red p-1 border-b border-r-1' onClick={preDeleteLink} >
+                                            <div className='display'>
+                                                <button className='red hover-red p-1 h-4 border-b border-r-1' onClick={preDeleteLink} >
                                                     <span className='f-s-16'>Supprimer le lien</span>
                                                 </button>
                                             </div>
