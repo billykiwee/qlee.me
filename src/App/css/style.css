@@ -294,6 +294,9 @@ button:active {
 .text-align-c {
     text-align: center;
 }
+.text-align-e {
+    text-align: end;
+}
 
 
 .display {

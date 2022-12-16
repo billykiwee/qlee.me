@@ -7,7 +7,7 @@ import Home from '../Website/Home'
 
 import Dashboard from '../Client/Dashboard'
 import Edit from '../Client/Edit'
-import Link from '../Client/Link.jsx'
+import LinkRedirect from '../Client/LinkRedirect.jsx'
 import Popup from './components/Popup'
 import Header from './components/Header'
 import Container from './components/Container'
@@ -54,10 +54,10 @@ export default function App() {
                 <Container>
                     <Routes>
                         <Route path="/page404" exact element={<Page404 />} />
-                        <Route path="/" exact element={<Home />} />
+                        <Route path="/home" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
-                        <Route path={"/:LinkID"} exact element={<Link />} />
+                        <Route path="/:LinkID" exact element={<LinkRedirect />} />
                         <Route path="/login" exact element={<Login />} />
                         <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
                         <Route path="/pricing" exact element={<Pricing />} />

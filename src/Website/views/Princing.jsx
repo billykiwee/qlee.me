@@ -40,7 +40,7 @@ export default function Pricing() {
         },
         Entrprise : {
             plan: 'Entrprise',
-            subtitle: 'A fond' ,
+            subtitle: 'Boosté votre présence' ,
             price: 9.90,
             benefits: [
                 'Liens illimités',

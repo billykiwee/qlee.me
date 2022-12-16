@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Container from '../App/components/Container'
 import { db } from '../App/database/firebase'
 import getFavicon from '../App/utils/getFavicon'
@@ -12,7 +12,7 @@ import { useStateValue } from '../App/components/StateProvider'
 import QRcode from './views/QRcode'
 import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
-
+import {makeFriendly} from '../App/utils/makeFriendly'
 
 const IS_USER_PREMIUM = false
 
@@ -238,13 +238,19 @@ export default function Edit() {
                                         <div className='display align-top'>
                                             <div className='grid gap white border-r-1 border-b p-1 w-100p'>
                                                 <div className='display justify-s-b'>
-                                                    <div className='display gap'>
+                                                    <div className='display gap w-100p'>
                                                         <a href={Link.url} className='display '>
                                                             <img src={getFavicon(editLink.url ? editLink.url : Link.url)} className='w-2 h-2 border-r-100' />
                                                         </a>
 
-                                                        <div className='grid'>
-                                                            <span>{editLink.name ? editLink.name : minimizeString(Link.name, 30)}</span>
+                                                        <div className='grid w-100p'>
+
+                                                            <div className='display justify-s-b w-100p'>
+                                                                <span>{editLink.name ? editLink.name : minimizeString(Link.name, 30)}</span>
+                                                                <div className='display justify-c'>
+                                                                    <small className='text-align-e c-grey'>{Link.views} clics</small>
+                                                                </div>
+                                                            </div>
 
                                                             <div 
                                                                 className='display gap' 
@@ -306,17 +312,15 @@ export default function Edit() {
                                                     QrCode &&
                                                     <div className='display w-100p justify-c'>
                                                         <div className='display white border-r-2 p-2 border border-b gap-1rem'>
-                                                            <image>
-                                                                <QRCode
-                                                                    id="qr-code-svg"
-                                                                    bgColor={'white'}
-                                                                    fgColor={'black'}
-                                                                    className='click'
-                                                                    level='H'
-                                                                    size={200}
-                                                                    value={Link.shortLink}
-                                                                />
-                                                            </image>
+                                                            <QRCode
+                                                                id="qr-code-svg"
+                                                                bgColor={'white'}
+                                                                fgColor={'black'}
+                                                                className='click'
+                                                                level='H'
+                                                                size={200}
+                                                                value={Link.shortLink}
+                                                            />
                                                         </div>
                                                     </div>
                                                 }
@@ -338,19 +342,13 @@ export default function Edit() {
                                             </div>
 
                                             {
-                                                IS_USER_PREMIUM === true
+                                                IS_USER_PREMIUM === false
                                                 ?
                                                 <>
                                                     <div className='grid gap-04 w-100p'>
                                                         <div className='display gap'>
                                                             <span>Modifier le lien court</span>
-                                                            <div className='display click'>
-                                                                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
-                                                                    <span className='display'>
-                                                                        <img src='/images/lock-solid.svg' width={14} />
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                            <GoToPricing />
                                                         </div>
                                                         <div className='opacity no-click'>
                                                             <input type='text' className='div-input h-3 border-r-1 w-100p ' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
@@ -360,13 +358,7 @@ export default function Edit() {
                                                     <div className='grid gap-04'>
                                                         <div className='display gap'>
                                                             <span>Fonctionnalités</span>
-                                                            <div className='display click'>
-                                                                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
-                                                                    <span className='display'>
-                                                                        <img src='/images/lock-solid.svg' width={14} />
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                            <GoToPricing />
                                                         </div>
 
                                                         <div className='grid gap-04 opacity no-click'>
@@ -481,5 +473,20 @@ export default function Edit() {
 
 
         </Main>
+    )
+}
+
+
+function GoToPricing() {
+    return (
+        <Link to='/pricing'>
+            <div className='display click'>
+                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
+                    <span className='display'>
+                        <img src='/images/lock-solid.svg' width={14} />
+                    </span>
+                </div>
+            </div>
+        </Link>
     )
 }

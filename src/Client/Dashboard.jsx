@@ -2,6 +2,7 @@ import { serverTimestamp } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Checkbox from '../App/components/Checkbox';
 import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
 import { useStateValue } from '../App/components/StateProvider';
@@ -82,7 +83,7 @@ export default function Dashboard() {
             views    : 0
         }    
 
-        db.collection('DB').doc('links').collection('links').doc(link.id).set(link)
+        db.collection('links').doc(link.id).set(link)
         db.collection('DB').doc('links').collection(user?.email).doc(link.id).set(link)
         .then(e=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
@@ -122,7 +123,7 @@ export default function Dashboard() {
                             {
                                 artcles.map(article=> {
                                     return (
-                                        <div className='display click'>
+                                        <div className='display click' key={article.id}>
                                             <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
                                                 <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
                                             </div>
@@ -190,7 +191,7 @@ export default function Dashboard() {
                                 return (
                                     <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={userlink?.id}>
                                         <div className='display gap-1rem'>
-                                            <Link to={'/edit/' + userlink?.shortLink.split('/')[1]}>
+                                            <Link to={'/edit/' + userlink?.shortLink.split('/')[1]} className='display'>
                                                 <img src={getFavicon(userlink?.url)} className='w-2 h-2 border-r-100' />
                                             </Link>
                                             <div className='grid '> 
