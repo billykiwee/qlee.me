@@ -9,11 +9,13 @@
 .login-img {
     display: flex;
     justify-content: center;
+    position: relative;
 }
 .login-img > img {
     width: 400px;
     display: flex;
     justify-content: center;
+    height: 622px;
 }
 
 

@@ -1,24 +1,18 @@
 
-export async function getUnsplashImage(type) {
+export async function getUnsplashImage(subject) {
+    const apiKey = 'kj408nn4kDTQyU-H3nyemQ3bPkqEJf7CS5wUvAHNy0I'
+    const url = `https://api.unsplash.com/photos/random?query=${subject}`
 
-    return fetch(`https://source.unsplash.com/1200x1800/?${type}`)
-    .then(response => {   
-        return response.url
-    })
-    .catch(e=> console.error(e))
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Client-ID ${apiKey}`
+      }
+    });
+    const data = await response.json()
+
+    return {
+        url: data.urls.regular,
+        author: data.user.name,
+        profileUrl: data.user.links.html
+    }
 }
-
-
-
-/* 
-const address = fetch(`https://source.unsplash.com/1200x1800/?${'nature'}`)
-.then(response => {   
-    return response.url
-})
-.catch(e=> console.error(e))
-
-const getUnsplashImage = async () => {
-    const a = await address;
-};
-
-console.log(  printAddress() ); */

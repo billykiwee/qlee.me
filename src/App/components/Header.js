@@ -67,9 +67,13 @@ export default function Header() {
 
     }, [Menu])
 
+
+
+
+
     
     return (
-        <header className='shadow border-r-2 p-1 border m-b-2 m-t-1 transition'>
+        <header className='shadow border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
             <div className='align-top display justify-s-b'>
                 <div className='display gap click'>
                     <Link to={user ? '/dashboard' : '/'}>
@@ -78,7 +82,7 @@ export default function Header() {
                         </span>
                     </Link>
                 </div>
-                <div className='display gap-1rem'>
+                <div className='display gap'>
                     {
                         user 
                         ?

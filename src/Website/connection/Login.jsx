@@ -10,7 +10,6 @@ import RandomPhotoURL from '../../App/utils/RandomPhotoURL'
 import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../App/api/unsplash'
-import { IS_USER_PREMIUM } from '../../Client/Edit'
 
 
 
@@ -29,8 +28,9 @@ export default function Signup() {
         })
     }, [])
 
-    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)
 
+    const UserDB = User.filter(e=> e.email === user?.email).map(e=> e)[0]
+    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)
 
 
 
@@ -174,11 +174,15 @@ export default function Signup() {
 
 
     const [UnsplashImg, setUnsplashImg] = useState('')
+
+
     useEffect(e=> {
-        getUnsplashImage('nature').then(img => {
-            setUnsplashImg(img ?? 'https://images.unsplash.com/photo-1445262102387-5fbb30a5e59d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1800&ixid=MnwxfDB8MXxyYW5kb218MHx8bmF0dXJlfHx8fHx8MTY3MTIwMDg5OQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200')
+        getUnsplashImage('nature')
+        .then(data => {
+            setUnsplashImg(data)
         })
     }, [])
+
 
 
     return (
@@ -186,7 +190,11 @@ export default function Signup() {
         <Main>
             <div className='login'>
                 <div className='login-img'>
-                    <img className='border-r-2' height='100%' src={UnsplashImg} />
+                    <a href={UnsplashImg.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
+                        <small className='display '>@ {UnsplashImg.author}</small>
+                    </a>
+
+                    <img className='border-r-2' height='100%' src={UnsplashImg.url} alt={UnsplashImg.author + ' @ ' + UnsplashImg.profileUrl} />
                 </div>
                 <div className="form-block">
 
@@ -199,11 +207,11 @@ export default function Signup() {
                             <div className='grid gap-2rem'>
                                 <div className='display gap-1rem'>
                                     <span className='display'>
-                                        <img src={user?.photoURL} width={68} height={68} />
+                                        <img src={UserDB?.photoURL} width={68} height={68} className='border-r-100' />
                                     </span>
                                     <div className='grid'>
                                         <div className='display gap-1rem'>
-                                            <h2 className='m-0'>{user?.displayName}</h2>
+                                            <h2 className='m-0'>{UserDB?.name}</h2>
                                             {
                                                 isUserPremium[0]?.plan !== 'FREE' &&
                                                 <div className='display justify-c yellow border-r-04 border-b h-1 p-04'>
@@ -211,7 +219,7 @@ export default function Signup() {
                                                 </div>
                                             }
                                         </div>
-                                        <span>{user?.email}</span>
+                                        <span>{UserDB?.email}</span>
                                     </div>
                                 </div>
                                 <div className='display gap'>
@@ -230,11 +238,11 @@ export default function Signup() {
                             <div className='grid gap-1rem'>
                                 <div className='grid gap'>
                                     <span>Nom</span>
-                                    <input className='div-input white h-3' type='text' placeholder={user?.displayName} />
+                                    <input className='div-input white h-3' type='text' placeholder={UserDB?.name} />
                                 </div>
                                 <div className='grid gap'>
                                     <span>Email</span>
-                                    <input className='div-input white h-3' type='email' placeholder={user?.email} />
+                                    <input className='div-input white h-3' type='email' placeholder={UserDB?.email} />
                                 </div>
                                 <div className='grid gap'>
                                     <span>Mot de passe</span>

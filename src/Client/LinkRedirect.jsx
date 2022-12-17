@@ -35,7 +35,6 @@ export default function LinkRedirect() {
             else setTimeout(e=> rej() ,5000)
         })
 
-    
         getURL
         .then(URL=> {
 
