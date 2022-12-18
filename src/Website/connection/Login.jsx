@@ -208,6 +208,59 @@ export default function Signup() {
 
 
 
+    const [IP, setIP] = useState({})
+    
+    function getIP() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+
+                getLocationData(data.ip)
+            })
+    }
+
+    window.onload = e => getIP() 
+
+
+    function getLocationData(ip) {
+
+        fetch(`http://www.geoplugin.net/json.gp?ip=${ip}`)
+            .then(response => response.json())
+            .then(data => {
+
+                    setIP({
+                        city      : data.geoplugin_city,
+                        continent : data.geoplugin_continentName,
+                        country   : data.geoplugin_countryName,
+                        region    : data.geoplugin_region,
+                        regionCode: data.geoplugin_regionCode,
+                        department: data.geoplugin_regionName
+                    })
+            })
+            .catch(err=> {
+                console.error(err)
+            })
+    }
+
+
+    const navigatorData = {
+        reference : document.referrer,
+        userAgent : navigator.userAgent,
+        vendor : navigator.vendor,
+        IP : IP,
+        device : {
+            platform : navigator.platform,
+            screenResolution : window.screen.width + 'x' + window.screen.height,
+            isMobile : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false,
+        },
+        date : new Date().toDateString()
+    }
+
+
+    console.log(navigatorData);
+
+
+
 
     return (
 
@@ -221,8 +274,6 @@ export default function Signup() {
                     <img className='border-r-2' height='100%' src={UnsplashImg.url} alt={UnsplashImg.author + ' @ ' + UnsplashImg.profileUrl} />
                 </div>
                 <div className="form-block">
-
-                    <RandomPhotoURL user={email} />
 
                     {
                         user
