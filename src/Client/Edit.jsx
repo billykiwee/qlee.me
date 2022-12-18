@@ -34,6 +34,7 @@ export default function Edit() {
     const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)[0]?.plan !== 'FREE'
 
 
+
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
@@ -43,7 +44,7 @@ export default function Edit() {
 
         getUser
         .then(userEmail => {
-            db.collection('DB').doc('links').collection(userEmail).orderBy('date').onSnapshot(snapshot => {
+            db.collection('links').orderBy('date').onSnapshot(snapshot => {
                 setUserLinks(snapshot.docs.map(doc => doc.data()))
             })
         })
@@ -52,18 +53,12 @@ export default function Edit() {
 
 
 
-    function getLink() {
-        for (const v in UserLinks) {
-            if (UserLinks[v].user === user?.email) {
-                if (UserLinks[v].id === LinkID) return UserLinks[v]
-            }
-        }
-    }
-
-    const Link = getLink()
+    const Link = UserLinks
+        .filter(data=> data.user === user?.email && data.id === LinkID)
+        .map(link=> link)[0]
 
 
-
+    
     const [PopUpMessage, setPopUpMessage] = useState({})
 
 
@@ -84,9 +79,7 @@ export default function Edit() {
 
         setPopUpMessage({loader: true})
 
-        db.collection('DB').doc('links').collection('links').doc(Link.id).delete()
-
-        db.collection('DB').doc('links').collection(user?.email).doc(Link.id).delete()
+        db.collection('links').doc(Link.id).delete()
         .then(e=> {
             setPopUpMessage({loader: false})
             window.location.href = '/dashboard'
@@ -177,7 +170,6 @@ export default function Edit() {
         .then(valid=> {
 
             db.collection('links').doc(Link.id).update(editLink)
-            db.collection('DB').doc('links').collection(user?.email).doc(Link.id).update(editLink)
 
             document.querySelector('#error-name').innerHTML = ''
             document.querySelector('#error-url').innerHTML = ''
@@ -212,7 +204,7 @@ export default function Edit() {
         let downloadLink = document.createElement('a');
         downloadLink.href = 'data:image/svg;base64,' + btoa(svg.outerHTML)
 
-        downloadLink.download = 'qr-code.svg'
+        downloadLink.download = Link.name + '.svg'
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -294,11 +286,11 @@ export default function Edit() {
                                                 <div className='display gap'>
                                                     <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.url)}>
                                                         <QRCode
-                                                            onClick={e=> setQrCode(Link.url)}
+                                                            onClick={e=> setQrCode(Link.shortLink)}
                                                             bgColor='white'
                                                             fgColor='black'
                                                             className='w-2 h-2'
-                                                            value={Link.url}
+                                                            value={Link.shortLink}
                                                         />
                                                     </div>
                                                     <div className='grid'>

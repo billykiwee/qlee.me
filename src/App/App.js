@@ -16,6 +16,7 @@ import Login from '../Website/connection/Login'
 import LinkInBio from '../Client/views/LinkInBio'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
+import Stats from '../Client/views/Stats'
 
 
 
@@ -61,6 +62,7 @@ export default function App() {
                         <Route path="/login" exact element={<Login />} />
                         <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
                         <Route path="/pricing" exact element={<Pricing />} />
+                        <Route path="/dashboard/stats" exact element={<Stats />} />
                     </Routes>
                 </Container>
             <Footer />  
