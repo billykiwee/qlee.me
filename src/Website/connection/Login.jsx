@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { auth, db } from '../../App/database/firebase'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useStateValue } from '../../App/components/StateProvider'
+import { useStateValue } from '../../App/provider/StateProvider'
 import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo, signOut} from "firebase/auth"
 import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../../App/utils/uniqueID'
@@ -10,6 +10,7 @@ import RandomPhotoURL from '../../App/utils/RandomPhotoURL'
 import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../App/api/unsplash'
+import { generateLetterImage } from '../../App/utils/generateLetterImage'
 
 
 
@@ -34,79 +35,116 @@ export default function Signup() {
 
 
 
-    const { NameShop } = useParams()
-    
-    const [Name, setName] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-
 
     const [MSG, setMSG] = useState({})   
 
     const userID = UniqueID('user', 10)
 
 
-    // User register by email
-    function register(e) {
+    const loginConditions = {
+        Name : {
+            value : name,
+            rules : {
+                length : {
+                    min: 4,
+                    max : 16
+                }
+            }
+        },
+        Email : {
+            value : email,
+            rules : {
+                regex : /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            },
+            error : document.querySelector('#error-email') 
+        },
+        Password : {
+            value: password,
+            rules : {
+                length : {
+                    min: 6
+                },
+                regex : {
+                    special: /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)&é"'(§è!çà)-^$`ù=:;,]/,
+                    number : /.[1234567890]/
+                }
+            },
+            error : document.querySelector('#error-password') 
+        }
+    }
+
+    const { Name, Email, Password } = loginConditions
+
+
+
+    function registerByEmail(e) {
+
+        const RandomPhotoUrl = document.querySelector('canvas')?.id
 
         e.preventDefault() 
-        setMSG({loader: true})
 
-        const minLengthName = 4
-        const maxLengthName = 16
-        const minLengthPassword = 6
-        const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        const regexPWD = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)&é"'(§è!çà)-^$`ù=:;,]/
 
-        console.log(email);
+        async function Signup() {
 
-        async function Check() {
+            if (!Email.value.match(Email.rules.regex)) 
+                throw {
+                    code : 'error-email',
+                    error : 'Veuillez entrer un email valide'
+                }
+            else Email.error.innerHTML = ''
 
-            if (!email) {
-                throw 'Veuillez entrer un email valide'
+
+            if (Password.value.length < Password.rules.length.min)
+                throw {
+                    code : 'error-password',
+                    error : `Le mot de passe doit contenir au moins ${Password.rules.length.min} caractères`
+                }
+
+            else if (!Password.value.match(Password.rules.regex.special))
+                throw {
+                    code : 'error-password',
+                    error : 'Le mot de passe doit contenir un caractère spécial'
+                }
+
+            else if (!Password.value.match(Password.rules.regex.number))
+                throw {
+                    code : 'error-password',
+                    error : 'Le mot de passe doit contenir un nombre'
+                }
+
+            else Password.error.innerHTML = ''
+
+
+            return {
+                email : Email.value, 
+                password :Password.value 
             }
 
-            if (!email.match(regexEmail)) {
-                throw "L'email n'est pas valide"
-            }
-    
-            if (password.length < minLengthPassword) {
-                throw 'Le mot de passe doit contenir au moins 6 caractères'
-            }
-    
-            if (!password.match(regexPWD)) {
-                throw 'Le mot de passe doit contenir un caractère spécial'
-            }
-    
-            if (!password.match(/.[1234567890]/)) {
-                throw 'Le mot de passe doit contenir un nombre'
-            }
-
-            return true
         }
 
-        Check()
-        .then(e=> {
+        Signup()
+        .then(validData=> {
 
-            const RandomPhotoUrl = document.querySelector('canvas')?.id
+            const { email, password } = validData
 
-            
             auth.createUserWithEmailAndPassword(email, password)
-            .then(e=> {
-                    // Add this user on database
+            .then(toDatabase=> {
+
                 db.collection('users').doc(email).set({
-                    plan : 'FREE',
-                    id    : userID,
-                    name  : email.split('@')[0],
-                    email : email,
-                    photoURL: RandomPhotoUrl,
-                    date  : serverTimestamp()
+                    plan    : 'FREE',
+                    id      : userID,
+                    name    : email.split('@')[0],
+                    email   : email,
+                    photoURL: generateLetterImage(email.split('')[0].toUpperCase()),
+                    date    : serverTimestamp()
                 }) 
-                .then(e=> history('/dashboard') )
             })
+            .then(redirect=> history('/dashboard') )
             .catch(error => {
-                console.log(error)
+                //console.error(error)
                 setMSG({
                     statu: 'error', 
                     msg: "L'adresse mail est associé à un autre compte"
@@ -115,19 +153,14 @@ export default function Signup() {
         })
         .catch(error => {
 
-            setMSG({
-                statu: 'error', 
-                msg: error
+            Object.values(loginConditions).map(condition=> {
+                return condition.error?.id === error.code ? condition.error.innerHTML = error.error : null
             })
-
         }) 
     }
 
 
-    // User register with Google
-    function GoogleRegister() {
-
-        const RandomPhotoUrl = document.querySelector('canvas')?.id
+    function registerByGoogle() {
 
         const provider = new GoogleAuthProvider()
 
@@ -142,39 +175,28 @@ export default function Signup() {
                 if (isFirstLogin) {
 
                     db.collection('users').doc(auth.currentUser.email).set({
-                        plan : 'FREE',
-                        id    : userID,
-                        name  : NameShop ?? auth.currentUser.displayName,
-                        email : auth.currentUser.email,
+                        plan    : 'FREE',
+                        id      : userID,
+                        name    : auth.currentUser.displayName,
+                        email   : auth.currentUser.email,
                         photoURL: auth.currentUser.photoURL,
-                        logo: RandomPhotoUrl,
-                        date  : serverTimestamp()
+                        date    : serverTimestamp()
                     }) 
                 }
-                else {
-                    history('/dashboard')
-                    console.log('Déjà client');
-                }
+                else return '/dashboard'
             })
-            return userID
         }
 
         signup()
-        .then(shop => {
-            history('/dashboard')
-            console.log('compte créer avec google');
-        }) 
+        .then(redirect => history(redirect)) 
     }
 
 
-
-    // Hash password
-    const [passwordShown, setPasswordShown] = useState(false)
+    const [HashPassword, setHashPassword] = useState(false)
 
 
 
     const [UnsplashImg, setUnsplashImg] = useState('')
-
 
     useEffect(e=> {
         getUnsplashImage('nature')
@@ -182,6 +204,8 @@ export default function Signup() {
             setUnsplashImg(data)
         })
     }, [])
+
+
 
 
 
@@ -265,13 +289,13 @@ export default function Signup() {
                                 </div>
                                 <div className='display justify-c gap'>
                                     <div className='display'>
-                                        <button className='border border-r-1 white border-b hover h-3' type='button' onClick={GoogleRegister}>
+                                        <button className='border border-r-1 white border-b hover h-3' type='button' onClick={registerByGoogle}>
                                             <span className='f-s-16 opacity p-04 c-black'>Google</span>
                                             <img src='/images/google.svg' width={36} />
                                         </button>
                                     </div>
                                     <div className='display'>
-                                        <button className='border border-r-1 white border-b hover h-3' type='button' onClick={GoogleRegister}>
+                                        <button className='border border-r-1 white border-b hover h-3' type='button' onClick={registerByGoogle}>
                                             <span className='f-s-16 opacity p-04 c-black'>Facebook</span>
                                             <img src='/images/facebook.svg' width={36} />
                                         </button>
@@ -298,6 +322,7 @@ export default function Signup() {
                                     </span>
                                     <input type="email" placeholder='mon-email@gmail.com' className='border-0 h-3 w-100p'onChange={e => setEmail(e.target.value)} required />
                                 </div>
+                                <small className='c-red' id='error-email'></small>
                             </div>
 
                             <div className='grid w-100p m-b-1'>
@@ -310,23 +335,23 @@ export default function Signup() {
                                     </span>
                                     <input  
                                         className='border-0 h-3 w-100p'
-                                        type={passwordShown ? "text" : "password"}  
+                                        type={HashPassword ? "text" : "password"}  
                                         onChange={e => setPassword(e.target.value)} 
                                         placeholder='*********'
                                         required
                                     />
                                     <img 
                                         className="display click m-r-1" 
-                                        onClick={e=> setPasswordShown(passwordShown === true ? false : true)} 
-                                        alt="" 
+                                        onClick={e=> setHashPassword(HashPassword === true ? false : true)} 
                                         width={20}
-                                        src={passwordShown ? '/images/eye.svg' : '/images/eye-closed.svg'}
+                                        src={HashPassword ? '/images/eye.svg' : '/images/eye-closed.svg'}
                                     /> 
                                 </div>
+                                <small className='c-red' id='error-password'></small>
                             </div>
                             
                             <div className='grid m-t-1'>    
-                                <button className="blue f-s-16 border-r-1 border-b hover-blue" onClick={register} type="submit">
+                                <button className="blue f-s-16 border-r-1 h-4 border-b hover-blue" onClick={registerByEmail} type="submit">
                                     <span className='f-s-16 p-1'>Se connecter</span>
                                 </button>
                             </div>

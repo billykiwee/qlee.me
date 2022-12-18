@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useStateValue } from './components/StateProvider'
+import { useStateValue } from './provider/StateProvider'
 import { getAuth } from "firebase/auth"
 
 import Home from '../Website/Home'

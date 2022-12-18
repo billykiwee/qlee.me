@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Checkbox from '../App/components/Checkbox';
 import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
-import { useStateValue } from '../App/components/StateProvider';
+import { useStateValue } from '../App/provider/StateProvider';
 import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
@@ -107,7 +107,6 @@ export default function Dashboard() {
             id: 'linkinbio'
         }
     ]
-
 
 
     return (

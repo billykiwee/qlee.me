@@ -8,7 +8,7 @@ import QRCode from 'react-qr-code'
 import { minimizeString } from '../App/utils/minimizeString'
 import { isValidUrl } from '../App/utils/isValidUrl'
 import Popup, { PopUpcontent } from '../App/components/Popup'
-import { useStateValue } from '../App/components/StateProvider'
+import { useStateValue } from '../App/provider/StateProvider'
 import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
 import {makeFriendly} from '../App/utils/makeFriendly'
@@ -220,7 +220,7 @@ export default function Edit() {
     
 
 
-
+    if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
 
         <>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfilImg } from '../../Website/Home'
-import { useStateValue } from './StateProvider'
+import { useStateValue } from '../provider/StateProvider'
 
 export default function Footer() {
     const [{user}] = useStateValue()

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Main from '../../App/components/Main'
-import { useStateValue } from '../../App/components/StateProvider'
+import { useStateValue } from '../../App/provider/StateProvider'
 import { db } from '../../App/database/firebase'
 import { Link } from 'react-router-dom';
 import getFavicon from '../../App/utils/getFavicon'

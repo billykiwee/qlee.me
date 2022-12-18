@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfilImg } from '../../Website/Home'
 import { db } from '../database/firebase'
-import { useStateValue } from './StateProvider'
+import { useStateValue } from '../provider/StateProvider'
 
 
 
