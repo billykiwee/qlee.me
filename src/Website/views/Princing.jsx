@@ -64,7 +64,7 @@ export default function Pricing() {
                     </div>
                 </div>
 
-                <div className='display gap-1rem align-top justify-c m-t-1 pricing-blocks'>
+                <div className='display gap-1rem align-top m-t-1 pricing-blocks'>
                     {
                         Object.values(Plans)
                         .map(plan => {

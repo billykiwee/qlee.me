@@ -1,7 +1,7 @@
 import { serverTimestamp } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Checkbox from '../App/components/Checkbox';
 import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
@@ -11,6 +11,7 @@ import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import { minimizeString } from '../App/utils/minimizeString';
 import UniqueID from '../App/utils/uniqueID';
+import ListLink from './components/ListLink';
 
 
 const MAX_LINK_BEFORE_UPDATE = 10
@@ -18,23 +19,17 @@ const MAX_LINK_BEFORE_UPDATE = 10
 
 export default function Dashboard() {
 
+    const history = useNavigate()
+
     const [{user}] = useStateValue()
 
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
-
-        const getUser = new Promise((resolve, reject) => {
-            resolve(user?.email)
+        db.collection('links').orderBy('date').onSnapshot(snapshot => {
+            setUserLinks(snapshot.docs.map(doc => doc.data()))
         })
-    
-        getUser
-        .then(userEmail => {
-            db.collection('links').orderBy('date').onSnapshot(snapshot => {
-                setUserLinks(snapshot.docs.map(doc => doc.data()))
-            })
-        })
-    }, [user])
+    }, [])
 
 
     const AllUserLinks = UserLinks
@@ -60,23 +55,28 @@ export default function Dashboard() {
 
     function createLink() {
 
-        if (NameLink.length) {
-            if (NameLink.length > 40) throw setError('Le nom doit comporté 40 charactères au maximum')
-        }
-        if (!isValidUrl(LinkURL)) throw setError('Tu dois rentrer une URL valide')
-        if (isLinkAlreadyExist) throw setError('Un lien exitse déjà avec ce nom et cet URL')
-        if (MAX_LINK_BEFORE_UPDATE <= AllUserLinks.length) {
+        if (NameLink.length) 
+            if (NameLink.length > 40) 
+                throw setError('Le nom doit comporté 40 charactères au maximum')
+        
+        if (!isValidUrl(LinkURL)) 
+            throw setError('Tu dois rentrer une URL valide')
+
+        if (isLinkAlreadyExist) 
+            throw setError('Un lien exitse déjà avec ce nom et cet URL')
+
+        if (MAX_LINK_BEFORE_UPDATE <= AllUserLinks.length) 
             throw setMessage({
                 title: 'Oups...',
                 message: `Tu as atteints la limite de ${MAX_LINK_BEFORE_UPDATE} liens gratuits.`,
                 buttonText: 'Voir les plans',
                 buttonColor: 'yellow',
-                valid: () => setMessage({}),
+                valid: () => history('/pricing'),
                 close: () => setMessage({}),
                 statu: 'error'
             })
-        }
         
+
         const linkID = 'qlee.me/' + UniqueID('', 5)
                 
         const link = {
@@ -88,6 +88,7 @@ export default function Dashboard() {
             date     : serverTimestamp(),
             views    : 0
         }    
+
 
         db.collection('links').doc(link.id).set(link)
         .then(e=> {
@@ -107,11 +108,12 @@ export default function Dashboard() {
                 statu: 'success'
             })
         })
-    }    
+    }   
+
 
 
     const artcles = [
-       /*  {
+        {
             name : 'Mon compte',
             img : 'https://images.unsplash.com/photo-1664574654578-d5a6a4f447bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
             id: 'account',
@@ -121,7 +123,7 @@ export default function Dashboard() {
             name : 'Link in bio',
             img : 'https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
             id: 'linkinbio'
-        } */
+        }
     ]
 
     const TopLinks = (
@@ -263,51 +265,8 @@ export default function Dashboard() {
                                 AllUserLinks
                                 .map(userlink=> {
 
-                                    return (
-                                        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={userlink?.id}>
-                                            <div className='display gap-1rem'>
-                                                <Link to={'/edit/' + userlink?.shortLink.split('/')[1]} className='display'>
-                                                    <img src={getFavicon(userlink?.url)} className='w-2 h-2 border-r-100' />
-                                                </Link>
-                                                <div className='grid '> 
-                                                    <div className='display gap'>
-                                                        <span className='f-s-16'>{minimizeString(userlink?.name, 20)}</span>
-                                                    </div>
+                                    return <ListLink link={userlink} />
 
-                                                    <div className='grid gap'>
-                                                        <div className='display gap'>
-                                                            <a href={userlink?.shortLink}  rel="noopener noreferrer" className='hover-link link'>{userlink?.shortLink}</a>
-                                                            <div className='display gap'>
-                                                                <button 
-                                                                    className='display border-r-04 w-2 hover h-2 border border-b' 
-                                                                    onClick={e=> {
-                                                                        navigator.clipboard.writeText(userlink?.shortLink)
-                                                                        let div = document.querySelector('#link-' + userlink?.id)
-                                                                        div.style.display = 'flex'
-                                                                        setTimeout(e=> div.style.display = 'none', 1500)
-                                                                    }} 
-                                                                >
-                                                                    <img src='/images/copy.svg' width={16} />
-                                                                </button>
-                                                                <div className='display disable green absolute border-r-04 p-04' id={'link-' + userlink?.id} >
-                                                                    <small>Copié</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <Link to={'/edit/' + userlink?.id}>
-                                                    <button className=' hover'>
-                                                        <span className='display w-1 h-2'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                                                        </span>
-                                                    </button>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    )
                                 }).reverse()
                             }
 

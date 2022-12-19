@@ -62,7 +62,9 @@ export default function App() {
                         <Route path="/login" exact element={<Login />} />
                         <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
                         <Route path="/pricing" exact element={<Pricing />} />
-                        <Route path="/dashboard/stats" exact element={<Stats />} />
+
+                        <Route path="/stats" exact element={<Stats />} />
+                        <Route path="/stats/:LinkID" exact element={<Stats />} />
                     </Routes>
                 </Container>
             <Footer />  

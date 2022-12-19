@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link as Redirect, useParams } from 'react-router-dom'
 import Container from '../App/components/Container'
 import { db } from '../App/database/firebase'
 import getFavicon from '../App/utils/getFavicon'
@@ -11,7 +11,6 @@ import Popup, { PopUpcontent } from '../App/components/Popup'
 import { useStateValue } from '../App/provider/StateProvider'
 import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
-import {makeFriendly} from '../App/utils/makeFriendly'
 
 
 
@@ -25,14 +24,22 @@ export default function Edit() {
 
     const [User, setUser] = useState([])
 
+    const [GetStatsLink, setGetStatsLink] = useState([])
+
     useEffect(e=> {
         db.collection('users').onSnapshot(snapshot => {
             setUser(snapshot.docs.map(doc => doc.data()))
+        })
+
+        db.collection('links').doc(LinkID).collection('stats').onSnapshot(snapshot => {
+            setGetStatsLink(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
 
     const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)[0]?.plan !== 'FREE'
 
+
+    const statsLink = GetStatsLink
 
 
     const [UserLinks, setUserLinks] = useState([])
@@ -199,7 +206,7 @@ export default function Edit() {
 
     const [QrCode,setQrCode] = useState(false)
 
-    function downloadQRCode(data) {
+    function downloadQRCode() {
         const svg = document.getElementById('qr-code-svg');
         let downloadLink = document.createElement('a');
         downloadLink.href = 'data:image/svg;base64,' + btoa(svg.outerHTML)
@@ -236,7 +243,7 @@ export default function Edit() {
                                 <div className='grid gap'>
 
                                     <div className='display align-top'>
-                                        <div className='grid gap white border-r-1 border-b p-1 w-100p'>
+                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap w-100p'>
                                                     <a href={Link.url} className='display '>
@@ -281,7 +288,7 @@ export default function Edit() {
                                     </div>
                                     
                                     <div className='display align-top'>
-                                        <div className='grid gap white border-r-1 border-b p-1 w-100p'>
+                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
                                                     <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.url)}>
@@ -324,6 +331,43 @@ export default function Edit() {
                                                     </div>
                                                 </div>
                                             }
+                                        </div>
+                                    </div>
+
+                                    <div className='display align-top'>
+                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
+                                            <div className='display justify-s-b'>
+                                                <div className='display gap'>
+                                                    <div className='grid'>
+                                                        <span>Statistiques</span>
+                                                    </div>
+                                                </div>
+                                                <div className='display gap'>
+                                                    <Redirect to={'/stats/' + Link.id}>
+                                                        <button className='border-b blue hover-blue h-40 p-1 border-r-1 border' >
+                                                            <span className='display'>Voir +</span>
+                                                        </button>
+                                                    </Redirect>
+                                                </div>
+                                                {
+                                                    statsLink.map(stat=> {
+                                                        return (
+                                                            <div className='grid gap'>
+                                                                <span>{stat?.adress?.ip}</span>
+                                                                <span>{stat?.adress?.country}</span>
+                                                                <span>{stat?.adress?.city}</span>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+
+                                            </div>
+                                            <div className='grid gap-1rem'>
+                                                <div className='display gap'>
+                                                    <img src='/images/eye-solid.svg' width={20} />
+                                                    <span>{Link.views} clics</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -479,7 +523,7 @@ export default function Edit() {
 
 function GoToPricing() {
     return (
-        <Link to='/pricing'>
+        <Redirect to='/pricing'>
             <div className='display click'>
                 <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
                     <span className='display'>
@@ -487,6 +531,6 @@ function GoToPricing() {
                     </span>
                 </div>
             </div>
-        </Link>
+        </Redirect>
     )
 }

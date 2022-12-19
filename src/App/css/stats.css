@@ -1,0 +1,17 @@
+.progress-bar-stat {
+    height: 9px;
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+}
+.progress-bar-stat > div { 
+    height: 100%;
+    animation: progressBar 800ms ease-in-out;
+}
+
+
+@keyframes progressBar {
+    from {
+        width : 0%;
+    }
+}
