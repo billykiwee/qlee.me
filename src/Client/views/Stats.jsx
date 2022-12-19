@@ -36,13 +36,15 @@ export default function Stats() {
         .sort((a, b) => b.views - a.views)
         .splice(0,1)[0]
         
+
+
     const [LinkStat, setLinkStat] = useState([])
     
     useEffect(e=> {
-        db.collection('links').doc(TopLink?.id).collection('stat').onSnapshot(snapshot => {
+        db.collection('links').doc(LinkID).collection('stats').onSnapshot(snapshot => {
             setLinkStat(snapshot.docs.map(doc => doc.data()))
         })
-    }, [])
+    }, [LinkID])
 
 
     const [ShowStat, setShowStat] = useState(null)
@@ -55,6 +57,48 @@ export default function Stats() {
 
     const [Filter, setFilter] = useState(false)
     const [Search, setSearch] = useState(false)
+
+
+
+
+    function countBy(array) {
+        const iterate =  array.reduce((acc, curr) => {
+            if (curr in acc) 
+                acc[curr]++
+            else 
+                acc[curr] = 1
+            return acc
+        }, {})
+
+        const transformedData = {}
+
+        Object.keys(iterate).forEach((key, i) => {
+            transformedData[i] = {
+                name: key, 
+                count: iterate[key]
+            }
+        })
+
+        return transformedData
+    }
+ 
+
+    const device = LinkStat.map(e=> e.device?.isMobile)
+    const countByDevice = countBy(device)
+
+    const reference = LinkStat.map(e=> e.reference)
+    const countByReference = countBy(reference)
+
+    const countries = LinkStat.map(e=> e.adress?.country)
+    const countByCountry = countBy(countries)
+
+
+    const StatsFilter = {
+        clics       : 0,
+        devise      : countByDevice,
+        reference   : countByReference,
+        localisation: countByCountry
+    } 
 
 
 
@@ -117,62 +161,26 @@ export default function Stats() {
                                                 <img src={'/images/globe-solid.svg'} width={20} />
                                                 <span>source du trafic</span>
                                             </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <img src={getFavicon('www.facebook.com')} width={16} className='border-r-100' />
-                                                    <span>Facebook</span><small className='c-grey'>(14 732)</small>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 53 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>23%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <img src={getFavicon('www.instagram.com')} width={16} className='border-r-100' />
-                                                    <span>Instagram</span>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 38 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>38%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <img src={getFavicon('www.tiktok.com')} width={16} className='border-r-100' />
-                                                    <span>Tiktok</span>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 12 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>12%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <img src={getFavicon('www.Discord.com')} width={16} className='border-r-100' />
-                                                    <span>Discord</span>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 8 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>8%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {
+                                                Object.values(StatsFilter.reference)
+                                                .sort((x, y)=> y.count - x.count )
+                                                .map(stat=> {
+                                                    
+                                                    const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+
+                                                    const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+
+                                                    return (
+                                                        <div className='display justify-s-b'>
+                                                            <div className='display gap'>
+                                                                <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
+                                                                <span>{stat.name.split('.')[1]}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                            </div>
+                                                            <ProgressBar percentage={percentage} />
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                         </div>
 
 
@@ -181,38 +189,25 @@ export default function Stats() {
                                                 <img src={'/images/localisation-solid.svg'} width={20} />
                                                 <span>localisation</span>
                                             </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <span>France</span>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 88 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>88%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <span>Réunion</span>
-                                                </div>
-                                                <ProgressBar percentage={63} />
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <span>Italie</span>
-                                                </div>
-                                                <div className='display gap-1rem'>
-                                                    <div className='progress-bar-stat'>
-                                                        <div className='blue border-r-2' style={{width: 5 + '%'}}></div>
-                                                    </div>
-                                                    <div className='display w-2 justify-c'>
-                                                        <span>5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {
+                                                Object.values(StatsFilter.localisation)
+                                                .sort((x, y)=> y.count - x.count )
+                                                .map(stat=> {
+                                                    
+                                                    const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+
+                                                    const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+
+                                                    return (
+                                                        <div className='display justify-s-b'>
+                                                            <div className='display gap'>
+                                                                <span>{stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                            </div>
+                                                            <ProgressBar percentage={percentage} />
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                         </div>
 
 
@@ -308,7 +303,7 @@ export default function Stats() {
                                     <Link to={'/stats/' + link.id}>
                                         <div    
                                             style={{background: LinkID === link.id ? 'var(--hover-btn)' : ''}}
-                                            className='display gap p-1 border-b border-r-1 border justify-s-b white h-3 click hover' 
+                                            className='display gap p-1 border-b border-r-1 border justify-s-b white h-2 click hover' 
                                             key={link.id} onClick={e=> setShowStat(link.id)} 
                                         >
                                             <div className='display gap-1rem justify-s-b w-100p'>
@@ -362,10 +357,10 @@ function ProgressBar({percentage}) {
     return (
         <div className='display gap-1rem'>
             <div className='progress-bar-stat'>
-                <div className='blue border-r-2' style={{width: percentage + '%'}}></div>
+                <div className='blue border-r-2' style={{width: percentage}}></div>
             </div>
             <div className='display w-2 justify-c'>
-                <span>{percentage}%</span>
+                <span>{percentage}</span>
             </div>
         </div>
     )

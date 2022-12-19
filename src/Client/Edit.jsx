@@ -45,18 +45,10 @@ export default function Edit() {
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
-        const getUser = new Promise((resolve, reject) => {
-            resolve(user?.email)
+        db.collection('links').orderBy('date').onSnapshot(snapshot => {
+            setUserLinks(snapshot.docs.map(doc => doc.data()))
         })
-
-        getUser
-        .then(userEmail => {
-            db.collection('links').orderBy('date').onSnapshot(snapshot => {
-                setUserLinks(snapshot.docs.map(doc => doc.data()))
-            })
-        })
-
-    }, [user])
+    }, [])
 
 
 
@@ -203,6 +195,36 @@ export default function Edit() {
 
 
 
+    function checkShortLinkAvailable(input) {
+        const divAlert = document.querySelector('#alert-shortlink')
+
+        if (input) {
+
+            let isIDExist = UserLinks.filter(link=> link.id === input)[0]
+
+            if (!isIDExist) {
+                divAlert.style.color = 'var(--green)'
+                divAlert.innerHTML = `Le lien court "${input}" est disponible`
+            }
+
+            else {
+                divAlert.style.color = 'var(--red)'
+                divAlert.innerHTML = `Le lien court "${input}" n'est pas disponible`
+            }
+
+        }
+        else divAlert.innerHTML = ''
+
+    } 
+    
+    useEffect(e=> {
+        checkShortLinkAvailable(editLink.id)
+
+
+    }, [editLink.id])
+
+
+
 
     const [QrCode,setQrCode] = useState(false)
 
@@ -216,6 +238,7 @@ export default function Edit() {
         downloadLink.click();
         document.body.removeChild(downloadLink);
     }
+
     
 
 
@@ -386,7 +409,7 @@ export default function Edit() {
                                         </div>
 
                                         {
-                                            !isUserPremium
+                                            isUserPremium
                                             ?
                                             <>
                                                 <div className='grid gap-04 w-100p'>
@@ -428,7 +451,22 @@ export default function Edit() {
                                                     <div className='display gap'>
                                                         <span>Modifier le lien court</span>
                                                     </div>
-                                                    <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
+                                                    <div className='display'>
+                                                        <span className='c-grey'>{Link.shortLink.split('/')[0]}/</span>
+                                                        <input 
+                                                            type='text' 
+                                                            className='div-input h-3 border-r-1 w-100p white' 
+                                                            placeholder={Link.id} 
+                                                            onChange={e=> seteditLink({...editLink, id : e.target.value})} 
+                                                            pattern="\S*"
+                                                            onKeyPress={event=> {
+                                                                if (event.key === ' ') {
+                                                                    event.preventDefault();
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <small id='alert-shortlink'></small>
                                                 </div>
                                                 <div className='grid gap-04'>
                                                     <div className='display gap'>

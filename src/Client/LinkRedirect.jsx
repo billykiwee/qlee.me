@@ -76,33 +76,6 @@ export default function LinkRedirect() {
     }
 
 
-
-    ////// TEST
-   /*  useEffect(e=> {
-
-        db.collection('links').doc(LinkID).collection('stats').doc(UniqueID('data' , 26)).set({
-            reference : document.referrer,
-            userAgent : navigator.userAgent,
-            vendor : navigator.vendor,
-            IP : {
-                ip        : 8390409394,
-                city      : 'Paris',
-                continent : 'Europe',
-                country   : 'France',
-                region    : 'Paris',
-                regionCode: '75',
-                department: 'Haute'
-            },
-            device : {
-                platform : navigator.platform,
-                screenResolution : window.screen.width + 'x' + window.screen.height,
-                isMobile : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false,
-            },
-            date : serverTimestamp()
-        })
-
-    }, []) */
-
     
     useEffect(e=> {
 

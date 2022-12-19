@@ -1,6 +1,6 @@
 .progress-bar-stat {
     height: 9px;
-    width: 200px;
+    width: 160px;
     display: flex;
     justify-content: flex-end;
 }
