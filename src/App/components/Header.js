@@ -73,7 +73,7 @@ export default function Header() {
 
     
     return (
-        <header className='shadow border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
+        <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
             <div className='align-top display justify-s-b'>
                 <div className='display gap click'>
                     <Link to={user ? '/dashboard' : '/'}>

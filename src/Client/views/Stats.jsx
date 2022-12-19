@@ -119,8 +119,8 @@ export default function Stats() {
                                             </div>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <img src={getFavicon('www.facebook.com')} width={18} className='border-r-100' />
-                                                    <span>Facebook</span>
+                                                    <img src={getFavicon('www.facebook.com')} width={16} className='border-r-100' />
+                                                    <span>Facebook</span><small className='c-grey'>(14 732)</small>
                                                 </div>
                                                 <div className='display gap-1rem'>
                                                     <div className='progress-bar-stat'>
@@ -133,7 +133,7 @@ export default function Stats() {
                                             </div>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <img src={getFavicon('www.instagram.com')} width={18} className='border-r-100' />
+                                                    <img src={getFavicon('www.instagram.com')} width={16} className='border-r-100' />
                                                     <span>Instagram</span>
                                                 </div>
                                                 <div className='display gap-1rem'>
@@ -147,7 +147,7 @@ export default function Stats() {
                                             </div>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <img src={getFavicon('www.tiktok.com')} width={18} className='border-r-100' />
+                                                    <img src={getFavicon('www.tiktok.com')} width={16} className='border-r-100' />
                                                     <span>Tiktok</span>
                                                 </div>
                                                 <div className='display gap-1rem'>
@@ -161,7 +161,7 @@ export default function Stats() {
                                             </div>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <img src={getFavicon('www.Discord.com')} width={18} className='border-r-100' />
+                                                    <img src={getFavicon('www.Discord.com')} width={16} className='border-r-100' />
                                                     <span>Discord</span>
                                                 </div>
                                                 <div className='display gap-1rem'>
