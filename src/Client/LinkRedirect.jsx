@@ -24,7 +24,7 @@ export default function LinkRedirect() {
 
 
 
-    const [IP, setIP] = useState({})
+    const [Location, setLocation] = useState({})
     
     function getIP() {
         fetch('https://api.ipify.org?format=json')
@@ -35,7 +35,9 @@ export default function LinkRedirect() {
             })
     }
 
-    window.onload = e => getIP() 
+    useEffect(e=> {
+        getIP() 
+    }, [])
 
     function getLocationData(ip) {
 
@@ -43,36 +45,39 @@ export default function LinkRedirect() {
             .then(response => response.json())
             .then(data => {
 
-                    setIP({
-                        ip        : data.geoplugin_request,
-                        country   : data.geoplugin_countryName,
-                        city      : data.geoplugin_city
-                    })
+                setLocation({
+                    country: data.geoplugin_countryName,
+                    city   : data.geoplugin_city
+                })
             })
             .catch(err=> {
                 console.error(err)
             })
     }
 
-    const navigatorData = {
-        reference : document.referrer,
-        userAgent : navigator.userAgent,
-        vendor : navigator.vendor,
-        adress : IP,
-        device : {
-            platform : navigator.platform,
-            screenResolution : window.screen.width + 'x' + window.screen.height,
-            isMobile : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false,
+
+
+
+    const Stats = {
+        ...AllLinks
+            .filter(e=> e.id === LinkID)
+            .map(e=> {
+                return {
+                    user : e.user,
+                    url  : e.url,
+                    views: e.views
+                }
+            })[0]
+        ,
+        stats: {
+            reference : !document.referrer.length ? 'unknown' : document.referrer,
+            adress : Location,
+            device : {
+                platform : navigator.platform,
+                isMobile : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false,
+            }
         },
         date : serverTimestamp()
-    }
-
-
-    const linkData = {
-        user : AllLinks.filter(e=> e.id === LinkID).map(e=> e.user).toString(),
-        url  : AllLinks.filter(e=> e.id === LinkID).map(e=> e.url).toString(),
-        views: Number(AllLinks.filter(e=> e.id === LinkID).map(e=> e.views)),
-        stats: navigatorData
     }
 
 
@@ -80,24 +85,36 @@ export default function LinkRedirect() {
     useEffect(e=> {
 
         const getURL = new Promise((res,rej)=> {
-            if (linkData.url) res(linkData.url)
-            else setTimeout(e=> rej() ,5000)
+
+            if (Stats.url) 
+                res(Stats.url)
+            else 
+                setTimeout(e=> rej() ,5000)
         })
 
         getURL
         .then(URL=> {
 
-            let updateViews = {views : linkData.views + 1}
+            if (Stats.url) {
 
-            db.collection('links').doc(LinkID).update(updateViews)         
+                let updateViews = {views : Stats.views + 1}
+    
+                db.collection('links').doc(LinkID).update(updateViews)         
+    
+                db.
+                    collection('links')
+                    .doc(LinkID).
+                    collection('stats')
+                    .add(Stats.stats)
+    
+                .then(redirect=> window.location.href = URL)
+                .catch(e=> console.log(e))
+            }
 
-            db.collection('links').doc(LinkID).collection('stats').doc(UniqueID('data' , 26)).set(linkData.stats)
-            .then(redirect=> window.location.href = URL)
-            .catch(e=> console.log(e))
         })
        .catch(page404=>  window.location.href = '/page404')
         
-    }, [linkData.url])
+    }, [Stats.url])
 
 
 

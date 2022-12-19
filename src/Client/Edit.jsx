@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import { Link as Redirect, useParams } from 'react-router-dom'
+import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import Container from '../App/components/Container'
 import { db } from '../App/database/firebase'
 import getFavicon from '../App/utils/getFavicon'
@@ -11,12 +11,14 @@ import Popup, { PopUpcontent } from '../App/components/Popup'
 import { useStateValue } from '../App/provider/StateProvider'
 import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
+import { serverTimestamp } from 'firebase/firestore'
+import { downloadQRCode } from './lib/downloadQRCode'
 
 
 
 export default function Edit() {
 
-
+    const history = useNavigate()
     const { LinkID } = useParams()
 
     const [{user}] = useStateValue()
@@ -86,119 +88,104 @@ export default function Edit() {
     }
 
 
+
     const [editLink, seteditLink] = useState({})
 
-    const [tag, settag] = useState('')
 
-    function addTags() {
+    const [EditShortLink, setEditShortLink] = useState('')
 
-        if (tag.length > 0) {
+    function EditLink() {
 
-            let conditions = {
-                tags : Link.tags ?? [],
-                maxLength: 10
+        if (!EditShortLink) {
+
+            if (Object.values(editLink).length === 0) return 
+    
+            async function Check() {
+                
+                if (editLink.name) {
+                    if (editLink.name.length > 40)
+                    throw {id:'name', error: 'Le nom doit faire entre 0 et 40 charactères'}
+                }
+                if (editLink.nurlame) {
+                    if (!isValidUrl(editLink.url)) 
+                    throw {id:'url', error:'Tu dois rentrer une URL valide'}
+                }
             }
-
-            if (conditions.tags.length >= conditions.maxLength + 1) {
+    
+            Check()
+            .then(valid=> {
+    
+                db.collection('links').doc(Link.id).update(editLink)
+    
+                document.querySelector('#error-name').innerHTML = ''
+                document.querySelector('#error-url').innerHTML = ''
+            })
+            .then(e=> {
+                document.querySelectorAll('input').forEach(e=> e.value = '')
+    
+                seteditLink({})
+    
                 setPopUpMessage({
-                    title: 'Erreur',
-                    message: "Vous pouvez ajouter que 10 tags",
+                    title: 'Modifications enregistrées',
+                    message: 'Le lien à bien été modifié',
                     buttonText: 'Continuer',
                     buttonColor: 'blue',
                     valid: () => setPopUpMessage({}),
                     close: () => setPopUpMessage({}),
-                    statu: 'error'
+                    statu: 'success'
                 })
-            }
-            else {
-
-                db.collection('DB').doc('links').collection(user?.email).doc(Link.id).update({
-                    tags : [
-                        ...conditions.tags,
-                        tag
-                    ]
-                })
-                db.collection('DB').doc('links').collection('links').doc(Link.id).update({
-                    tags : [
-                        ...conditions.tags,
-                        tag
-                    ]
-                })
-                .then(e=> {
-                    document.querySelector('.tags').value = '' 
-                    settag('')
-                })
-            }
-
-
-        }
-
-    }
-
-    function deleteTag(tag) {
-
-        let array = Link.tags
-
-        db.collection('DB').doc('links').collection(user?.email).doc(Link.id).update({
-            tags : array.filter(e=> e !== tag)
-        })
-        db.collection('DB').doc('links').collection('user').doc(Link.id).update({
-            tags : array.filter(e=> e !== tag)
-        })
-    }
-
-
-
-    function EditLink() {
-
-        if (Object.values(editLink).length === 0) return 
-
-        async function Check() {
-            
-            if (editLink.name) {
-                if (editLink.name.length > 40)
-                throw {id:'name', error: 'Le nom doit faire entre 0 et 40 charactères'}
-            }
-            if (editLink.nurlame) {
-                if (!isValidUrl(editLink.url)) 
-                throw {id:'url', error:'Tu dois rentrer une URL valide'}
-            }
-        }
-
-        Check()
-        .then(valid=> {
-
-            db.collection('links').doc(Link.id).update(editLink)
-
-            document.querySelector('#error-name').innerHTML = ''
-            document.querySelector('#error-url').innerHTML = ''
-        })
-        .then(e=> {
-            document.querySelectorAll('input').forEach(e=> e.value = '')
-
-            seteditLink({})
-
-            setPopUpMessage({
-                title: 'Modifications enregistrées',
-                message: 'Le lien à bien été modifié',
-                buttonText: 'Continuer',
-                buttonColor: 'blue',
-                valid: () => setPopUpMessage({}),
-                close: () => setPopUpMessage({}),
-                statu: 'success'
             })
-        })
-        .catch(e=> {
-           document.querySelector('#error-'+ e.id).innerHTML = e.error
-        })
+            .catch(e=> {
+               document.querySelector('#error-'+ e.id).innerHTML = e.error
+            })
+        }
+
+        else {
+            db.collection('links').doc(EditShortLink).set({
+                name     : Link.name,
+                id       : EditShortLink,
+                user     : user?.email,
+                url      : Link.url,
+                shortLink: 'qlee.me/' + EditShortLink,
+                date     : serverTimestamp(),
+                views    : Link.views
+            })
+            .then(addStat=> {
+                if (statsLink[0])  
+                    db.collection('links').doc(EditShortLink).collection('stats').add(statsLink[0])
+            })
+            .then(deleteOldID=> {
+                db.collection('links').doc(Link.id).delete()
+            })
+            .then(popup=> {
+                document.querySelectorAll('input').forEach(e=> e.value = '')
+    
+                setEditShortLink('')
+    
+                setPopUpMessage({
+                    title: 'Modifications enregistrées',
+                    message: 'Le lien à bien été modifié',
+                    buttonText: 'Continuer',
+                    buttonColor: 'blue',
+                    valid: () => setPopUpMessage({}),
+                    close: () => setPopUpMessage({}),
+                    statu: 'success'
+                })
+            })
+            .then(redirect=> {
+                history('/edit/' + EditShortLink)
+            })
+        }
+
     }
 
-
+    
 
     function checkShortLinkAvailable(input) {
         const divAlert = document.querySelector('#alert-shortlink')
 
-        if (input) {
+
+        if (input.length) {
 
             let isIDExist = UserLinks.filter(link=> link.id === input)[0]
 
@@ -216,29 +203,11 @@ export default function Edit() {
         else divAlert.innerHTML = ''
 
     } 
-    
-    useEffect(e=> {
-        checkShortLinkAvailable(editLink.id)
-
-
-    }, [editLink.id])
-
+  
 
 
 
     const [QrCode,setQrCode] = useState(false)
-
-    function downloadQRCode() {
-        const svg = document.getElementById('qr-code-svg');
-        let downloadLink = document.createElement('a');
-        downloadLink.href = 'data:image/svg;base64,' + btoa(svg.outerHTML)
-
-        downloadLink.download = Link.name + '.svg'
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
-
     
 
 
@@ -268,7 +237,7 @@ export default function Edit() {
                                     <div className='display align-top'>
                                         <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
-                                                <div className='display gap w-100p'>
+                                                <div className='display gap-1rem w-100p'>
                                                     <a href={Link.url} className='display '>
                                                         <img src={getFavicon(editLink.url ? editLink.url : Link.url)} className='w-2 h-2 border-r-100' />
                                                     </a>
@@ -277,9 +246,6 @@ export default function Edit() {
 
                                                         <div className='display justify-s-b w-100p'>
                                                             <span>{editLink.name ? editLink.name : minimizeString(Link.name, 30)}</span>
-                                                            <div className='display justify-c'>
-                                                                <small className='text-align-e c-grey'>{Link.views} clics</small>
-                                                            </div>
                                                         </div>
 
                                                         <div 
@@ -372,17 +338,6 @@ export default function Edit() {
                                                         </button>
                                                     </Redirect>
                                                 </div>
-                                                {
-                                                    statsLink.map(stat=> {
-                                                        return (
-                                                            <div className='grid gap'>
-                                                                <span>{stat?.adress?.ip}</span>
-                                                                <span>{stat?.adress?.country}</span>
-                                                                <span>{stat?.adress?.city}</span>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
 
                                             </div>
                                             <div className='grid gap-1rem'>
@@ -452,12 +407,15 @@ export default function Edit() {
                                                         <span>Modifier le lien court</span>
                                                     </div>
                                                     <div className='display'>
-                                                        <span className='c-grey'>{Link.shortLink.split('/')[0]}/</span>
+                                                        <span className='c-blue'>{Link.shortLink.split('/')[0]}/</span>
                                                         <input 
                                                             type='text' 
                                                             className='div-input h-3 border-r-1 w-100p white' 
                                                             placeholder={Link.id} 
-                                                            onChange={e=> seteditLink({...editLink, id : e.target.value})} 
+                                                            onChange={e=> {
+                                                                setEditShortLink(e.target.value)
+                                                                checkShortLinkAvailable(e.target.value)
+                                                            }} 
                                                             pattern="\S*"
                                                             onKeyPress={event=> {
                                                                 if (event.key === ' ') {
@@ -492,41 +450,6 @@ export default function Edit() {
                                             </>
 
                                         }
-
-                                        <div className='grid gap-04 w-100p'>
-                                            <span>Ajouter des tags</span>
-                                            <div className='display gap'>
-                                                <input 
-                                                    type='text'
-                                                    className='div-input h-3 border-r-1 w-100p white tags' 
-                                                    placeholder='Entrer un tag'
-                                                    onChange={e=> settag(e.target.value)}
-                                                />
-                                                <div className='display'>
-                                                    <button className='white border-b borde-r-2 border h-3 p-lr-1' onClick={addTags}>
-                                                        <span>ajouter</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div className='display gap wrap'>
-                                                {
-                                                    Link.tags?.map(tag=> {
-                                                        return (
-                                                            <div className='display blue-secondary border-r-04 p-lr-1 p-04 click gap-04'>
-                                                                <div className='display'>
-                                                                    <span>{tag}</span>
-                                                                </div>
-                                                                <div className='display' onClick={e=> deleteTag(tag)}>
-                                                                    <span className='display'>
-                                                                        <img src='/images/x.svg' width={12} height={12} />
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
                                     </div>
 
 

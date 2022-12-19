@@ -32,9 +32,7 @@ export default function Dashboard() {
     }, [])
 
 
-    const AllUserLinks = UserLinks
-        .filter(data=> data.user === user?.email)
-        .map(userlinks=> userlinks)
+    const AllUserLinks = UserLinks.filter(data=> data.user === user?.email).map(userlinks=> userlinks)
 
 
 
@@ -91,7 +89,7 @@ export default function Dashboard() {
 
 
         db.collection('links').doc(link.id).set(link)
-        .then(e=> {
+        .then(linkCreated=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
 
             setLinkURL(false)
@@ -126,18 +124,6 @@ export default function Dashboard() {
         }
     ]
 
-    const TopLinks = (
-        UserLinks
-            .filter(isUserAuth=> isUserAuth.user === user?.email)
-            .map(links=> links)
-            .sort((a, b) => b.views - a.views)
-            .splice(0,3)
-    )
-
-
-
-
-
 
     return (
 
@@ -150,48 +136,6 @@ export default function Dashboard() {
                 <div className='grid gap-2rem'>
                     <div className='grid swiper' style={{overflowX: 'scroll' }}>
                         <div className='display gap-1rem transition' >
-
-                            <div className='display white border-r-2 border-b border' >
-                                <div className='display w-100p' >
-                                    <div className='grid gap-2rem align-top w-100p p-1'>
-                                        <div className='display justify-s-b w-100p'>
-                                            <span>Top liens</span>
-                                            <div>
-                                                <button className='blue border-b h-2 border-r-04'>
-                                                    <span>Voir les stats</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div className='grid gap-1rem w-100p'>
-                                            {
-                                                TopLinks.map(link=> {
-                                                    return (
-                                                        <div className='display '>
-                                                            <div className='display justify-s-b w-100p'>
-                                                                <div className='display justify-c gap'>
-                                                                    <img src={getFavicon(link.url)} className='w-2 h-2 border-r-2' />
-                                                                    <div className='grid'>
-                                                                        <small>{link.views} clics</small>
-                                                                        <small className='link'>{link.shortLink}</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <span className='link'>
-                                                                        +
-                                                                        {
-                                                                            (((link.views - link.viewsLastWeek) / link.viewsLastWeek) * 100).toFixed(0)
-                                                                        }%
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             {
                                 artcles.map(article=> {
                                     return (

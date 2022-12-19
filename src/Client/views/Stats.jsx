@@ -101,7 +101,6 @@ export default function Stats() {
     } 
 
 
-
     return (
         <Main>
             <h2>Statistiques</h2>
@@ -170,6 +169,8 @@ export default function Stats() {
 
                                                     const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
+                                                    console.log(sumCount);
+
                                                     return (
                                                         <div className='display justify-s-b'>
                                                             <div className='display gap'>
@@ -201,7 +202,7 @@ export default function Stats() {
                                                     return (
                                                         <div className='display justify-s-b'>
                                                             <div className='display gap'>
-                                                                <span>{stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                                <span>{stat.name === 'undefined' ? 'autres...' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
                                                             </div>
                                                             <ProgressBar percentage={percentage} />
                                                         </div>
