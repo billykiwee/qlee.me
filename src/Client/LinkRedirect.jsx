@@ -64,7 +64,7 @@ export default function LinkRedirect() {
 
 
 
-    const getReference = document.referrer.includes('qlee.me') ? null : document.referrer
+    const getReference = !document.referrer || document.referrer.includes('qlee.me') ? null : document.referrer
     
     const Stats = {
         ...AllLinks
@@ -78,7 +78,7 @@ export default function LinkRedirect() {
             })[0]
         ,
         stats: {
-            reference: !document.referrer ? 'unknown' : getReference,
+            reference: getReference,
             adress   : Location,
             device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
             id       :  's-' + new Date().getTime()

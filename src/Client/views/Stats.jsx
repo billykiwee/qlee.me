@@ -196,18 +196,19 @@ export default function Stats() {
                                                     .map(stat=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
-
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-                                                        return (
-                                                            <div className='display justify-s-b'>
-                                                                <div className='display gap'>
-                                                                    <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    <span>{stat.name === 'unknown' ? 'autres' : getTitleURL(stat.name)}</span><small className='c-grey f-s-12'>{stat.count}</small>
-                                                                </div>
-                                                                <ProgressBar percentage={percentage} />
-                                                            </div>
-                                                        )
+                                                       if (stat.name !== 'null' && !stat.name.includes('qlee.me')) {
+                                                           return (
+                                                               <div className='display justify-s-b'>
+                                                                   <div className='display gap'>
+                                                                       <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
+                                                                       <span>{getTitleURL(stat.name)}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                                   </div>
+                                                                   <ProgressBar percentage={percentage} />
+                                                               </div>
+                                                           )
+                                                       }
                                                     })
                                                 }
                                              </div>
