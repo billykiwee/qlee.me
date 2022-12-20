@@ -154,6 +154,12 @@ export default function Edit() {
                 if (statsLink[0])  
                     db.collection('links').doc(EditShortLink).collection('stats').add(statsLink[0])
             })
+            .then(deleteOldStat=> {
+
+                for (const v in statsLink) {
+                    db.collection('links').doc(Link.id).collection('stats').doc(statsLink[v]?.id).delete()
+                }
+            })
             .then(deleteOldID=> {
                 db.collection('links').doc(Link.id).delete()
             })
@@ -178,7 +184,6 @@ export default function Edit() {
         }
 
     }
-
     
 
     function checkShortLinkAvailable(input) {

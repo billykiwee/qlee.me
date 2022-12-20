@@ -11,9 +11,11 @@ import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
+import { getTitleURL } from './lib/getTitleURL';
 
 
 const MAX_LINK_BEFORE_UPDATE = 10
+
 
 
 export default function Dashboard() {
@@ -77,7 +79,7 @@ export default function Dashboard() {
         const linkID = 'qlee.me/' + UniqueID('', 5)
                 
         const link = {
-            name     : NameLink.length < 1 ? isValidUrl(LinkURL).hostname : NameLink,
+            name     : NameLink.length < 1 ? getTitleURL(LinkURL) : NameLink,
             id       : linkID.split('/')[1],
             user     : user?.email,
             url      : isValidUrl(LinkURL).href,

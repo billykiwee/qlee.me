@@ -9,7 +9,6 @@ import '../../App/css/stats.css'
 import formatDate from '../../App/utils/formatDate'
 import { getTitleURL } from '../lib/getTitleURL'
 
-
 export default function Stats() {
 
 

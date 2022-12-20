@@ -63,8 +63,7 @@ export default function LinkRedirect() {
     }
 
 
-
-
+    
     const Stats = {
         ...AllLinks
             .filter(e=> e.id === LinkID)
@@ -77,11 +76,13 @@ export default function LinkRedirect() {
             })[0]
         ,
         stats: {
-            reference : !document.referrer.length ? 'unknown' : document.referrer,
-            adress : Location,
-            device : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'pc',
+            reference: !document.referrer.length ? 'unknown' : document.referrer,
+            adress   : Location,
+            device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
+            id       :  's-' + new Date().getTime()
         }
     }
+
 
 
     
@@ -98,22 +99,23 @@ export default function LinkRedirect() {
         getURL
         .then(URL=> {
 
-            const finChargement = performance.now();
+            const finChargement = performance.now()
 
             if (Stats.url) {
 
                 let updateViews = {views : Stats.views + 1}
     
-                db.collection('links').doc(LinkID).update(updateViews)         
+                db.collection('links').doc(LinkID).update(updateViews)      
     
                 db.
-                    collection('links')
-                    .doc(LinkID).
-                    collection('stats')
-                    .add({
+                collection('links')
+                    .doc(LinkID)
+                    .collection('stats')
+                    .doc(Stats.stats.id)
+                    .set({
                         ...Stats.stats,
-                        performance : finChargement - débutChargement,
-                        date : serverTimestamp()
+                        performance: finChargement - débutChargement,
+                        date       : serverTimestamp()
                     })
     
                 .then(redirect=> window.location.href = URL)
