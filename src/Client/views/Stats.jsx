@@ -96,7 +96,9 @@ export default function Stats() {
     const dates = LinkStat.map(e=> e.date && formatDate(e.date).split(' ')[0])
     const countByDate = countBy(dates)
 
-    console.log(countByDate);
+    const performance = LinkStat.map(e=> e.performance && e.performance)
+    const countPerformance = performance.length && performance.reduce((x,y) => x + y)
+    const averagePerformance = ((countPerformance / performance.length) / 1000).toFixed(2) + 's'
 
 
     const StatsFilter = {
@@ -106,6 +108,7 @@ export default function Stats() {
         localisation: countByCountry,
         performance: performance
     } 
+
 
 
 
@@ -127,7 +130,7 @@ export default function Stats() {
                                 <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
                                     <div className='grid gap'>
                                         <div className='display justify-c'>
-                                            <img src={getFavicon(topLink?.url)} width={100} className='border-r-100' /> 
+                                            <img src={getFavicon(topLink?.url)} width={88} className='border-r-100' /> 
                                         </div>
                                         <div className='grid text-align-c'>
                                             <span className='f-s-20'>{topLink?.name}</span>
@@ -247,14 +250,14 @@ export default function Stats() {
                                                 <img src={'/images/rocket-solid.svg'} width={16} />
                                                 <span>Performance</span>
                                             </div>
-
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    {/* <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small> */}
+                                            <div className='grid gap'>
+                                                <div className='display justify-s-b'>
+                                                    <div className='display gap'>
+                                                        <span>vitesse</span>
+                                                    </div>
+                                                    <span>{averagePerformance}</span>
                                                 </div>
-
                                             </div>
-                           
                                         </div>
 
 

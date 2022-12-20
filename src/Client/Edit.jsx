@@ -238,7 +238,7 @@ export default function Edit() {
                                         <div className='grid gap-1rem justfy-s-b border-r-2 border border-b p-1 white w-100p'>
                                             <div className='grid gap'>
                                                 <div className='display justify-c'>
-                                                    <img src={getFavicon(Link?.url)} width={100} className='border-r-100' /> 
+                                                    <img src={getFavicon(Link?.url)} width={88} className='border-r-100' /> 
                                                 </div>
                                                 <div className='grid text-align-c'>
                                                     <span className='f-s-20'>{Link?.name}</span>
@@ -249,7 +249,7 @@ export default function Edit() {
                                                 <div className='grid gap'>
                                                     <div className='display'>
                                                         <Redirect to={'/stats/' + Link.id}>
-                                                            <button className='grey h-3 border-r-04 p-lr-1 display gap'>
+                                                            <button className='grey hover h-3 border-r-04 p-lr-1 display gap'>
                                                                 <img src='/images/charts.svg' width={20} />
                                                                 <span>Statistiques</span>
                                                             </button>
@@ -323,7 +323,7 @@ export default function Edit() {
                                         </div>
 
                                         {
-                                            isUserPremium
+                                            !isUserPremium
                                             ?
                                             <>
                                                 <div className='grid gap-04 w-100p'>
