@@ -235,41 +235,25 @@ export default function Edit() {
                                 <div className='grid gap'>
 
                                     <div className='display align-top'>
-                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap-1rem w-100p'>
-                                                    <a href={Link.url} className='display '>
-                                                        <img src={getFavicon(editLink.url ? editLink.url : Link.url)} className='w-2 h-2 border-r-100' />
-                                                    </a>
-
-                                                    <div className='grid w-100p'>
-
-                                                        <div className='display justify-s-b w-100p'>
-                                                            <span>{editLink.name ? editLink.name : minimizeString(Link.name, 30)}</span>
-                                                        </div>
-
-                                                        <div 
-                                                            className='display gap' 
-                                                            onClick={e=> {
-                                                                navigator.clipboard.writeText(Link.shortLink)
-                                                                let div = document.querySelector('#link-' + Link.id)
-                                                                div.style.display = 'flex'
-                                                                setTimeout(e=> div.style.display = 'none', 1500)
-                                                            }}
-                                                            >
-                                                            <span className='link f-s-20 f-w-500'>{Link.shortLink}</span>
-                                                            <div className='display gap'>
-                                                                <button 
-                                                                    className='display border-r-04 gap-04 hover h-2 border border-b' 
-                                                                >
-                                                                    <img src='/images/copy.svg' width={16} />
-                                                                </button>
-                                                                <div className='display disable green absolute border-r-04 p-04' id={'link-' + Link.id} >
-                                                                    <small>Copié</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
+                                        <div className='grid gap-1rem justfy-s-b border-r-2 border border-b p-1 white w-100p'>
+                                            <div className='grid gap'>
+                                                <div className='display justify-c'>
+                                                    <img src={getFavicon(Link?.url)} width={100} className='border-r-100' /> 
+                                                </div>
+                                                <div className='grid text-align-c'>
+                                                    <span className='f-s-20'>{Link?.name}</span>
+                                                    <span className='f-s-20 link hover-link'>{Link?.shortLink}</span>
+                                                </div>
+                                            </div>
+                                            <div className='display justify-c'>
+                                                <div className='grid gap'>
+                                                    <div className='display'>
+                                                        <Redirect to={'/stats/' + Link.id}>
+                                                            <button className='grey h-3 border-r-04 p-lr-1 display gap'>
+                                                                <img src='/images/charts.svg' width={20} />
+                                                                <span>Statistiques</span>
+                                                            </button>
+                                                        </Redirect>
                                                     </div>
                                                 </div>
                                             </div>
@@ -323,31 +307,6 @@ export default function Edit() {
                                         </div>
                                     </div>
 
-                                    <div className='display align-top'>
-                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <div className='grid'>
-                                                        <span>Statistiques</span>
-                                                    </div>
-                                                </div>
-                                                <div className='display gap'>
-                                                    <Redirect to={'/stats/' + Link.id}>
-                                                        <button className='border-b blue hover-blue h-40 p-1 border-r-1 border' >
-                                                            <span className='display'>Voir +</span>
-                                                        </button>
-                                                    </Redirect>
-                                                </div>
-
-                                            </div>
-                                            <div className='grid gap-1rem'>
-                                                <div className='display gap'>
-                                                    <img src='/images/eye-solid.svg' width={20} />
-                                                    <span>{Link.views} clics</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div className='grid gap-2rem'>

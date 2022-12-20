@@ -1,6 +1,6 @@
 .progress-bar-stat {
     height: 9px;
-    width: 160px;
+    width: 122px;
     display: flex;
     justify-content: flex-end;
 }
@@ -14,4 +14,16 @@
     from {
         width : 0%;
     }
+}
+
+.stats-blocks {
+    display: flex;
+}
+
+@media screen and (max-width: 740px) {
+
+    .stats-blocks {
+        display: grid;
+    }
+    
 }

@@ -13,7 +13,6 @@ import { getUnsplashImage } from '../../App/api/unsplash'
 import { generateLetterImage } from '../../App/utils/generateLetterImage'
 
 
-
 export default function Signup() {
 
 
@@ -194,7 +193,7 @@ export default function Signup() {
 
     const [HashPassword, setHashPassword] = useState(false)
 
-
+    const [Loader, setLoader] = useState(false)
 
     const [UnsplashImg, setUnsplashImg] = useState('')
 
@@ -203,6 +202,7 @@ export default function Signup() {
         .then(data => {
             setUnsplashImg(data)
         })
+
     }, [])
 
 
@@ -215,8 +215,11 @@ export default function Signup() {
                     <a href={UnsplashImg.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
                         <small className='display '>@ {UnsplashImg.author}</small>
                     </a>
-
-                    <img className='border-r-2' height='100%' src={UnsplashImg.url} alt={UnsplashImg.author + ' @ ' + UnsplashImg.profileUrl} />
+                    {
+                        !UnsplashImg
+                        ? <Messages loader={Loader} />
+                        : <img className='border-r-2' height='100%' src={UnsplashImg.url} alt={UnsplashImg.author + ' @ ' + UnsplashImg.profileUrl} />
+                    }
                 </div>
                 <div className="form-block">
 

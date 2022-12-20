@@ -83,7 +83,7 @@ export default function Stats() {
     }
  
 
-    const device = LinkStat.map(e=> e.device?.isMobile)
+    const device = LinkStat.map(e=> e.device)
     const countByDevice = countBy(device)
 
     const reference = LinkStat.map(e=> e.reference)
@@ -95,10 +95,12 @@ export default function Stats() {
 
     const StatsFilter = {
         clics       : 0,
-        devise      : countByDevice,
+        device      : countByDevice,
         reference   : countByReference,
-        localisation: countByCountry
+        localisation: countByCountry,
+        performance: performance
     } 
+
 
 
     return (
@@ -106,9 +108,9 @@ export default function Stats() {
             <h2>Statistiques</h2>
 
 
-            <div className='display blocks align-top gap-1rem'>
+            <div className='display blocks stats-blocks align-top gap-2rem'>
 
-                <div className='display'>
+                <div className='grid'>
                     {
                         UserLinks
                         .filter(isUserAuth=> isUserAuth.user === user?.email)
@@ -116,7 +118,7 @@ export default function Stats() {
                         .map(topLink=> {
                       
                             return (
-                                <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 w-100p white' key={topLink.id}>
+                                <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
                                     <div className='grid gap'>
                                         <div className='display justify-c'>
                                             <img src={getFavicon(topLink?.url)} width={100} className='border-r-100' /> 
@@ -126,89 +128,127 @@ export default function Stats() {
                                             <span className='f-s-20 link hover-link'>{topLink?.shortLink}</span>
                                         </div>
                                     </div>
+                                    
                                     <div className='grid gap'>
-                                        <ListStat stat={topLink?.views} label='clics' icon={'eye-solid'} />
 
-                                        <div className='display justify-s-b grey p-1 border-r-04'>
-                                            <div className='display gap'>
-                                                <img src={'/images/mobile-solid.svg'} width={20} />
-                                                <span>mobile</span>
-                                            </div>
-                                            <div className='display gap-1rem'>
-                                                <div className='progress-bar-stat'>
-                                                    <div className='blue border-r-2' style={{width: 77 + '%'}}></div>
+                                        <div className='grid gap-1rem grey p-1 border-r-04'>
+                                            <div className='display justify-s-b '>
+                                                <div className='display gap'>
+                                                    <img src={'/images/eye-solid.svg'} width={18} />
+                                                    <span>Clics</span>
                                                 </div>
-                                                <span>77%</span>
+                                                <div className='grid gap'>
+                                                    {topLink?.views}
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className='display justify-s-b grey p-1 border-r-04'>
+                                        <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className='display gap'>
-                                                <img src={'/images/pc-solid.svg'} width={20} />
-                                                <span>pc</span>
+                                                <img src={'/images/mobile-solid.svg'} width={18} />
+                                                <span>Appareil</span>
                                             </div>
-                                            <div className='display gap-1rem'>
-                                                <div className='progress-bar-stat'>
-                                                    <div className='blue border-r-2' style={{width: 23 + '%'}}></div>
-                                                </div>
-                                                <span>23%</span>
+                                            <div className='grid gap'>
+                                                {
+                                                    Object.values(StatsFilter.device)
+                                                    .sort((x, y)=> y.count - x.count )
+                                                    .map(stat=> {
+                                                        
+                                                        const sumCount = Object.values(StatsFilter.device).map(e=> e.count).reduce((x,y)=> x + y)
+
+                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+
+                                                        return (
+                                                            <div className='display justify-s-b'>
+                                                                <div className='display gap'>
+                                                                    <span>{stat.name}</span>
+                                                                    <small className='c-grey f-s-12'>{stat.count}</small>
+                                                                </div>
+                                                                <div className='display gap-1rem'>
+                                                                    <div className='progress-bar-stat'>
+                                                                        <div className='blue border-r-2' style={{width: percentage}}></div>
+                                                                    </div>
+                                                                    <span>{percentage}</span>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
                                             </div>
                                         </div>
 
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className='display gap'>
                                                 <img src={'/images/globe-solid.svg'} width={20} />
-                                                <span>source du trafic</span>
+                                                <span>Source du trafic</span>
                                             </div>
-                                            {
-                                                Object.values(StatsFilter.reference)
-                                                .sort((x, y)=> y.count - x.count )
-                                                .map(stat=> {
-                                                    
-                                                    const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+                                                <div className='grid gap'>
+                                                {
+                                                    Object.values(StatsFilter.reference)
+                                                    .sort((x, y)=> y.count - x.count )
+                                                    .map(stat=> {
+                                                        
+                                                        const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
 
-                                                    const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-                                                    console.log(sumCount);
-
-                                                    return (
-                                                        <div className='display justify-s-b'>
-                                                            <div className='display gap'>
-                                                                <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                <span>{stat.name.split('.')[1]}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                        return (
+                                                            <div className='display justify-s-b'>
+                                                                <div className='display gap'>
+                                                                    <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
+                                                                    <span>{stat.name === 'unknown' ? 'autres' : stat.name.split('.')[1]}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                                </div>
+                                                                <ProgressBar percentage={percentage} />
                                                             </div>
-                                                            <ProgressBar percentage={percentage} />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
+                                                        )
+                                                    })
+                                                }
+                                             </div>
                                         </div>
 
 
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className='display gap'>
                                                 <img src={'/images/localisation-solid.svg'} width={20} />
-                                                <span>localisation</span>
+                                                <span>Localisation</span>
                                             </div>
-                                            {
-                                                Object.values(StatsFilter.localisation)
-                                                .sort((x, y)=> y.count - x.count )
-                                                .map(stat=> {
-                                                    
-                                                    const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+                                            <div className='grid gap'>
+                                                {
+                                                    Object.values(StatsFilter.localisation)
+                                                    .sort((x, y)=> y.count - x.count )
+                                                    .map(stat=> {
+                                                        
+                                                        const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
 
-                                                    const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-                                                    return (
-                                                        <div className='display justify-s-b'>
-                                                            <div className='display gap'>
-                                                                <span>{stat.name === 'undefined' ? 'autres...' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                        return (
+                                                            <div className='display justify-s-b'>
+                                                                <div className='display gap'>
+                                                                    <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                                </div>
+                                                                <ProgressBar percentage={percentage} />
                                                             </div>
-                                                            <ProgressBar percentage={percentage} />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+
+
+                                        <div className='grid gap-1rem grey p-1 border-r-04'>
+                                            <div className='display gap'>
+                                                <img src={'/images/rocket-solid.svg'} width={16} />
+                                                <span>Performance</span>
+                                            </div>
+
+                                            <div className='display justify-s-b'>
+                                                <div className='display gap'>
+                                                    {/* <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small> */}
+                                                </div>
+
+                                            </div>
+                           
                                         </div>
 
 

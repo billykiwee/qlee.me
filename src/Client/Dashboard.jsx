@@ -125,6 +125,7 @@ export default function Dashboard() {
     ]
 
 
+
     return (
 
         <Main>
@@ -156,7 +157,7 @@ export default function Dashboard() {
                     </div>
 
                     <div className='grid gap-2rem '>
-                        <div className='grid gap'>
+                        <div className='grid gap-1rem'>
                             <div>
                                 <span className='f-s-25 f-w-500'>Créer un lien</span>
                             </div>
@@ -188,11 +189,10 @@ export default function Dashboard() {
 
                 <div className='grid gap-2rem'>
 
-                    <div className='grid gap-1rem'>
-                        <div className='grid gap'>
+                    <div className='grid gap-2rem'>
+                        <div className='grid gap-1rem'>
                             <div className='display justify-s-b'>
                                 <span className='f-s-25 f-w-500'>Mes liens</span>
-                                
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
                                         <small className='c-black'>{AllUserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
@@ -205,15 +205,16 @@ export default function Dashboard() {
                                 </Link>
 
                             </div>
-                            {
-                                AllUserLinks
-                                .map(userlink=> {
+                            <div className='grid gap'>
+                                {
+                                    AllUserLinks
+                                    .map(userlink=> {
 
-                                    return <ListLink link={userlink} />
+                                        return <ListLink link={userlink} />
 
-                                }).reverse()
-                            }
-
+                                    }).reverse()
+                                }
+                            </div>
                         </div>
                         <div className='display justify-c'>
                             {

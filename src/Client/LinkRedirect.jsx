@@ -10,6 +10,13 @@ import UniqueID from '../App/utils/uniqueID'
 
 export default function LinkRedirect() {
 
+
+
+    let débutChargement = 0
+    window.onload = e => débutChargement =  performance.now();
+
+
+
     const [{user}] = useStateValue()
 
     const { LinkID } = useParams()
@@ -72,10 +79,7 @@ export default function LinkRedirect() {
         stats: {
             reference : !document.referrer.length ? 'unknown' : document.referrer,
             adress : Location,
-            device : {
-                platform : navigator.platform,
-                isMobile : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false,
-            }
+            device : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'pc',
         },
         date : serverTimestamp()
     }
@@ -95,6 +99,8 @@ export default function LinkRedirect() {
         getURL
         .then(URL=> {
 
+            const finChargement = performance.now();
+
             if (Stats.url) {
 
                 let updateViews = {views : Stats.views + 1}
@@ -105,7 +111,10 @@ export default function LinkRedirect() {
                     collection('links')
                     .doc(LinkID).
                     collection('stats')
-                    .add(Stats.stats)
+                    .add({
+                        ...Stats.stats,
+                        performance : finChargement - débutChargement
+                    })
     
                 .then(redirect=> window.location.href = URL)
                 .catch(e=> console.log(e))

@@ -34,9 +34,6 @@ export default function Footer() {
         <footer>
             <div className='display justify-s-b m-t-1'>
                 <div className='align-top display justify-s-b'>
-                    <span className='display'>
-                        <img src='/favicon.ico' width={30} />
-                    </span>
                     <div className='display gap-04'>
                         {
                             Object.values(socialMedia).map(socialMedia=> {
