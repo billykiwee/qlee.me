@@ -167,7 +167,7 @@ export default function Stats() {
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (
-                                                            <div className='display justify-s-b'>
+                                                            <div className='display justify-s-b' id={stat.name} >
                                                                 <div className='display gap'>
                                                                     <span>{stat.name}</span>
                                                                     <small className='c-grey f-s-12'>{stat.count}</small>
@@ -230,7 +230,7 @@ export default function Stats() {
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (
-                                                            <div className='display justify-s-b'>
+                                                            <div className='display justify-s-b' id={stat.name}>
                                                                 <div className='display gap'>
                                                                     <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
@@ -356,15 +356,13 @@ export default function Stats() {
                                         >
                                             <div className='display gap-1rem justify-s-b w-100p'>
                                                 <div className='display gap-1rem '> 
-                                                    <Link to={'/edit/' + link.id} className='display'>
-                                                        <img src={getFavicon(link.url)} className='w-2 h-2 border-r-100' />
-                                                    </Link>
+                                                    <img src={getFavicon(link.url)} className='w-2 h-2 border-r-100' />
                                                     <div className='grid'>
                                                         <div className='display gap'>
                                                             <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
                                                         </div>
                                                         <div className='display  gap'>
-                                                            <a href={link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
+                                                            <span className='link'>{link.shortLink}</span>
                                                         </div>
                                                     </div>
                                                 </div>
