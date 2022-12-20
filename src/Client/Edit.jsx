@@ -247,7 +247,7 @@ export default function Edit() {
                                                 </div>
                                                 <div className='grid text-align-c'>
                                                     <span className='f-s-20'>{Link?.name}</span>
-                                                    <span className='f-s-20 link hover-link'>{Link?.shortLink}</span>
+                                                    <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                                 </div>
                                             </div>
                                             <div className='display justify-c'>

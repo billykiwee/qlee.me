@@ -76,13 +76,15 @@ export default function LinkRedirect() {
             })[0]
         ,
         stats: {
-            reference: !document.referrer.length ? 'unknown' : document.referrer,
+            reference: !document.referrer ? 'unknown' : document.referrer,
             adress   : Location,
             device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
             id       :  's-' + new Date().getTime()
         }
     }
 
+
+    console.log(document.referrer);
 
 
     
