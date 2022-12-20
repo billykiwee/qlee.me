@@ -4,5 +4,5 @@ export function getTitleURL(url) {
 
     const isUrl = isValidUrl(url)
 
-    return isUrl.hostname.split('.')[0]
+    return isUrl.hostname.split('.')[1]
 }

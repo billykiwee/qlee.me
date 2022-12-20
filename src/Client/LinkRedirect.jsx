@@ -63,6 +63,8 @@ export default function LinkRedirect() {
     }
 
 
+
+    const getReference = document.referrer.includes('qlee.me') ? null : document.referrer
     
     const Stats = {
         ...AllLinks
@@ -76,12 +78,13 @@ export default function LinkRedirect() {
             })[0]
         ,
         stats: {
-            reference: !document.referrer ? 'unknown' : document.referrer,
+            reference: !document.referrer ? 'unknown' : getReference,
             adress   : Location,
             device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
             id       :  's-' + new Date().getTime()
         }
     }
+
 
 
     console.log(document.referrer);
