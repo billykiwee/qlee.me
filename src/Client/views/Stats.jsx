@@ -7,6 +7,7 @@ import getFavicon from '../../App/utils/getFavicon'
 import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
 import formatDate from '../../App/utils/formatDate'
+import { getTitleURL } from '../lib/getTitleURL'
 
 
 export default function Stats() {
@@ -98,7 +99,7 @@ export default function Stats() {
 
     const performance = LinkStat.map(e=> e.performance && e.performance)
     const countPerformance = performance.length && performance.reduce((x,y) => x + y)
-    const averagePerformance = ((countPerformance / performance.length) / 1000).toFixed(2) + 's'
+    const averagePerformance = countPerformance ? ((countPerformance / performance.length) / 1000).toFixed(2) + 's' : ''
 
 
     const StatsFilter = {
@@ -108,8 +109,6 @@ export default function Stats() {
         localisation: countByCountry,
         performance: performance
     } 
-
-
 
 
     return (
@@ -151,7 +150,7 @@ export default function Stats() {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className='display gap'>
                                                 <img src={'/images/mobile-solid.svg'} width={18} />
@@ -205,7 +204,7 @@ export default function Stats() {
                                                             <div className='display justify-s-b'>
                                                                 <div className='display gap'>
                                                                     <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    <span>{stat.name === 'unknown' ? 'autres' : stat.name.split('.')[1]}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                                                    <span>{stat.name === 'unknown' ? 'autres' : getTitleURL(stat.name)}</span><small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
                                                                 <ProgressBar percentage={percentage} />
                                                             </div>
@@ -226,8 +225,7 @@ export default function Stats() {
                                                     Object.values(StatsFilter.localisation)
                                                     .sort((x, y)=> y.count - x.count )
                                                     .map(stat=> {
-                                                        
-                                                        const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+                                                        const sumCount = Object.values(StatsFilter.localisation).map(e=> e.count).reduce((x,y)=> x + y)
 
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 

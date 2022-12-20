@@ -46,7 +46,7 @@ export default function Footer() {
                                         onMouseLeave={e=> e.target.style = 'opacity: unset'}
                                     >
                                         <span className='display w-2 h-2'>
-                                            <img src={socialMedia.logo1} />
+                                            <img src={socialMedia.logo1} id={'img-' + socialMedia.name} />
                                         </span>
                                     </a>
                                 )

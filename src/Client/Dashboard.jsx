@@ -46,7 +46,7 @@ export default function Dashboard() {
 
 
 
-    const isLinkAlreadyExist = UserLinks.some(data => {
+    const isLinkAlreadyExist = AllUserLinks.some(data => {
         if (data.name === NameLink && data.url === LinkURL) return true
     })
 
