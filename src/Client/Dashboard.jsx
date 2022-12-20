@@ -9,10 +9,8 @@ import { useStateValue } from '../App/provider/StateProvider';
 import { db } from '../App/database/firebase';
 import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
-import { minimizeString } from '../App/utils/minimizeString';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
-import { exec } from 'child_process';
 
 
 const MAX_LINK_BEFORE_UPDATE = 10
