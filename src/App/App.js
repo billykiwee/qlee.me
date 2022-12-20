@@ -17,7 +17,7 @@ import LinkInBio from '../Client/views/LinkInBio'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats'
-
+import { GitPush } from '../GitPush'
 
 
 export default function App() {
@@ -45,13 +45,14 @@ export default function App() {
         })
     }, [dispatch, auth])
 
-
+    
 
 
 
     return (
         <BrowserRouter>
             <Header />
+            <GitPush />
                 <Container>
                     <Routes>
                         <Route path="/page404" exact element={<Page404 />} />

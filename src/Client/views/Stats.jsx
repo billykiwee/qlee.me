@@ -93,7 +93,7 @@ export default function Stats() {
     const countries = LinkStat.map(e=> e.adress?.country)
     const countByCountry = countBy(countries)
 
-    const dates = LinkStat.map(e=> formatDate(e.date).split(' ')[0])
+    const dates = LinkStat.map(e=> e.date && formatDate(e.date).split(' ')[0])
     const countByDate = countBy(dates)
 
     console.log(countByDate);
@@ -157,7 +157,7 @@ export default function Stats() {
                                             <div className='grid gap'>
                                                 {
                                                     Object.values(StatsFilter.device)
-                                                    .sort((x, y)=> y.count - x.count )
+                                                    .sort((x, y)=> y.count - x.count)
                                                     .map(stat=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.device).map(e=> e.count).reduce((x,y)=> x + y)
@@ -191,7 +191,7 @@ export default function Stats() {
                                                 <div className='grid gap'>
                                                 {
                                                     Object.values(StatsFilter.reference)
-                                                    .sort((x, y)=> y.count - x.count )
+                                                    .sort((x, y)=> y.count - x.count)
                                                     .map(stat=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
