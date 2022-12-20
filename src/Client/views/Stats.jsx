@@ -6,6 +6,7 @@ import { useStateValue } from '../../App/provider/StateProvider'
 import getFavicon from '../../App/utils/getFavicon'
 import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
+import formatDate from '../../App/utils/formatDate'
 
 
 export default function Stats() {
@@ -91,6 +92,11 @@ export default function Stats() {
 
     const countries = LinkStat.map(e=> e.adress?.country)
     const countByCountry = countBy(countries)
+
+    const dates = LinkStat.map(e=> formatDate(e.date).split(' ')[0])
+    const countByDate = countBy(dates)
+
+    console.log(countByDate);
 
 
     const StatsFilter = {

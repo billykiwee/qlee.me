@@ -80,8 +80,7 @@ export default function LinkRedirect() {
             reference : !document.referrer.length ? 'unknown' : document.referrer,
             adress : Location,
             device : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'pc',
-        },
-        date : serverTimestamp()
+        }
     }
 
 
@@ -113,7 +112,8 @@ export default function LinkRedirect() {
                     collection('stats')
                     .add({
                         ...Stats.stats,
-                        performance : finChargement - débutChargement
+                        performance : finChargement - débutChargement,
+                        date : serverTimestamp()
                     })
     
                 .then(redirect=> window.location.href = URL)
