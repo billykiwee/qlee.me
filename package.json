@@ -43,7 +43,7 @@
     "react-phone-input-2": "^2.15.1",
     "react-qr-code": "^2.0.9",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "5.0.1",
     "react-use-scroll-direction": "^0.1.0",
     "stripe": "^9.12.0",
     "swiper": "^8.4.5",
