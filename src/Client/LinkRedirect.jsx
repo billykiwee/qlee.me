@@ -104,10 +104,13 @@ export default function LinkRedirect() {
                     })
         
                 })
+                .catch(err=> console.log(err))
 
             })
+            .catch(err=> console.log(err))
 
         })
+        .catch(err=> console.log(err))
     }
     
 
