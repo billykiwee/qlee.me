@@ -54,14 +54,14 @@ export default function LinkRedirect() {
             .then(data => data.ip)
             .then(ip=> {
 
-                fetch('qlee.me/fetchIpAdress' + ip)
+                fetch(`https://ipapi.co/json/`)
                 .then(response => response.json())
 
                 .then(adress => {
     
                     return {
-                        country: adress.geoplugin_countryName,
-                        city   : adress.geoplugin_city
+                        country: adress.country_name,
+                        city   : adress.city
                     }
                 })
 
