@@ -141,12 +141,12 @@ export default function Dashboard() {
                                     return (
                                         <Link to={article.link} key={article.id}>
                                             <div className='display click' >
-                                                    <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
-                                                        <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
-                                                    </div>
-                                                    <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
-                                                        <span className='f-s-20 c-white'>{article.name}</span>
-                                                    </div>
+                                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
+                                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
+                                                </div>
+                                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
+                                                    <span className='f-s-20 c-white'>{article.name}</span>
+                                                </div>
                                             </div>
                                         </Link>
                                     )

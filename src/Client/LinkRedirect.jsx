@@ -63,8 +63,6 @@ export default function LinkRedirect() {
             })
     }
 
-
-    const getReference = checkURLReference(document.referrer)
     
     const Stats = {
         ...AllLinks
@@ -73,21 +71,17 @@ export default function LinkRedirect() {
                 return {
                     user : e.user,
                     url  : e.url,
-                    views: e.views
+                    views: e.views,
+                    id   : 's-' + new Date().getTime()
                 }
             })[0]
         ,
         stats: {
-            reference: getReference,
+            reference: checkURLReference(document.referrer) ?? null,
             adress   : Location,
             device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
-            id       :  's-' + new Date().getTime()
         }
     }
-
-
-
-    console.log(document.referrer);
 
 
     
@@ -111,12 +105,14 @@ export default function LinkRedirect() {
                 let updateViews = {views : Stats.views + 1}
     
                 db.collection('links').doc(LinkID).update(updateViews)      
-    
+                
+                console.log(Stats, document.referrer);
+
                 db.
                 collection('links')
                     .doc(LinkID)
                     .collection('stats')
-                    .doc(Stats.stats.id)
+                    .doc(Stats.id)
                     .set({
                         ...Stats.stats,
                         performance: finChargement - débutChargement,

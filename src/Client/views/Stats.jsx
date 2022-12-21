@@ -8,6 +8,7 @@ import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
 import formatDate from '../../App/utils/formatDate'
 import { getTitleURL } from '../lib/getTitleURL'
+import { checkURLReference } from '../lib/checkURLReference'
 
 export default function Stats() {
 
@@ -198,22 +199,21 @@ export default function Stats() {
                                                         const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-                                                       if (!stat.name.includes('qlee.me')) {
-                                                           return (
-                                                               <div className='display justify-s-b'>
-                                                                   <div className='display gap'>
-                                                                       <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                       {
-                                                                            stat.name === 'null' 
-                                                                            ? <span>inconnue</span>
-                                                                            : <span>{getTitleURL(stat.name)}</span>
-                                                                       }
-                                                                       <small className='c-grey f-s-12'>{stat.count}</small>
-                                                                   </div>
-                                                                   <ProgressBar percentage={percentage} />
-                                                               </div>
-                                                           )
-                                                       }
+
+                                                        return (
+                                                            <div className='display justify-s-b'>
+                                                                <div className='display gap'>
+                                                                    <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
+                                                                    {
+                                                                        checkURLReference(stat.name)
+                                                                        ? <span>{getTitleURL(stat.name)}</span>
+                                                                        : <span>inconnue</span>
+                                                                    }
+                                                                    <small className='c-grey f-s-12'>{stat.count}</small>
+                                                                </div>
+                                                                <ProgressBar percentage={percentage} />
+                                                            </div>
+                                                        )
                                                     })
                                                 }
                                              </div>
