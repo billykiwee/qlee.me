@@ -11,16 +11,12 @@ import { checkURLReference } from './lib/checkURLReference'
 
 export default function LinkRedirect() {
 
-
-
-    const [{user}] = useStateValue()
-
+    const [{ user }] = useStateValue()
     const { LinkID } = useParams()
 
-
     useEffect(e=> {
-
-        const startLoading =  performance.now();
+        
+        const startLoading = performance.now();
     
         const getAllLinks = new Promise((res, rej)=> {
     
@@ -56,7 +52,6 @@ export default function LinkRedirect() {
     
                 fetch(`https://ipapi.co/${ip}/json/`)
                 .then(response => response.json())
-    
                 .then(adress => {
     
                     return {
@@ -90,7 +85,7 @@ export default function LinkRedirect() {
                         db
                         .collection('links')
                         .doc(LinkID)
-                        .update({views : linksFiltred.views + 1})      
+                        .update({ views : linksFiltred.views + 1 })      
     
                         db
                         .collection('links')
@@ -100,7 +95,6 @@ export default function LinkRedirect() {
                         .set(data)
     
                         .then(redirect=> window.location.href = linksFiltred.url)
-                        .catch(e=> console.log(e))
                     })
                     .catch(err=> console.log(err))
         
@@ -111,10 +105,11 @@ export default function LinkRedirect() {
             .catch(err=> console.log(err))
     
         })
-        .catch(err=> console.log(err))
-    }, [])
+        .catch(e=> window.location.href = '/page404')
 
-    
+    }, [LinkID])
+
+
 
  
     useEffect(e=> {
