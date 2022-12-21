@@ -54,7 +54,7 @@ export default function LinkRedirect() {
             .then(data => data.ip)
             .then(ip=> {
 
-                fetch(`http://www.geoplugin.net/json.gp?ip=${ip}`)
+                fetch(`https://www.geoplugin.net/json.gp?ip=${ip}`)
                 .then(response => response.json())
 
                 .then(adress => {
