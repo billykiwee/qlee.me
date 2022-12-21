@@ -21,8 +21,12 @@ export default function LinkRedirect() {
 
 
     useEffect(e=> {
-        window.onload = e => {
-        
+
+        window.addEventListener('load', redirect)
+
+
+        function redirect() {
+
             async function getAdress() {
                 return (
                     fetch('https://api.ipify.org?format=json')
@@ -44,17 +48,17 @@ export default function LinkRedirect() {
                         })
                 )
             }
-
+    
             getAdress()
             .then(adress=> {
-
+    
                 const getAllLinks = new Promise((res, rej)=> {
         
                     db.collection('links').onSnapshot(snapshot => {
                         res(snapshot.docs.map(doc => doc.data()))
                     })
                 })
-
+    
                 getAllLinks
                 .then(getLink=> {
             
@@ -72,13 +76,13 @@ export default function LinkRedirect() {
                         performance: performance.now() - startLoading,
                         date       : serverTimestamp()
                     })
-
+    
                     return link
                 })
                 .then(link=> {
-
+    
                     console.log('rrrr');
-
+    
                     db.collection('links')
                     .doc(LinkID)
                     .update({
@@ -91,8 +95,9 @@ export default function LinkRedirect() {
                     .catch(page404 => (window.location.href = '/page404'))    
                 })
             })
-
         }
+        
+
     }, [])
 
 
