@@ -160,14 +160,14 @@ export default function Stats() {
                                                 {
                                                     Object.values(StatsFilter.device)
                                                     .sort((x, y)=> y.count - x.count)
-                                                    .map(stat=> {
+                                                    .map((stat, i)=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.device).map(e=> e.count).reduce((x,y)=> x + y)
 
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (
-                                                            <div className='display justify-s-b' id={stat.name} >
+                                                            <div className='display justify-s-b' key={i} >
                                                                 <div className='display gap'>
                                                                     <span>{stat.name}</span>
                                                                     <small className='c-grey f-s-12'>{stat.count}</small>
@@ -194,18 +194,18 @@ export default function Stats() {
                                                 {
                                                     Object.values(StatsFilter.reference)
                                                     .sort((x, y)=> y.count - x.count)
-                                                    .map(stat=> {
+                                                    .map((stat, i)=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
 
                                                         return (
-                                                            <div className='display justify-s-b'>
+                                                            <div className='display justify-s-b' key={i}>
                                                                 <div className='display gap'>
                                                                     <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
                                                                     {
-                                                                        checkURLReference(stat.name)
+                                                                        checkURLReference(stat.name) !== 'null' || null
                                                                         ? <span>{getTitleURL(stat.name)}</span>
                                                                         : <span>inconnue</span>
                                                                     }
@@ -229,13 +229,13 @@ export default function Stats() {
                                                 {
                                                     Object.values(StatsFilter.localisation)
                                                     .sort((x, y)=> y.count - x.count )
-                                                    .map(stat=> {
+                                                    .map((stat, i)=> {
                                                         const sumCount = Object.values(StatsFilter.localisation).map(e=> e.count).reduce((x,y)=> x + y)
 
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (
-                                                            <div className='display justify-s-b' id={stat.name}>
+                                                            <div className='display justify-s-b' key={i}>
                                                                 <div className='display gap'>
                                                                     <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
@@ -289,7 +289,7 @@ export default function Stats() {
                                     <div >
                                         <span className='f-s-14 display gap'>
                                             Rechercher
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={20}><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" /></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={20}><path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clipRule="evenodd" /></svg>
                                         </span>
                                     </div>
                                 </button>
@@ -308,7 +308,7 @@ export default function Stats() {
                                     <div className={!Filter ? 'c-grey' : 'c-black'} onMouseOver={e=> e.target.classList.add('c-black')} onMouseOut={e=> e.target.classList.remove('c-black')} >
                                         <span className='f-s-14 display gap'>
                                             Filtre
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={14}><path fill-rule="evenodd" d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z" clip-rule="evenodd" /></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={14}><path fillRule="evenodd" d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z" clipRule="evenodd" /></svg>
                                         </span>
                                     </div>
                                 </button>
@@ -353,7 +353,7 @@ export default function Stats() {
                             .sort((a, b) => b.views - a.views)
                             .map(link=> {
                                 return (
-                                    <Link to={'/stats/' + link.id}>
+                                    <Link to={'/stats/' + link.id} key={link.id}>
                                         <div    
                                             style={{background: LinkID === link.id ? 'var(--hover-btn)' : ''}}
                                             className='display gap p-1 border-b border-r-1 border justify-s-b white h-2 click hover' 
