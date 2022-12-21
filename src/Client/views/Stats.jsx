@@ -95,9 +95,6 @@ export default function Stats() {
     const countries = LinkStat.map(e=> e.adress?.country)
     const countByCountry = countBy(countries)
 
-    const dates = LinkStat.map(e=> e.date && formatDate(e.date).split(' ')[0])
-    const countByDate = countBy(dates)
-
     const performance = LinkStat.map(e=> e.performance && e.performance)
     const countPerformance = performance.length && performance.reduce((x,y) => x + y)
     const averagePerformance = countPerformance ? ((countPerformance / performance.length) / 1000).toFixed(2) + 's' : ''
@@ -110,6 +107,7 @@ export default function Stats() {
         localisation: Object.values(countByCountry),
         performance : performance
     } 
+
 
 
 
@@ -148,7 +146,7 @@ export default function Stats() {
                                                     <span>Clics</span>
                                                 </div>
                                                 <div className='grid gap'>
-                                                    {topLink?.views}
+                                                    {'views'}
                                                 </div>
                                             </div>
                                         </div>
@@ -385,20 +383,6 @@ export default function Stats() {
     )
 }
 
-
-function ListStat({stat, label, icon}) {
-    return (
-        <div className='display justify-s-b grey p-1 border-r-04'>
-            <div className='display gap'>
-                <img src={'/images/' + icon + '.svg'} width={20} />
-                <span>{label}</span>
-            </div>
-            <div className='display'>
-                <span>{stat}</span>
-            </div>
-        </div>
-    )
-}
 
 
 function ProgressBar({percentage}) {

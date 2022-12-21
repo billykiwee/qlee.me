@@ -7,6 +7,7 @@ import Messages from '../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../App/utils/uniqueID'
 import { checkURLReference } from './lib/checkURLReference'
+import { getDevice } from './lib/getDevice'
 
 
 export default function LinkRedirect() {
@@ -14,7 +15,94 @@ export default function LinkRedirect() {
     const [{ user }] = useStateValue()
     const { LinkID } = useParams()
 
-    useEffect(e=> {
+
+    const startLoading = performance.now()
+    const statID = 's-' + new Date().getTime()
+
+
+
+    window.onload = e => {
+    
+        async function getAdress() {
+            return (
+                fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => data.ip)
+                    .then(async ip=> {
+            
+                        return (
+                            fetch(`https://ipapi.co/${ip}/json/`)
+                            .then(response => response.json())
+                            .then(adress => {
+                
+                                return {
+                                    country: adress.country_name,
+                                    city   : adress.city
+                                }
+                            })
+                        )
+                    })
+            )
+        }
+
+        getAdress()
+        .then(adress=> {
+
+            const getAllLinks = new Promise((res, rej)=> {
+    
+                db.collection('links').onSnapshot(snapshot => {
+                    res(snapshot.docs.map(doc => doc.data()))
+                })
+            })
+
+            getAllLinks
+            .then(getLink=> {
+        
+                let link = getLink?.filter(e=> e.id === LinkID).map(e=> e)[0] 
+    
+                db.collection('links')
+                .doc(LinkID)
+                .collection('stats')
+                .doc(statID)
+                .set({
+                    id         : statID,
+                    adress     : adress,
+                    reference  : document.referrer ?? null,
+                    device     : getDevice(),
+                    performance: performance.now() - startLoading,
+                    date       : serverTimestamp()
+                })
+
+                return link
+            })
+            .then(link=> {
+
+                console.log('rrrr');
+
+                db.collection('links')
+                .doc(LinkID)
+                .update({
+                    views : link.views + 1
+                }) 
+    
+                .then(e=> {                    
+                    window.location.href = link.url
+                })
+                .catch(page404 => (window.location.href = '/page404'))    
+            })
+        })
+
+    }
+
+
+
+
+
+
+
+
+
+   /*  useEffect(e=> {
         
         const startLoading = performance.now();
     
@@ -108,7 +196,7 @@ export default function LinkRedirect() {
         .catch(e=> window.location.href = '/page404')
 
     }, [LinkID])
-
+ */
 
 
  
