@@ -194,7 +194,7 @@ export default function Stats() {
                                                 <div className='grid gap'>
                                                 {
                                                     StatsFilter.reference
-                                                    .filter(e=> checkURLReference(e.name))
+                                                    .filter(e=> checkURLReference(e.name) && e.name !== '')
                                                     .sort((x, y)=> y.count - x.count)
                                                     .map((stat, i)=> {
                                                         
@@ -205,7 +205,7 @@ export default function Stats() {
                                                             <div className='display justify-s-b' key={i}>
                                                                 <div className='display gap'>
                                                                     <img src={stat.name === '' ? getFavicon('https://qlee.me') : getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    <span>{stat.name === '' ? 'iconnue' : getTitleURL(stat.name)}</span>
+                                                                    <span>{stat.name === '' ? 'inconnue' : getTitleURL(stat.name)}</span>
                                                                     <small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
                                                                 <ProgressBar percentage={percentage} />
