@@ -76,7 +76,7 @@ export default function LinkRedirect() {
 
                         const data = {
                             id         : 's-' + new Date().getTime(),
-                            reference  : src,
+                            reference  : src ?? null,
                             adress     : getadress,
                             device     : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
                             performance: performance.now() - startLoading,

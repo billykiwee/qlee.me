@@ -193,22 +193,18 @@ export default function Stats() {
                                                 <div className='grid gap'>
                                                 {
                                                     Object.values(StatsFilter.reference)
+                                                    .filter(e=> e.name !== '' && checkURLReference(e.name))
                                                     .sort((x, y)=> y.count - x.count)
                                                     .map((stat, i)=> {
                                                         
                                                         const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-
                                                         return (
                                                             <div className='display justify-s-b' key={i}>
                                                                 <div className='display gap'>
                                                                     <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    {
-                                                                        checkURLReference(stat.name) !== 'null' || null
-                                                                        ? <span>{getTitleURL(stat.name)}</span>
-                                                                        : <span>inconnue</span>
-                                                                    }
+                                                                    <span>{getTitleURL(stat.name)}</span>
                                                                     <small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
                                                                 <ProgressBar percentage={percentage} />
