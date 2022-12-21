@@ -7,7 +7,7 @@ import { minimizeString } from '../../App/utils/minimizeString'
 export default function ListLink({link}) {
 
     return (
-        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={link.id}>
+        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3'>
             <div className='display gap-1rem'>
                 <Link to={'/edit/' + link.id} className='display'>
                     <img src={getFavicon(link.url)} className='w-2 h-2 border-r-100' />

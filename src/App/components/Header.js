@@ -78,7 +78,7 @@ export default function Header() {
                 <div className='display gap click'>
                     <Link to={user ? '/dashboard' : '/'}>
                         <span className='display'>
-                            <img src='/images/logo.svg' width={140} />
+                            <img src='/images/logo.svg' width={122} />
                         </span>
                     </Link>
                 </div>
@@ -87,7 +87,7 @@ export default function Header() {
                         user 
                         ?
                         <Link to='/dashboard' className='display avatar-header' >
-                            <img src={USER?.photoURL} className='border-r-100' width={40} height={40} />
+                            <img src={USER?.photoURL} className='border-r-100' width={38} height={38} />
                         </Link>
                         : 
                         <div className='display justify-c'>
@@ -103,7 +103,7 @@ export default function Header() {
                     }
                     <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
-                            <img src='/images/hamburger.svg' width={24} height={24}  />
+                            <img src='/images/hamburger.svg' width={20} height={20}  />
                         </span>
                     </button>
                 </div>
@@ -111,13 +111,13 @@ export default function Header() {
             {
                 Menu &&
                 <div className='display justify-c m-t-2 menu'>
-                    <div className='grid gap-04 w-100p'>
+                    <div className='grid w-100p'>
                         {
-                            menu.map(menu=> {
+                            menu.map((menu, i)=> {
                                 return (
-                                    <Link to={menu.link} className='w-100p' key={menu.name} onClick={e=> setMenu(false)}>
+                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false)}>
                                         <button className='h-3 hover border-r-1 '>
-                                            <span className='f-s-16'>{menu.name}</span>
+                                            <span className='f-s-16 c-black'>{menu.name}</span>
                                         </button>
                                     </Link>
                                 )

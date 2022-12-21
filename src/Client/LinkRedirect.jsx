@@ -6,6 +6,7 @@ import { db } from '../App/database/firebase'
 import Messages from '../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../App/utils/uniqueID'
+import { checkURLReference } from './lib/checkURLReference'
 
 
 export default function LinkRedirect() {
@@ -63,8 +64,7 @@ export default function LinkRedirect() {
     }
 
 
-
-    const getReference = !document.referrer || document.referrer.includes('qlee.me') ? null : document.referrer
+    const getReference = checkURLReference(document.referrer)
     
     const Stats = {
         ...AllLinks
