@@ -69,17 +69,19 @@ export default function Header() {
 
 
 
-
-
     
     return (
         <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
-            <div className='align-top display justify-s-b'>
+            <div className='display justify-s-b'>
                 <div className='display gap click'>
                     <Link to={user ? '/dashboard' : '/'}>
                         <span className='display'>
-                            <img src='/images/logo.svg' width={122} />
-                        </span>
+                            {
+                                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                                ? <img src='/images/logo-icon.png' width={44} />
+                                : <img src='/images/logo.svg' width={122} />
+                            }
+                            </span>
                     </Link>
                 </div>
                 <div className='display gap'>
