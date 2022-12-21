@@ -13,122 +13,103 @@ export default function LinkRedirect() {
 
 
 
-    let débutChargement = 0
-    window.onload = e => débutChargement =  performance.now();
-
-
-
     const [{user}] = useStateValue()
 
     const { LinkID } = useParams()
 
-    const [AllLinks, setAllLinks] = useState([])
 
-    useEffect(e=> {
-        db.collection('links').onSnapshot(snapshot => {
-            setAllLinks(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
+    window.onload = e => {
 
+        const startLoading =  performance.now();
 
+        const getAllLinks = new Promise((res, rej)=> {
 
-    const [Location, setLocation] = useState({})
-    
-    function getIP() {
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-
-                getLocationData(data.ip)
+            db.collection('links').onSnapshot(snapshot => {
+                res(snapshot.docs.map(doc => doc.data()))
             })
-    }
+        })
 
-    useEffect(e=> {
-        getIP() 
-    }, [])
+        getAllLinks
+        .then(allLinks=> {
+            
+            const filterLinks = (
+                allLinks
+                    .filter(e=> e.id === LinkID)
+                    .map(e=> {
+                        return {
+                            user : e.user,
+                            url  : e.url,
+                            views: e.views
+                        }
+                    })[0]
+            )
 
-    function getLocationData(ip) {
+            return filterLinks
+        })
 
-        fetch(`http://www.geoplugin.net/json.gp?ip=${ip}`)
+        .then(linksFiltred=> {
+
+            fetch('https://api.ipify.org?format=json')
             .then(response => response.json())
-            .then(data => {
+            .then(data => data.ip)
+            .then(ip=> {
 
-                setLocation({
-                    country: data.geoplugin_countryName,
-                    city   : data.geoplugin_city
+                fetch(`http://www.geoplugin.net/json.gp?ip=${ip}`)
+                .then(response => response.json())
+
+                .then(adress => {
+    
+                    return {
+                        country: adress.geoplugin_countryName,
+                        city   : adress.geoplugin_city
+                    }
                 })
-            })
-            .catch(err=> {
-                console.error(err)
-            })
-    }
 
-    
-    const Stats = {
-        ...AllLinks
-            .filter(e=> e.id === LinkID)
-            .map(e=> {
-                return {
-                    user : e.user,
-                    url  : e.url,
-                    views: e.views,
-                    id   : 's-' + new Date().getTime()
-                }
-            })[0]
-        ,
-        stats: {
-            reference: checkURLReference(document.referrer) ?? null,
-            adress   : Location,
-            device   : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
-        }
-    }
+                .then(getadress=> {
 
-
-    
-    useEffect(e=> {
-
-        const getURL = new Promise((res,rej)=> {
-
-            if (Stats.url) 
-                res(Stats.url)
-            else 
-                setTimeout(e=> rej() ,5000)
-        })
-
-        getURL
-        .then(URL=> {
-
-            const finChargement = performance.now()
-
-            if (Stats.url) {
-
-                let updateViews = {views : Stats.views + 1}
-    
-                db.collection('links').doc(LinkID).update(updateViews)      
-                
-                console.log(Stats, document.referrer);
-
-                db.
-                collection('links')
-                    .doc(LinkID)
-                    .collection('stats')
-                    .doc(Stats.id)
-                    .set({
-                        ...Stats.stats,
-                        performance: finChargement - débutChargement,
-                        date       : serverTimestamp()
+                    const getSource = new Promise((res,rej)=> {
+                        res(document.referrer)
                     })
+
+                    getSource
+                    .then(src=> {
+
+                        const data = {
+                            id         : 's-' + new Date().getTime(),
+                            reference  : src,
+                            adress     : getadress,
+                            device     : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile': 'pc',
+                            performance: performance.now() - startLoading,
+                            date       : serverTimestamp()
+                        }
+                        return data
+                    })
+                    
+                    .then(data=> {
     
-                .then(redirect=> window.location.href = URL)
-                .catch(e=> console.log(e))
-            }
+                        db
+                        .collection('links')
+                        .doc(LinkID)
+                        .update({views : linksFiltred.views + 1})      
+    
+                        db
+                        .collection('links')
+                        .doc(LinkID)
+                        .collection('stats')
+                        .doc(data.id)
+                        .set(data)
+    
+                        .then(redirect=> window.location.href = linksFiltred.url)
+                        .catch(e=> console.log(e))
+                    })
+        
+                })
+
+            })
 
         })
-       .catch(page404=>  window.location.href = '/page404')
-        
-    }, [Stats.url])
-
-
+    }
+    
 
  
     useEffect(e=> {

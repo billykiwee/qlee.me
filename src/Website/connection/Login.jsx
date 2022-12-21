@@ -252,7 +252,7 @@ export default function Signup() {
                                         </button>
                                     </div>
                                     <div className='display'>
-                                        <button className='p-1 h-4 border-b white hover-white border border-r-1' onClick={e=> signOut(auth) }>
+                                        <button className='p-1 h-4 border-b white hover-white border border-r-1' onClick={e=> signOut(auth).then(e=> history('/')) }>
                                             <span className='f-s-16'>Se déconnecter</span>
                                         </button>
                                     </div>

@@ -107,7 +107,7 @@ export default function Stats() {
         device      : countByDevice,
         reference   : countByReference,
         localisation: countByCountry,
-        performance: performance
+        performance : performance
     } 
 
 
