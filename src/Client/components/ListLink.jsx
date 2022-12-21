@@ -19,7 +19,7 @@ export default function ListLink({link}) {
 
                     <div className='grid gap'>
                         <div className='display gap'>
-                            <a href={link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
+                            <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
                             <div className='display gap'>
                                 <button 
                                     className='display border-r-04 w-2 hover h-2 border border-b' 

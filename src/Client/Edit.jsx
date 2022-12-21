@@ -256,7 +256,7 @@ export default function Edit() {
                                                         <Redirect to={'/stats/' + Link.id}>
                                                             <button className='grey hover h-3 border-r-04 p-lr-1 display gap'>
                                                                 <img src='/images/charts.svg' width={20} />
-                                                                <span>Statistiques</span>
+                                                                <span className='f-s-16'>Statistiques</span>
                                                             </button>
                                                         </Redirect>
                                                     </div>
