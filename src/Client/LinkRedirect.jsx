@@ -54,7 +54,7 @@ export default function LinkRedirect() {
             .then(data => data.ip)
             .then(ip=> {
 
-                fetch(`https://ipapi.co/json/`)
+                fetch(`https://ipapi.co/${ip}/json/`)
                 .then(response => response.json())
 
                 .then(adress => {
