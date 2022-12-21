@@ -10,8 +10,9 @@ import formatDate from '../../App/utils/formatDate'
 import { getTitleURL } from '../lib/getTitleURL'
 import { checkURLReference } from '../lib/checkURLReference'
 
-export default function Stats() {
 
+
+export default function Stats() {
 
     const { LinkID } = useParams()
 
@@ -104,11 +105,12 @@ export default function Stats() {
 
     const StatsFilter = {
         clics       : 0,
-        device      : countByDevice,
-        reference   : countByReference,
-        localisation: countByCountry,
+        device      : Object.values(countByDevice),
+        reference   : Object.values(countByReference),
+        localisation: Object.values(countByCountry),
         performance : performance
     } 
+
 
 
     return (
@@ -133,7 +135,7 @@ export default function Stats() {
                                         </div>
                                         <div className='grid text-align-c'>
                                             <span className='f-s-20'>{topLink?.name}</span>
-                                            <span className='f-s-20 link hover-link'>{topLink?.shortLink}</span>
+                                            <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
                                         </div>
                                     </div>
                                     
@@ -158,14 +160,13 @@ export default function Stats() {
                                             </div>
                                             <div className='grid gap'>
                                                 {
-                                                    Object.values(StatsFilter.device)
+                                                    StatsFilter.device
                                                     .sort((x, y)=> y.count - x.count)
                                                     .map((stat, i)=> {
                                                         
-                                                        const sumCount = Object.values(StatsFilter.device).map(e=> e.count).reduce((x,y)=> x + y)
+                                                        const sumCount = StatsFilter.device.map(e=> e.count).reduce((x,y)=> x + y)
 
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-
                                                         return (
                                                             <div className='display justify-s-b' key={i} >
                                                                 <div className='display gap'>
@@ -192,19 +193,19 @@ export default function Stats() {
                                             </div>
                                                 <div className='grid gap'>
                                                 {
-                                                    Object.values(StatsFilter.reference)
-                                                    .filter(e=> e.name !== '' && checkURLReference(e.name))
+                                                    StatsFilter.reference
+                                                    .filter(e=> checkURLReference(e.name))
                                                     .sort((x, y)=> y.count - x.count)
                                                     .map((stat, i)=> {
                                                         
-                                                        const sumCount = Object.values(StatsFilter.reference).map(e=> e.count).reduce((x,y)=> x + y)
+                                                        const sumCount = StatsFilter.reference.map(e=> e.count).reduce((x,y)=> x + y)
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (
                                                             <div className='display justify-s-b' key={i}>
                                                                 <div className='display gap'>
-                                                                    <img src={getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    <span>{getTitleURL(stat.name)}</span>
+                                                                    <img src={stat.name === '' ? getFavicon('https://qlee.me') : getFavicon(stat.name)} width={16} className='border-r-100' />
+                                                                    <span>{stat.name === '' ? 'iconnue' : getTitleURL(stat.name)}</span>
                                                                     <small className='c-grey f-s-12'>{stat.count}</small>
                                                                 </div>
                                                                 <ProgressBar percentage={percentage} />
@@ -223,11 +224,11 @@ export default function Stats() {
                                             </div>
                                             <div className='grid gap'>
                                                 {
-                                                    Object.values(StatsFilter.localisation)
-                                                    .sort((x, y)=> y.count - x.count )
+                                                    StatsFilter.localisation
+                                                    .sort((x, y)=> y.count - x.coun)
                                                     .map((stat, i)=> {
-                                                        const sumCount = Object.values(StatsFilter.localisation).map(e=> e.count).reduce((x,y)=> x + y)
 
+                                                        const sumCount = StatsFilter.localisation.map(e=> e.count).reduce((x,y)=> x + y)
                                                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
                                                         return (

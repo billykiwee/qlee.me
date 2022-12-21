@@ -18,17 +18,17 @@ export default function LinkRedirect() {
     const { LinkID } = useParams()
 
 
-    window.onload = e => {
+    useEffect(e=> {
 
         const startLoading =  performance.now();
-
+    
         const getAllLinks = new Promise((res, rej)=> {
-
+    
             db.collection('links').onSnapshot(snapshot => {
                 res(snapshot.docs.map(doc => doc.data()))
             })
         })
-
+    
         getAllLinks
         .then(allLinks=> {
             
@@ -43,20 +43,20 @@ export default function LinkRedirect() {
                         }
                     })[0]
             )
-
+    
             return filterLinks
         })
-
+    
         .then(linksFiltred=> {
-
+    
             fetch('https://api.ipify.org?format=json')
             .then(response => response.json())
             .then(data => data.ip)
             .then(ip=> {
-
+    
                 fetch(`https://ipapi.co/${ip}/json/`)
                 .then(response => response.json())
-
+    
                 .then(adress => {
     
                     return {
@@ -64,16 +64,16 @@ export default function LinkRedirect() {
                         city   : adress.city
                     }
                 })
-
+    
                 .then(getadress=> {
-
+    
                     const getSource = new Promise((res,rej)=> {
                         res(document.referrer)
                     })
-
+    
                     getSource
                     .then(src=> {
-
+    
                         const data = {
                             id         : 's-' + new Date().getTime(),
                             reference  : src ?? null,
@@ -106,13 +106,14 @@ export default function LinkRedirect() {
         
                 })
                 .catch(err=> console.log(err))
-
+    
             })
             .catch(err=> console.log(err))
-
+    
         })
         .catch(err=> console.log(err))
-    }
+    }, [])
+
     
 
  
