@@ -7,19 +7,19 @@ import Home from '../Website/Home'
 
 import Dashboard from '../Client/Dashboard'
 import Edit from '../Client/Edit'
-import LinkRedirect from '../Client/LinkRedirect.jsx'
 import Popup from './components/Popup'
 import Header from './components/Header'
 import Container from './components/Container'
 import Footer from './components/Footer'
 import Login from '../Website/connection/Login'
-import LinkInBio from '../Client/views/LinkInBio'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats'
+import Redirection from '../Client/Redirection.jsx'
+
+
 
 export default function App() {
-
 
     const [{user}, dispatch] = useStateValue('')
     const auth = getAuth()
@@ -56,9 +56,9 @@ export default function App() {
                         <Route path="/home" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
-                        <Route path="/:LinkID" exact element={<LinkRedirect />} />
+                        <Route path="/:LinkID" exact element={<Redirection />} />
                         <Route path="/login" exact element={<Login />} />
-                        <Route path="/linkinbio/:UserID" exact element={<LinkInBio />} />
+
                         <Route path="/pricing" exact element={<Pricing />} />
 
                         <Route path="/stats" exact element={<Stats />} />

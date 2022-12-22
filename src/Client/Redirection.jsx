@@ -8,9 +8,11 @@ import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../App/utils/uniqueID'
 import { checkURLReference } from './lib/checkURLReference'
 import { getDevice } from './lib/getDevice'
+import { getLink } from './lib/database/getLink'
+import { getAdress } from './lib/getAdress'
 
 
-export default function LinkRedirect() {
+export default function Redirection() {
 
     const { LinkID } = useParams()
 
@@ -19,75 +21,57 @@ export default function LinkRedirect() {
     const statID = 's-' + new Date().getTime()
 
 
-    useEffect(e=> {
+    const [link, setlink] = useState([])
 
-        async function getAdress() {
-            return (
-                fetch('https://api.ipify.org?format=json')
-                    .then(response => response.json())
-                    .then(data => data.ip)
-                    .then(async ip=> {
-            
-                        return (
-                            fetch(`https://ipapi.co/${ip}/json/`)
-                            .then(response => response.json())
-                            .then(adress => {
-                
-                                return {
-                                    country: adress.country_name,
-                                    city   : adress.city
-                                }
-                            })
-                        )
-                    })
-            )
-        }
+    useEffect(e=> {
+        getLink(setlink, LinkID)
+    }, [LinkID])
+
+
+    const [Adress, setAdress] = useState([])
+
+    useEffect(e=> {
 
         getAdress()
         .then(adress=> {
+            setAdress(adress)
+        })
+    }, [])
 
-            const getAllLinks = new Promise((res, rej)=> {
-    
-                db.collection('links').onSnapshot(snapshot => {
-                    res(snapshot.docs.map(doc => doc.data()))
-                })
-            })
 
-            getAllLinks
-            .then(getLink=> {
-        
-                let link = getLink?.filter(e=> e.id === LinkID).map(e=> e)[0] 
-    
-                db.collection('links')
-                .doc(LinkID)
-                .collection('stats')
-                .doc(statID)
-                .set({
-                    id         : statID,
-                    adress     : adress,
-                    reference  : document.referrer ?? null,
-                    device     : getDevice(),
-                    performance: performance.now() - startLoading,
-                    date       : serverTimestamp()
-                })
-                .then(e=> {
-    
-                    db.collection('links')
-                    .doc(LinkID)
-                    .update({
-                        views : link.views + 1
-                    }) 
-        
-                    .then(e=> {                    
-                        window.location.href = link.url
-                    })
-                    .catch(page404 => (window.location.href = '/page404'))    
-                })
 
+    useEffect(e=> {
+
+        if (!link) window.location.href = '/page404'
+
+        db.collection('links')
+        .doc(link.id)
+        .collection('stats')
+        .doc(statID)
+        .set({
+            id         : statID,
+            adress     : Adress,
+            reference  : document.referrer ?? null,
+            device     : getDevice(),
+            performance: performance.now() - startLoading,
+            date       : serverTimestamp()
+        })
+        .then(e=> {
+
+            db.collection('links')
+            .doc(link.id)
+            .update({
+                views : link.views + 1
+            }) 
+
+            .then(e=> {                    
+                window.location.href = link.url
             })
         })
+        .catch(err=> console.log(e))    
 
-    }, [LinkID])
+
+    }, [link])
 
 
 

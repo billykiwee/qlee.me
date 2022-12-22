@@ -11,6 +11,7 @@ import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../App/api/unsplash'
 import { generateLetterImage } from '../../App/utils/generateLetterImage'
+import { getUser } from '../../Client/lib/database/getUser'
 
 
 export default function Signup() {
@@ -23,14 +24,11 @@ export default function Signup() {
     const [User, setUser] = useState([])
 
     useEffect(e=> {
-        db.collection('users').onSnapshot(snapshot => {
-            setUser(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
+        getUser(setUser, user?.email)
+    }, [user])
 
-
-    const UserDB = User.filter(e=> e.email === user?.email).map(e=> e)[0]
-    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)
+    
+    const isUserPremium = User.plan
 
 
 
@@ -80,8 +78,6 @@ export default function Signup() {
 
 
     function registerByEmail(e) {
-
-        const RandomPhotoUrl = document.querySelector('canvas')?.id
 
         e.preventDefault() 
 
@@ -230,19 +226,19 @@ export default function Signup() {
                             <div className='grid gap-2rem'>
                                 <div className='display gap-1rem'>
                                     <span className='display'>
-                                        <img src={UserDB?.photoURL} width={68} height={68} className='border-r-100' />
+                                        <img src={User?.photoURL} width={68} height={68} className='border-r-100' />
                                     </span>
                                     <div className='grid'>
                                         <div className='display gap-1rem'>
-                                            <h2 className='m-0'>{UserDB?.name}</h2>
+                                            <h2 className='m-0'>{User?.name}</h2>
                                             {
-                                                isUserPremium[0]?.plan !== 'FREE' &&
+                                                isUserPremium !== 'FREE' &&
                                                 <div className='display justify-c yellow border-r-04 border-b h-1 p-04'>
-                                                    <span className='display'>{isUserPremium[0]?.plan}</span>
+                                                    <span className='display'>{isUserPremium}</span>
                                                 </div>
                                             }
                                         </div>
-                                        <span>{UserDB?.email}</span>
+                                        <span>{User?.email}</span>
                                     </div>
                                 </div>
                                 <div className='display gap'>
@@ -261,11 +257,11 @@ export default function Signup() {
                             <div className='grid gap-1rem'>
                                 <div className='grid gap'>
                                     <span>Nom</span>
-                                    <input className='div-input white h-3' type='text' placeholder={UserDB?.name} />
+                                    <input className='div-input white h-3' type='text' placeholder={User?.name} />
                                 </div>
                                 <div className='grid gap'>
                                     <span>Email</span>
-                                    <input className='div-input white h-3' type='email' placeholder={UserDB?.email} />
+                                    <input className='div-input white h-3' type='email' placeholder={User?.email} />
                                 </div>
                                 <div className='grid gap'>
                                     <span>Mot de passe</span>

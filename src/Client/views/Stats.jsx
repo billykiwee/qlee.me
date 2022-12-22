@@ -9,6 +9,7 @@ import '../../App/css/stats.css'
 import formatDate from '../../App/utils/formatDate'
 import { getTitleURL } from '../lib/getTitleURL'
 import { checkURLReference } from '../lib/checkURLReference'
+import { getLinks } from '../lib/database/getLinks'
 
 
 
@@ -21,10 +22,10 @@ export default function Stats() {
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
-        db.collection('links').orderBy('date').onSnapshot(snapshot => {
-            setUserLinks(snapshot.docs.map(doc => doc.data()))
-        })
+        getLinks(setUserLinks)
     }, []) 
+      
+
 
     const AllUserLinks = UserLinks
         .filter(data=> data.user === user?.email)
@@ -146,7 +147,7 @@ export default function Stats() {
                                                     <span>Clics</span>
                                                 </div>
                                                 <div className='grid gap'>
-                                                    {'views'}
+                                                    {topLink?.views}
                                                 </div>
                                             </div>
                                         </div>

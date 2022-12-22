@@ -12,6 +12,7 @@ import { isValidUrl } from '../App/utils/isValidUrl';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
 import { getTitleURL } from './lib/getTitleURL';
+import { getUserLinks } from './lib/database/getUserLinks';
 
 
 const MAX_LINK_BEFORE_UPDATE = 10
@@ -27,14 +28,8 @@ export default function Dashboard() {
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
-        db.collection('links').orderBy('date').onSnapshot(snapshot => {
-            setUserLinks(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
-
-
-    const AllUserLinks = UserLinks.filter(data=> data.user === user?.email).map(userlinks=> userlinks)
-
+        getUserLinks(setUserLinks, user?.email)
+    }, [user])
 
 
     const [LinkURL,setLinkURL] = useState('')
@@ -46,7 +41,7 @@ export default function Dashboard() {
 
 
 
-    const isLinkAlreadyExist = AllUserLinks.some(data => {
+    const isLinkAlreadyExist = UserLinks.some(data => {
         if (data.name === NameLink && data.url === LinkURL) return true
     })
 
@@ -64,7 +59,7 @@ export default function Dashboard() {
         if (isLinkAlreadyExist) 
             throw setError('Un lien exitse déjà avec ce nom et cet URL')
 
-        if (MAX_LINK_BEFORE_UPDATE <= AllUserLinks.length) 
+        if (MAX_LINK_BEFORE_UPDATE <= UserLinks.length) 
             throw setMessage({
                 title: 'Oups...',
                 message: `Tu as atteints la limite de ${MAX_LINK_BEFORE_UPDATE} liens gratuits.`,
@@ -194,7 +189,7 @@ export default function Dashboard() {
                                 <span className='f-s-25 f-w-500'>Mes liens</span>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small className='c-black'>{AllUserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                                        <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -206,7 +201,7 @@ export default function Dashboard() {
                             </div>
                             <div className='grid gap'>
                                 {
-                                    AllUserLinks
+                                    UserLinks
                                     .map((userlink, i)=> {
 
                                         return <ListLink link={userlink} key={i} />
@@ -217,12 +212,12 @@ export default function Dashboard() {
                         </div>
                         <div className='display justify-c'>
                             {
-                                AllUserLinks.length < MAX_LINK_BEFORE_UPDATE 
+                                UserLinks.length < MAX_LINK_BEFORE_UPDATE 
                                 ?
                                 <div className='display gap'>
                                     <img src='/images/info.svg' className='w-1 h-1 opacity'  />
                                     <small className='c-grey f-w-300'>
-                                        Il te reste encore {MAX_LINK_BEFORE_UPDATE - AllUserLinks.length} {MAX_LINK_BEFORE_UPDATE - AllUserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
+                                        Il te reste encore {MAX_LINK_BEFORE_UPDATE - UserLinks.length} {MAX_LINK_BEFORE_UPDATE - UserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
                                     </small>
                                 </div>
                                 :

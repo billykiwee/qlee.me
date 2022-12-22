@@ -13,6 +13,8 @@ import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import { downloadQRCode } from './lib/downloadQRCode'
+import { getUserLinks } from './lib/database/getUserLinks'
+import { getStats } from './lib/database/getStats'
 
 
 
@@ -26,22 +28,17 @@ export default function Edit() {
 
     const [User, setUser] = useState([])
 
-    const [GetStatsLink, setGetStatsLink] = useState([])
+    const [Stats, setStats] = useState([])
 
     useEffect(e=> {
-        db.collection('users').onSnapshot(snapshot => {
-            setUser(snapshot.docs.map(doc => doc.data()))
-        })
-
-        db.collection('links').doc(LinkID).collection('stats').onSnapshot(snapshot => {
-            setGetStatsLink(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
+        getUserLinks(setUser, user?.email)
+        getStats(setStats, LinkID)
+    }, [user])
 
     const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)[0]?.plan !== 'FREE'
 
 
-    const statsLink = GetStatsLink
+    const statsLink = Stats
 
 
     const [UserLinks, setUserLinks] = useState([])
