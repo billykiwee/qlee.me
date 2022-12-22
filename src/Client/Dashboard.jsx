@@ -29,7 +29,7 @@ export default function Dashboard() {
 
     useEffect(e=> {
         getUserLinks(setUserLinks, user?.email)
-    }, [user])
+    }, [user?.email])
 
 
     const [LinkURL,setLinkURL] = useState('')

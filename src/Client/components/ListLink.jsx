@@ -42,10 +42,8 @@ export default function ListLink({link}) {
             </div>
             <div>
                 <Link to={'/edit/' + link.id}>
-                    <button className=' hover'>
-                        <span className='display w-1 h-2'>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                        </span>
+                    <button className='w-3 h-3 border-r-100 hover'>
+                        <img src='/images/chevron-right.svg' width={20} />
                     </button>
                 </Link>
             </div>

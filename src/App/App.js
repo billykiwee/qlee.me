@@ -52,6 +52,7 @@ export default function App() {
             <Header />
                 <Container>
                     <Routes>
+                        <Route path="/*" exact element={<Page404 />} />
                         <Route path="/page404" exact element={<Page404 />} />
                         <Route path="/home" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />

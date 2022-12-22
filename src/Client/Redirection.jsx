@@ -9,7 +9,7 @@ import UniqueID from '../App/utils/uniqueID'
 import { checkURLReference } from './lib/checkURLReference'
 import { getDevice } from './lib/getDevice'
 import { getLink } from './lib/database/getLink'
-import { getAdress } from './lib/getAdress'
+import { getAdress } from './lib/api/ipapi/getAdress'
 
 
 export default function Redirection() {
@@ -21,54 +21,51 @@ export default function Redirection() {
     const statID = 's-' + new Date().getTime()
 
 
-    const [link, setlink] = useState([])
+    const [link, setLink] = useState([])
 
     useEffect(e=> {
-        getLink(setlink, LinkID)
+        getLink(setLink, LinkID)
     }, [LinkID])
 
 
-    const [Adress, setAdress] = useState([])
+    const [adress, setAdress] = useState({})
 
     useEffect(e=> {
+        
 
         getAdress()
+        .then(getAdress=> getAdress)
         .then(adress=> {
-            setAdress(adress)
-        })
-    }, [])
 
-
-
-    useEffect(e=> {
-
-        if (!link) window.location.href = '/page404'
-
-        db.collection('links')
-        .doc(link.id)
-        .collection('stats')
-        .doc(statID)
-        .set({
-            id         : statID,
-            adress     : Adress,
-            reference  : document.referrer ?? null,
-            device     : getDevice(),
-            performance: performance.now() - startLoading,
-            date       : serverTimestamp()
-        })
-        .then(e=> {
-
+            if (!link) window.location.href = '/page404'
+    
             db.collection('links')
             .doc(link.id)
-            .update({
-                views : link.views + 1
-            }) 
-
-            .then(e=> {                    
-                window.location.href = link.url
+            .collection('stats')
+            .doc(statID)
+            .set({
+                id         : statID,
+                adress     : adress,
+                reference  : document.referrer ?? null,
+                device     : getDevice(),
+                performance: performance.now() - startLoading,
+                date       : serverTimestamp()
             })
+            .then(e=> {
+    
+                db.collection('links')
+                .doc(link.id)
+                .update({
+                    views : link.views + 1
+                }) 
+                .then(e=> {                    
+                    window.location.href = link.url
+                })
+    
+            })
+            .catch(err=> console.log(err))    
         })
-        .catch(err=> console.log(e))    
+        .catch(err=> console.log(err))    
 
 
     }, [link])
