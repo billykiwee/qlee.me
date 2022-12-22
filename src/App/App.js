@@ -55,6 +55,7 @@ export default function App() {
                         <Route path="/*" exact element={<Page404 />} />
                         <Route path="/page404" exact element={<Page404 />} />
                         <Route path="/home" exact element={<Home />} />
+                        <Route path="/" exact element={<Home />} />
                         <Route path="/dashboard" exact element={<Dashboard />} />
                         <Route path="/edit/:LinkID" exact element={<Edit />} />
                         <Route path="/:LinkID" exact element={<Redirection />} />

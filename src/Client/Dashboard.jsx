@@ -12,11 +12,11 @@ import { isValidUrl } from '../App/utils/isValidUrl';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
 import { getTitleURL } from './lib/getTitleURL';
-import { getUserLinks } from './lib/database/getUserLinks';
+import { fetchUserLinks } from './lib/database/fetchUserLinks';
 
 
-const MAX_LINK_BEFORE_UPDATE = 10
-
+const MAX_LINK_BEFORE_UPDATE = 200
+const MAX_LINK_PRO_PLAN = 300
 
 
 export default function Dashboard() {
@@ -27,9 +27,13 @@ export default function Dashboard() {
 
     const [UserLinks, setUserLinks] = useState([])
 
-    useEffect(e=> {
-        getUserLinks(setUserLinks, user?.email)
+
+    useEffect(() => {
+
+        fetchUserLinks(setUserLinks, user?.email)
+
     }, [user?.email])
+
 
 
     const [LinkURL,setLinkURL] = useState('')
@@ -88,8 +92,8 @@ export default function Dashboard() {
         .then(linkCreated=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
 
-            setLinkURL(false)
-            setNameLink(false)
+            setLinkURL('')
+            setNameLink('')
         })
         .then(showPopup=> {
             setMessage({
@@ -103,7 +107,6 @@ export default function Dashboard() {
             })
         })
     }   
-
 
 
     const artcles = [

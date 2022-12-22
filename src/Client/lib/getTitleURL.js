@@ -1,4 +1,4 @@
-import { isValidUrl } from "../../App/utils/isValidUrl";
+import { isValidUrl } from "../../App/utils/isValidUrl"
 
 export function getTitleURL(url) {
 

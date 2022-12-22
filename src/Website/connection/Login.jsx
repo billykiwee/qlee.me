@@ -6,7 +6,6 @@ import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo, signOut} fr
 import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../../App/utils/uniqueID'
 import Messages from '../../App/utils/Messages'
-import RandomPhotoURL from '../../App/utils/RandomPhotoURL'
 import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../Client/lib/api/unsplash/unsplash'
@@ -28,8 +27,7 @@ export default function Signup() {
     }, [user])
 
 
-    const isUserPremium = User.plan
-
+    const isUserPremium = User?.plan
 
 
     const [name, setName] = useState('')

@@ -13,7 +13,7 @@ import Main from '../App/components/Main'
 import Messages from '../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import { downloadQRCode } from './lib/downloadQRCode'
-import { getUserLinks } from './lib/database/getUserLinks'
+import { fetchUserLinks } from './lib/database/fetchUserLinks'
 import { getStats } from './lib/database/getStats'
 
 
@@ -31,7 +31,7 @@ export default function Edit() {
     const [Stats, setStats] = useState([])
 
     useEffect(e=> {
-        getUserLinks(setUser, user?.email)
+        fetchUserLinks(setUser, user?.email)
         getStats(setStats, LinkID)
     }, [user])
 

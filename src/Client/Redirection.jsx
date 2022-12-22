@@ -21,54 +21,47 @@ export default function Redirection() {
     const statID = 's-' + new Date().getTime()
 
 
-    const [link, setLink] = useState([])
-
     useEffect(e=> {
-        getLink(setLink, LinkID)
-    }, [LinkID])
 
+        getLink(LinkID)
+        .then(link=> {
 
-    const [adress, setAdress] = useState({})
+            getAdress()
+            .then(getAdress=> getAdress)
+            .then(adress=> {
 
-    useEffect(e=> {
-        
-
-        getAdress()
-        .then(getAdress=> getAdress)
-        .then(adress=> {
-
-            if (!link) window.location.href = '/page404'
-    
-            db.collection('links')
-            .doc(link.id)
-            .collection('stats')
-            .doc(statID)
-            .set({
-                id         : statID,
-                adress     : adress,
-                reference  : document.referrer ?? null,
-                device     : getDevice(),
-                performance: performance.now() - startLoading,
-                date       : serverTimestamp()
-            })
-            .then(e=> {
-    
                 db.collection('links')
                 .doc(link.id)
-                .update({
-                    views : link.views + 1
-                }) 
-                .then(e=> {                    
-                    window.location.href = link.url
+                .collection('stats')
+                .doc(statID)
+                .set({
+                    id         : statID,
+                    adress     : adress,
+                    reference  : document.referrer ?? null,
+                    device     : getDevice(),
+                    performance: performance.now() - startLoading,
+                    date       : serverTimestamp()
                 })
-    
+                .then(e=> {
+        
+                    db.collection('links')
+                    .doc(link.id)
+                    .update({
+                        views: link.views + 1
+                    }) 
+                    .then(e=> {                    
+                        window.location.href = link.url
+                    })
+                })
+                .catch(err=> console.log(err))    
+
             })
             .catch(err=> console.log(err))    
         })
-        .catch(err=> console.log(err))    
+        .catch(e=> window.location.href = '/page404')
 
 
-    }, [link])
+    }, [])
 
 
 
