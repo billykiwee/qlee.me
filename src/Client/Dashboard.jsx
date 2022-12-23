@@ -2,7 +2,6 @@ import { serverTimestamp } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import Checkbox from '../App/components/Checkbox';
 import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
 import { useStateValue } from '../App/provider/StateProvider';
@@ -10,7 +9,7 @@ import { db } from '../App/database/firebase';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
-import { getTitleURL } from './lib/getTitleURL';
+import { getHostName } from './lib/getHostName';
 import { fetchUserLinks } from './lib/database/fetchUserLinks';
 import Messages from '../App/utils/Messages';
 import { isUserPremium } from '../Admin/settings/isPremium';
@@ -80,7 +79,7 @@ export default function Dashboard() {
         const linkID = 'qlee.me/' + UniqueID('', 5)
                 
         const link = {
-            name     : NameLink.length < 1 ? getTitleURL(LinkURL) : NameLink,
+            name     : NameLink.length < 1 ? getHostName(LinkURL) : NameLink,
             id       : linkID.split('/')[1],
             user     : user?.email,
             url      : isValidUrl(LinkURL).href,

@@ -6,11 +6,8 @@ import { useStateValue } from '../../App/provider/StateProvider'
 import getFavicon from '../../App/utils/getFavicon'
 import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
-import formatDate from '../../App/utils/formatDate'
-import { getTitleURL } from '../lib/getTitleURL'
-import { checkURLReference } from '../lib/checkURLReference'
 import { getLinks } from '../lib/database/getLinks'
-import { ProgressBar, StatsBlock } from '../components/StatsBlock'
+import { StatsBlock } from '../components/StatsBlock'
 
 
 export default function Stats() {
@@ -165,7 +162,7 @@ export default function Stats() {
                                                 <img src={'/images/globe-solid.svg'} width={20} />
                                                 <span>Source du trafic</span>
                                             </div>
-                                            <StatsBlock statType={StatsFilter.reference} />
+                                            <StatsBlock statType={StatsFilter.reference} url={true} />
                                         </div>
 
 
@@ -282,7 +279,7 @@ export default function Stats() {
                                     <Link to={'/stats/' + link.id} key={link.id}>
                                         <div    
                                             style={{background: LinkID === link.id ? 'var(--hover-btn)' : ''}}
-                                            className='display gap p-1 border-b border-r-1 border justify-s-b white h-2 click hover' 
+                                            className='display gap p-1 border-b border-r-1 border justify-s-b white h-2 click' 
                                             key={link.id} onClick={e=> setShowStat(link.id)} 
                                         >
                                             <div className='display gap-1rem justify-s-b w-100p'>

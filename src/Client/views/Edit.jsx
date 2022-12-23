@@ -1,22 +1,22 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
-import Container from '../App/components/Container'
-import { db } from '../App/database/firebase'
-import getFavicon from '../App/utils/getFavicon'
-import formatDate from '../App/utils/formatDate'
+import Container from '../../App/components/Container'
+import { db } from '../../App/database/firebase'
+import getFavicon from '../../App/utils/getFavicon'
+import formatDate from '../../App/utils/formatDate'
 import QRCode from 'react-qr-code'
-import { minimizeString } from '../App/utils/minimizeString'
-import { isValidUrl } from '../App/utils/isValidUrl'
-import Popup, { PopUpcontent } from '../App/components/Popup'
-import { useStateValue } from '../App/provider/StateProvider'
-import Main from '../App/components/Main'
-import Messages from '../App/utils/Messages'
+import { minimizeString } from '../../App/utils/minimizeString'
+import { isValidUrl } from '../../App/utils/isValidUrl'
+import Popup, { PopUpcontent } from '../../App/components/Popup'
+import { useStateValue } from '../../App/provider/StateProvider'
+import Main from '../../App/components/Main'
+import Messages from '../../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
-import { downloadQRCode } from './lib/downloadQRCode'
-import { fetchUserLinks } from './lib/database/fetchUserLinks'
-import { getStats } from './lib/database/getStats'
-import { isUserPremium } from '../Admin/settings/isPremium'
-import { fetchUser } from './lib/database/fetchUser'
+import { downloadQRCode } from '../lib/downloadQRCode'
+import { fetchUserLinks } from '../lib/database/fetchUserLinks'
+import { getStats } from '../lib/database/getStats'
+import { isUserPremium } from '../../Admin/settings/isPremium'
+import { fetchUser } from '../lib/database/fetchUser'
 
 
 
@@ -214,7 +214,7 @@ export default function Edit() {
 
 
     const [QrCode,setQrCode] = useState(false)
-    
+
 
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
@@ -255,7 +255,7 @@ export default function Edit() {
                                                 <div className='grid gap'>
                                                     <div className='display'>
                                                         <Redirect to={'/stats/' + Link.id}>
-                                                            <button className='grey hover h-3 border-r-04 p-lr-1 display gap'>
+                                                            <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
                                                                 <img src='/images/charts.svg' width={20} />
                                                                 <span className='f-s-16'>Statistiques</span>
                                                             </button>
@@ -270,7 +270,7 @@ export default function Edit() {
                                         <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <div className='display p-04 border-r-04 border shadow click' onClick={e=> setQrCode(Link.url)}>
+                                                    <div className='display p-04 border-r-04 border click' onClick={e=> setQrCode(Link.url)}>
                                                         <QRCode
                                                             onClick={e=> setQrCode(Link.shortLink)}
                                                             bgColor='white'
@@ -284,7 +284,7 @@ export default function Edit() {
                                                     </div>
                                                 </div>
                                                 <div className='display gap'>
-                                                    <button className='border-b h-2 blue hover-blue p-1 border-r-1 border' onClick={e=> setQrCode(QrCode ===true ? false : true)} >
+                                                    <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(QrCode ===true ? false : true)} >
                                                         <span className='display'>{QrCode ? 'Ok' : 'Voir'}</span>
                                                     </button>
                                                     <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.url)} >
@@ -420,7 +420,13 @@ export default function Edit() {
 
 
                                     <div className='grid gap'>
-                                        <div className='display'>
+                                        <div 
+                                            className='display' 
+                                            style={ 
+                                                Object.values(editLink).filter(e=> e !== '').length < 1 && !EditShortLink 
+                                                ? {pointerEvents: 'none', opacity: 0.8} 
+                                                : {pointerEvents: 'visible', opacity: 1}}
+                                            >
                                             <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' onClick={EditLink} >
                                                 <span className='f-s-16'>Modifier</span>
                                             </button>

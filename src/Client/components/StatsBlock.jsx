@@ -1,6 +1,9 @@
 import React from 'react'
+import getFavicon from '../../App/utils/getFavicon'
+import { isValidUrl } from '../../App/utils/isValidUrl'
+import { getHostName } from '../lib/getHostName'
 
-export const StatsBlock = ({statType}) => {
+export const StatsBlock = ({statType, url}) => {
 
     return (
         <div className='grid gap'>
@@ -13,11 +16,21 @@ export const StatsBlock = ({statType}) => {
     
                         const sumCount = statType.map(e=> e.count).reduce((x,y)=> x + y)
                         const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-    
+
                         return (
                             <div className='display justify-s-b' key={i}>
                                 <div className='display gap'>
-                                    <span>{stat.name === 'undefined' || stat.name === '' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
+                                    {
+                                        url && <img src={getFavicon(stat.name || 'https://www.cool.com')} width={16} className='border-r-2' />
+                                    }
+                                    <div className='display gap'>
+                                        {
+                                            isValidUrl(stat.name) 
+                                            ? <span>{getHostName(stat.name)}</span> 
+                                            : <span>{stat.name === 'undefined' || stat.name === '' ? 'autres' : stat.name}</span> 
+                                        }
+                                        <small className='c-grey f-s-12'>{stat.count}</small>
+                                    </div>
                                 </div>
                                 <ProgressBar percentage={percentage} />
                             </div>

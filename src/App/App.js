@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth"
 import Home from '../Website/Home'
 
 import Dashboard from '../Client/Dashboard'
-import Edit from '../Client/Edit'
+import Edit from '../Client/views/Edit'
 import Popup from './components/Popup'
 import Header from './components/Header'
 import Container from './components/Container'
@@ -15,7 +15,7 @@ import Login from '../Website/connection/Login'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats'
-import Redirection from '../Client/Redirection.jsx'
+import Redirection from '../Client/views/Redirection.jsx'
 import Payment from '../Website/views/Payment'
 
 

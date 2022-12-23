@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { isUserPremium } from '../../Admin/settings/isPremium'
 import Container from '../../App/components/Container'
 import Main from '../../App/components/Main'
 import '../../App/css/pricing.css'
+import { useStateValue } from '../../App/provider/StateProvider'
 import formatCurrency from '../../App/utils/formatCurrency'
+import { fetchUser } from '../../Client/lib/database/fetchUser'
 
 
 export default function Pricing() {
 
     const history = useNavigate()
+
+    const [{user}] = useStateValue()
+
+    const [User, setUser] = useState({})
+
+    useEffect(e=> {
+        fetchUser(setUser, user?.email)
+    }, [user])
 
 
     const Plans = {
@@ -91,7 +102,7 @@ export default function Pricing() {
                                             onClick={e=> plan.plan === 'Free' ? history('/dashboard') : ''}
                                             className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
                                         > 
-                                            <span>{plan.plan === 'Free' ? 'Continuer' : 'Essayer'}</span> 
+                                            <span>{plan.plan.toUpperCase() === isUserPremium(User).plan ? 'Continuer' : 'Essayer'}</span> 
                                         </button>
                                     </div>
                     
