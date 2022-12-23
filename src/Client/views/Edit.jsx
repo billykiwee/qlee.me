@@ -12,13 +12,12 @@ import { useStateValue } from '../../App/provider/StateProvider'
 import Main from '../../App/components/Main'
 import Messages from '../../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
-import { downloadQRCode } from '../lib/downloadQRCode'
+import { download } from '../lib/htmlToImage/download'
 import { fetchUserLinks } from '../lib/database/fetchUserLinks'
-import { getStats } from '../lib/database/getStats'
+import { fetchStats } from '../lib/database/fetchStats'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { fetchUser } from '../lib/database/fetchUser'
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import UniqueID from '../../App/utils/uniqueID'
+import { uploadPhoto } from '../lib/database/upload/uploadPhoto'
 
 
 
@@ -36,7 +35,7 @@ export default function Edit() {
 
     useEffect(e=> {
         fetchUserLinks(setUser, user?.email)
-        getStats(setStats, LinkID)
+        fetchStats(setStats, LinkID)
 
         fetchUser(setUser, user?.email)
     }, [user])
@@ -212,48 +211,14 @@ export default function Edit() {
 
     } 
   
-
     const [QrCode,setQrCode] = useState(false)
 
 
 
 
-    async function sendPhoto(input) {
-
-        let file = input.target.files[0]
-        let fileRef = ref(storage, `links/${user?.email}/favicon/${LinkID}`) 
-        const uploadTask = uploadBytesResumable(fileRef, file)
-        
-        upload(uploadTask, LinkID)
-    }
-
-    function upload(uploadTask, photoID) {
-
-        uploadTask
-        .then(e=> {
-
-            let path = getDownloadURL(ref(storage, `links/${user?.email}/favicon/${LinkID}`))
-
-            path
-            .then(url => {
-
-                try {
-
-                    db.collection('links').doc(LinkID).update({
-                        icon : url
-                    })
-                    
-                } catch (err) {
-                    console.log(err)
-                } 
-            })
-        }) 
-    }
-
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
-
         <>
         {
             PopUpMessage?.loader
@@ -286,7 +251,7 @@ export default function Edit() {
                                                                 type='file' 
                                                                 hidden 
                                                                 id='upload-img' 
-                                                                onChange={e => { sendPhoto(e) }}
+                                                                onChange={input => { uploadPhoto(input, LinkID) }}
                                                             />
                                                         </div>
                                                     </div>
@@ -297,15 +262,13 @@ export default function Edit() {
                                                 </div>
                                             </div>
                                             <div className='display justify-c'>
-                                                <div className='grid gap'>
-                                                    <div className='display'>
-                                                        <Redirect to={'/stats/' + Link.id}>
-                                                            <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                                <img src='/images/charts.svg' width={20} />
-                                                                <span className='f-s-16'>Statistiques</span>
-                                                            </button>
-                                                        </Redirect>
-                                                    </div>
+                                                <div className='grid gap w-100p'>
+                                                    <Redirect to={'/stats/' + Link.id}>
+                                                        <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
+                                                            <img src='/images/charts.svg' width={20} />
+                                                            <span className='f-s-16'>Statistiques</span>
+                                                        </button>
+                                                    </Redirect>
                                                 </div>
                                             </div>
                                         </div>
@@ -321,6 +284,7 @@ export default function Edit() {
                                                             bgColor='white'
                                                             fgColor='black'
                                                             className='w-2 h-2'
+                                                            id="qr-code-svg"
                                                             value={Link.shortLink}
                                                         />
                                                     </div>
@@ -329,10 +293,10 @@ export default function Edit() {
                                                     </div>
                                                 </div>
                                                 <div className='display gap'>
-                                                    <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(QrCode ===true ? false : true)} >
+                                                    <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(QrCode === true ? false : true)} >
                                                         <span className='f-s-16'>{QrCode ? 'Ok' : 'Voir'}</span>
                                                     </button>
-                                                    <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.url)} >
+                                                    <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> download(Link.name)} >
                                                         <span className='display'>
                                                             <img src='/images/dowload.svg' width={20} height={20} />
                                                         </span>
@@ -342,16 +306,20 @@ export default function Edit() {
                                             {
                                                 QrCode &&
                                                 <div className='display w-100p justify-c'>
-                                                    <div className='display white border-r-2 p-2 border border-b gap-1rem'>
-                                                        <QRCode
-                                                            id="qr-code-svg"
-                                                            bgColor={'white'}
-                                                            fgColor={'black'}
-                                                            className='click'
-                                                            level='H'
-                                                            size={200}
-                                                            value={Link.shortLink}
-                                                        />
+                                                    <div className='grid gap-1rem blue border-r-2 p-1 border-b gap-1rem' id='qr-code-img'>
+                                                        <div className='display white p-1 border-r-1'>
+                                                            <QRCode
+                                                                bgColor='white'
+                                                                fgColor='black'
+                                                                className='click qr-code-svg'
+                                                                level='H'
+                                                                size={200}
+                                                                value={Link.shortLink}
+                                                            />
+                                                        </div> 
+                                                        <div className='display justify-c'>
+                                                            <span className='f-s-25' contentEditable={true}>Qlee me</span>   
+                                                        </div> 
                                                     </div>
                                                 </div>
                                             }
@@ -384,7 +352,7 @@ export default function Edit() {
                                                     </div>
                                                     <div className='opacity no-click'>
                                                         <input type='text' className='div-input h-3 border-r-1 w-100p ' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
-                                                        <small className='c-grey'>ex: loop.me/mon-lien-perso</small>
+                                                        <small className='c-grey'>ex: qlee.me/mon-lien-perso</small>
                                                     </div>
                                                 </div>
                                                 <div className='grid gap-04'>
@@ -416,7 +384,7 @@ export default function Edit() {
                                                     <div className='display gap'>
                                                         <span>Modifier le lien court</span>
                                                     </div>
-                                                    <div className='display'>
+                                                    <div className='display gap'>
                                                         <span className='c-blue'>{Link.shortLink.split('/')[0]}/</span>
                                                         <input 
                                                             type='text' 

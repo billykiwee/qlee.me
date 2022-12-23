@@ -19,6 +19,9 @@ import { fetchUser } from './lib/database/fetchUser';
 
 export default function Dashboard() {
 
+
+    document.title = ' dashboard'
+
     const history = useNavigate()
 
     const [{user}] = useStateValue()
@@ -27,14 +30,10 @@ export default function Dashboard() {
     const [User, setUser] = useState([])
 
     const [UserLinks, setUserLinks] = useState([])
-    const [loader, setLoader] = useState(true)
 
     useEffect(() => {
 
         fetchUserLinks(setUserLinks, user?.email)
-        .then(e=> {
-            setLoader(true)
-        })
 
         fetchUser(setUser, user?.email)
 

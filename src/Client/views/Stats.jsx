@@ -6,11 +6,12 @@ import { useStateValue } from '../../App/provider/StateProvider'
 import getFavicon from '../../App/utils/getFavicon'
 import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
-import { getLinks } from '../lib/database/getLinks'
 import { ProgressBar, StatsBlock } from '../components/StatsBlock'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { fetchUser } from '../lib/database/fetchUser'
 import { GoToPricing } from './Edit'
+import { fetchUserLinks } from '../lib/database/fetchUserLinks'
+import { fetchStats } from '../lib/database/fetchStats'
 
 
 export default function Stats() {
@@ -23,7 +24,7 @@ export default function Stats() {
     const [User, setUser] = useState([])
 
     useEffect(e=> {
-        getLinks(setUserLinks)
+        fetchUserLinks(setUserLinks, user?.email)
 
         fetchUser(setUser, user?.email)
     }, [user]) 
@@ -48,9 +49,7 @@ export default function Stats() {
     const [LinkStat, setLinkStat] = useState([])
     
     useEffect(e=> {
-        db.collection('links').doc(LinkID).collection('stats').onSnapshot(snapshot => {
-            setLinkStat(snapshot.docs.map(doc => doc.data()))
-        })
+        fetchStats(setLinkStat, LinkID)
     }, [LinkID])
 
 
@@ -129,7 +128,7 @@ export default function Stats() {
                     {
                         UserLinks
                         .filter(isUserAuth=> isUserAuth.user === user?.email)
-                        .filter(toplink=> toplink.id === ShowStat)
+                        .filter(link=> link.id === ShowStat)
                         .map(topLink=> {
                         
                             return (
@@ -287,7 +286,7 @@ export default function Stats() {
                                         >
                                             <div className='display gap-1rem justify-s-b w-100p'>
                                                 <div className='display gap-1rem '> 
-                                                    <img src={getFavicon(link.url)} className='w-2 h-2 border-r-100' />
+                                                    <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
                                                     <div className='grid'>
                                                         <div className='display gap'>
                                                             <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
