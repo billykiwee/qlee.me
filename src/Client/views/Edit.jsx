@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import Container from '../../App/components/Container'
-import { db } from '../../App/database/firebase'
+import { db, storage } from '../../App/database/firebase'
 import getFavicon from '../../App/utils/getFavicon'
 import formatDate from '../../App/utils/formatDate'
 import QRCode from 'react-qr-code'
@@ -17,6 +17,8 @@ import { fetchUserLinks } from '../lib/database/fetchUserLinks'
 import { getStats } from '../lib/database/getStats'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { fetchUser } from '../lib/database/fetchUser'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import UniqueID from '../../App/utils/uniqueID'
 
 
 
@@ -211,10 +213,45 @@ export default function Edit() {
     } 
   
 
-
-
     const [QrCode,setQrCode] = useState(false)
 
+
+
+
+    async function sendPhoto(input) {
+
+        const photoID = UniqueID('photo', 10)
+
+        let file = input.target.files[0]
+        let fileRef = ref(storage, `links/${user?.email}/favicon/${LinkID + '=' + photoID}`) 
+        const uploadTask = uploadBytesResumable(fileRef, file)
+        
+        console.log(file);
+        upload(uploadTask, photoID)
+    }
+
+    function upload(uploadTask, photoID) {
+
+        uploadTask
+        .then(e=> {
+
+            let path = getDownloadURL(ref(storage, `links/${user?.email}/favicon/${LinkID + '=' + photoID}`))
+
+            path
+            .then(url => {
+
+                try {
+
+                    db.collection('links').doc(LinkID).update({
+                        icon : url
+                    })
+                    
+                } catch (err) {
+                    console.log(err)
+                } 
+            })
+        }) 
+    }
 
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
@@ -245,9 +282,15 @@ export default function Edit() {
                                             <div className='grid gap'>
                                                 <div className='display justify-c'>
                                                     <div className='edit-image-link'>
-                                                        <img src={getFavicon(Link?.url)} width={88} className='border-r-100' /> 
-                                                        <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' > 
+                                                        <img src={getFavicon(Link)} width={80} height={80} className='border-r-100' /> 
+                                                        <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
                                                             <img src='/images/edit.svg' width={16} />
+                                                            <input 
+                                                                type='file' 
+                                                                hidden 
+                                                                id='upload-img' 
+                                                                onChange={e => { sendPhoto(e) }}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>

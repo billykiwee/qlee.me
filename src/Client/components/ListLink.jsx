@@ -10,7 +10,7 @@ export default function ListLink({link}) {
         <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3'>
             <div className='display gap-1rem'>
                 <Link to={'/edit/' + link.id} className='display'>
-                    <img src={getFavicon(link.url)} className='w-2 h-2 border-r-100' />
+                    <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
                 </Link>
                 <div className='grid '> 
                     <div className='display gap'>

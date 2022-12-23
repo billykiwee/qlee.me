@@ -7,7 +7,7 @@ import getFavicon from '../../App/utils/getFavicon'
 import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
 import { getLinks } from '../lib/database/getLinks'
-import { StatsBlock } from '../components/StatsBlock'
+import { ProgressBar, StatsBlock } from '../components/StatsBlock'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { fetchUser } from '../lib/database/fetchUser'
 import { GoToPricing } from './Edit'
@@ -111,6 +111,9 @@ export default function Stats() {
         performance : performance
     } 
 
+    const allStats = {
+        clics       : UserLinks.filter(e=> e.id === ShowStat).map(e=> e.views).map((x,y)=> x + y)[0],
+    }
 
 
 
@@ -128,12 +131,12 @@ export default function Stats() {
                         .filter(isUserAuth=> isUserAuth.user === user?.email)
                         .filter(toplink=> toplink.id === ShowStat)
                         .map(topLink=> {
-                      
+                        
                             return (
                                 <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
                                     <div className='grid gap'>
                                         <div className='display justify-c'>
-                                            <img src={getFavicon(topLink?.url)} width={88} className='border-r-100' /> 
+                                            <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
                                         </div>
                                         <div className='grid text-align-c'>
                                             <span className='f-s-20'>{topLink?.name}</span>
@@ -155,17 +158,44 @@ export default function Stats() {
                                             </div>
                                         </div>
                                     
-                       
                                         <StatsBlock statType={StatsFilter.device} title='Appareil' icon='mobile' />
-                                        <StatsBlock statType={StatsFilter.reference} title='Source du trafic' icon='globe' />
+                                        <StatsBlock statType={StatsFilter.reference} title='Source du trafic' icon='globe' url />
                                         <StatsBlock statType={StatsFilter.localisation} title='Localisation' icon='localisation' />
-                                        <StatsBlock statType={StatsFilter.localisation} title='Performance' icon='rocket' performance={countPerformance} />
                                     
+                                        <div className='grid gap-1rem grey p-1 border-r-04'>
+                                            <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
+                                                <div className='display gap'>
+                                                    <img src={'/images/rocket-solid.svg'} width={18} />
+                                                    <span>Performance</span>
+                                                </div>
+                                                {
+                                                    isUserPremium(User).plan === 'ENTREPRISE' 
+                                                    ? 
+                                                    (
+                                                        <div className='display justify-s-b'>
+                                                            {
+                                                                countPerformance 
+                                                                ? 
+                                                                (
+                                                                    <>
+                                                                        <span>vitesse</span>
+                                                                        <ProgressBar percentage={countPerformance} />
+                                                                    </>
+                                                                )
+                                                                : <small className='c-grey'>aucune données</small>
+                                                            }
+                                                        </div>
+                                                    )
+                                                    : <GoToPricing />
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )
                         })
                     }
+                    
                 </div>
 
                 <div className='grid gap-1rem'>

@@ -7,7 +7,7 @@ import { fetchUser } from '../lib/database/fetchUser'
 import { getHostName } from '../lib/getHostName'
 import { GoToPricing } from '../views/Edit'
 
-export const StatsBlock = ({statType, url, title, icon, performance}) => {
+export const StatsBlock = ({statType, url, title, icon}) => {
 
     const [{user}] = useStateValue()
 
@@ -18,63 +18,58 @@ export const StatsBlock = ({statType, url, title, icon, performance}) => {
     }, [user]) 
       
 
+
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
-            <div className='display justify-s-b'>
-                <div className='display gap'>
+            
+            <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
+                <div className='display gap' >
                     <img src={`/images/${icon}-solid.svg`} width={18} />
                     <span>{title}</span>
                 </div>
-                <div className='grid gap'>
-                    {
-                        statType.length > 0 ? 
-                        (
-                            statType
-                            .sort((x, y)=> y.count - x.count)
-                            .map((stat, i)=> {
+                {
+                    isUserPremium(User).plan === 'ENTREPRISE' 
+                    ? 
+                    (
+                        <div className='grid gap'>
+                            {
+                                (
+                                    statType.length > 0 ? 
+                                    (
+                                        statType
+                                        .sort((x, y)=> y.count - x.count)
+                                        .map((stat, i)=> {
+                        
+                                            const sumCount = statType.map(e=> e.count).reduce((x,y)=> x + y)
+                                            const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
             
-                                const sumCount = statType.map(e=> e.count).reduce((x,y)=> x + y)
-                                const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-
-                                return (
-                                    <div className='display justify-s-b' key={i}>
-                                        <div className='display gap'>
-                                            {
-                                                url && <img src={getFavicon(stat.name || 'https://www.cool.com')} width={16} className='border-r-2' />
-                                            }
-                                            {
-                                                performance &&
-                                                <div className='display justify-s-b'>
-                                                    <span>vitesse</span>
-                                                    <span>{performance}</span>
+                                            return (
+                                                <div className={'display justify-s-b'} key={i} >
+                                                    <div className='display gap'>
+                                                        {
+                                                            url && <img src={getFavicon(stat.name || 'https://www.cool.com')} width={16} className='border-r-2' />
+                                                        }
+                                                        <div className='display gap'>
+                                                            {
+                                                                isValidUrl(stat.name) 
+                                                                ? <span>{getHostName(stat.name)}</span> 
+                                                                : <span>{stat.name === 'undefined' || stat.name === '' ? 'autres' : stat.name}</span> 
+                                                            }
+                                                            <small className='c-grey f-s-12'>{stat.count}</small>
+                                                        </div>
+                                                    </div>
+                                                    <ProgressBar percentage={percentage} />
                                                 </div>
-                                            }
-                                            <div className='display gap'>
-                                                {
-                                                    isValidUrl(stat.name) 
-                                                    ? <span>{getHostName(stat.name)}</span> 
-                                                    : <span>{stat.name === 'undefined' || stat.name === '' ? 'autres' : stat.name}</span> 
-                                                }
-                                                <small className='c-grey f-s-12'>{stat.count}</small>
-                                            </div>
-                                        </div>
-                                        <ProgressBar percentage={percentage} />
-                                    </div>
+                                            )
+                                        })
+                                    )
+                                    : <small className='c-grey'>aucune données</small>
                                 )
-                            })
-                        )
-                        : 
-                        (
-                            <>
-                                {
-                                    isUserPremium(User).plan !== 'ENTREPRISE' 
-                                    ? <GoToPricing />
-                                    : <small className='c-grey text-align-e'>aucune données</small>
-                                }
-                            </>
-                        )
-                    }
-                </div>
+                            }
+                        </div>
+                    )
+                    : <GoToPricing />
+                }
             </div>
         </div>
     )

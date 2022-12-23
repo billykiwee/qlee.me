@@ -24,7 +24,7 @@ export default function Pricing() {
 
     const Plans = {
         Free : {
-            plan: 'Free',
+            plan: 'Free 💸',
             subtitle: 'Pour tous' ,
             price: 0,
             benefits: [
@@ -35,7 +35,7 @@ export default function Pricing() {
             payment: '',
         },
         Pro : {
-            plan: 'Pro',
+            plan: 'Pro 👨🏻‍💻',
             subtitle: 'Pour aller plus loin' ,
             price: 4.90,
             benefits: [
@@ -48,7 +48,7 @@ export default function Pricing() {
             payment: '',
         },
         Entrprise : {
-            plan: 'Entrprise',
+            plan: 'Entreprise 🚀',
             subtitle: 'Boosté votre présence' ,
             price: 14.90,
             benefits: [
@@ -70,7 +70,7 @@ export default function Pricing() {
                 
                 <div className='display wrap justify-s-b'>
                     <div className='grid gap'>
-                        <span class="f-s-25 f-w-500">Pricing</span>
+                        <span className="f-s-25 f-w-500">Pricing</span>
                         <span className='f-w-100'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</span>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Pricing() {
                             
                                             <div className='display'>
                                                 <button 
-                                                    onClick={e=> plan.plan === 'Free' ? history('/dashboard') : ''}
+                                                    onClick={e=> plan.plan.toUpperCase() === isUserPremium(User).plan ? history('/dashboard') : ''}
                                                     className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
                                                 > 
                                                     <span>{plan.plan.toUpperCase() === isUserPremium(User).plan ? 'Continuer' : 'Essayer'}</span> 

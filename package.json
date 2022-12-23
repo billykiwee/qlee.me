@@ -23,7 +23,7 @@
     "env-cmd": "^10.1.0",
     "eth-price": "^0.1.1",
     "ethers": "^5.6.9",
-    "firebase": "^9.8.4",
+    "firebase": "^9.15.0",
     "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.22.0",
     "get-eth-price": "^1.0.0",

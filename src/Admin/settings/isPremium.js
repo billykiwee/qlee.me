@@ -31,7 +31,7 @@ export const isUserPremium = (user) => {
         return {
             user     : user?.email,
             plan     : userPlan,
-            max_links: plans[userPlan].max_links,
+            max_links: plans[userPlan]?.max_links,
             features : userPlan === 'PRO' ? plans.PRO.features: plans.ENTREPRISE.features
         }
     }
