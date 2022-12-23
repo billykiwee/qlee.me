@@ -1,15 +1,12 @@
 import { db } from "../../../App/database/firebase"
 
-export async function fetchLink(setLink, LinkID) {
+export async function fetchLink(LinkID) {
 
-    const query = db.collection('links').where('id', '==', LinkID)
+    const snapshot  = await db.collection('links').get()
+    const userLinks = snapshot.docs.map(doc => doc.data())
 
-    query.get()
-    .then(snapshot => {
-        const link = snapshot.docs.map(doc => doc.data())
-        setLink(...link)
-    })
-    .catch(err => {
-        console.error(err)
-    })
+    const link = userLinks.filter(e=> e?.id === LinkID)[0]
+
+    if (Object.values(link).length > 0) return link
+
 }

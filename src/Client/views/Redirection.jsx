@@ -17,51 +17,48 @@ export default function Redirection() {
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
 
-
-    const [link, setLink] = useState({})
-
-    useEffect(e=> {
-        fetchLink(setLink, LinkID)
-        .catch(e=> {
-            window.location.href = '/page404'
-        })
-    }, [LinkID])
-
-
     useEffect(e=> {
 
-        getAdress()
-        .then(getAdress=> getAdress)
-        .then(adress=> {
+        fetchLink(LinkID)
+        .then(link=> {
 
-            db.collection('links')
-            .doc(link.id)
-            .collection('stats')
-            .doc(statID)
-            .set({
-                id         : statID,
-                adress     : adress,
-                reference  : document.referrer ?? null,
-                device     : getDevice(),
-                performance: performance.now() - startLoading,
-                date       : serverTimestamp()
-            })
-            .then(e=> {
-    
+            getAdress()
+            .then(getAdress=> getAdress)
+            .then(adress=> {
+
                 db.collection('links')
                 .doc(link.id)
-                .update({
-                    views: link.views + 1
-                }) 
-                .then(e=> {                    
-                    window.location.href = link.url
+                .collection('stats')
+                .doc(statID)
+                .set({
+                    id         : statID,
+                    adress     : adress,
+                    reference  : document.referrer ?? null,
+                    device     : getDevice(),
+                    performance: performance.now() - startLoading,
+                    date       : serverTimestamp()
                 })
+                .then(e=> {
+        
+                    db.collection('links')
+                    .doc(link.id)
+                    .update({
+                        views: link.views + 1
+                    }) 
+                    .then(e=> {                    
+                        window.location.href = link.url
+                    })
+                })
+                .catch(err=> console.log(err))    
             })
             .catch(err=> console.log(err))    
         })
-        .catch(err=> console.log(err))    
 
-    }, [link])
+        .catch(e=> {
+            window.location.href = '/page404'
+        })
+
+    }, [LinkID])
 
  
     useEffect(e=> {
