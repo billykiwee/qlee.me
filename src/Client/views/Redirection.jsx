@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, redirect, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../App/components/Main'
-import { useStateValue } from '../../App/provider/StateProvider'
 import { db } from '../../App/database/firebase'
 import Messages from '../../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'

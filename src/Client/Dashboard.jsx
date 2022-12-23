@@ -27,14 +27,19 @@ export default function Dashboard() {
     const [User, setUser] = useState([])
 
     const [UserLinks, setUserLinks] = useState([])
+    const [loader, setLoader] = useState(true)
 
     useEffect(() => {
 
         fetchUserLinks(setUserLinks, user?.email)
+        .then(e=> {
+            setLoader(true)
+        })
 
         fetchUser(setUser, user?.email)
 
     }, [user?.email])
+
 
 
     const [LinkURL,setLinkURL] = useState('')
@@ -190,7 +195,7 @@ export default function Dashboard() {
                     <div className='grid gap-2rem'>
                         <div className='grid gap-1rem'>
                             <div className='display justify-s-b'>
-                                <span className='f-s-25 f-w-500'>Mes liens</span>
+                                <span className='f-s-25 f-w-400'>Mes liens</span>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
                                         <small className='c-black'>{UserLinks.length} / {isUserPremium(User).max_links}</small>

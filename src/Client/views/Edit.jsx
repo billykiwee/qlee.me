@@ -244,7 +244,12 @@ export default function Edit() {
                                         <div className='grid gap-1rem justfy-s-b border-r-2 border border-b p-1 white w-100p'>
                                             <div className='grid gap'>
                                                 <div className='display justify-c'>
-                                                    <img src={getFavicon(Link?.url)} width={88} className='border-r-100' /> 
+                                                    <div className='edit-image-link'>
+                                                        <img src={getFavicon(Link?.url)} width={88} className='border-r-100' /> 
+                                                        <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' > 
+                                                            <img src='/images/edit.svg' width={16} />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className='grid text-align-c'>
                                                     <span className='f-s-20'>{Link?.name}</span>
@@ -285,7 +290,7 @@ export default function Edit() {
                                                 </div>
                                                 <div className='display gap'>
                                                     <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(QrCode ===true ? false : true)} >
-                                                        <span className='display'>{QrCode ? 'Ok' : 'Voir'}</span>
+                                                        <span className='f-s-16'>{QrCode ? 'Ok' : 'Voir'}</span>
                                                     </button>
                                                     <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> downloadQRCode(Link.url)} >
                                                         <span className='display'>
@@ -454,14 +459,19 @@ export default function Edit() {
 }
 
 
-function GoToPricing() {
+export function GoToPricing({children}) {
     return (
-        <Redirect to='/pricing'>
-            <div className='display click'>
-                <div className='display justify-c yellow border-r-04 border-b hover-yellow w-1 p-04'>
-                    <span className='display'>
-                        <img src='/images/lock-solid.svg' width={14} />
-                    </span>
+        <Redirect to='/pricing' className='yellow border-r-04 border-b hover-yellow p-04' style={{width : !children ? '1rem' : ''}}>
+            <div className='display justify-c gap'>
+                {
+                    children
+                }
+                <div className='display click'>
+                    <div className='display justify-c'>
+                        <span className='display'>
+                            <img src='/images/lock-solid.svg' width={14} />
+                        </span>
+                    </div>
                 </div>
             </div>
         </Redirect>

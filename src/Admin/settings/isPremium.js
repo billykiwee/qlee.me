@@ -27,10 +27,13 @@ export const isUserPremium = (user) => {
 
     const userPlan = user.plan
 
-    return {
-        user     : user?.email,
-        plan     : userPlan,
-        max_links: userPlan && plans[userPlan].max_links,
-        features : userPlan === 'PRO' ? plans.PRO.features: plans.ENTREPRISE.features
+    if (userPlan) {
+        return {
+            user     : user?.email,
+            plan     : userPlan,
+            max_links: plans[userPlan].max_links,
+            features : userPlan === 'PRO' ? plans.PRO.features: plans.ENTREPRISE.features
+        }
     }
+    else return { max_links:  plans.FREE.max_links }
 }

@@ -8,6 +8,9 @@ import { minimizeString } from '../../App/utils/minimizeString'
 import '../../App/css/stats.css'
 import { getLinks } from '../lib/database/getLinks'
 import { StatsBlock } from '../components/StatsBlock'
+import { isUserPremium } from '../../Admin/settings/isPremium'
+import { fetchUser } from '../lib/database/fetchUser'
+import { GoToPricing } from './Edit'
 
 
 export default function Stats() {
@@ -17,10 +20,13 @@ export default function Stats() {
     const [{user}] = useStateValue()
 
     const [UserLinks, setUserLinks] = useState([])
+    const [User, setUser] = useState([])
 
     useEffect(e=> {
         getLinks(setUserLinks)
-    }, []) 
+
+        fetchUser(setUser, user?.email)
+    }, [user]) 
       
 
 
@@ -148,46 +154,13 @@ export default function Stats() {
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className='display gap'>
-                                                <img src={'/images/mobile-solid.svg'} width={18} />
-                                                <span>Appareil</span>
-                                            </div>
-                                            <StatsBlock statType={StatsFilter.device} />
-                                        </div>
-
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className='display gap'>
-                                                <img src={'/images/globe-solid.svg'} width={20} />
-                                                <span>Source du trafic</span>
-                                            </div>
-                                            <StatsBlock statType={StatsFilter.reference} url={true} />
-                                        </div>
-
-
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className='display gap'>
-                                                <img src={'/images/localisation-solid.svg'} width={20} />
-                                                <span>Localisation</span>
-                                            </div>
-                                            <StatsBlock statType={StatsFilter.localisation} />
-                                        </div>
-
-
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className='display gap'>
-                                                <img src={'/images/rocket-solid.svg'} width={16} />
-                                                <span>Performance</span>
-                                            </div>
-                                            <div className='display justify-s-b'>
-                                                <span>vitesse</span>
-                                                <span>{countPerformance}</span>
-                                            </div>
-                                        </div>
-
-
-
+                                    
+                       
+                                        <StatsBlock statType={StatsFilter.device} title='Appareil' icon='mobile' />
+                                        <StatsBlock statType={StatsFilter.reference} title='Source du trafic' icon='globe' />
+                                        <StatsBlock statType={StatsFilter.localisation} title='Localisation' icon='localisation' />
+                                        <StatsBlock statType={StatsFilter.localisation} title='Performance' icon='rocket' performance={countPerformance} />
+                                    
                                     </div>
                                 </div>
                             )
