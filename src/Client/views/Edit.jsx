@@ -220,14 +220,11 @@ export default function Edit() {
 
     async function sendPhoto(input) {
 
-        const photoID = UniqueID('photo', 10)
-
         let file = input.target.files[0]
-        let fileRef = ref(storage, `links/${user?.email}/favicon/${LinkID + '=' + photoID}`) 
+        let fileRef = ref(storage, `links/${user?.email}/favicon/${LinkID}`) 
         const uploadTask = uploadBytesResumable(fileRef, file)
         
-        console.log(file);
-        upload(uploadTask, photoID)
+        upload(uploadTask, LinkID)
     }
 
     function upload(uploadTask, photoID) {
@@ -235,7 +232,7 @@ export default function Edit() {
         uploadTask
         .then(e=> {
 
-            let path = getDownloadURL(ref(storage, `links/${user?.email}/favicon/${LinkID + '=' + photoID}`))
+            let path = getDownloadURL(ref(storage, `links/${user?.email}/favicon/${LinkID}`))
 
             path
             .then(url => {
