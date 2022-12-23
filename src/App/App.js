@@ -16,6 +16,7 @@ import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats'
 import Redirection from '../Client/Redirection.jsx'
+import Payment from '../Website/views/Payment'
 
 
 
@@ -65,6 +66,8 @@ export default function App() {
 
                         <Route path="/stats" exact element={<Stats />} />
                         <Route path="/stats/:LinkID" exact element={<Stats />} />
+
+                        <Route path="/payment" exact element={<Payment />} />
                     </Routes>
                 </Container>
             <Footer />  

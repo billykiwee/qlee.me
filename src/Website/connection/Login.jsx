@@ -10,7 +10,7 @@ import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../Client/lib/api/unsplash/unsplash'
 import { generateLetterImage } from '../../App/utils/generateLetterImage'
-import { getUser } from '../../Client/lib/database/getUser'
+import { fetchUser } from '../../Client/lib/database/fetchUser'
 
 
 export default function Signup() {
@@ -23,7 +23,7 @@ export default function Signup() {
     const [User, setUser] = useState([])
 
     useEffect(e=> {
-        getUser(setUser, user?.email)
+        fetchUser(setUser, user?.email)
     }, [user])
 
 

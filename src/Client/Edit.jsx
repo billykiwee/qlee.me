@@ -15,6 +15,8 @@ import { serverTimestamp } from 'firebase/firestore'
 import { downloadQRCode } from './lib/downloadQRCode'
 import { fetchUserLinks } from './lib/database/fetchUserLinks'
 import { getStats } from './lib/database/getStats'
+import { isUserPremium } from '../Admin/settings/isPremium'
+import { fetchUser } from './lib/database/fetchUser'
 
 
 
@@ -33,9 +35,9 @@ export default function Edit() {
     useEffect(e=> {
         fetchUserLinks(setUser, user?.email)
         getStats(setStats, LinkID)
-    }, [user])
 
-    const isUserPremium = User.filter(e=> e.email === user?.email).map(e=> e)[0]?.plan !== 'FREE'
+        fetchUser(setUser, user?.email)
+    }, [user])
 
 
     const statsLink = Stats
@@ -148,8 +150,10 @@ export default function Edit() {
                 views    : Link.views
             })
             .then(addStat=> {
-                if (statsLink[0])  
-                    db.collection('links').doc(EditShortLink).collection('stats').add(statsLink[0])
+
+                for (const v in statsLink) {
+                    db.collection('links').doc(EditShortLink).collection('stats').doc(statsLink[v].id).set(statsLink[v])
+                }
             })
             .then(deleteOldStat=> {
 
@@ -325,7 +329,7 @@ export default function Edit() {
                                         </div>
 
                                         {
-                                            !isUserPremium
+                                            isUserPremium(User).plan === 'FREE'
                                             ?
                                             <>
                                                 <div className='grid gap-04 w-100p'>
@@ -393,6 +397,7 @@ export default function Edit() {
                                                     </div>
 
                                                     <div className='grid gap-04'>
+
                                                         <div className='display'>
                                                             <label htmlFor='active_views' className='display gap click'>
                                                                 <input type='checkbox' className='h-1' id='active_views' />

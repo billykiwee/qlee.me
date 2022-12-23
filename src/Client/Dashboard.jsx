@@ -7,16 +7,15 @@ import Main from '../App/components/Main';
 import Popup from '../App/components/Popup';
 import { useStateValue } from '../App/provider/StateProvider';
 import { db } from '../App/database/firebase';
-import getFavicon from '../App/utils/getFavicon';
 import { isValidUrl } from '../App/utils/isValidUrl';
 import UniqueID from '../App/utils/uniqueID';
 import ListLink from './components/ListLink';
 import { getTitleURL } from './lib/getTitleURL';
 import { fetchUserLinks } from './lib/database/fetchUserLinks';
+import Messages from '../App/utils/Messages';
+import { isUserPremium } from '../Admin/settings/isPremium';
+import { fetchUser } from './lib/database/fetchUser';
 
-
-const MAX_LINK_BEFORE_UPDATE = 200
-const MAX_LINK_PRO_PLAN = 300
 
 
 export default function Dashboard() {
@@ -25,15 +24,18 @@ export default function Dashboard() {
 
     const [{user}] = useStateValue()
 
-    const [UserLinks, setUserLinks] = useState([])
 
+    const [User, setUser] = useState([])
+
+    const [UserLinks, setUserLinks] = useState([])
 
     useEffect(() => {
 
         fetchUserLinks(setUserLinks, user?.email)
 
-    }, [user?.email])
+        fetchUser(setUser, user?.email)
 
+    }, [user?.email])
 
 
     const [LinkURL,setLinkURL] = useState('')
@@ -63,10 +65,10 @@ export default function Dashboard() {
         if (isLinkAlreadyExist) 
             throw setError('Un lien exitse déjà avec ce nom et cet URL')
 
-        if (MAX_LINK_BEFORE_UPDATE <= UserLinks.length) 
+        if (isUserPremium(User).max_links <= UserLinks.length) 
             throw setMessage({
                 title: 'Oups...',
-                message: `Tu as atteints la limite de ${MAX_LINK_BEFORE_UPDATE} liens gratuits.`,
+                message: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
                 buttonText: 'Voir les plans',
                 buttonColor: 'yellow',
                 valid: () => history('/pricing'),
@@ -192,7 +194,7 @@ export default function Dashboard() {
                                 <span className='f-s-25 f-w-500'>Mes liens</span>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small className='c-black'>{UserLinks.length} / {MAX_LINK_BEFORE_UPDATE}</small>
+                                        <small className='c-black'>{UserLinks.length} / {isUserPremium(User).max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -204,23 +206,23 @@ export default function Dashboard() {
                             </div>
                             <div className='grid gap'>
                                 {
+                                    UserLinks.length < 1 ? <Messages loader={true} />
+                                    :
                                     UserLinks
                                     .map((userlink, i)=> {
-
                                         return <ListLink link={userlink} key={i} />
-
                                     }).reverse()
                                 }
                             </div>
                         </div>
                         <div className='display justify-c'>
                             {
-                                UserLinks.length < MAX_LINK_BEFORE_UPDATE 
+                                UserLinks.length < isUserPremium(User).max_links 
                                 ?
                                 <div className='display gap'>
                                     <img src='/images/info.svg' className='w-1 h-1 opacity'  />
                                     <small className='c-grey f-w-300'>
-                                        Il te reste encore {MAX_LINK_BEFORE_UPDATE - UserLinks.length} {MAX_LINK_BEFORE_UPDATE - UserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
+                                        Il te reste encore {isUserPremium(User).max_links - UserLinks.length} {isUserPremium(User).max_links - UserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
                                     </small>
                                 </div>
                                 :

@@ -10,7 +10,7 @@ import formatDate from '../../App/utils/formatDate'
 import { getTitleURL } from '../lib/getTitleURL'
 import { checkURLReference } from '../lib/checkURLReference'
 import { getLinks } from '../lib/database/getLinks'
-
+import { ProgressBar, StatsBlock } from '../components/StatsBlock'
 
 
 export default function Stats() {
@@ -96,9 +96,8 @@ export default function Stats() {
     const countries = LinkStat.map(e=> e.adress?.country)
     const countByCountry = countBy(countries)
 
-    const performance = LinkStat.map(e=> e.performance && e.performance)
-    const countPerformance = performance.length && performance.reduce((x,y) => x + y)
-    const averagePerformance = countPerformance ? ((countPerformance / performance.length) / 1000).toFixed(2) + 's' : ''
+    const performance = LinkStat.map(e=> e.performance)
+    const countPerformance = performance.length && ((performance.reduce((x,y) => x + y) / performance.length / 1000)).toFixed(2) + 's'
 
 
     const StatsFilter = {
@@ -108,6 +107,7 @@ export default function Stats() {
         localisation: Object.values(countByCountry),
         performance : performance
     } 
+
 
 
 
@@ -157,32 +157,7 @@ export default function Stats() {
                                                 <img src={'/images/mobile-solid.svg'} width={18} />
                                                 <span>Appareil</span>
                                             </div>
-                                            <div className='grid gap'>
-                                                {
-                                                    StatsFilter.device
-                                                    .sort((x, y)=> y.count - x.count)
-                                                    .map((stat, i)=> {
-                                                        
-                                                        const sumCount = StatsFilter.device.map(e=> e.count).reduce((x,y)=> x + y)
-
-                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-                                                        return (
-                                                            <div className='display justify-s-b' key={i} >
-                                                                <div className='display gap'>
-                                                                    <span>{stat.name}</span>
-                                                                    <small className='c-grey f-s-12'>{stat.count}</small>
-                                                                </div>
-                                                                <div className='display gap-1rem'>
-                                                                    <div className='progress-bar-stat'>
-                                                                        <div className='blue border-r-2' style={{width: percentage}}></div>
-                                                                    </div>
-                                                                    <span>{percentage}</span>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
+                                            <StatsBlock statType={StatsFilter.device} />
                                         </div>
 
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -190,29 +165,7 @@ export default function Stats() {
                                                 <img src={'/images/globe-solid.svg'} width={20} />
                                                 <span>Source du trafic</span>
                                             </div>
-                                                <div className='grid gap'>
-                                                {
-                                                    StatsFilter.reference
-                                                    .filter(e=> checkURLReference(e.name) && e.name !== '')
-                                                    .sort((x, y)=> y.count - x.count)
-                                                    .map((stat, i)=> {
-                                                        
-                                                        const sumCount = StatsFilter.reference.map(e=> e.count).reduce((x,y)=> x + y)
-                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-
-                                                        return (
-                                                            <div className='display justify-s-b' key={i}>
-                                                                <div className='display gap'>
-                                                                    <img src={stat.name === '' ? getFavicon('https://qlee.me') : getFavicon(stat.name)} width={16} className='border-r-100' />
-                                                                    <span>{stat.name === '' ? 'inconnue' : getTitleURL(stat.name)}</span>
-                                                                    <small className='c-grey f-s-12'>{stat.count}</small>
-                                                                </div>
-                                                                <ProgressBar percentage={percentage} />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                             </div>
+                                            <StatsBlock statType={StatsFilter.reference} />
                                         </div>
 
 
@@ -221,26 +174,7 @@ export default function Stats() {
                                                 <img src={'/images/localisation-solid.svg'} width={20} />
                                                 <span>Localisation</span>
                                             </div>
-                                            <div className='grid gap'>
-                                                {
-                                                    StatsFilter.localisation
-                                                    .sort((x, y)=> y.count - x.coun)
-                                                    .map((stat, i)=> {
-
-                                                        const sumCount = StatsFilter.localisation.map(e=> e.count).reduce((x,y)=> x + y)
-                                                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-
-                                                        return (
-                                                            <div className='display justify-s-b' key={i}>
-                                                                <div className='display gap'>
-                                                                    <span>{stat.name === 'undefined' ? 'autres' : stat.name}</span><small className='c-grey f-s-12'>{stat.count}</small>
-                                                                </div>
-                                                                <ProgressBar percentage={percentage} />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
+                                            <StatsBlock statType={StatsFilter.localisation} />
                                         </div>
 
 
@@ -249,13 +183,9 @@ export default function Stats() {
                                                 <img src={'/images/rocket-solid.svg'} width={16} />
                                                 <span>Performance</span>
                                             </div>
-                                            <div className='grid gap'>
-                                                <div className='display justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>vitesse</span>
-                                                    </div>
-                                                    <span>{averagePerformance}</span>
-                                                </div>
+                                            <div className='display justify-s-b'>
+                                                <span>vitesse</span>
+                                                <span>{countPerformance}</span>
                                             </div>
                                         </div>
 
@@ -385,16 +315,3 @@ export default function Stats() {
 }
 
 
-
-function ProgressBar({percentage}) {
-    return (
-        <div className='display gap-1rem'>
-            <div className='progress-bar-stat'>
-                <div className='blue border-r-2' style={{width: percentage}}></div>
-            </div>
-            <div className='display w-2 justify-c'>
-                <span>{percentage}</span>
-            </div>
-        </div>
-    )
-}
