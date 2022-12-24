@@ -26,9 +26,9 @@ export default function ListLink({links, User}) {
                                     </div>
                 
                                     <div className='grid gap'>
-                                        <div className='display gap'>
+                                        <div className='display'>
                                             <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
-                                            <div className='display gap'>
+                                            <div className='display'>
                                                 <button 
                                                     className='display border-r-04 w-2 hover h-2' 
                                                     onClick={e=> {

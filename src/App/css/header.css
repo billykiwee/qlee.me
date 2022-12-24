@@ -18,10 +18,3 @@
     }
     
 }
-
-header {
-    position: sticky;
-    top: 1rem;
-    z-index: 12;
-}
-
