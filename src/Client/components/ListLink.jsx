@@ -8,7 +8,7 @@ import { minimizeString } from '../../App/utils/minimizeString'
 export default function ListLink({links, User}) {
 
     return (
-        <div className='grid gap'> 
+        <> 
             {
                 links
                 .map((link, i)=> {
@@ -81,6 +81,6 @@ export default function ListLink({links, User}) {
                     </div>
                 }
             </div>
-        </div>
+        </>
     )
 }

@@ -327,12 +327,12 @@ export default function Edit() {
 
                                 <div className='grid gap-2rem'>
                                     <div className='grid gap-1rem'>
-                                        <div className='grid gap-04 w-100p'>
+                                        <div className='grid gap w-100p'>
                                             <span>Modifier le nom</span>
                                             <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
                                             <small className='c-red' id='error-name'></small>
                                         </div>
-                                        <div className='grid gap-04 w-100p'>
+                                        <div className='grid gap w-100p'>
                                             <span>Modifier le lien principal</span>
                                             <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
                                             <small className='c-red' id='error-url'></small>
@@ -342,7 +342,7 @@ export default function Edit() {
                                             isUserPremium(User).plan === 'FREE'
                                             ?
                                             <>
-                                                <div className='grid gap-04 w-100p'>
+                                                <div className='grid gap w-100p'>
                                                     <div className='display gap'>
                                                         <span>Modifier le lien court</span>
                                                         <GoToPricing />
@@ -352,7 +352,7 @@ export default function Edit() {
                                                         <small className='c-grey'>ex: qlee.me/mon-lien-perso</small>
                                                     </div>
                                                 </div>
-                                                <div className='grid gap-04'>
+                                                <div className='grid gap'>
                                                     <div className='display gap'>
                                                         <span>Fonctionnalités</span>
                                                         <GoToPricing />
@@ -377,7 +377,7 @@ export default function Edit() {
                                             </>
                                             :
                                             <>
-                                                <div className='grid gap-04 w-100p'>
+                                                <div className='grid gap w-100p'>
                                                     <div className='display gap'>
                                                         <span>Modifier le lien court</span>
                                                     </div>
@@ -401,12 +401,12 @@ export default function Edit() {
                                                     </div>
                                                     <small id='alert-shortlink'></small>
                                                 </div>
-                                                <div className='grid gap-04'>
+                                                <div className='grid gap'>
                                                     <div className='display gap'>
                                                         <span>Fonctionnalités</span>
                                                     </div>
 
-                                                    <div className='grid gap-04'>
+                                                    <div className='grid gap'>
 
                                                         <div className='display'>
                                                             <label htmlFor='active_views' className='display gap click'>

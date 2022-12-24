@@ -20,6 +20,7 @@
     "cleave.js": "^1.6.0",
     "coinbase-commerce-node": "^1.0.4",
     "cors": "^2.8.5",
+    "country-flag-icons": "^1.5.5",
     "crypto-price": "^0.0.6",
     "env-cmd": "^10.1.0",
     "eth-price": "^0.1.1",

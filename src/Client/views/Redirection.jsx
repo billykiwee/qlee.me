@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, redirect, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Main from '../../App/components/Main'
 import { db } from '../../App/database/firebase'
 import Messages from '../../App/utils/Messages'
@@ -64,7 +64,7 @@ export default function Redirection() {
 
         document.querySelector('header').style.display = 'none'
         document.querySelector('footer').style.display = 'none'
-        document.querySelector('.container').style = 'display:flex; justify-content:center;margin:auto;'
+        document.querySelector('main').style = 'display:flex; justify-content:center;margin:auto;'
     })
 
     return (

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { isUserPremium } from '../../Admin/settings/isPremium'
-import { useStateValue } from '../../App/provider/StateProvider'
-import getFavicon from '../../App/utils/getFavicon'
-import { isValidUrl } from '../../App/utils/isValidUrl'
-import { fetchUser } from '../lib/database/fetchUser'
-import { getHostName } from '../lib/getHostName'
-import { GoToPricing } from '../views/Edit'
+import { isUserPremium } from '../../../../Admin/settings/isPremium'
+import { useStateValue } from '../../../../App/provider/StateProvider'
+import getFavicon from '../../../../App/utils/getFavicon'
+import { isValidUrl } from '../../../../App/utils/isValidUrl'
+import { fetchUser } from '../../../lib/database/fetchUser'
+import { getHostName } from '../../../lib/getHostName'
+import { GoToPricing } from '../../Edit'
+import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 
-export const StatsBlock = ({statType, url, title, icon}) => {
+
+export const Block = ({statType, url, title, icon, country, device, views}) => {
 
     const [{user}] = useStateValue()
 
@@ -17,7 +19,6 @@ export const StatsBlock = ({statType, url, title, icon}) => {
         fetchUser(setUser, user?.email)
     }, [user]) 
       
-
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -45,20 +46,30 @@ export const StatsBlock = ({statType, url, title, icon}) => {
 
                                             const isURL = isValidUrl(stat) && stat.name !== 'undefined' || stat.name !== '' ? true : false
 
-
                                             return (
                                                 <div className={'display justify-s-b'} key={i} >
                                                     <div className='display gap'>
                                                         {
-                                                            url && 
-                                                            isURL &&
+                                                            url && isURL && 
                                                             <img src={getFavicon(stat.name)} width={16} className='border-r-2' />
+                                                        }
+                                                        {
+                                                            country && getUnicodeFlagIcon(stat.name)
                                                         }
                                                         <div className='display gap'>
                                                             {
-                                                                isValidUrl(stat.name) 
-                                                                ? <span>{getHostName(stat.name)}</span> 
-                                                                : <span>{!isURL ? 'autres' : stat.name}</span> 
+                                                                device && <span>{stat.name}</span> 
+                                                            }
+                                                            {
+                                                                url && (
+                                                                    isValidUrl(stat.name) 
+                                                                    ? <span>{getHostName(stat.name)}</span> 
+                                                                    : <span>autres</span>
+                                                                )
+                                                            }
+                                                            {
+                                                                country &&
+                                                                <span>{stat.name.split('__')[1]}</span> 
                                                             }
                                                             <small className='c-grey f-s-12'>{stat.count}</small>
                                                         </div>

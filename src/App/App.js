@@ -14,7 +14,7 @@ import Footer from './components/Footer'
 import Login from '../Website/connection/Login'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
-import Stats from '../Client/views/Stats'
+import Stats from '../Client/views/Stats/Stats'
 import Redirection from '../Client/views/Redirection.jsx'
 import Payment from '../Website/views/Payment'
 
@@ -76,7 +76,7 @@ export default function App() {
             element : <Login />
         },
         pricing : {
-            path : '/edit/:LinkID',
+            path : '/pricing',
             element : <Pricing />
         },
         stats : {

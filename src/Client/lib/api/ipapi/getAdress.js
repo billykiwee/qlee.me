@@ -9,10 +9,11 @@ export async function getAdress() {
                 fetch(`https://ipapi.co/${ip}/json/`)
                 .then(response => response.json())
                 .then(adress => {
-    
+
                     return {
-                        country: adress.country_name,
-                        city   : adress.city
+                        country     : adress.country_name,
+                        city        : adress.city,
+                        country_code: adress.country_code
                     }
                 })
             )

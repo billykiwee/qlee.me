@@ -14,11 +14,11 @@ import { fetchUserLinks } from './lib/database/fetchUserLinks';
 import Messages from '../App/utils/Messages';
 import { isUserPremium } from '../Admin/settings/isPremium';
 import { fetchUser } from './lib/database/fetchUser';
+import { SnackBar } from '../App/components/SnackBar';
 
 
 
 export default function Dashboard() {
-
 
     const history = useNavigate()
 
@@ -55,32 +55,43 @@ export default function Dashboard() {
     const [Msg, setMsg] = useState([])
     
 
+    async function createLink() {
+
+        try {
+
+            if (NameLink.length) 
+                if (NameLink.length > 40) 
+                    throw setError('Le nom doit comporté 40 charactères au maximum')
+            
+            if (!isValidUrl(LinkURL)) 
+                throw setError('Tu dois rentrer une URL valide')
+    
+            if (isLinkAlreadyExist) 
+                throw setError('Un lien exitse déjà avec ce nom et cet URL')
+    
+            if (isUserPremium(User).max_links <= UserLinks.length) 
+                throw setMessage({
+                    title: 'Oups...',
+                    message: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
+                    buttonText: 'Voir les plans',
+                    buttonColor: 'yellow',
+                    valid: () => history('/pricing'),
+                    close: () => setMessage({}),
+                    statu: 'error'
+                })
+
+            createLink()
+        }
+        catch (err) {
+            console.error(err)
+        }
+
+    }   
+
     function createLink() {
 
-        if (NameLink.length) 
-            if (NameLink.length > 40) 
-                throw setError('Le nom doit comporté 40 charactères au maximum')
-        
-        if (!isValidUrl(LinkURL)) 
-            throw setError('Tu dois rentrer une URL valide')
-
-        if (isLinkAlreadyExist) 
-            throw setError('Un lien exitse déjà avec ce nom et cet URL')
-
-        if (isUserPremium(User).max_links <= UserLinks.length) 
-            throw setMessage({
-                title: 'Oups...',
-                message: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
-                buttonText: 'Voir les plans',
-                buttonColor: 'yellow',
-                valid: () => history('/pricing'),
-                close: () => setMessage({}),
-                statu: 'error'
-            })
-        
-
         const linkID = 'qlee.me/' + UniqueID('', 5)
-                
+                    
         const link = {
             name     : NameLink.length < 1 ? getHostName(LinkURL) : NameLink,
             id       : linkID.split('/')[1],
@@ -90,8 +101,8 @@ export default function Dashboard() {
             date     : serverTimestamp(),
             views    : 0
         }    
-
-
+    
+    
         db.collection('links').doc(link.id).set(link)
         .then(showPopup=> {
             setMsg([
@@ -107,10 +118,9 @@ export default function Dashboard() {
             document.querySelectorAll('input').forEach(e=> e.value = '')
             setLinkURL('')
             setNameLink('')
-
+    
         })
-       
-    }   
+    }
 
 
     const artcles = [
@@ -237,47 +247,3 @@ export default function Dashboard() {
 }
 
 
-
-function SnackBar({content, setMsg}) {
-
-    let time = 4
-
-    if (content)
-    return (
-
-        <div className='fixed display grid gap-04 snackbar_div' style={{bottom: '1rem'}}>
-            {
-                content.map((data, i)=> {
-
-                    const contentData = {...data}
-                    const div = document.querySelector('#snackData-'+ i)
-
-                    setTimeout(e=> div.classList.add('out'), 1000 * time)
-                    setTimeout(e=> div.remove(), 1000 * time * 1.4)
-
-                    return (
-                        <div className='white border border-r-04 shadow p-1 snackbar' id={'snackData-' + i} >
-                            <div className='display gap-2rem'>
-                                <div className='display gap-1rem'>
-                                    <div className='w-2 display justify-c'>
-                                        <img src='/images/check.svg' width={22} />
-                                    </div>
-                                    <div className='grid gap-04'>
-                                        <span className='f-w-500 f-s-18'>{contentData.text}</span>
-                                        <span className='opacity'>{contentData.subtext}</span>
-                                    </div>
-                                </div>
-                                <div className='w-3 display justify-c'>
-                                    <button className='c-blue' onClick={e=> div.classList.add('out')} >
-                                        <span className='f-s-16 f-w-500'>OK</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
-
-}
