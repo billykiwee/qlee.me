@@ -31,7 +31,7 @@ export default function Footer() {
     }
     
     return (
-        <footer>
+        <footer className='m-t-4' >
             <div className='display justify-s-b m-t-1'>
                 <div className='align-top display justify-s-b'>
                     <div className='display gap-04'>

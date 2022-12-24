@@ -141,7 +141,6 @@ export default function Dashboard() {
 
 
 
-console.log(Msg);
     return (
 
         <Main>
@@ -217,40 +216,14 @@ console.log(Msg);
                                         </div>
                                     </div>
                                 </Link>
+                            </div>
 
-                            </div>
-                            <div className='grid gap'>
-                                {
-                                    UserLinks.length < 1 ? <Messages loader={true} />
-                                    :
-                                    UserLinks
-                                    .map((userlink, i)=> {
-                                        return <ListLink link={userlink} key={i} />
-                                    }).reverse()
-                                }
-                            </div>
-                        </div>
-                        <div className='display justify-c'>
                             {
-                                UserLinks.length < isUserPremium(User).max_links 
-                                ?
-                                <div className='display gap'>
-                                    <img src='/images/info.svg' className='w-1 h-1 opacity'  />
-                                    <small className='c-grey f-w-300'>
-                                        Il te reste encore {isUserPremium(User).max_links - UserLinks.length} {isUserPremium(User).max_links - UserLinks.length > 1 ? 'liens gratuits' : 'lien gratuit'}
-                                    </small>
-                                </div>
-                                :
-                                <div className='grid gap-04'>
-                                    <div className='display gap'>
-                                        <img src='/images/info.svg' className='w-1 h-1'  />
-                                        <small className='c-red f-w-300'>Tu dois upgrade ton compte</small>
-                                    </div>
-                                    <div className='display justify-c'>
-                                        <a className='f-w-300 link'>Voir les plans</a>
-                                    </div>
-                                </div>
+                                UserLinks.length < 1 
+                                ? <Messages loader={true} /> 
+                                : <ListLink links={UserLinks} User={User} />
                             }
+
                         </div>
                     </div>
 
