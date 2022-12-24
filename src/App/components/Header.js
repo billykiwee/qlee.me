@@ -35,28 +35,28 @@ export default function Header() {
         {
             name: 'Se connecter',
             link: '/login',
-            icon: <UserIcon width={16} />
+            icon: <UserIcon width={16} className='c-black' />
         },
         {
             name: 'Créer un lien',
             link: '/dashboard',
-            icon: <PencilIcon width={16} />
+            icon: <PencilIcon width={16} className='c-black' />
         },
         {
             name: 'Link in bio',
             link: '/dashboard',
-            icon: <SwatchIcon width={16} />
+            icon: <SwatchIcon width={16} className='c-black' />
         },
         {
             name: 'Pricing',
             link: '/pricing',
-            icon:  <LockOpenIcon width={16} />
+            icon:  <LockOpenIcon width={16} className='c-black' />
         }
         ,
         {
             name: 'Terms',
             link: '/terms',
-            icon:  <BuildingOfficeIcon width={16} />
+            icon:  <BuildingOfficeIcon width={16} className='c-black' />
         }
     ]
 
