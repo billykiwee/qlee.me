@@ -12,7 +12,7 @@ export default function ListLink({links, User}) {
             {
                 links
                 .map((link, i)=> {
-
+                    
                     return (
 
                         <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={i} >
@@ -30,7 +30,7 @@ export default function ListLink({links, User}) {
                                             <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
                                             <div className='display gap'>
                                                 <button 
-                                                    className='display border-r-04 w-2 hover h-2 border border-b' 
+                                                    className='display border-r-04 w-2 hover h-2' 
                                                     onClick={e=> {
                                                         navigator.clipboard.writeText(link.shortLink)
                                                         let div = document.querySelector('#link-' + link.id)

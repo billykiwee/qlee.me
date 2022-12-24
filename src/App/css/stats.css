@@ -27,3 +27,12 @@
     }
     
 }
+
+@media screen and (min-width: 800px) {
+
+    .stats-blocks > div {
+        position: sticky;
+        top: 8rem;
+        z-index: 9;
+    }
+}

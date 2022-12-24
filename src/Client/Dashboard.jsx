@@ -155,57 +155,58 @@ export default function Dashboard() {
 
         <Main>
 
-            <div className='grid gap-2rem blocks' >
+            <div className='grid gap-3rem blocks' >
 
-                <div className='grid gap-2rem'>
-                    <div className='grid swiper' style={{overflowX: 'scroll' }}>
-                        <div className='display gap-1rem transition' >
-                            {
-                                artcles.map(article=> {
-                                    return (
-                                        <Link to={article.link} key={article.id}>
-                                            <div className='display click' >
-                                                <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
-                                                    <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
+                <div className='grid gap'>
+                    <div className='grid gap-2rem'>
+                        <div className='grid swiper' style={{overflowX: 'scroll' }}>
+                            <div className='display gap-1rem transition' >
+                                {
+                                    artcles.map(article=> {
+                                        return (
+                                            <Link to={article.link} key={article.id}>
+                                                <div className='display click' >
+                                                    <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
+                                                        <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
+                                                    </div>
+                                                    <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
+                                                        <span className='f-s-20 c-white'>{article.name}</span>
+                                                    </div>
                                                 </div>
-                                                <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
-                                                    <span className='f-s-20 c-white'>{article.name}</span>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    )
-                                })
-                            }
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='grid gap-2rem '>
-                        <div className='grid gap-1rem'>
-                            <div>
-                                <span className='f-s-25 f-w-500'>Créer un lien</span>
-                            </div>
+                        <div className='grid gap-2rem '>
                             <div className='grid gap-1rem'>
-                                <div className='grid gap'>
-                                    <div className='display w-100p'>
-                                        <input type='text' onChange={e=> {setNameLink(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
+                                <div>
+                                    <span className='f-s-25 f-w-500'>Créer un lien</span>
+                                </div>
+                                <div className='grid gap-1rem'>
+                                    <div className='grid gap'>
+                                        <div className='display w-100p'>
+                                            <input type='text' onChange={e=> {setNameLink(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
+                                        </div>
+                                        <div className='display w-100p'>
+                                            <input type='text' onChange={e=> {setLinkURL(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                                        </div>
                                     </div>
-                                    <div className='display w-100p'>
-                                        <input type='text' onChange={e=> {setLinkURL(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                                    <div className='display h-4 align-top'>
+                                        <button onClick={e=> createLink(LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
+                                            <span className='f-s-16'>Créer</span>
+                                        </button>
                                     </div>
                                 </div>
-                                <div className='display h-4 align-top'>
-                                    <button onClick={e=> createLink(LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
-                                        <span className='f-s-16'>Créer</span>
-                                    </button>
-                                </div>
+                                {
+                                    Error && 
+                                    <div className='display justify-c'>
+                                        <small className='c-red'>{Error}</small>
+                                    </div>
+                                }
                             </div>
-
-                            {
-                                Error && 
-                                <div className='display justify-c'>
-                                    <small className='c-red'>{Error}</small>
-                                </div>
-                            }
                         </div>
                     </div>
                 </div>
@@ -213,7 +214,7 @@ export default function Dashboard() {
                 <div className='grid gap-2rem'>
 
                     <div className='grid gap-2rem'>
-                        <div className='grid gap-1rem'>
+                        <div className='grid gap-2rem'>
                             <div className='display justify-s-b'>
                                 <span className='f-s-25 f-w-400'>Mes liens</span>
                                 <Link to='/pricing'>
@@ -227,12 +228,13 @@ export default function Dashboard() {
                                     </div>
                                 </Link>
                             </div>
-
-                            {
-                                UserLinks.length < 1 
-                                ? <Messages loader={true} /> 
-                                : <ListLink links={UserLinks} User={User} />
-                            }
+                            <div className='grid gap-1rem'>
+                                {
+                                    UserLinks.length < 1 
+                                    ? <Messages loader={true} /> 
+                                    : <ListLink links={UserLinks} User={User} />
+                                }
+                            </div>
 
                         </div>
                     </div>

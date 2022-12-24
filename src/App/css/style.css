@@ -1035,8 +1035,12 @@ input[type=number] {
 
 .snackbar {
     display: flex;
-    bottom: 1rem;
     box-shadow:0px 0px 10px 2px var(--border);
+    background-color: var(--white);
+}
+
+.snackbar_div {
+    bottom: 2rem;
 }
 
 .snackbar.in {

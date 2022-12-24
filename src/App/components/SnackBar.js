@@ -7,7 +7,7 @@ export function SnackBar({content, setMsg}) {
     if (content)
     return (
 
-        <div className='fixed display grid gap-04 snackbar_div' style={{bottom: '1rem'}}>
+        <div className='fixed display grid gap-04 snackbar_div'>
             {
                 content.map((data, i)=> {
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 
 export default function Filter({props}) {
@@ -49,7 +49,7 @@ export default function Filter({props}) {
                 {
                     props.Search &&
                     <div className='display'>
-                        <input className='div-input h-3 white border-r-1 w-100p' placeholder='Rechercher un lien' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
+                        <input className='div-input h-3 white border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
                     </div>
                 }
                 {
@@ -57,17 +57,17 @@ export default function Filter({props}) {
                     <div className='display wrap gap'>
                         <div>
                             <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>le + populaire</span>
+                                <span>popular</span>
                             </button>
                         </div>
                         <div>
                             <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>le + récent</span>
+                                <span>most recent</span>
                             </button>
                         </div>
                         <div>
                             <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>le + ancient</span>
+                                <span>oldest</span>
                             </button>
                         </div>
                     </div>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
-import { db } from '../../../App/database/firebase'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
-import { minimizeString } from '../../../App/utils/minimizeString'
 import '../../../App/css/stats.css'
 import { Block } from './components/Block'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
@@ -14,6 +12,7 @@ import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { fetchStats } from '../../lib/database/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
+import { StatsFilter } from './data/filters'
 
 
 
@@ -61,52 +60,7 @@ export default function Stats() {
 
 
 
-    function countBy(array) {
-        const iterate =  array.reduce((acc, curr) => {
-            if (curr in acc) 
-                acc[curr]++
-            else 
-                acc[curr] = 1
-            return acc
-        }, {})
-
-        const transformedData = {}
-
-        Object.keys(iterate).forEach((key, i) => {
-            transformedData[i] = {
-                name: key, 
-                count: iterate[key]
-            }
-        })
-
-        return transformedData
-    }
- 
-
-    const StatsFilter = (data) => {
-
-        const device = LinkStat.map(e=> e.device)
-        const countByDevice = countBy(device)
-    
-        const reference = LinkStat.map(e=> e.reference &&  new URL(e.reference).origin)
-        const countByReference = countBy(reference)
-    
-        const countries = LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country)
-        const countByCountry = countBy(countries)
-    
-        const performance = LinkStat.map(e=> e.performance)
-        const countPerformance = performance.length && ((performance.reduce((x,y) => x + y) / performance.length / 1000)).toFixed(2) + 's'
-    
-        return {
-            clics       : 0,
-            device      : Object.values(countByDevice),
-            reference   : Object.values(countByReference),
-            localisation: Object.values(countByCountry),
-            performance : { performance, speed : countPerformance }
-        } 
-    }
-
-    const filters = StatsFilter()
+    const dataFilter = StatsFilter(LinkStat)
 
     
 
@@ -151,9 +105,9 @@ export default function Stats() {
                                             </div>
                                         </div>
 
-                                        <Block statType={filters.device} title='Appareil' icon='mobile' device />
-                                        <Block statType={filters.reference} title='Source du trafic' icon='globe' url />
-                                        <Block statType={filters.localisation} title='Localisation' icon='localisation' country />
+                                        <Block statType={dataFilter.device} title='Appareil' icon='mobile' device />
+                                        <Block statType={dataFilter.reference} title='Source du trafic' icon='globe' url />
+                                        <Block statType={dataFilter.localisation} title='Localisation' icon='localisation' country />
                                     
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
@@ -167,15 +121,15 @@ export default function Stats() {
                                                     (
                                                         <div className='display justify-s-b'>
                                                             {
-                                                                filters.performance 
+                                                                dataFilter.performance 
                                                                 ? 
                                                                 (
                                                                     <>
                                                                         <div className='display gap'>
                                                                             <span>vitesse</span>
-                                                                            <small className='c-grey f-s-12'>{filters.performance.performance.length}</small>
+                                                                            <small className='c-grey f-s-12'>{dataFilter.performance.performance.length}</small>
                                                                         </div>
-                                                                        <span>{filters.performance.speed}</span>
+                                                                        <span>{dataFilter.performance.speed}</span>
                                                                     </>
                                                                 )
                                                                 : <small className='c-grey'>aucune données</small>
@@ -195,7 +149,7 @@ export default function Stats() {
                 </div>
 
                 
-                <div className='grid gap'>
+                <div className='grid gap-1rem'>
                     <Filter 
                         props={{
                             Filter       : filter,

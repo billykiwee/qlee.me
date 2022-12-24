@@ -290,19 +290,21 @@ export default function Edit() {
                                                     </div>
                                                 </div>
                                                 <div className='display gap'>
-                                                    <button className='border-b h-2 blue hover-blue p-1 border-r-04 border' onClick={e=> setQrCode(QrCode === true ? false : true)} >
-                                                        <span className='f-s-16'>{QrCode ? 'Ok' : 'Voir'}</span>
-                                                    </button>
-                                                    <button className='border-b white hover w-40 h-40 p-1 border-r-04 border' onClick={e=> download(Link.name)} >
-                                                        <span className='display'>
+                                                    {
+                                                        QrCode &&
+                                                        <button className='border-b white hover h-3 p-1 border-r-1 border display gap' onClick={e=> download(Link.name)} >
+                                                            <span className='c-black'>Télécharger</span>
                                                             <img src='/images/dowload.svg' width={20} height={20} />
-                                                        </span>
+                                                        </button>
+                                                    }
+                                                    <button className='border-b h-3 blue hover-blue p-1 border-r-1 border' onClick={e=> setQrCode(QrCode === true ? false : true)} >
+                                                        <span className='f-s-16'>{QrCode ? '-' : 'voir'}</span>
                                                     </button>
                                                 </div>
                                             </div>
                                             {
                                                 QrCode &&
-                                                <div className='display w-100p justify-c'>
+                                                <div className='display w-100p justify-c m-t-2'>
                                                     <div className='grid gap-1rem blue border-r-2 p-1 border-b gap-1rem' id='qr-code-img'>
                                                         <div className='display white p-1 border-r-1'>
                                                             <QRCode
