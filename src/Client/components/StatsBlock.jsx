@@ -42,18 +42,23 @@ export const StatsBlock = ({statType, url, title, icon}) => {
                         
                                             const sumCount = statType.map(e=> e.count).reduce((x,y)=> x + y)
                                             const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-            
+
+                                            const isURL = isValidUrl(stat) && stat.name !== 'undefined' || stat.name !== '' ? true : false
+
+
                                             return (
                                                 <div className={'display justify-s-b'} key={i} >
                                                     <div className='display gap'>
                                                         {
-                                                            url && <img src={getFavicon(stat.name || 'https://www.cool.com')} width={16} className='border-r-2' />
+                                                            url && 
+                                                            isURL &&
+                                                            <img src={getFavicon(stat.name)} width={16} className='border-r-2' />
                                                         }
                                                         <div className='display gap'>
                                                             {
                                                                 isValidUrl(stat.name) 
                                                                 ? <span>{getHostName(stat.name)}</span> 
-                                                                : <span>{stat.name === 'undefined' || stat.name === '' ? 'autres' : stat.name}</span> 
+                                                                : <span>{!isURL ? 'autres' : stat.name}</span> 
                                                             }
                                                             <small className='c-grey f-s-12'>{stat.count}</small>
                                                         </div>

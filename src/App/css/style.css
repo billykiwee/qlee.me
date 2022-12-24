@@ -63,6 +63,7 @@ body {
 }
 
 main {
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
 }
@@ -1027,4 +1028,40 @@ input[type=number] {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+
+
+
+.snackbar {
+    display: flex;
+    bottom: 1rem;
+    box-shadow:0px 0px 10px 2px var(--border);
+}
+
+.snackbar.in {
+    animation: snackBarIN 400ms ease-in-out forwards;
+}
+
+.snackbar.out {
+    animation: snackBarOUT 400ms ease-in-out forwards;
+}
+
+@keyframes snackBarIN {
+    from {
+        transform: translateY(-1rem);
+        opacity: 0;
+        display: none;
+    }
+    to {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+@keyframes snackBarOUT {
+    to {
+        transform: translateY(1rem);
+        opacity: 0;
+        display: none;
+    }
 }

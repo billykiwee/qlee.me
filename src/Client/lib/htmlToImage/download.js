@@ -4,10 +4,10 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 export async function download(name) {
 
-    var node = document.getElementById('qr-code-img');
+    var node = document.getElementById('qr-code-img')
 
     htmlToImage.toPng(node)
-    .then(function (dataUrl) {
+    .then(dataUrl => {
 
         const link = document.createElement('a')
         link.download = name + '-QrCode.png'
@@ -15,7 +15,7 @@ export async function download(name) {
 
         link.click()
     })
-    .catch(function (error) {
+    .catch(error=> {
         console.error(error);
     })
       

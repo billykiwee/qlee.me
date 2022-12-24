@@ -20,8 +20,6 @@ import { fetchUser } from './lib/database/fetchUser';
 export default function Dashboard() {
 
 
-    document.title = ' dashboard'
-
     const history = useNavigate()
 
     const [{user}] = useStateValue()
@@ -54,7 +52,8 @@ export default function Dashboard() {
         if (data.name === NameLink && data.url === LinkURL) return true
     })
 
-
+    const [Msg, setMsg] = useState([])
+    
 
     function createLink() {
 
@@ -94,23 +93,23 @@ export default function Dashboard() {
 
 
         db.collection('links').doc(link.id).set(link)
+        .then(showPopup=> {
+            setMsg([
+                ...Msg, 
+                {
+                    text: 'Bravo 🎉',
+                    subtext: `Le lien ${NameLink} a bien été crée`,
+                    status: 'success'
+                }
+            ])
+        })
         .then(linkCreated=> {
             document.querySelectorAll('input').forEach(e=> e.value = '')
-
             setLinkURL('')
             setNameLink('')
+
         })
-        .then(showPopup=> {
-            setMessage({
-                title: 'Bravo 🎉',
-                message: `Lien crée avec succés`,
-                buttonText: 'Continuer',
-                buttonColor: 'blue',
-                valid: () => setMessage({}),
-                close: () => setMessage({}),
-                statu: 'success'
-            })
-        })
+       
     }   
 
 
@@ -128,11 +127,24 @@ export default function Dashboard() {
         }
     ]
 
+    useEffect(() => {
+
+        if (LinkURL) {
+            window.onkeydown = e => {
+                if (e.key === 'Enter') {
+                    createLink(LinkURL)
+                }
+            }
+        }
+
+    }, [LinkURL])
+
+
+
+console.log(Msg);
     return (
 
         <Main>
-
-            <Popup content={Message} />
 
             <div className='grid gap-2rem blocks' >
 
@@ -173,7 +185,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div className='display h-4 align-top'>
-                                    <button onClick={e=> createLink(LinkURL)} className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
+                                    <button onClick={e=> createLink(LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
                                         <span className='f-s-16'>Créer</span>
                                     </button>
                                 </div>
@@ -245,6 +257,54 @@ export default function Dashboard() {
                 </div>
 
             </div>
+
+            <SnackBar content={Msg} setMsg={setMsg} />
         </Main>
     )
+}
+
+
+
+function SnackBar({content, setMsg}) {
+
+    let time = 4
+
+    if (content)
+    return (
+
+        <div className='fixed display grid gap-04 snackbar_div' style={{bottom: '1rem'}}>
+            {
+                content.map((data, i)=> {
+
+                    const contentData = {...data}
+                    const div = document.querySelector('#snackData-'+ i)
+
+                    setTimeout(e=> div.classList.add('out'), 1000 * time)
+                    setTimeout(e=> div.remove(), 1000 * time * 1.4)
+
+                    return (
+                        <div className='white border border-r-04 shadow p-1 snackbar' id={'snackData-' + i} >
+                            <div className='display gap-2rem'>
+                                <div className='display gap-1rem'>
+                                    <div className='w-2 display justify-c'>
+                                        <img src='/images/check.svg' width={22} />
+                                    </div>
+                                    <div className='grid gap-04'>
+                                        <span className='f-w-500 f-s-18'>{contentData.text}</span>
+                                        <span className='opacity'>{contentData.subtext}</span>
+                                    </div>
+                                </div>
+                                <div className='w-3 display justify-c'>
+                                    <button className='c-blue' onClick={e=> div.classList.add('out')} >
+                                        <span className='f-s-16 f-w-500'>OK</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
+
 }

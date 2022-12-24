@@ -9,7 +9,7 @@ import Dashboard from '../Client/Dashboard'
 import Edit from '../Client/views/Edit'
 import Popup from './components/Popup'
 import Header from './components/Header'
-import Container from './components/Container'
+
 import Footer from './components/Footer'
 import Login from '../Website/connection/Login'
 import Page404 from '../Website/views/Page404'
@@ -46,30 +46,65 @@ export default function App() {
 
     
 
+    const router = {
+        init : {
+            path : '/*',
+            element : <Page404 />
+        },
+        page404 : {
+            path : '/page404',
+            element : <Page404 />
+        },
+        home : {
+            path : '/',
+            element : <Home />
+        },
+        dashboard : {
+            path : '/dashboard',
+            element : <Dashboard />
+        },
+        edit : {
+            path : '/edit/:LinkID',
+            element : <Edit />
+        },
+        redirection : {
+            path : '/:LinkID',
+            element : <Redirection />
+        },
+        login : {
+            path : '/login',
+            element : <Login />
+        },
+        pricing : {
+            path : '/edit/:LinkID',
+            element : <Pricing />
+        },
+        stats : {
+            path : '/stats',
+            element : <Stats />
+        },
+        statsByLink : {
+            path : '/stats/:LinkID',
+            element : <Stats />
+        },
+        payment : {
+            path : '/payment',
+            element : <Payment />
+        }
+    }
 
 
     return (
         <BrowserRouter>
             <Header />
-                <Container>
-                    <Routes>
-                        <Route path="/*" exact element={<Page404 />} />
-                        <Route path="/page404" exact element={<Page404 />} />
-                        <Route path="/home" exact element={<Home />} />
-                        <Route path="/" exact element={<Home />} />
-                        <Route path="/dashboard" exact element={<Dashboard />} />
-                        <Route path="/edit/:LinkID" exact element={<Edit />} />
-                        <Route path="/:LinkID" exact element={<Redirection />} />
-                        <Route path="/login" exact element={<Login />} />
-
-                        <Route path="/pricing" exact element={<Pricing />} />
-
-                        <Route path="/stats" exact element={<Stats />} />
-                        <Route path="/stats/:LinkID" exact element={<Stats />} />
-
-                        <Route path="/payment" exact element={<Payment />} />
-                    </Routes>
-                </Container>
+                <Routes>
+                    {
+                        Object.values(router)
+                        .map((route, i)=> {
+                            return <Route path={route.path} exact element={route.element} key={i} />
+                        })
+                    }
+                </Routes>
             <Footer />  
         </BrowserRouter>
                 

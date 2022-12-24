@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
-import Container from '../../App/components/Container'
 import { db, storage } from '../../App/database/firebase'
 import getFavicon from '../../App/utils/getFavicon'
 import formatDate from '../../App/utils/formatDate'
@@ -215,8 +214,6 @@ export default function Edit() {
 
 
 
-
-
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
         <>
@@ -318,7 +315,7 @@ export default function Edit() {
                                                             />
                                                         </div> 
                                                         <div className='display justify-c'>
-                                                            <span className='f-s-25' contentEditable={true}>Qlee me</span>   
+                                                            <span className='f-s-2rem' contentEditable>Qlee me</span>  
                                                         </div> 
                                                     </div>
                                                 </div>
