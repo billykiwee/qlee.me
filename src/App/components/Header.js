@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getDevice } from '../../Client/lib/getDevice'
 import { ProfilImg } from '../../Website/Home'
 import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
-
+import { ArrowDownCircleIcon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
 
 
 export default function Header() {
@@ -32,29 +33,30 @@ export default function Header() {
 
     const menu = [
         {
-            name: 'Acceuil',
-            link: '/',
-        },
-        {
             name: 'Se connecter',
             link: '/login',
+            icon: <UserIcon width={16} />
         },
         {
             name: 'Créer un lien',
             link: '/dashboard',
+            icon: <PencilIcon width={16} />
         },
         {
             name: 'Link in bio',
             link: '/dashboard',
+            icon: <SwatchIcon width={16} />
         },
         {
             name: 'Pricing',
             link: '/pricing',
+            icon:  <LockOpenIcon width={16} />
         }
         ,
         {
             name: 'Terms',
             link: '/terms',
+            icon:  <BuildingOfficeIcon width={16} />
         }
     ]
 
@@ -77,7 +79,7 @@ export default function Header() {
                     <Link to={user ? '/dashboard' : '/'}>
                         <span className='display'>
                             {
-                                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                                getDevice() === 'mobile'
                                 ? <img src='/images/logo-icon.png' width={44} />
                                 : <img src='/images/logo.svg' width={122} />
                             }
@@ -118,7 +120,8 @@ export default function Header() {
                             menu.map((menu, i)=> {
                                 return (
                                     <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false)}>
-                                        <button className='h-3 hover border-r-1 '>
+                                        <button className='h-3 hover border-r-1 display gap p-1'>
+                                            {menu.icon}
                                             <span className='f-s-16 c-black'>{menu.name}</span>
                                         </button>
                                     </Link>

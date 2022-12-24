@@ -77,14 +77,9 @@ footer {
 h1 {
     font-style: normal;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 2.4rem;
 }
 
-
-h1 {
-    font-size: 3rem;
-    line-height: 3rem;
-}
 
 h2 {
     font-size: 1.8rem;
@@ -201,6 +196,10 @@ button:active {
 
 
 
+
+.justify-s {
+    justify-content: flex-start;
+}
 
 .eye-password {
     display: flex;

@@ -28,9 +28,7 @@ export default function Pricing() {
             subtitle: 'Pour tous',
             price   : 0,
             benefits: [
-                '10 liens',
-                'Nom de domaine personalisé',
-                'Système de paiement',
+                '10 liens'
             ],
         },
         Pro : {
