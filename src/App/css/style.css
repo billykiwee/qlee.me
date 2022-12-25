@@ -470,7 +470,9 @@ button:active {
 .fixed {
     position: fixed;
 }
-
+.sticky {
+    position: sticky;
+}
 
 
 .margin-auto {
@@ -1036,10 +1038,13 @@ input[type=number] {
     display: flex;
     box-shadow:0px 0px 10px 2px var(--border);
     background-color: var(--white);
+    z-index: 99;
 }
 
 .snackbar_div {
     bottom: 2rem;
+    align-items: flex-start;
+    position: sticky;
 }
 
 .snackbar.in {

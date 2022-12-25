@@ -1,9 +1,21 @@
-
-const PopUpReducer = (state = [], action) => {
-switch (action.type) {
-    case 'ADD_TO_CART':
-    return [...state, action.item];
-    default:
-    return state;
+export const initialState = {
+    user: null,
+    isLoggedIn: false
 }
-};
+
+const reducer = (state, action) => {
+
+    switch(action.type) {
+        case 'SET_USER' : 
+            return {
+                ...state,
+                user : action.user,
+                
+            }
+
+        default:
+            return state
+    }
+}
+
+export default reducer

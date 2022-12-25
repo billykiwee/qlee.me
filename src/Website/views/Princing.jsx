@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../Admin/settings/isPremium'
-import { plans } from '../../Admin/settings/plan'
+import { plans } from '../../Admin/settings/plans'
 import Main from '../../App/components/Main'
 import '../../App/css/pricing.css'
 import { useStateValue } from '../../App/provider/StateProvider'
@@ -46,7 +46,7 @@ export default function Pricing() {
         },
         Entrprise : {
             plan    : 'Entreprise 🚀',
-            subtitle: 'Boosté votre présence',
+            subtitle: 'Booster votre présence',
             price   : plans.ENTREPRISE.price,
             benefits: [
                 '1000 liens',
@@ -81,12 +81,7 @@ export default function Pricing() {
 
                             return (
                                 <div className='grid' key={plan.plan}>
-                                    <div 
-                                        className='border-b border border-r-1 p-2 card-pricing' 
-                                        style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} 
-                                        onMouseEnter={e=> !checkUserPlan ? e.target.style.boxShadow= '0px 0px 22px var(--border)' : null}
-                                        onMouseLeave={e=> !checkUserPlan ? e.target.style.boxShadow= 'unset' : null}
-                                    >
+                                    <div className='border-b border border-r-1 p-2 card-pricing' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
 
                                         <div className='grid gap-2rem'>
                                             <div className='display justify-s-b align-top'>

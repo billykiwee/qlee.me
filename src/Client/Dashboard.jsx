@@ -1,5 +1,5 @@
 import { serverTimestamp } from 'firebase/firestore';
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Main from '../App/components/Main';
@@ -14,8 +14,8 @@ import { fetchUserLinks } from './lib/database/fetchUserLinks';
 import Messages from '../App/utils/Messages';
 import { isUserPremium } from '../Admin/settings/isPremium';
 import { fetchUser } from './lib/database/fetchUser';
-import { SnackBar } from '../App/components/SnackBar';
-
+import { setSnackbar, SnackBar } from '../App/components/SnackBar';
+import { useReducer } from 'react';
 
 
 export default function Dashboard() {
@@ -55,43 +55,10 @@ export default function Dashboard() {
     const [Msg, setMsg] = useState([])
     
 
-    async function createLink() {
-
-        try {
-
-            if (NameLink.length) 
-                if (NameLink.length > 40) 
-                    throw setError('Le nom doit comporté 40 charactères au maximum')
-            
-            if (!isValidUrl(LinkURL)) 
-                throw setError('Tu dois rentrer une URL valide')
-    
-            if (isLinkAlreadyExist) 
-                throw setError('Un lien exitse déjà avec ce nom et cet URL')
-    
-            if (isUserPremium(User).max_links <= UserLinks.length) 
-                throw setMessage({
-                    title: 'Oups...',
-                    message: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
-                    buttonText: 'Voir les plans',
-                    buttonColor: 'yellow',
-                    valid: () => history('/pricing'),
-                    close: () => setMessage({}),
-                    statu: 'error'
-                })
-
-            createLink()
-        }
-        catch (err) {
-            console.error(err)
-        }
-
-    }   
-
     function createLink() {
 
         const linkID = 'qlee.me/' + UniqueID('', 5)
-                    
+                        
         const link = {
             name     : NameLink.length < 1 ? getHostName(LinkURL) : NameLink,
             id       : linkID.split('/')[1],
@@ -101,26 +68,62 @@ export default function Dashboard() {
             date     : serverTimestamp(),
             views    : 0
         }    
+
+
+        async function check() {
+
+            if (NameLink.length) {
+                if (NameLink.length > 40) {
+                    throw 'Le nom doit comporté 40 charactères au maximum'
+                }
+            }
+            
+            if (!isValidUrl(LinkURL)) {
+                throw 'Tu dois rentrer une URL valide'
+            }
     
-    
-        db.collection('links').doc(link.id).set(link)
-        .then(showPopup=> {
-            setMsg([
-                ...Msg, 
-                {
+            if (isUserPremium(User).max_links <= UserLinks.length) {
+                throw setMsg({
+                    id: UniqueID('msg', 5),
+                    text: 'Erreur',
+                    subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
+                    action: {
+                        text : 'Débloque plus de lien ici !',
+                        link: '/pricing',
+                    },
+                    status : 'error'
+                })
+            }
+        }
+
+        check()
+        .then(e=> {
+        
+            db.collection('links').doc(link.id).set(link)
+            .then(showPopup=> {
+                setMsg({
+                    id: UniqueID('msg', 5),
                     text: 'Bravo 🎉',
                     subtext: `Le lien ${NameLink} a bien été crée`,
                     status: 'success'
-                }
-            ])
+                })
+            })
+            .then(linkCreated=> {
+                document.querySelectorAll('input').forEach(e=> e.value = '')
+                setLinkURL('')
+                setNameLink('')
+        
+            })
         })
-        .then(linkCreated=> {
-            document.querySelectorAll('input').forEach(e=> e.value = '')
-            setLinkURL('')
-            setNameLink('')
-    
+        .catch(Popup=> {
+            setError(Popup)
         })
+
     }
+
+
+
+
 
 
     const artcles = [
@@ -151,10 +154,10 @@ export default function Dashboard() {
 
 
 
+
     return (
 
         <Main>
-
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

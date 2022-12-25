@@ -19,7 +19,6 @@ export const plans = {
             edit_shortlink: true,
             monetization  : true,
             link_in_bio   : true,
-            shop          : true,
         }
     }
 }

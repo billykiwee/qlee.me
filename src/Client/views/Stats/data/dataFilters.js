@@ -1,6 +1,8 @@
 import { countBy } from '../functions/countBy'
 
-export const StatsFilter = (LinkStat) => {
+export const dataFilter = (LinkStat) => {
+
+    const views = LinkStat.length
 
     const device = LinkStat.map(e=> e.device)
     const countByDevice = countBy(device)
@@ -14,8 +16,9 @@ export const StatsFilter = (LinkStat) => {
     const performance = LinkStat.map(e=> e.performance)
     const countPerformance = performance.length && ((performance.reduce((x,y) => x + y) / performance.length / 1000)).toFixed(2) + 's'
 
+
     return {
-        clics       : 0,
+        clics       : views,
         device      : Object.values(countByDevice),
         reference   : Object.values(countByReference),
         localisation: Object.values(countByCountry),

@@ -1,4 +1,4 @@
-import { plans } from "./plan"
+import { plans } from "./plans"
 
 export const isUserPremium = (user) => {
 

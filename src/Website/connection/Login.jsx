@@ -79,7 +79,6 @@ export default function Signup() {
 
         e.preventDefault() 
 
-
         async function Signup() {
 
             if (!Email.value.match(Email.rules.regex)) 

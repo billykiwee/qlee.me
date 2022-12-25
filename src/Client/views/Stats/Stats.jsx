@@ -12,7 +12,8 @@ import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { fetchStats } from '../../lib/database/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
-import { StatsFilter } from './data/filters'
+import { dataFilter } from './data/dataFilters'
+import { DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 
 
 
@@ -60,10 +61,9 @@ export default function Stats() {
 
 
 
-    const dataFilter = StatsFilter(LinkStat)
+    const data = dataFilter(LinkStat)
 
     
-
 
 
     return (
@@ -100,19 +100,19 @@ export default function Stats() {
                                                     <span>Clics</span>
                                                 </div>
                                                 <div className='grid gap'>
-                                                    {topLink?.views}
+                                                    {data.clics}
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <Block statType={dataFilter.device} title='Appareil' icon='mobile' device />
-                                        <Block statType={dataFilter.reference} title='Source du trafic' icon='globe' url />
-                                        <Block statType={dataFilter.localisation} title='Localisation' icon='localisation' country />
+                                        <Block statType={data.device} title='Appareil' device />
+                                        <Block statType={data.reference} title='Source du trafic' icon='globe' url />
+                                        <Block statType={data.localisation} title='Localisation' icon='localisation' country />
                                     
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
                                                 <div className='display gap'>
-                                                    <img src={'/images/rocket-solid.svg'} width={18} />
+                                                    <RocketLaunchIcon width={18} />
                                                     <span>Performance</span>
                                                 </div>
                                                 {
@@ -121,15 +121,15 @@ export default function Stats() {
                                                     (
                                                         <div className='display justify-s-b'>
                                                             {
-                                                                dataFilter.performance 
+                                                                data.performance 
                                                                 ? 
                                                                 (
                                                                     <>
                                                                         <div className='display gap'>
                                                                             <span>vitesse</span>
-                                                                            <small className='c-grey f-s-12'>{dataFilter.performance.performance.length}</small>
+                                                                            <small className='c-grey f-s-12'>{data.performance.performance.length}</small>
                                                                         </div>
-                                                                        <span>{dataFilter.performance.speed}</span>
+                                                                        <span>{data.performance.speed}</span>
                                                                     </>
                                                                 )
                                                                 : <small className='c-grey'>aucune données</small>

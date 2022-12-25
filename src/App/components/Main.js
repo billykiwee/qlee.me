@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Main({children, className}) {
+
+export default function Main({children}) {
     
     return (
-        <main className={className}>
+        <main>
             {children}
         </main>
     )

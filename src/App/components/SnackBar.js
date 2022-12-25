@@ -1,44 +1,74 @@
-import React from 'react'
+import { CheckBadgeIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 
 export function SnackBar({content, setMsg}) {
 
-    let time = 5
 
-    if (content)
+    function deleteData(id) {
+
+        document.querySelector('#' + id).classList.add('out');
+            
+        setTimeout(() => {
+            if (document.querySelector('#' + id).classList.value.includes('out')) {
+                setMsg([])
+            }
+        }, 400)
+    }
+
+
+
+    if (Object.values(content).length > 0)
     return (
 
-        <div className='fixed display grid gap-04 snackbar_div'>
-            {
-                content.map((data, i)=> {
+        <div className='sticky display grid gap-04 snackbar_div'>
+        {
+            [content]
+            .map(data=> {
 
-                    const contentData = {...data}
-                    const div = document.querySelector('#snackData-'+ i)
+                setTimeout(e => {
+                    document.querySelector('#' + data.id).classList.add('out')
 
-                    setTimeout(e=> div.classList.add('out'), 1000 * time)
-                    setTimeout(e=> div.remove(), 1000 * time * 1.4)
+                    setTimeout(e => {
+                        setMsg([])
+                    }, 400)
+                }, 1000 * 8)
 
-                    return (
-                        <div className='white border border-r-04 shadow p-1 snackbar' id={'snackData-' + i} >
-                            <div className='display gap-2rem'>
-                                <div className='display gap-1rem'>
-                                    <div className='w-2 display justify-c'>
-                                        <img src='/images/check.svg' width={22} />
-                                    </div>
-                                    <div className='grid gap-04'>
-                                        <span className='f-w-500 f-s-18'>{contentData.text}</span>
-                                        <span className='opacity'>{contentData.subtext}</span>
-                                    </div>
+
+                return (
+                    <div className='white border border-r-04 shadow p-04 snackbar ' id={data?.id} key={data?.id} >
+                        <div className='display gap-1rem'>
+                            <div className='display gap-1rem'>
+                                <div className='w-2 display justify-c'>
+                                    {
+                                        data?.status === 'success'
+                                        ? <CheckCircleIcon width={34} className='c-green' />
+                                        : <ExclamationTriangleIcon width={34} className='c-red' />
+                                    }
                                 </div>
-                                <div className='w-3 display justify-c'>
-                                    <button className='c-blue' onClick={e=> div.classList.add('out')} >
-                                        <span className='f-s-16 f-w-500'>OK</span>
-                                    </button>
+                                <div className='grid gap-04'>
+                                    <span className='f-w-500 f-s-18'>{data?.text}</span>
+                                    <span className='opacity'>{data?.subtext}</span>
+                                    {
+                                        data?.action &&
+                                        <Link to={data?.action.link}>
+                                            <span className='link hover-link '>{data?.action.text}</span>
+                                        </Link>
+                                    }
                                 </div>
                             </div>
+                            <div className='display justify-c'>
+                                <button className='c-blue' onClick={e=> deleteData(data.id)}  >
+                                    <span className='f-s-16 f-w-500'>OK</span>
+                                </button>
+                            </div>
                         </div>
-                    )
-                })
-            }
+                    </div>
+                )
+            }).reverse()
+        }
         </div>
+
     )
 }

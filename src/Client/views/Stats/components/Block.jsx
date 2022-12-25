@@ -7,9 +7,10 @@ import { fetchUser } from '../../../lib/database/fetchUser'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
+import { DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 
 
-export const Block = ({statType, url, title, icon, country, device, views}) => {
+export const Block = ({statType, url, title, country, device, click}) => {
 
     const [{user}] = useStateValue()
 
@@ -25,9 +26,17 @@ export const Block = ({statType, url, title, icon, country, device, views}) => {
             
             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
-                    <img src={`/images/${icon}-solid.svg`} width={18} />
+                    { click && <EyeIcon width={18}/> }
+                    { device && <DevicePhoneMobileIcon width={18}/> }
+                    { url && <GlobeEuropeAfricaIcon width={18}/> }
+                    { country && <MapPinIcon width={18}/> }
                     <span>{title}</span>
                 </div>
+
+                {
+                    click && <span>{statType}</span>
+                }
+
                 {
                     isUserPremium(User).plan === 'ENTREPRISE' 
                     ? 

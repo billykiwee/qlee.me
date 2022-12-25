@@ -15,7 +15,7 @@ export default function ListLink({links, User}) {
                     
                     return (
 
-                        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={i} >
+                        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
                             <div className='display gap-1rem'>
                                 <Link to={'/edit/' + link.id} className='display'>
                                     <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
@@ -26,7 +26,7 @@ export default function ListLink({links, User}) {
                                     </div>
                 
                                     <div className='grid gap'>
-                                        <div className='display'>
+                                        <div className='display gap-04'>
                                             <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
                                             <div className='display'>
                                                 <button 

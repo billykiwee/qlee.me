@@ -17,6 +17,7 @@ import { fetchStats } from '../lib/database/fetchStats'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { fetchUser } from '../lib/database/fetchUser'
 import { uploadPhoto } from '../lib/database/upload/uploadPhoto'
+import { QrCodeIcon } from '@heroicons/react/24/solid'
 
 
 
@@ -214,6 +215,7 @@ export default function Edit() {
 
 
 
+
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
         <>
@@ -275,16 +277,7 @@ export default function Edit() {
                                         <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
-                                                    <div className='display p-04 border-r-04 border click' onClick={e=> setQrCode(Link.url)}>
-                                                        <QRCode
-                                                            onClick={e=> setQrCode(Link.shortLink)}
-                                                            bgColor='white'
-                                                            fgColor='black'
-                                                            className='w-2 h-2'
-                                                            id="qr-code-svg"
-                                                            value={Link.shortLink}
-                                                        />
-                                                    </div>
+                                                    <QrCodeIcon width={22} />
                                                     <div className='grid'>
                                                         <span>Qr code</span>
                                                     </div>

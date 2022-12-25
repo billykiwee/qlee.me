@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth"
 
 import Home from '../Website/Home'
 
-import Dashboard from '../Client/Dashboard'
+import Dashboard, { Counter } from '../Client/Dashboard'
 import Edit from '../Client/views/Edit'
 import Popup from './components/Popup'
 import Header from './components/Header'
@@ -17,6 +17,7 @@ import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats/Stats'
 import Redirection from '../Client/views/Redirection.jsx'
 import Payment from '../Website/views/Payment'
+import { SnackBar } from './components/SnackBar'
 
 
 
@@ -43,6 +44,8 @@ export default function App() {
             }
         })
     }, [dispatch, auth])
+
+    
 
     
 
@@ -90,8 +93,10 @@ export default function App() {
         payment : {
             path : '/payment',
             element : <Payment />
-        }
+        },
     }
+
+
 
 
     return (
@@ -106,6 +111,7 @@ export default function App() {
                     }
                 </Routes>
             <Footer />  
+
         </BrowserRouter>
                 
     )
