@@ -6,6 +6,7 @@ import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
 import { ArrowDownCircleIcon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
 import { fetchLinks } from '../../Client/lib/database/fetchLinks'
+import { fetchUser } from '../../Client/lib/database/fetchUser'
 
 
 export default function Header({visible}) {
@@ -13,20 +14,11 @@ export default function Header({visible}) {
 
     const [{user}] = useStateValue()
 
-    const [getUsers, setgetUsers] = useState([])
+    const [User, setUser] = useState([])
 
     useEffect(e=> {
-        db.collection('users').onSnapshot(snapshot => {
-            setgetUsers(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
-
-    function getUser() {
-        for (const v in getUsers) {
-            if (getUsers[v].email === user?.email) return getUsers[v]
-        }
-    }
-    const USER = getUser()
+       fetchUser(setUser, user?.email)
+    }, [user])
 
 
     const [Menu, setMenu] = useState(false)
@@ -85,7 +77,7 @@ export default function Header({visible}) {
         <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
             <div className='display justify-s-b'>
                 <div className='display gap click'>
-                    <Link to={user ? '/dashboard' : '/'}>
+                    <Link to='/' >
                         <span className='display'>
                             {
                                 getDevice() === 'mobile'
@@ -97,10 +89,10 @@ export default function Header({visible}) {
                 </div>
                 <div className='display gap'>
                     {
-                        user 
+                        User 
                         ?
                         <Link to='/dashboard' className='display avatar-header' >
-                            <img src={USER?.photoURL} className='border-r-100' width={38} height={38} />
+                            <img src={User?.photoURL} className='border-r-100' width={38} height={38} />
                         </Link>
                         : 
                         <div className='display justify-c'>

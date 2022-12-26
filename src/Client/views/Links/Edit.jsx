@@ -245,7 +245,7 @@ export default function Edit() {
                                                 </div>
                                                 <div className='grid gap-1rem text-align-c'>
                                                     <div className='grid'>
-                                                        <div className='display justify-c'>
+                                                        <div className='display justify-c gap'>
                                                             <span className='f-s-20'>{Link?.name}</span>
                                                             {
                                                                 Link.linkInBio &&
@@ -322,7 +322,8 @@ export default function Edit() {
                                 </div>
 
                                 <div className='grid gap-2rem'>
-                                    <div className='grid gap-1rem'>
+
+                                    <div className='grid gap-1rem' >
                                         <div className='grid gap w-100p'>
                                             <span>Modifier le nom</span>
                                             <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
@@ -334,96 +335,90 @@ export default function Edit() {
                                             <small className='c-red' id='error-url'></small>
                                         </div>
 
-                                        {
-                                            isUserPremium(User).plan === 'FREE'
-                                            ?
-                                            <>
-                                                <div className='grid gap w-100p'>
-                                                    <div className='display gap'>
-                                                        <span>Modifier le lien court</span>
-                                                        <GoToPricing />
-                                                    </div>
-                                                    <div className='opacity no-click'>
-                                                        <input type='text' className='div-input h-3 border-r-1 w-100p ' placeholder={Link.shortLink} onChange={e=> seteditLink({...editLink, shortLink : e.target.value})} />
-                                                        <small className='c-grey'>ex: qlee.me/mon-lien-perso</small>
-                                                    </div>
+                                        <div className='grid gap w-100p'>
+                                            <div className='display gap'>
+                                                <span>Modifier le lien court</span>
+                                                {
+                                                    isUserPremium(User).plan === 'FREE' &&
+                                                    <GoToPricing />
+                                                }
+                                            </div>
+                                            <div 
+                                                className='display div-input h-3 border border-r-1 w-100p white'
+                                                style={ 
+                                                    isUserPremium(User).plan === 'FREE' ? 
+                                                    {
+                                                        opacity : 0.4,
+                                                        pointerEvents: 'none'
+                                                    }
+                                                    : 
+                                                    {
+                                                        opacity : 1,
+                                                        pointerEvents: 'visible'
+                                                    }
+                                                } 
+                                            >
+                                                <span className='c-blue p-l-1 p-r-04'>{Link.shortLink.split('/')[0]}/</span>
+                                                <input 
+                                                    type='text' 
+                                                    className='border-0 p-0' 
+                                                    placeholder={Link.id} 
+                                                    onChange={e=> {
+                                                        setEditShortLink(e.target.value)
+                                                        checkShortLinkAvailable(e.target.value, UserLinks)
+                                                    }} 
+                                                    pattern="\S*"
+                                                    onKeyPress={event=> {
+                                                        if (event.key === ' ') {
+                                                            event.preventDefault();
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                            <small id='alert-shortlink'></small>
+                                        </div>
+
+
+                                        <div className='grid gap'>
+                                            <div className='display gap'>
+                                                <span>Fonctionnalités</span>
+                                                {
+                                                    isUserPremium(User).plan === 'FREE' &&
+                                                    <GoToPricing />
+                                                }
+                                            </div>
+                                            
+                                            <div className='grid gap' 
+                                                style={ 
+                                                    isUserPremium(User).plan === 'FREE' ? 
+                                                    {
+                                                        opacity : 0.4,
+                                                        pointerEvents: 'none'
+                                                    }
+                                                    : 
+                                                    {
+                                                        opacity : 1,
+                                                        pointerEvents: 'visible'
+                                                    }
+                                                } 
+                                            >
+                                                <div className='display'>
+                                                    <label htmlFor='active_views' className='display gap-1rem click'>
+                                                        <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } id='active_views'  />
+                                                        <span className='f-w-300'>Ajouter a mon link in bio</span>
+                                                    </label>
                                                 </div>
-                                                <div className='grid gap'>
-                                                    <div className='display gap'>
-                                                        <span>Fonctionnalités</span>
-                                                        <GoToPricing />
-                                                    </div>
 
-                                                    <div className='grid gap-04 opacity no-click'>
-                                                        <div className='display'>
-                                                            <label htmlFor='active_views' className='display gap click'>
-                                                                <input type='checkbox' className='h-1' id='active_views' />
-                                                                <span className='f-w-300'>Ajouter a mon link in bio</span>
-                                                            </label>
-                                                        </div>
-
-                                                        <div className='display no-click'>
-                                                            <label htmlFor='active_adds' className='display gap click'>
-                                                                <input type='checkbox' className='h-1' id='active_adds' />
-                                                                <span className='f-w-300'>Activer la monétisation</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                <div className='display'>
+                                                    <label htmlFor='active_adds' className='display gap-1rem click'>
+                                                        <SwitchInput id='active_adds' />
+                                                        <span className='f-w-300'>Activer la monétisation</span>
+                                                    </label>
                                                 </div>
-                                            </>
-                                            :
-                                            <>
-                                                <div className='grid gap w-100p'>
-                                                    <div className='display gap'>
-                                                        <span>Modifier le lien court</span>
-                                                    </div>
-                                                    <div className='display div-input h-3 border border-r-1 w-100p white'>
-                                                        <span className='c-blue p-l-1 p-r-04'>{Link.shortLink.split('/')[0]}/</span>
-                                                        <input 
-                                                            type='text' 
-                                                            className='border-0 p-0' 
-                                                            placeholder={Link.id} 
-                                                            onChange={e=> {
-                                                                setEditShortLink(e.target.value)
-                                                                checkShortLinkAvailable(e.target.value, UserLinks)
-                                                            }} 
-                                                            pattern="\S*"
-                                                            onKeyPress={event=> {
-                                                                if (event.key === ' ') {
-                                                                    event.preventDefault();
-                                                                }
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    <small id='alert-shortlink'></small>
-                                                </div>
-                                                <div className='grid gap'>
-                                                    <div className='display gap'>
-                                                        <span>Fonctionnalités</span>
-                                                    </div>
+                                            </div>
+                                        </div>
 
-                                                    <div className='grid gap'>
-
-                                                        <div className='display'>
-                                                            <label htmlFor='active_views' className='display gap-1rem click'>
-                                                                <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } id='active_views'  />
-                                                                <span className='f-w-300'>Ajouter a mon link in bio</span>
-                                                            </label>
-                                                        </div>
-
-                                                        <div className='display'>
-                                                            <label htmlFor='active_adds' className='display gap-1rem click'>
-                                                                <SwitchInput id='active_adds' />
-                                                                <span className='f-w-300'>Activer la monétisation</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-
-                                        }
                                     </div>
-
 
                                     <div className='grid gap'>
                                         <div 
@@ -443,6 +438,7 @@ export default function Edit() {
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>   
