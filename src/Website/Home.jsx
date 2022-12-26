@@ -1,12 +1,16 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+// import required modules
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+
 
 import Main from '../App/components/Main'
-import { LinkIcon, PencilSquareIcon, ShareIcon } from '@heroicons/react/24/solid';
+import { BanknotesIcon, LinkIcon, PencilSquareIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { formatNumber } from '../App/utils/formatNumber';
+import formatCurrency from '../App/utils/formatCurrency';
 
 export default function Home() {
 
@@ -18,6 +22,14 @@ export default function Home() {
         {
             icon: '🏀',
             name: 'Sport'
+        },
+        {
+            icon: '🎨',
+            name: 'Artists'
+        },
+        {
+            icon: '🎮',
+            name: 'Gamers'
         },
         {
             icon: '🍔',
@@ -60,6 +72,33 @@ export default function Home() {
     ]
 
 
+    const exemples = [
+        {
+            name: '@Celine',
+            img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80'
+        },
+        {
+            name: '@HBO',
+            img: 'https://linktr.ee/_gatsby/image/3366c979a0e1dbf88ebae4f99acfcb3d/6a30f42b5bff44434c29c5c6b36ab839/hbo.avif?eu=0205d5faf0e45b2de94ef3064e19324860060ceb18abf477bdcfe18886fe5cda552ed622bb5723ea37c7aab77e3124cb335a42082ebde91c0e0544d461f049b03809765cdfe50063f1e28b53bd864f2de8b09b8d32583fcbe878424ad4726cadd87d21529d55854db49fcc5b63871653a1e7f7acc87eed4faac253450347fa857031b82f6ab3a4e6e876258a530bdf7e8789f88d296a2f3f66cf9ddad6fcb8e1ad89aa58b66ee56956ef9b434322302688f7b912c7&a=w%3D890%26h%3D890%26fm%3Davif%26q%3D75&cd=fae6508b0d22194261a6fbab5a6791af'
+        },
+        {
+            name: '@basket',
+            img: 'https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+        },
+        {
+            name: '@Joyca',
+            img : 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+        },
+        {
+            name: '@Seb',
+            img: 'https://images.unsplash.com/photo-1593757147298-e064ed1419e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+        },
+        {
+            name: '@Cookin co',
+            img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+        }
+    ]
+
     return (
         <Main className='main-home'>
 
@@ -95,9 +134,7 @@ export default function Home() {
                 <div className='display justify-e'>
                     <img src='favicon.ico' width='288px' height='288px' />
                 </div>
-
             </div>
-
             <div className='steps-div'>
                 <div className='title-steps'>
                     <small className='link'>MAKE IT EASY</small>
@@ -107,14 +144,14 @@ export default function Home() {
                     {
                         steps.map(step=> {
                             return (
-                                <div className='steps-blocks'>
+                                <div className='steps-blocks' key={step.name}>
                                     <div className='grid'>
                                         <div className='justify-c display'>
                                             <div className='steps-blocks-head'>
                                                 <div className='display justify-c border-r-100 p-1 blue-secondary steps-icon'>
                                                     <span>{step.icon}</span>
                                                 </div>
-                                                <span className='f-s-20'>{step.name}</span>
+                                                <span className='f-s-20 f-w-500'>{step.name}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +174,7 @@ export default function Home() {
                     {
                         subjects.map(subject=> {
                             return (
-                                <div className='display subject-blocks'>
+                                <div className='display subject-blocks' key={subject.name}>
                                     <span className='f-s-20'>{subject.icon}</span>
                                     <span>{subject.name}</span>
                                 </div>
@@ -145,9 +182,82 @@ export default function Home() {
                         })
                     }
                 </div>
-               
+
+                <Swiper 
+                    className='w-100p'
+                    slidesPerView={2.2} 
+                    spaceBetween={18}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Pagination]}
+                >
+                        {
+                            exemples.map(exemple=> {
+                                return (
+                                    <SwiperSlide className='m-b-3' key={exemple.name}>
+                                        <div className='grid gap-1rem' >
+                                            <img src={exemple.img} className='exemples-img' />
+                                            <span className='exemples-name'>{exemple.name}</span>
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                            })
+                        }
+                </Swiper>
+            
             </div>
 
+
+            <div className='yellow p-2 border-r-2'>
+                <div>
+                    <h1>What about numbers ?</h1>
+                </div>
+
+                <div className='grid gap-1rem'>
+                    <div className='display justify-s-b'>
+                        <SwatchIcon width={38} className='c-black' />
+                        <div className='grid'>
+                            <span className='f-s-2rem f-w-600'>{formatNumber(93842)}</span>
+                            <div className='display gap justify-e'>
+                                <span className='opacity f-w-300'>Created links</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='display justify-s-b'>
+                        <UserIcon width={38} className='c-black' />
+                        <div className='grid'>
+                            <span className='f-s-2rem f-w-600'>{formatNumber(293)}</span>
+                            <div className='display gap justify-e'>
+                                <span className='opacity f-w-300'>Uers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='display justify-s-b'>
+                        <BanknotesIcon width={38} className='c-black' />
+                        <div className='grid'>
+                            <span className='f-s-2rem f-w-600'>{formatCurrency(89377.29)}</span>
+                            <div className='display gap justify-e'>
+                                <span className='opacity f-w-300'>earned</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           {/*  <Swiper 
+                className='w-100p'
+                style={{height: '80vh'}}
+                direction={"vertical"}
+                navigation={true}
+                mousewheel={true}
+                keyboard={true}
+                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+            >
+
+                <SwiperSlide className='display justify-c'></SwiperSlide>
+
+            </Swiper> */}
 
         </Main>
     )

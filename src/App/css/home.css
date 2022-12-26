@@ -1,7 +1,7 @@
 .main-home {
     display: grid;
     margin-top: 2rem;
-    gap: 4rem;
+    gap: 6rem;
 }
 
 
@@ -41,7 +41,7 @@
 
 .steps-blocks {
     padding: 2rem;
-    border-radius: 1rem;
+    border-radius: 2rem;
     display: grid;
     height: 254px;
     align-content: space-around;
@@ -98,6 +98,26 @@
     padding-right: 1.4rem;
     height: 28px;
     border-radius: 2rem;
+}
+.subject-blocks:hover {
+    background-color: #e2e1e1;
+}
+
+.exemples-div-blocks {
+    display: grid;
+    gap: 1rem;
+}
+.exemples-div-blocks > div >img {
+    border-radius: 2rem;
+}
+.exemples-img {
+    border-radius: 2rem;
+    height: 288px;
+}
+.exemples-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--grey-300);
 }
 
 @media screen and (max-width: 780px) {
