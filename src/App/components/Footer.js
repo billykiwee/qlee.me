@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ProfilImg } from '../../Website/Home'
 import { useStateValue } from '../provider/StateProvider'
 
@@ -30,6 +30,16 @@ export default function Footer() {
         }
     }
     
+
+
+    const location = useLocation()    
+
+    function isLinkInBio() {
+        return location.pathname === '/link-in-bio'
+    }
+    
+
+    if (!isLinkInBio())
     return (
         <footer className='m-t-4' >
             <div className='display justify-s-b m-t-1'>

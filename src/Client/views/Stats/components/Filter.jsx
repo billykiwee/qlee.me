@@ -3,10 +3,29 @@ import React from 'react'
 
 export default function Filter({props}) {
 
+    const filters = [
+        {
+            name: 'popular',
+            text: 'popular',
+        },
+        {
+            name: 'recent',
+            text: 'most recent'
+        },
+        {
+            name: 'oldest',
+            text: 'oldest',
+        },
+        {
+            name: 'link-in-bio',
+            text: 'link in bio',
+        }
+    ]
+
 
     return (
         <div className='grid gap-1rem'>
-            <div className='grid gap'>
+            <div className='grid gap-1rem'>
                 <div className='display justify-s-b'>
                     <div className='display'>
                         <button 
@@ -55,21 +74,17 @@ export default function Filter({props}) {
                 {
                     props.Filter &&
                     <div className='display wrap gap'>
-                        <div>
-                            <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>popular</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>most recent</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button className='border border-r-2 h-2 hover white p-lr-1'>
-                                <span>oldest</span>
-                            </button>
-                        </div>
+                        {
+                            filters.map(filter=> {
+                                return (
+                                    <div key={filter.name}>
+                                        <button className='border border-r-2 h-2 hover white p-lr-1' onClick={e=> props.setCheckFilter(filter.name)} style={{background : props.checkFilter === filter.name ? 'var(--yellow)' : ''}}>
+                                            <span>{filter.text}</span>
+                                        </button>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 }
             </div>

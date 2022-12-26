@@ -17,11 +17,12 @@ import { fetchStats } from '../../lib/database/fetchStats'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
-import { QrCodeIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
 import { deleteObject, ref } from 'firebase/storage'
 import { addToLinkInBio } from './functions/addToLinkInBio'
 import { checkShortLinkAvailable } from '../Links/functions/checkShortLinkAvailable'
 import { SwitchInput } from '../../../App/components/Switch'
+import { formatNumber } from '../../../App/utils/formatNumber'
 
 
 export default function Edit() {
@@ -242,9 +243,21 @@ export default function Edit() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='grid text-align-c'>
-                                                    <span className='f-s-20'>{Link?.name}</span>
+                                                <div className='grid gap-1rem text-align-c'>
+                                                    <div className='display justify-c gap-04'>
+                                                        <span className='f-s-20'>{Link?.name}</span>
+                                                        {
+                                                            Link.linkInBio &&
+                                                            <BookmarkIcon width={12} className='c-yellow' />
+                                                        }
+                                                    </div>
                                                     <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
+                                                    
+                                                    <div className='display justify-c gap-04'>
+                                                        <EyeIcon  width={22}/>
+                                                        <span className='f-s-20'>{formatNumber(Link?.views)} clics</span>
+                                                    </div>
+                                                   
                                                 </div>
                                             </div>
                                             <div className='display justify-c'>
@@ -392,14 +405,14 @@ export default function Edit() {
 
                                                         <div className='display'>
                                                             <label htmlFor='active_views' className='display gap-1rem click'>
-                                                                <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) }  />
+                                                                <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } id='active_views'  />
                                                                 <span className='f-w-300'>Ajouter a mon link in bio</span>
                                                             </label>
                                                         </div>
 
                                                         <div className='display'>
                                                             <label htmlFor='active_adds' className='display gap-1rem click'>
-                                                                <SwitchInput />
+                                                                <SwitchInput id='active_adds' />
                                                                 <span className='f-w-300'>Activer la monétisation</span>
                                                             </label>
                                                         </div>

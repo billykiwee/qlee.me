@@ -22,13 +22,8 @@ export default function LinkInBio() {
     }, [user?.email])
 
 
-    useEffect(e=> {
 
-        document.querySelector('header').style.display = 'none'
-        document.querySelector('footer').style.display = 'none'
-    }, [])
-
-
+ 
     return (
         <Main className='display p-1' style={{
             height: '100%',
@@ -62,13 +57,13 @@ export default function LinkInBio() {
 
                             return (
                                 <a href={'https://' +link.shortLink} key={link.url}>
-                                    <div className='display border white border-r-1 border-b p-1 hover click' style={{height: '44px'}}>
-                                            <div className='display justify-c absolute'>
-                                                <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
-                                            </div>
-                                            <div className='display justify-c w-100p'>
-                                                <span className='f-s-18'>{link.name}</span>
-                                            </div>
+                                    <div className='display border white border-r-1 border-b p-1 hover click h-2' >
+                                        <div className='display justify-c absolute'>
+                                            <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
+                                        </div>
+                                        <div className='display justify-c w-100p'>
+                                            <span className='f-s-16'>{link.name}</span>
+                                        </div>
                                     </div>
                                 </a>
                             )

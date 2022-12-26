@@ -44,7 +44,7 @@ export default function ListLink({links, User}) {
                                                         setTimeout(e=> div.style.display = 'none', 1500)
                                                     }} 
                                                 >
-                                                    <ClipboardIcon width={16} />
+                                                    <ClipboardIcon width={16} className='c-black' />
                                                 </button>
                                                 <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
                                                     <small>Copié</small>
@@ -72,7 +72,7 @@ export default function ListLink({links, User}) {
                     <div className='display gap'>
                         <img src='/images/info.svg' className='w-1 h-1 opacity' />
                         <small className='c-grey f-w-300'>
-                            Il te reste encore {isUserPremium(User).max_links - links.length} {isUserPremium(User).max_links - links.length > 1 ? 'liens gratuits' : 'lien gratuit'}
+                            Il te reste {isUserPremium(User).max_links - links.length} {isUserPremium(User).max_links - links.length > 1 ? 'disponibles' : 'disponible'}
                         </small>
                     </div>
                     :

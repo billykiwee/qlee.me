@@ -39,6 +39,12 @@ export default function Articles({links}) {
             icon: <SwatchIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
             link: '/link-in-bio'
+        },
+        {
+            name: 'Link in bio',
+            icon: <SwatchIcon width={22} className='c-black' />,
+            img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+            link: '/link-in-bio'
         }
     ]
 
@@ -46,8 +52,8 @@ export default function Articles({links}) {
         <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
             
             <Swiper 
-                slidesPerView={1.5} 
-                spaceBetween={20}
+                slidesPerView={1.66} 
+                spaceBetween={18}
                 pagination={{
                     clickable: true,
                 }}
@@ -72,9 +78,11 @@ export default function Articles({links}) {
                                             }}
                                         >
                                         </div>
-                                        <div className='display gap justify-c  p-1'>
-                                            {article.icon}
-                                            <span>{article.name}</span>
+                                        <div className='display gap justify-c h-2 p-1'>
+                                            <div className='display gap-04'>
+                                                {article.icon}
+                                                <span>{article.name}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>

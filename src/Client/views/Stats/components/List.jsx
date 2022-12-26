@@ -23,7 +23,15 @@ export default function List({props}) {
         <div className='grid gap'>
             {
                 links
-                .sort((a, b) => b.views - a.views)
+                .sort((a, b) => {
+                    if (props.checkFilter === 'oldest') return a.date - b.date
+                    if (props.checkFilter === 'recent') return b.date - a.date
+                    return b.views - a.views
+                })
+                .filter(e=> {
+                    if (props.checkFilter === 'link-in-bio') return e.linkInBio
+                    else return e
+                })
                 .map(link=> {
                     return (
                         <Link to={'/stats/' + link.id} key={link.id}>

@@ -56,6 +56,8 @@ export default function Stats() {
 
 
     const [filter, setFilter] = useState(false)
+    const [checkFilter, setCheckFilter] = useState('popular')
+
     const [Search, setSearch] = useState(false)
     const [InputSearch, setInputSearch] = useState(false)
 
@@ -68,11 +70,11 @@ export default function Stats() {
 
     return (
         <Main>
-            <h2>Statistiques</h2>
-
             <div className='display blocks stats-blocks align-top gap-2rem'>
 
                 <div className='grid'>
+                    <h2 className='m-t-0'>Statistiques</h2>
+
                     {
                         UserLinks
                         .filter(isUserAuth=> isUserAuth.user === user?.email)
@@ -152,21 +154,24 @@ export default function Stats() {
                 <div className='grid gap-1rem'>
                     <Filter 
                         props={{
-                            Filter       : filter,
-                            Search       : Search,
+                            Filter        : filter,
+                            Search        : Search,
                             InputSearch   : InputSearch,
                             setInputSearch: setInputSearch,
-                            setFilter    : setFilter,
-                            setSearch    : setSearch,
+                            setFilter     : setFilter,
+                            setSearch     : setSearch,
+                            checkFilter    : checkFilter,
+                            setCheckFilter: setCheckFilter,
                         }} 
                     />
 
                     <List 
                         props={{
-                            LinkID: LinkID,
-                            InputSearch   : InputSearch,
+                            LinkID     : LinkID,
+                            InputSearch: InputSearch,
                             setShowStat: setShowStat,
-                            UserLinks  : UserLinks
+                            UserLinks  : UserLinks,
+                            checkFilter: checkFilter
                         }} 
                     />
                 </div>

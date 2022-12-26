@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { getDevice } from '../../Client/lib/getDevice'
 import { ProfilImg } from '../../Website/Home'
 import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
 import { ArrowDownCircleIcon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
+import { fetchLinks } from '../../Client/lib/database/fetchLinks'
 
 
 export default function Header({visible}) {
@@ -71,7 +72,15 @@ export default function Header({visible}) {
 
 
 
-    if (visible)
+
+    const location = useLocation()    
+
+    function isLinkInBio() {
+        return location.pathname === '/link-in-bio'
+    }
+    
+
+    if (!isLinkInBio())
     return (
         <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
             <div className='display justify-s-b'>

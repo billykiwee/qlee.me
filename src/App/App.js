@@ -49,7 +49,6 @@ export default function App() {
     
 
 
-
     const router = {
         init : {
             path : '/*',
@@ -103,10 +102,9 @@ export default function App() {
 
 
 
-
     return (
         <BrowserRouter>
-            <Header visible />
+            <Header/>
                 <Routes>
                     {
                         Object.values(router)
@@ -116,7 +114,6 @@ export default function App() {
                     }
                 </Routes>
             <Footer />  
-
         </BrowserRouter>
                 
     )

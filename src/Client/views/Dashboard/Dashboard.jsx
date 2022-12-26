@@ -22,6 +22,7 @@ import formatDate from '../../../App/utils/formatDate';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import getFavicon from '../../../App/utils/getFavicon';
 import Articles from './components/Articles';
+import { formatNumber } from '../../../App/utils/formatNumber';
 
 
 export default function Dashboard() {
@@ -126,6 +127,7 @@ export default function Dashboard() {
         }
 
     }, [LinkURL])
+
 
 
     return (
