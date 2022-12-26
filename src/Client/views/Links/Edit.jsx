@@ -21,6 +21,7 @@ import { QrCodeIcon } from '@heroicons/react/24/solid'
 import { deleteObject, ref } from 'firebase/storage'
 import { addToLinkInBio } from './functions/addToLinkInBio'
 import { checkShortLinkAvailable } from '../Links/functions/checkShortLinkAvailable'
+import { SwitchInput } from '../../../App/components/Switch'
 
 
 export default function Edit() {
@@ -362,11 +363,11 @@ export default function Edit() {
                                                     <div className='display gap'>
                                                         <span>Modifier le lien court</span>
                                                     </div>
-                                                    <div className='display gap'>
-                                                        <span className='c-blue'>{Link.shortLink.split('/')[0]}/</span>
+                                                    <div className='display div-input h-3 border border-r-1 w-100p white'>
+                                                        <span className='c-blue p-l-1 p-r-04'>{Link.shortLink.split('/')[0]}/</span>
                                                         <input 
                                                             type='text' 
-                                                            className='div-input h-3 border-r-1 w-100p white' 
+                                                            className='border-0 p-0' 
                                                             placeholder={Link.id} 
                                                             onChange={e=> {
                                                                 setEditShortLink(e.target.value)
@@ -390,15 +391,15 @@ export default function Edit() {
                                                     <div className='grid gap'>
 
                                                         <div className='display'>
-                                                            <label htmlFor='active_views' className='display gap click'>
-                                                                <input type='checkbox' className='h-1' id='active_views' checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } />
+                                                            <label htmlFor='active_views' className='display gap-1rem click'>
+                                                                <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) }  />
                                                                 <span className='f-w-300'>Ajouter a mon link in bio</span>
                                                             </label>
                                                         </div>
 
                                                         <div className='display'>
-                                                            <label htmlFor='active_adds' className='display gap click'>
-                                                                <input type='checkbox' className='h-1' id='active_adds' />
+                                                            <label htmlFor='active_adds' className='display gap-1rem click'>
+                                                                <SwitchInput />
                                                                 <span className='f-w-300'>Activer la monétisation</span>
                                                             </label>
                                                         </div>

@@ -39,18 +39,20 @@ export default function Articles({links}) {
             icon: <SwatchIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
             link: '/link-in-bio'
-        },
+        }
     ]
 
     return (
         <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
             
-            <Swiper slidesPerView={1.8} spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        >
+            <Swiper 
+                slidesPerView={1.5} 
+                spaceBetween={20}
+                pagination={{
+                    clickable: true,
+                }}
+                modules={[Pagination]}
+            >
                 {
                     articles
                     .map(article=> {
