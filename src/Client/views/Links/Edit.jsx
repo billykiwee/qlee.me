@@ -1,23 +1,24 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
-import { db, storage } from '../../App/database/firebase'
-import getFavicon from '../../App/utils/getFavicon'
-import formatDate from '../../App/utils/formatDate'
+import { db, storage } from '../../../App/database/firebase'
+import getFavicon from '../../../App/utils/getFavicon'
+import formatDate from '../../../App/utils/formatDate'
 import QRCode from 'react-qr-code'
-import { minimizeString } from '../../App/utils/minimizeString'
-import { isValidUrl } from '../../App/utils/isValidUrl'
-import Popup, { PopUpcontent } from '../../App/components/Popup'
-import { useStateValue } from '../../App/provider/StateProvider'
-import Main from '../../App/components/Main'
-import Messages from '../../App/utils/Messages'
+import { minimizeString } from '../../../App/utils/minimizeString'
+import { isValidUrl } from '../../../App/utils/isValidUrl'
+import Popup, { PopUpcontent } from '../../../App/components/Popup'
+import { useStateValue } from '../../../App/provider/StateProvider'
+import Main from '../../../App/components/Main'
+import Messages from '../../../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
-import { download } from '../lib/htmlToImage/download'
-import { fetchUserLinks } from '../lib/database/fetchUserLinks'
-import { fetchStats } from '../lib/database/fetchStats'
-import { isUserPremium } from '../../Admin/settings/isPremium'
-import { fetchUser } from '../lib/database/fetchUser'
-import { uploadPhoto } from '../lib/database/upload/uploadPhoto'
+import { download } from '../../lib/htmlToImage/download'
+import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
+import { fetchStats } from '../../lib/database/fetchStats'
+import { isUserPremium } from '../../../Admin/settings/isPremium'
+import { fetchUser } from '../../lib/database/fetchUser'
+import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
 import { QrCodeIcon } from '@heroicons/react/24/solid'
+import { deleteObject, ref } from 'firebase/storage'
 
 
 
@@ -81,12 +82,17 @@ export default function Edit() {
         setPopUpMessage({loader: true})
 
         db.collection('links').doc(Link.id).delete()
+        .then(deletePhoto=> {
+            if (Link.url) {
+                let refPhoto = ref(storage, `links/favicon/${Link.id}`)
+                deleteObject(refPhoto)
+            }
+        })
         .then(e=> {
             setPopUpMessage({loader: false})
-            window.location.href = '/dashboard'
+            history('/dashboard')
         })
     }
-
 
 
     const [editLink, seteditLink] = useState({})
@@ -286,7 +292,7 @@ export default function Edit() {
                                                     {
                                                         QrCode &&
                                                         <button className='border-b white hover h-3 p-1 border-r-1 border display gap' onClick={e=> download(Link.name)} >
-                                                            <span className='c-black'>Télécharger</span>
+                                                            <span className='c-black f-s-16'>Télécharger</span>
                                                             <img src='/images/dowload.svg' width={20} height={20} />
                                                         </button>
                                                     }

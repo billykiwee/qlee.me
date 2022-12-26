@@ -36,7 +36,7 @@ export default function Signup() {
 
     const [MSG, setMSG] = useState({})   
 
-    const userID = UniqueID('user', 10)
+    const userID = UniqueID('user', 16)
 
 
     const loginConditions = {
@@ -225,7 +225,7 @@ export default function Signup() {
                                     <span className='display'>
                                         <img src={User?.photoURL} width={68} height={68} className='border-r-100' />
                                     </span>
-                                    <div className='grid'>
+                                    <div className='grid gap-04'>
                                         <div className='display gap-1rem'>
                                             <h2 className='m-0'>{User?.name}</h2>
                                             {

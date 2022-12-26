@@ -2,20 +2,26 @@ import { serverTimestamp } from 'firebase/firestore';
 import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import Main from '../App/components/Main';
-import Popup from '../App/components/Popup';
-import { useStateValue } from '../App/provider/StateProvider';
-import { db } from '../App/database/firebase';
-import { isValidUrl } from '../App/utils/isValidUrl';
-import UniqueID from '../App/utils/uniqueID';
+import Main from '../../../App/components/Main';
+import Popup from '../../../App/components/Popup';
+import { useStateValue } from '../../../App/provider/StateProvider';
+import { db } from '../../../App/database/firebase';
+import { isValidUrl } from '../../../App/utils/isValidUrl';
+import UniqueID from '../../../App/utils/uniqueID';
 import ListLink from './components/ListLink';
-import { getHostName } from './lib/getHostName';
-import { fetchUserLinks } from './lib/database/fetchUserLinks';
-import Messages from '../App/utils/Messages';
-import { isUserPremium } from '../Admin/settings/isPremium';
-import { fetchUser } from './lib/database/fetchUser';
-import { setSnackbar, SnackBar } from '../App/components/SnackBar';
+import { getHostName } from '../../lib/getHostName';
+import { fetchUserLinks } from '../../lib/database/fetchUserLinks';
+import Messages from '../../../App/utils/Messages';
+import { isUserPremium } from '../../../Admin/settings/isPremium';
+import { fetchUser } from '../../lib/database/fetchUser';
+import { setSnackbar, SnackBar } from '../../../App/components/SnackBar';
 import { useReducer } from 'react';
+import { BookmarkIcon, EyeIcon } from '@heroicons/react/24/solid';
+import { dataFilter } from '../Stats/data/dataFilters';
+import formatDate from '../../../App/utils/formatDate';
+import { HeartIcon } from '@heroicons/react/24/solid';
+import getFavicon from '../../../App/utils/getFavicon';
+import Articles from './components/Articles';
 
 
 export default function Dashboard() {
@@ -24,38 +30,25 @@ export default function Dashboard() {
 
     const [{user}] = useStateValue()
 
-
     const [User, setUser] = useState([])
-
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(() => {
 
         fetchUserLinks(setUserLinks, user?.email)
-
         fetchUser(setUser, user?.email)
 
     }, [user?.email])
 
 
-
-    const [LinkURL,setLinkURL] = useState('')
-    const [NameLink,setNameLink] = useState('')
-
-
-    const [Message, setMessage] = useState('')
-    const [Error, setError] = useState('')
-
-
-
-    const isLinkAlreadyExist = UserLinks.some(data => {
-        if (data.name === NameLink && data.url === LinkURL) return true
-    })
+    const [LinkURL, setLinkURL] = useState('')
+    const [NameLink, setNameLink] = useState('')
 
     const [Msg, setMsg] = useState([])
+    const [Error, setError] = useState('')
     
 
-    function createLink() {
+    function createLink(NameLink, LinkURL) {
 
         const linkID = 'qlee.me/' + UniqueID('', 5)
                         
@@ -122,37 +115,17 @@ export default function Dashboard() {
     }
 
 
-
-
-
-
-    const artcles = [
-        {
-            name : 'Mon compte',
-            img : 'https://images.unsplash.com/photo-1664574654578-d5a6a4f447bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
-            id: 'account',
-            link: '/login'
-        },
-        {
-            name : 'Link in bio',
-            img : 'https://images.unsplash.com/photo-1572456606764-80a4f00cbe52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
-            id: 'linkinbio'
-        }
-    ]
-
     useEffect(() => {
 
         if (LinkURL) {
             window.onkeydown = e => {
                 if (e.key === 'Enter') {
-                    createLink(LinkURL)
+                    createLink(NameLink, LinkURL)
                 }
             }
         }
 
     }, [LinkURL])
-
-
 
 
     return (
@@ -162,25 +135,10 @@ export default function Dashboard() {
 
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
-                        <div className='grid swiper' style={{overflowX: 'scroll' }}>
-                            <div className='display gap-1rem transition' >
-                                {
-                                    artcles.map(article=> {
-                                        return (
-                                            <Link to={article.link} key={article.id}>
-                                                <div className='display click' >
-                                                    <div className='grid gap-1rem border-r-2 black' style={{width: '244px', height: '244px'}}>
-                                                        <div className='grid gap-1rem border-r-2 w-100p h-100p opacity-08' id={'img-' + article.id} style={{backgroundSize: 'cover', backgroundImage: `url(${article.img})`}}></div>
-                                                    </div>
-                                                    <div className='display justify-c absolute' style={{width: '244px', height: '244px'}}>
-                                                        <span className='f-s-20 c-white'>{article.name}</span>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                            </div>
+
+                        <div className='grid' >
+                            <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
+                            <Articles links={UserLinks} />
                         </div>
 
                         <div className='grid gap-2rem '>
@@ -198,7 +156,7 @@ export default function Dashboard() {
                                         </div>
                                     </div>
                                     <div className='display h-4 align-top'>
-                                        <button onClick={e=> createLink(LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
+                                        <button onClick={e=> createLink(NameLink, LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
                                             <span className='f-s-16'>Créer</span>
                                         </button>
                                     </div>
@@ -219,7 +177,7 @@ export default function Dashboard() {
                     <div className='grid gap-2rem'>
                         <div className='grid gap-2rem'>
                             <div className='display justify-s-b'>
-                                <span className='f-s-25 f-w-400'>Mes liens</span>
+                                <span className='f-s-25 f-w-500'>Mes liens</span>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
                                         <small className='c-black'>{UserLinks.length} / {isUserPremium(User).max_links}</small>
@@ -231,7 +189,7 @@ export default function Dashboard() {
                                     </div>
                                 </Link>
                             </div>
-                            <div className='grid gap-1rem'>
+                            <div className='grid gap'>
                                 {
                                     UserLinks.length < 1 
                                     ? <Messages loader={true} /> 

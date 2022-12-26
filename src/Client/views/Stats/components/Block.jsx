@@ -5,7 +5,7 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { isValidUrl } from '../../../../App/utils/isValidUrl'
 import { fetchUser } from '../../../lib/database/fetchUser'
 import { getHostName } from '../../../lib/getHostName'
-import { GoToPricing } from '../../Edit'
+import { GoToPricing } from '../../Links/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 import { DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 

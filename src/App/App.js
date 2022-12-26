@@ -5,8 +5,8 @@ import { getAuth } from "firebase/auth"
 
 import Home from '../Website/Home'
 
-import Dashboard, { Counter } from '../Client/Dashboard'
-import Edit from '../Client/views/Edit'
+import Dashboard, { Counter } from '../Client/views/Dashboard/Dashboard'
+import Edit from '../Client/views/Links/Edit'
 import Popup from './components/Popup'
 import Header from './components/Header'
 
@@ -15,7 +15,7 @@ import Login from '../Website/connection/Login'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats/Stats'
-import Redirection from '../Client/views/Redirection.jsx'
+import Redirection from '../Client/Redirection.jsx'
 import Payment from '../Website/views/Payment'
 import { SnackBar } from './components/SnackBar'
 

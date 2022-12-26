@@ -32,7 +32,7 @@
 
     .stats-blocks > div {
         position: sticky;
-        top: 8rem;
+        top: 2rem;
         z-index: 9;
     }
 }
