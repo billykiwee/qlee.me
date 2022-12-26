@@ -13,7 +13,8 @@ import { fetchStats } from '../../lib/database/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
-import { DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import Messages from '../../../App/utils/Messages'
 
 
 
@@ -76,6 +77,12 @@ export default function Stats() {
                     <h2 className='m-t-0'>Statistiques</h2>
 
                     {
+                        UserLinks === 'no link' 
+                        ? <span>Pas de lien</span>
+                        :  
+                        UserLinks.length < 1
+                        ? <Messages loader={true} /> 
+                        :
                         UserLinks
                         .filter(isUserAuth=> isUserAuth.user === user?.email)
                         .filter(link=> link.id === ShowStat)
@@ -88,7 +95,13 @@ export default function Stats() {
                                             <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
                                         </div>
                                         <div className='grid text-align-c'>
-                                            <span className='f-s-20'>{topLink?.name}</span>
+                                            <div className='display justify-c gap-04'>
+                                                <span className='f-s-20'>{topLink?.name}</span>
+                                                {
+                                                    topLink?.linkInBio &&
+                                                    <BookmarkIcon width={12} className='c-yellow' />
+                                                }
+                                            </div>
                                             <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
                                         </div>
                                     </div>

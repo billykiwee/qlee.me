@@ -12,20 +12,6 @@ import "swiper/css/pagination";
 
 export default function Articles({links}) {
 
-    const [topLink, setTopLink] = useState({})
-
-    useEffect(e=> {
-
-        try {
-            const top = links.length > 0 && links.sort((a, b) => b.views - a.views)[0]
-            setTopLink(top)
-        }
-        catch (err) {
-            console.log(err);
-        }
-
-    }, [links])
-
 
     const articles = [
         {
@@ -33,12 +19,6 @@ export default function Articles({links}) {
             icon: <UserCircleIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1564069114553-7215e1ff1890?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80',
             link: '/login'
-        },
-        {
-            name: 'Link in bio',
-            icon: <SwatchIcon width={22} className='c-black' />,
-            img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-            link: '/link-in-bio'
         },
         {
             name: 'Link in bio',

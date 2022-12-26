@@ -78,8 +78,12 @@ export default function Filter({props}) {
                             filters.map(filter=> {
                                 return (
                                     <div key={filter.name}>
-                                        <button className='border border-r-2 h-2 hover white p-lr-1' onClick={e=> props.setCheckFilter(filter.name)} style={{background : props.checkFilter === filter.name ? 'var(--yellow)' : ''}}>
-                                            <span>{filter.text}</span>
+                                        <button 
+                                            className='border border-r-2 h-2 hover white p-lr-1' 
+                                            onClick={e=> props.setCheckFilter(filter.name)} 
+                                            style={{background : props.checkFilter === filter.name ? 'var(--yellow)' : ''}}
+                                        >
+                                            <span className='c-black'>{filter.text}</span>
                                         </button>
                                     </div>
                                 )

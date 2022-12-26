@@ -44,7 +44,7 @@ export default function ListLink({links, User}) {
                                                         setTimeout(e=> div.style.display = 'none', 1500)
                                                     }} 
                                                 >
-                                                    <ClipboardIcon width={16} className='c-black' />
+                                                    <ClipboardIcon width={18} className='c-black' />
                                                 </button>
                                                 <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
                                                     <small>Copié</small>
@@ -65,7 +65,7 @@ export default function ListLink({links, User}) {
                     )
                 }).reverse()
             }
-            <div className='display justify-c'>
+            <div className='display justify-c m-t-1'>
                 {
                     links.length < isUserPremium(User).max_links 
                     ?

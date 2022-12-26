@@ -37,7 +37,7 @@ export default function LinkInBio() {
                 
                 <div className='grid gap p-1'>
                     <div className='display justify-c'>
-                        <img src={User.photoURL} width={80} />
+                        <img src={User.photoURL} width={80} height={80} className='border-r-100' />
                     </div>
                     <div className='grid gap-04'>
                         <div className='display justify-c'>

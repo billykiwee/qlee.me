@@ -17,12 +17,15 @@ import { fetchStats } from '../../lib/database/fetchStats'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
-import { BookmarkIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
 import { deleteObject, ref } from 'firebase/storage'
+import { BookmarkIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
 import { addToLinkInBio } from './functions/addToLinkInBio'
 import { checkShortLinkAvailable } from '../Links/functions/checkShortLinkAvailable'
 import { SwitchInput } from '../../../App/components/Switch'
 import { formatNumber } from '../../../App/utils/formatNumber'
+import { PencilSquareIcon } from '@heroicons/react/24/outline'
+import { SnackBar } from '../../../App/components/SnackBar'
+import UniqueID from '../../../App/utils/uniqueID'
 
 
 export default function Edit() {
@@ -65,7 +68,7 @@ export default function Edit() {
 
     
     const [PopUpMessage, setPopUpMessage] = useState({})
-
+    const [Msg, setMsg] = useState([])
 
     function preDeleteLink() {
         setPopUpMessage({
@@ -109,19 +112,19 @@ export default function Edit() {
 
             if (Object.values(editLink).length === 0) return 
     
-            async function Check() {
-                
+            async function Check(editLink) {
+
                 if (editLink.name) {
                     if (editLink.name.length > 40)
-                    throw {id:'name', error: 'Le nom doit faire entre 0 et 40 charactères'}
+                    throw { id:'name', error: 'Le nom doit faire entre 0 et 40 charactères' }
                 }
-                if (editLink.nurlame) {
+                if (editLink.url) {
                     if (!isValidUrl(editLink.url)) 
-                    throw {id:'url', error:'Tu dois rentrer une URL valide'}
+                    throw { id:'url', error:'Tu dois rentrer une URL valide' }
                 }
             }
     
-            Check()
+            Check(editLink)
             .then(valid=> {
     
                 db.collection('links').doc(Link.id).update(editLink)
@@ -134,14 +137,11 @@ export default function Edit() {
     
                 seteditLink({})
     
-                setPopUpMessage({
-                    title: 'Modifications enregistrées',
-                    message: 'Le lien à bien été modifié',
-                    buttonText: 'Continuer',
-                    buttonColor: 'blue',
-                    valid: () => setPopUpMessage({}),
-                    close: () => setPopUpMessage({}),
-                    statu: 'success'
+                setMsg({
+                    id: UniqueID('m-', 5),
+                    text: 'Modifications enregistrées 🎉',
+                    subtext: 'Le lien à bien été modifié',
+                    status: 'success'
                 })
             })
             .catch(e=> {
@@ -233,7 +233,7 @@ export default function Edit() {
                                                     <div className='edit-image-link'>
                                                         <img src={getFavicon(Link)} width={80} height={80} className='border-r-100' /> 
                                                         <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
-                                                            <img src='/images/edit.svg' width={16} />
+                                                            <PencilSquareIcon width={16} />
                                                             <input 
                                                                 type='file' 
                                                                 hidden 
@@ -244,15 +244,16 @@ export default function Edit() {
                                                     </div>
                                                 </div>
                                                 <div className='grid gap-1rem text-align-c'>
-                                                    <div className='display justify-c gap-04'>
-                                                        <span className='f-s-20'>{Link?.name}</span>
-                                                        {
-                                                            Link.linkInBio &&
-                                                            <BookmarkIcon width={12} className='c-yellow' />
-                                                        }
+                                                    <div className='grid'>
+                                                        <div className='display justify-c'>
+                                                            <span className='f-s-20'>{Link?.name}</span>
+                                                            {
+                                                                Link.linkInBio &&
+                                                                <BookmarkIcon width={12} className='c-yellow' />
+                                                            }
+                                                        </div>
+                                                        <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                                     </div>
-                                                    <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
-                                                    
                                                     <div className='display justify-c gap-04'>
                                                         <EyeIcon  width={22}/>
                                                         <span className='f-s-20'>{formatNumber(Link?.views)} clics</span>
@@ -450,6 +451,9 @@ export default function Edit() {
                         </div>
                     }
                 </div>
+
+
+                <SnackBar content={Msg} setMsg={setMsg} />
             </Main>
             }
 

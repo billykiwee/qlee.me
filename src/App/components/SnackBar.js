@@ -37,18 +37,18 @@ export function SnackBar({content, setMsg}) {
 
 
                 return (
-                    <div className='white border border-r-04 shadow p-04 snackbar ' id={data?.id} key={data?.id} >
-                        <div className='display gap-1rem'>
+                    <div className='white border border-r-04 shadow p-1 snackbar ' id={data?.id} key={data?.id} >
+                        <div className='display gap-2rem'>
                             <div className='display gap-1rem'>
                                 <div className='w-2 display justify-c'>
                                     {
                                         data?.status === 'success'
-                                        ? <CheckCircleIcon width={34} className='c-green' />
-                                        : <ExclamationTriangleIcon width={34} className='c-red' />
+                                        ? <CheckCircleIcon width={28} className='c-green' />
+                                        : <ExclamationTriangleIcon width={28} className='c-red' />
                                     }
                                 </div>
-                                <div className='grid gap-04'>
-                                    <span className='f-w-500 f-s-18'>{data?.text}</span>
+                                <div className='grid'>
+                                    <span className='f-w-500 f-s-16'>{data?.text}</span>
                                     <span className='opacity'>{data?.subtext}</span>
                                     {
                                         data?.action &&

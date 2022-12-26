@@ -129,10 +129,9 @@ export default function Dashboard() {
     }, [LinkURL])
 
 
-
     return (
 
-        <Main>
+        <Main className='m-t-2'>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>
@@ -193,9 +192,15 @@ export default function Dashboard() {
                             </div>
                             <div className='grid gap'>
                                 {
-                                    UserLinks.length < 1 
-                                    ? <Messages loader={true} /> 
-                                    : <ListLink links={UserLinks} User={User} />
+
+                                    UserLinks === 'no link' 
+                                    ? <span>Pas de lien</span>
+                                    :  
+                                    (
+                                        UserLinks.length < 1
+                                        ? <Messages loader={true} /> 
+                                        : <ListLink links={UserLinks} User={User} />
+                                    )
                                 }
                             </div>
 

@@ -34,8 +34,8 @@ export default function Header({visible}) {
 
     const menu = [
         {
-            name: 'Se connecter',
-            link: '/login',
+            name: user ? 'Mon compte' : 'Se connecter',
+            link:  user ? '/profil' : '/login',
             icon: <UserIcon width={16} className='c-black' />
         },
         {

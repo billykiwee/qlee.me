@@ -41,7 +41,7 @@ export default function Footer() {
 
     if (!isLinkInBio())
     return (
-        <footer className='m-t-4' >
+        <footer className='m-t-2' >
             <div className='display justify-s-b m-t-1'>
                 <div className='align-top display justify-s-b'>
                     <div className='display gap-04'>

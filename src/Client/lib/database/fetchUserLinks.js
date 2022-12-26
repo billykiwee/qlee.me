@@ -12,7 +12,10 @@ export const fetchUserLinks = async (setUserLinks, userEmail) => {
     
             query.onSnapshot(snapshot => {
                 const allLinks = snapshot.docs.map(doc => doc.data())
-                setUserLinks(allLinks.sort((x,y)=> y.date - x.date).reverse())
+                
+                if (allLinks.length === 0) setUserLinks('no link')
+                else 
+                setUserLinks(allLinks?.sort((x,y)=> y.date - x.date).reverse())
             })
         }
 

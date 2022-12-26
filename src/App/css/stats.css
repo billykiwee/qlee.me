@@ -28,7 +28,7 @@
     
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 740px) {
 
     .stats-blocks > div {
         position: sticky;
