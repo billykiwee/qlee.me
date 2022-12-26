@@ -7,7 +7,7 @@ import { useStateValue } from '../provider/StateProvider'
 import { ArrowDownCircleIcon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
 
 
-export default function Header() {
+export default function Header({visible}) {
 
 
     const [{user}] = useStateValue()
@@ -71,7 +71,7 @@ export default function Header() {
 
 
 
-    
+    if (visible)
     return (
         <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
             <div className='display justify-s-b'>

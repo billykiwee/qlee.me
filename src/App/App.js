@@ -18,6 +18,7 @@ import Stats from '../Client/views/Stats/Stats'
 import Redirection from '../Client/Redirection.jsx'
 import Payment from '../Website/views/Payment'
 import { SnackBar } from './components/SnackBar'
+import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 
 
 
@@ -47,7 +48,7 @@ export default function App() {
 
     
 
-    
+
 
     const router = {
         init : {
@@ -94,6 +95,10 @@ export default function App() {
             path : '/payment',
             element : <Payment />
         },
+        linkinbio : {
+            path : '/link-in-bio',
+            element : <LinkInBio />
+        },
     }
 
 
@@ -101,7 +106,7 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header visible />
                 <Routes>
                     {
                         Object.values(router)

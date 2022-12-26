@@ -19,7 +19,8 @@ import { fetchUser } from '../../lib/database/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
 import { QrCodeIcon } from '@heroicons/react/24/solid'
 import { deleteObject, ref } from 'firebase/storage'
-
+import { addToLinkInBio } from './functions/addToLinkInBio'
+import { checkShortLinkAvailable } from '../Links/functions/checkShortLinkAvailable'
 
 
 export default function Edit() {
@@ -83,7 +84,7 @@ export default function Edit() {
 
         db.collection('links').doc(Link.id).delete()
         .then(deletePhoto=> {
-            if (Link.url) {
+            if (Link.icon) {
                 let refPhoto = ref(storage, `links/favicon/${Link.id}`)
                 deleteObject(refPhoto)
             }
@@ -194,28 +195,7 @@ export default function Edit() {
     }
     
 
-    function checkShortLinkAvailable(input) {
-        const divAlert = document.querySelector('#alert-shortlink')
 
-
-        if (input.length) {
-
-            let isIDExist = UserLinks.filter(link=> link.id === input)[0]
-
-            if (!isIDExist) {
-                divAlert.style.color = 'var(--green)'
-                divAlert.innerHTML = `Le lien court "${input}" est disponible`
-            }
-
-            else {
-                divAlert.style.color = 'var(--red)'
-                divAlert.innerHTML = `Le lien court "${input}" n'est pas disponible`
-            }
-
-        }
-        else divAlert.innerHTML = ''
-
-    } 
   
     const [QrCode,setQrCode] = useState(false)
 
@@ -390,7 +370,7 @@ export default function Edit() {
                                                             placeholder={Link.id} 
                                                             onChange={e=> {
                                                                 setEditShortLink(e.target.value)
-                                                                checkShortLinkAvailable(e.target.value)
+                                                                checkShortLinkAvailable(e.target.value, UserLinks)
                                                             }} 
                                                             pattern="\S*"
                                                             onKeyPress={event=> {
@@ -411,7 +391,7 @@ export default function Edit() {
 
                                                         <div className='display'>
                                                             <label htmlFor='active_views' className='display gap click'>
-                                                                <input type='checkbox' className='h-1' id='active_views' />
+                                                                <input type='checkbox' className='h-1' id='active_views' checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } />
                                                                 <span className='f-w-300'>Ajouter a mon link in bio</span>
                                                             </label>
                                                         </div>

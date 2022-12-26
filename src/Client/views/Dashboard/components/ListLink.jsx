@@ -1,4 +1,5 @@
 import { ClipboardIcon } from '@heroicons/react/24/outline'
+import { BookmarkIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
@@ -22,8 +23,12 @@ export default function ListLink({links, User}) {
                                     <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
                                 </Link>
                                 <div className='grid '> 
-                                    <div className='display gap'>
+                                    <div className='display gap-04'>
                                         <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
+                                        {
+                                            link.linkInBio &&
+                                            <BookmarkIcon width={12} className='c-yellow' />
+                                        }
                                     </div>
                 
                                     <div className='grid gap'>

@@ -196,7 +196,9 @@ button:active {
 
 
 
-
+.m-b-3 {
+    margin-bottom: 3rem;
+}
 .justify-s {
     justify-content: flex-start;
 }
@@ -641,6 +643,9 @@ padding: 0.4rem;
 }
 
 
+.c-yellow {
+    color: var(--yellow);
+}
 
 .c-grey {
     color: var(--grey-text);
