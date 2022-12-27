@@ -1,4 +1,5 @@
-import React from 'react'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import React, { useState } from 'react'
 
 
 export default function Filter({props}) {
@@ -21,6 +22,10 @@ export default function Filter({props}) {
             text: 'link in bio',
         }
     ]
+
+
+
+    const [showFilter, setShowFilter] = useState(false)
 
 
     return (
@@ -77,25 +82,16 @@ export default function Filter({props}) {
                 }
                 {
                     props.Filter &&
-                    <>
-                        <div className='display wrap gap'>
+                    <div className='display gap'>
+                        <label htmlFor="filter-menu">filtres : </label>
+                        <select id="filter-menu" onChange={e=> props.setCheckFilter(e.target.value)} className='click h-2 border-r-04 p-04'>
                             {
-                                filters.map(filter=> {
-                                    return (
-                                        <div key={filter.name}>
-                                            <button 
-                                                className='border border-r-2 h-2 hover white p-lr-1' 
-                                                onClick={e=> props.setCheckFilter(filter.name)} 
-                                                style={{background : props.checkFilter === filter.name ? 'var(--orange)' : ''}}
-                                            >
-                                                <span className='c-black'>{filter.text}</span>
-                                            </button>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </>
+                            filters.map((filter) => (
+                                <option value={filter.name} >{filter.text}</option>
+                            ))
+                            } 
+                        </select>
+                    </div>
                 }
             </div>
         </div>  

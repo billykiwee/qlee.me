@@ -275,7 +275,7 @@ export default function Edit() {
                                     </div>
                                     
                                     <div className='display align-top'>
-                                        <div className='grid justify-c gap white border-r-1 border-b p-1 w-100p'>
+                                        <div className='grid justify-c gap white border-r-2 border-b p-1 w-100p'>
                                             <div className='display justify-s-b'>
                                                 <div className='display gap'>
                                                     <QrCodeIcon width={22} />

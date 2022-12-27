@@ -90,7 +90,7 @@ export default function List({props}) {
                 <div className='display gap justify-e'>
                     <div>
                         <button className={(selectLink.length ? 'red' : 'border white') + ' display gap h-2 p-1 border-r-2 '} onClick={e=> preDelete(selectLink.length)}>
-                            <span className='c-black f-s-16'>Suprimer</span>
+                            <span className='c-black'>Suprimer</span>
                         </button>
                     </div>
                     <div>
@@ -98,7 +98,7 @@ export default function List({props}) {
                             className={(selectLink.length === linksFilters.length ? 'blue ' : 'border white') + ' display gap h-2 p-1 border-r-2'} 
                             onClick={e=> selectLink.length !== linksFilters.length ? setselectLink(linksFilters.map(e=> e.id)) : setselectLink([]) }
                         >
-                            <span className='c-black f-s-16'>Selectioner tout</span>
+                            <span className='c-black'>Selectioner tout</span>
                         </button>
                     </div>
                 </div>
