@@ -1,6 +1,6 @@
 import { BookmarkIcon, EyeIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
@@ -10,6 +10,8 @@ import { getHostName } from '../../../lib/getHostName'
 
 
 export default function List({props}) {
+
+    const history = useNavigate()
 
     const linksFilters = props.InputSearch.length 
     ? 
@@ -56,13 +58,28 @@ export default function List({props}) {
         })
     }
 
+
     const deleteLinksSelected = (selectLink) => {
         selectLink.map(selected=> {
+
+
             db.collection('links').doc(selected).delete()
+            .then(e=> {
+                props.setMsg([]) 
+            })
+            .then(e=> {
+                setselectLink([])
+
+                const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
+                history('/stats/' + getNewIdDiv)
+                props.setShowStat(getNewIdDiv)
+                
+            })
         })
     }
 
-    console.log(selectLink);
+
+
 
     
     return (
@@ -87,65 +104,68 @@ export default function List({props}) {
                 </div>
             }
 
-            {
-                linksFilters
-                .map(link=> {
 
-                    return (
-                        
-                        <div className='display justify-s-b'>
-                            <Link to={'/stats/' + link.id} key={link.id} className='w-100p'>
-                                <div    
-                                    style={{background: props.LinkID === link.id ? 'var(--hover-btn)' : ''}}
-                                    className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
-                                    key={link.id} onClick={e=> props.setShowStat(link.id)} 
-                                >
-                                    <div className='display gap-1rem'>
-                                        <img src={getFavicon(link)} className='border-r-100' width={30} />
-                                        <div className='grid '> 
-                                            <div className='display gap-04'>
-                                                <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
-                                                {
-                                                    link.linkInBio &&
-                                                    <BookmarkIcon width={12} className='c-yellow' />
-                                                }
-                                            </div>
-                        
-                                            <div className='grid gap'>
+            <div  className='grid gap' id='div-links' >
+                {
+                    linksFilters
+                    .map(link=> {
+
+                        return (
+                            
+                            <div className='display justify-s-b' id={'link-' + link.id}>
+                                <Link to={'/stats/' + link.id} key={link.id} className='w-100p' >
+                                    <div    
+                                        style={{background: props.LinkID === link.id ? 'var(--hover-btn)' : ''}}
+                                        className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
+                                        key={link.id} onClick={e=> props.setShowStat(link.id)} 
+                                    >
+                                        <div className='display gap-1rem'>
+                                            <img src={getFavicon(link)} className='border-r-100' width={30} />
+                                            <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    <small href={'https://' + link.shortLink} className='hover-link link'>{link.shortLink}</small>
-                                                    <div className='display'>
-                                                        <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
-                                                            <small>Copié</small>
+                                                    <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
+                                                    {
+                                                        link.linkInBio &&
+                                                        <BookmarkIcon width={12} className='c-yellow' />
+                                                    }
+                                                </div>
+                            
+                                                <div className='grid gap'>
+                                                    <div className='display gap-04'>
+                                                        <small href={'https://' + link.shortLink} className='hover-link link'>{link.shortLink}</small>
+                                                        <div className='display'>
+                                                            <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
+                                                                <small>Copié</small>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className='display gap-1rem'>
-                                        <div className='display gap-04 opacity'>
-                                            <EyeIcon width={16} />
-                                            <small>{link.views}</small>
+                                        <div className='display gap-1rem'>
+                                            <div className='display gap-04 opacity'>
+                                                <EyeIcon width={16} />
+                                                <small>{link.views}</small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
-                            {
-                                props.Filter && 
-                                <div className='display justify-c w-3 h-3 '>
-                                    <input 
-                                        type='checkbox' 
-                                        className='click w-1 h-1'
-                                        checked={selectLink.includes(link.id) ? true : false}
-                                        onChange={e=> selectedLinks({ checked: e.target.checked, id: link.id }) }  
-                                    />
-                                </div>
-                            }
-                        </div>
-                    )
-                })
-            }
+                                </Link>
+                                {
+                                    props.Filter && 
+                                    <div className='display justify-c w-3 h-3 '>
+                                        <input 
+                                            type='checkbox' 
+                                            className='click w-1 h-1'
+                                            checked={selectLink.includes(link.id) ? true : false}
+                                            onChange={e=> selectedLinks({ checked: e.target.checked, id: link.id }) }  
+                                        />
+                                    </div>
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

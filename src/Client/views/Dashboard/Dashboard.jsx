@@ -15,14 +15,7 @@ import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
 import { fetchUser } from '../../lib/database/fetchUser';
 import { setSnackbar, SnackBar } from '../../../App/components/SnackBar';
-import { useReducer } from 'react';
-import { BookmarkIcon, EyeIcon } from '@heroicons/react/24/solid';
-import { dataFilter } from '../Stats/data/dataFilters';
-import formatDate from '../../../App/utils/formatDate';
-import { HeartIcon } from '@heroicons/react/24/solid';
-import getFavicon from '../../../App/utils/getFavicon';
 import Articles from './components/Articles';
-import { formatNumber } from '../../../App/utils/formatNumber';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 
 
@@ -79,15 +72,15 @@ export default function Dashboard() {
     
             if (isUserPremium(User).max_links <= UserLinks.length) {
                 throw setMsg({
-                        id: UniqueID('msg', 5),
-                        text: 'Erreur',
-                        subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
-                        action: {
-                            text : 'Débloque plus de lien ici !',
-                            link: '/pricing',
-                        },
-                        status : 'error'
-                    })
+                    id: UniqueID('msg', 5),
+                    text: 'Erreur',
+                    subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
+                    action: {
+                        text : 'Débloque plus de lien ici !',
+                        link: '/pricing',
+                    },
+                    status : 'error'
+                })
             }
         }
 

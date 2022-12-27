@@ -70,6 +70,7 @@ export default function Stats() {
     const [Msg, setMsg] = useState([])
 
 
+    
     return (
         <Main>
 
@@ -191,6 +192,7 @@ export default function Stats() {
                             UserLinks  : UserLinks,
                             checkFilter: checkFilter,
                             setMsg     : setMsg,
+                            setShowStat: setShowStat,
                         }} 
                     />
                 </div>

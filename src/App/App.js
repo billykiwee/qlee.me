@@ -20,7 +20,7 @@ import Payment from '../Website/views/Payment'
 import { SnackBar } from './components/SnackBar'
 import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
-import Terms from '../Client/views/Terms/Terms'
+import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 
 
