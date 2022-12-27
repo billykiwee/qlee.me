@@ -18,7 +18,7 @@ export default function Articles({links}) {
             name: 'Mon compte',
             icon: <UserCircleIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1564069114553-7215e1ff1890?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80',
-            link: '/login'
+            link: '/profil'
         },
         {
             name: 'Link in bio',

@@ -87,6 +87,24 @@ h2 {
     font-weight: 500;
 }
 
+h1 {
+    font-size: 4.4rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+@media screen and (max-width: 780px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+
 
 
 
@@ -1102,7 +1120,7 @@ input[type=number] {
   left: 0;
   right: -6px;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--border);
   -webkit-transition: .2s;
   transition: .2s;
 }

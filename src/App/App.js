@@ -21,6 +21,7 @@ import { SnackBar } from './components/SnackBar'
 import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Client/views/Terms/Terms'
+import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 
 
 
@@ -99,6 +100,10 @@ export default function App() {
         linkinbio : {
             path : '/link-in-bio',
             element : <LinkInBio />
+        },
+        edit_linkinbio : {
+            path : '/edit/link-in-bio',
+            element : <EditLinkInBio />
         },
         profil : {
             path : '/profil',

@@ -57,8 +57,8 @@ export default function Profil() {
     
 
     return (
-        <Main>
-            <div className='grid gap-2rem'>
+        <Main className='m-t-2'>
+            <div className='grid gap-2rem blocks'>
                 <div className='grid gap-2rem'>
                     <div className='display gap-1rem'>
 
@@ -107,6 +107,10 @@ export default function Profil() {
                     <div className='grid gap'>
                         <span>Nom</span>
                         <input className='div-input white h-3' type='text' placeholder={User?.name} onChange={e=> setEditValue(['name', e.target.value])} />
+                    </div>
+                    <div className='grid gap'>
+                        <span>Description</span>
+                        <textarea className='div-input white' type='text' placeholder={User?.description ?? "Écrire une description qui s'affichera dans ma bio"} onChange={e=> setEditValue(['description', e.target.value])} />
                     </div>
                     <div className='grid gap'>
                         <span>Email</span>

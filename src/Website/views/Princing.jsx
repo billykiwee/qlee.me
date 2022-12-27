@@ -81,7 +81,7 @@ export default function Pricing() {
 
                             return (
                                 <div className='grid' key={plan.plan}>
-                                    <div className='border-b border border-r-1 p-2 card-pricing' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
+                                    <div className='border-b border border-r-1 card-pricing white' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
 
                                         <div className='grid gap-2rem'>
                                             <div className='display justify-s-b align-top'>

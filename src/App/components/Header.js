@@ -89,7 +89,7 @@ export default function Header({visible}) {
                 </div>
                 <div className='display gap'>
                     {
-                        User 
+                        user 
                         ?
                         <Link to='/dashboard' className='display avatar-header' >
                             <img src={User?.photoURL} className='border-r-100' width={38} height={38} />
@@ -97,7 +97,7 @@ export default function Header({visible}) {
                         : 
                         <div className='display justify-c'>
                             <Link to='/login'>
-                                <button className='border-b hover-blue border border-r-1 p-lr-1 gap-04 blue' style={{height: '40px'}}>
+                                <button className='hover-blue border-r-2 p-1 gap-04 blue' style={{height: '40px'}}>
                                     <span className='display'>
                                         <img src='/images/user-solid.svg' width={14} style={{filter:' invert(100%)'}} />
                                     </span>

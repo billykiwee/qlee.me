@@ -404,14 +404,14 @@ export default function Edit() {
                                             >
                                                 <div className='display'>
                                                     <label htmlFor='active_views' className='display gap-1rem click'>
-                                                        <SwitchInput checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } id='active_views'  />
+                                                        <SwitchInput dimension={0.8} checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID) } id='active_views'  />
                                                         <span className='f-w-300'>Ajouter a mon link in bio</span>
                                                     </label>
                                                 </div>
 
                                                 <div className='display'>
                                                     <label htmlFor='active_adds' className='display gap-1rem click'>
-                                                        <SwitchInput id='active_adds' />
+                                                        <SwitchInput dimension={0.8} id='active_adds' />
                                                         <span className='f-w-300'>Activer la monétisation</span>
                                                     </label>
                                                 </div>

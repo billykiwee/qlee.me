@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 // import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 import Main from '../App/components/Main'
-import { BanknotesIcon, LinkIcon, PencilSquareIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { BanknotesIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { formatNumber } from '../App/utils/formatNumber';
 import formatCurrency from '../App/utils/formatCurrency';
+import { fetchLinks } from '../Client/lib/database/fetchLinks';
+import ListLink from '../Client/views/Dashboard/components/ListLink';
+import { SwitchInput } from '../App/components/Switch';
+import getFavicon from '../App/utils/getFavicon';
 
 export default function Home() {
 
@@ -71,7 +75,6 @@ export default function Home() {
         },
     ]
 
-
     const exemples = [
         {
             name: '@Celine',
@@ -99,6 +102,51 @@ export default function Home() {
         }
     ]
 
+
+    const features = [
+        {
+            name: 'Cut',
+            text: "Short and manage your URLs in a seconde",
+            icon: <div className='display justify-c blue border-b border-r-1 ' style={{width: '100px', height: '88px'}}><ScissorsIcon width={44} /></div>
+        },
+        {
+            name: 'Links',
+            text: "Create a link in bio page with yours links in one clic",
+            icon: <div className='display justify-c yellow border-b border-r-1 ' style={{width: '100px', height: '88px'}}><SwatchIcon width={44} className='c-white' /></div>
+        },
+        {
+            name: 'Stats',
+            text: "Aanalyse your bests links to a better scale up",
+            icon:  <div className='display justify-c orange border-b border-r-1 ' style={{width: '100px', height: '88px'}}><RocketLaunchIcon width={44} /></div>
+        },
+    ]
+
+
+    const tempateLinks = [
+        {
+            name: 'Ma boutique de vetement',
+            shortLink: 'ma-boutique',
+            check: true
+        },
+        {
+            name: 'Mon instagram',
+            shortLink: '@joe',
+            check: true
+        },
+        {
+            name: 'Ma boutique de vetement',
+            shortLink: 'ma-boutique',
+            check: false
+        }
+    ]
+
+
+    const [AllLinks, setAllLinks] = useState([])
+
+    useEffect(e=> {
+        fetchLinks(setAllLinks)
+    }, [])
+
     return (
         <Main className='main-home'>
 
@@ -109,7 +157,7 @@ export default function Home() {
                         <div className='grid gap-04 title-home'>
                             <small className='link'>ONE SECOND TO</small>
                             <h1 className='m-t-0 m-b-1'>Qlee your links</h1>
-                            <span className='opacity f-w-300'>Don't panic, that juste the best shortener for your web presence you have never seen before !</span>
+                            <span className='opacity f-w-300'>Don't panic, that just the best URL shortener for your web presence you have never seen before !</span>
                         </div>
 
                         <div className='grid gap-1rem w-100p'>
@@ -165,32 +213,68 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='subject-div'>
-                <div className='title-subject'>
-                    <small className='link'>FOR ALL TYPE OF LINKS</small>
+            <div className='steps-div'>
+                <div className='title-steps'>
+                    <small className='link'>ALL IN ONE</small>
+                    <h2 className='m-t-04'>All that you need</h2>
                 </div>
-
-                <div className='subject-div-blocks'>
+                <div className='display gap-1rem features'>
                     {
-                        subjects.map(subject=> {
+                        features.map(feature=> {
                             return (
-                                <div className='display subject-blocks' key={subject.name}>
-                                    <span className='f-s-20'>{subject.icon}</span>
-                                    <span>{subject.name}</span>
+                                <div className='features-blocks' key={feature.name}>
+                                    <div className='grid'>
+                                        <div className='justify-c display'>
+                                            <div className='steps-blocks-head'>
+                                                {feature.icon}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='grid gap-1rem'>
+                                        <div className='grid gap text-align-c'>
+                                            <span className='f-s-25 f-w-500'>{feature.name}</span>
+                                            <span className='display c-grey f-w-200 text-align-c'>{feature.text}</span>
+                                        </div>
+                                        <span className='link hover-link text-align-c'>know more</span>
+                                    </div>
                                 </div>
                             )
                         })
                     }
                 </div>
+            </div>
+
+            <div className='subject-div'>
+                <div className='grid'>
+                    <div className='title-subject'>
+                        <small className='link'>FOR ALL TYPE OF LINKS</small>
+                        <h2 className='m-t-04'>For everyone</h2>
+                    </div>
+
+                    <div className='subject-div-blocks'>
+                        {
+                            subjects.map(subject=> {
+                                return (
+                                    <div className='display subject-blocks' key={subject.name}>
+                                        <span className='f-s-20'>{subject.icon}</span>
+                                        <span>{subject.name}</span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
 
                 <Swiper 
                     className='w-100p'
-                    slidesPerView={2.2} 
+                    slidesPerView={1.8} 
                     spaceBetween={18}
-                    pagination={{
-                        clickable: true,
+                    loop
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
                     }}
-                    modules={[Pagination]}
+                    modules={[Autoplay]}
                 >
                         {
                             exemples.map(exemple=> {
@@ -209,38 +293,54 @@ export default function Home() {
             </div>
 
 
+            <div className='display justify-s-b'>
+                <div className='display w-50'>
+                    <h2>Manage your links as you wish</h2>
+                </div>
+                <div className='grid gap w-50'>
+                    <img src='/images/capture.png' width='100%' />
+                   {/*  {
+                        tempateLinks.map(t=> {
+                            let checked = t.check
+
+                            console.log(checked);
+                            return (
+                                <div className='display border border-r-1 border-b white p-1'>
+                                    <img src={getFavicon('www.youtube.com')} width={30} className='border-r-100' />
+                                    <div className='display gap-04 '>
+                                        <span className='f-s-16'>{t.name}</span>
+                                        <SwitchInput checked={checked} onChange={e=> checked = e.target.checked} />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    } */}
+                </div>
+            </div>
+
             <div className='yellow p-2 border-r-2'>
                 <div>
-                    <h1>What about numbers ?</h1>
+                    <h2 className='m-t-0'>Some numbers</h2>
                 </div>
 
                 <div className='grid gap-1rem'>
-                    <div className='display justify-s-b'>
-                        <SwatchIcon width={38} className='c-black' />
+                    <div className='display justify-s-b align-top'>
                         <div className='grid'>
-                            <span className='f-s-2rem f-w-600'>{formatNumber(93842)}</span>
-                            <div className='display gap justify-e'>
+                            <span className='f-s-2rem f-w-600 '>{formatNumber(AllLinks.length)}</span>
+                            <div className='display gap-1rem'>
                                 <span className='opacity f-w-300'>Created links</span>
                             </div>
                         </div>
+                        <SwatchIcon width={28} className='c-black' />
                     </div>
-                    <div className='display justify-s-b'>
-                        <UserIcon width={38} className='c-black' />
+                    <div className='display justify-s-b align-top'>
                         <div className='grid'>
                             <span className='f-s-2rem f-w-600'>{formatNumber(293)}</span>
-                            <div className='display gap justify-e'>
-                                <span className='opacity f-w-300'>Uers</span>
+                            <div className='display gap-1rem e'>
+                                <span className='opacity f-w-300'>Users</span>
                             </div>
                         </div>
-                    </div>
-                    <div className='display justify-s-b'>
-                        <BanknotesIcon width={38} className='c-black' />
-                        <div className='grid'>
-                            <span className='f-s-2rem f-w-600'>{formatCurrency(89377.29)}</span>
-                            <div className='display gap justify-e'>
-                                <span className='opacity f-w-300'>earned</span>
-                            </div>
-                        </div>
+                        <UserIcon width={28} className='c-black' />
                     </div>
                 </div>
             </div>

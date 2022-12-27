@@ -21,8 +21,6 @@ export default function Redirection() {
         fetchLink(LinkID)
         .then(link=> {
 
-            hideHeaderFooter()
-
             getAdress()
             .then(getAdress=> getAdress)
             .then(adress=> {
@@ -62,11 +60,12 @@ export default function Redirection() {
     }, [LinkID])
 
  
-    function hideHeaderFooter() {
+    useEffect(e=> {
         document.querySelector('header').style.display = 'none'
         document.querySelector('footer').style.display = 'none'
         document.querySelector('main').style = 'display:flex; justify-content:center;margin:auto;'
-    }
+    })
+
 
     return (
         <Main className='margin-auto'> 
