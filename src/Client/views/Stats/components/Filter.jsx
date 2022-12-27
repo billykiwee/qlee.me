@@ -56,7 +56,11 @@ export default function Filter({props}) {
                             onMouseOver={e=> e.target.classList.add('c-black')}
                             onMouseOut={e=> e.target.classList.remove('c-black')}
                         >
-                            <div className={!props.Filter ? 'c-grey' : 'c-black'} onMouseOver={e=> e.target.classList.add('c-black')} onMouseOut={e=> e.target.classList.remove('c-black')} >
+                            <div 
+                                className={props.checkFilter ? 'c-orange' : 'c-grey' && (!props.Filter ? 'c-grey' : 'c-black')} 
+                                onMouseOver={e=> e.target.classList.add('c-black')} 
+                                onMouseOut={e=> e.target.classList.remove('c-black')} 
+                            >
                                 <span className='f-s-14 display gap'>
                                     Filtre
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={14}><path fillRule="evenodd" d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z" clipRule="evenodd" /></svg>
@@ -73,23 +77,25 @@ export default function Filter({props}) {
                 }
                 {
                     props.Filter &&
-                    <div className='display wrap gap'>
-                        {
-                            filters.map(filter=> {
-                                return (
-                                    <div key={filter.name}>
-                                        <button 
-                                            className='border border-r-2 h-2 hover white p-lr-1' 
-                                            onClick={e=> props.setCheckFilter(filter.name)} 
-                                            style={{background : props.checkFilter === filter.name ? 'var(--yellow)' : ''}}
-                                        >
-                                            <span className='c-black'>{filter.text}</span>
-                                        </button>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    <>
+                        <div className='display wrap gap'>
+                            {
+                                filters.map(filter=> {
+                                    return (
+                                        <div key={filter.name}>
+                                            <button 
+                                                className='border border-r-2 h-2 hover white p-lr-1' 
+                                                onClick={e=> props.setCheckFilter(filter.name)} 
+                                                style={{background : props.checkFilter === filter.name ? 'var(--orange)' : ''}}
+                                            >
+                                                <span className='c-black'>{filter.text}</span>
+                                            </button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </>
                 }
             </div>
         </div>  

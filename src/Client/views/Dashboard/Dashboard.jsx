@@ -23,6 +23,7 @@ import { HeartIcon } from '@heroicons/react/24/solid';
 import getFavicon from '../../../App/utils/getFavicon';
 import Articles from './components/Articles';
 import { formatNumber } from '../../../App/utils/formatNumber';
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 
 
 export default function Dashboard() {
@@ -78,15 +79,15 @@ export default function Dashboard() {
     
             if (isUserPremium(User).max_links <= UserLinks.length) {
                 throw setMsg({
-                    id: UniqueID('msg', 5),
-                    text: 'Erreur',
-                    subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
-                    action: {
-                        text : 'Débloque plus de lien ici !',
-                        link: '/pricing',
-                    },
-                    status : 'error'
-                })
+                        id: UniqueID('msg', 5),
+                        text: 'Erreur',
+                        subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
+                        action: {
+                            text : 'Débloque plus de lien ici !',
+                            link: '/pricing',
+                        },
+                        status : 'error'
+                    })
             }
         }
 
@@ -96,11 +97,11 @@ export default function Dashboard() {
             db.collection('links').doc(link.id).set(link)
             .then(showPopup=> {
                 setMsg({
-                    id: UniqueID('msg', 5),
+                            id: UniqueID('msg', 5),
                     text: 'Bravo 🎉',
                     subtext: `Le lien ${NameLink} a bien été crée`,
                     status: 'success'
-                })
+            })
             })
             .then(linkCreated=> {
                 document.querySelectorAll('input').forEach(e=> e.value = '')
@@ -127,6 +128,8 @@ export default function Dashboard() {
         }
 
     }, [LinkURL])
+
+
 
 
     return (
@@ -178,7 +181,12 @@ export default function Dashboard() {
                     <div className='grid gap-2rem'>
                         <div className='grid gap-2rem'>
                             <div className='display justify-s-b'>
-                                <span className='f-s-25 f-w-500'>Mes liens</span>
+                                <div className='display gap'>
+                                    <span className='f-s-25 f-w-500'>Mes liens</span>
+                                    <Link className='display justify-c hover border-r-2 w-2 h-2' to='/stats'>
+                                        <EllipsisHorizontalIcon width={24} className='c-grey' />
+                                    </Link>
+                                </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
                                         <small className='c-black'>{UserLinks.length} / {isUserPremium(User).max_links}</small>
@@ -211,7 +219,7 @@ export default function Dashboard() {
 
             </div>
 
-            <SnackBar content={Msg} setMsg={setMsg} />
+            <SnackBar content={Msg} Msg={Msg} setMsg={setMsg} />
         </Main>
     )
 }

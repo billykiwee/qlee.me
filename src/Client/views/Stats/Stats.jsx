@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
@@ -15,6 +15,7 @@ import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import { BookmarkIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
+import Popup from '../../../App/components/Popup'
 
 
 
@@ -66,11 +67,14 @@ export default function Stats() {
 
     const data = dataFilter(LinkStat)
 
-    
+    const [Msg, setMsg] = useState([])
 
 
     return (
         <Main>
+
+            <Popup content={Msg} />
+
             <div className='display blocks stats-blocks align-top gap-2rem'>
 
                 <div className='grid'>
@@ -91,9 +95,9 @@ export default function Stats() {
                             return (
                                 <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
                                     <div className='grid gap'>
-                                        <div className='display justify-c'>
+                                        <Link to={'/edit/' + topLink.id} className='display justify-c'>
                                             <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
-                                        </div>
+                                        </Link>
                                         <div className='grid text-align-c'>
                                             <div className='display justify-c gap-04'>
                                                 <span className='f-s-20'>{topLink?.name}</span>
@@ -164,7 +168,7 @@ export default function Stats() {
                 </div>
 
                 
-                <div className='grid gap-1rem'>
+                <div className='grid gap-1rem m-t-4' >
                     <Filter 
                         props={{
                             Filter        : filter,
@@ -180,11 +184,13 @@ export default function Stats() {
 
                     <List 
                         props={{
+                            Filter     : filter,
                             LinkID     : LinkID,
                             InputSearch: InputSearch,
                             setShowStat: setShowStat,
                             UserLinks  : UserLinks,
-                            checkFilter: checkFilter
+                            checkFilter: checkFilter,
+                            setMsg     : setMsg,
                         }} 
                     />
                 </div>

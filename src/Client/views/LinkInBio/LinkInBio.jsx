@@ -67,10 +67,7 @@ export default function LinkInBio({userView}) {
     }
 
 
-    console.log(end)
 
-
- 
     return (
         <Main className='display p-1' style={{
             height: '100%',
@@ -80,7 +77,7 @@ export default function LinkInBio({userView}) {
         }}
         >
 
-            <div className=' gap-1rem w-100p border-r-2 border p-1 white'>  
+            <div className=' gap-1rem'>  
                 
                 <div className='grid gap-1rem p-1'>
                     {

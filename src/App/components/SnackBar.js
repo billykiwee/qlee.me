@@ -1,21 +1,28 @@
 import { CheckBadgeIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-export function SnackBar({content, setMsg}) {
+export function SnackBar({content, Msg, setMsg}) {
 
 
     function deleteData(id) {
+        
+        document.querySelector('#' + id).classList.add('out')
+        let remove = document.querySelector('#' + id).classList.value.split(' ')
 
-        document.querySelector('#' + id).classList.add('out');
-            
-        setTimeout(() => {
-            if (document.querySelector('#' + id).classList.value.includes('out')) {
+        if (remove.includes('out')) {
+            setTimeout(e=> {
                 setMsg([])
-            }
-        }, 400)
+            }, 400)
+        }
     }
+
+    useEffect(e=> {
+        setTimeout(e=> {
+            setMsg([])
+        }, 4000)
+    }, [])
 
 
 
@@ -26,14 +33,6 @@ export function SnackBar({content, setMsg}) {
         {
             [content]
             .map(data=> {
-
-                setTimeout(e => {
-                    document.querySelector('#' + data.id).classList.add('out')
-
-                    setTimeout(e => {
-                        setMsg([])
-                    }, 400)
-                }, 1000 * 8)
 
 
                 return (

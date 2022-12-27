@@ -1065,7 +1065,7 @@ input[type=number] {
 }
 
 .snackbar_div {
-    bottom: 0rem;
+    bottom: 2rem;
     align-items: flex-start;
     position: sticky;
 }
@@ -1159,3 +1159,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+
+
