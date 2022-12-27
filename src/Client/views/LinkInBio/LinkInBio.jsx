@@ -9,8 +9,6 @@ import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
 
-import DraggableList from 'react-draggable-lists'
-
 
 export default function LinkInBio({userView}) {
 

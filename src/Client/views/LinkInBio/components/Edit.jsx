@@ -9,8 +9,6 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { fetchUserLinks } from '../../../lib/database/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 
 
 export function EditLinkInBio() {
