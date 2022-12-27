@@ -57,7 +57,7 @@ export default function Filter({props}) {
                             onMouseOut={e=> e.target.classList.remove('c-black')}
                         >
                             <div 
-                                className={props.checkFilter ? 'c-orange' : 'c-grey' && (!props.Filter ? 'c-grey' : 'c-black')} 
+                                className={!props.Filter ? 'c-grey' : 'c-black'} 
                                 onMouseOver={e=> e.target.classList.add('c-black')} 
                                 onMouseOut={e=> e.target.classList.remove('c-black')} 
                             >
