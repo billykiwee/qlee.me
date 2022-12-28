@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { BackwardIcon, ChevronDownIcon, ForwardIcon, FunnelIcon, MagnifyingGlassIcon, StarIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 
 
@@ -8,44 +8,48 @@ export default function Filter({props}) {
         {
             name: 'popular',
             text: 'popular',
+            icon: <StarIcon width={16} className='c-black' />
         },
         {
             name: 'recent',
-            text: 'most recent'
+            text: 'most recent',
+            icon: <ForwardIcon width={16} className='c-black' />
         },
         {
             name: 'oldest',
             text: 'oldest',
+            icon: <BackwardIcon width={16} className='c-black' />
         },
         {
             name: 'link-in-bio',
             text: 'link in bio',
+            icon: <SwatchIcon width={16} className='c-black' />
         }
     ]
 
 
 
-    const [showFilter, setShowFilter] = useState(false)
-
+    const [isOpen, setOpen] = useState(false)
+    
 
     return (
         <div className='grid gap-1rem'>
             <div className='grid gap-1rem'>
-                <div className='display justify-s-b'>
+                <div className='display gap'>
                     <div className='display'>
                         <button 
                             onClick={e=> {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={!props.Search ? 'c-grey' : 'c-black'} 
+                            className={(!props.Search ? 'c-grey' : 'c-black') + ' h-3 p-1 border-r-1 border white'} 
                             onMouseOver={e=> e.target.classList.add('c-black')}
                             onMouseOut={e=> e.target.classList.remove('c-black')}
                         >
                             <div >
                                 <span className='f-s-14 display gap'>
                                     Rechercher
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={20}><path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clipRule="evenodd" /></svg>
+                                    <MagnifyingGlassIcon width={20} />
                                 </span>
                             </div>
                         </button>
@@ -57,7 +61,7 @@ export default function Filter({props}) {
                                 props.setSearch(false)
                                 props.setFilter(props.Filter ? false : true)
                             }}
-                            className={!props.Search ? 'c-grey' : 'c-black'} 
+                            className={(!props.Search ? 'c-grey' : 'c-black') + ' h-3 p-1 border-r-1 border white'} 
                             onMouseOver={e=> e.target.classList.add('c-black')}
                             onMouseOut={e=> e.target.classList.remove('c-black')}
                         >
@@ -68,7 +72,7 @@ export default function Filter({props}) {
                             >
                                 <span className='f-s-14 display gap'>
                                     Filtre
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width={14}><path fillRule="evenodd" d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z" clipRule="evenodd" /></svg>
+                                    <FunnelIcon  width={18} />
                                 </span>
                             </div>
                         </button>
@@ -81,16 +85,34 @@ export default function Filter({props}) {
                     </div>
                 }
                 {
-                    props.Filter &&
+                     props.Filter &&
                     <div className='display gap'>
-                        <label htmlFor="filter-menu">filtres : </label>
-                        <select id="filter-menu" onChange={e=> props.setCheckFilter(e.target.value)} className='click h-2 border-r-04 p-04'>
-                            {
-                            filters.map((filter) => (
-                                <option value={filter.name} >{filter.text}</option>
-                            ))
-                            } 
-                        </select>
+                        <div className='dropdown border-r-1 border click'>
+                            <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)}>
+                                <div className='display gap'>
+                                    {
+                                        filters.map(fil=> {
+                                            if (fil.name === props.checkFilter)
+                                            return <span className='display'>{fil.icon}</span>
+                                        })
+                                    }
+                                    {props.checkFilter}
+                                </div>
+                                <ChevronDownIcon width={16} />
+                            </div>
+                            <div className={`dropdown-body ${isOpen && 'open'}`}>
+                                {
+                                    filters.map(item => {
+                                        return (
+                                            <div className="dropdown-item hover click display gap" onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
+                                                <span className='display'>{item.icon}</span>
+                                                <span>{item.name}</span>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
                 }
             </div>

@@ -70,7 +70,7 @@ export default function Stats() {
     const [Msg, setMsg] = useState([])
 
 
-    
+
     return (
         <Main>
 
@@ -141,7 +141,7 @@ export default function Stats() {
                                                     (
                                                         <div className='display justify-s-b'>
                                                             {
-                                                                data.performance 
+                                                                data.performance.speed
                                                                 ? 
                                                                 (
                                                                     <>

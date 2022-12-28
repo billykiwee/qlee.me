@@ -1,4 +1,5 @@
-import { BookmarkIcon, EyeIcon } from '@heroicons/react/24/solid'
+import { CheckIcon } from '@heroicons/react/24/outline'
+import { BookmarkIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { db } from '../../../../App/database/firebase'
@@ -46,16 +47,18 @@ export default function List({props}) {
 
 
     const preDelete = async (number) => {
-        props.setMsg({
-            title: 'Attention',
-            message: `Vous êtes sur le point de supprimer ${number} ${number < 2 ? 'lien' : 'liens'}`,
-            question: 'Voulez-vous continuer ?',
-            buttonText: 'Supprimer',
-            buttonColor: 'red',
-            valid: () => deleteLinksSelected(selectLink),
-            close: () => props.setMsg([]) && setselectLink([]),
-            statu: 'question'
-        })
+        if (selectLink.length) {
+            props.setMsg({
+                title: 'Attention',
+                message: `Vous êtes sur le point de supprimer ${number} ${number < 2 ? 'lien' : 'liens'}`,
+                question: 'Voulez-vous continuer ?',
+                buttonText: 'Supprimer',
+                buttonColor: 'red',
+                valid: () => deleteLinksSelected(selectLink),
+                close: () => props.setMsg([]) && setselectLink([]),
+                statu: 'question'
+            })
+        }
     }
 
 
@@ -84,26 +87,6 @@ export default function List({props}) {
     
     return (
         <div className='grid gap'>
-
-            {
-                props.Filter &&
-                <div className='display gap justify-e'>
-                    <div>
-                        <button className={(selectLink.length ? 'red' : 'border white') + ' display gap h-2 p-1 border-r-2 '} onClick={e=> preDelete(selectLink.length)}>
-                            <span className='c-black'>Suprimer</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button 
-                            className={(selectLink.length === linksFilters.length ? 'blue ' : 'border white') + ' display gap h-2 p-1 border-r-2'} 
-                            onClick={e=> selectLink.length !== linksFilters.length ? setselectLink(linksFilters.map(e=> e.id)) : setselectLink([]) }
-                        >
-                            <span className='c-black'>Selectioner tout</span>
-                        </button>
-                    </div>
-                </div>
-            }
-
 
             <div  className='grid gap' id='div-links' >
                 {
@@ -153,12 +136,9 @@ export default function List({props}) {
                                 {
                                     props.Filter && 
                                     <div className='display justify-c w-3 h-3 '>
-                                        <input 
-                                            type='checkbox' 
-                                            className='click w-1 h-1'
-                                            checked={selectLink.includes(link.id) ? true : false}
-                                            onChange={e=> selectedLinks({ checked: e.target.checked, id: link.id }) }  
-                                        />
+                                        <button className='display' onClick={preDelete}>
+                                            <TrashIcon width={20} className='c-red'/>
+                                        </button>
                                     </div>
                                 }
                             </div>
