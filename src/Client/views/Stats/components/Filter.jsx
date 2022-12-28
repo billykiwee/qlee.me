@@ -1,4 +1,4 @@
-import { BackwardIcon, ChevronDownIcon, ForwardIcon, FunnelIcon, MagnifyingGlassIcon, StarIcon, SwatchIcon } from '@heroicons/react/24/solid'
+import { BackwardIcon, ChevronDownIcon, ChevronUpIcon, ForwardIcon, FunnelIcon, MagnifyingGlassIcon, StarIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 
 
@@ -8,22 +8,22 @@ export default function Filter({props}) {
         {
             name: 'popular',
             text: 'popular',
-            icon: <StarIcon width={16} className='c-black' />
+            icon: <StarIcon width={16} className='c-grey' />
         },
         {
             name: 'recent',
             text: 'most recent',
-            icon: <ForwardIcon width={16} className='c-black' />
+            icon: <ForwardIcon width={16} className='c-grey' />
         },
         {
             name: 'oldest',
             text: 'oldest',
-            icon: <BackwardIcon width={16} className='c-black' />
+            icon: <BackwardIcon width={16} className='c-grey' />
         },
         {
             name: 'link-in-bio',
             text: 'link in bio',
-            icon: <SwatchIcon width={16} className='c-black' />
+            icon: <SwatchIcon width={16} className='c-grey' />
         }
     ]
 
@@ -42,9 +42,7 @@ export default function Filter({props}) {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={(!props.Search ? 'c-grey' : 'c-black') + ' h-3 p-1 border-r-1 border white'} 
-                            onMouseOver={e=> e.target.classList.add('c-black')}
-                            onMouseOut={e=> e.target.classList.remove('c-black')}
+                            className={(props.Search ? 'blue' : 'white') + ' h-2 p-1 border-r-1 border '} 
                         >
                             <div >
                                 <span className='f-s-14 display gap'>
@@ -61,15 +59,11 @@ export default function Filter({props}) {
                                 props.setSearch(false)
                                 props.setFilter(props.Filter ? false : true)
                             }}
-                            className={(!props.Search ? 'c-grey' : 'c-black') + ' h-3 p-1 border-r-1 border white'} 
+                            className={(props.Filter ? 'blue' : 'white') + ' h-2 p-1 border-r-1 border '} 
                             onMouseOver={e=> e.target.classList.add('c-black')}
                             onMouseOut={e=> e.target.classList.remove('c-black')}
                         >
-                            <div 
-                                className={!props.Filter ? 'c-grey' : 'c-black'} 
-                                onMouseOver={e=> e.target.classList.add('c-black')} 
-                                onMouseOut={e=> e.target.classList.remove('c-black')} 
-                            >
+                            <div>
                                 <span className='f-s-14 display gap'>
                                     Filtre
                                     <FunnelIcon  width={18} />
@@ -98,7 +92,9 @@ export default function Filter({props}) {
                                     }
                                     {props.checkFilter}
                                 </div>
-                                <ChevronDownIcon width={16} />
+                                {
+                                    isOpen ?  <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
+                                }
                             </div>
                             <div className={`dropdown-body ${isOpen && 'open'}`}>
                                 {

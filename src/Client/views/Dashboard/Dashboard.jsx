@@ -177,7 +177,7 @@ export default function Dashboard() {
                                 <div className='display gap'>
                                     <span className='f-s-25 f-w-500'>Mes liens</span>
                                     <Link className='display justify-c hover border-r-2 w-2 h-2' to='/stats'>
-                                        <EllipsisHorizontalIcon width={24} />
+                                        <EllipsisHorizontalIcon width={30} />
                                     </Link>
                                 </div>
                                 <Link to='/pricing'>

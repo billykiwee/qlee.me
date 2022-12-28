@@ -1,21 +1,16 @@
 .frame-popup {
-    position: absolute;
-    z-index: 92;
-    width: 100%;
-    height: 100vh;
-    justify-content: center;
-    display: flex;
     align-items: center;
-    border-bottom: 0;
-    top: -7rem;
-}
-
-.frame-popup > div {
-    width: 100%;
-    position: fixed;
-    height: 100%;
-    justify-content: center;
+    background-color: rgba(70,76,80,.6);
+    bottom: 0;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 130;
 }
 
 .frame-popup > div > div {

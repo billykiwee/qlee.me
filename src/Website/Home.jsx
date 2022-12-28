@@ -256,7 +256,7 @@ export default function Home() {
                             subjects.map(subject=> {
                                 return (
                                     <div className='display subject-blocks' key={subject.name}>
-                                        <span className='f-s-20'>{subject.icon}</span>
+                                        <span className='f-s-16'>{subject.icon}</span>
                                         <span>{subject.name}</span>
                                     </div>
                                 )

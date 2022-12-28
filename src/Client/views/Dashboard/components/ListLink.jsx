@@ -1,10 +1,12 @@
 import { ClipboardIcon } from '@heroicons/react/24/outline'
-import { BookmarkIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
+import { CopyClip } from '../../Links/functions/CopyClip'
+
 
 
 export default function ListLink({links, User}) {
@@ -17,7 +19,7 @@ export default function ListLink({links, User}) {
                     
                     return (
 
-                        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-3' key={i} >
+                        <div className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
                             <div className='display gap-1rem'>
                                 <Link to={'/edit/' + link.id} className='display'>
                                     <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
@@ -34,30 +36,15 @@ export default function ListLink({links, User}) {
                                     <div className='grid gap'>
                                         <div className='display gap-04'>
                                             <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
-                                            <div className='display'>
-                                                <button 
-                                                    className='display border-r-04 w-2 hover h-2' 
-                                                    onClick={e=> {
-                                                        navigator.clipboard.writeText(link.shortLink)
-                                                        let div = document.querySelector('#link-' + link.id)
-                                                        div.style.display = 'flex'
-                                                        setTimeout(e=> div.style.display = 'none', 1500)
-                                                    }} 
-                                                >
-                                                    <ClipboardIcon width={18} className='c-black' />
-                                                </button>
-                                                <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
-                                                    <small>Copié</small>
-                                                </div>
-                                            </div>
+                                            <CopyClip link={link} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <Link to={'/edit/' + link.id}>
-                                    <button className='w-3 h-3 border-r-100 hover'>
-                                        <img src='/images/chevron-right.svg' width={20} />
+                                    <button className='w-2 h-2 border-r-100 hover'>
+                                        <ChevronRightIcon  width={20}  />
                                     </button>
                                 </Link>
                             </div>

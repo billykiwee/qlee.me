@@ -39,45 +39,33 @@ export default function List({props}) {
 
 
 
-    const [selectLink, setselectLink] = useState([])
 
-    const selectedLinks = (select) => {
-        setselectLink(select.checked ? [...selectLink, select.id] : selectLink.filter(e=> e !== select.id))
+
+    const preDelete = async (link) => {
+        props.setMsg({
+            title: 'Attention',
+            message: `Tu es sur le point de supprimer ${link.name}`,
+            question: 'Voulez-vous continuer ?',
+            buttonText: 'Supprimer',
+            buttonColor: 'red',
+            valid: () => deleteLinksSelected(link),
+            close: () => props.setMsg([]),
+            statu: 'question'
+        })
     }
 
 
-    const preDelete = async (number) => {
-        if (selectLink.length) {
-            props.setMsg({
-                title: 'Attention',
-                message: `Vous êtes sur le point de supprimer ${number} ${number < 2 ? 'lien' : 'liens'}`,
-                question: 'Voulez-vous continuer ?',
-                buttonText: 'Supprimer',
-                buttonColor: 'red',
-                valid: () => deleteLinksSelected(selectLink),
-                close: () => props.setMsg([]) && setselectLink([]),
-                statu: 'question'
-            })
-        }
-    }
+    const deleteLinksSelected = (link) => {
+        db.collection('links').doc(link.id).delete()
+        .then(E=> {
+            props.setMsg([])
+        })
+        .then(e=> {
 
-
-    const deleteLinksSelected = (selectLink) => {
-        selectLink.map(selected=> {
-
-
-            db.collection('links').doc(selected).delete()
-            .then(e=> {
-                props.setMsg([]) 
-            })
-            .then(e=> {
-                setselectLink([])
-
-                const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
-                history('/stats/' + getNewIdDiv)
-                props.setShowStat(getNewIdDiv)
-                
-            })
+            const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
+            history('/stats/' + getNewIdDiv)
+            props.setShowStat(getNewIdDiv)
+            
         })
     }
 
@@ -135,8 +123,8 @@ export default function List({props}) {
                                 </Link>
                                 {
                                     props.Filter && 
-                                    <div className='display justify-c w-3 h-3 '>
-                                        <button className='display' onClick={preDelete}>
+                                    <div className='display justify-c p-04'>
+                                        <button className='display w-3 h-3  hover border-r-100' onClick={e=> preDelete(link)}>
                                             <TrashIcon width={20} className='c-red'/>
                                         </button>
                                     </div>

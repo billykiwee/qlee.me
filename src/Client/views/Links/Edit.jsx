@@ -26,6 +26,7 @@ import { formatNumber } from '../../../App/utils/formatNumber'
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import { SnackBar } from '../../../App/components/SnackBar'
 import UniqueID from '../../../App/utils/uniqueID'
+import QrCodeSection from './QrCode'
 
 
 export default function Edit() {
@@ -261,63 +262,38 @@ export default function Edit() {
                                                    
                                                 </div>
                                             </div>
-                                            <div className='display justify-c'>
-                                                <div className='grid gap w-100p'>
+                                            <div className='display justify-c wrap gap'>
+                                                <div className='grid gap'>
                                                     <Redirect to={'/stats/' + Link.id}>
                                                         <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                            <img src='/images/charts.svg' width={20} />
+                                                            <PencilSquareIcon width={18} />
+                                                            <span className='f-s-16'>Modifier</span>
+                                                        </button>
+                                                    </Redirect>
+                                                </div>
+                                                <div className='grid gap'>
+                                                    <Redirect to={'/stats/' + Link.id}>
+                                                        <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
+                                                            <img src='/images/charts.svg' width={18} />
                                                             <span className='f-s-16'>Statistiques</span>
                                                         </button>
                                                     </Redirect>
+                                                </div>
+                                                <div className='grid gap'>
+                                                    <button className='grey h-3 border-r-04 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                                        <QrCodeIcon width={18} />
+                                                        <span className='f-s-16'>Qr code</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div className='display align-top'>
-                                        <div className='grid justify-c gap white border-r-2 border-b p-1 w-100p'>
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <QrCodeIcon width={22} />
-                                                    <div className='grid'>
-                                                        <span>Qr code</span>
-                                                    </div>
-                                                </div>
-                                                <div className='display gap'>
-                                                    {
-                                                        QrCode &&
-                                                        <button className='border-b white hover h-3 p-1 border-r-1 border display gap' onClick={e=> download(Link.name)} >
-                                                            <span className='c-black f-s-16'>Télécharger</span>
-                                                            <img src='/images/dowload.svg' width={20} height={20} />
-                                                        </button>
-                                                    }
-                                                    <button className='border-b h-3 blue hover-blue p-1 border-r-1 border' onClick={e=> setQrCode(QrCode === true ? false : true)} >
-                                                        <span className='f-s-16'>{QrCode ? '-' : 'voir'}</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            {
-                                                QrCode &&
-                                                <div className='display w-100p justify-c m-t-2'>
-                                                    <div className='grid gap-1rem blue border-r-2 p-1 border-b gap-1rem' id='qr-code-img'>
-                                                        <div className='display white p-1 border-r-1'>
-                                                            <QRCode
-                                                                bgColor='white'
-                                                                fgColor='black'
-                                                                className='click qr-code-svg'
-                                                                level='H'
-                                                                size={200}
-                                                                value={Link.shortLink}
-                                                            />
-                                                        </div> 
-                                                        <div className='display justify-c'>
-                                                            <span className='f-s-2rem' contentEditable>Qlee me</span>  
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
+                                    <QrCodeSection 
+                                        Link={Link} 
+                                        QrCode={QrCode}
+                                         setQrCode={setQrCode}  
+                                    />
 
                                 </div>
 

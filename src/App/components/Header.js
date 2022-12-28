@@ -106,7 +106,7 @@ export default function Header({visible}) {
                             </Link>
                         </div>
                     }
-                    <button className='hamburger border-b hover border' onClick={e=> setMenu(Menu === false ? true : false)} >
+                    <button className='hamburger border-r-100' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
                             <img src='/images/hamburger.svg' width={20} height={20}  />
                         </span>
@@ -115,7 +115,7 @@ export default function Header({visible}) {
             </div>
             {
                 Menu &&
-                <div className='display justify-c m-t-2 menu'>
+                <div className='display justify-c m-t-1 menu'>
                     <div className='grid w-100p'>
                         {
                             menu.map((menu, i)=> {

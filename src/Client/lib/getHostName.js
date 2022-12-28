@@ -7,12 +7,9 @@ export function getHostName(url) {
     
             const hostname = getUrl.hostname
     
-            const isWWW = hostname.split('.')[0] === 'www' ? true : false
-            const isM = hostname.split('.')[0] === 'm' ? true : false
-
+            const filterHostname = hostname.split('.').length === 3 ? hostname.split('.')[1] : hostname.split('.')[0]
     
-            if (isWWW || isM) return hostname.split('.')[1]
-            else return hostname.split('.')[0]
+            return filterHostname
         }
         catch {
             return 

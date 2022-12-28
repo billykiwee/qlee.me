@@ -16,6 +16,7 @@ import { dataFilter } from './data/dataFilters'
 import { BookmarkIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
+import { CopyClip } from '../Links/functions/CopyClip'
 
 
 
@@ -107,7 +108,10 @@ export default function Stats() {
                                                     <BookmarkIcon width={12} className='c-yellow' />
                                                 }
                                             </div>
-                                            <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
+                                            <div className='display gap justify-c'>
+                                                <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
+                                                <CopyClip link={topLink} />
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -169,7 +173,7 @@ export default function Stats() {
                 </div>
 
                 
-                <div className='grid gap-1rem m-t-4' >
+                <div className='grid gap-1rem' >
                     <Filter 
                         props={{
                             Filter        : filter,
