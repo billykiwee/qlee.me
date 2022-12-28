@@ -106,7 +106,7 @@ export default function Header({visible}) {
                             </Link>
                         </div>
                     }
-                    <button className='hamburger border-r-100' onClick={e=> setMenu(Menu === false ? true : false)} >
+                    <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
                             <img src='/images/hamburger.svg' width={20} height={20}  />
                         </span>

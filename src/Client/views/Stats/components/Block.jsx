@@ -7,7 +7,10 @@ import { fetchUser } from '../../../lib/database/fetchUser'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Links/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
-import { DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { Link } from 'react-router-dom'
+import { CopyClip } from '../../Links/functions/CopyClip'
+import formatDate from '../../../../App/utils/formatDate'
 
 
 export const Block = ({statType, url, title, country, device, click}) => {
@@ -110,5 +113,35 @@ export function ProgressBar({percentage}) {
                 <span>{percentage}</span>
             </div>
         </div>
+    )
+}
+
+
+
+export function HeadBlock({topLink}) {
+    return (
+        <div className='grid gap'>
+            <Link to={'/edit/' + topLink.id} className='display justify-c'>
+                <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
+            </Link>
+            <div className='grid text-align-c'>
+                <div className='display justify-c gap-04'>
+                    <span className='f-s-20'>{topLink?.name}</span>
+                    {
+                        topLink?.linkInBio &&
+                        <BookmarkIcon width={12} className='c-yellow' />
+                    }
+                </div>
+                <div className='display gap justify-c'>
+                    <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
+                    <CopyClip link={topLink} />
+                </div>
+            </div>
+                <div className='display gap justify-c'>
+                    <CalendarIcon width={16} />
+                    <span>{formatDate(topLink.date, 'date')}</span>
+                </div>
+        </div>
+
     )
 }

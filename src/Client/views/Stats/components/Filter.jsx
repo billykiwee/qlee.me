@@ -7,22 +7,22 @@ export default function Filter({props}) {
     const filters = [
         {
             name: 'popular',
-            text: 'popular',
+            text: 'Populaire',
             icon: <StarIcon width={16} className='c-grey' />
         },
         {
             name: 'recent',
-            text: 'most recent',
+            text: 'Le plus récent',
             icon: <ForwardIcon width={16} className='c-grey' />
         },
         {
             name: 'oldest',
-            text: 'oldest',
+            text: 'Le plus ancient',
             icon: <BackwardIcon width={16} className='c-grey' />
         },
         {
             name: 'link-in-bio',
-            text: 'link in bio',
+            text: 'Link in bio',
             icon: <SwatchIcon width={16} className='c-grey' />
         }
     ]
@@ -42,12 +42,12 @@ export default function Filter({props}) {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={(props.Search ? 'blue' : 'white') + ' h-2 p-1 border-r-1 border '} 
+                            className={(props.Search ? 'grey' : 'white') + ' h-2 p-1 border-r-1 border '} 
                         >
                             <div >
-                                <span className='f-s-14 display gap'>
+                                <span className='f-s-14 display gap c-black'>
                                     Rechercher
-                                    <MagnifyingGlassIcon width={20} />
+                                    <MagnifyingGlassIcon width={20} className='c-black' />
                                 </span>
                             </div>
                         </button>
@@ -59,14 +59,12 @@ export default function Filter({props}) {
                                 props.setSearch(false)
                                 props.setFilter(props.Filter ? false : true)
                             }}
-                            className={(props.Filter ? 'blue' : 'white') + ' h-2 p-1 border-r-1 border '} 
-                            onMouseOver={e=> e.target.classList.add('c-black')}
-                            onMouseOut={e=> e.target.classList.remove('c-black')}
+                            className={(props.Filter ? 'grey' : 'white') + ' h-2 p-1 border-r-1 border '} 
                         >
                             <div>
-                                <span className='f-s-14 display gap'>
+                                <span className='f-s-14 display gap c-black'>
                                     Filtre
-                                    <FunnelIcon  width={18} />
+                                    <FunnelIcon width={18} className='c-black' />
                                 </span>
                             </div>
                         </button>
@@ -90,19 +88,19 @@ export default function Filter({props}) {
                                             return <span className='display'>{fil.icon}</span>
                                         })
                                     }
-                                    {props.checkFilter}
+                                    <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
                                 </div>
                                 {
-                                    isOpen ?  <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
+                                    isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
                                 }
                             </div>
                             <div className={`dropdown-body ${isOpen && 'open'}`}>
                                 {
                                     filters.map(item => {
                                         return (
-                                            <div className="dropdown-item hover click display gap" onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
+                                            <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
                                                 <span className='display'>{item.icon}</span>
-                                                <span>{item.name}</span>
+                                                <span>{item.text}</span>
                                             </div>
                                         )
                                     })

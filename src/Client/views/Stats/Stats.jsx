@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
 import '../../../App/css/stats.css'
-import { Block } from './components/Block'
+import { Block, HeadBlock } from './components/Block'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { GoToPricing } from '../Links/Edit'
@@ -13,14 +13,17 @@ import { fetchStats } from '../../lib/database/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
-import { BookmarkIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
 import { CopyClip } from '../Links/functions/CopyClip'
+import formatDate from '../../../App/utils/formatDate'
 
 
 
 export default function Stats() {
+
+    const history = useNavigate()
 
     const { LinkID } = useParams()
 
@@ -52,8 +55,14 @@ export default function Stats() {
 
     const [ShowStat, setShowStat] = useState(null)
 
-    useEffect(e=> {
+    function redirectIfNoLinkID() {
+
         setShowStat(LinkID ?? TopLink?.id)
+        history(!LinkID && TopLink?.id)
+    }
+
+    useEffect(e=> {
+        redirectIfNoLinkID()
     }, [TopLink])
 
 
@@ -96,24 +105,8 @@ export default function Stats() {
                         
                             return (
                                 <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
-                                    <div className='grid gap'>
-                                        <Link to={'/edit/' + topLink.id} className='display justify-c'>
-                                            <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
-                                        </Link>
-                                        <div className='grid text-align-c'>
-                                            <div className='display justify-c gap-04'>
-                                                <span className='f-s-20'>{topLink?.name}</span>
-                                                {
-                                                    topLink?.linkInBio &&
-                                                    <BookmarkIcon width={12} className='c-yellow' />
-                                                }
-                                            </div>
-                                            <div className='display gap justify-c'>
-                                                <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
-                                                <CopyClip link={topLink} />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                    <HeadBlock topLink={topLink} />
                                     
                                     <div className='grid gap'>
 

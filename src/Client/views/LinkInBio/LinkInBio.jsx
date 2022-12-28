@@ -112,7 +112,7 @@ export default function LinkInBio({userView}) {
                                 <span className='f-s-25 f-w-400'>{User.name}</span>
                             </div>
                             <div className='display justify-c'>
-                                <span className='f-s-16 c-grey f-w-300 text-align-c'>Développeur web React... Bienvenue dans mon univers !</span>
+                                <span className='f-s-16 c-grey f-w-300 text-align-c'>{User.description}</span>
                             </div>
                         </div>
                         <div className='display gap-1rem justify-c'>

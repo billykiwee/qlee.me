@@ -8,6 +8,7 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
 import { fetchUserLinks } from '../../../lib/database/fetchUserLinks'
 import { getHostName } from '../../../lib/getHostName'
+import { DeleteLink } from '../../Links/functions/Delete'
 
 
 export default function List({props}) {
@@ -37,37 +38,6 @@ export default function List({props}) {
         })
     )
 
-
-
-
-
-    const preDelete = async (link) => {
-        props.setMsg({
-            title: 'Attention',
-            message: `Tu es sur le point de supprimer ${link.name}`,
-            question: 'Voulez-vous continuer ?',
-            buttonText: 'Supprimer',
-            buttonColor: 'red',
-            valid: () => deleteLinksSelected(link),
-            close: () => props.setMsg([]),
-            statu: 'question'
-        })
-    }
-
-
-    const deleteLinksSelected = (link) => {
-        db.collection('links').doc(link.id).delete()
-        .then(E=> {
-            props.setMsg([])
-        })
-        .then(e=> {
-
-            const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
-            history('/stats/' + getNewIdDiv)
-            props.setShowStat(getNewIdDiv)
-            
-        })
-    }
 
 
 
@@ -124,7 +94,15 @@ export default function List({props}) {
                                 {
                                     props.Filter && 
                                     <div className='display justify-c p-04'>
-                                        <button className='display w-3 h-3  hover border-r-100' onClick={e=> preDelete(link)}>
+                                        <button className='display w-3 h-3  hover border-r-100'
+                                            onClick={e=> 
+                                                DeleteLink({
+                                                    link: link, 
+                                                    setMsg: props.setMsg, 
+                                                    setShowStat: props.setShowStat
+                                                })
+                                            }
+                                        >
                                             <TrashIcon width={20} className='c-red'/>
                                         </button>
                                     </div>

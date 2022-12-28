@@ -1,17 +1,16 @@
 export default function formatDate(date, type) {
 
-    if (date) {
+    try {
 
-        let d = new Date(date.seconds * 1000).toLocaleDateString()
-        let h = new Date(date.seconds * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        let DATE = new Date(date.seconds * 1000).toLocaleDateString()
+        let HOURS = new Date(date.seconds * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     
+        if (type === 'date') return DATE
+        if (type === 'hours') return HOURS
+        else return DATE + ' ' + HOURS
+    }
 
-        let result = d + ' ' + h
-
-
-        if (type=== 'hour') result = h
-        if (type=== 'day') result = d
-    
-        return result
+    catch (e) {
+        console.log(e);
     }
 }
