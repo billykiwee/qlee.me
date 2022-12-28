@@ -13,52 +13,46 @@ export default function Redirection() {
 
     const { LinkID } = useParams()
     
-    const startLoading = performance.now()
-    const statID = 's-' + new Date().getTime()
+    useEffect(() => {
 
-    useEffect(e=> {
+        const startLoading = performance.now()
+        const statID = 's-' + new Date().getTime()
+      
+        const fetchData = async () => {
+            try {
+                const link   = await fetchLink(LinkID)
+                const adress = await getAdress()
 
-        fetchLink(LinkID)
-        .then(link=> {
-
-            getAdress()
-            .then(getAdress=> getAdress)
-            .then(adress=> {
-
-                db.collection('links')
-                .doc(link.id)
-                .collection('stats')
-                .doc(statID)
-                .set({
+                const stat = {
                     id         : statID,
                     adress     : adress,
                     reference  : document.referrer ?? null,
                     device     : getDevice(),
                     performance: performance.now() - startLoading,
                     date       : serverTimestamp()
-                })
-                .then(updateViews=> {
-        
-                    db.collection('links')
-                    .doc(link.id)
-                    .update({
-                        views: link.views + 1
-                    }) 
-                    .then(e=> {                    
-                        window.location.href = link.url
-                    })
-                })
-                .catch(err=> console.log(err))    
-            })
-            .catch(err=> console.log(err))    
-        })
+                }
 
-        .catch(e=> {
-            window.location.href = '/page404'
-        })
+                await db.collection('links')
+                .doc(link.id)
+                .collection('stats')
+                .doc(statID)
+                .set(stat)
 
-    }, [LinkID])
+                await db.collection('links')
+                .doc(link.id)
+                .update({ views: link.views + 1 })
 
+                window.location.href = link.url
+
+            } catch (err) {
+                console.log(err)
+                window.location.href = '/page404'
+            }
+        }
+      
+        fetchData()
+      }, [LinkID])
+      
  
     useEffect(e=> {
         document.querySelector('header').style.display = 'none'
