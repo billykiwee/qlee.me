@@ -25,48 +25,6 @@ export default function LinkInBio({userView}) {
     }, [user?.email])
 
 
-    const socialMedia = [
-        {
-            name: 'instagram',
-            icon: '/images/instagram.svg',
-            link: ''
-        },
-        {
-            name: 'Github',
-            icon: '/images/github.svg',
-            link: ''
-        },
-        {
-            name: 'linkedin',
-            icon: '/images/linkedin.svg',
-            link: ''
-        },
-    ]
-
-
-    const [start, setStart] = useState(0)
-    const onDrag = (result) => {
-
-        let { clientX, clientY, target } = result
-
-        let heightDiv = target.clientHeight
-
-        setStart(clientY);
-    
-    }
-
-    const [end, setEnd] = useState(0)
-    const onDragEnd = (result) => {
-
-        let { clientX, clientY, target } = result
-
-        let heightDiv = target.clientHeight
-
-        if (clientY - heightDiv)
-        setEnd(clientY)
-    }
-
-
 
     return (
         <Main style={{
@@ -122,7 +80,7 @@ export default function LinkInBio({userView}) {
                                .map((link, i)=> {
        
                                     return (
-                                        <a href={'https://'+ link.shortLink} className='link' key={i}>
+                                        <a href={'https://'+ link.shortLink} className='link' key={i} >
                                             <img src={link.icon ?? getFavicon(link.url)} width={34} className='border-r-100' />
                                         </a>
                                     )
