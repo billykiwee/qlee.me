@@ -64,7 +64,7 @@ export default function List({props}) {
                                             <img src={getFavicon(link)} className='border-r-100' width={30} />
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
+                                                    <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>
                                                     {
                                                         link.linkInBio &&
                                                         <BookmarkIcon width={12} className='c-yellow' />

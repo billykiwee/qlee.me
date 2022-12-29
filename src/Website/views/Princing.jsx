@@ -113,7 +113,7 @@ export default function Pricing() {
                                                             onClick={e=> checkUserPlan ? history('/dashboard') : ''}
                                                             className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
                                                         > 
-                                                            <span>{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
+                                                            <span className='c-white'>{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
                                                         </button>
                                                     </a>
                                                 </div>

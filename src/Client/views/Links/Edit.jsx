@@ -273,11 +273,13 @@ export default function Edit() {
                                 <div className='grid gap-2rem'>
 
                                     <div className='grid gap-1rem' >
+
                                         <div className='grid gap w-100p'>
                                             <span>Modifier le nom</span>
                                             <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
                                             <small className='c-red' id='error-name'></small>
                                         </div>
+
                                         <div className='grid gap w-100p'>
                                             <div className='display gap'>
                                                 <span>Modifier le lien principal</span>
@@ -332,8 +334,8 @@ export default function Edit() {
                                                 <span className='c-blue p-l-1 p-r-04'>{Link.shortLink.split('/')[0]}/</span>
                                                 <input 
                                                     type='text' 
-                                                    className='border-0 p-0' 
-                                                    placeholder={Link.id} 
+                                                    className='border-0 p-0 w-100*' 
+                                                    placeholder='mon-lien' 
                                                     onChange={e=> {
                                                         setEditShortLink(e.target.value)
                                                         checkShortLinkAvailable(e.target.value, UserLinks)
@@ -348,7 +350,6 @@ export default function Edit() {
                                             </div>
                                             <small id='alert-shortlink'></small>
                                         </div>
-
 
                                         <div className='grid gap'>
                                             <div className='display gap'>

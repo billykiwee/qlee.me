@@ -48,7 +48,6 @@ body {
 
 
 main {
-    height: 100%;
     position: relative;
     width: 94%;
     margin: auto;
@@ -74,6 +73,11 @@ footer > div {
 
 #root {
     height: 100%;
+}
+
+
+span {
+    color: var(--black);
 }
 
 h1 {
