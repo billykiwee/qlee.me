@@ -8,22 +8,22 @@ import { getDevice } from './lib/getDevice'
 import { fetchLink } from './lib/database/fetchLink'
 import { getAdress } from './lib/api/ipapi/getAdress'
 
+import reactReferer from 'react-referer';
+
 
 export default function Redirection() {
 
     const { LinkID } = useParams()
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramValue = urlParams.get('param');
-    console.log(paramValue);
-
 
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
     
+    console.log(reactReferer.referer());
 
 
     const fetchData = async () => {
+        
         try {
             const link   = await fetchLink(LinkID)
             const adress = await getAdress()
@@ -58,7 +58,7 @@ export default function Redirection() {
 
     useEffect(() => {
         //fetchData()
-      }, [LinkID])
+    }, [LinkID])
       
  
     useEffect(e=> {
