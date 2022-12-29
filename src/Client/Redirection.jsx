@@ -13,15 +13,9 @@ export default function Redirection() {
 
     const { LinkID } = useParams()
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramValue = urlParams.get('param');
-    console.log(paramValue);
-
-
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
     
-
 
     const fetchData = async () => {
         
@@ -70,7 +64,7 @@ export default function Redirection() {
 
 
     return (
-        <Main className='margin-auto'> 
+        <Main className='p-0'> 
             <Messages loader={true} />
         </Main>
     )
