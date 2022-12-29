@@ -8,12 +8,14 @@ import { getDevice } from './lib/getDevice'
 import { fetchLink } from './lib/database/fetchLink'
 import { getAdress } from './lib/api/ipapi/getAdress'
 
-import reactReferer from 'react-referer';
-
 
 export default function Redirection() {
 
     const { LinkID } = useParams()
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get('param');
+    console.log(paramValue);
 
 
     const startLoading = performance.now()
@@ -30,7 +32,7 @@ export default function Redirection() {
             const stat = {
                 id         : statID,
                 adress     : adress,
-                reference  : reactReferer.referer() ?? null,
+                reference  : document.referrer ?? null,
                 device     : getDevice(),
                 performance: performance.now() - startLoading,
                 date       : serverTimestamp()
@@ -57,7 +59,7 @@ export default function Redirection() {
 
     useEffect(() => {
         fetchData()
-    }, [LinkID])
+      }, [LinkID])
       
  
     useEffect(e=> {

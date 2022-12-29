@@ -3,6 +3,17 @@
     border-radius: 40px;
 }
 
+header {
+    left: 0;
+    right: 0;
+    z-index: 9;
+    transition: 4s;
+}
+
+
+header.menu {
+    height: 8rem;
+}
 
 .hamburger {
     width: 40px;

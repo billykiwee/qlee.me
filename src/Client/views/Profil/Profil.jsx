@@ -104,29 +104,50 @@ export default function Profil() {
 
 
                 <div className='grid gap-1rem'>
-                    <div className='grid gap'>
-                        <span>Nom</span>
-                        <input className='div-input white h-3' type='text' placeholder={User?.name} onChange={e=> setEditValue(['name', e.target.value])} />
-                    </div>
-                    <div className='grid gap'>
-                        <span>Description</span>
-                        <textarea className='div-input white' type='text' placeholder={User?.description ?? "Écrire une description qui s'affichera dans ma bio"} onChange={e=> setEditValue(['description', e.target.value])} />
-                    </div>
-                    <div className='grid gap'>
-                        <span>Email</span>
-                        <input className='div-input white h-3' type='email' placeholder={User?.email} />
-                    </div>
+                    <Inputs props={{
+                        label: 'Nom',
+                        input: 'name',
+                        User : User
+                    }} />
+
+                    <Inputs props={{
+                        label: 'Description',
+                        input: 'description',
+                        User : User
+                    }} />
+
+                    <Inputs props={{
+                        label: 'Email',
+                        input: 'email',
+                        User : User
+                    }} />
                     <div className='grid gap'>
                         <span>Mot de passe</span>
-                        <input className='div-input white h-3' type='password' placeholder='*******' />
+                        <input className='div-input white h-3' type='password' defaultValue='*******' />
                     </div>
                     <div className='grid gap'>
                         <span>Confirmer le mot de passe</span>
-                        <input className='div-input white h-3' type='password' placeholder='*******' />
+                        <input className='div-input white h-3' type='password' defaultValue='*******' />
                     </div>
                 </div>
 
             </div>
         </Main>
+    )
+}
+
+
+
+const Inputs = ({props}) => {
+
+    return (
+        <div className='grid gap'>
+            <span>{props.label}</span>
+            <input 
+                className='div-input white h-3' 
+                type='text' 
+                placeholder={props.User?.[props.input]} 
+            />
+        </div>
     )
 }

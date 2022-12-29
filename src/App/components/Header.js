@@ -74,7 +74,7 @@ export default function Header({visible}) {
 
     if (!isLinkInBio())
     return (
-        <header className='border-b border-r-2 p-1 border m-b-2 m-t-1 white transition'>
+        <header className='p-1 white shadow '>
             <div className='display justify-s-b'>
                 <div className='display gap click'>
                     <Link to='/' >
@@ -115,12 +115,12 @@ export default function Header({visible}) {
             </div>
             {
                 Menu &&
-                <div className='display justify-c m-t-1 menu'>
+                <div className='display justify-c menu m-t-1'>
                     <div className='grid w-100p'>
                         {
                             menu.map((menu, i)=> {
                                 return (
-                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false)}>
+                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=>{ setMenu(false) ; document.querySelector('header').classList.add('menu')} }>
                                         <button className='h-3 hover border-r-1 display gap p-1'>
                                             {menu.icon}
                                             <span className='f-s-16 c-black'>{menu.name}</span>

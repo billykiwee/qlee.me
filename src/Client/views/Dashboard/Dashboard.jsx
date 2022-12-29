@@ -126,7 +126,7 @@ export default function Dashboard() {
 
     return (
 
-        <Main className='m-t-2'>
+        <Main>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

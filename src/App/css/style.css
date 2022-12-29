@@ -47,30 +47,29 @@ body {
 }
 
 
-#root {
-    margin: auto;
-    width: 94%;
-    max-width: 1200px;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container {
-    flex: 1 0 auto;
-    margin-bottom: 4rem;
-    position: relative;
-}
-
 main {
+    height: 100%;
+    position: relative;
+    width: 94%;
+    margin: auto;
     flex: 1 0 0;
     display: flex;
     flex-direction: column;
+    margin-top: 2rem;
+    max-width: 1200px;
+    min-height: 100%;
 }
 
+
 footer {
-    margin-bottom: 1rem;
+    margin-top: 2rem;
     border-top: 1px solid var(--border);
+}
+footer > div {
+    justify-content: space-between;
+    margin: auto;
+    display: flex;
+    padding: 1rem;
 }
 
 
@@ -190,9 +189,7 @@ table, tr, th {
 
 
 
-main {
-    height: 100%;
-}
+
 
 
 button {
