@@ -6,6 +6,7 @@ import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
 import { CopyClip } from '../../Links/functions/CopyClip'
+import { IsLinkInBio } from '../../Links/lib/IsLinkInBio'
 
 
 
@@ -27,10 +28,7 @@ export default function ListLink({links, User}) {
                                 <div className='grid '> 
                                     <div className='display gap-04'>
                                         <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
-                                        {
-                                            link.linkInBio &&
-                                            <BookmarkIcon width={12} className='c-yellow' />
-                                        }
+                                        <IsLinkInBio Link={link} />
                                     </div>
                 
                                     <div className='grid gap'>

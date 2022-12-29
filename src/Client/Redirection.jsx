@@ -12,45 +12,52 @@ import { getAdress } from './lib/api/ipapi/getAdress'
 export default function Redirection() {
 
     const { LinkID } = useParams()
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get('param');
+    console.log(paramValue);
+
+
+    const startLoading = performance.now()
+    const statID = 's-' + new Date().getTime()
     
-    useEffect(() => {
 
-        const startLoading = performance.now()
-        const statID = 's-' + new Date().getTime()
-      
-        const fetchData = async () => {
-            try {
-                const link   = await fetchLink(LinkID)
-                const adress = await getAdress()
 
-                const stat = {
-                    id         : statID,
-                    adress     : adress,
-                    reference  : document.referrer ?? null,
-                    device     : getDevice(),
-                    performance: performance.now() - startLoading,
-                    date       : serverTimestamp()
-                }
+    const fetchData = async () => {
+        try {
+            const link   = await fetchLink(LinkID)
+            const adress = await getAdress()
 
-                await db.collection('links')
-                .doc(link.id)
-                .collection('stats')
-                .doc(statID)
-                .set(stat)
-
-                await db.collection('links')
-                .doc(link.id)
-                .update({ views: link.views + 1 })
-
-                window.location.href = link.url
-
-            } catch (err) {
-                console.log(err)
-                window.location.href = '/page404'
+            const stat = {
+                id         : statID,
+                adress     : adress,
+                reference  : document.referrer ?? null,
+                device     : getDevice(),
+                performance: performance.now() - startLoading,
+                date       : serverTimestamp()
             }
+
+            await db.collection('links')
+            .doc(link.id)
+            .collection('stats')
+            .doc(statID)
+            .set(stat)
+
+            await db.collection('links')
+            .doc(link.id)
+            .update({ views: link.views + 1 })
+
+            window.location.href = link.url
+
+        } catch (err) {
+            console.log(err)
+            window.location.href = '/page404'
         }
-      
-        fetchData()
+    }
+
+
+    useEffect(() => {
+        //fetchData()
       }, [LinkID])
       
  

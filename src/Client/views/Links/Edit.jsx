@@ -27,6 +27,8 @@ import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import { SnackBar } from '../../../App/components/SnackBar'
 import UniqueID from '../../../App/utils/uniqueID'
 import QrCodeSection from './QrCode'
+import { DeleteLink } from './functions/Delete'
+import { IsLinkInBio } from './lib/IsLinkInBio'
 
 
 export default function Edit() {
@@ -70,36 +72,6 @@ export default function Edit() {
     
     const [PopUpMessage, setPopUpMessage] = useState({})
     const [Msg, setMsg] = useState([])
-
-    function preDeleteLink() {
-        setPopUpMessage({
-            title: 'Attention',
-            message: 'Vous êtes sur le point de supprimer ce lien',
-            question: 'Voulez-vous continuer ?',
-            buttonText: 'Supprimer',
-            buttonColor: 'red',
-            valid: () => deleteLink(),
-            close: () => setPopUpMessage({}),
-            statu: 'question'
-        })
-    }
-
-    function deleteLink() {
-
-        setPopUpMessage({loader: true})
-
-        db.collection('links').doc(Link.id).delete()
-        .then(deletePhoto=> {
-            if (Link.icon) {
-                let refPhoto = ref(storage, `links/favicon/${Link.id}`)
-                deleteObject(refPhoto)
-            }
-        })
-        .then(e=> {
-            setPopUpMessage({loader: false})
-            history('/dashboard')
-        })
-    }
 
 
     const [editLink, seteditLink] = useState({})
@@ -248,10 +220,8 @@ export default function Edit() {
                                                     <div className='grid'>
                                                         <div className='display justify-c gap'>
                                                             <span className='f-s-20'>{Link?.name}</span>
-                                                            {
-                                                                Link.linkInBio &&
-                                                                <BookmarkIcon width={12} className='c-yellow' />
-                                                            }
+                                                            <IsLinkInBio Link={Link} />
+
                                                         </div>
                                                         <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                                     </div>
@@ -292,7 +262,7 @@ export default function Edit() {
                                     <QrCodeSection 
                                         Link={Link} 
                                         QrCode={QrCode}
-                                         setQrCode={setQrCode}  
+                                        setQrCode={setQrCode}  
                                     />
 
                                 </div>
@@ -409,7 +379,14 @@ export default function Edit() {
                                             </button>
                                         </div>
                                         <div className='display'>
-                                            <button className='red hover-red p-1 h-4 border-b border-r-1' onClick={preDeleteLink} >
+                                            <button className='red hover-red p-1 h-4 border-b border-r-1'
+                                                onClick={e=> 
+                                                    DeleteLink({
+                                                        link: Link, 
+                                                        setMsg: setPopUpMessage
+                                                    })
+                                                } 
+                                            >
                                                 <span className='f-s-16'>Supprimer le lien</span>
                                             </button>
                                         </div>

@@ -1,29 +1,37 @@
 import { db } from "../../../../App/database/firebase"
 
 
-export function DeleteLink(props) {
+export async function DeleteLink(props) {
 
-    props.setMsg({
+    const { link, setMsg, setShowStat } = props
+
+
+    setMsg({
         title: 'Attention',
-        message: `Tu es sur le point de supprimer ${props.link.name}`,
+        message: `Tu es sur le point de supprimer ${link.name}`,
         question: 'Voulez-vous continuer ?',
         buttonText: 'Supprimer',
         buttonColor: 'red',
-        valid: () => deleteLinksSelected(props.link),
-        close: () => props.setMsg([]),
+        valid: () => deleteLinksSelected(link),
+        close: () => setMsg([]),
         statu: 'question'
     })
 
 
-    const deleteLinksSelected = (link) => {
+    const deleteLinksSelected = async (link) => {
 
         db.collection('links').doc(link.id).delete()
         .then(e=> {
-            props.setMsg([])
+            setMsg([])
         })
         .then(e=> {
-            const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
-            props.setShowStat(getNewIdDiv)
+            if (setShowStat) {
+                const getNewIdDiv = (document.querySelector('#div-links').childNodes[0].id).split('-')[1]
+                setShowStat(getNewIdDiv)
+            }
+            else {
+                window.location.href = '/dashboard'
+            }
         })
     }
 }
