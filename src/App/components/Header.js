@@ -120,7 +120,7 @@ export default function Header({visible}) {
                         {
                             menu.map((menu, i)=> {
                                 return (
-                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=>{ setMenu(false) ; document.querySelector('header').classList.add('menu')} }>
+                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false) }>
                                         <button className='h-3 hover border-r-1 display gap p-1'>
                                             {menu.icon}
                                             <span className='f-s-16 c-black'>{menu.name}</span>
