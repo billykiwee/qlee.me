@@ -58,8 +58,8 @@ export function SnackBar({content, Msg, setMsg}) {
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='c-blue' onClick={e=> deleteData(data.id)}  >
-                                    <span className='f-s-16 f-w-500'>OK</span>
+                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(data.id)}  >
+                                    <span className='f-s-16'>OK</span>
                                 </button>
                             </div>
                         </div>

@@ -69,13 +69,13 @@ export default function LinkInBio({userView}) {
 
 
     return (
-        <Main className='display p-1' style={{
-            height: '100%',
+        <Main style={{
+            paddingTop: '2rem',
             display: 'grid',
-            aligItems: 'stretch',
-            alignContent: 'space-between',
-        }}
-        >
+            'align-content': 'space-between',
+            'align-items': 'end',
+            height: '100vh',
+        }}>
 
             <div className=' gap-1rem'>  
                 
@@ -109,7 +109,7 @@ export default function LinkInBio({userView}) {
                     <div className='grid gap-1rem'>
                         <div className='grid gap'>
                             <div className='display justify-c'>
-                                <span className='f-s-25 f-w-400'>{User.name}</span>
+                                <span className='f-s-25 f-w-400'>@{User.name}</span>
                             </div>
                             <div className='display justify-c'>
                                 <span className='f-s-16 c-grey f-w-300 text-align-c'>{User.description}</span>

@@ -6,7 +6,7 @@ export function IsLinkInBio({Link}) {
     <>
       {
         Link.linkInBio &&
-        <SwatchIcon width={12} className='c-yellow' />
+        <SwatchIcon width={16} className='c-yellow' />
       }
     </>
   )

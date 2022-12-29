@@ -8,7 +8,6 @@ header {
     right: 0;
     z-index: 9;
     transition: 0.4s;
-    top: 0;
     position: fixed;
 }
 

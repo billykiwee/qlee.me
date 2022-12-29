@@ -41,9 +41,9 @@ export default function ListLink({links, User}) {
                             </div>
                             <div>
                                 <Link to={'/edit/' + link.id}>
-                                    <button className='w-2 h-2 border-r-100 hover'>
+                                    <div className='display justify-c w-2 h-2 border-r-100 hover'>
                                         <ChevronRightIcon width={20} className='c-black'  />
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                         </arcticle>

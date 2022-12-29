@@ -18,8 +18,7 @@ export function CopyClip(linkObj) {
 
     return (
         <div className='display'>
-            <div 
-                className='display justify-c border-r-04 w-2 hover h-2 click' 
+            <div className='display justify-c border-r-04 w-2 hover h-2 click' 
                 onClick={e=> copyClipboard(link)} 
             >
                 <ClipboardIcon width={18} className='c-black' />

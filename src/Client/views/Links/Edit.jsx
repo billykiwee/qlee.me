@@ -42,13 +42,16 @@ export default function Edit() {
     const [User, setUser] = useState([])
 
     const [Stats, setStats] = useState([])
+    
 
     useEffect(e=> {
         fetchUserLinks(setUser, user?.email)
         fetchStats(setStats, LinkID)
 
         fetchUser(setUser, user?.email)
+
     }, [user])
+
 
 
     const statsLink = Stats
@@ -171,12 +174,12 @@ export default function Edit() {
     
 
 
+
   
     const [QrCode,setQrCode] = useState(false)
 
 
-
-
+    if (!Link) return history('/dashboard')
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
         <>
@@ -276,9 +279,31 @@ export default function Edit() {
                                             <small className='c-red' id='error-name'></small>
                                         </div>
                                         <div className='grid gap w-100p'>
-                                            <span>Modifier le lien principal</span>
-                                            <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
-                                            <small className='c-red' id='error-url'></small>
+                                            <div className='display gap'>
+                                                <span>Modifier le lien principal</span>
+                                                {
+                                                    isUserPremium(User).plan === 'FREE' &&
+                                                    <GoToPricing />
+                                                }
+                                            </div>
+                                            <div 
+                                                className='display div-input h-3  border-r-1 w-100p white'
+                                                style={ 
+                                                    isUserPremium(User).plan === 'FREE' ? 
+                                                    {
+                                                        opacity : 0.4,
+                                                        pointerEvents: 'none'
+                                                    }
+                                                    : 
+                                                    {
+                                                        opacity : 1,
+                                                        pointerEvents: 'visible'
+                                                    }
+                                                } 
+                                            >
+                                                <input type='text' className=' h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
+                                                <small className='c-red' id='error-url'></small>
+                                            </div>
                                         </div>
 
                                         <div className='grid gap w-100p'>
@@ -414,7 +439,7 @@ export default function Edit() {
 
 export function GoToPricing({children}) {
     return (
-        <Redirect to='/pricing' className='yellow border-r-04 border-b hover-yellow p-04' style={{width : !children ? '1rem' : ''}}>
+        <Redirect to='/pricing' className='display justify-c yellow border-r-100 hover-yellow p-04' style={{width : !children ? '1rem' : ''}} >
             <div className='display justify-c gap'>
                 {
                     children

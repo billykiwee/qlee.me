@@ -55,7 +55,7 @@ main {
     flex: 1 0 0;
     display: flex;
     flex-direction: column;
-    margin-top: 8rem;
+    padding-top: 8rem;
     max-width: 1200px;
     min-height: 100%;
 }
@@ -72,6 +72,9 @@ footer > div {
     padding: 1rem;
 }
 
+#root {
+    height: 100%;
+}
 
 h1 {
     font-style: normal;
