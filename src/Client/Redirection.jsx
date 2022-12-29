@@ -19,7 +19,6 @@ export default function Redirection() {
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
     
-    console.log(reactReferer.referer());
 
 
     const fetchData = async () => {
@@ -31,7 +30,7 @@ export default function Redirection() {
             const stat = {
                 id         : statID,
                 adress     : adress,
-                reference  : document.referrer ?? null,
+                reference  : reactReferer.referer() ?? null,
                 device     : getDevice(),
                 performance: performance.now() - startLoading,
                 date       : serverTimestamp()
@@ -57,7 +56,7 @@ export default function Redirection() {
 
 
     useEffect(() => {
-        //fetchData()
+        fetchData()
     }, [LinkID])
       
  
