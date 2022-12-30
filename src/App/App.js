@@ -5,9 +5,8 @@ import { getAuth } from "firebase/auth"
 
 import Home from '../Website/Home'
 
-import Dashboard, { Counter } from '../Client/views/Dashboard/Dashboard'
+import Dashboard from '../Client/views/Dashboard/Dashboard'
 import Edit from '../Client/views/Links/Edit'
-import Popup from './components/Popup'
 import Header from './components/Header'
 
 import Footer from './components/Footer'
@@ -17,12 +16,10 @@ import Pricing from '../Website/views/Princing'
 import Stats from '../Client/views/Stats/Stats'
 import Redirection from '../Client/Redirection.jsx'
 import Payment from '../Website/views/Payment'
-import { SnackBar } from './components/SnackBar'
 import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
-import { MyListComponent } from '../Client/views/Dnd'
 
 
 
@@ -114,10 +111,6 @@ export default function App() {
         terms : {
             path : '/terms',
             element : <Terms />
-        },
-        draggable : {
-            path : '/dnd',
-            element : <MyListComponent />
         },
     }
 
