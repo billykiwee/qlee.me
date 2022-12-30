@@ -10,7 +10,7 @@ import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
 
 
-export default function LinkInBio({userView}) {
+export default function LinkInBio({userView = true}) {
 
     const [{user}] = useStateValue()
 
@@ -26,13 +26,88 @@ export default function LinkInBio({userView}) {
 
 
 
+    const [letDrag, setLetDrag]= useState(false)
+    
+
+    const onDragStart = e => {
+        e.target.classList.add('dragging')
+    }
+    
+    const onDragEnd = e => {
+        e.target.classList.remove('dragging')
+        
+        const div    = document.querySelectorAll('.draggable')
+        const parent = document.querySelector('.container')
+
+        div.forEach(div=> {
+    
+            for (let i = 0; i < parent.childNodes.length; i++) {
+                if (parent.childNodes[i] === div) {
+
+                    db.collection('links')
+                    .doc(div.id)
+                    .update({
+                        position : i
+                    })
+
+                    console.table({
+                        id: div.id,
+                        position: i
+                    });
+        
+                }
+            }
+        })
+    }
+
+    const onDragOver = e => {
+
+        const container = document.querySelector('.container')
+
+        e.preventDefault()
+        
+        const afterElement = getDragAfterElement(container, e.clientY)
+        const draggable = document.querySelector('.dragging')
+        
+        if (afterElement == null) {
+            container.appendChild(draggable)
+        }
+        else container.insertBefore(draggable, afterElement)
+
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+        
+            return draggableElements.reduce((closest, child) => {
+        
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child }
+            }
+            else return closest
+        
+            }, { offset: Number.NEGATIVE_INFINITY }).element
+        }
+    }
+
+    
+
+
+
+
+
+
+
     return (
+
         <Main style={{
-            paddingTop: '2rem',
-            display: 'grid',
-            'align-content': 'space-between',
-            'align-items': 'end',
-            height: '100vh',
+            paddingTop  : '2rem',
+            display     : 'grid',
+            alignContent: 'space-between',
+            alignItems  : 'end',
+            height      : '100vh',
         }}>
 
             <div className=' gap-1rem'>  
@@ -89,7 +164,7 @@ export default function LinkInBio({userView}) {
                         </div>
                     </div>
                 </div>
-                <div className='grid gap'>
+                <div className='grid gap container' onDragOver={onDragOver}>
                     {
                         UserLinks
                         .filter(e=> e.linkInBio === true && e.asIcon !== true)
@@ -97,11 +172,20 @@ export default function LinkInBio({userView}) {
                         .map(link=> {
 
                             return (
-                                <div key={link.url} >
+                                <div 
+                                    key={link.url}
+                                    id={link.id}
+                                    className='draggable relative' 
+                                    onDragStart={onDragStart}
+                                    onDragEnd={onDragEnd}
+                                    draggable
+                                    onMouseEnter={e=> e.target.style = 'cursor: grab'} 
+                                    onDrag={e=> e.target.style = 'cursor: grabbing'}
+                                >
                                     {
                                         !userView 
                                         ?
-                                        <a href={'https://' +link.shortLink}>
+                                        <a href={'https://' + link.shortLink} className='relative'>
                                             <div className='display border white border-r-1 border-b p-1 hover click h-2' >
                                                 <div className='display justify-c absolute'>
                                                     <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
@@ -118,7 +202,7 @@ export default function LinkInBio({userView}) {
                                             </div>
                                         </a>
                                         :
-                                        <div className='display border white border-r-1 border-b p-1 hover click h-2' draggable >
+                                        <div className='display border white border-r-1 border-b p-1 hover click h-2' >
                                             <div className='display justify-c absolute'>
                                                 <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                                             </div>

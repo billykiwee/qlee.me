@@ -77,10 +77,6 @@ export default function Edit() {
   
     const [QrCode,setQrCode] = useState(false)
 
-    console.log(Object.values(editLink).toString() );
-
-
-
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (

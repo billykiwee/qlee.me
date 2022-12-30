@@ -12,6 +12,7 @@ import LinkInBio from '../LinkInBio'
 import { useDrag } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
+import { dragElement } from '../../../lib/draggable/dragabble'
 
 
 
@@ -30,7 +31,8 @@ export function EditLinkInBio() {
             asIcon : data.checked
         })
     }
-    
+
+ 
 
     return (
     
@@ -43,13 +45,14 @@ export function EditLinkInBio() {
                     <div className='display justify-s-b'>
                         <span>Lien icon</span>
                     </div>
-                    <div className='grid gap'>
+                    <div className='grid gap'  >
                         {
                             UserLinks
                             .filter(e=> e.linkInBio === true)
+                            .sort((a,b)=> a.position - b.position)
                             .map(ul=> {
                                 return (
-                                    <UserLink ul={ul} putLinkAsIcon={putLinkAsIcon}  key={ul.id}/>
+                                    <UserLink ul={ul} putLinkAsIcon={putLinkAsIcon} key={ul.id} />
                                 )
                             })
                         }
@@ -65,13 +68,10 @@ export function EditLinkInBio() {
 }
 
 
-function UserLink({ ul ,putLinkAsIcon }) {
-
+function UserLink({ ul ,putLinkAsIcon}) {
   
     return (
-
-        <div className='display justify-s-b click' >
-
+        <div className={'p-1 white shadow border-r-04 h-2'} >
             <label className='display gap-04 click' htmlFor={'l-' + ul.id}>
                 <SwitchInput 
                     dimension={0.6} 
@@ -84,6 +84,7 @@ function UserLink({ ul ,putLinkAsIcon }) {
                         })
                     }}
                 />
+                <psan>{ul.id}</psan>
                 <img src={ul.icon ?? getFavicon(ul.url)} width={16} className='border-r-100' />
                 <span>{ul.name}</span>
             </label>

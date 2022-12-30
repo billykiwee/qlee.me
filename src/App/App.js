@@ -22,6 +22,7 @@ import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
+import { MyListComponent } from '../Client/views/Dnd'
 
 
 
@@ -113,6 +114,10 @@ export default function App() {
         terms : {
             path : '/terms',
             element : <Terms />
+        },
+        draggable : {
+            path : '/dnd',
+            element : <MyListComponent />
         },
     }
 
