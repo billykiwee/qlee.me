@@ -52,10 +52,6 @@ export default function Edit() {
     }, [user, LinkID])
 
 
-
-
-    const statsLink = Stats
-
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
@@ -80,6 +76,8 @@ export default function Edit() {
 
   
     const [QrCode,setQrCode] = useState(false)
+
+    console.log(Object.values(editLink).toString() );
 
 
 
@@ -241,8 +239,10 @@ export default function Edit() {
                                                     className='border-0 p-0 w-100p' 
                                                     placeholder='mon-lien' 
                                                     onChange={e=> {
-                                                        seteditLink({...editLink, shortLink: e.target.value})
-                                                        checkShortLinkAvailable(e.target.value, UserLinks)
+                                                        seteditLink({
+                                                            ...editLink, 
+                                                            shortLink: e.target.value 
+                                                        })
                                                     }} 
                                                     pattern="\S*"
                                                     onKeyPress={event=> {
@@ -299,10 +299,19 @@ export default function Edit() {
                                     <div className='grid gap'>
                                         <div 
                                             className='display' 
-                                            style={ 
-                                                Object.values(editLink).filter(e=> e !== '').length < 1
-                                                ? {pointerEvents: 'none', opacity: 0.8} 
-                                                : {pointerEvents: 'visible', opacity: 1}}
+                                            style={
+                                               !Object.values(editLink).toString().split(',').join('')
+                                                ? 
+                                                {
+                                                    pointerEvents: 'none', 
+                                                    opacity: 0.8
+                                                } 
+                                                : 
+                                                {
+                                                    pointerEvents: 'visible', 
+                                                    opacity: 1
+                                                }
+                                            }
                                             >
                                             <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
                                                 onClick={e=> 

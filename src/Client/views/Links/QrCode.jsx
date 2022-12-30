@@ -1,23 +1,43 @@
 import { ArrowDownOnSquareIcon } from '@heroicons/react/24/outline'
 import { ArrowDownIcon, ChevronDownIcon, ChevronUpIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import QRCode from 'react-qr-code'
 import { SwitchInput } from '../../../App/components/Switch'
 import { colors } from '../../../App/utils/generateLetterImage'
 import getFavicon from '../../../App/utils/getFavicon'
 import { download } from '../../lib/htmlToImage/download'
+import html2canvas from 'html2canvas'
+
+
 
 export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
     const [frame, setFrame] = useState(false)
     const [frameActive, setframeActive] = useState(true)
-    const [frameColor, setframeColor] = useState(false)
+    const [frameColor, setframeColor] = useState('')
 
     const [line, setLine] = useState(false)
-    const [lineColor, setLineColor] = useState(false)
+    const [lineColor, setLineColor] = useState('')
     const [color, setColor] = useState('')
     const [logo, setLogo] = useState(true)
     const [text, setText] = useState('Qlee me')
+
+
+
+   /*  useEffect(() => {
+        var reader = new FileReader();
+      
+        reader.onload = event => {
+          var dataUrl = event.target.result;
+          console.log(dataUrl);
+        }
+        
+        reader.readAsDataURL("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://chat.openai.com/chat&size=256");
+      }, []);
+       */
+
+
     
     if (QrCode)
     return (
@@ -100,7 +120,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                     </div>
                 </div>
                 <div className='grid'>
-                    <div className='display justify-s-b border-r-04 grey p-1'>
+                    <div className='display justify-s-b border-r-04 grey p-04'>
                         <span>Logo</span>
                         <SwitchInput dimension={0.8} checked={logo} onChange={e=> setLogo(logo ? false : true)} />
                     </div>
@@ -109,7 +129,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
             <div className='display justify-c'>
                 <div className='display gap'>
-                    <button className='blue-secondary h-3 p-1 border-r-2 display gap' onClick={e=> download(Link.name)} >
+                    <button className='blue-secondary h-3 p-1 border-r-2 display gap' onClick={e=> download(Link.name, frameActive ? 'qr-code-frame-img' : 'qr-code-img')} >
                         <ArrowDownOnSquareIcon width={18} height={18} className='c-blue' />
                         <span className='c-blue f-s-16'>Télécharger</span>
                     </button>
@@ -122,21 +142,29 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
 const QRCODE = ({style, link}) => {
 
+
+
     return (
         <>
             {
                 style.frameActive 
                 ?
                 (
-                    <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
+                    <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
                         <div className='display white p-1 border-r-04 justify-c'>
                             {
                                 style.logo &&
-                                <img src={link.icon ?? getFavicon(link.url)} className='w-2 h-2 absolute border-r-100 p-04 white' />
+                                <div 
+                                    style={{ 
+                                        backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
+                                        backgroundPosition: 'center', 
+                                        backgroundSize: 'cover' 
+                                    }}
+                                    className='w-2 h-2 border-r-100 absolute red' />
                             }
                             <QRCode
                                 bgColor='white'
-                                fgColor={style.lineColor}
+                                fgColor={style.lineColor ?? 'black'}
                                 className='click qr-code-svg'
                                 level='H'
                                 size={144}
@@ -146,7 +174,7 @@ const QRCODE = ({style, link}) => {
                         {
                             style.text &&
                             <div className='display justify-c'>
-                                <span className='f-s-25' contentEditable>{style.text}</span>  
+                                <span className='f-s-25'>{style.text}</span>  
                             </div> 
                         }
                     </div> 
@@ -157,11 +185,17 @@ const QRCODE = ({style, link}) => {
                         <div className='display p-1 border-r-04 justify-c'>
                             {
                                 style.logo &&
-                                <img src={link.icon ?? getFavicon(link.url)} className='w-2 h-2 absolute border-r-100 p-04 white' />
+                                <div 
+                                    style={{ 
+                                        backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
+                                        backgroundPosition: 'center', 
+                                        backgroundSize: 'cover' 
+                                    }}
+                                    className='w-2 h-2 border-r-100 absolute' />
                             }
                             <QRCode
                                 bgColor='white'
-                                fgColor={style.lineColor}
+                                fgColor={style.lineColor ?? 'black'}
                                 className='click qr-code-svg'
                                 level='H'
                                 size={144}

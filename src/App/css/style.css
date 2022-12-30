@@ -1069,9 +1069,12 @@ input[type=number] {
 }
 
 .snackbar_div {
-    bottom: 2rem;
+    bottom: 1rem;
     align-items: flex-start;
-    position: sticky;
+    position: fixed;
+    z-index: 9;
+    left: 1rem;
+    right: 1rem;
 }
 
 .snackbar.in {

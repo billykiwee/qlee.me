@@ -1,4 +1,4 @@
-import { serverTimestamp } from "firebase/firestore"
+import { doc, serverTimestamp } from "firebase/firestore"
 import { db } from "../../../../App/database/firebase"
 import { isValidUrl } from "../../../../App/utils/isValidUrl"
 import UniqueID from "../../../../App/utils/uniqueID"
@@ -44,6 +44,8 @@ export function EditLink(props) {
 
   const editShortLink = async (newID) => {
     try {
+
+      if ((/\s/.test(editLink.shortLink))) throw 'space in shortlink'
       
       await db.collection('links')
       .doc(newID.id)
@@ -84,6 +86,9 @@ export function EditLink(props) {
 
     } catch (e) {
       console.log(e);
+
+      document.querySelector('#alert-shortlink').style.color= 'var(--red)'
+      document.querySelector('#alert-shortlink').innerHTML = e
     }
   }
 
