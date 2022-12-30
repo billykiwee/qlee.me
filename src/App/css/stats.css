@@ -28,16 +28,6 @@
     
 }
 
-@media screen and (min-width: 740px) {
-
-    .stats-blocks > div {
-        position: sticky;
-        top: 2rem;
-        z-index: 9;
-    }
-}
-
-
 
 
 

@@ -57,7 +57,7 @@ export default function Profil() {
     
 
     return (
-        <Main className='m-t-2'>
+        <Main>
             <div className='grid gap-2rem blocks'>
                 <div className='grid gap-2rem'>
                     <div className='display gap-1rem'>

@@ -7,10 +7,5 @@
         display: flex;
         width: 50%;
     }
-
-    .blocks > div > div  {
-        position: sticky;
-        top: 2rem;
-    }
 }
 

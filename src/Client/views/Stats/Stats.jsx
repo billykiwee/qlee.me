@@ -16,7 +16,7 @@ import { dataFilter } from './data/dataFilters'
 import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
-import { CopyClip } from '../Links/functions/CopyClip'
+import { CopyClip } from '../Links/lib/CopyClip'
 import formatDate from '../../../App/utils/formatDate'
 
 

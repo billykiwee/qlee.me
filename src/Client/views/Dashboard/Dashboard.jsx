@@ -17,11 +17,10 @@ import { fetchUser } from '../../lib/database/fetchUser';
 import { setSnackbar, SnackBar } from '../../../App/components/SnackBar';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import { createLink } from '../Links/functions/Create';
 
 
 export default function Dashboard() {
-
-    const history = useNavigate()
 
     const [{user}] = useStateValue()
 
@@ -41,88 +40,17 @@ export default function Dashboard() {
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
-    
-
-    function createLink(NameLink, LinkURL) {
-
-        const linkID = 'qlee.me/' + UniqueID('', 5)
-                        
-        const link = {
-            name     : NameLink.length < 1 ? getHostName(LinkURL) : NameLink,
-            id       : linkID.split('/')[1],
-            user     : user?.email,
-            url      : isValidUrl(LinkURL).href,
-            shortLink: linkID,
-            date     : serverTimestamp(),
-            views    : 0
-        }    
 
 
-        async function check() {
-
-            if (NameLink.length) {
-                if (NameLink.length > 40) {
-                    throw 'Le nom doit comporté 40 charactères au maximum'
-                }
-            }
-            
-            if (!isValidUrl(LinkURL)) {
-                throw 'Tu dois rentrer une URL valide'
-            }
-    
-            if (isUserPremium(User).max_links <= UserLinks.length) {
-                throw setMsg({
-                    id: UniqueID('msg', 5),
-                    text: 'Erreur',
-                    subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
-                    action: {
-                        text : 'Débloque plus de lien ici !',
-                        link: '/pricing',
-                    },
-                    status : 'error'
-                })
+    window.onkeydown = e => {
+        if (e.key === 'Enter') {
+            if (LinkURL) {
+                document.querySelector('#btn-create').click()
             }
         }
-
-        check()
-        .then(e=> {
-        
-            db.collection('links').doc(link.id).set(link)
-            .then(showPopup=> {
-                setMsg({
-                            id: UniqueID('msg', 5),
-                    text: 'Bravo 🎉',
-                    subtext: `Le lien ${NameLink} a bien été crée`,
-                    status: 'success'
-            })
-            })
-            .then(linkCreated=> {
-                document.querySelectorAll('input').forEach(e=> e.value = '')
-                setLinkURL('')
-                setNameLink('')
-        
-            })
-        })
-        .catch(Popup=> {
-            setError(Popup)
-        })
-
     }
-
-
-    useEffect(() => {
-
-        if (LinkURL) {
-            window.onkeydown = e => {
-                if (e.key === 'Enter') {
-                    createLink(NameLink, LinkURL)
-                }
-            }
-        }
-
-    }, [LinkURL])
-
-
+    
+    
 
     return (
 
@@ -145,14 +73,35 @@ export default function Dashboard() {
                                 <div className='grid gap-1rem'>
                                     <div className='grid gap'>
                                         <div className='display w-100p'>
-                                            <input type='text' onChange={e=> {setNameLink(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' />
+                                            <input type='text' 
+                                                onChange={e=> {setNameLink(e.target.value); setError('')}} 
+                                                className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
+                                            />
                                         </div>
                                         <div className='display w-100p'>
-                                            <input type='text' onChange={e=> {setLinkURL(e.target.value); setError('')}} className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' />
+                                            <input type='text' 
+                                                onChange={e=> {setLinkURL(e.target.value); setError('')}} 
+                                                className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' 
+                                            />
                                         </div>
                                     </div>
                                     <div className='display h-4 align-top'>
-                                        <button onClick={e=> createLink(NameLink, LinkURL) } className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
+                                        <button 
+                                            onClick={e=> 
+                                                createLink({
+                                                    NameLink,
+                                                    LinkURL,
+                                                    setLinkURL,
+                                                    setNameLink,
+                                                    setError,
+                                                    User,
+                                                    UserLinks,
+                                                    setMsg 
+                                                }) 
+                                            } 
+                                            id='btn-create'
+                                            className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
+                                        >
                                             <span className='f-s-16 c-white'>Créer</span>
                                         </button>
                                     </div>

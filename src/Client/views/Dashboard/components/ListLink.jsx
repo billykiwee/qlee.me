@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
-import { CopyClip } from '../../Links/functions/CopyClip'
+import { CopyClip } from '../../Links/lib/CopyClip'
 import { IsLinkInBio } from '../../Links/lib/IsLinkInBio'
 
 
@@ -20,7 +20,7 @@ export default function ListLink({links, User}) {
                     
                     return (
 
-                        <arcticle className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
+                        <article className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
                             <div className='display gap-1rem'>
                                 <Link to={'/edit/' + link.id} className='display'>
                                     <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
@@ -46,7 +46,7 @@ export default function ListLink({links, User}) {
                                     </div>
                                 </Link>
                             </div>
-                        </arcticle>
+                        </article>
                     )
                 }).reverse()
             }

@@ -19,8 +19,8 @@ import { fetchUser } from '../../lib/database/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
 import { deleteObject, ref } from 'firebase/storage'
 import { BookmarkIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
-import { addToLinkInBio } from './functions/addToLinkInBio'
-import { checkShortLinkAvailable } from '../Links/functions/checkShortLinkAvailable'
+import { addToLinkInBio } from './lib/addToLinkInBio'
+import { checkShortLinkAvailable } from './lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../App/components/Switch'
 import { formatNumber } from '../../../App/utils/formatNumber'
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
@@ -29,6 +29,7 @@ import UniqueID from '../../../App/utils/uniqueID'
 import QrCodeSection from './QrCode'
 import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
+import { EditLink } from './functions/Edit'
 
 
 export default function Edit() {
@@ -39,7 +40,7 @@ export default function Edit() {
     const [{user}] = useStateValue()
 
 
-    const [User, setUser] = useState([])
+    const [User, setUser] = useState({})
 
     const [Stats, setStats] = useState([])
     
@@ -47,15 +48,13 @@ export default function Edit() {
     useEffect(e=> {
         fetchUserLinks(setUser, user?.email)
         fetchStats(setStats, LinkID)
-
         fetchUser(setUser, user?.email)
+    }, [user, LinkID])
 
-    }, [user])
 
 
 
     const statsLink = Stats
-
 
     const [UserLinks, setUserLinks] = useState([])
 
@@ -79,104 +78,9 @@ export default function Edit() {
 
     const [editLink, seteditLink] = useState({})
 
-
-    const [EditShortLink, setEditShortLink] = useState('')
-
-    function EditLink() {
-
-        if (!EditShortLink) {
-
-            if (Object.values(editLink).length === 0) return 
-    
-            async function Check(editLink) {
-
-                if (editLink.name) {
-                    if (editLink.name.length > 40)
-                    throw { id:'name', error: 'Le nom doit faire entre 0 et 40 charactères' }
-                }
-                if (editLink.url) {
-                    if (!isValidUrl(editLink.url)) 
-                    throw { id:'url', error:'Tu dois rentrer une URL valide' }
-                }
-            }
-    
-            Check(editLink)
-            .then(valid=> {
-    
-                db.collection('links').doc(Link.id).update(editLink)
-    
-                document.querySelector('#error-name').innerHTML = ''
-                document.querySelector('#error-url').innerHTML = ''
-            })
-            .then(e=> {
-                document.querySelectorAll('input').forEach(e=> e.value = '')
-    
-                seteditLink({})
-    
-                setMsg({
-                    id: UniqueID('m-', 5),
-                    text: 'Modifications enregistrées 🎉',
-                    subtext: 'Le lien à bien été modifié',
-                    status: 'success'
-                })
-            })
-            .catch(e=> {
-               document.querySelector('#error-'+ e.id).innerHTML = e.error
-            })
-        }
-
-        else {
-            db.collection('links').doc(EditShortLink).set({
-                name     : Link.name,
-                id       : EditShortLink,
-                user     : user?.email,
-                url      : Link.url,
-                shortLink: 'qlee.me/' + EditShortLink,
-                date     : serverTimestamp(),
-                views    : Link.views
-            })
-            .then(addStat=> {
-
-                for (const v in statsLink) {
-                    db.collection('links').doc(EditShortLink).collection('stats').doc(statsLink[v].id).set(statsLink[v])
-                }
-            })
-            .then(deleteOldStat=> {
-
-                for (const v in statsLink) {
-                    db.collection('links').doc(Link.id).collection('stats').doc(statsLink[v]?.id).delete()
-                }
-            })
-            .then(deleteOldID=> {
-                db.collection('links').doc(Link.id).delete()
-            })
-            .then(popup=> {
-                document.querySelectorAll('input').forEach(e=> e.value = '')
-    
-                setEditShortLink('')
-    
-                setPopUpMessage({
-                    title: 'Modifications enregistrées',
-                    message: 'Le lien à bien été modifié',
-                    buttonText: 'Continuer',
-                    buttonColor: 'blue',
-                    valid: () => setPopUpMessage({}),
-                    close: () => setPopUpMessage({}),
-                    statu: 'success'
-                })
-            })
-            .then(redirect=> {
-                history('/edit/' + EditShortLink)
-            })
-        }
-
-    }
-    
-
-
-
   
     const [QrCode,setQrCode] = useState(false)
+
 
 
 
@@ -289,7 +193,7 @@ export default function Edit() {
                                                 }
                                             </div>
                                             <div 
-                                                className='display div-input h-3  border-r-1 w-100p white'
+                                                className='display h-3 border-r-1 w-100p white'
                                                 style={ 
                                                     isUserPremium(User).plan === 'FREE' ? 
                                                     {
@@ -303,9 +207,9 @@ export default function Edit() {
                                                     }
                                                 } 
                                             >
-                                                <input type='text' className=' h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
-                                                <small className='c-red' id='error-url'></small>
+                                                <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
                                             </div>
+                                            <small className='c-red' id='error-url'></small>
                                         </div>
 
                                         <div className='grid gap w-100p'>
@@ -331,13 +235,13 @@ export default function Edit() {
                                                     }
                                                 } 
                                             >
-                                                <span className='c-blue p-l-1 p-r-04'>{Link.shortLink.split('/')[0]}/</span>
+                                                <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
                                                 <input 
                                                     type='text' 
-                                                    className='border-0 p-0 w-100*' 
+                                                    className='border-0 p-0 w-100p' 
                                                     placeholder='mon-lien' 
                                                     onChange={e=> {
-                                                        setEditShortLink(e.target.value)
+                                                        seteditLink({...editLink, shortLink: e.target.value})
                                                         checkShortLinkAvailable(e.target.value, UserLinks)
                                                     }} 
                                                     pattern="\S*"
@@ -396,11 +300,26 @@ export default function Edit() {
                                         <div 
                                             className='display' 
                                             style={ 
-                                                Object.values(editLink).filter(e=> e !== '').length < 1 && !EditShortLink 
+                                                Object.values(editLink).filter(e=> e !== '').length < 1
                                                 ? {pointerEvents: 'none', opacity: 0.8} 
                                                 : {pointerEvents: 'visible', opacity: 1}}
                                             >
-                                            <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' onClick={EditLink} >
+                                            <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
+                                                onClick={e=> 
+
+                                                    EditLink({
+                                                        Link,
+                                                        LinkID,
+                                                        user,
+                                                        Stats,
+                                                        editLink,
+                                                        seteditLink,
+                                                        setMsg,
+                                                        setPopUpMessage,
+                                                        history,
+                                                    }) 
+                                                }
+                                            >
                                                 <span className='f-s-16'>Modifier</span>
                                             </button>
                                         </div>
@@ -408,7 +327,8 @@ export default function Edit() {
                                             <button className='red hover-red p-1 h-4 border-b border-r-1'
                                                 onClick={e=> 
                                                     DeleteLink({
-                                                        link: Link, 
+                                                        Stats,
+                                                        link: Link,
                                                         setMsg: setPopUpMessage
                                                     })
                                                 } 

@@ -1,14 +1,15 @@
 import { plans } from "./plans"
 
-export const isUserPremium = (user) => {
+export function isUserPremium(user) {
+
     const userPlan = user.plan
 
-    if (userPlan === 'PRO' || userPlan === 'ENTREPRISE') {
+    if (userPlan !== 'FREE') {
         return {
             user: user.email,
             plan: userPlan,
-            max_links: plans[userPlan].max_links,
-            features: plans[userPlan].features
+            max_links: plans[userPlan]?.max_links,
+            features: plans[userPlan]?.features
         };
     } 
     else return {

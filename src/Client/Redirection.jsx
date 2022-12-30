@@ -24,17 +24,16 @@ export default function Redirection() {
             const adress = await getAdress()
 
             const stat = {
-                id         : statID,
-                adress     : adress,
+                LinkID,
+                statID,
+                adress,
                 reference  : document.referrer ?? null,
                 device     : getDevice(),
                 performance: performance.now() - startLoading,
                 date       : serverTimestamp()
             }
 
-            await db.collection('links')
-            .doc(link.id)
-            .collection('stats')
+            await db.collection('stats')
             .doc(statID)
             .set(stat)
 
