@@ -57,59 +57,45 @@ export default function Filter({props}) {
                         <div className='w-100p'>
                             <span>Filtre :</span>
                         </div>
-                        <button 
-                            onClick={e=> {
-                                props.setSearch(false)
-                                props.setFilter(props.Filter ? false : true)
-                            }}
-                            className={(props.Filter ? 'grey' : 'white') + ' h-2 p-1 border-r-1 border '} 
-                        >
-                            <div>
-                                <span className='f-s-14 display gap c-black'>
-                                    Filtre
-                                    <FunnelIcon width={18} className='c-black' />
-                                </span>
+                        {
+                            props.Filter &&
+                            <div className='display gap'>
+                                <div className='dropdown border-r-1 border click w-100p'>
+                                    <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)}>
+                                        <div className='display gap'>
+                                            {
+                                                filters.map(fil=> {
+                                                    if (fil.name === props.checkFilter)
+                                                    return <span className='display'>{fil.icon}</span>
+                                                })
+                                            }
+                                            <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
+                                        </div>
+                                        {
+                                            isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
+                                        }
+                                    </div>
+                                    <div className={`dropdown-body ${isOpen && 'open'}`}>
+                                        {
+                                            filters.map(item => {
+                                                return (
+                                                    <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
+                                                        <span className='display'>{item.icon}</span>
+                                                        <span>{item.text}</span>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                        </button>
+                        }
                     </div>
                 </div>
                 {
                     props.Search &&
                     <div className='display'>
                         <input className='div-input h-3 white border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
-                    </div>
-                }
-                {
-                    props.Filter &&
-                    <div className='display gap'>
-                        <div className='dropdown border-r-1 border click'>
-                            <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)}>
-                                <div className='display gap'>
-                                    {
-                                        filters.map(fil=> {
-                                            if (fil.name === props.checkFilter)
-                                            return <span className='display'>{fil.icon}</span>
-                                        })
-                                    }
-                                    <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
-                                </div>
-                                {
-                                    isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
-                                }
-                            </div>
-                            <div className={`dropdown-body ${isOpen && 'open'}`}>
-                                {
-                                    filters.map(item => {
-                                        return (
-                                            <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
-                                                <span className='display'>{item.icon}</span>
-                                                <span>{item.text}</span>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
                     </div>
                 }
             </div>
