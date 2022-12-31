@@ -9,7 +9,7 @@ import getFavicon from '../../../App/utils/getFavicon'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
-import { reorder } from 'react-beautiful-dnd'
+
 
 
 export default function LinkInBio({userView = true}) {
@@ -26,23 +26,49 @@ export default function LinkInBio({userView = true}) {
 
     }, [user?.email])
 
-
-
-  /*   const [letDrag, setLetDrag]= useState(false)
+    
     
 
-    const onDragStart = e => {
-        e.target.classList.add('dragging')
+    const [LinksDrag, setLinksDrag] = useState([]);
+
+    useEffect(e=> {
+        setLinksDrag(UserLinks.filter(e=> e.linkInBio === true && e.asIcon !== true).sort((a,b)=> a.position - b.position))
+    }, [UserLinks])
+
+    function onDragEnd(result) {    
+            // Vérifier s'il y a une destination (l'élément a été déplacé à l'intérieur de la liste)
+        if (!result.destination) {
+            return;
+        }
+
+        // Récupérer l'index de départ et de destination de l'élément
+        const startIndex = result.source.index;
+        const endIndex = result.destination.index;
+
+        // Mettre à jour l'état de l'application en réorganisant les éléments de la liste
+        setLinksDrag((prevLinks) => {
+            // Copier la liste actuelle
+            const updatedLinks = [...prevLinks];
+
+            // Extraire l'élément à déplacer
+            const [movedLink] = updatedLinks.splice(startIndex, 1);
+
+            // Insérer l'élément à sa nouvelle position
+            updatedLinks.splice(endIndex, 0, movedLink);
+
+
+            setLinksDrag(updatedLinks)
+            // Renvoyer la liste mise à jour
+            return updatedLinks;
+        });
     }
-    
-    const onDragEnd = e => {
-        e.target.classList.remove('dragging')
-        
+
+ /*    useEffect(e=> {
         const div    = document.querySelectorAll('.draggable')
         const parent = document.querySelector('.container')
 
         div.forEach(div=> {
-    
+
             for (let i = 0; i < parent.childNodes.length; i++) {
                 if (parent.childNodes[i] === div) {
 
@@ -54,86 +80,9 @@ export default function LinkInBio({userView = true}) {
                 }
             }
         })
-    }
-
-    const onDragOver = e => {
-
-        const container = document.querySelector('.container')
-
-        e.preventDefault()
-        
-        const afterElement = getDragAfterElement(container, e.clientY)
-        const draggable = document.querySelector('.dragging')
-        
-        if (afterElement == null) {
-            container.appendChild(draggable)
-        }
-        else container.insertBefore(draggable, afterElement)
-
-
-        function getDragAfterElement(container, y) {
-            const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
-        
-            return draggableElements.reduce((closest, child) => {
-        
-            const box = child.getBoundingClientRect()
-            const offset = y - box.top - box.height / 2
-            
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child }
-            }
-            else return closest
-        
-            }, { offset: Number.NEGATIVE_INFINITY }).element
-        }
-    }
+    }, [LinksDrag]) */
 
     
-
-
-    const [drag, setDrag] = useState(null)
-    console.log(drag);
-    function onDrag(e, id) {
-
-        document.body.style.overflowY = 'hidden';
-        document.body.style.overflowX = 'hidden';
-        e.target.style = 'z-index: 99;'
-
-        const div = document.querySelector('#lnb-' + id)
-
-console.log(div);
-        var x = e.touches[0].clientX;
-        var y = e.touches[0].clientY;
-    
-        // Ajout d'un gestionnaire d'événements pour l'événement "mousemove" sur le document
-        document.addEventListener('touchmove', suivre);
-        setDrag(true)
-    
-        // Fonction qui déplace la e.target en fonction de la position de la souris
-        function suivre(e) {
-            div.style.left = (e.touches[0].clientX - x) + 'px';
-            div.style.top = (e.touches[0].clientY - y) + 'px';
-        }
-
-
-    }
-
-    function onDragOut() {
-        setDrag(false)
-        document.body.style.overflowY = 'visible';
-    } */
-
-    const [DragList, setDragList] = useState([]);
-
-    useEffect(e=> {
-        setDragList(UserLinks)
-    }, [UserLinks])
-
-    function onDragEnd(val) {
-        console.log(al.source, val.destination, DragList);
-        let result = reorder(val.source, val.destination, DragList);
-        setDragList(result);
-    }
 
 
 
@@ -206,20 +155,18 @@ console.log(div);
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]}>
+                    <Droppable droppableId={LinksDrag.map(e=> e.id)[0]}>
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                    DragList
-                                    .filter(e=> e.linkInBio === true && e.asIcon !== true)
-                                    .sort((a,b)=> a.position - b.position)
+                                    LinksDrag
+                                    /* .sort((a,b)=> a.position - b.position) */
                                     .map((link, i)=> {
 
                                         return (
-                                            <Draggable draggableId={link.id} index={i} >
+                                            <Draggable draggableId={link.id} index={i} key={i}>
                                                 {(provided)=> (
                                                     <div 
-                                                        id={link.id}
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
