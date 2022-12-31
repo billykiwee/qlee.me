@@ -161,7 +161,7 @@ export default function Dashboard() {
 
             </div>
 
-            <SnackBar content={Msg} Msg={Msg} setMsg={setMsg} />
+            <SnackBar content={Msg} setMsg={setMsg} />
         </Main>
     )
 }

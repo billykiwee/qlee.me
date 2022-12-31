@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-export function SnackBar({content, Msg, setMsg}) {
+export function SnackBar({content, setMsg}) {
 
 
     function deleteData(id) {
