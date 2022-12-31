@@ -1,5 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
-import { BookmarkIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, EllipsisHorizontalIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { db } from '../../../../App/database/firebase'
@@ -85,24 +85,25 @@ export default function List({props}) {
                                                 <EyeIcon width={16} />
                                                 <small>{link.views}</small>
                                             </div>
+                                            <div className='display justify-c'>
+                                                <button className='display w-2 h-2 hover border-r-100'
+                                                    onClick={e=> 
+                                                        DeleteLink({
+                                                            link       : link,
+                                                            setMsg     : props.setMsg,
+                                                            setShowStat: props.setShowStat,
+                                                            type       : 'stats',
+                                                            history: history
+                                                        })
+                                                    }
+                                                >
+                                                    <EllipsisHorizontalIcon width={22} className='c-black' />
+                                                    {/* <TrashIcon width={20} className='c-red'/> */}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
-                                <div className='display justify-c p-04'>
-                                    <button className='display w-3 h-3  hover border-r-100'
-                                        onClick={e=> 
-                                            DeleteLink({
-                                                link       : link,
-                                                setMsg     : props.setMsg,
-                                                setShowStat: props.setShowStat,
-                                                type       : 'stats',
-                                                history: history
-                                            })
-                                        }
-                                    >
-                                        <TrashIcon width={20} className='c-red'/>
-                                    </button>
-                                </div>
                             </div>
                         )
                     })
