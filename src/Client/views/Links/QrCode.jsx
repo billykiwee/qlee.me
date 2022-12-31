@@ -47,17 +47,13 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                 <div className='grid gap-1rem border-r-04 grey p-1'>
                     <div className='display justify-s-b'>
                         <span>Cadre</span>
-                        <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setFrame(frame ? false : true)}>
-                            { frame ? <ChevronUpIcon width={20} /> : <ChevronDownIcon width={20} />  }
+                        <div className='click display border-r-2 hover justify-c' onClick={e=> setFrame(frame ? false : true)}>
+                            <SwitchInput dimension={0.7} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
                         </div>
                     </div>
                     {
                         frame && 
                         <>
-                         <div className='display gap-04'>
-                            <span className='opacity'>activer</span>
-                            <SwitchInput dimension={0.7} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
-                        </div>
                             <div className='grid gap'>
                                 <span className='opacity'>texte</span>
                                 <input type="text" className='div-input white' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
@@ -89,7 +85,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                 </div>
 
                 <div className='grid'>
-                    <div className='grid gap-1rem grey border-r-04 p-1'>
+                    <div className='grid gap-1rem grey border-r-04  p-1'>
                         <div className='display justify-s-b'>
                             <span>Lignes</span>
                             <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setLine(line ? false : true)}>
@@ -116,7 +112,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                     </div>
                 </div>
                 <div className='grid'>
-                    <div className='display justify-s-b border-r-04 grey p-04'>
+                    <div className='display justify-s-b border-r-04 grey  p-1'>
                         <span>Logo</span>
                         <SwitchInput dimension={0.8} checked={logo} onChange={e=> setLogo(logo ? false : true)} />
                     </div>
@@ -138,7 +134,6 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
 const QRCODE = ({style, link}) => {
 
-
     if (style.frameActive )
     return (
  
@@ -152,7 +147,7 @@ const QRCODE = ({style, link}) => {
                             backgroundPosition: 'center', 
                             backgroundSize: 'cover' 
                         }}
-                        className='w-2 h-2 border-r-100 absolute' 
+                        className='w-2 h-2 border-r-100 absolute white' 
                     />
                 }
                 <QRCode
@@ -184,7 +179,7 @@ const QRCODE = ({style, link}) => {
                             backgroundPosition: 'center', 
                             backgroundSize: 'cover' 
                         }}
-                        className='w-2 h-2 border-r-100 absolute' 
+                        className='w-2 h-2 border-r-100 absolute white' 
                     />
                 }
                 <QRCode
