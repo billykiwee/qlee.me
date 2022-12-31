@@ -24,20 +24,6 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
     const [text, setText] = useState('Qlee me')
 
 
-
-   /*  useEffect(() => {
-        var reader = new FileReader();
-      
-        reader.onload = event => {
-          var dataUrl = event.target.result;
-          console.log(dataUrl);
-        }
-        
-        reader.readAsDataURL("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://chat.openai.com/chat&size=256");
-      }, []);
-       */
-
-
     
     if (QrCode)
     return (
@@ -143,68 +129,61 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 const QRCODE = ({style, link}) => {
 
 
-
+    if (style.frameActive )
     return (
-        <>
+ 
+        <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
+            <div className='display white p-1 border-r-04 justify-c'>
+                {
+                    style.logo &&
+                    <div 
+                        style={{ 
+                            backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
+                            backgroundPosition: 'center', 
+                            backgroundSize: 'cover' 
+                        }}
+                        className='w-2 h-2 border-r-100 absolute red' />
+                }
+                <QRCode
+                    bgColor='white'
+                    fgColor={style.lineColor ?? 'black'}
+                    className='click qr-code-svg'
+                    level='H'
+                    size={144}
+                    value={link.shortLink}
+                />
+            </div> 
             {
-                style.frameActive 
-                ?
-                (
-                    <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
-                        <div className='display white p-1 border-r-04 justify-c'>
-                            {
-                                style.logo &&
-                                <div 
-                                    style={{ 
-                                        backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
-                                        backgroundPosition: 'center', 
-                                        backgroundSize: 'cover' 
-                                    }}
-                                    className='w-2 h-2 border-r-100 absolute red' />
-                            }
-                            <QRCode
-                                bgColor='white'
-                                fgColor={style.lineColor ?? 'black'}
-                                className='click qr-code-svg'
-                                level='H'
-                                size={144}
-                                value={link.shortLink}
-                            />
-                        </div> 
-                        {
-                            style.text &&
-                            <div className='display justify-c'>
-                                <span className='f-s-25'>{style.text}</span>  
-                            </div> 
-                        }
-                    </div> 
-                )
-                : 
-                (
-                    <div className='grid gap-1rem border-r-1 gap-1rem p-1' id='qr-code-img' > 
-                        <div className='display p-1 border-r-04 justify-c'>
-                            {
-                                style.logo &&
-                                <div 
-                                    style={{ 
-                                        backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
-                                        backgroundPosition: 'center', 
-                                        backgroundSize: 'cover' 
-                                    }}
-                                    className='w-2 h-2 border-r-100 absolute' />
-                            }
-                            <QRCode
-                                bgColor='white'
-                                fgColor={style.lineColor ?? 'black'}
-                                className='click qr-code-svg'
-                                level='H'
-                                size={144}
-                                value={link.shortLink}
-                            />
-                        </div> 
-                    </div> 
-                )
-            }   
-        </>
+                style.text &&
+                <div className='display justify-c'>
+                    <span className='f-s-25'>{style.text}</span>  
+                </div> 
+            }
+        </div> 
+    )
+
+    else return (
+        <div className='grid gap-1rem border-r-1 gap-1rem p-1' id='qr-code-img' > 
+            <div className='display p-1 border-r-04 justify-c'>
+                {
+                    style.logo &&
+                    <div 
+                        style={{ 
+                            backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
+                            backgroundPosition: 'center', 
+                            backgroundSize: 'cover' 
+                        }}
+                        className='w-2 h-2 border-r-100 absolute' />
+                }
+                <QRCode
+                    bgColor='white'
+                    fgColor={style.lineColor ?? 'black'}
+                    className='click qr-code-svg'
+                    level='H'
+                    size={144}
+                    value={link.shortLink}
+                />
+            </div> 
+        </div> 
     )
 }

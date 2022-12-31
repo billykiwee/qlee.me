@@ -7,7 +7,7 @@ export const dataFilter = (LinkStat) => {
     const device = LinkStat.map(e=> e.device)
     const countByDevice = countBy(device)
 
-    const reference = LinkStat.map(e=> e.reference &&  new URL(e.reference).origin)
+    const reference = LinkStat.map(e=> e.reference && new URL(e.reference).origin)
     const countByReference = countBy(reference)
 
     const countries = LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country)
