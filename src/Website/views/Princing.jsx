@@ -70,7 +70,7 @@ export default function Pricing() {
                 
                 <div className='display wrap justify-s-b'>
                     <div className='grid gap'>
-                        <span className="f-s-25 f-w-500">Pricing</span>
+                        <h1 className='m-0'>Pricing</h1>
                         <span className='f-w-100'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</span>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ export default function Pricing() {
                                                             onClick={e=> checkUserPlan ? history('/dashboard') : ''}
                                                             className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
                                                         > 
-                                                            <span className='c-white'>{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
+                                                            <span className={(plan.recommended ? 'c-black' : 'c-white')}>{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
                                                         </button>
                                                     </a>
                                                 </div>
@@ -127,7 +127,7 @@ export default function Pricing() {
                                                 plan.benefits.map((benefit)=> {
                                                     
                                                     return (
-                                                        <div className='display gap-1rem hover border-r-1 h-2 click' key={benefit}>
+                                                        <div className='display gap hover border-r-1 h-2 click' key={benefit}>
                                                             <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
                                                             <p className='f-w-300'>{benefit[0]}</p>
                                                         </div>
