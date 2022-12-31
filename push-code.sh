@@ -12,7 +12,7 @@ while true; do
   git commit -m "Code pushé automatiquement toutes les 5 minutes"
 
   # Pousser les commits sur le dépôt Git Hub
-  git push origin master
+  git push
 
   sleep 300
 done
