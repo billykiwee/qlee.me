@@ -160,7 +160,6 @@ export default function LinkInBio({userView = true}) {
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
                                     LinksDrag
-                                    /* .sort((a,b)=> a.position - b.position) */
                                     .map((link, i)=> {
 
                                         return (
