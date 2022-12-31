@@ -55,6 +55,8 @@
     position: absolute;
     z-index: 9;
     background: white;
+    border-radius: 0.4rem;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
   }
   
   .dropdown-item {

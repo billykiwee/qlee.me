@@ -42,7 +42,7 @@ export default function Filter({props}) {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={(props.Search ? 'grey' : 'white') + ' h-2 p-1 border-r-1 border '} 
+                            className={(props.Search ? 'grey' : 'white') + ' h-3 p-1 border-r-1 border '} 
                         >
                             <div>
                                 <span className='f-s-14 display gap c-black'>
@@ -54,9 +54,6 @@ export default function Filter({props}) {
                     </div>
 
                     <div className='display gap'>
-                        <div className='w-100p'>
-                            <span>Filtre :</span>
-                        </div>
                         <div className='display gap'>
                             <div className='dropdown border-r-1 border click w-100p'>
                                 <div className='dropdown-header display gap' onClick={e=> setOpen(isOpen ? false : true)} >
@@ -67,10 +64,10 @@ export default function Filter({props}) {
                                                 return <span className='display'>{fil.icon}</span>
                                             })
                                         }
-                                        <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
+                                        <span className='c-black f-s-14'>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
                                     </div>
                                     {
-                                        isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
+                                        isOpen ? <ChevronUpIcon width={14} /> : <ChevronDownIcon width={14} />
                                     }
                                 </div>
                                 <div className={`dropdown-body ${isOpen && 'open'}`}>
@@ -79,7 +76,7 @@ export default function Filter({props}) {
                                             return (
                                                 <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
                                                     <span className='display'>{item.icon}</span>
-                                                    <span>{item.text}</span>
+                                                    <span className='c-black f-s-14'>{item.text}</span>
                                                 </div>
                                             )
                                         })
