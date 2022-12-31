@@ -16,3 +16,7 @@ while true; do
 
   sleep 300
 done
+
+
+# cmd push
+./push-code.sh
