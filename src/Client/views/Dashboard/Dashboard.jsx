@@ -18,7 +18,7 @@ import { setSnackbar, SnackBar } from '../../../App/components/SnackBar';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
-
+import Login from '../../../Website/connection/Login'
 
 export default function Dashboard() {
 
@@ -51,7 +51,8 @@ export default function Dashboard() {
     }
     
     
-
+    if (!user) return <Login />
+    
     return (
 
         <Main>
@@ -141,7 +142,6 @@ export default function Dashboard() {
                             </div>
                             <div className='grid gap'>
                                 {
-
                                     UserLinks === 'no link' 
                                     ? <span>Pas de lien</span>
                                     :  

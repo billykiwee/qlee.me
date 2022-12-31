@@ -18,6 +18,7 @@ export const fetchUserLinks = async (setUserLinks, userEmail) => {
                 setUserLinks(allLinks?.sort((x,y)=> y.date - x.date).reverse())
             })
         }
+        return 
 
     }
     catch (err) {

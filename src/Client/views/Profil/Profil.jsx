@@ -6,6 +6,7 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import { fetchUser } from '../../lib/database/fetchUser'
 import Main from '../../../App/components/Main'
+import Login from '../../../Website/connection/Login'
 
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
@@ -55,6 +56,7 @@ export default function Profil() {
     }
 
     
+    if (!user) return <Login />
 
     return (
         <Main>

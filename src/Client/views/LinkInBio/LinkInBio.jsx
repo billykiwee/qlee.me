@@ -36,30 +36,20 @@ export default function LinkInBio({userView = true}) {
     }, [UserLinks])
 
     function onDragEnd(result) {    
-            // Vérifier s'il y a une destination (l'élément a été déplacé à l'intérieur de la liste)
         if (!result.destination) {
             return;
         }
-
-        // Récupérer l'index de départ et de destination de l'élément
         const startIndex = result.source.index;
         const endIndex = result.destination.index;
 
-        // Mettre à jour l'état de l'application en réorganisant les éléments de la liste
         setLinksDrag((prevLinks) => {
-            // Copier la liste actuelle
             const updatedLinks = [...prevLinks];
 
-            // Extraire l'élément à déplacer
             const [movedLink] = updatedLinks.splice(startIndex, 1);
 
-            // Insérer l'élément à sa nouvelle position
             updatedLinks.splice(endIndex, 0, movedLink);
 
-
             setLinksDrag(updatedLinks)
-            // Renvoyer la liste mise à jour
-            return updatedLinks;
         });
     }
 

@@ -78,7 +78,6 @@ function UserLink({ ul ,putLinkAsIcon}) {
                         })
                     }}
                 />
-                <psan>{ul.id}</psan>
                 <img src={ul.icon ?? getFavicon(ul.url)} width={16} className='border-r-100' />
                 <span>{ul.name}</span>
             </label>
