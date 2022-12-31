@@ -11,9 +11,7 @@ export function copyClipboard(link) {
     setTimeout(e=> div.style.display = 'none', 2000)
 }
 
-export function CopyClip(linkObj) {
-
-    const { link } = linkObj
+export function CopyClip(link) {
 
     return (
         <div className='display'>
