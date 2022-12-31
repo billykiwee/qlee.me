@@ -24,6 +24,8 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
     const [text, setText] = useState('Qlee me')
 
 
+    console.log(frameActive);
+
 
     if (QrCode)
     return (
@@ -47,12 +49,12 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                 <div className='grid gap-1rem border-r-04 grey p-1'>
                     <div className='display justify-s-b'>
                         <span>Cadre</span>
-                        <div className='click display border-r-2 hover justify-c' onClick={e=> setFrame(frame ? false : true)}>
+                        <div className='click display border-r-2 justify-c' >
                             <SwitchInput dimension={0.7} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
                         </div>
                     </div>
                     {
-                        frame && 
+                        frameActive && 
                         <>
                             <div className='grid gap'>
                                 <span className='opacity'>texte</span>
