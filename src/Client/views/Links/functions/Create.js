@@ -8,7 +8,16 @@ import { getHostName } from "../../../lib/getHostName"
 
 export function createLink(props) {
 
-    const { NameLink, LinkURL, setLinkURL, setNameLink, setError, User, UserLinks, setMsg } = props
+    const { 
+        NameLink,
+        LinkURL,
+        setLinkURL,
+        setNameLink,
+        setError,
+        User,
+        UserLinks,
+        setMsg 
+    } = props
 
     const linkID = 'qlee.me/' + UniqueID('', 5)
                     
@@ -59,7 +68,7 @@ export function createLink(props) {
             text   : 'Bravo 🎉',
             subtext: `Le lien ${NameLink} a bien été crée`,
             status : 'success'
-    })
+        })
     })
     .then(linkCreated=> {
         document.querySelectorAll('input').forEach(e=> e.value = '')

@@ -35,7 +35,7 @@ export default function Filter({props}) {
     return (
         <div className='grid gap-1rem'>
             <div className='grid gap-1rem'>
-                <div className='display gap'>
+                <div className='display gap white border-r-1 border p-1'>
                     <div className='display'>
                         <button 
                             onClick={e=> {
@@ -44,7 +44,7 @@ export default function Filter({props}) {
                             }}
                             className={(props.Search ? 'grey' : 'white') + ' h-2 p-1 border-r-1 border '} 
                         >
-                            <div >
+                            <div>
                                 <span className='f-s-14 display gap c-black'>
                                     Rechercher
                                     <MagnifyingGlassIcon width={20} className='c-black' />

@@ -7,14 +7,14 @@ export async function DeleteLink(props) {
 
 
     setMsg({
-        title: 'Attention',
-        message: `Tu es sur le point de supprimer ${link.name}`,
-        question: 'Voulez-vous continuer ?',
-        buttonText: 'Supprimer',
+        title      : 'Attention',
+        message    : `Tu es sur le point de supprimer ${link.name}`,
+        question   : 'Voulez-vous continuer ?',
+        buttonText : 'Supprimer',
         buttonColor: 'red',
-        valid: () => deleteLinksSelected(link).then(e=> window.location.href = '/dashboard' ),
-        close: () => setMsg([]),
-        statu: 'question'
+        valid      : () => deleteLinksSelected(link).then(e=> window.location.href = '/dashboard' ),
+        close      : () => setMsg([]),
+        statu      : 'question'
     })
 
 
