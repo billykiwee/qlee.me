@@ -1,17 +1,15 @@
 import { ArrowDownOnSquareIcon } from '@heroicons/react/24/outline'
 import { ArrowDownIcon, ChevronDownIcon, ChevronUpIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
-import { useEffect } from 'react'
 import QRCode from 'react-qr-code'
 import { SwitchInput } from '../../../App/components/Switch'
 import { colors } from '../../../App/utils/generateLetterImage'
 import getFavicon from '../../../App/utils/getFavicon'
 import { download } from '../../lib/htmlToImage/download'
-import html2canvas from 'html2canvas'
 
 
 
-export default function QrCodeSection({Link, QrCode, setQrCode}) {
+export default function QrCodeSection({Link, QrCode}) {
 
     const [frame, setFrame] = useState(false)
     const [frameActive, setframeActive] = useState(true)
