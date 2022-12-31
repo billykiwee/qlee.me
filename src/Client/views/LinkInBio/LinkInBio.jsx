@@ -28,10 +28,6 @@ export default function LinkInBio({userView = true}) {
 
 
 
-
-    useEffect(e=> {
-        UserLinks.push(...UserLinks)
-    }, [])
     
 
     console.log(UserLinks);
@@ -41,36 +37,32 @@ export default function LinkInBio({userView = true}) {
         
         const { source, destination } = result
 
-        console.log(source, destination );
+        console.log(source, destination)
 
         db.collection('links')
-        .doc(destination.droppableId)
-        .update({
-            position : destination.index
-        })
-
+          .doc(destination.droppableId)
+          .update({
+            position: destination.index,
+          })
+        
         const startIndex = source.index
         const endIndex = destination.index
-
-        setUserLinks((prevLinks) => {
-            const updatedLinks = [...prevLinks];
-
-            const [movedLink] = UserLinks.splice(startIndex, 1);
-
-            updatedLinks.splice(endIndex, 0, movedLink);
-
-            console.log(updatedLinks.map(e=> e.id));
-
-            return updatedLinks
+        
+        setUserLinks(prevLinks => {
+          const updatedLinks = [...prevLinks]
+        
+          const [movedLink] = UserLinks.splice(startIndex, 1)
+        
+          updatedLinks.splice(endIndex, 0, movedLink)
+        
+          console.log(updatedLinks.map(e => e.id))
+        
+          return updatedLinks
         })
     }
 
 
-    
-    const [ID, setID] = useState('')
 
-
-    console.log(ID);
 
 
     return (
@@ -141,7 +133,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId='LINKS' >
+                    <Droppable droppableId={UserLinks.map(e=> e.linkInBio)[0]} >
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
@@ -158,7 +150,6 @@ export default function LinkInBio({userView = true}) {
                                                         {...provided.dragHandleProps}
                                                         className='draggable relative' 
                                                         id={link.id}
-                                                        onClick={e=> setID(link.id)}
                                                     >
                                                         {
                                                             !userView 
