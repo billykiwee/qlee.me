@@ -131,7 +131,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={document.querySelector('.draggable')?.id} >
+                    <Droppable droppableId="droppable-1">
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
@@ -147,7 +147,6 @@ export default function LinkInBio({userView = true}) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                         className='draggable relative' 
-                                                        id={link.id}
                                                     >
                                                         {
                                                             !userView 
