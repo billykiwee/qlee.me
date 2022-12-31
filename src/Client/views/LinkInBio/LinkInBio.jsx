@@ -29,11 +29,6 @@ export default function LinkInBio({userView = true}) {
     
     
 
-    const [LinksDrag, setLinksDrag] = useState([]);
-
-    useEffect(e=> {
-        setLinksDrag(UserLinks.filter(e=> e.linkInBio === true && e.asIcon !== true).sort((a,b)=> a.position - b.position))
-    }, [UserLinks])
 
     function onDragEnd(result) {    
         if (!result.destination) {
@@ -45,11 +40,11 @@ export default function LinkInBio({userView = true}) {
         setLinksDrag((prevLinks) => {
             const updatedLinks = [...prevLinks];
 
-            const [movedLink] = updatedLinks.splice(startIndex, 1);
+            const [movedLink] = UserLinks.splice(startIndex, 1);
 
             updatedLinks.splice(endIndex, 0, movedLink);
 
-            setLinksDrag(updatedLinks)
+            setUserLinks(updatedLinks)
         });
     }
 
@@ -149,7 +144,7 @@ export default function LinkInBio({userView = true}) {
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                    LinksDrag
+                                    UserLinks
                                     .map((link, i)=> {
 
                                         return (
