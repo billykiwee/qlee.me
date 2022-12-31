@@ -52,6 +52,9 @@
   
   .dropdown-body.open {
     display: block;
+    position: absolute;
+    z-index: 9;
+    background: white;
   }
   
   .dropdown-item {

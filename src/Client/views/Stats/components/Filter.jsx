@@ -57,11 +57,10 @@ export default function Filter({props}) {
                         <div className='w-100p'>
                             <span>Filtre :</span>
                         </div>
-                        {
-                            props.Filter &&
+
                             <div className='display gap'>
                                 <div className='dropdown border-r-1 border click w-100p'>
-                                    <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)}>
+                                    <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)} >
                                         <div className='display gap'>
                                             {
                                                 filters.map(fil=> {
@@ -89,7 +88,6 @@ export default function Filter({props}) {
                                     </div>
                                 </div>
                             </div>
-                        }
                     </div>
                 </div>
                 {
