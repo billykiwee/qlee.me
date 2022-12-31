@@ -187,16 +187,9 @@ export default function Edit() {
                                             <div 
                                                 className='display h-3 border-r-1 w-100p white'
                                                 style={ 
-                                                    isUserPremium(User).plan === 'FREE' ? 
-                                                    {
-                                                        opacity : 0.4,
-                                                        pointerEvents: 'none'
-                                                    }
-                                                    : 
-                                                    {
-                                                        opacity : 1,
-                                                        pointerEvents: 'visible'
-                                                    }
+                                                    isUserPremium(User).plan === 'FREE' 
+                                                    ? { pointerEvents: 'none', opacity: 0.8} 
+                                                    : { pointerEvents: 'visible',  opacity: 1 }
                                                 } 
                                             >
                                                 <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
@@ -207,24 +200,14 @@ export default function Edit() {
                                         <div className='grid gap w-100p'>
                                             <div className='display gap'>
                                                 <span>Modifier le lien court</span>
-                                                {
-                                                    isUserPremium(User).plan === 'FREE' &&
-                                                    <GoToPricing />
-                                                }
+                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                             </div>
                                             <div 
                                                 className='display div-input h-3 border border-r-1 w-100p white'
                                                 style={ 
-                                                    isUserPremium(User).plan === 'FREE' ? 
-                                                    {
-                                                        opacity : 0.4,
-                                                        pointerEvents: 'none'
-                                                    }
-                                                    : 
-                                                    {
-                                                        opacity : 1,
-                                                        pointerEvents: 'visible'
-                                                    }
+                                                    isUserPremium(User).plan === 'FREE' 
+                                                    ? { pointerEvents: 'none', opacity: 0.8} 
+                                                    : { pointerEvents: 'visible',  opacity: 1 }
                                                 } 
                                             >
                                                 <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
@@ -240,9 +223,7 @@ export default function Edit() {
                                                     }} 
                                                     pattern="\S*"
                                                     onKeyPress={event=> {
-                                                        if (event.key === ' ') {
-                                                            event.preventDefault();
-                                                        }
+                                                        if (event.key === ' ') event.preventDefault()
                                                     }}
                                                 />
                                             </div>
@@ -260,16 +241,9 @@ export default function Edit() {
                                             
                                             <div className='grid gap' 
                                                 style={ 
-                                                    isUserPremium(User).plan === 'FREE' ? 
-                                                    {
-                                                        opacity : 0.4,
-                                                        pointerEvents: 'none'
-                                                    }
-                                                    : 
-                                                    {
-                                                        opacity : 1,
-                                                        pointerEvents: 'visible'
-                                                    }
+                                                    isUserPremium(User).plan === 'FREE' 
+                                                    ? { pointerEvents: 'none', opacity: 0.8} 
+                                                    : { pointerEvents: 'visible',  opacity: 1 }
                                                 } 
                                             >
                                                 <div className='display'>
@@ -295,16 +269,8 @@ export default function Edit() {
                                             className='display' 
                                             style={
                                                !Object.values(editLink).toString().split(',').join('')
-                                                ? 
-                                                {
-                                                    pointerEvents: 'none', 
-                                                    opacity: 0.8
-                                                } 
-                                                : 
-                                                {
-                                                    pointerEvents: 'visible', 
-                                                    opacity: 1
-                                                }
+                                                ? { pointerEvents: 'none', opacity: 0.8} 
+                                                : { pointerEvents: 'visible',  opacity: 1 }
                                             }
                                             >
                                             <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
@@ -348,7 +314,6 @@ export default function Edit() {
                         </div>
                     }
                 </div>
-
 
                 <SnackBar content={Msg} setMsg={setMsg} />
             </Main>
