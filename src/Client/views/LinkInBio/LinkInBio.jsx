@@ -36,7 +36,7 @@ export default function LinkInBio({userView = true}) {
 
         console.log(source, destination );
 
-        db.collection('links')
+       /*  db.collection('links')
         .doc(destination.droppableId)
         .update({
             position : destination.index
@@ -55,7 +55,7 @@ export default function LinkInBio({userView = true}) {
             console.log(updatedLinks.map(e=> e.id));
 
             return updatedLinks
-        })
+        }) */
     }
 
 
@@ -131,7 +131,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]}>
+                    <Droppable droppableId={document.querySelector('.draggable')?.id} >
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
@@ -147,6 +147,7 @@ export default function LinkInBio({userView = true}) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                         className='draggable relative' 
+                                                        id={link.id}
                                                     >
                                                         {
                                                             !userView 
