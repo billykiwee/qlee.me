@@ -97,7 +97,7 @@ export function EditLink(props) {
     Check(editLink)
     .then(async edit=> {
 
-      console.log(edit);
+      console.log({[Object.keys(edit)] : Object.values(edit)[0]});
 
       await db.collection('links')
       .doc(Link.id)

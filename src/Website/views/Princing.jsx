@@ -1,6 +1,7 @@
 import { ArrowsRightLeftIcon, ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Icons } from '../../../icons'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { plans } from '../../Admin/settings/plans'
 import Main from '../../App/components/Main'
@@ -121,18 +122,22 @@ export default function Pricing() {
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div className='grid'>
+                                            <div className='grid gap-04'>
                                             {
                                                 plan.benefits &&
                                                 plan.benefits.map((benefit)=> {
                                                     
                                                     return (
-                                                        <div className='display gap-1rem hover border-r-1 p-04 h-2 click' key={benefit}>
+                                                        <div className='display gap-1rem hover border-r-1 h-2 click' key={benefit}>
                                                             <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
                                                             <p className='f-w-300'>{benefit[0]}</p>
                                                         </div>
                                                     )
                                                 })
+                                            }
+
+                                            {
+                                                Icons[0]
                                             }
                                             </div>
                                         </div>
