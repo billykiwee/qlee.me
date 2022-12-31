@@ -42,7 +42,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
             zIndex: 130,
         }}>
 
-            <div className='border border-r-1 p-1 display justify-s-b white' style={{width: '66%', height: '66%'}}>
+            <div className='border border-r-1 p-2 display justify-s-b white' style={{width: '66%', height: '66%'}}>
                 <div className='display justify-c p-2 w-50p'>
                     <QRCODE 
                         style={{

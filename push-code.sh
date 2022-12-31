@@ -17,7 +17,7 @@ while true; do
   # Pousser les commits sur le dépôt Git Hub
   git push
 
-  sleep 180
+  sleep 600
 done
 
 
