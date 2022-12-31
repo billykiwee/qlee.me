@@ -226,7 +226,7 @@ export default function Edit() {
                                             <small id='alert-shortlink'></small>
                                         </div>
 
-                                        <div className='grid gap'>
+                                        <div className='grid gap white shadow border-r-1 p-2'>
                                             <div className='display gap'>
                                                 <span>Fonctionnalités</span>
                                                  { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
@@ -265,7 +265,7 @@ export default function Edit() {
                                                 ? { pointerEvents: 'none', opacity: 0.8} 
                                                 : { pointerEvents: 'visible',  opacity: 1 }
                                             }
-                                            >
+                                        >
                                             <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
                                                 onClick={e=> 
                                                     EditLink({
