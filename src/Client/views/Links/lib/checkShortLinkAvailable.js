@@ -1,4 +1,5 @@
 export function checkShortLinkAvailable(input, UserLinks) {
+
     const divAlert = document.querySelector('#alert-shortlink')
 
 
@@ -16,8 +17,10 @@ export function checkShortLinkAvailable(input, UserLinks) {
         else {
             divAlert.style.color = 'var(--red)'
             divAlert.innerHTML = `Le lien court "${input}" n'est pas disponible`
+            
             return false
         }
     }
+    else return divAlert.innerHTML = ''
 
 } 

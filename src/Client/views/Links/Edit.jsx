@@ -220,6 +220,7 @@ export default function Edit() {
                                                             ...editLink, 
                                                             shortLink: e.target.value 
                                                         })
+                                                        checkShortLinkAvailable(e.target.value, UserLinks)
                                                     }} 
                                                     pattern="\S*"
                                                     onKeyPress={event=> {
