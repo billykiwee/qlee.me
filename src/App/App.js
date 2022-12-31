@@ -33,13 +33,11 @@ export default function App() {
     useEffect(() => {
         auth.onAuthStateChanged(authUser => {
             if (authUser) {
-                // The user just ged in or the user is ged in
                 dispatch({
                     type: 'SET_USER',
                     user: authUser
                 })
             } else { 
-                // The user is logged out
                 dispatch({
                     type: 'SET_USER',
                     user: null
