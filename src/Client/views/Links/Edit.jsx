@@ -39,7 +39,6 @@ export default function Edit() {
 
     const [{user}] = useStateValue()
 
-
     const [User, setUser] = useState({})
 
     const [Stats, setStats] = useState([])
@@ -59,7 +58,6 @@ export default function Edit() {
             setUserLinks(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
-
 
 
     const Link = UserLinks
@@ -311,7 +309,6 @@ export default function Edit() {
                                             >
                                             <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
                                                 onClick={e=> 
-
                                                     EditLink({
                                                         Link,
                                                         LinkID,

@@ -44,7 +44,7 @@ export default function Articles({links}) {
                     .map(article=> {
                         return (
 
-                            <SwiperSlide className='m-b-3' key={article.name}>
+                            <SwiperSlide className='m-b-2' key={article.name}>
                                 <Link to={article.link} >
                                     <div className='grid white border-r-1 border-b hover'>
                                         <div className='grid border-r-1 white p-1' 

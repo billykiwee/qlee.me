@@ -24,12 +24,22 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
     const [text, setText] = useState('Qlee me')
 
 
-    
+
     if (QrCode)
     return (
         <div className='grid gap-2rem justify-s-b white border-r-2 border-b p-1 border'>
             <div className='display justify-c'>
-                <QRCODE style={{frameActive, frameColor, lineColor, color, logo, text}} link={Link} />
+                <QRCODE 
+                    style={{
+                        frameActive,
+                        frameColor,
+                        lineColor,
+                        color,
+                        logo,
+                        text
+                    }} 
+                    link={Link} 
+                />
             </div>
 
             
