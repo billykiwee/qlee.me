@@ -30,12 +30,20 @@ export default function LinkInBio({userView = true}) {
     
 
 
-    function onDragEnd(result) {    
-        if (!result.destination) {
-            return;
-        }
-        const startIndex = result.source.index;
-        const endIndex = result.destination.index;
+    function onDragEnd(result) {  
+        
+        const { source, destination } = result
+
+        console.log(source, destination );
+
+        db.collection('links')
+        .doc(destination.droppableId)
+        .update({
+            position : destination.index
+        })
+
+        const startIndex = source.index;
+        const endIndex = destination.index;
 
         setUserLinks((prevLinks) => {
             const updatedLinks = [...prevLinks];
@@ -44,24 +52,9 @@ export default function LinkInBio({userView = true}) {
 
             updatedLinks.splice(endIndex, 0, movedLink);
 
+            console.log(updatedLinks);
+
             return updatedLinks
-        })
-
-        const div    = document.querySelectorAll('.draggable')
-        const parent = document.querySelector('.container')
-
-        div.forEach(div=> {
-
-            for (let i = 0; i < parent.childNodes.length; i++) {
-                if (parent.childNodes[i] === div) {
-
-                    db.collection('links')
-                    .doc(div.id)
-                    .update({
-                        position : i
-                    })
-                }
-            }
         })
     }
 
