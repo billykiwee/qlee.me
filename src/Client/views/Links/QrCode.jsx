@@ -57,7 +57,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                     />
                 </div>
 
-                <div className='grid gap'>
+                <div className='grid gap p-2'>
                     <div className='grid gap-1rem border-r-04 grey p-1'>
                         <div className='display justify-s-b'>
                             <span>Cadre</span>
