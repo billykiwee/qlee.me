@@ -37,9 +37,9 @@ export default function Pricing() {
             subtitle: 'Pour aller plus loin',
             price   : plans.PRO.price,
             benefits: [
-                ['100 liens', <LinkIcon width={18} className='c-blue' />],
-                ['Lien personalisable', <Cog6ToothIcon width={18} className='c-blue' />],
-                ['Statistiques', <ChartPieIcon width={18} className='c-blue' />]
+                ['100 liens', <LinkIcon width={18} />],
+                ['Lien personalisable', <Cog6ToothIcon width={18} />],
+                ['Statistiques', <ChartPieIcon width={18} />]
             ],
             recommended: true,
             payment    : 'https://buy.stripe.com/7sIbK43CR8677ja9Bc',
@@ -49,10 +49,10 @@ export default function Pricing() {
             subtitle: 'Booster votre présence',
             price   : plans.ENTREPRISE.price,
             benefits: [
-                ['1000 liens', <LinkIcon width={18} className='c-blue' />],
-                ['Link in bio', <SwatchIcon width={18} className='c-blue' />],
-                ['Lien personalisable', <Cog6ToothIcon width={18} className='c-blue' />],
-                ['Statistiques', <ChartPieIcon width={18} className='c-blue' />]
+                ['1000 liens', <LinkIcon width={18} />],
+                ['Link in bio', <SwatchIcon width={18} />],
+                ['Lien personalisable', <Cog6ToothIcon width={18} />],
+                ['Statistiques', <ChartPieIcon width={18} />]
             ],
             payment: 'https://buy.stripe.com/00g9BW0qF5XZ32U14F',
         }
@@ -78,6 +78,7 @@ export default function Pricing() {
 
                             const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
+                            console.log(checkUserPlan);
                             return (
                                 <div className='grid' key={plan.plan}>
                                     <div className='border-b border border-r-1 card-pricing white' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
@@ -96,7 +97,7 @@ export default function Pricing() {
                                                 }
                                             </div>
                             
-                                            <div className='grid gap-1rem'>
+                                            <div className='grid gap-1rem m-t-1'>
                                                 <div className='display'>
                                                     <div className='lh-1 display align-b'>
                                                         <div className='display'>
@@ -124,7 +125,7 @@ export default function Pricing() {
                                                     
                                                     return (
                                                         <div className='display gap-1rem hover border-r-1 p-04 h-2 click' key={benefit}>
-                                                            <span className='display'>{benefit[1]}</span>
+                                                            <span className={'display' + checkUserPlan ? 'c-blue' : 'c-green'}>{benefit[1]}</span>
                                                             <span className='f-w-300'>{benefit[0]}</span>
                                                         </div>
                                                     )
