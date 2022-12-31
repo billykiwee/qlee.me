@@ -152,7 +152,8 @@ const QRCODE = ({style, link}) => {
                             backgroundPosition: 'center', 
                             backgroundSize: 'cover' 
                         }}
-                        className='w-2 h-2 border-r-100 absolute red' />
+                        className='w-2 h-2 border-r-100 absolute' 
+                    />
                 }
                 <QRCode
                     bgColor='white'
@@ -183,7 +184,8 @@ const QRCODE = ({style, link}) => {
                             backgroundPosition: 'center', 
                             backgroundSize: 'cover' 
                         }}
-                        className='w-2 h-2 border-r-100 absolute' />
+                        className='w-2 h-2 border-r-100 absolute' 
+                    />
                 }
                 <QRCode
                     bgColor='white'
