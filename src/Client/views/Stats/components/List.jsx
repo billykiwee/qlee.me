@@ -89,7 +89,7 @@ export default function List({props}) {
                                     </div>
                                 </Link>
                                 <div className='display justify-c p-04'>
-                                    <button className='display w-2 h-2  hover border-r-100'
+                                    <div className='display w-2 h-2  hover border-r-100'
                                         onClick={e=> 
                                             DeleteLink({
                                                 link       : link,
@@ -101,7 +101,7 @@ export default function List({props}) {
                                         }
                                     >
                                         <TrashIcon width={20} className='c-red'/>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         )
