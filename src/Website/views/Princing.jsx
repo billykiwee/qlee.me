@@ -128,7 +128,7 @@ export default function Pricing() {
                                                     
                                                     return (
                                                         <div className='display gap-1rem hover border-r-1 p-04 h-2 click' key={benefit}>
-                                                            <span className={'display justify-c ' + (plan.recommended ? 'c-yellow' : 'c-blue')}>{benefit[1]}</span>
+                                                            <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
                                                             <p className='f-w-300'>{benefit[0]}</p>
                                                         </div>
                                                     )
