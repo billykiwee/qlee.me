@@ -3,8 +3,7 @@ import { db } from "../../../../App/database/firebase"
 
 export async function DeleteLink(props) {
 
-    const { link, setMsg, Stats } = props
-
+    const { link, setMsg, Stats, type, history } = props
 
     setMsg({
         title      : 'Attention',
@@ -12,18 +11,27 @@ export async function DeleteLink(props) {
         question   : 'Voulez-vous continuer ?',
         buttonText : 'Supprimer',
         buttonColor: 'red',
-        valid      : () => deleteLinksSelected(link).then(e=> window.location.href = '/dashboard' ),
+        valid      : () => deleteLinksSelected(link),
         close      : () => setMsg([]),
         statu      : 'question'
     })
 
 
-    const deleteLinksSelected = async (link) => {
+    const deleteLinksSelected = async link => {
 
-        await db.collection('links').doc(link.id).delete()
-
-        await Stats.filter(e=> e.LinkID === link.id).map(e=> {
+        try {
+          await db.collection('links').doc(link.id).delete()
+          await Stats?.filter(e => e.LinkID === link.id)
+          .map(e => {
             db.collection('stats').doc(e.statID).delete()
-        })
+          })
+
+          setMsg([])
+
+          history(type !== 'stats' && '/dashboard')
+        } 
+        catch (error) {
+          console.error(error);
+        }
     }
 }

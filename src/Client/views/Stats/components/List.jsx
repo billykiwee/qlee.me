@@ -50,7 +50,7 @@ export default function List({props}) {
 
                         return (
                             
-                            <div className='display justify-s-b' id={'link-' + link.id}>
+                            <div className='display justify-s-b' id={'link-' + link.id} key={link.id}>
                                 <Link to={'/stats/' + link.id} key={link.id} className='w-100p' >
                                     <div    
                                         style={{background: props.LinkID === link.id ? 'var(--hover-btn)' : ''}}
@@ -88,22 +88,21 @@ export default function List({props}) {
                                         </div>
                                     </div>
                                 </Link>
-                                {
-                                    props.Filter && 
-                                    <div className='display justify-c p-04'>
-                                        <button className='display w-3 h-3  hover border-r-100'
-                                            onClick={e=> 
-                                                DeleteLink({
-                                                    link: link, 
-                                                    setMsg: props.setMsg, 
-                                                    setShowStat: props.setShowStat
-                                                })
-                                            }
-                                        >
-                                            <TrashIcon width={20} className='c-red'/>
-                                        </button>
-                                    </div>
-                                }
+                                <div className='display justify-c p-04'>
+                                    <button className='display w-3 h-3  hover border-r-100'
+                                        onClick={e=> 
+                                            DeleteLink({
+                                                link       : link,
+                                                setMsg     : props.setMsg,
+                                                setShowStat: props.setShowStat,
+                                                type       : 'stats',
+                                                history: history
+                                            })
+                                        }
+                                    >
+                                        <TrashIcon width={20} className='c-red'/>
+                                    </button>
+                                </div>
                             </div>
                         )
                     })
