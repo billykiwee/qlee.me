@@ -26,8 +26,15 @@ export default function LinkInBio({userView = true}) {
 
     }, [user?.email])
 
+
+
+
+    useEffect(e=> {
+        UserLinks.push(...UserLinks)
+    }, [])
     
-    
+
+    console.log(UserLinks);
 
 
     function onDragEnd(result) {  
@@ -36,7 +43,7 @@ export default function LinkInBio({userView = true}) {
 
         console.log(source, destination );
 
-       /*  db.collection('links')
+        db.collection('links')
         .doc(destination.droppableId)
         .update({
             position : destination.index
@@ -55,7 +62,7 @@ export default function LinkInBio({userView = true}) {
             console.log(updatedLinks.map(e=> e.id));
 
             return updatedLinks
-        }) */
+        })
     }
 
 
@@ -134,7 +141,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={ID}>
+                    <Droppable droppableId='LINKS' >
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
