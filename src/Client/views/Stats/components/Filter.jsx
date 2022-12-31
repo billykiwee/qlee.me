@@ -57,37 +57,36 @@ export default function Filter({props}) {
                         <div className='w-100p'>
                             <span>Filtre :</span>
                         </div>
-
-                            <div className='display gap'>
-                                <div className='dropdown border-r-1 border click w-100p'>
-                                    <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)} >
-                                        <div className='display gap'>
-                                            {
-                                                filters.map(fil=> {
-                                                    if (fil.name === props.checkFilter)
-                                                    return <span className='display'>{fil.icon}</span>
-                                                })
-                                            }
-                                            <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
-                                        </div>
+                        <div className='display gap'>
+                            <div className='dropdown border-r-1 border click w-100p'>
+                                <div className='dropdown-header display gap' onClick={e=> setOpen(isOpen ? false : true)} >
+                                    <div className='display gap'>
                                         {
-                                            isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
-                                        }
-                                    </div>
-                                    <div className={`dropdown-body ${isOpen && 'open'}`}>
-                                        {
-                                            filters.map(item => {
-                                                return (
-                                                    <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
-                                                        <span className='display'>{item.icon}</span>
-                                                        <span>{item.text}</span>
-                                                    </div>
-                                                )
+                                            filters.map(fil=> {
+                                                if (fil.name === props.checkFilter)
+                                                return <span className='display'>{fil.icon}</span>
                                             })
                                         }
+                                        <span>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
                                     </div>
+                                    {
+                                        isOpen ? <ChevronUpIcon width={16} /> : <ChevronDownIcon width={16} />
+                                    }
+                                </div>
+                                <div className={`dropdown-body ${isOpen && 'open'}`}>
+                                    {
+                                        filters.map(item => {
+                                            return (
+                                                <div className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}>
+                                                    <span className='display'>{item.icon}</span>
+                                                    <span>{item.text}</span>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
                 {
