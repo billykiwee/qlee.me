@@ -96,7 +96,7 @@ export default function Edit() {
 
                             <div className='grid blocks gap-2rem'>
 
-                                <div className='grid gap'>
+                                <div className='grid gap-1rem'>
 
                                     <div className='display align-top'>
                                         <div className='grid gap-1rem justfy-s-b border-r-2 border border-b p-1 white w-100p'>

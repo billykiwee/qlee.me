@@ -27,23 +27,10 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
     if (QrCode)
     return (
-        <div className='grid gap-2rem' style={{
-            alignItems: 'center',
-            backgroundColor: 'rgb(0 0 0 / 60%)',
-            bottom: 0,
-            display: 'flex',
-            flexCirection: 'column',
-            justifyContent: 'center',
-            left: 0,
-            overflow: 'auto',
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            zIndex: 130,
-        }}>
+        <div className='grid gap-2rem'>
 
-            <div className='border border-r-1 p-2 display justify-s-b white' style={{width: '66%', height: '66%'}}>
-                <div className='display justify-c p-2 w-50p'>
+            <div className='border border-r-1 p-2 grid gap-2rem justify-s-a white '>
+                <div className='display justify-c'>
                     <QRCODE 
                         style={{
                             frameActive,
@@ -57,7 +44,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                     />
                 </div>
 
-                <div className='grid gap p-2 w-50p'>
+                <div className='grid gap '>
                     <div className='grid gap-1rem border-r-04 grey p-1'>
                         <div className='display justify-s-b'>
                             <span>Cadre</span>
