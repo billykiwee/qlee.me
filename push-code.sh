@@ -16,8 +16,12 @@ while true; do
 
   # Pousser les commits sur le dépôt Git Hub
   git push
+  
 
-  sleep 600
+  minute=5
+  time=$((minute * 60))
+
+  sleep $time
 done
 
 

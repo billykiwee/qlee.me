@@ -1,7 +1,7 @@
 import { ArrowsRightLeftIcon, ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Icons } from '../../../icons'
+import icons, { captureIcon, deleteIcon, Iconcart, Icons } from '../../icons'
 import { isUserPremium } from '../../Admin/settings/isPremium'
 import { plans } from '../../Admin/settings/plans'
 import Main from '../../App/components/Main'
@@ -136,9 +136,6 @@ export default function Pricing() {
                                                 })
                                             }
 
-                                            {
-                                                Icons[0]
-                                            }
                                             </div>
                                         </div>
                         
