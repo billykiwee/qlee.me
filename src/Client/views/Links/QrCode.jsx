@@ -102,7 +102,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                                     {
                                         colors.map(c=> {
                                             return (
-                                                <div className='border-r-2 w-2 h-2 click' style={{background : c}} onClick={e=> setLineColor(c)} />
+                                                <div className='border-r-2 w-2 h-2 click' style={{background : c}} onClick={e=> setLineColor(c)} key={c}/>
                                             )
                                         })
                                     }
