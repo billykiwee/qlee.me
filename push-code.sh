@@ -18,7 +18,7 @@ while true; do
   git push
   
 
-  minute=5
+  minute=15
   time=$((minute * 60))
 
   sleep $time
@@ -27,3 +27,4 @@ done
 
 # cmd push
 ./push-code.sh
+

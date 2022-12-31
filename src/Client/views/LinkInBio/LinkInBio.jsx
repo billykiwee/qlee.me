@@ -37,18 +37,16 @@ export default function LinkInBio({userView = true}) {
         const startIndex = result.source.index;
         const endIndex = result.destination.index;
 
-        setLinksDrag((prevLinks) => {
+        setUserLinks((prevLinks) => {
             const updatedLinks = [...prevLinks];
 
             const [movedLink] = UserLinks.splice(startIndex, 1);
 
             updatedLinks.splice(endIndex, 0, movedLink);
 
-            setUserLinks(updatedLinks)
-        });
-    }
+            return updatedLinks
+        })
 
- /*    useEffect(e=> {
         const div    = document.querySelectorAll('.draggable')
         const parent = document.querySelector('.container')
 
@@ -65,10 +63,10 @@ export default function LinkInBio({userView = true}) {
                 }
             }
         })
-    }, [LinksDrag]) */
+    }
+
 
     
-
 
 
 
@@ -140,7 +138,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={LinksDrag.map(e=> e.id)[0]}>
+                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]}>
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
