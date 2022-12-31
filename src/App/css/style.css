@@ -10,7 +10,7 @@
     --blue-secondary: rgba(11, 115, 241, 0.1);
     --blue-dark: #0760d0;
     --background: #fafafa;
-    --black: black;
+    --black: #2d3436;
     --yellow: #f9ca24;
     --black-200 : rgb(49, 49, 49);
     --grey : #F8F8F8;
@@ -40,7 +40,7 @@
 html,
 body {
     margin: 0;
-    color: var(--text-color);
+    color: var(--black);
     background-color: var(--background);
     height: 100%;
     scroll-behavior: smooth;
