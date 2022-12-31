@@ -3,7 +3,7 @@
 while true; do
  
   # Se déplacer dans le répertoire de votre projet
-  cd https://github.com/billykiwee/loopme.git
+  cd /loopme
 
   # Ajouter tous les fichiers modifiés à l'index
   git add .
