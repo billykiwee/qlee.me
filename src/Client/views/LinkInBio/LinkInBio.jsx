@@ -60,7 +60,10 @@ export default function LinkInBio({userView = true}) {
 
 
     
+    const [ID, setID] = useState('')
 
+
+    console.log(ID);
 
 
     return (
@@ -131,7 +134,7 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId="droppable-1">
+                    <Droppable droppableId={ID}>
                         {(provided) => (
                             <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
@@ -147,6 +150,8 @@ export default function LinkInBio({userView = true}) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                         className='draggable relative' 
+                                                        id={link.id}
+                                                        onClick={e=> setID(link.id)}
                                                     >
                                                         {
                                                             !userView 
