@@ -135,23 +135,23 @@ export default function Edit() {
                                                 <div className='grid gap'>
                                                     <Redirect to={'/stats/' + Link.id}>
                                                         <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                            <PencilSquareIcon width={18} />
-                                                            <span className='f-s-16'>Modifier</span>
+                                                            <PencilSquareIcon width={16} />
+                                                            <span className='f-s-14'>Modifier</span>
                                                         </button>
                                                     </Redirect>
                                                 </div>
                                                 <div className='grid gap'>
                                                     <Redirect to={'/stats/' + Link.id}>
                                                         <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                            <img src='/images/charts.svg' width={18} />
-                                                            <span className='f-s-16'>Statistiques</span>
+                                                            <img src='/images/charts.svg' width={16} />
+                                                            <span className='f-s-14'>Statistiques</span>
                                                         </button>
                                                     </Redirect>
                                                 </div>
                                                 <div className='grid gap'>
                                                     <button className='grey h-3 border-r-04 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
-                                                        <QrCodeIcon width={18} />
-                                                        <span className='f-s-16'>Qr code</span>
+                                                        <QrCodeIcon width={16} />
+                                                        <span className='f-s-14'>Qr code</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -179,10 +179,7 @@ export default function Edit() {
                                         <div className='grid gap w-100p'>
                                             <div className='display gap'>
                                                 <span>Modifier le lien principal</span>
-                                                {
-                                                    isUserPremium(User).plan === 'FREE' &&
-                                                    <GoToPricing />
-                                                }
+                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                             </div>
                                             <div 
                                                 className='display h-3 border-r-1 w-100p white'
@@ -223,9 +220,7 @@ export default function Edit() {
                                                         checkShortLinkAvailable(e.target.value, UserLinks)
                                                     }} 
                                                     pattern="\S*"
-                                                    onKeyPress={event=> {
-                                                        if (event.key === ' ') event.preventDefault()
-                                                    }}
+                                                    onKeyPress={event=> event.key === ' ' && event.preventDefault()}
                                                 />
                                             </div>
                                             <small id='alert-shortlink'></small>
@@ -234,10 +229,7 @@ export default function Edit() {
                                         <div className='grid gap'>
                                             <div className='display gap'>
                                                 <span>Fonctionnalités</span>
-                                                {
-                                                    isUserPremium(User).plan === 'FREE' &&
-                                                    <GoToPricing />
-                                                }
+                                                 { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                             </div>
                                             
                                             <div className='grid gap' 
