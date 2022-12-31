@@ -1,4 +1,6 @@
 
+![alt text](https://qlee.me/favicon.ico)
+
 # Qlee your links !
 
 Qlee me is the best URL shortener you have never seen !
