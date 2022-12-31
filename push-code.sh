@@ -2,7 +2,7 @@
 
 while true; do
 
-  unique_id=$(uuidgen)
+  current_datetime=$(date +%F\ %T)
 
  
   # Se déplacer dans le répertoire de votre projet
@@ -12,12 +12,12 @@ while true; do
   git add .
 
   # Commit les modifications
-  git commit -m "$unique_id"
+  git commit -m "$current_datetime"
 
   # Pousser les commits sur le dépôt Git Hub
   git push
 
-  sleep 60
+  sleep 60 * 20
 done
 
 
