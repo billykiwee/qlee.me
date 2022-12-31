@@ -24,8 +24,6 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
     const [text, setText] = useState('Qlee me')
 
 
-    console.log(frameActive);
-
 
     if (QrCode)
     return (
@@ -116,7 +114,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
                 <div className='grid'>
                     <div className='display justify-s-b border-r-04 grey  p-1'>
                         <span>Logo</span>
-                        <SwitchInput dimension={0.8} checked={logo} onChange={e=> setLogo(logo ? false : true)} />
+                        <SwitchInput dimension={0.7} checked={logo} onChange={e=> setLogo(logo ? false : true)} />
                     </div>
                 </div>
             </div>
@@ -136,7 +134,7 @@ export default function QrCodeSection({Link, QrCode, setQrCode}) {
 
 const QRCODE = ({style, link}) => {
 
-    if (style.frameActive )
+    if (style.frameActive)
     return (
  
         <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
