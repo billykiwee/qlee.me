@@ -34,8 +34,8 @@ export default function Filter({props}) {
 
     return (
         <div className='grid gap-1rem'>
-            <div className='grid gap-1rem'>
-                <div className='display gap white border-r-1 border p-1'>
+            <div className='grid gap-1rem white border-r-1 border p-1'>
+                <div className='display justify-s-b'>
                     <div className='display'>
                         <button 
                             onClick={e=> {
@@ -53,7 +53,10 @@ export default function Filter({props}) {
                         </button>
                     </div>
 
-                    <div className='display'>
+                    <div className='display gap'>
+                        <div className='w-100p'>
+                            <span>Filtre :</span>
+                        </div>
                         <button 
                             onClick={e=> {
                                 props.setSearch(false)
@@ -77,7 +80,7 @@ export default function Filter({props}) {
                     </div>
                 }
                 {
-                     props.Filter &&
+                    props.Filter &&
                     <div className='display gap'>
                         <div className='dropdown border-r-1 border click'>
                             <div className='dropdown-header' onClick={e=> setOpen(isOpen ? false : true)}>
