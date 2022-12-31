@@ -131,11 +131,12 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]}>
+                    <Droppable droppableId={'UserLinks'}>
                         {(provided) => (
-                            <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
                                     UserLinks
+                                    .sort((a,b)=> a.position - b.position)
                                     .map((link, i)=> {
 
                                         return (
