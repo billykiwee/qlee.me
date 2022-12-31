@@ -42,8 +42,8 @@ export default function LinkInBio({userView = true}) {
             position : destination.index
         })
 
-        const startIndex = source.index;
-        const endIndex = destination.index;
+        const startIndex = source.index
+        const endIndex = destination.index
 
         setUserLinks((prevLinks) => {
             const updatedLinks = [...prevLinks];
@@ -52,7 +52,7 @@ export default function LinkInBio({userView = true}) {
 
             updatedLinks.splice(endIndex, 0, movedLink);
 
-            console.log(updatedLinks);
+            console.log(updatedLinks.map(e=> e.id));
 
             return updatedLinks
         })
@@ -131,9 +131,9 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={'UserLinks'}>
+                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]}>
                         {(provided) => (
-                            <div className='grid gap' {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap container' {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
                                     UserLinks
                                     .sort((a,b)=> a.position - b.position)
