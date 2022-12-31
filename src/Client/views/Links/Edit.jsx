@@ -170,66 +170,68 @@ export default function Edit() {
 
                                     <div className='grid gap-1rem' >
 
-                                        <div className='grid gap w-100p'>
-                                            <span>Modifier le nom</span>
-                                            <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
-                                            <small className='c-red' id='error-name'></small>
+                                        <div className='grid gap-1rem white shadow border-r-1 border p-2' >
+                                            <div className='grid gap w-100p'>
+                                                <span>Modifier le nom</span>
+                                                <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
+                                                <small className='c-red' id='error-name'></small>
+                                            </div>
+
+                                            <div className='grid gap w-100p'>
+                                                <div className='display gap'>
+                                                    <span>Modifier le lien principal</span>
+                                                    { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                                </div>
+                                                <div 
+                                                    className='display h-3 border-r-1 w-100p white'
+                                                    style={ 
+                                                        isUserPremium(User).plan === 'FREE' 
+                                                        ? { pointerEvents: 'none', opacity: 0.8} 
+                                                        : { pointerEvents: 'visible',  opacity: 1 }
+                                                    } 
+                                                >
+                                                    <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
+                                                </div>
+                                                <small className='c-red' id='error-url'></small>
+                                            </div>
+
+                                            <div className='grid gap w-100p'>
+                                                <div className='display gap'>
+                                                    <span>Modifier le lien court</span>
+                                                    { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                                </div>
+                                                <div 
+                                                    className='display div-input h-3 border border-r-1 w-100p white'
+                                                    style={ 
+                                                        isUserPremium(User).plan === 'FREE' 
+                                                        ? { pointerEvents: 'none', opacity: 0.8} 
+                                                        : { pointerEvents: 'visible',  opacity: 1 }
+                                                    } 
+                                                >
+                                                    <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
+                                                    <input 
+                                                        type='text' 
+                                                        className='border-0 p-0 w-100p' 
+                                                        placeholder='mon-lien' 
+                                                        onChange={e=> {
+                                                            seteditLink({
+                                                                ...editLink, 
+                                                                shortLink: e.target.value 
+                                                            })
+                                                            checkShortLinkAvailable(e.target.value, UserLinks)
+                                                        }} 
+                                                        pattern="\S*"
+                                                        onKeyPress={event=> event.key === ' ' && event.preventDefault()}
+                                                    />
+                                                </div>
+                                                <small id='alert-shortlink'></small>
+                                            </div>
                                         </div>
 
-                                        <div className='grid gap w-100p'>
-                                            <div className='display gap'>
-                                                <span>Modifier le lien principal</span>
-                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
-                                            </div>
-                                            <div 
-                                                className='display h-3 border-r-1 w-100p white'
-                                                style={ 
-                                                    isUserPremium(User).plan === 'FREE' 
-                                                    ? { pointerEvents: 'none', opacity: 0.8} 
-                                                    : { pointerEvents: 'visible',  opacity: 1 }
-                                                } 
-                                            >
-                                                <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
-                                            </div>
-                                            <small className='c-red' id='error-url'></small>
-                                        </div>
-
-                                        <div className='grid gap w-100p'>
-                                            <div className='display gap'>
-                                                <span>Modifier le lien court</span>
-                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
-                                            </div>
-                                            <div 
-                                                className='display div-input h-3 border border-r-1 w-100p white'
-                                                style={ 
-                                                    isUserPremium(User).plan === 'FREE' 
-                                                    ? { pointerEvents: 'none', opacity: 0.8} 
-                                                    : { pointerEvents: 'visible',  opacity: 1 }
-                                                } 
-                                            >
-                                                <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
-                                                <input 
-                                                    type='text' 
-                                                    className='border-0 p-0 w-100p' 
-                                                    placeholder='mon-lien' 
-                                                    onChange={e=> {
-                                                        seteditLink({
-                                                            ...editLink, 
-                                                            shortLink: e.target.value 
-                                                        })
-                                                        checkShortLinkAvailable(e.target.value, UserLinks)
-                                                    }} 
-                                                    pattern="\S*"
-                                                    onKeyPress={event=> event.key === ' ' && event.preventDefault()}
-                                                />
-                                            </div>
-                                            <small id='alert-shortlink'></small>
-                                        </div>
-
-                                        <div className='grid gap white shadow border-r-1 p-2'>
+                                        <div className='grid gap white shadow border-r-1 border p-2'>
                                             <div className='display gap'>
                                                 <span>Fonctionnalités</span>
-                                                 { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                             </div>
                                             
                                             <div className='grid gap' 
