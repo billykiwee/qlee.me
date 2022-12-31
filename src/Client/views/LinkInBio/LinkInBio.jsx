@@ -51,7 +51,7 @@ export default function LinkInBio({userView = true}) {
         setUserLinks(prevLinks => {
           const updatedLinks = [...prevLinks]
         
-          const [movedLink] = UserLinks.splice(startIndex, 1)
+          const [movedLink] = UserLinks.map(e=> e.linkInBio).splice(startIndex, 1)
         
           updatedLinks.splice(endIndex, 0, movedLink)
         
