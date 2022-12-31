@@ -1,4 +1,4 @@
-import { ChartPieIcon, Cog6ToothIcon, LinkIcon, SwatchIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../Admin/settings/isPremium'
@@ -30,6 +30,7 @@ export default function Pricing() {
             price   : 0,
             benefits: [
                 ['10 liens', <LinkIcon width={18} />],
+                ['Qr code', <QrCodeIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
             ],
         },
@@ -39,6 +40,7 @@ export default function Pricing() {
             price   : plans.PRO.price,
             benefits: [
                 ['100 liens', <LinkIcon width={18} />],
+                ['Qr code', <QrCodeIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
                 ['Statistiques', <ChartPieIcon width={18} />]
             ],
@@ -51,6 +53,7 @@ export default function Pricing() {
             price   : plans.ENTREPRISE.price,
             benefits: [
                 ['1000 liens', <LinkIcon width={18} />],
+                ['Qr code', <QrCodeIcon width={18} />],
                 ['Link in bio', <SwatchIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
                 ['Statistiques', <ChartPieIcon width={18} />]
@@ -92,7 +95,7 @@ export default function Pricing() {
                                                 {
                                                     checkUserPlan &&
                                                     <div>
-                                                        <img src='/images/check.svg' width={34} />
+                                                        <img src='/images/check.svg' width={28} />
                                                     </div>
                                                 }
                                             </div>
@@ -101,7 +104,7 @@ export default function Pricing() {
                                                 <div className='display'>
                                                     <div className='lh-1 display align-b'>
                                                         <div className='display'>
-                                                            <span className='display f-s-2rem'>{formatCurrency(plan.price)}</span>
+                                                            <span className='display f-w-500 f-s-2rem'>{formatCurrency(plan.price)}</span>
                                                             <span className='f-s-16 m-l-04 opacity'>/mois</span>
                                                         </div>
                                                     </div>
