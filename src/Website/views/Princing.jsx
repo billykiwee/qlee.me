@@ -29,7 +29,8 @@ export default function Pricing() {
             subtitle: 'Pour tous',
             price   : 0,
             benefits: [
-                '10 liens'
+                ['10 liens', <LinkIcon width={18} />],
+                ['Lien personalisable', <Cog6ToothIcon width={18} />],
             ],
         },
         Pro : {
@@ -78,7 +79,6 @@ export default function Pricing() {
 
                             const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
-                            console.log(checkUserPlan);
                             return (
                                 <div className='grid' key={plan.plan}>
                                     <div className='border-b border border-r-1 card-pricing white' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
@@ -125,8 +125,8 @@ export default function Pricing() {
                                                     
                                                     return (
                                                         <div className='display gap-1rem hover border-r-1 p-04 h-2 click' key={benefit}>
-                                                            <span className={'display' + checkUserPlan ? 'c-blue' : 'c-green'}>{benefit[1]}</span>
-                                                            <span className='f-w-300'>{benefit[0]}</span>
+                                                            <span className={'display justify-c ' + (plan.recommended ? 'c-yellow' : 'c-blue')}>{benefit[1]}</span>
+                                                            <p className='f-w-300'>{benefit[0]}</p>
                                                         </div>
                                                     )
                                                 })
