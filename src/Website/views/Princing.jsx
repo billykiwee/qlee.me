@@ -1,4 +1,4 @@
-import { ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
+import { ArrowsRightLeftIcon, ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../Admin/settings/isPremium'
@@ -29,7 +29,7 @@ export default function Pricing() {
             subtitle: 'Pour tous',
             price   : 0,
             benefits: [
-                ['10 liens', <LinkIcon width={18} />],
+                ['10 liens', <ArrowsRightLeftIcon width={18} />],
                 ['Qr code', <QrCodeIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
             ],
@@ -39,7 +39,7 @@ export default function Pricing() {
             subtitle: 'Pour aller plus loin',
             price   : plans.PRO.price,
             benefits: [
-                ['100 liens', <LinkIcon width={18} />],
+                ['100 liens', <ArrowsRightLeftIcon width={18} />],
                 ['Qr code', <QrCodeIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
                 ['Statistiques', <ChartPieIcon width={18} />]
@@ -52,7 +52,7 @@ export default function Pricing() {
             subtitle: 'Booster votre présence',
             price   : plans.ENTREPRISE.price,
             benefits: [
-                ['1000 liens', <LinkIcon width={18} />],
+                ['1000 liens', <ArrowsRightLeftIcon width={18} />],
                 ['Qr code', <QrCodeIcon width={18} />],
                 ['Link in bio', <SwatchIcon width={18} />],
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
@@ -84,7 +84,7 @@ export default function Pricing() {
 
                             return (
                                 <div className='grid' key={plan.plan}>
-                                    <div className='border-b border border-r-1 card-pricing white' style={{boxShadow: checkUserPlan && '0px 0px 22px var(--border)'}} >
+                                    <div className='border-b border border-r-1 card-pricing white'  >
 
                                         <div className='grid gap-2rem'>
                                             <div className='display justify-s-b align-top'>
@@ -95,7 +95,7 @@ export default function Pricing() {
                                                 {
                                                     checkUserPlan &&
                                                     <div>
-                                                        <img src='/images/check.svg' width={28} />
+                                                        <img src='/images/check.svg' width={22} />
                                                     </div>
                                                 }
                                             </div>
