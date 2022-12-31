@@ -9,12 +9,6 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { fetchUserLinks } from '../../../lib/database/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
-import { useDrag } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
-import { dragElement } from '../../../lib/draggable/dragabble'
-
-
 
 export function EditLinkInBio() {
 
