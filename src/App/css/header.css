@@ -9,6 +9,8 @@ header {
     z-index: 9;
     transition: 0.4s;
     position: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 

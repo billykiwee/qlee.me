@@ -17,7 +17,7 @@ import { fetchStats } from '../../lib/database/fetchStats'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
-import { BookmarkIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, ChartPieIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
 import { addToLinkInBio } from './lib/addToLinkInBio'
 import { checkShortLinkAvailable } from './lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../App/components/Switch'
@@ -124,7 +124,7 @@ export default function Edit() {
                                                         <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                                     </div>
                                                     <div className='display justify-c gap-04'>
-                                                        <EyeIcon  width={22}/>
+                                                        <EyeIcon width={22}/>
                                                         <span className='f-s-20'>{formatNumber(Link?.views)} clics</span>
                                                     </div>
                                                    
@@ -142,7 +142,7 @@ export default function Edit() {
                                                 <div className='grid gap'>
                                                     <Redirect to={'/stats/' + Link.id}>
                                                         <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                            <img src='/images/charts.svg' width={16} />
+                                                            <ChartPieIcon width={16} />
                                                             <span className='f-s-14'>Statistiques</span>
                                                         </button>
                                                     </Redirect>
