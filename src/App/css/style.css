@@ -37,18 +37,20 @@
 }
 
 [data-theme="dark"] {
-    --white: #303636;
+    --white: #ffffff12;
     --background: #252c2e;
     --black: white;
     --grey: #f8f8f80f;
 }
 
 
-html,
+html{
+    background: var(--background);
+}
 body {
     margin: 0;
     color: var(--black);
-    background-color: var(--background);
+    background: var(--background);
     scroll-behavior: smooth;
 }
 
@@ -62,7 +64,7 @@ main {
     flex-direction: column;
     padding-top: 8rem;
     max-width: 1200px;
-    min-height: 100%;
+
 }
 
 
