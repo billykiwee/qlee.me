@@ -44,14 +44,12 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-console.log(localStorage.getItem('theme'));
     
     if (!user) return <Login />
     
     return (
 
         <Main>
-            <button onClick={toggleTheme}>{localStorage.getItem('theme')}</button>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

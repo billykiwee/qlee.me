@@ -4,9 +4,10 @@ import { getDevice } from '../../Client/lib/getDevice'
 import { ProfilImg } from '../../Website/Home'
 import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
-import { ArrowDownCircleIcon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
+import { ArrowDownCircleIcon, Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
 import { fetchLinks } from '../../Client/lib/database/fetchLinks'
 import { fetchUser } from '../../Client/lib/database/fetchUser'
+import { toggleTheme } from '../functions/setTheme'
 
 
 export default function Header({visible}) {
@@ -108,7 +109,14 @@ export default function Header({visible}) {
                     }
                     <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
-                            <img src='/images/hamburger.svg' width={20} height={20}  />
+                            <Bars2Icon width={20} className='c-black' />
+                        </span>
+                    </button>
+                    <button className='hamburger border-r-100 hover' onClick={toggleTheme(localStorage.getItem('theme'))}>
+                        <span className='display'>
+                            {
+                                toggleTheme() === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />
+                            }
                         </span>
                     </button>
                 </div>

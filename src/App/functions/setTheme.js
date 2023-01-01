@@ -5,10 +5,10 @@ const setTheme = theme => {
     document.querySelector('body').setAttribute('data-theme', theme)
 }
 
-export const toggleTheme = e => {
-    const activeTheme = localStorage.getItem('theme')
+export const toggleTheme = theme => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
 
-    setTheme(activeTheme === 'light' ? 'dark' : 'light')
+    return theme
 }
 
 
