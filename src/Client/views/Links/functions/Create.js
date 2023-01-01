@@ -10,10 +10,10 @@ export function createLink(e) {
 
     e.preventDefault()
 
-    const elements = e.target.elements
+    const { name, url } = e.target.elements
 
-    const [name, url] = [elements.name.value, elements.url.value]
-    console.log(name, url);
+
+    console.log(name.value, url.value);
 
 /*     const { 
         NameLink,

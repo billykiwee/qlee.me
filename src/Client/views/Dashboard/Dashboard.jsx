@@ -71,7 +71,11 @@ export default function Dashboard() {
                             <Articles links={UserLinks} />
                         </div>
 
-                        <form className='grid gap-2rem ' onSubmit={createLink}>
+                        <form className='grid gap-2rem ' 
+                            onSubmit={e=> 
+                                create(e.target.elements)
+                            }
+                        >
                             <div className='grid gap-1rem'>
                                 <div>
                                     <span className='f-s-25 f-w-500'>Créer un lien</span>
