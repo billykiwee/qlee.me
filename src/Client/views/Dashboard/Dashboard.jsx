@@ -43,17 +43,6 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    window.onkeydown = e => {
-        if (e.key === 'Enter') {
-            if (LinkURL) {
-                document.querySelector('#btn-create').click()
-            }
-        }
-    }
-
-
-
-
 
     
     if (!user) return <Login />
@@ -74,7 +63,7 @@ export default function Dashboard() {
                         <form className='grid gap-2rem ' 
                             onSubmit={e=> {
                                 e.preventDefault()
-                                
+
                                 createLink({
                                     elements: e.target.elements,
                                     setError,
