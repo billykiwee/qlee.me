@@ -1,6 +1,7 @@
 
-import { db, firebaseApp, storage } from "../../../../App/database/firebase"
-import { deleteObject, ref } from 'firebase/storage'
+import { db, storage } from "../../../../App/database/firebase"
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
 
 
 export async function DeleteLink(props) {
@@ -51,23 +52,13 @@ export async function DeleteLink(props) {
 
 const faviconExist = link => {
 
-    const storage = firebaseApp.storage();
 
+    const storage = getStorage()
     const path = `links/favicon/${link.id}`
-    const fileRef = storage.ref(path)
 
-    fileRef.exists().then(exists=> {
-        if (exists) {
-          console.log('File exists');
-        } else {
-          console.log('File does not exist');
-        }
-      });
-   /*  fileRef.delete()
-    .then(e=> {
-        console.log('File deleted successfully');
-    })
-    .catch(error=> {
-        console.error(error);
-    }); */
+    const favicon = ref(storage, path)
+
+
+   return deleteObject(favicon)
+
 }
