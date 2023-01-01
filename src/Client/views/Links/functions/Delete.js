@@ -1,6 +1,7 @@
 
-import { db } from "../../../../App/database/firebase"
-import { deleteObject, ref, storage } from 'firebase/storage'
+import { db, storage } from "../../../../App/database/firebase"
+import { deleteObject, ref } from 'firebase/storage'
+
 
 export async function DeleteLink(props) {
 
@@ -30,13 +31,8 @@ export async function DeleteLink(props) {
                 .doc(e.statID)
                 .delete()
                 .then(e=> {
-                    const fileRef = storage.ref('links/favicon/' + link.id);
 
-                    fileRef.delete().then(function() {
-                    console.log('File deleted successfully');
-                    }).catch(function(error) {
-                    console.error('Error deleting file:', error);
-                    });
+
                 })
             })
 
@@ -48,4 +44,18 @@ export async function DeleteLink(props) {
             console.error(error);
         }
     }
+}
+
+
+const faviconExist = link => {
+    const fileRef = storage.ref('links/favicon/' + link.id);
+
+    fileRef.exists()
+    fileRef.delete()
+    .then(e=> {
+        console.log('File deleted successfully');
+    })
+    .catch(error=> {
+        console.error(error);
+    });
 }
