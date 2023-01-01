@@ -701,6 +701,7 @@ padding: 0.4rem;
 }
 
 
+
 .hover-black:hover {
     background-color: var(--black-200);
 }
@@ -713,7 +714,7 @@ padding: 0.4rem;
 }
 
 .hover:hover {
-    background-color: var(--hover-btn);
+    background-color: var(--grey);
 }
 
 .hover-white:hover  {

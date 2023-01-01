@@ -98,7 +98,7 @@ export default function Header({visible}) {
                             {theme === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />}
                         </span>
                     </button>
-                    <div className='grey display gap-04 border p-04 h-2 border-r-2'>
+                    <div className='display gap-04 border p-04 h-2 border-r-2'>
                         {
                             user 
                             ?
@@ -117,7 +117,7 @@ export default function Header({visible}) {
                                 </Link>
                             </div>
                         }
-                        <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
+                        <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(Menu === false ? true : false)} >
                             <span className='display'>
                                 <Bars2Icon width={20} className='c-black' />
                             </span>
