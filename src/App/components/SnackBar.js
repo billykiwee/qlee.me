@@ -34,31 +34,33 @@ export function SnackBar({content, setMsg}) {
             [content]
             .map(data=> {
 
+                const { id, text, subtext, status, action } = data
+
 
                 return (
-                    <div className='white border border-r-04 shadow p-1 snackbar ' id={data?.id} key={data?.id} >
+                    <div className='white border border-r-04 shadow p-1 snackbar ' id={id} key={id} >
                         <div className='display gap-2rem'>
                             <div className='display gap-1rem'>
                                 <div className='w-2 display justify-c'>
                                     {
-                                        data?.status === 'success'
+                                        status === 'success'
                                         ? <CheckCircleIcon width={28} className='c-green' />
                                         : <ExclamationTriangleIcon width={28} className='c-red' />
                                     }
                                 </div>
                                 <div className='grid'>
-                                    <span className='f-w-500 f-s-16'>{data?.text}</span>
-                                    <span className='opacity'>{data?.subtext}</span>
+                                    <span className='f-w-500 f-s-16'>{text}</span>
+                                    <span className='opacity'>{subtext}</span>
                                     {
-                                        data?.action &&
-                                        <Link to={data?.action.link}>
-                                            <span className='link hover-link '>{data?.action.text}</span>
+                                        action &&
+                                        <Link to={action.link}>
+                                            <span className='link hover-link '>{action.text}</span>
                                         </Link>
                                     }
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(data.id)}  >
+                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)}  >
                                     <span className='f-s-16'>OK</span>
                                 </button>
                             </div>

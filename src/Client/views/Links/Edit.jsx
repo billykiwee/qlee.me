@@ -291,7 +291,6 @@ export default function Edit() {
                                                     DeleteLink({
                                                         Stats,
                                                         link: Link,
-                                                        setPopUpMessage,
                                                         setMsg,
                                                         history
                                                     })
