@@ -58,7 +58,7 @@ export default function QrCodeSection({Link, QrCode}) {
                                     <input type="text" className='div-input white' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
                                 </div>
 
-                                <div className='grid gap-1rem grey border-r-04'>
+                                <div className='grid gap-1rem grey border-r-04 p-1'>
                                     <div className='display justify-s-b'>
                                         <span className='opacity'>couleur</span>
                                         <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setframeColor(frameColor ? false : true)}>
@@ -153,7 +153,7 @@ const QRCODE = ({style, link}) => {
                     />
                 }
                 <QRCode
-                    bgColor='white'
+                    bgColor='var(--white)'
                     fgColor={style.lineColor ?? 'black'}
                     className='click qr-code-svg'
                     level='H'
@@ -185,7 +185,7 @@ const QRCODE = ({style, link}) => {
                     />
                 }
                 <QRCode
-                    bgColor='white'
+                    bgColor='red'
                     fgColor={style.lineColor ?? 'black'}
                     className='click qr-code-svg'
                     level='H'

@@ -14,5 +14,5 @@ Qlee me is the best URL shortener you have never seen !
 - Manage and analyze this links statistics
 
 
-## 🛠 Go to the website 
+## Go to the website 
 <a style="color: blue;" href='https://qlee.me/'>qlee.me</a>
