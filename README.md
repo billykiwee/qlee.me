@@ -1,5 +1,5 @@
-<a align="center" href='https://qlee.me/' >
-  <img src="https://qlee.me/favicon.ico" width={40} alt="Qlee.me logo" />
+<a style="justify-content: center; display: flex;" href='https://qlee.me/' >
+  <img src="https://qlee.me/favicon.ico" width="166px" alt="Qlee.me logo" />
 </a>
 
 # Qlee your links !
@@ -15,4 +15,4 @@ Qlee me is the best URL shortener you have never seen !
 
 
 ## 🛠 Go to the website 
-qlee.me
+<a style="color: blue;" href='https://qlee.me/'>qlee.me</a>
