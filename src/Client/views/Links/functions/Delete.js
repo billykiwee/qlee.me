@@ -49,15 +49,18 @@ export async function DeleteLink(props) {
 }
 
 
-const faviconExist = async link => {
-    const fileRef = storage.ref('links/favicon/' + link.id);
+const faviconExist = link => {
 
-    try {
-        return await fileRef.exists()
-    }
-    catch {
-        return false
-    }
+    const path = `links/favicon/${link.id}`
+    const fileRef = ref(storage, path)
+
+    fileRef.exists().then(exists=> {
+        if (exists) {
+          console.log('File exists');
+        } else {
+          console.log('File does not exist');
+        }
+      });
    /*  fileRef.delete()
     .then(e=> {
         console.log('File deleted successfully');
