@@ -98,29 +98,31 @@ export default function Header({visible}) {
                             {theme === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />}
                         </span>
                     </button>
-                    {
-                        user 
-                        ?
-                        <Link to='/dashboard' className='display avatar-header' >
-                            <img src={User?.photoURL} className='border-r-100' width={38} height={38} />
-                        </Link>
-                        : 
-                        <div className='display justify-c'>
-                            <Link to='/login'>
-                                <button className='hover-blue border-r-2 p-1 gap-04 blue' style={{height: '40px'}}>
-                                    <span className='display'>
-                                        <img src='/images/user-solid.svg' width={14} style={{filter:' invert(100%)'}} />
-                                    </span>
-                                    <span className='display'>Se connecter</span>
-                                </button>
+                    <div className='grey display gap-04 border p-04 h-2 border-r-2'>
+                        {
+                            user 
+                            ?
+                            <Link to='/dashboard' className='display avatar-header' >
+                                <img src={User?.photoURL} className='border-r-100' width={36} height={36} />
                             </Link>
-                        </div>
-                    }
-                    <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
-                        <span className='display'>
-                            <Bars2Icon width={20} className='c-black' />
-                        </span>
-                    </button>
+                            : 
+                            <div className='display justify-c'>
+                                <Link to='/login'>
+                                    <button className='hover-blue border-r-2 p-1 gap-04 blue' style={{height: '40px'}}>
+                                        <span className='display'>
+                                            <img src='/images/user-solid.svg' width={14} style={{filter:' invert(100%)'}} />
+                                        </span>
+                                        <span className='display'>Se connecter</span>
+                                    </button>
+                                </Link>
+                            </div>
+                        }
+                        <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
+                            <span className='display'>
+                                <Bars2Icon width={20} className='c-black' />
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
             {

@@ -37,15 +37,15 @@
 }
 
 [data-theme="dark"] {
-    --white: #ffffff12;
+    --white: #343b3d;
     --background: #252c2e;
     --black: white;
     --grey: #f8f8f80f;
 }
 
 
-html{
-    background: var(--background);
+html {
+    background: unset
 }
 body {
     margin: 0;

@@ -93,22 +93,7 @@ export default function Dashboard() {
                                         </div>
                                     </div>
                                     <div className='display h-4 align-top'>
-                                        <button 
-                                            /* onClick={e=> 
-                                                createLink({
-                                                    NameLink,
-                                                    LinkURL,
-                                                    setLinkURL,
-                                                    setNameLink,
-                                                    setError,
-                                                    User,
-                                                    UserLinks,
-                                                    setMsg 
-                                                }) 
-                                            }  */
-                                            id='btn-create'
-                                            className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
-                                        >
+                                        <button id='btn-create' className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' >
                                             <span className='f-s-16 c-white'>Créer</span>
                                         </button>
                                     </div>
