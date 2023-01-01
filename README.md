@@ -1,5 +1,6 @@
-
-![alt text](https://qlee.me/favicon.ico)
+<p align="center">
+  <img src="https://qlee.me/favicon.ico" alt="Logo de Qlee me" />
+</p>
 
 # Qlee your links !
 
