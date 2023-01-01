@@ -58,10 +58,15 @@ const faviconExist = link => {
 
     const favicon = ref(storage, path)
 
-
-   return deleteObject(favicon)
-   .then(() => {
-        return true
-    })
+    return favicon.exists()
+    .then(exists => {
+      if (exists) {
+        return deleteObject(favicon).then(() => {
+          return true;
+        });
+      } else {
+        return false;
+      }
+    });
 
 }
