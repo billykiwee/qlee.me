@@ -7,8 +7,6 @@ const setTheme = theme => {
 
 export const toggleTheme = theme => {
     setTheme(theme === 'light' ? 'dark' : 'light')
-
-    return theme
 }
 
 
