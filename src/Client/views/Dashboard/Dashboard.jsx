@@ -19,6 +19,7 @@ import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
+import { toggleTheme } from '../../../App/functions/setTheme';
 
 
 export default function Dashboard() {
@@ -43,36 +44,14 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    const initialTheme = 'light'
-
-    export const setTheme = theme => {
-        localStorage.setItem('theme', theme)
-        document.querySelector('body').setAttribute('data-theme', theme)
-    }
-    const toggleTheme = e => {
-        const activeTheme = localStorage.getItem('theme')
-
-        setTheme(activeTheme === 'light' ? 'dark' : 'light')
-    }
-
-    const setThemeOnInit = e => {
-        const savedTheme = localStorage.getItem('theme')
-        savedTheme 
-        ? document.querySelector('body').setAttribute('data-theme', savedTheme)
-        : setTheme(initialTheme)
-    }
-
-    setThemeOnInit()
-
+console.log(localStorage.getItem('theme'));
     
     if (!user) return <Login />
     
     return (
 
         <Main>
-            <button onClick={toggleTheme}>
-                dark
-            </button>
+            <button onClick={toggleTheme}>{localStorage.getItem('theme')}</button>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>
