@@ -36,6 +36,11 @@
     --grey-text : #8fa0ac;
 }
 
+[data-theme="dark"] {
+    --white: var(--black);
+    --background: var(--black);
+}
+
 
 html,
 body {
