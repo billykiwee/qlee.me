@@ -22,7 +22,9 @@ export async function DeleteLink(props) {
 
     const deleteLinksSelected = async link => {
 
-        try {
+        console.log(faviconExist(link));
+
+        /* try {
             await db.collection('links').doc(link.id).delete()
             await Stats?.filter(e => e.LinkID === link.id)
             .map(e => {
@@ -31,7 +33,6 @@ export async function DeleteLink(props) {
                 .doc(e.statID)
                 .delete()
                 .then(e=> {
-
 
                 })
             })
@@ -43,19 +44,25 @@ export async function DeleteLink(props) {
         catch (error) {
             console.error(error);
         }
+    } */
     }
 }
 
 
-const faviconExist = link => {
+const faviconExist = async link => {
     const fileRef = storage.ref('links/favicon/' + link.id);
 
-    fileRef.exists()
-    fileRef.delete()
+    try {
+        return await fileRef.exists()
+    }
+    catch {
+        return false
+    }
+   /*  fileRef.delete()
     .then(e=> {
         console.log('File deleted successfully');
     })
     .catch(error=> {
         console.error(error);
-    });
+    }); */
 }
