@@ -43,6 +43,26 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
+    const initialTheme = 'light'
+
+    const setTheme = theme => {
+        localStorage.setItem('theme', theme)
+        document.querySelector('body').setAttribute('data-theme', theme)
+    }
+    const toggleTheme = e => {
+        const activeTheme = localStorage.getItem('theme')
+
+        if (activeTheme === 'light') setTheme('dark')
+        else setTheme('light')
+    }
+
+    const setThemeOnInit = e => {
+        const savedTheme = localStorage.getItem('theme')
+        savedTheme 
+        ? document.querySelector('body').setAttribute('data-theme', savedTheme)
+        : setTheme(initialTheme)
+    }
+
 
     
     if (!user) return <Login />
@@ -50,6 +70,9 @@ export default function Dashboard() {
     return (
 
         <Main>
+            <button onClick={toggleTheme}>
+                dark
+            </button>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

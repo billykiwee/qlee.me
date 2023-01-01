@@ -47,7 +47,6 @@ body {
     margin: 0;
     color: var(--black);
     background-color: var(--background);
-    height: 100%;
     scroll-behavior: smooth;
 }
 
