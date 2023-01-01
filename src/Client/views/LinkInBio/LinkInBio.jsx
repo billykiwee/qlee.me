@@ -28,10 +28,6 @@ export default function LinkInBio({userView = true}) {
 
 
 
-    
-
-    console.log(UserLinks);
-
 
     function onDragEnd(result) {  
         
@@ -72,19 +68,15 @@ export default function LinkInBio({userView = true}) {
 
         
         Object.values(all).map(e=>{
+            let tab = e.classList.value.split(' ')
 
-            data.map(d=> {
+            for (const v in data) {
 
-                let tab = e.classList.value.split(' ')
+                for (const t in tab) {
 
-                tab.map(x=> {
-
-                    console.log(x);
-                    if (x === d) {
-                        e.style = `${d}px`
-                    }
-                })
-            })
+                   if (data[v].split('-')[0] === tab[t].split('-')[0]) return console.log(tab[t]);
+                }
+            }
         })
     }, [])
 
@@ -108,7 +100,7 @@ export default function LinkInBio({userView = true}) {
                     bonjour
                 </div>
 
-                <div className=' gap-1rem'>  
+               {/*  <div className=' gap-1rem'>  
                     
                     <div className='grid gap-1rem p-1'>
                         {
@@ -242,7 +234,7 @@ export default function LinkInBio({userView = true}) {
                             <span className='c-grey f-w-300 disable'>Made by Qlee.me</span>
                         </a>
                     </div>
-                }
+                } */}
             </Main>
         </DragDropContext>
     )
