@@ -139,6 +139,7 @@ input {
     background: transparent;
     box-sizing: border-box;
     padding: 1rem;
+    color: var(--black);
 }
 textarea {
     font-size: 16px;
@@ -152,6 +153,7 @@ textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 12px;
+    color: var(--black);
 }
 input:focus {
     border: 0;
@@ -164,7 +166,7 @@ textarea:focus {
 ::placeholder {
     color: var(--black);
     opacity: 0.4;
-  }
+}
 
 li {
     list-style: none;
