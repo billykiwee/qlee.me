@@ -1,6 +1,6 @@
-<p align="center">
+<a align="center" href='https://qlee.me/' >
   <img src="https://qlee.me/favicon.ico" width={40} alt="Qlee.me logo" />
-</p>
+</a>
 
 # Qlee your links !
 
