@@ -61,6 +61,32 @@ export default function LinkInBio({userView = true}) {
         })
     }
 
+    
+
+    const data = ['w-', 'h-', 'm-', 'mt-', 'mb-', 'ml-', 'mr-', 'p-']
+
+    useEffect(e=> {
+
+        const all = document.querySelectorAll('*')
+
+
+        
+        Object.values(all).map(e=>{
+
+            data.map(d=> {
+
+                let tab = e.classList.value.split(' ')
+
+                tab.map(x=> {
+
+                    console.log(x);
+                    if (x === d) {
+                        e.style = `${d}px`
+                    }
+                })
+            })
+        })
+    }, [])
 
 
 
@@ -77,6 +103,10 @@ export default function LinkInBio({userView = true}) {
                     height      : '100vh',
                 }}
             >
+
+                <div className='blue p-2 mt-99'>
+                    bonjour
+                </div>
 
                 <div className=' gap-1rem'>  
                     
