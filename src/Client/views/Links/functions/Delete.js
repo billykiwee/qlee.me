@@ -60,5 +60,8 @@ const faviconExist = link => {
 
 
    return deleteObject(favicon)
+   .then(() => {
+        return true
+    })
 
 }
