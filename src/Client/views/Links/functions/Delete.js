@@ -23,7 +23,7 @@ export async function DeleteLink(props) {
 
     const deleteLinksSelected = async link => {
 
-        console.log(faviconExist(link));
+         console.log(faviconExist(link));
 
         /* try {
             await db.collection('links').doc(link.id).delete()
@@ -50,23 +50,12 @@ export async function DeleteLink(props) {
 }
 
 
-const faviconExist = link => {
-
+const faviconExist = async link => {
 
     const storage = getStorage()
     const path = `links/favicon/${link.id}`
 
     const favicon = ref(storage, path)
-
-    return favicon.exists()
-    .then(exists => {
-      if (exists) {
-        return deleteObject(favicon).then(() => {
-          return true;
-        });
-      } else {
-        return false;
-      }
-    });
-
+    
+    return deleteObject(favicon)
 }
