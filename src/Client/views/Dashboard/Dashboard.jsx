@@ -52,6 +52,14 @@ export default function Dashboard() {
     }
 
 
+    const create = e => {
+        e.preventDefault()
+
+        const { name, url } = e.target.elements
+
+        console.log(name, url);
+    }
+
 
     
     if (!user) return <Login />
@@ -69,7 +77,7 @@ export default function Dashboard() {
                             <Articles links={UserLinks} />
                         </div>
 
-                        <div className='grid gap-2rem '>
+                        <form className='grid gap-2rem ' onSubmit={create}>
                             <div className='grid gap-1rem'>
                                 <div>
                                     <span className='f-s-25 f-w-500'>Créer un lien</span>
@@ -77,13 +85,13 @@ export default function Dashboard() {
                                 <div className='grid gap-1rem'>
                                     <div className='grid gap'>
                                         <div className='display w-100p'>
-                                            <input type='text' 
+                                            <input type='text' id='name'
                                                 onChange={e=> {setNameLink(e.target.value); setError('')}} 
                                                 className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
                                             />
                                         </div>
                                         <div className='display w-100p'>
-                                            <input type='text' 
+                                            <input type='text' id='url'
                                                 onChange={e=> {setLinkURL(e.target.value); setError('')}} 
                                                 className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' 
                                             />
@@ -91,7 +99,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className='display h-4 align-top'>
                                         <button 
-                                            onClick={e=> 
+                                            /* onClick={e=> 
                                                 createLink({
                                                     NameLink,
                                                     LinkURL,
@@ -102,7 +110,7 @@ export default function Dashboard() {
                                                     UserLinks,
                                                     setMsg 
                                                 }) 
-                                            } 
+                                            }  */
                                             id='btn-create'
                                             className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
                                         >
@@ -117,7 +125,7 @@ export default function Dashboard() {
                                     </div>
                                 }
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 

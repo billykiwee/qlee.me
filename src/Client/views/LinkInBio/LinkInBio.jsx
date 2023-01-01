@@ -64,13 +64,6 @@ export default function LinkInBio({userView = true}) {
 
 
 
-const sub = e=> {
-    e.preventDefault()
-
-    alert(`Your name is ${e.target.elements.website.value}`);
-    return false
-}
-
 
     return (
 
@@ -84,12 +77,6 @@ const sub = e=> {
                     height      : '100vh',
                 }}
             >
-
-                <form onSubmit={sub}>
-                    <label for="website">Enter a website address:</label>
-                    <input type="url" id="website" name="website"/>
-                    <input type="submit" value="Submit"/>
-                </form>
 
                 <div className=' gap-1rem'>  
                     
