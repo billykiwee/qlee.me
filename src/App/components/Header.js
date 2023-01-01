@@ -75,7 +75,7 @@ export default function Header({visible}) {
 
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
 
-    
+
 
     if (!isLinkInBio())
     return (
@@ -93,6 +93,11 @@ export default function Header({visible}) {
                     </Link>
                 </div>
                 <div className='display gap'>
+                    <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
+                        <span className='display'>
+                            {theme === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />}
+                        </span>
+                    </button>
                     {
                         user 
                         ?
@@ -114,16 +119,6 @@ export default function Header({visible}) {
                     <button className='hamburger border-r-100 hover' onClick={e=> setMenu(Menu === false ? true : false)} >
                         <span className='display'>
                             <Bars2Icon width={20} className='c-black' />
-                        </span>
-                    </button>
-                    <button className='hamburger border-r-100 hover' onClick={e=> toggleTheme(localStorage.getItem('theme'))}>
-                        <span className='display'>
-                            {
-                                console.log( toggleTheme())
-                            }
-                            {
-                                toggleTheme() === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />
-                            }
                         </span>
                     </button>
                 </div>
