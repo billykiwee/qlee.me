@@ -6,9 +6,16 @@ import UniqueID from "../../../../App/utils/uniqueID"
 import { getHostName } from "../../../lib/getHostName"
 
 
-export function createLink(props) {
+export function createLink(e) {
 
-    const { 
+    e.preventDefault()
+
+    const elements = e.target.elements
+
+    const [name, url] = [elements.name.value, elements.url.value]
+    console.log(name, url);
+
+/*     const { 
         NameLink,
         LinkURL,
         setLinkURL,
@@ -78,6 +85,6 @@ export function createLink(props) {
     })
     .catch(Popup=> {
         setError(Popup)
-    })
+    }) */
 
 }

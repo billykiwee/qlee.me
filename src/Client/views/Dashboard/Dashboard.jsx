@@ -52,14 +52,7 @@ export default function Dashboard() {
     }
 
 
-    const create = e => {
-        e.preventDefault()
 
-        const [name, url] = [e.target.elements.name.value, e.target.elements.url.value]
-
-
-        console.log(name, url);
-    }
 
 
     
@@ -78,7 +71,7 @@ export default function Dashboard() {
                             <Articles links={UserLinks} />
                         </div>
 
-                        <form className='grid gap-2rem ' onSubmit={create}>
+                        <form className='grid gap-2rem ' onSubmit={createLink}>
                             <div className='grid gap-1rem'>
                                 <div>
                                     <span className='f-s-25 f-w-500'>Créer un lien</span>
