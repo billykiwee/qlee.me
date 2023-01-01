@@ -10,7 +10,7 @@
     --blue-secondary: rgba(11, 115, 241, 0.1);
     --blue-dark: #0760d0;
     --background: #fafafa;
-    --black: #2d3436;
+    --black: #252c2e;
     --yellow: #f9ca24;
     --black-200 : rgb(49, 49, 49);
     --grey : #F8F8F8;
@@ -38,8 +38,9 @@
 
 [data-theme="dark"] {
     --white: #303636;
-    --background: #252b2c;
+    --background: #252c2e;
     --black: white;
+    --grey: #f8f8f80f;
 }
 
 
