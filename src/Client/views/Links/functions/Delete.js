@@ -27,12 +27,12 @@ export async function DeleteLink(props) {
             await db.collection('links').doc(link.id).delete()
             await Stats?.filter(e => e.LinkID === link.id)
             .map(e => {
-
+                
                 db.collection('stats')
                 .doc(e.statID)
                 .delete()
-                .then(e=> faviconExist(link))
             })
+            await faviconExist(link.id)
 
             setMsg([])
 
@@ -45,12 +45,14 @@ export async function DeleteLink(props) {
 }
 
 
-const faviconExist = link => {
+const faviconExist = async id => {
 
     const storage = getStorage()
-    const path = `links/favicon/${link.id}`
+    const path = `links/favicon/${id}`
 
     const favicon = ref(storage, path)
     
-    deleteObject(favicon)
+    deleteObject(favicon).then(e=> {
+        return true
+    })
 }
