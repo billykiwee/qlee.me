@@ -45,15 +45,14 @@ export default function Dashboard() {
 
     const initialTheme = 'light'
 
-    const setTheme = theme => {
+    export const setTheme = theme => {
         localStorage.setItem('theme', theme)
         document.querySelector('body').setAttribute('data-theme', theme)
     }
     const toggleTheme = e => {
         const activeTheme = localStorage.getItem('theme')
 
-        if (activeTheme === 'light') setTheme('dark')
-        else setTheme('light')
+        setTheme(activeTheme === 'light' ? 'dark' : 'light')
     }
 
     const setThemeOnInit = e => {
@@ -63,6 +62,7 @@ export default function Dashboard() {
         : setTheme(initialTheme)
     }
 
+    setThemeOnInit()
 
     
     if (!user) return <Login />

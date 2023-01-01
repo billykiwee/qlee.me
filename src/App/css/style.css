@@ -37,8 +37,9 @@
 }
 
 [data-theme="dark"] {
-    --white: var(--black);
-    --background: var(--black);
+    --white: #303636;
+    --background: #252b2c;
+    --black: white;
 }
 
 
