@@ -103,7 +103,7 @@ export default function Header({visible}) {
                             user 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURL} className='border-r-100' width={36} height={36} />
+                                <img src={User?.photoURL ?? '/images/user-solid.svg'} className='border-r-100' width={36} height={36} />
                             </Link>
                             : 
                             <div className='display justify-c'>
