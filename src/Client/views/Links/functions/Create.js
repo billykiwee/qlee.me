@@ -6,38 +6,27 @@ import UniqueID from "../../../../App/utils/uniqueID"
 import { getHostName } from "../../../lib/getHostName"
 
 
-export function createLink(e) {
+export function createLink(props) {
 
-    e.preventDefault()
+    const { elements, setError, User, UserLinks, setMsg } = props
 
-    const { name, url } = e.target.elements
+    const name = elements.name.value
+    const url = elements.name.value
 
-
-    console.log(name.value, url.value);
-
-/*     const { 
-        NameLink,
-        LinkURL,
-        setLinkURL,
-        setNameLink,
-        setError,
-        User,
-        UserLinks,
-        setMsg 
-    } = props
-
+    
     const linkID = 'qlee.me/' + UniqueID('', 5)
                     
     const link = {
-        name     : NameLink.length < 1 ? getHostName(LinkURL) : NameLink,
+        name     : name.length < 1 ? getHostName(LinkURL) : name,
         id       : linkID.split('/')[1],
         user     : User.email,
-        url      : isValidUrl(LinkURL).href,
+        url      : isValidUrl(url).href,
         shortLink: linkID,
         date     : serverTimestamp(),
         views    : 0
     }    
 
+/*  
 
     async function check() {
 

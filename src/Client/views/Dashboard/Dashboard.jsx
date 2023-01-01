@@ -72,9 +72,17 @@ export default function Dashboard() {
                         </div>
 
                         <form className='grid gap-2rem ' 
-                            onSubmit={e=> 
-                                create(e.target.elements)
-                            }
+                            onSubmit={e=> {
+                                e.preventDefault()
+                                
+                                createLink({
+                                    elements: e.target.elements,
+                                    setError,
+                                    User,
+                                    UserLinks,
+                                    setMsg 
+                                })
+                            }}
                         >
                             <div className='grid gap-1rem'>
                                 <div>
