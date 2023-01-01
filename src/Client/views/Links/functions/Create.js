@@ -11,13 +11,14 @@ export function createLink(props) {
     const { elements, setError, User, UserLinks, setMsg } = props
 
     const name = elements.name.value
-    const url = elements.name.value
-
+    const url = elements.url.value
     
-    const linkID = 'qlee.me/' + UniqueID('', 5)
+
+
+    const linkID = 'qlee.me/' + UniqueID('', 4)
                     
     const link = {
-        name     : name.length < 1 ? getHostName(LinkURL) : name,
+        name     : name.length < 1 ? getHostName(url) : name,
         id       : linkID.split('/')[1],
         user     : User.email,
         url      : isValidUrl(url).href,
@@ -25,18 +26,17 @@ export function createLink(props) {
         date     : serverTimestamp(),
         views    : 0
     }    
-
-/*  
+  
 
     async function check() {
 
-        if (NameLink.length) {
-            if (NameLink.length > 40) {
+        if (name.length) {
+            if (name.length > 40) {
                 throw 'Le nom doit comporté 40 charactères au maximum'
             }
         }
         
-        if (!isValidUrl(LinkURL)) {
+        if (!isValidUrl(url)) {
             throw 'Tu dois rentrer une URL valide'
         }
 
@@ -62,18 +62,16 @@ export function createLink(props) {
         setMsg({
             id     : UniqueID('msg', 5),
             text   : 'Bravo 🎉',
-            subtext: `Le lien ${NameLink} a bien été crée`,
+            subtext: `Le lien ${name} a bien été crée`,
             status : 'success'
         })
     })
     .then(linkCreated=> {
         document.querySelectorAll('input').forEach(e=> e.value = '')
-        setLinkURL('')
-        setNameLink('')
 
     })
     .catch(Popup=> {
         setError(Popup)
-    }) */
+    }) 
 
 }
