@@ -55,7 +55,8 @@ export default function Dashboard() {
     const create = e => {
         e.preventDefault()
 
-        const { name, url } = e.target.elements
+        const [name, url] = [e.target.elements.name.value, e.target.elements.url.value]
+
 
         console.log(name, url);
     }
