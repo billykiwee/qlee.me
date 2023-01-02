@@ -2,6 +2,7 @@ import { ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, PencilSquar
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link } from 'react-router-dom'
+import { css } from '../../../css'
 import Main from '../../../App/components/Main'
 import { db } from '../../../App/database/firebase'
 import { useStateValue } from '../../../App/provider/StateProvider'
@@ -59,30 +60,6 @@ export default function LinkInBio({userView = true}) {
 
     
 
-    const data = ['w-', 'h-', 'm-', 'mt-', 'mb-', 'ml-', 'mr-', 'p-']
-
-    useEffect(e=> {
-
-        const all = document.querySelectorAll('*')
-
-
-        
-        Object.values(all).map(e=>{
-            let tab = e.classList.value.split(' ')
-
-            for (const v in data) {
-
-                for (const t in tab) {
-
-                   if (data[v].split('-')[0] === tab[t].split('-')[0]) return console.log(tab[t]);
-                }
-            }
-        })
-    }, [])
-
-
-
-
     return (
 
         <DragDropContext onDragEnd={onDragEnd}>
@@ -95,10 +72,6 @@ export default function LinkInBio({userView = true}) {
                     height      : '100vh',
                 }}
             >
-
-                <div className='blue p-2 mt-99'>
-                    bonjour
-                </div>
 
                {/*  <div className=' gap-1rem'>  
                     

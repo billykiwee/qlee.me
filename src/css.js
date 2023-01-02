@@ -5,18 +5,18 @@ export const css = [
     },
     {
         name: 'h-',
-        value: 'width'
+        value: 'height'
     },
     {
         name: 'mt-',
-        value: 'width'
+        value: 'margin-top'
     },
     {
         name: 'mb-',
-        value: 'width'
+        value: 'margin-bottom'
     },
     {
         name: 'p-',
-        value: 'width'
+        value: 'padding'
     },
 ]
