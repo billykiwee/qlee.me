@@ -86,7 +86,7 @@ export default function Header({visible}) {
                         <span className='display'>
                             {
                                 getDevice() === 'mobile'
-                                ? <img src='/images/logo-icon.png' width={44} />
+                                ? <img src='/images/logo-icon.png' width={36} />
                                 : <img src='/images/logo.svg' width={122} />
                             }
                             </span>
@@ -103,7 +103,7 @@ export default function Header({visible}) {
                             user 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURL ?? '/images/user-solid.svg'} className='border-r-100' width={36} height={36} />
+                                <img src={User?.photoURL ?? '/images/user-solid.svg'} className='border-r-100' width={32} height={32} />
                             </Link>
                             : 
                             <div className='display justify-c'>
