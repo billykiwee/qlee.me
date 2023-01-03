@@ -1,4 +1,4 @@
-import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link, useParams } from 'react-router-dom'
@@ -39,6 +39,7 @@ export default function LinkInBio({userView = true}) {
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
+    if (userName)
     return (
         <>
             <Background 
@@ -46,6 +47,16 @@ export default function LinkInBio({userView = true}) {
                 img   = {background?.img?.url}
                 blur  = {background?.img?.blur}
             />
+
+            {
+                userView  === true &&  
+                <div className='display margin-auto fixed grey m-1 p-1 h-2 border-r-2 justify-c'>
+                    <div className='display justify-c gap  w-100p'>
+                        <UserCircleIcon width={30} className='c-black' />
+                        <span>Voir en tant que</span>
+                    </div>
+                </div>
+            }
 
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
                 <Main 
@@ -58,9 +69,7 @@ export default function LinkInBio({userView = true}) {
                     }}
                 >
 
-                    <div className=' gap-1rem' style={{
-                        fontFamily: `${fontFamily}`
-                    }}>  
+                    <div className=' gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
                         
                         <Head
                             props={{
