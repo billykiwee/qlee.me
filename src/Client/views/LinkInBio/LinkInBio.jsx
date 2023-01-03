@@ -23,8 +23,16 @@ export default function LinkInBio({userView = true}) {
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
-        fetchUserLinks(setUserLinks, user?.email)
+            
+        db.collection('links').get().then(snapshot => {
+            const links = snapshot.docs.map(doc => doc.data());
+            setUserLinks(links.filter(e=> e.user === user?.email && e.linkInBio).sort((a,b)=> a.position - b.position))
+        })
+
     }, [user?.email])
+    
+
+    console.log(UserLinks);
     
 
     const linksInBio = UserLinks
@@ -43,9 +51,9 @@ export default function LinkInBio({userView = true}) {
         setUserLinks(newItems)
         
 
-       /*  db.collection('links').doc(draggableId).update({
+        db.collection('links').doc(draggableId).update({
             position: destination.index
-        }) */
+        })
 
         const container = document.querySelector('.container')
         const array = container.childNodes
