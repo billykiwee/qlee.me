@@ -91,7 +91,7 @@ export default function App() {
             element : <Stats />
         },
         payment : {
-            path : '/payment',
+            path : '/payment/:plan',
             element : <Payment />
         },
         linkinbio : {

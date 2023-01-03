@@ -11,9 +11,11 @@ import axios from 'axios'
 import Messages from '../../App/utils/Messages';
 import PhoneInput from 'react-phone-input-2'
 import { loadStripe } from '@stripe/stripe-js';
+import { plans } from '../../Admin/settings/plans';
 
 
-export function Stripe() {
+
+export function Stripe({planID}) {
 
 
     const [MSG, setMSG] = useState({})
@@ -63,26 +65,6 @@ export function Stripe() {
     const [Email, setEmail] = useState('')
     const [DateTime, setDateTime] = useState('')
     const [RememberCheckOutinfo, setRememberCheckOutinfo] = useState('')
-
-
-    const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-
-    function setFormatDate(type) {
-
-        let y = new Date().getFullYear()
-        let m = new Date().getMonth()
-        let d = new Date().getDate()
-        let h = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-
-        if (type === 'max') d = d + 7
-        
-        if (m < 10) m = '0' + m
-        if (d < 10) d = '0' + d
-
-        let result = y + '-' + m + '-' + d + 'T' + h
-
-        return result
-    }
 
 
     const stripe = useStripe()
@@ -289,10 +271,10 @@ export function Stripe() {
 
             <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
-            <div className='display wrap justify-s-b gap align-top'>
+            <div className='grid justify-s-b gap align-top blocks' >
 
-                <div className='grid w-100p'>
-                    <div className='grid w-100p'>
+                <div className='grid w-100p '>
+                    <div className='grid w-100p '>
                         <div className='grid white border border-r-1 p-1 shadow gap'>
 
                             <div className='grid m-b-1'>
@@ -308,11 +290,13 @@ export function Stripe() {
 
                             <div className='grid' style={{display : ShowCart === true ? 'block' : 'none'}} >
                                 <div className='display justify-s-b align-top f-s-14'>
-                                    <div className='display m-b-04 w-50'>
+                                    <div className='grid m-b-04 w-50'>
                                         <span className='c-grey'>Article</span>
+                                        <span>Paiement récurrent {planID}</span>
                                     </div>
-                                    <div className='display'>
+                                    <div className='grid'>
                                         <span className='c-grey'>Prix</span>
+                                        <span>{formatCurrency(plans[planID].price)}</span>
                                     </div>
                                 </div>
                                 <ul className='grid'>
@@ -347,7 +331,7 @@ export function Stripe() {
 
                 </div>
                 
-                <div className='grid white border border-r-1 p-1 shadow gap-1rem w-100p'>
+                <div className='grid white border border-r-1 p-1 shadow gap-1rem'>
                     <div className='grid m-b-1'>
                         <h2 className='f-s-25 m-b-1'>Vos informations</h2>
                         <span className='c-grey f-w-300'>Entrez vos informations de contact et de paiement</span>
@@ -425,30 +409,31 @@ export function Stripe() {
                         <input type='checkbox' className='w-1' id='remember_payment' onChange={e=> setRememberCheckOutinfo(e.target.checked)} />
                         <label htmlFor='remember_payment' className='c-grey f-w-300'>Se souvenir de ma carte</label>
                     </div>
-                </div>
-            </div>
-
-            <div className='dynamicBottom'>
-                <div className='display w-100p'>
                     <div className='display w-100p'>
-                        <button className='blue c-white hover-blue border-r-1 f-s-16 h-3 p-1' disabled={!stripe}>
-                            <span>Payer {formatCurrency(AmountOfCart)}</span>
-                        </button>
+                        <div className='display w-100p'>
+                            <button className='blue c-white hover-blue border-r-1 f-s-16 h-3 p-1' disabled={!stripe}>
+                                <span>Payer {formatCurrency(AmountOfCart)}</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </form>
     )
 }
 
 
 export default function Payment() {
+
+    const { plan } = useParams()
+
     const stripePromise = loadStripe('pk_test_51HKFx4L8AEDuYjhscUrD37Q7AP9kCKtBF8uG8xO6DCh5FKNrTuyLAecOgxZyXHPtaV4jduDf6fWoJBiGuqjjcK8c00z71QBckl')
 
     return (
         <Main>
             <Elements stripe={stripePromise}>
-                <Stripe />
+                <Stripe planID={plan.toLocaleUpperCase()} />
             </Elements>
         </Main>
     )

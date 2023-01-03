@@ -45,7 +45,7 @@ export default function Pricing() {
                 ['Statistiques', <ChartPieIcon width={18} />]
             ],
             recommended: true,
-            payment    : 'https://buy.stripe.com/7sIbK43CR8677ja9Bc',
+            payment    : '/payment/pro',
         },
         Entrprise : {
             plan    : 'Entreprise 🚀',
@@ -58,7 +58,7 @@ export default function Pricing() {
                 ['Lien personalisable', <Cog6ToothIcon width={18} />],
                 ['Statistiques', <ChartPieIcon width={18} />]
             ],
-            payment: 'https://buy.stripe.com/00g9BW0qF5XZ32U14F',
+            payment    : '/payment/entreprise',
         }
     }
 
