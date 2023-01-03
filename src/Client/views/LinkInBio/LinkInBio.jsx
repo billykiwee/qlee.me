@@ -10,7 +10,6 @@ import getFavicon from '../../../App/utils/getFavicon'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
-import e from 'cors'
 
 
 
@@ -20,16 +19,23 @@ export default function LinkInBio({userView = true}) {
 
     const [User, setUser] = useState([])
     const [UserLinks, setUserLinks] = useState([])
+    
+    const [userLinksInBio, setUserLinksInBio] = useState([])
+
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
         fetchUserLinks(setUserLinks, user?.email)
-
     }, [user?.email])
 
+    useEffect(e=> {
+        setUserLinksInBio(UserLinks.filter(e=> e.linkInBio))
 
-    const userLinksInBio = UserLinks.filter(e=> e.linkInBio)
+    }, [UserLinks])
 
+
+
+    const [reorder, setreorder] = useState(false)
 
     const onDragEnd = (result) => {
 
@@ -38,26 +44,35 @@ export default function LinkInBio({userView = true}) {
         if (!destination) return
 
         const newItems = reorderList(userLinksInBio, source.index, destination.index)
-        setUserLinks(newItems)
-            
+        setUserLinksInBio(newItems)
+        
+
+        console.log(result);
     }
 
-    
+
     useEffect(e=> {
+
+        if (reorder) {
+            
+        }
         const container = document.querySelector('.container')
         const array = container.childNodes
-
+    
         const value = Array.from(array).map((e,index)=> { return { id :e.classList.value, index } }) 
-
+    
       
         for (const v in value) {
             const { id, index } = value[v]
 
-            console.log(id, index);
-            db.collection('links').doc(id).update(index)
+            console.log( id, index);
+    
+            db.collection('links').doc(id).update({index})
         }
+    }, [reorder])
 
-    }, [UserLinks, userLinksInBio])
+
+    
 
     
 
