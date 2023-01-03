@@ -1,4 +1,4 @@
-import { ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
+import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link } from 'react-router-dom'
@@ -31,6 +31,12 @@ export default function LinkInBio({userView = true}) {
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)
 
+    const onDragStart = e => {
+        const { draggableId } = e
+
+        const childElement = document.querySelector('#drag-' + draggableId)
+        childElement.classList.add('c-blue')
+    }
 
     const onDragEnd = (result) => {
 
@@ -42,6 +48,8 @@ export default function LinkInBio({userView = true}) {
         setUserLinks(newItems)
         
         getPosition() 
+
+        document.querySelector('.btn-drag').children[0].classList.remove('c-blue')
     }
 
 
@@ -75,7 +83,7 @@ export default function LinkInBio({userView = true}) {
     
     return (
 
-        <DragDropContext onDragEnd={onDragEnd} >
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
             <Main 
                 style={{
                     paddingTop  : '2rem',
@@ -188,25 +196,36 @@ export default function LinkInBio({userView = true}) {
                                                                 {
                                                                     userView && 
                                                                     <div className='display gap'>
-                                                                        <Link to={'/edit/' + link.id} className='display'>
+                                                                        <div  className='display hover' onClick={e=> {
+                                                                            e.target.children[1].style.display = 'flex'
+
+                                                                            console.log( e);
+                                                                        }}>
                                                                             <EllipsisHorizontalIcon width={28} /> 
-                                                                        </Link>
-                                                                        <div className='w-2 h-2 display justify-c' 
+
+                                                                            <div className='grid' style={{display : 'none'}}>
+                                                                                <span>Modifier</span>
+                                                                                <span>Suprimmer de la bio</span>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div className='w-2 h-2 display justify-c btn-drag' 
                                                                             onMouseEnter={e=> {
                                                                                 setIsDragDisabled(false)
-                                                                                console.log(isDragDisabled);
-                                                                                if (!isDragDisabled) {
+
+                                                                                if (isDragDisabled) {
                                                                                     e.target.children[0].classList.add('c-blue')
                                                                                 }
                                                                             }} 
                                                                             onMouseLeave={e=> {
                                                                                 setIsDragDisabled(true)
-                                                                                /* if (isDragDisabled) {
+                                                                                if (!isDragDisabled) {
                                                                                     e.target.children[0].classList.remove('c-blue')
-                                                                                } */
+                                                                                }
                                                                             }} 
                                                                         >
-                                                                            <HandRaisedIcon width={20} className={' absolute no-click'} id={'#drag-' + link.id} /> 
+                                                                            <ArrowsPointingOutIcon width={20} className={' absolute no-click'} id={'drag-' + link.id} /> 
                                                                         </div>
                                                                     </div>  
                                                                 }
