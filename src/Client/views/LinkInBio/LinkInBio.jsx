@@ -28,8 +28,7 @@ export default function LinkInBio({userView = true}) {
     }, [user?.email])
 
 
-    const userLinksInBio = UserLinks
-    .filter(e=> e.linkInBio)
+    const userLinksInBio = UserLinks.filter(e=> e.linkInBio)
 
 
     const onDragEnd = (result) => {
@@ -43,27 +42,22 @@ export default function LinkInBio({userView = true}) {
             
     }
 
-
+    
     useEffect(e=> {
         const container = document.querySelector('.container')
         const array = container.childNodes
 
-        async function getValues() {
-           return Array.from(array).map((e,index)=> { return { id :e.classList.value, index } }) 
+        const value = Array.from(array).map((e,index)=> { return { id :e.classList.value, index } }) 
+
+      
+        for (const v in value) {
+            const { id, index } = value[v]
+
+            console.log(id, index);
+            db.collection('links').doc(id).update(index)
         }
-       
 
-        getValues().then(value=> {
-            value.map(e=> {
-                db.collection('links')
-                .doc(e.id)
-                .update({
-                    position: e.index
-                })
-            })
-        })
-
-    }, [userLinksInBio])
+    }, [UserLinks, userLinksInBio])
 
     
 
