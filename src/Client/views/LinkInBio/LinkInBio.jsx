@@ -1,23 +1,24 @@
 import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { Link } from 'react-router-dom'
-import { css } from '../../../css'
+import { Link, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
-import { db } from '../../../App/database/firebase'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
 import { fetchUser } from '../../lib/database/fetchUser'
-import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
 import fetchLinksInbio from '../../lib/database/fetchLinksInbio'
-import { DeleteLink } from '../Links/functions/Delete'
 import { deleteLinkFromBio } from './functions/delete'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
+import DragBtn from './components/DragBtn'
 
 
 
 export default function LinkInBio({userView = true}) {
+
+    const { userName } = useParams()
+
+    console.log(userName);
 
     const [{user}] = useStateValue()
 
@@ -33,11 +34,6 @@ export default function LinkInBio({userView = true}) {
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)
-
-    
-
-
-    
     
     
     return (
@@ -55,58 +51,13 @@ export default function LinkInBio({userView = true}) {
 
                 <div className=' gap-1rem'>  
                     
-                    <div className='grid gap-1rem p-1'>
-                        {
-                            userView 
-                            ? 
-                            (
-                                <div className='display justify-c'>
-                                    <div className='edit-image-link'>
-                                        <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
-                                        <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
-                                            <PencilSquareIcon width={16} />
-                                            <input 
-                                                type='file' 
-                                                hidden 
-                                                id='upload-img' 
-                                                onChange={fileInput => { uploadPhoto(fileInput, User.email) }}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                            : 
-                            (
-                                <div className='display justify-c'>
-                                    <img src={User.photoURL} width={80} height={80} className='border-r-100' />
-                                </div>
-                            )
-                        }
-                        <div className='grid gap-1rem'>
-                            <div className='grid gap'>
-                                <div className='display justify-c'>
-                                    <span className='f-s-25 f-w-400'>@{User.name}</span>
-                                </div>
-                                <div className='display justify-c'>
-                                    <span className='f-s-16 c-grey f-w-300 text-align-c'>{User.description}</span>
-                                </div>
-                            </div>
-                            <div className='display gap-1rem justify-c'>
-                                {
-                                UserLinks
-                                .filter(e=> e.linkInBio === true && e.asIcon === true)
-                                .map((link, i)=> {
-        
-                                        return (
-                                            <a href={'https://'+ link.shortLink} className='link' key={i} >
-                                                <img src={link.icon ?? getFavicon(link.url)} width={34} className='border-r-100' />
-                                            </a>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    <Head
+                        props={{
+                            userView, 
+                            User, 
+                            UserLinks 
+                        }} 
+                    />
                     
                     <Droppable droppableId={UserLinks.length && 'UserLinks'} >
                         {(provided) => (
@@ -183,23 +134,13 @@ export default function LinkInBio({userView = true}) {
 
                                                                         </div>
 
-                                                                        <div className='w-2 h-2 display justify-c btn-drag' 
-                                                                            onMouseEnter={e=> {
-                                                                                setIsDragDisabled(false)
-
-                                                                                if (isDragDisabled) {
-                                                                                    e.target.children[0].classList.add('c-blue')
-                                                                                }
-                                                                            }} 
-                                                                            onMouseLeave={e=> {
-                                                                                setIsDragDisabled(true)
-                                                                                if (!isDragDisabled) {
-                                                                                    e.target.children[0].classList.remove('c-blue')
-                                                                                }
-                                                                            }} 
-                                                                        >
-                                                                            <ArrowsPointingOutIcon width={20} className={' absolute no-click'} id={'drag-' + link.id} /> 
-                                                                        </div>
+                                                                        <DragBtn 
+                                                                            props={{
+                                                                                link, 
+                                                                                isDragDisabled, 
+                                                                                setIsDragDisabled 
+                                                                            }}
+                                                                        />
                                                                     </div>  
                                                                 }
                                                             </div>
@@ -238,3 +179,64 @@ export default function LinkInBio({userView = true}) {
 }
 
 
+
+function Head({props}) {
+
+    const { userView, User, UserLinks } = props
+
+    return (
+        <div className='grid gap-1rem p-1'>
+            {
+                userView 
+                ? 
+                (
+                    <div className='display justify-c'>
+                        <div className='edit-image-link'>
+                            <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
+                            <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
+                                <PencilSquareIcon width={16} />
+                                <input 
+                                    type='file' 
+                                    hidden 
+                                    id='upload-img' 
+                                    onChange={fileInput => { uploadPhoto(fileInput, User.email) }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )
+                : 
+                (
+                    <div className='display justify-c'>
+                        <img src={User.photoURL} width={80} height={80} className='border-r-100' />
+                    </div>
+                )
+            }
+            <div className='grid gap-1rem'>
+                <div className='grid gap'>
+                    <div className='display justify-c'>
+                        <span className='f-s-18'>@</span>
+                        <span className='f-s-25 f-w-400'>{User.name}</span>
+                    </div>
+                    <div className='display justify-c'>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User.description}</span>
+                    </div>
+                </div>
+                <div className='display gap-1rem justify-c'>
+                    {
+                    UserLinks
+                    .filter(e=> e.linkInBio === true && e.asIcon === true)
+                    .map((link, i)=> {
+
+                            return (
+                                <a href={'https://'+ link.shortLink} className='link' key={i} >
+                                    <img src={link.icon ?? getFavicon(link.url)} width={34} className='border-r-100' />
+                                </a>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}

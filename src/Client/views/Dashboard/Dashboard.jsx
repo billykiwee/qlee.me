@@ -35,11 +35,8 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-
-
     
-    if (!user) return <Login />
-    
+    if (!user) return <Login />    
     return (
 
         <Main>

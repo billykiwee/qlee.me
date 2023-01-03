@@ -95,7 +95,7 @@ export default function App() {
             element : <Payment />
         },
         linkinbio : {
-            path : '/link-in-bio',
+            path : '/@:userName',
             element : <LinkInBio />
         },
         edit_linkinbio : {
