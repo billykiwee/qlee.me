@@ -27,6 +27,10 @@ export default function LinkInBio({userView = true}) {
     }, [user?.email])
     
 
+    const linksInBio = UserLinks
+    .filter(e=> e.linkInBio)
+
+
 
 
     const onDragEnd = (result) => {
@@ -35,20 +39,19 @@ export default function LinkInBio({userView = true}) {
 
         if (!destination) return
 
-        const newItems = reorderList(UserLinks, source.index, destination.index)
+        const newItems = reorderList(linksInBio, source.index, destination.index)
         setUserLinks(newItems)
         
 
+        db.collection('links').doc(draggableId).update({
+            position: destination.index
+        })
 
         const container = document.querySelector('.container')
         const array = container.childNodes
-    
-        Array.from(array).map((e,position)=> {
 
-            db.collection('links').doc(e.classList.value).set({
-                position
-            })
-        }) 
+        for (let i = 0; i < array.length; i++) {
+        }
 
 
 
@@ -136,9 +139,7 @@ export default function LinkInBio({userView = true}) {
 
                             <div className='grid gap container' id={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                    UserLinks
-                                    .filter(e=> e.linkInBio)
-                                    .sort((a,b)=> a.position - b.position)
+                                   linksInBio
                                     .map((link, i)=> {
 
                                         return (
