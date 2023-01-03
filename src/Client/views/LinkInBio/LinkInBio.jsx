@@ -43,9 +43,9 @@ export default function LinkInBio({userView = true}) {
         setUserLinks(newItems)
         
 
-        db.collection('links').doc(draggableId).update({
+       /*  db.collection('links').doc(draggableId).update({
             position: destination.index
-        })
+        }) */
 
         const container = document.querySelector('.container')
         const array = container.childNodes
@@ -134,10 +134,10 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} >
+                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]} >
                         {(provided) => (
 
-                            <div className='grid gap container' id={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap container' id={UserLinks.map(e=> e.id)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
                                    linksInBio
                                     .map((link, i)=> {
