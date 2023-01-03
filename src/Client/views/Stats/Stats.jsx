@@ -13,7 +13,7 @@ import { fetchStats } from '../../lib/database/stats/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
-import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
 import { CopyClip } from '../Links/lib/CopyClip'
@@ -109,7 +109,7 @@ export default function Stats() {
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className='display justify-s-b '>
                                                 <div className='display gap'>
-                                                    <img src={'/images/eye-solid.svg'} width={18} />
+                                                    <EyeIcon  width={18} />
                                                     <span>Clics</span>
                                                 </div>
                                                 <div className='grid gap'>

@@ -124,7 +124,7 @@ export default function Edit() {
                                                         <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                                     </div>
                                                     <div className='display justify-c gap-04'>
-                                                        <EyeIcon width={22}/>
+                                                        <EyeIcon width={22} />
                                                         <span className='f-s-20'>{formatNumber(Link?.views)} clics</span>
                                                     </div>
                                                    

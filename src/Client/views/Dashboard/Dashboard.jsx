@@ -72,13 +72,13 @@ export default function Dashboard() {
                                         <div className='display w-100p'>
                                             <input type='text' id='name'
                                                 onChange={e=> setError('')} 
-                                                className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
+                                                className='div-input h-4 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
                                             />
                                         </div>
                                         <div className='display w-100p'>
                                             <input type='text' id='url'
                                                 onChange={e=> setError('')}
-                                                className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' 
+                                                className='div-input h-4 border-r-1 w-100p white' placeholder='Enter your website URL' 
                                             />
                                         </div>
                                     </div>
