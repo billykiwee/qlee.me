@@ -27,6 +27,7 @@ export function EditLinkInBio() {
         })
     }
 
+    console.log(UserLinks);
 
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
@@ -75,7 +76,7 @@ export function EditLinkInBio() {
                     backgroundColor   : background?.color
                 }} />
                 <div className='p-1'>
-                    <LinkInBio userView={!user} />
+                    <LinkInBio userView={user} links={UserLinks} />
                 </div>
             </div>
         </Main> 

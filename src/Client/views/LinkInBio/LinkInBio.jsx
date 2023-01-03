@@ -13,10 +13,11 @@ import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
+import { db } from '../../../App/database/firebase'
 
 
 
-export default function LinkInBio({userView, settings}) {
+export default function LinkInBio({userView, links}) {
 
     const { userName } = useParams()
 
@@ -26,8 +27,6 @@ export default function LinkInBio({userView, settings}) {
     const [User, setUser] = useState([])
     const [UserLinks, setUserLinks] = useState([])
     const [LinksBioSettings, setLinksBioSettings] = useState([])
-
-    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
 
     useEffect(e=> {
         
@@ -42,16 +41,21 @@ export default function LinkInBio({userView, settings}) {
                 fetchLinksInbio(setUserLinks, getUser?.email)
                 fetchSettings(setLinksBioSettings, getUser?.email)
             }
-
         })
         
     }, [user?.email, userName])
+
+
+    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
+
+    console.log(UserLinks);
+
     
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-    if (userName)
+   /*  if (userName)
     return (
         <>
 
@@ -202,7 +206,7 @@ export default function LinkInBio({userView, settings}) {
                 </Main>
             </DragDropContext>
         </>
-    )
+    ) */
 }
 
 
