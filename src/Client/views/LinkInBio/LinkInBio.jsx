@@ -30,8 +30,6 @@ export default function LinkInBio({userView = true}) {
 
     const userLinksInBio = UserLinks
     .filter(e=> e.linkInBio)
-    .sort((a,b)=> a.position - b.position)
-
 
 
     const onDragEnd = (result) => {
@@ -42,18 +40,23 @@ export default function LinkInBio({userView = true}) {
 
         const newItems = reorderList(userLinksInBio, source.index, destination.index)
         setUserLinks(newItems)
-
+            
         const container = document.querySelector('.container').childNodes
+        
+        container.forEach(e=> {
 
-        container.forEach((e, index)=> {
+            console.log( container.findIndex(x=> x.className === e.className));
 
             db.collection('links')
-            .doc(e.id)
+            .doc(e.className)
             .update({
-                position: index
+                position: container.findIndex(x=> x.className === e.className)
             })
         })
     }
+
+
+
     
 
     function reorderList(list, startIndex, endIndex) {
@@ -148,8 +151,8 @@ export default function LinkInBio({userView = true}) {
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
-                                                        className='draggable relative' 
-                                                        id={link.id}
+
+                                                        className={link.id}
                                                     >
                                                         {
                                                             !userView 
@@ -191,6 +194,7 @@ export default function LinkInBio({userView = true}) {
                                             </Draggable>
                                         )
                                     })
+                                    .sort((a,b)=> a.position - b.position)
                                 }
                             </div>
                         )}
