@@ -1,4 +1,4 @@
-import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
+import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link } from 'react-router-dom'
@@ -11,6 +11,9 @@ import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
 import fetchLinksInbio from '../../lib/database/fetchLinksInbio'
+import { DeleteLink } from '../Links/functions/Delete'
+import { deleteLinkFromBio } from './functions/delete'
+import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 
 
 
@@ -31,59 +34,15 @@ export default function LinkInBio({userView = true}) {
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)
 
-    const onDragStart = e => {
-        const { draggableId } = e
-
-        const childElement = document.querySelector('#drag-' + draggableId)
-        childElement.classList.add('c-blue')
-    }
-
-    const onDragEnd = (result) => {
-
-        const { source, destination } = result
-
-        if (!destination) return
-
-        const newItems = reorderList(UserLinks, source.index, destination.index)
-        setUserLinks(newItems)
-        
-        getPosition() 
-
-        document.querySelector('.btn-drag').children[0].classList.remove('c-blue')
-    }
+    
 
 
-    async function getPosition() {
-        const container = document.querySelector('.container')
-        const array     = container.childNodes
-        return array
-    }
-
-    getPosition()
-    .then(array=> {
-        Object.values(array).map((e, index)=> {
-
-            const id = e.classList.value
-
-            db.collection('links').doc(id).update({
-                position: index
-            })
-        })
-    })
-
-
-    function reorderList(list, startIndex, endIndex) {
-        const result = Array.from(list)
-        const [removed] = result.splice(startIndex, 1)
-        result.splice(endIndex, 0, removed)
-        return result
-    }
-
+    
     
     
     return (
 
-        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
+        <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
             <Main 
                 style={{
                     paddingTop  : '2rem',
@@ -186,7 +145,7 @@ export default function LinkInBio({userView = true}) {
                                                                 </div>
                                                             </a>
                                                             :
-                                                            <div className='display border white border-r-1 border-b p-1 hover click h-2' >
+                                                            <div className='display border white border-r-1 border-b p-1 click h-2' >
                                                                 <div className='display justify-c absolute'>
                                                                     <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                                                                 </div>
@@ -196,16 +155,30 @@ export default function LinkInBio({userView = true}) {
                                                                 {
                                                                     userView && 
                                                                     <div className='display gap'>
-                                                                        <div  className='display hover' onClick={e=> {
-                                                                            e.target.children[1].style.display = 'flex'
+                                                                        <div  className='display justify-c hover border-r-100 w-2 h-2' onClick={e=> {
+                                                                            const detail = document.querySelector('#details-'+ link.id)
 
-                                                                            console.log( e);
+                                                                            detail.style.display = detail.style.display == 'none' ? 'flex' : 'none'
+
                                                                         }}>
                                                                             <EllipsisHorizontalIcon width={28} /> 
 
-                                                                            <div className='grid' style={{display : 'none'}}>
-                                                                                <span>Modifier</span>
-                                                                                <span>Suprimmer de la bio</span>
+                                                                            <div className='grid p-04 white border border-r-04 disable absolute' id={'details-'+ link.id} style={{
+                                                                                right: 0,
+                                                                                top: '2rem',
+                                                                                position: 'absolute',
+                                                                                zIndex: 9,
+                                                                            }}>
+                                                                                <Link to={'/edit/'+ link.id}>
+                                                                                    <div className='display gap hover p-04 border-r-04'>
+                                                                                        <PencilSquareIcon width={12} />
+                                                                                        <small>Modifier</small>
+                                                                                    </div>
+                                                                                </Link>
+                                                                                <div className='display gap hover p-04 border-r-04' onClick={e=> deleteLinkFromBio(link.id) }>
+                                                                                    <TrashIcon width={12} className='c-red' />
+                                                                                    <small>Supprimer</small>
+                                                                                </div>
                                                                             </div>
 
                                                                         </div>
