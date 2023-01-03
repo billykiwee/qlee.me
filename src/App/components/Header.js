@@ -5,8 +5,8 @@ import { ProfilImg } from '../../Website/Home'
 import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
 import { ArrowDownCircleIcon, Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
-import { fetchLinks } from '../../Client/lib/database/fetchLinks'
-import { fetchUser } from '../../Client/lib/database/fetchUser'
+import { fetchLinks } from '../../Client/lib/database/links/fetchLinks'
+import { fetchUser } from '../../Client/lib/database/user/fetchUser'
 import { toggleTheme } from '../functions/setTheme'
 
 

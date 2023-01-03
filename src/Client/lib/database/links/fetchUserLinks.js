@@ -1,4 +1,4 @@
-import { db } from "../../../App/database/firebase"
+import { db } from "../../../../App/database/firebase"
 
 export const fetchUserLinks = async (setUserLinks, userEmail) => {
 

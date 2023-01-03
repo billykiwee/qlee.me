@@ -6,7 +6,7 @@ import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
-import { fetchUserLinks } from '../../../lib/database/fetchUserLinks'
+import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import { getHostName } from '../../../lib/getHostName'
 import { DeleteLink } from '../../Links/functions/Delete'
 

@@ -11,7 +11,7 @@ import Main from '../App/components/Main'
 import { BanknotesIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { formatNumber } from '../App/utils/formatNumber';
 import formatCurrency from '../App/utils/formatCurrency';
-import { fetchLinks } from '../Client/lib/database/fetchLinks';
+import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
 import ListLink from '../Client/views/Dashboard/components/ListLink';
 import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';

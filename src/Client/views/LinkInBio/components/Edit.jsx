@@ -6,7 +6,7 @@ import { SwitchInput } from '../../../../App/components/Switch'
 import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
-import { fetchUserLinks } from '../../../lib/database/fetchUserLinks'
+import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
 

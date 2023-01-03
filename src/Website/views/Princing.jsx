@@ -7,7 +7,7 @@ import Main from '../../App/components/Main'
 import '../../App/css/pricing.css'
 import { useStateValue } from '../../App/provider/StateProvider'
 import formatCurrency from '../../App/utils/formatCurrency'
-import { fetchUser } from '../../Client/lib/database/fetchUser'
+import { fetchUser } from '../../Client/lib/database/user/fetchUser'
 
 
 export default function Pricing() {

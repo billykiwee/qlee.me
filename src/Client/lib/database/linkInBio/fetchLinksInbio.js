@@ -1,5 +1,5 @@
 import React from 'react'
-import { db } from '../../../App/database/firebase';
+import { db } from '../../../../App/database/firebase';
 
 export default function fetchLinksInbio(setUserLinks, userEmail) {
 

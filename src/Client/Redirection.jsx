@@ -5,7 +5,7 @@ import { db } from '../App/database/firebase'
 import Messages from '../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import { getDevice } from './lib/getDevice'
-import { fetchLink } from './lib/database/fetchLink'
+import { fetchLink } from './lib/database/links/fetchLink'
 import { getAdress } from './lib/api/ipapi/getAdress'
 
 
