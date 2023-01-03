@@ -1,25 +1,19 @@
-import { serverTimestamp } from 'firebase/firestore';
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Main from '../../../App/components/Main';
-import Popup from '../../../App/components/Popup';
 import { useStateValue } from '../../../App/provider/StateProvider';
-import { db } from '../../../App/database/firebase';
-import { isValidUrl } from '../../../App/utils/isValidUrl';
-import UniqueID from '../../../App/utils/uniqueID';
 import ListLink from './components/ListLink';
-import { getHostName } from '../../lib/getHostName';
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
 import { fetchUser } from '../../lib/database/fetchUser';
-import { setSnackbar, SnackBar } from '../../../App/components/SnackBar';
+import { SnackBar } from '../../../App/components/SnackBar';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
-import { toggleTheme } from '../../../App/functions/setTheme';
+
 
 
 export default function Dashboard() {
@@ -37,11 +31,10 @@ export default function Dashboard() {
     }, [user?.email])
 
 
-    const [LinkURL, setLinkURL] = useState('')
-    const [NameLink, setNameLink] = useState('')
-
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
+
+
 
 
     
@@ -81,13 +74,13 @@ export default function Dashboard() {
                                     <div className='grid gap'>
                                         <div className='display w-100p'>
                                             <input type='text' id='name'
-                                                onChange={e=> {setNameLink(e.target.value); setError('')}} 
+                                                onChange={e=> setError('')} 
                                                 className='div-input h-3 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
                                             />
                                         </div>
                                         <div className='display w-100p'>
                                             <input type='text' id='url'
-                                                onChange={e=> {setLinkURL(e.target.value); setError('')}} 
+                                                onChange={e=> setError('')}
                                                 className='div-input h-3 border-r-1 w-100p white' placeholder='Enter your website URL' 
                                             />
                                         </div>

@@ -1,6 +1,5 @@
-import { BookmarkIcon, EyeIcon, LinkIco } from '@heroicons/react/24/outline'
 import { SwatchIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";

@@ -1,6 +1,5 @@
-import { ClipboardIcon } from '@heroicons/react/24/outline'
-import { BookmarkIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import React, { useState } from 'react'
+import { ChevronRightIcon } from '@heroicons/react/24/solid'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
@@ -50,6 +49,7 @@ export default function ListLink({links, User}) {
                     )
                 }).reverse()
             }
+            
             <div className='display justify-c m-t-1'>
                 {
                     links.length < isUserPremium(User).max_links 
