@@ -1,4 +1,4 @@
-import { ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
+import { ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link } from 'react-router-dom'
@@ -24,13 +24,15 @@ export default function LinkInBio({userView = true}) {
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
-
         fetchLinksInbio(setUserLinks, user?.email)
-
     }, [user?.email])
     
 
-    const onDragEnd = result => {
+
+    const [draggable, setDraggable] = useState(true)
+
+
+    const onDragEnd = (result) => {
 
         const { source, destination } = result
 
@@ -68,6 +70,7 @@ export default function LinkInBio({userView = true}) {
         return result
     }
 
+    
     
     return (
 
@@ -146,7 +149,7 @@ export default function LinkInBio({userView = true}) {
                                     .map((link, i)=> {
 
                                         return (
-                                            <Draggable draggableId={link.id} index={i} key={link.id}>
+                                            <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={draggable}>
                                                 {(provided)=> (
                                                     <div 
                                                         ref={provided.innerRef}
@@ -180,12 +183,17 @@ export default function LinkInBio({userView = true}) {
                                                                 </div>
                                                                 <div className='display justify-c w-100p'>
                                                                     <span className='f-s-16'>{link.name}</span>
-                                                                </div>{link.position +  '__' + link.id}
+                                                                </div>
                                                                 {
                                                                     userView && 
-                                                                    <Link to={'/edit/' + link.id} className='display'>
-                                                                        <EllipsisHorizontalIcon width={28} /> 
-                                                                    </Link>
+                                                                    <div className='display gap'>
+                                                                        <Link to={'/edit/' + link.id} className='display'>
+                                                                            <EllipsisHorizontalIcon width={28} /> 
+                                                                        </Link>
+                                                                        <div className='w-2 h-2 display justify-c' onMouseDown={e=> setDraggable(draggable ? false : true)}>
+                                                                            <HandRaisedIcon width={20} className='c-grey absolute' /> 
+                                                                        </div>
+                                                                    </div>  
                                                                 }
                                                             </div>
                                                         }
