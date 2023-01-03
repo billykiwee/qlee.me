@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Background({color, img}) {
+export default function Background({color, img, blur}) {
     return (
         <div style={{
             backgroundImage   : !color && `url(${img}`,
-            filter            : 'blur(5px)',
+            filter            : `blur(${blur}px)`,
             position          : 'fixed',
             left              : 0,
             right             : 0,

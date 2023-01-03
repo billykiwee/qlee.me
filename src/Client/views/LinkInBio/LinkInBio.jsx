@@ -27,6 +27,8 @@ export default function LinkInBio({userView = true}) {
     const [UserLinks, setUserLinks] = useState([])
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
+    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
+
     useEffect(e=> {
         fetchUser(setUser, user?.email)
         fetchLinksInbio(setUserLinks, user?.email)
@@ -35,15 +37,14 @@ export default function LinkInBio({userView = true}) {
     
 
 
-    const [isDragDisabled, setIsDragDisabled] = useState(true)
-    
-    
+    const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
     return (
         <>
             <Background 
-                color={LinksBioSettings?.background?.color} 
-                img={LinksBioSettings?.background?.img}
+                color = {background?.color}
+                img   = {background?.img?.url}
+                blur  = {background?.img?.blur}
             />
 
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
@@ -57,7 +58,9 @@ export default function LinkInBio({userView = true}) {
                     }}
                 >
 
-                    <div className=' gap-1rem'>  
+                    <div className=' gap-1rem' style={{
+                        fontFamily: `${fontFamily}`
+                    }}>  
                         
                         <Head
                             props={{
@@ -70,7 +73,7 @@ export default function LinkInBio({userView = true}) {
                         <Droppable droppableId={UserLinks.length && 'UserLinks'} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef}  >
+                                <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
                                     UserLinks
                                         .map((link, i)=> {
@@ -104,7 +107,12 @@ export default function LinkInBio({userView = true}) {
                                                                     </div>
                                                                 </a>
                                                                 :
-                                                                <div className='display border white border-r-1 border-b p-1 click h-2' >
+                                                                <div className='display border white border-r-1 border-b p-1 click h-2' 
+                                                                    style={{
+                                                                        background : blocks.color,
+                                                                        borderRadius: blocks.radius
+                                                                    }}
+                                                                >
                                                                     <div className='display justify-c absolute'>
                                                                         <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                                                                     </div>
