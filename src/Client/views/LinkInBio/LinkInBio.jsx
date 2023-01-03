@@ -16,7 +16,7 @@ import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 
 
 
-export default function LinkInBio({userView}) {
+export default function LinkInBio({userView, settings}) {
 
     const { userName } = useParams()
 
@@ -50,15 +50,18 @@ export default function LinkInBio({userView}) {
                         display     : 'grid',
                         alignContent: 'space-between',
                         alignItems  : 'end',
-                        height      : '100vh',
+                        height: '100%'
                     }}
                 >
-        
-                    <Background 
-                        color = {background?.color}
-                        img   = {background?.img?.url}
-                        blur  = {background?.img?.blur}
-                    />
+
+                    {
+                        userView &&
+                        <Background 
+                            color = {background?.color}
+                            img   = {background?.img?.url}
+                            blur  = {background?.img?.blur}
+                        />
+                    }
                     {
                         userView  === true &&  
                         <div className='display margin-auto fixed grey m-1 p-1 h-2 border-r-2 justify-c'>
@@ -84,7 +87,7 @@ export default function LinkInBio({userView}) {
 
                                 <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
-                                    UserLinks
+                                        UserLinks
                                         .map((link, i)=> {
 
                                             return (

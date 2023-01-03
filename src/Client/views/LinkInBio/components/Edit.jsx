@@ -6,6 +6,7 @@ import { SwitchInput } from '../../../../App/components/Switch'
 import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
+import fetchSettings from '../../../lib/database/linkInBio/fetchSetting'
 import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
@@ -26,6 +27,14 @@ export function EditLinkInBio() {
         })
     }
 
+
+    const [LinksBioSettings, setLinksBioSettings] = useState([])
+
+    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
+
+    useEffect(e=> {
+        fetchSettings(setLinksBioSettings, user?.email)
+    }, [user?.email])
  
 
     return (
@@ -53,8 +62,17 @@ export function EditLinkInBio() {
                     </div>
                 </div>
             </div>
-            <div>
-                <LinkInBio userView={!user} />
+            <div className='p-1'>
+                <div className='border-r-1 p-1' style={{
+                    backgroundImage   : !background?.color && `url(${background?.img?.url}`,
+                    filter            : `blur(${background?.blur}px)`,
+                    left              : 0,
+                    right             : 0,
+                    backgroundSize    : 'cover',
+                    backgroundPosition: 'center',
+                    backgroundColor: background?.color
+                }} />
+                    <LinkInBio userView={!user} />
             </div>
         </Main> 
     
