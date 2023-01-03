@@ -17,7 +17,7 @@ import { db } from '../../../App/database/firebase'
 
 
 
-export default function LinkInBio({userView, links}) {
+export default function LinkInBio({userView, settings}) {
 
     const { userName } = useParams()
 
@@ -28,34 +28,21 @@ export default function LinkInBio({userView, links}) {
     const [UserLinks, setUserLinks] = useState([])
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
-    useEffect(e=> {
-        
-        const query = db.collection('users')
-
-        query.onSnapshot(snapshot => {
-            const getUser = snapshot.docs.map(doc => doc.data())
-
-            if (getUser.name === userName) {
-
-                fetchUser(setUser, getUser?.email)
-                fetchLinksInbio(setUserLinks, getUser?.email)
-                fetchSettings(setLinksBioSettings, getUser?.email)
-            }
-        })
-        
-    }, [user?.email, userName])
-
-
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
 
-    console.log(UserLinks);
-
+    useEffect(e=> {
+        
+        fetchUser(setUser, user?.email)
+        fetchLinksInbio(setUserLinks, user?.email)
+        fetchSettings(setLinksBioSettings, user?.email)
+        
+    }, [user?.email, userName])
     
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-   /*  if (userName)
+    if (userName)
     return (
         <>
 
@@ -206,7 +193,7 @@ export default function LinkInBio({userView, links}) {
                 </Main>
             </DragDropContext>
         </>
-    ) */
+    )
 }
 
 
