@@ -16,7 +16,7 @@ import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 
 
 
-export default function LinkInBio({userView = true}) {
+export default function LinkInBio({userView}) {
 
     const { userName } = useParams()
 
@@ -42,21 +42,6 @@ export default function LinkInBio({userView = true}) {
     if (userName)
     return (
         <>
-            <Background 
-                color = {background?.color}
-                img   = {background?.img?.url}
-                blur  = {background?.img?.blur}
-            />
-
-            {
-                userView  === true &&  
-                <div className='display margin-auto fixed grey m-1 p-1 h-2 border-r-2 justify-c'>
-                    <div className='display justify-c gap  w-100p'>
-                        <UserCircleIcon width={30} className='c-black' />
-                        <span>Voir en tant que</span>
-                    </div>
-                </div>
-            }
 
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
                 <Main 
@@ -68,6 +53,21 @@ export default function LinkInBio({userView = true}) {
                         height      : '100vh',
                     }}
                 >
+        
+                    <Background 
+                        color = {background?.color}
+                        img   = {background?.img?.url}
+                        blur  = {background?.img?.blur}
+                    />
+                    {
+                        userView  === true &&  
+                        <div className='display margin-auto fixed grey m-1 p-1 h-2 border-r-2 justify-c'>
+                            <div className='display justify-c gap  w-100p'>
+                                <UserCircleIcon width={30} className='c-black' />
+                                <span>Voir en tant que</span>
+                            </div>
+                        </div>
+                    }
 
                     <div className=' gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
                         

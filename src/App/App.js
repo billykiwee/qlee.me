@@ -99,7 +99,7 @@ export default function App() {
             element : <LinkInBio />
         },
         edit_linkinbio : {
-            path : '/edit/link-in-bio',
+            path : '/edit/@:userName',
             element : <EditLinkInBio />
         },
         profil : {

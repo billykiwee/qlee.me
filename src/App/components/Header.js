@@ -69,7 +69,7 @@ export default function Header({visible}) {
     const location = useLocation()    
 
     function isLinkInBio() {
-        return location.pathname.includes('/@')
+        return location.pathname.includes('0/@')
     }
     
 

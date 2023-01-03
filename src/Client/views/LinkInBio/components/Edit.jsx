@@ -30,7 +30,7 @@ export function EditLinkInBio() {
 
     return (
     
-        <Main className='blocks'>
+        <Main className='blocks' >
             <div className='grid'>
                 <h2>Mon link in bio</h2>
 
@@ -54,7 +54,7 @@ export function EditLinkInBio() {
                 </div>
             </div>
             <div>
-                <LinkInBio userView />
+                <LinkInBio userView={!user} />
             </div>
         </Main> 
     
