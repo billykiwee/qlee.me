@@ -41,21 +41,18 @@ export default function LinkInBio({userView = true}) {
         const newItems = reorderList(userLinksInBio, source.index, destination.index)
         setUserLinks(newItems)
             
-        const container = document.querySelector('.container').childNodes
-        
-        container.forEach(e=> {
-
-            console.log( container.findIndex(x=> x.className === e.className));
-
-            db.collection('links')
-            .doc(e.className)
-            .update({
-                position: container.findIndex(x=> x.className === e.className)
-            })
-        })
     }
-
-
+    
+    
+    useEffect(e=> {
+        
+        const container = document.querySelector('.container')
+        const array = container.childNodes
+       
+        array.forEach((e,index)=> {
+            console.log(e.classList.value, index);
+        })
+    }, [UserLinks])
 
     
 
