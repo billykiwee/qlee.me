@@ -28,6 +28,11 @@ export default function LinkInBio({userView = true}) {
     }, [user?.email])
 
 
+    const userLinksInBio = UserLinks
+    .filter(e=> e.linkInBio)
+    .sort((a,b)=> a.position - b.position)
+
+
 
     const onDragEnd = (result) => {
 
@@ -35,14 +40,19 @@ export default function LinkInBio({userView = true}) {
 
         if (!destination) return
 
-        const newItems = reorderList(UserLinks, source.index, destination.index)
+        const newItems = reorderList(userLinksInBio, source.index, destination.index)
         setUserLinks(newItems)
 
-       /*  db.collection('links')
-        .doc(draggableId)
-        .update({
-            position: destination.index
-        }) */
+        const container = document.querySelector('.container').childNodes
+
+        container.forEach((e, index)=> {
+
+            db.collection('links')
+            .doc(e.id)
+            .update({
+                position: index
+            })
+        })
     }
     
 
@@ -123,14 +133,12 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.filter(e=> e.linkInBio)[0]} >
+                    <Droppable droppableId={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} >
                         {(provided) => (
 
-                            <div className='grid gap' id={UserLinks.filter(e=> e.linkInBio)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap container' id={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                    UserLinks
-                                    .filter(e=> e.linkInBio)
-                                    //.sort((a,b)=> e.position - b.position)
+                                    userLinksInBio
                                     .map((link, i)=> {
 
                                         return (
@@ -141,8 +149,8 @@ export default function LinkInBio({userView = true}) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                         className='draggable relative' 
+                                                        id={link.id}
                                                     >
-                                                        {link.content}
                                                         {
                                                             !userView 
                                                             ?
@@ -169,7 +177,7 @@ export default function LinkInBio({userView = true}) {
                                                                 </div>
                                                                 <div className='display justify-c w-100p'>
                                                                     <span className='f-s-16'>{link.name}</span>
-                                                                </div>
+                                                                </div>{link.position +  '__' + link.id}
                                                                 {
                                                                     userView && 
                                                                     <Link to={'/edit/' + link.id} className='display'>
