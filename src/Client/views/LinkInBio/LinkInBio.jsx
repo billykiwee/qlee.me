@@ -28,19 +28,23 @@ export default function LinkInBio({userView = true}) {
 
 
 
-    const [items, setItems] = useState([
-        { id: 'item-1', content: 'Item 1' },
-        { id: 'item-2', content: 'Item 2' },
-        { id: 'item-3', content: 'Item 3' },
-        { id: 'item-4', content: 'Item 4' },
-      ]);
-
 
     const onDragEnd = (result) => {
-        if (!result.destination) return
 
-        const newItems = reorderList(UserLinks, result.source.index, result.destination.index)
+        const { draggableId, source, destination } = result
+
+        console.log(result);
+
+        if (!destination) return
+
+        const newItems = reorderList(UserLinks, source.index, destination.index)
         setUserLinks(newItems)
+
+        db.collection('links')
+        .doc(draggableId)
+        .update({
+            position: source.index
+        })
     }
     
 
@@ -121,65 +125,69 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <div className='grid gap container' >
-                        {
-                            items
+                    <Droppable droppableId={UserLinks.map(e=> e.linkInBio)[0]} >
+                        {(provided) => (
 
-                            .map((link, i)=> {
-
-                                return (
-                                    <Draggable draggableId={link.id} key={link.id}>
-                                        {(provided)=> (
-                                            <div 
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                className='draggable relative' 
-                                                id={link.id}
-                                            >
-                                                {link.content}
-                                                {/* {
-                                                    !userView 
-                                                    ?
-                                                    <a href={'https://' + link.shortLink} className='relative'>
-                                                        <div className='display border white border-r-1 border-b p-1 hover click h-2' >
-                                                            <div className='display justify-c absolute'>
-                                                                <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
-                                                            </div>
-                                                            <div className='display justify-c w-100p'>
-                                                                <span className='f-s-16'>{link.name}</span>
-                                                            </div>
-                                                            {
-                                                                userView && 
-                                                                <div className='display'>
-                                                                        <EllipsisHorizontalIcon width={28} /> 
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    </a>
-                                                    :
-                                                    <div className='display border white border-r-1 border-b p-1 hover click h-2' >
-                                                        <div className='display justify-c absolute'>
-                                                            <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
-                                                        </div>
-                                                        <div className='display justify-c w-100p'>
-                                                            <span className='f-s-16'>{link.name}</span>
-                                                        </div>
+                            <div className='grid gap' id={UserLinks.map(e=> e.linkInBio)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
+                                {
+                                    UserLinks
+                                    .filter(e=> e.linkInBio)
+                                    .map((link, i)=> {
+                                        console.log(link.id);
+                                        return (
+                                            <Draggable draggableId={link.id} index={i} key={link.id}>
+                                                {(provided)=> (
+                                                    <div 
+                                                        ref={provided.innerRef}
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                        className='draggable relative' 
+                                                    >
+                                                        {link.content}
                                                         {
-                                                            userView && 
-                                                            <Link to={'/edit/' + link.id} className='display'>
-                                                                <EllipsisHorizontalIcon width={28} /> 
-                                                            </Link>
+                                                            !userView 
+                                                            ?
+                                                            <a href={'https://' + link.shortLink} className='relative'>
+                                                                <div className='display border white border-r-1 border-b p-1 hover click h-2' >
+                                                                    <div className='display justify-c absolute'>
+                                                                        <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
+                                                                    </div>
+                                                                    <div className='display justify-c w-100p'>
+                                                                        <span className='f-s-16'>{link.name}</span>
+                                                                    </div>
+                                                                    {
+                                                                        userView && 
+                                                                        <div className='display'>
+                                                                                <EllipsisHorizontalIcon width={28} /> 
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </a>
+                                                            :
+                                                            <div className='display border white border-r-1 border-b p-1 hover click h-2' >
+                                                                <div className='display justify-c absolute'>
+                                                                    <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
+                                                                </div>
+                                                                <div className='display justify-c w-100p'>
+                                                                    <span className='f-s-16'>{link.name}</span>
+                                                                </div>
+                                                                {
+                                                                    userView && 
+                                                                    <Link to={'/edit/' + link.id} className='display'>
+                                                                        <EllipsisHorizontalIcon width={28} /> 
+                                                                    </Link>
+                                                                }
+                                                            </div>
                                                         }
                                                     </div>
-                                                } */}
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                )
-                            })
-                        }
-                    </div>
+                                                )}
+                                            </Draggable>
+                                        )
+                                    })
+                                }
+                            </div>
+                        )}
+                    </Droppable>
                 </div>
                         
                 {
@@ -202,3 +210,5 @@ export default function LinkInBio({userView = true}) {
         </DragDropContext>
     )
 }
+
+
