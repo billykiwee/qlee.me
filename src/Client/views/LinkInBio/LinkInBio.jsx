@@ -34,7 +34,7 @@ export default function LinkInBio({userView = true}) {
 
     const onDragEnd = (result) => {
 
-        const { draggableId, source, destination } = result
+        const { source, destination } = result
 
         if (!destination) return
 
@@ -42,17 +42,28 @@ export default function LinkInBio({userView = true}) {
         setUserLinks(newItems)
             
     }
-    
-    
+
+
     useEffect(e=> {
-        
         const container = document.querySelector('.container')
         const array = container.childNodes
+
+        async function getValues() {
+           return Array.from(array).map((e,index)=> { return { id :e.classList.value, index } }) 
+        }
        
-        array.forEach((e,index)=> {
-            console.log(e.classList.value, index);
+
+        getValues().then(value=> {
+            value.map(e=> {
+                db.collection('links')
+                .doc(e.id)
+                .update({
+                    position: e.index
+                })
+            })
         })
-    }, [UserLinks])
+
+    }, [userLinksInBio])
 
     
 
