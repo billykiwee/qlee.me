@@ -112,7 +112,7 @@ export default function Dashboard() {
                                 </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small className='c-black'>{UserLinks.length} / {isUserPremium(User).max_links}</small>
+                                        <small style={{color: 'black'}}>{UserLinks.length} / {isUserPremium(User).max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
