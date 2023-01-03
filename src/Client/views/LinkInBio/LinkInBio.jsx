@@ -11,24 +11,26 @@ import fetchLinksInbio from '../../lib/database/linkInBio/fetchLinksInbio'
 import { deleteLinkFromBio } from './functions/delete'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
+import Background from './components/Background'
+import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 
 
 
-export default function LinkInBio({userView}) {
+export default function LinkInBio({userView = true}) {
 
     const { userName } = useParams()
 
-    console.log(userName);
 
     const [{user}] = useStateValue()
 
     const [User, setUser] = useState([])
     const [UserLinks, setUserLinks] = useState([])
-
+    const [LinksBioSettings, setLinksBioSettings] = useState([])
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
         fetchLinksInbio(setUserLinks, user?.email)
+        fetchSettings(setLinksBioSettings, user?.email)
     }, [user?.email])
     
 
@@ -36,19 +38,14 @@ export default function LinkInBio({userView}) {
     const [isDragDisabled, setIsDragDisabled] = useState(true)
     
     
+
     return (
         <>
-            <div style={{
-                backgroundImage   : 'url(https://images.unsplash.com/photo-1672739604434-2bd3e4f111fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80)',
-                filter            : 'blur(5px)',
-                position          : 'fixed',
-                left              : 0,
-                right             : 0,
-                width             : '100%',
-                height            : '100%',
-                backgroundSize    : 'cover',
-                backgroundPosition: 'center',
-            }}></div>
+            <Background 
+                color={LinksBioSettings?.background?.color} 
+                img={LinksBioSettings?.background?.img}
+            />
+
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
                 <Main 
                     style={{
@@ -183,16 +180,9 @@ function Footer({userView}) {
     return (
 
         <div className='display justify-c' style={{position: 'sticky', bottom: '1rem'}} >
-            <a href='/' className='display gap' id='link-qlee' 
-                onMouseEnter={e=> {
-                    document.querySelector('#link-qlee').children[1].style.display = 'flex'
-                }}
-                onMouseLeave={e=> {
-                    document.querySelector('#link-qlee').children[1].style.display = 'none'
-                }}
-            >
-                <img src='/favicon.ico' width={32} />
-                <span className='c-grey f-w-300 disable'>Made by Qlee.me</span>
+            <a href='/' className='display gap grey p-04 border-r-04' id='link-qlee'>
+                <img src='/favicon.ico' width={28} />
+                <small className='f-w-300'>Made by Qlee.me</small>
             </a>
         </div>
     )
