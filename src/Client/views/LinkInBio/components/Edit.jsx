@@ -39,7 +39,7 @@ export function EditLinkInBio() {
 
     return (
     
-        <Main className='blocks' >
+        <Main className='blocks gap-1rem' >
             <div className='grid'>
                 <h2>Mon link in bio</h2>
 
@@ -62,17 +62,21 @@ export function EditLinkInBio() {
                     </div>
                 </div>
             </div>
-            <div className='p-1'>
-                <div className='border-r-1 p-1' style={{
+            <div className='relative overflow-hidden border-r-1'>
+                <div className='' style={{
                     backgroundImage   : !background?.color && `url(${background?.img?.url}`,
-                    filter            : `blur(${background?.blur}px)`,
+                    filter            : `blur(${background?.img?.blur}px)`,
                     left              : 0,
                     right             : 0,
+                    height            : '100%',
+                    position: 'absolute',
                     backgroundSize    : 'cover',
                     backgroundPosition: 'center',
-                    backgroundColor: background?.color
+                    backgroundColor   : background?.color
                 }} />
+                <div className='p-1'>
                     <LinkInBio userView={!user} />
+                </div>
             </div>
         </Main> 
     

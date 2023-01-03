@@ -30,10 +30,22 @@ export default function LinkInBio({userView, settings}) {
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
 
     useEffect(e=> {
-        fetchUser(setUser, user?.email)
-        fetchLinksInbio(setUserLinks, user?.email)
-        fetchSettings(setLinksBioSettings, user?.email)
-    }, [user?.email])
+        
+        const query = db.collection('users')
+
+        query.onSnapshot(snapshot => {
+            const getUser = snapshot.docs.map(doc => doc.data())
+
+            if (getUser.name === userName) {
+
+                fetchUser(setUser, getUser?.email)
+                fetchLinksInbio(setUserLinks, getUser?.email)
+                fetchSettings(setLinksBioSettings, getUser?.email)
+            }
+
+        })
+        
+    }, [user?.email, userName])
     
 
 
