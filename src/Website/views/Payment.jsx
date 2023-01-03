@@ -324,7 +324,7 @@ export function Stripe({planID}) {
 
                             <div className='display justify-s-b f-w-500'>
                                 <span className='f-s-18'>Total :</span>
-                                <span className='f-s-20'>{formatCurrency(AmountOfCart)}</span>
+                                <span className='f-s-20'>{formatCurrency(plans[planID].price)}</span>
                             </div>
                         </div>
                     </div>
