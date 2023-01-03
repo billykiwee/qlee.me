@@ -79,6 +79,7 @@ export default function Pricing() {
                     {
                         Object.values(Plans)
                         .map(plan => {
+                            
 
                             const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
