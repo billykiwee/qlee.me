@@ -29,7 +29,7 @@ export default function LinkInBio({userView = true}) {
     
 
 
-    const [draggable, setDraggable] = useState(true)
+    const [isDragDisabled, setIsDragDisabled] = useState(true)
 
 
     const onDragEnd = (result) => {
@@ -43,6 +43,7 @@ export default function LinkInBio({userView = true}) {
         
         getPosition() 
     }
+
 
     async function getPosition() {
         const container = document.querySelector('.container')
@@ -149,7 +150,7 @@ export default function LinkInBio({userView = true}) {
                                     .map((link, i)=> {
 
                                         return (
-                                            <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={draggable}>
+                                            <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
                                                 {(provided)=> (
                                                     <div 
                                                         ref={provided.innerRef}
@@ -190,8 +191,22 @@ export default function LinkInBio({userView = true}) {
                                                                         <Link to={'/edit/' + link.id} className='display'>
                                                                             <EllipsisHorizontalIcon width={28} /> 
                                                                         </Link>
-                                                                        <div className='w-2 h-2 display justify-c' onMouseDown={e=> setDraggable(draggable ? false : true)}>
-                                                                            <HandRaisedIcon width={20} className='c-grey absolute' /> 
+                                                                        <div className='w-2 h-2 display justify-c' 
+                                                                            onMouseEnter={e=> {
+                                                                                setIsDragDisabled(false)
+                                                                                console.log(isDragDisabled);
+                                                                                if (!isDragDisabled) {
+                                                                                    e.target.children[0].classList.add('c-blue')
+                                                                                }
+                                                                            }} 
+                                                                            onMouseLeave={e=> {
+                                                                                setIsDragDisabled(true)
+                                                                                /* if (isDragDisabled) {
+                                                                                    e.target.children[0].classList.remove('c-blue')
+                                                                                } */
+                                                                            }} 
+                                                                        >
+                                                                            <HandRaisedIcon width={20} className={' absolute no-click'} id={'#drag-' + link.id} /> 
                                                                         </div>
                                                                     </div>  
                                                                 }
