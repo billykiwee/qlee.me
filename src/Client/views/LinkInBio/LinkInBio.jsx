@@ -10,6 +10,7 @@ import getFavicon from '../../../App/utils/getFavicon'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
+import e from 'cors'
 
 
 
@@ -28,23 +29,20 @@ export default function LinkInBio({userView = true}) {
 
 
 
-
     const onDragEnd = (result) => {
 
         const { draggableId, source, destination } = result
-
-        console.log(result);
 
         if (!destination) return
 
         const newItems = reorderList(UserLinks, source.index, destination.index)
         setUserLinks(newItems)
 
-        db.collection('links')
+       /*  db.collection('links')
         .doc(draggableId)
         .update({
-            position: source.index
-        })
+            position: destination.index
+        }) */
     }
     
 
@@ -125,15 +123,16 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.map(e=> e.linkInBio)[0]} >
+                    <Droppable droppableId={UserLinks.filter(e=> e.linkInBio)[0]} >
                         {(provided) => (
 
-                            <div className='grid gap' id={UserLinks.map(e=> e.linkInBio)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap' id={UserLinks.filter(e=> e.linkInBio)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
                                     UserLinks
                                     .filter(e=> e.linkInBio)
+                                    //.sort((a,b)=> e.position - b.position)
                                     .map((link, i)=> {
-                                        console.log(link.id);
+
                                         return (
                                             <Draggable draggableId={link.id} index={i} key={link.id}>
                                                 {(provided)=> (
