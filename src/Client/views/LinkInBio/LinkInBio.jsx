@@ -19,62 +19,40 @@ export default function LinkInBio({userView = true}) {
 
     const [User, setUser] = useState([])
     const [UserLinks, setUserLinks] = useState([])
-    
-    const [userLinksInBio, setUserLinksInBio] = useState([])
 
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
         fetchUserLinks(setUserLinks, user?.email)
     }, [user?.email])
-
-    useEffect(e=> {
-        setUserLinksInBio(UserLinks.filter(e=> e.linkInBio))
-
-    }, [UserLinks])
+    
 
 
-
-    const [reorder, setreorder] = useState(false)
 
     const onDragEnd = (result) => {
 
-        const { source, destination } = result
+        const { draggableId, source, destination } = result
 
         if (!destination) return
 
-        const newItems = reorderList(userLinksInBio, source.index, destination.index)
-        setUserLinksInBio(newItems)
+        const newItems = reorderList(UserLinks, source.index, destination.index)
+        setUserLinks(newItems)
         
 
-        console.log(result);
-    }
 
-
-    useEffect(e=> {
-
-        if (reorder) {
-            
-        }
         const container = document.querySelector('.container')
         const array = container.childNodes
     
-        const value = Array.from(array).map((e,index)=> { return { id :e.classList.value, index } }) 
-    
-      
-        for (const v in value) {
-            const { id, index } = value[v]
+        Array.from(array).map((e,position)=> {
 
-            console.log( id, index);
-    
-            db.collection('links').doc(id).update({index})
-        }
-    }, [reorder])
+            db.collection('links').doc(e.classList.value).set({
+                position
+            })
+        }) 
 
 
-    
 
-    
+    }
 
     function reorderList(list, startIndex, endIndex) {
         const result = Array.from(list)
@@ -158,7 +136,9 @@ export default function LinkInBio({userView = true}) {
 
                             <div className='grid gap container' id={UserLinks.filter(e=> e.linkInBio).map(e=> e)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                    userLinksInBio
+                                    UserLinks
+                                    .filter(e=> e.linkInBio)
+                                    .sort((a,b)=> a.position - b.position)
                                     .map((link, i)=> {
 
                                         return (
