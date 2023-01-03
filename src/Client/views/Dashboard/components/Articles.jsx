@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 
 
-export default function Articles({links}) {
+export default function Articles({links, user}) {
 
 
     const articles = [
@@ -23,7 +23,7 @@ export default function Articles({links}) {
             name: 'Link in bio',
             icon: <SwatchIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-            link: '/link-in-bio'
+            link: '/@' + user.name
         }
     ]
 
@@ -31,7 +31,9 @@ export default function Articles({links}) {
         <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
             
             <Swiper 
-                slidesPerView={1.66} 
+                slidesPerView={1.5} 
+                width={366}
+                height={366}
                 spaceBetween={18}
                 pagination={{
                     clickable: true,
@@ -48,7 +50,7 @@ export default function Articles({links}) {
                                     <div className='grid white border-r-1 border-b hover'>
                                         <div className='grid border-r-1 white p-1' 
                                             style={{
-                                                height: '144px',
+                                                height: '140px',
                                                 backgroundImage: `url(${article.img})`,
                                                 backgroundPosition: 'center', 
                                                 backgroundSize: 'cover',

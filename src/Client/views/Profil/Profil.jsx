@@ -123,14 +123,14 @@ export default function Profil() {
                         input: 'email',
                         User : User
                     }} />
-                    <div className='grid gap'>
+                   {/*  <div className='grid gap'>
                         <span>Mot de passe</span>
                         <input className='div-input white h-3' type='password' defaultValue='*******' />
                     </div>
                     <div className='grid gap'>
                         <span>Confirmer le mot de passe</span>
                         <input className='div-input white h-3' type='password' defaultValue='*******' />
-                    </div>
+                    </div> */}
                 </div>
 
             </div>

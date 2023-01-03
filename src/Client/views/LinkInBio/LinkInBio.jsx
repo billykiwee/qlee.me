@@ -14,7 +14,7 @@ import DragBtn from './components/DragBtn'
 
 
 
-export default function LinkInBio({userView = true}) {
+export default function LinkInBio({userView}) {
 
     const { userName } = useParams()
 

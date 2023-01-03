@@ -35,8 +35,9 @@ export default function Footer() {
     const location = useLocation()    
 
     function isLinkInBio() {
-        return location.pathname === '/link-in-bio'
+        return location.pathname.includes('/@')
     }
+    
     
 
     if (!isLinkInBio())

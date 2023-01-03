@@ -98,7 +98,7 @@ export default function Edit() {
                                 <div className='grid gap-1rem'>
 
                                     <div className='display align-top'>
-                                        <div className='grid gap-1rem justfy-s-b border-r-2 border border-b p-1 white w-100p'>
+                                        <div className='grid gap-1rem justfy-s-b border-r-1 border border-b p-1 white w-100p'>
                                             <div className='grid gap'>
                                                 <div className='display justify-c'>
                                                     <div className='edit-image-link'>
@@ -134,14 +134,6 @@ export default function Edit() {
                                                 <div className='grid gap'>
                                                     <Redirect to={'/stats/' + Link.id}>
                                                         <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                            <PencilSquareIcon width={16} />
-                                                            <span className='f-s-14'>Modifier</span>
-                                                        </button>
-                                                    </Redirect>
-                                                </div>
-                                                <div className='grid gap'>
-                                                    <Redirect to={'/stats/' + Link.id}>
-                                                        <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
                                                             <ChartPieIcon width={16} />
                                                             <span className='f-s-14'>Statistiques</span>
                                                         </button>
@@ -172,7 +164,7 @@ export default function Edit() {
                                         <div className='grid gap-1rem white shadow border-r-1 border p-2' >
                                             <div className='grid gap w-100p'>
                                                 <span>Modifier le nom</span>
-                                                <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
+                                                <input type='text' className='div-input h-3 border-r-1 w-100p grey' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
                                                 <small className='c-red' id='error-name'></small>
                                             </div>
 
@@ -189,7 +181,7 @@ export default function Edit() {
                                                         : { pointerEvents: 'visible',  opacity: 1 }
                                                     } 
                                                 >
-                                                    <input type='text' className='div-input h-3 border-r-1 w-100p white' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
+                                                    <input type='text' className='div-input h-3 border-r-1 w-100p grey' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
                                                 </div>
                                                 <small className='c-red' id='error-url'></small>
                                             </div>
@@ -200,7 +192,7 @@ export default function Edit() {
                                                     { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                                 </div>
                                                 <div 
-                                                    className='display div-input h-3 border border-r-1 w-100p white'
+                                                    className='display div-input h-3 border border-r-1 w-100p grey'
                                                     style={ 
                                                         isUserPremium(User).plan === 'FREE' 
                                                         ? { pointerEvents: 'none', opacity: 0.8} 

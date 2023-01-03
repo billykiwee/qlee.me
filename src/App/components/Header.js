@@ -95,7 +95,7 @@ export default function Header({visible}) {
                 <div className='display gap'>
                     <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                         <span className='display'>
-                            {theme === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-black' />}
+                            {theme === 'light' ? <MoonIcon width={20} className='c-black' /> : <SunIcon width={20} className='c-yellow' />}
                         </span>
                     </button>
                     <div className='display gap-04 border p-04 h-2 border-r-2'>
