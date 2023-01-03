@@ -24,7 +24,7 @@ export default function LinkInBio({userView = true}) {
     useEffect(e=> {
         fetchUser(setUser, user?.email)
             
-        db.collection('links').get().then(snapshot => {
+        db.collection('links').onSnapshot(snapshot => {
             const links = snapshot.docs.map(doc => doc.data());
             setUserLinks(links.filter(e=> e.user === user?.email && e.linkInBio).sort((a,b)=> a.position - b.position))
         })
@@ -32,38 +32,36 @@ export default function LinkInBio({userView = true}) {
     }, [user?.email])
     
 
-    console.log(UserLinks);
-    
-
-    const linksInBio = UserLinks
-    .filter(e=> e.linkInBio)
-
-
-
-
     const onDragEnd = (result) => {
 
         const { draggableId, source, destination } = result
 
         if (!destination) return
 
-        const newItems = reorderList(linksInBio, source.index, destination.index)
+        const newItems = reorderList(UserLinks, source.index, destination.index)
         setUserLinks(newItems)
         
+        getPosition() 
+    }
 
-        db.collection('links').doc(draggableId).update({
-            position: destination.index
-        })
-
+    async function getPosition() {
         const container = document.querySelector('.container')
         const array = container.childNodes
-
-        for (let i = 0; i < array.length; i++) {
-        }
-
-
-
+        return array
     }
+
+    getPosition()
+    .then(array=> {
+        Object.values(array).map((e, index)=> {
+
+            const id = e.classList.value
+
+            db.collection('links').doc(id).update({
+                position: index
+            })
+        })
+    })
+
 
     function reorderList(list, startIndex, endIndex) {
         const result = Array.from(list)
@@ -73,7 +71,6 @@ export default function LinkInBio({userView = true}) {
     }
 
     
-
     return (
 
         <DragDropContext onDragEnd={onDragEnd} >
@@ -142,12 +139,12 @@ export default function LinkInBio({userView = true}) {
                         </div>
                     </div>
                     
-                    <Droppable droppableId={UserLinks.map(e=> e.id)[0]} >
+                    <Droppable droppableId={UserLinks.length && 'UserLinks'} >
                         {(provided) => (
 
-                            <div className='grid gap container' id={UserLinks.map(e=> e.id)[0]} {...provided.droppableProps} ref={provided.innerRef}  >
+                            <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef}  >
                                 {
-                                   linksInBio
+                                   UserLinks
                                     .map((link, i)=> {
 
                                         return (
@@ -157,7 +154,6 @@ export default function LinkInBio({userView = true}) {
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
-
                                                         className={link.id}
                                                     >
                                                         {
