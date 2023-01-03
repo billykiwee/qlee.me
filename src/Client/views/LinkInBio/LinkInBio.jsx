@@ -10,6 +10,7 @@ import getFavicon from '../../../App/utils/getFavicon'
 import { fetchUser } from '../../lib/database/fetchUser'
 import { fetchUserLinks } from '../../lib/database/fetchUserLinks'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
+import fetchLinksInbio from '../../lib/database/fetchLinksInbio'
 
 
 
@@ -23,18 +24,15 @@ export default function LinkInBio({userView = true}) {
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
-            
-        db.collection('links').onSnapshot(snapshot => {
-            const links = snapshot.docs.map(doc => doc.data());
-            setUserLinks(links.filter(e=> e.user === user?.email && e.linkInBio).sort((a,b)=> a.position - b.position))
-        })
+
+        fetchLinksInbio(setUserLinks, user?.email)
 
     }, [user?.email])
     
 
-    const onDragEnd = (result) => {
+    const onDragEnd = result => {
 
-        const { draggableId, source, destination } = result
+        const { source, destination } = result
 
         if (!destination) return
 
@@ -46,7 +44,7 @@ export default function LinkInBio({userView = true}) {
 
     async function getPosition() {
         const container = document.querySelector('.container')
-        const array = container.childNodes
+        const array     = container.childNodes
         return array
     }
 
