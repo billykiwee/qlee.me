@@ -36,21 +36,10 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-
-    const beautifulNumber = (num, max, speed) => {
-
-        return setInterval(e=>{
-            return num <= max ? num++ : max
-        }, speed)
-    }
-
-
-    
     if (!user) return <Login />    
     return (
 
         <Main>
-            <h1 id='num'>{beautifulNumber(0, 100, 0)}</h1>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

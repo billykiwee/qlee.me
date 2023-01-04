@@ -28,7 +28,7 @@ export default function Articles({links, user}) {
     ]
 
     return (
-        <div className='display gap-1rem' style={{overflowX: 'scroll'}}>
+        <div className='display gap-1rem' >
             
             <Swiper 
                 slidesPerView={1.5} 
@@ -39,15 +39,16 @@ export default function Articles({links, user}) {
                     clickable: true,
                 }}
                 modules={[Pagination]}
+                style={{height: '322px'}}
             >
                 {
                     articles
                     .map(article=> {
                         return (
 
-                            <SwiperSlide className='m-b-2' key={article.name}>
+                            <SwiperSlide key={article.name}>
                                 <Link to={article.link} >
-                                    <div className='grid white border-r-1 border-b hover'>
+                                    <div className='grid white border-r-1 border-b hover' >
                                         <div className='grid border-r-1 white p-1' 
                                             style={{
                                                 height: '140px',

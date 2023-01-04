@@ -54,14 +54,9 @@ export default function Filter({props}) {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={(props.Search ? 'grey' : 'white') + ' h-3 p-1 border-r-2 border '} 
+                            className={(props.Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border '} 
                         >
-                            <div>
-                                <span className='f-s-14 display gap c-black'>
-                                    Rechercher
-                                    <MagnifyingGlassIcon width={20} className='c-grey' />
-                                </span>
-                            </div>
+                            <MagnifyingGlassIcon width={20} className='c-grey' />
                         </button>
                     </div>
 
@@ -106,7 +101,7 @@ export default function Filter({props}) {
                 {
                     props.Search &&
                     <div className='display'>
-                        <input className='div-input h-3 white border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
+                        <input className='div-input grey h-3 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
                     </div>
                 }
             </div>
