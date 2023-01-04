@@ -13,6 +13,7 @@ import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
+import formatCurrency from '../../../App/utils/formatCurrency';
 
 
 
@@ -35,34 +36,29 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    let num = 0
-    const max = 100
-    const div = document.querySelector('#num')
+    
+    const beautifulNumber = (num, max, speed) => {
 
+        let div = document.querySelector('#num')
 
-    window.onclick = e => {
-
-        if (Number(div.innerHTML) === max) {
-            let n = Number(div.innerHTML)
-            setInterval(e=>{
-                div.innerHTML = n <= 0 ? n-- : 0
-            }, 0)
+        let setSpeed = speed => {
+            console.log(speed.split('').includes('s'));
+            if (speed.split('').includes('s')) return speed.split('s')[0] * 1000
         }
-        else {
 
-            setInterval(e=>{
-                div.innerHTML = num <= max ? num++ : max
-            }, 0)
-        }
-        
+        return setInterval(e=>{
+            div.innerHTML = formatCurrency(num <= max ? num++ : max)
+
+        }, setSpeed(speed) )
     }
+
 
     
     if (!user) return <Login />    
     return (
 
         <Main>
-            <h1 id='num'></h1>
+            <h1 id='num'>{beautifulNumber(1, 100, '100s')}</h1>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

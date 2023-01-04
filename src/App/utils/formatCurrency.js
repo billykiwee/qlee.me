@@ -1,9 +1,15 @@
 
 
-export default function formatCurrency(data, currency) {
-    const formatC = new Intl.NumberFormat('fr-FR', { 
-        style: 'currency', currency: 'EUR' 
-    }).format(data)
+export default function formatCurrency(data, currency, digit) {
 
-    return formatC 
+    const formatC = new Intl.NumberFormat( 
+
+        currency ?? 'fr-FR', { 
+            style                : 'currency',
+            currency             : 'EUR',
+            minimumFractionDigits: digit ?? 2
+        }
+    ).format(data)
+
+    return formatC
 }
