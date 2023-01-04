@@ -9,6 +9,11 @@
     padding: 2rem;
 }
 
+.question {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 
 @media screen and (max-width: 980px) {
 
@@ -26,6 +31,9 @@
     .card-pricing {
         width:  322px;
         height: 100%;
+    }
+    .question {
+        grid-template-columns: unset;
     }
 }
 

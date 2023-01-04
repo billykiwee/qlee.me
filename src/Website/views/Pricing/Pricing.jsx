@@ -1,3 +1,4 @@
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
@@ -25,104 +26,100 @@ export default function Pricing() {
     return (
         <Main>
 
+
             <div className='grid gap-2rem'>
-                
-                <div className='grid gap-2rem'>
+                <div className='grid'>
                     <div className='grid'>
-                        <div className='grid'>
-                            <h1 className='m-0 text-align-c'>Pricing</h1>
-                            <h2 className='f-w-300 c-grey text-align-c f-s-25'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</h2>
-                        </div>
-                        {
-                            !user &&  
+                        <h1 className='m-0 text-align-c'>Pricing</h1>
+                        <h2 className='f-w-200 c-grey text-align-c f-s-25'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</h2>
+                    </div>
+                    {
+                        !user &&  
+                        <div className='display justify-c'>
                             <div className='display justify-c'>
-                                <div className='display justify-c'>
-                                    <button className='blue hover-blue h-4 p-1 border-r-1'>
-                                        <span className='f-s-18 c-black'>Créer un compte gratuitement</span>
-                                    </button>
-                                </div>
+                                <button className='blue hover-blue h-4 p-1 border-r-1'>
+                                    <span className='f-s-18 c-black'>Créer un compte gratuitement</span>
+                                </button>
                             </div>
-                        }
-                    </div>
-
-                    <div className='display justify-c gap-1rem align-top m-t-1 pricing-blocks'>
-                        {
-                            Object.values(Plans)
-                            .map(plan => {
-                                
-                                const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
-
-                                return (
-                                    <div className='grid' key={plan.plan}>
-                                        <div className='border-b border border-r-1 card-pricing white'  >
-
-                                            <div className='grid gap-2rem'>
-                                                <div className='display justify-s-b align-top'>
-                                                    <div className='grid align-l gap'>
-                                                        <span className='f-s-25 f-w-600'>{plan.plan}</span>
-                                                        <span className='opacity'>{plan.subtitle}</span>
-                                                    </div>
-                                                    {
-                                                        checkUserPlan &&
-                                                        <div>
-                                                            <img src='/images/check.svg' width={22} />
-                                                        </div>
-                                                    }
-                                                </div>
-                                
-                                                <div className='grid gap-1rem m-t-1'>
-                                                    <div className='display'>
-                                                        <div className='lh-1 display align-b'>
-                                                            <div className='display'>
-                                                                <span className='display f-w-600 f-s-3rem'>{plan.price}</span>
-                                                                <span className='f-s-20 m-l-04 opacity'>€ /mois</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                    
-                                                    <div className='display'>
-                                                        <a href={plan.payment} className='w-100p'>
-                                                            <button 
-                                                                onClick={e=> checkUserPlan ? history('/dashboard') : ''}
-                                                                className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
-                                                            > 
-                                                                <span style={{
-                                                                    color : plan.recommended ? 'black' : 'white'
-                                                                }}
-                                                                >{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div className='grid gap-04'>
-                                                {
-                                                    plan.benefits &&
-                                                    plan.benefits.map((benefit)=> {
-                                                        
-                                                        return (
-                                                            <div className='display gap hover border-r-1 h-2 click' key={benefit}>
-                                                                <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
-                                                                <p className='f-w-300'>{benefit[0]}</p>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-
-                                                </div>
-                                            </div>
-                            
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
 
-                <FAQ /> 
+                <div className='display justify-c gap-1rem align-top m-t-1 pricing-blocks'>
+                    {
+                        Object.values(Plans)
+                        .map(plan => {
+                            
+                            const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
+                            return (
+                                <div className='grid' key={plan.plan}>
+                                    <div className='border-b border border-r-1 card-pricing white'  >
+
+                                        <div className='grid gap-2rem'>
+                                            <div className='display justify-s-b align-top'>
+                                                <div className='grid align-l gap'>
+                                                    <span className='f-s-25 f-w-600'>{plan.plan}</span>
+                                                    <span className='opacity'>{plan.subtitle}</span>
+                                                </div>
+                                                {
+                                                    checkUserPlan &&
+                                                    <div>
+                                                        <img src='/images/check.svg' width={22} />
+                                                    </div>
+                                                }
+                                            </div>
+                            
+                                            <div className='grid gap-1rem m-t-1'>
+                                                <div className='display'>
+                                                    <div className='lh-1 display align-b'>
+                                                        <div className='display'>
+                                                            <span className='display f-w-600 f-s-3rem'>{plan.price}</span>
+                                                            <span className='f-s-20 m-l-04 opacity'>€ /mois</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div className='display'>
+                                                    <a href={plan.payment} className='w-100p'>
+                                                        <button 
+                                                            onClick={e=> checkUserPlan ? history('/dashboard') : ''}
+                                                            className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
+                                                        > 
+                                                            <span style={{
+                                                                color : plan.recommended ? 'black' : 'white'
+                                                            }}
+                                                            >{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className='grid gap-04'>
+                                            {
+                                                plan.benefits &&
+                                                plan.benefits.map((benefit)=> {
+                                                    
+                                                    return (
+                                                        <div className='display gap hover border-r-1 h-2 click' key={benefit}>
+                                                            <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
+                                                            <p className='f-w-300'>{benefit[0]}</p>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
 
+            <FAQ /> 
 
         </Main>
     )
@@ -151,21 +148,24 @@ function FAQ() {
         },
     ]
     return (
-        <div className='grid gap-3rem'>
-            <div className='display justify-c'>
+        <div className='grid gap-3rem m-t-4'>
+            <div className='display justify-c p-2'>
                 <div className='grid'>
-                    <span className='f-s-25 c-blue f-w-500 text-align-c'>FAQ</span>
-                    <h2 className='m-0'>Tu as une question ?</h2>
+                    <span className='f-s-25 c-blue f-w-800 text-align-c'>FAQ</span>
+                    <h1 className='m-0 text-align-c'>Toujours une question ?</h1>
                 </div>
             </div>
             
-            <div className='grid gap-1rem  align-top' style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            <div className='grid gap-1rem align-top question' >
                 {
-                    questions.map(question=> {
+                    questions.map((question, i)=> {
                         return (
-                            <div className='grid gap p-2' >
-                                <span className='f-s-20 f-w-500'>{question.q}</span>
-                                <span className='c-grey f-w-200'>{question.a}</span>
+                            <div className='grid gap-1rem p-1' key={i}>
+                                <div className='grid gap'>
+                                    <QuestionMarkCircleIcon className='c-grey w-3' />
+                                    <span className='f-s-25 f-w-500'>{question.q}</span>
+                                </div>
+                                <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
                             </div>
                         )
                     })
