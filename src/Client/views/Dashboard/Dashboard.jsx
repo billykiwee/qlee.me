@@ -35,21 +35,34 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    const [num, setnum] = useState(1)
+    let num = 0
     const max = 100
+    const div = document.querySelector('#num')
 
-    useEffect(e=> {
-       const lol = setInterval(e=> setnum(num + 1), 1000)
 
-        if (num === max) clearInterval(lol)
+    window.onclick = e => {
 
-    }, [])
+        if (Number(div.innerHTML) === max) {
+            let n = Number(div.innerHTML)
+            setInterval(e=>{
+                div.innerHTML = n <= 0 ? n-- : 0
+            }, 0)
+        }
+        else {
+
+            setInterval(e=>{
+                div.innerHTML = num <= max ? num++ : max
+            }, 0)
+        }
+        
+    }
+
     
     if (!user) return <Login />    
     return (
 
         <Main>
-            <h1>{num}</h1>
+            <h1 id='num'></h1>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>
