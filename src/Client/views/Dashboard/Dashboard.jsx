@@ -36,20 +36,12 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    
+
     const beautifulNumber = (num, max, speed) => {
 
-        let div = document.querySelector('#num')
-
-        let setSpeed = speed => {
-            console.log(speed.split('').includes('s'));
-            if (speed.split('').includes('s')) return speed.split('s')[0] * 1000
-        }
-
         return setInterval(e=>{
-            div.innerHTML = formatCurrency(num <= max ? num++ : max)
-
-        }, setSpeed(speed) )
+            return num <= max ? num++ : max
+        }, speed)
     }
 
 
@@ -58,7 +50,7 @@ export default function Dashboard() {
     return (
 
         <Main>
-            <h1 id='num'>{beautifulNumber(1, 100, '100s')}</h1>
+            <h1 id='num'>{beautifulNumber(0, 100, 0)}</h1>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>

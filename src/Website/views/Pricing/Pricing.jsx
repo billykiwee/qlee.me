@@ -1,13 +1,13 @@
-import { ArrowsRightLeftIcon, ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isUserPremium } from '../../Admin/settings/isPremium'
-import { plans } from '../../Admin/settings/plans'
-import Main from '../../App/components/Main'
-import '../../App/css/pricing.css'
-import { useStateValue } from '../../App/provider/StateProvider'
-import formatCurrency from '../../App/utils/formatCurrency'
-import { fetchUser } from '../../Client/lib/database/user/fetchUser'
+import { isUserPremium } from '../../../Admin/settings/isPremium'
+import { plans } from '../../../Admin/settings/plans'
+import Main from '../../../App/components/Main'
+import '../../../App/css/pricing.css'
+import { useStateValue } from '../../../App/provider/StateProvider'
+import formatCurrency from '../../../App/utils/formatCurrency'
+import { fetchUser } from '../../../Client/lib/database/user/fetchUser'
+import { Plans } from './data/plans'
 
 
 export default function Pricing() {
@@ -22,65 +22,28 @@ export default function Pricing() {
         fetchUser(setUser, user?.email)
     }, [user])
 
-
-    const Plans = {
-        Free : {
-            plan    : 'Free 💸',
-            subtitle: 'Pour tous',
-            price   : 0,
-            benefits: [
-                ['10 liens', <ArrowsRightLeftIcon width={18} />],
-                ['Qr code', <QrCodeIcon width={18} />],
-                ['Lien personalisable', <Cog6ToothIcon width={18} />],
-            ],
-        },
-        Pro : {
-            plan    : 'Pro 👨🏻‍💻',
-            subtitle: 'Pour aller plus loin',
-            price   : plans.PRO.price,
-            benefits: [
-                ['100 liens', <ArrowsRightLeftIcon width={18} />],
-                ['Qr code', <QrCodeIcon width={18} />],
-                ['Lien personalisable', <Cog6ToothIcon width={18} />],
-                ['Statistiques', <ChartPieIcon width={18} />]
-            ],
-            recommended: true,
-            payment    : '/payment/pro',
-        },
-        Entrprise : {
-            plan    : 'Entreprise 🚀',
-            subtitle: 'Booster votre présence',
-            price   : plans.ENTREPRISE.price,
-            benefits: [
-                ['1000 liens', <ArrowsRightLeftIcon width={18} />],
-                ['Qr code', <QrCodeIcon width={18} />],
-                ['Link in bio', <SwatchIcon width={18} />],
-                ['Lien personalisable', <Cog6ToothIcon width={18} />],
-                ['Statistiques', <ChartPieIcon width={18} />]
-            ],
-            payment    : '/payment/entreprise',
-        }
-    }
-
-
     return (
         <Main>
 
             <div className='grid gap-2rem'>
                 
-                <div className='display wrap justify-s-b'>
-                    <div className='grid gap'>
-                        <h1 className='m-0'>Pricing</h1>
-                        <span className='f-w-100'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</span>
+                <div className='grid'>
+                    <div className='grid'>
+                        <h1 className='m-0 text-align-c'>Pricing</h1>
+                        <h2 className='f-w-300 c-grey text-align-c f-s-25'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</h2>
+                    </div>
+                    <div className='display justify-c' style={{width: '22%'}}>
+                        <button className='blue hover-blue h-3 p-1 border-r-1'>
+                            <span className='f-s-20'>Créer un compte</span>
+                        </button>
                     </div>
                 </div>
 
-                <div className='display gap-1rem align-top m-t-1 pricing-blocks'>
+                <div className='display justify-c gap-1rem align-top m-t-1 pricing-blocks'>
                     {
                         Object.values(Plans)
                         .map(plan => {
                             
-
                             const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
                             return (
