@@ -35,11 +35,21 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
+    const [num, setnum] = useState(1)
+    const max = 100
+
+    useEffect(e=> {
+       const lol = setInterval(e=> setnum(num + 1), 1000)
+
+        if (num === max) clearInterval(lol)
+
+    }, [])
     
     if (!user) return <Login />    
     return (
 
         <Main>
+            <h1>{num}</h1>
             <div className='grid gap-3rem blocks' >
 
                 <div className='grid gap'>
