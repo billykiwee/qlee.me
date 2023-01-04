@@ -88,8 +88,8 @@ export default function List({props}) {
                                         </div>
                                     </div>
                                 </Link>
-                                <div className='display justify-c p-04'>
-                                    <div className='display w-2 h-2  hover border-r-100'
+                                <div className='display p-04'>
+                                    <div className='display w-2 h-2 justify-c click  hover border-r-100'
                                         onClick={e=> 
                                             DeleteLink({
                                                 link       : link,
