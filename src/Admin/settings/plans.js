@@ -3,7 +3,7 @@ export const plans = {
         max_links: 10
     },
     PRO : {
-        price    : 4.90,
+        price    : 4.9,
         max_links: 300,
         features : {
             statistics    : true,
@@ -12,7 +12,7 @@ export const plans = {
         }
     },
     ENTREPRISE: {
-        price    : 12.90,
+        price    : 12.9,
         max_links: 1000,
         features : {
             statistics    : true,
