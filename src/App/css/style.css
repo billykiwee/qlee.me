@@ -712,11 +712,8 @@ padding: 0.4rem;
     background-color: var(--red-dark);
 }
 
-
-
-
 .hover:hover {
-    filter: brightness(0.8);
+    background-color: var(--grey);
 }
 
 
