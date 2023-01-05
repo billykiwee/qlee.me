@@ -14,6 +14,7 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import formatCurrency from '../../../App/utils/formatCurrency';
+import { css } from '../../../css';
 
 
 
@@ -36,11 +37,41 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
+
+
+   /*  useEffect(e=> {
+
+        const all = document.querySelectorAll('*')
+
+        Object.values(all).map(elements=>{
+            
+            const getClass = elements.classList.value.split(' ')
+
+            getClass.map(keys=> {
+
+                const getVal = keys.split('-')[1]
+
+                for (const v in css) {
+
+                    if (keys.includes(css[v].key)) {
+
+                        elements.style = `${css[v].properties}: ${getVal}px;`
+
+                        document.write(`.${css[v].key}${getVal} { ${css[v].properties}: ${getVal}rem; }`);
+                    }
+                }
+                
+            })
+        })
+
+    }) */
+
     if (!user) return <Login />    
     return (
 
         <Main>
-            <div className='grid gap-3rem blocks' >
+            <div className='grid gap-3rem blocks w-100' >
+
 
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
@@ -147,3 +178,24 @@ export default function Dashboard() {
 }
 
 
+
+
+
+
+const CasinoNumberIncreaser = () => {
+    const [number, setNumber] = useState(0);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (number >= 100) {
+          clearInterval(interval)
+          return
+        }
+        setNumber(number + 1)
+      }, 50)
+  
+      return () => clearInterval(interval)
+    }, [number])
+  
+    return <span>{number}</span>
+}

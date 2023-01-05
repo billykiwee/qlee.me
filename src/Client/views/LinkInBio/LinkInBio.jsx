@@ -54,12 +54,12 @@ export default function LinkInBio({userView, settings}) {
                         display     : 'grid',
                         alignContent: 'space-between',
                         alignItems  : 'end',
-                        height: '100%'
+                        height      : '100%'
                     }}
                 >
 
                     {
-                        userView &&
+                        !userView &&
                         <Background 
                             color = {background?.color}
                             img   = {background?.img?.url}
@@ -108,16 +108,19 @@ export default function LinkInBio({userView, settings}) {
                                                                 ?
                                                                 <a href={'https://' + link.shortLink} className='relative'>
                                                                     <div className='display border white border-r-1 border-b p-1 hover click h-2' >
-                                                                        <div className='display justify-c absolute'>
-                                                                            <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
-                                                                        </div>
+                                                                        {
+                                                                            blocks.img &&
+                                                                            <div className='display justify-c absolute'>
+                                                                                <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
+                                                                            </div>
+                                                                        }
                                                                         <div className='display justify-c w-100p'>
                                                                             <span className='f-s-16'>{link.name}</span>
                                                                         </div>
                                                                         {
                                                                             userView && 
                                                                             <div className='display'>
-                                                                                    <EllipsisHorizontalIcon width={28} /> 
+                                                                                <EllipsisHorizontalIcon width={28} /> 
                                                                             </div>
                                                                         }
                                                                     </div>
@@ -129,9 +132,12 @@ export default function LinkInBio({userView, settings}) {
                                                                         borderRadius: blocks.radius
                                                                     }}
                                                                 >
-                                                                    <div className='display justify-c absolute'>
-                                                                        <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
-                                                                    </div>
+                                                                    {
+                                                                        blocks.img &&
+                                                                        <div className='display justify-c absolute'>
+                                                                            <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
+                                                                        </div>
+                                                                    }
                                                                     <div className='display justify-c w-100p'>
                                                                         <span className='f-s-16'>{link.name}</span>
                                                                     </div>
