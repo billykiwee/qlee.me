@@ -76,7 +76,7 @@ export default function LinkInBio({userView, settings}) {
                         </div>
                     }
 
-                    <div className=' gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
+                    <div className='grid gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
                         
                         <Head
                             props={{
@@ -92,6 +92,7 @@ export default function LinkInBio({userView, settings}) {
                                 <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
                                         UserLinks
+                                        .filter(e=>!e.linkAsIcon)
                                         .map((link, i)=> {
 
                                             return (
