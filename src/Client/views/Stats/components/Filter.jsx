@@ -54,7 +54,7 @@ export default function Filter({props}) {
                                 props.setFilter(false)
                                 props.setSearch(props.Search ? false : true)
                             }}
-                            className={(props.Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border '} 
+                            className={(props.Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border'} 
                         >
                             <MagnifyingGlassIcon width={20} className='c-grey' />
                         </button>
