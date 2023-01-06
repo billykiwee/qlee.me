@@ -15,7 +15,7 @@ import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { db } from '../../../App/database/firebase'
 import GetWidth from '../../../App/utils/GetWidth'
-
+import FetchUser from '../../lib/database/user/User'
 
 
 
@@ -46,7 +46,10 @@ export default function LinkInBio({userView, settings}) {
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
 
-    console.log(GetWidth());
+
+    console.log(FetchUser(user?.email));
+
+    
 
    // if (UserLinks.some(e=> e.user === User.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User.LinkInBioID
     return (
