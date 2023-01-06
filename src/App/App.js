@@ -21,6 +21,7 @@ import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
+import { useFetchUser } from '../Client/data/Users/users'
 
 
 
@@ -114,6 +115,13 @@ export default function App() {
     }
 
 
+    const User = useFetchUser(user)
+
+    Object.values(router).forEach(route => {
+        route.element = React.cloneElement(route.element, {
+            User
+        })
+    })
 
     return (
         <BrowserRouter>
@@ -127,7 +135,9 @@ export default function App() {
                                     path={route.path} 
                                     exact 
                                     element={
-                                        <Main>{route.element}</Main>
+                                        <Main>
+                                            {route.element }
+                                        </Main>
                                     } 
                                     key={i}
                                 />

@@ -39,7 +39,7 @@ export function EditLinkInBio() {
 
     return (
     
-        <div className='display align-top blocks gap-1rem' >
+        <div className='grid blocks gap-1rem' >
             <div className='grid'>
                 <h2>Mon link in bio</h2>
 
