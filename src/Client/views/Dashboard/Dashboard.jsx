@@ -13,6 +13,7 @@ import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
+import { useFetchUser, useFetchUserLinks } from '../../data/Users/users';
 
 
 
@@ -20,15 +21,9 @@ export default function Dashboard() {
 
     const [{user}] = useStateValue()
 
-    const [User, setUser] = useState([])
-    const [UserLinks, setUserLinks] = useState([])
-
-    useEffect(() => {
-
-        fetchUserLinks(setUserLinks, user?.email)
-        fetchUser(setUser, user?.email)
-
-    }, [user?.email])
+    const User = useFetchUser(user)
+    debugger
+    const UserLinks = useFetchUserLinks(user)
 
 
     const [Msg, setMsg] = useState([])
@@ -48,7 +43,7 @@ export default function Dashboard() {
                     <div className='grid gap-2rem'>
 
                         <div className='grid' >
-                            <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
+                            <h2 className='m-t-0 m-b-1'>Bonjour, {User?.name}</h2>
                             <Articles links={UserLinks} user={User} />
                         </div>
 

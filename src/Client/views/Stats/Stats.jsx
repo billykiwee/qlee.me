@@ -17,6 +17,7 @@ import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
 
 import { useFetchStats } from '../../data/Stats/stats'
+import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
 
 
 
@@ -28,15 +29,10 @@ export default function Stats() {
 
     const [{user}] = useStateValue()
 
-    const [UserLinks, setUserLinks] = useState([])
-    const [User, setUser] = useState([])
-
-    useEffect(e=> {
-        fetchUserLinks(setUserLinks, user?.email)
-        fetchUser(setUser, user?.email)
-    }, [user]) 
-      
-
+    const User = useFetchUser(user)
+    const UserLinks = useFetchUserLinks(user)
+    const LinkStat = useFetchStats(LinkID)
+    
 
     const TopLink = UserLinks.map(topLink=> topLink)
     .sort((a, b) => b.views - a.views)
@@ -44,7 +40,6 @@ export default function Stats() {
         
 
 
-    const LinkStat = useFetchStats(LinkID)
     const [ShowStat, setShowStat] = useState(null)
     
     const redirectIfNoLinkID = e => setShowStat(LinkID ?? TopLink?.id)

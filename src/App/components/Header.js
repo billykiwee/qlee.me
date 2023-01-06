@@ -99,8 +99,8 @@ export default function Header({visible}) {
                                         <rect x="37" y="30" width="144" height="100" rx="40" fill="#0B71F1"/>
                                         </g>
                                         <defs>
-                                        <filter id="filter0_i_651_85" x="37" y="70" width="144" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                        <filter id="filter0_i_651_85" x="37" y="70" width="144" height="100" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                         <feOffset dy="-16"/>
@@ -108,8 +108,8 @@ export default function Header({visible}) {
                                         <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
                                         <feBlend mode="normal" in2="shape" result="effect1_innerShadow_651_85"/>
                                         </filter>
-                                        <filter id="filter1_i_651_85" x="37" y="30" width="144" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                        <filter id="filter1_i_651_85" x="37" y="30" width="144" height="100" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                         <feOffset dy="-16"/>

@@ -311,7 +311,7 @@ export default function Edit() {
 
 export function GoToPricing({children}) {
     return (
-        <Redirect to='/pricing' className='display justify-c yellow border-r-100 hover-yellow p-04' style={{width : !children ? '1rem' : ''}} >
+        <Redirect to='/pricing' className='display justify-c yellow border-r-100 hover-yellow p-04 h-1 w-1 hover-yellow' style={{width : !children ? '1rem' : ''}} >
             <div className='display justify-c gap'>
                 {
                     children
