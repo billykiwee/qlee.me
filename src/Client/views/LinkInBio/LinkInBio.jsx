@@ -46,6 +46,7 @@ export default function LinkInBio({userView, settings}) {
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
 
+    const lol = useFetchUser(user)
     
 
    // if (UserLinks.some(e=> e.user === User.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User.LinkInBioID
