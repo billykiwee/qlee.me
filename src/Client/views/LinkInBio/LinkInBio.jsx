@@ -45,10 +45,13 @@ export default function LinkInBio({userView, settings}) {
     }
 
 
-    const [isDragDisabled, setIsDragDisabled] = useState(true)    
+    const [isDragDisabled, setIsDragDisabled] = useState(true)  
+    
+    
+    const ifUserIsOwner = UserLinks?.some(e=> e.user === User?.email) && userView?.email !== User?.email
 
 
-    if (UserLinks?.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
+    if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     if (user, UserLinks, LinksBioSettings)
     return (
         <>
@@ -56,7 +59,6 @@ export default function LinkInBio({userView, settings}) {
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
-                        paddingTop  : '2rem',
                         display     : 'grid',
                         alignContent: 'space-between',
                         alignItems  : 'end',
@@ -193,7 +195,11 @@ export default function LinkInBio({userView, settings}) {
                         </Droppable>
                     </div>
                             
-                    <Footer userView />
+
+                    {
+                        ifUserIsOwner &&
+                        <Footer />
+                    }
 
                 </div>
             </DragDropContext>
@@ -204,7 +210,7 @@ export default function LinkInBio({userView, settings}) {
 
 
 function Footer({userView}) {
-    if (userView)
+    if (!userView)
     return (
 
         <div className='display justify-c' style={{position: 'sticky', bottom: '1rem'}} >

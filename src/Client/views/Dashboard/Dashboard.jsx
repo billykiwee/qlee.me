@@ -21,14 +21,17 @@ export default function Dashboard({ props }) {
 
     const [{user}] = useStateValue()
 
-    console.log(props);
+    const User = useFetchUser(user)
+    const UserLinks = useFetchUserLinks(user)
+
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
 
 
-  /*   if (!user) return <Login />    
+
+    if (!user) return <Login />    
     if (User && UserLinks)
     return (
 
@@ -137,7 +140,7 @@ export default function Dashboard({ props }) {
 
             <SnackBar content={Msg} setMsg={setMsg} />
         </>
-    ) */
+    )
 }
 
 
