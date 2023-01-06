@@ -62,8 +62,8 @@ export default function Edit() {
 
 
     const Link = UserLinks
-        .filter(data=> data.user === user?.email && data.id === LinkID)
-        .map(link=> link)[0]
+    .filter(data=> data.user === user?.email && data.id === LinkID)
+    .map(link=> link)[0]
 
 
     

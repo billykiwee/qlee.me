@@ -13,8 +13,6 @@ import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
-import formatCurrency from '../../../App/utils/formatCurrency';
-import { css } from '../../../css';
 
 
 
@@ -38,33 +36,6 @@ export default function Dashboard() {
 
 
 
-
-   /*  useEffect(e=> {
-
-        const all = document.querySelectorAll('*')
-
-        Object.values(all).map(elements=>{
-            
-            const getClass = elements.classList.value.split(' ')
-
-            getClass.map(keys=> {
-
-                const getVal = keys.split('-')[1]
-
-                for (const v in css) {
-
-                    if (keys.includes(css[v].key)) {
-
-                        elements.style = `${css[v].properties}: ${getVal}px;`
-
-                        document.write(`.${css[v].key}${getVal} { ${css[v].properties}: ${getVal}rem; }`);
-                    }
-                }
-                
-            })
-        })
-
-    }) */
 
     if (!user) return <Login />    
     return (

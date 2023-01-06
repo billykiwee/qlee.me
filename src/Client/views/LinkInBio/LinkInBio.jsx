@@ -14,10 +14,11 @@ import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { db } from '../../../App/database/firebase'
+import { EditLinkInBio } from './components/Edit'
 
 
 
-export default function LinkInBio({userView = true, settings}) {
+export default function LinkInBio({userView, settings}) {
 
     const { userName } = useParams()
 
@@ -43,7 +44,9 @@ export default function LinkInBio({userView = true, settings}) {
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-    if (userName)
+
+
+    if (UserLinks.some(e=> e.user === User.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User.LinkInBioID
     return (
         <>
 
@@ -66,15 +69,6 @@ export default function LinkInBio({userView = true, settings}) {
                             blur  = {background?.img?.blur}
                         />
                     }
-                    {
-                        userView  === true &&  
-                        <div className='display margin-auto fixed grey m-1 p-1 h-2 border-r-2 justify-c'>
-                            <div className='display justify-c gap  w-100p'>
-                                <UserCircleIcon width={30} className='c-black' />
-                                <span>Voir en tant que</span>
-                            </div>
-                        </div>
-                    }
 
                     <div className='grid gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
                         
@@ -92,7 +86,7 @@ export default function LinkInBio({userView = true, settings}) {
                                 <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
                                         UserLinks
-                                        .filter(e=>!e.linkAsIcon)
+                                        .filter(e=> !e.asIcon)
                                         .map((link, i)=> {
 
                                             return (
