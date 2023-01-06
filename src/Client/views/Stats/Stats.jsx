@@ -67,7 +67,7 @@ export default function Stats() {
 
 
     return (
-        <Main>
+        <>
 
             <Popup content={Msg} />
 
@@ -180,7 +180,7 @@ export default function Stats() {
                 </div>
 
             </div>
-        </Main>
+        </>
     )
 }
 

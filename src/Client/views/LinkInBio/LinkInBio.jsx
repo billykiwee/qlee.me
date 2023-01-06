@@ -13,6 +13,7 @@ import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { useFetchUser } from '../../data/Users/users'
 import { useFetchLinksInBio } from '../../data/LinkInBio/links'
+import useFetchLinkInBioSettings from '../../data/LinkInBio/links'
 
 
 
@@ -28,29 +29,21 @@ export default function LinkInBio({userView, settings}) {
 
     const User = useFetchUser(user)
     const UserLinks = useFetchLinksInBio(user)
-    const LinksBioSettings = 'user'
+    const LinksBioSettings = useFetchLinkInBioSettings(user)
 
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
-
-    useEffect(e=> {
-    
-        fetchSettings(setLinksBioSettings, user?.email)
-        
-    }, [user?.email, userName])
-
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-    
 
    // if (UserLinks.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
-    if (user, UserLinks)
+ /*    if (user, UserLinks, LinksBioSettings)
     return (
         <>
 
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks)} onDragStart={onDragStratLinkInBio} >
-                <Main 
+                <div 
                     style={{
                         paddingTop  : '2rem',
                         display     : 'grid',
@@ -191,10 +184,10 @@ export default function LinkInBio({userView, settings}) {
                             
                     <Footer userView />
 
-                </Main>
+                </div>
             </DragDropContext>
         </>
-    )
+    ) */
 }
 
 

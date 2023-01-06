@@ -38,11 +38,13 @@ export function useFetchUserLinks(user) {
         const query = db.collection('links').where('user', '==', user?.email).orderBy('date', 'desc')
 
         const data = query.onSnapshot(snapshot => {
-            const allLinks = snapshot.docs.map(doc => doc.data())
+            if (snapshot.empty) {
+                setLinksData('no links')
+            }
+
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
             
-            if (allLinks.length === 0) setLinksData('no link')
-            else 
-            setLinksData(allLinks?.sort((x,y)=> y.date - x.date).reverse())
+            setLinksData(fetchedLinks?.sort((x,y)=> y.date - x.date).reverse())
         })
 
         return data

@@ -22,7 +22,6 @@ export default function Dashboard() {
     const [{user}] = useStateValue()
 
     const User = useFetchUser(user)
-    debugger
     const UserLinks = useFetchUserLinks(user)
 
 
@@ -33,9 +32,10 @@ export default function Dashboard() {
 
 
     if (!user) return <Login />    
+    if (User && UserLinks)
     return (
 
-        <Main>
+        <>
             <div className='grid gap-3rem blocks w-100' >
 
 
@@ -109,7 +109,7 @@ export default function Dashboard() {
                                 </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small style={{color: 'black'}}>{UserLinks.length} / {isUserPremium(User).max_links}</small>
+                                        <small style={{color: 'black'}}>{UserLinks?.length} / {isUserPremium(User)?.max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -124,7 +124,7 @@ export default function Dashboard() {
                                     ? <span>Pas de lien</span>
                                     :  
                                     (
-                                        UserLinks.length < 1
+                                        UserLinks?.length < 1
                                         ? <Messages loader={true} /> 
                                         : <ListLink links={UserLinks} User={User} />
                                     )
@@ -139,7 +139,7 @@ export default function Dashboard() {
             </div>
 
             <SnackBar content={Msg} setMsg={setMsg} />
-        </Main>
+        </>
     )
 }
 

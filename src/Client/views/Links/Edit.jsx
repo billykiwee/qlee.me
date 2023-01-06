@@ -79,7 +79,7 @@ export default function Edit() {
             PopUpMessage?.loader
             ? <Messages loader={PopUpMessage?.loader}/>
             :
-            <Main>
+            <>
                 <Popup content={PopUpMessage} />
                 <div className='display'>
                     <h2>Modifier le lien</h2>
@@ -300,7 +300,7 @@ export default function Edit() {
                 </div>
 
                 <SnackBar content={Msg} setMsg={setMsg} />
-            </Main>
+            </>
             }
 
         </>

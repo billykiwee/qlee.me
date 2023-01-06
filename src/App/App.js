@@ -20,6 +20,7 @@ import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
+import Main from './components/Main'
 
 
 
@@ -121,7 +122,16 @@ export default function App() {
                     {
                         Object.values(router)
                         .map((route, i)=> {
-                            return <Route path={route.path} exact element={route.element} key={i} />
+                            return (
+                                <Route 
+                                    path={route.path} 
+                                    exact 
+                                    element={
+                                        <Main>{route.element}</Main>
+                                    } 
+                                    key={i}
+                                />
+                            )
                         })
                     }
                 </Routes>

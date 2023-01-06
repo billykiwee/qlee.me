@@ -25,3 +25,25 @@ export function useFetchLinksInBio(user) {
     return linksInBio
 }
 
+
+
+export default function useFetchLinkInBioSettings(user) {
+
+    const [settings, setSettings] = useState()
+
+    useEffect(() => {
+        if (!user) return
+        
+        const data = db.collection('link-in-bio').onSnapshot(snapshot => {
+            const settings = snapshot.docs.map(doc => doc.data())
+            
+            const fetchedSettings = settings.filter(e=> e.user === user?.email)[0]
+
+            setSettings(fetchedSettings)
+        })
+
+        return data
+    }, [user])
+
+    return settings
+}

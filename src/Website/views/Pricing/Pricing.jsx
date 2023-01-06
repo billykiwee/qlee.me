@@ -24,7 +24,7 @@ export default function Pricing() {
     }, [user])
 
     return (
-        <Main>
+        <>
 
 
             <div className='grid gap-2rem'>
@@ -121,7 +121,7 @@ export default function Pricing() {
 
             <FAQ /> 
 
-        </Main>
+        </>
     )
 }
 

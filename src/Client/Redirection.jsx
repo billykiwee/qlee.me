@@ -63,8 +63,8 @@ export default function Redirection() {
 
 
     return (
-        <Main className='p-0'> 
+        <div className='p-0'> 
             <Messages loader={true} />
-        </Main>
+        </div>
     )
 }
