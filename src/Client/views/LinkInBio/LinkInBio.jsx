@@ -17,7 +17,7 @@ import { db } from '../../../App/database/firebase'
 
 
 
-export default function LinkInBio({userView, settings}) {
+export default function LinkInBio({userView = true, settings}) {
 
     const { userName } = useParams()
 
@@ -129,8 +129,8 @@ export default function LinkInBio({userView, settings}) {
                                                                 :
                                                                 <div className='display border white border-r-1 border-b p-1 click h-2' 
                                                                     style={{
-                                                                        background : blocks.color,
-                                                                        borderRadius: blocks.radius
+                                                                        background  : blocks.color,
+                                                                        borderRadius: blocks.radius + 'px'
                                                                     }}
                                                                 >
                                                                     {

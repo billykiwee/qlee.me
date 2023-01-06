@@ -55,9 +55,7 @@ export function EditLinkInBio() {
                             .filter(e=> e.linkInBio === true)
                             .sort((a,b)=> a.position - b.position)
                             .map(ul=> {
-                                return (
-                                    <UserLink ul={ul} putLinkAsIcon={putLinkAsIcon} key={ul.id} />
-                                )
+                                return <LinksAsIcon ul={ul} putLinkAsIcon={putLinkAsIcon} key={ul.id} />
                             })
                         }
                     </div>
@@ -70,7 +68,7 @@ export function EditLinkInBio() {
                     left              : 0,
                     right             : 0,
                     height            : '100%',
-                    position: 'absolute',
+                    position          : 'absolute',
                     backgroundSize    : 'cover',
                     backgroundPosition: 'center',
                     backgroundColor   : background?.color
@@ -85,7 +83,7 @@ export function EditLinkInBio() {
 }
 
 
-function UserLink({ ul ,putLinkAsIcon}) {
+function LinksAsIcon({ ul, putLinkAsIcon }) {
   
     return (
         <div className={'p-1 white shadow border-r-04 h-2'} >

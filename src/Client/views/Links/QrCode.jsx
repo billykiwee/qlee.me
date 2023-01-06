@@ -140,7 +140,7 @@ const QRCODE = ({style, link}) => {
     return (
  
         <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
-            <div className='display white p-1 border-r-04 justify-c'>
+            <div className='display white p-1 border-r-04 justify-c' style={{background : 'white'}}>
                 {
                     style.logo &&
                     <div 
@@ -153,7 +153,7 @@ const QRCODE = ({style, link}) => {
                     />
                 }
                 <QRCode
-                    bgColor='var(--white)'
+                    bgColor='white'
                     fgColor={style.lineColor ?? 'black'}
                     className='click qr-code-svg'
                     level='H'
