@@ -17,13 +17,11 @@ import { useFetchUser, useFetchUserLinks } from '../../data/Users/users';
 
 
 
-export default function Dashboard() {
+export default function Dashboard({ props }) {
 
     const [{user}] = useStateValue()
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchUserLinks(user)
-
+    const { User, UserLinks } = props
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')

@@ -21,7 +21,7 @@ import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
-import { useFetchUser } from '../Client/data/Users/users'
+import { useFetchUser, useFetchUserLinks } from '../Client/data/Users/users'
 
 
 
@@ -48,7 +48,21 @@ export default function App() {
         })
     }, [dispatch, auth])
 
+
+
+
+
     
+
+    const User = useFetchUser(user)
+    const UserLinks = useFetchUserLinks(user)
+    
+
+    const props = {
+        User,
+        UserLinks,
+    }
+
 
 
     const router = {
@@ -114,15 +128,6 @@ export default function App() {
         },
     }
 
-
-    const User = useFetchUser(user)
-
-    Object.values(router).forEach(route => {
-        route.element = React.cloneElement(route.element, {
-            User
-        })
-    })
-
     return (
         <BrowserRouter>
             <Header/>
@@ -130,24 +135,22 @@ export default function App() {
                     {
                         Object.values(router)
                         .map((route, i)=> {
+
+                            route.element.props = props
+                            
                             return (
                                 <Route 
+                                    key={i}
                                     path={route.path} 
                                     exact 
-                                    element={
-                                        <Main>
-                                            {route.element }
-                                        </Main>
-                                    } 
-                                    key={i}
+                                    element={ <Main>{route.element}</Main> } 
                                 />
                             )
                         })
                     }
                 </Routes>
             <Footer />  
-        </BrowserRouter>
-                
+        </BrowserRouter> 
     )
 
 }
