@@ -2,6 +2,8 @@ import { countBy } from '../functions/countBy'
 
 export const dataFilter = (LinkStat) => {
 
+    if (!LinkStat) return 
+    
     const views = LinkStat.length
 
     const device = LinkStat.map(e=> e.device)
@@ -24,4 +26,5 @@ export const dataFilter = (LinkStat) => {
         localisation: Object.values(countByCountry),
         performance : { performance, speed : countPerformance }
     } 
+
 }

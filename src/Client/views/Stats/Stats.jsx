@@ -9,15 +9,14 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/user/fetchUser'
 import { GoToPricing } from '../Links/Edit'
 import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks'
-import { fetchStats } from '../../lib/database/stats/fetchStats'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
-import { CopyClip } from '../Links/lib/CopyClip'
-import formatDate from '../../../App/utils/formatDate'
+
+import { useFetchStats } from '../../data/Stats/stats'
 
 
 
@@ -45,21 +44,15 @@ export default function Stats() {
         
 
 
-    const [LinkStat, setLinkStat] = useState([])
-    
-    useEffect(e=> {
-        fetchStats(setLinkStat, LinkID)
-    }, [LinkID])
-
-
-
+    const LinkStat = useFetchStats(LinkID)
     const [ShowStat, setShowStat] = useState(null)
-
+    
     const redirectIfNoLinkID = e => setShowStat(LinkID ?? TopLink?.id)
-
+    
     useEffect(e=> {
         redirectIfNoLinkID()
     }, [TopLink])
+    
 
 
 
@@ -74,6 +67,7 @@ export default function Stats() {
     const data = dataFilter(LinkStat)
 
     const [Msg, setMsg] = useState([])
+
 
 
 

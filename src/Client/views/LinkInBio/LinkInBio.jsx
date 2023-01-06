@@ -12,7 +12,7 @@ import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { useFetchUser } from '../../data/Users/users'
-import { useFetchLinks } from '../../data/LinkInBio/links'
+import { useFetchLinksInBio } from '../../data/LinkInBio/links'
 
 
 
@@ -27,8 +27,8 @@ export default function LinkInBio({userView, settings}) {
     const [{user}] = useStateValue()
 
     const User = useFetchUser(user)
-    const UserLinks = useFetchLinks(user)
-    const [LinksBioSettings, setLinksBioSettings] = useState([])
+    const UserLinks = useFetchLinksInBio(user)
+    const LinksBioSettings = 'user'
 
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
 

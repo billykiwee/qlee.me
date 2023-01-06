@@ -13,7 +13,6 @@ import Messages from '../../../App/utils/Messages'
 import { serverTimestamp } from 'firebase/firestore'
 import { download } from '../../lib/htmlToImage/download'
 import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks'
-import { fetchStats } from '../../lib/database/stats/fetchStats'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { fetchUser } from '../../lib/database/user/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
@@ -29,6 +28,8 @@ import QrCodeSection from './QrCode'
 import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
+import { useFetchStats } from '../../data/Stats/stats'
+
 
 
 export default function Edit() {
@@ -40,19 +41,13 @@ export default function Edit() {
 
     const [User, setUser] = useState({})
     const [UserLinks, setUserLinks] = useState([])
-    const [Stats, setStats] = useState([])
+    const Stats = useFetchStats(LinkID)
     
 
     useEffect(e=> {
         fetchUser(setUser, user?.email)
         fetchUserLinks(setUserLinks, user?.email)
     }, [user?.email])
-
-    useEffect(e=> {
-        fetchStats(setStats, LinkID)
-    }, [LinkID])
-
-
 
     useEffect(e=> {
         db.collection('links').orderBy('date').onSnapshot(snapshot => {
