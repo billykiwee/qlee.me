@@ -77,6 +77,8 @@ export default function Header({visible}) {
 
 
 
+
+
     if (!isLinkInBio())
     return (
         <header className='p-1 white shadow '>
