@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { db } from '../../../../App/database/firebase'
+import { db } from '../../../App/database/firebase'
 
-export default function useFetchLinksInBio(user) {
+
+export function useFetchLinks(user) {
 
     const [linksInBio, setLinksInBio] = useState()
 

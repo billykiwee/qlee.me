@@ -5,16 +5,17 @@ import { Link, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
-import { fetchUser } from '../../lib/database/user/fetchUser'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
-import fetchLinksInbio from '../../lib/database/linkInBio/fetchLinksInbio'
 import { deleteLinkFromBio } from './functions/delete'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
-import useFetchUser from '../../data/users/user'
-import useFetchLinksInBio from '../../lib/database/linkInBio/linksInBio'
+import { useFetchUser } from '../../data/Users/users'
+import { useFetchLinks } from '../../data/LinkInBio/links'
+
+
+
 
 
 
@@ -25,8 +26,8 @@ export default function LinkInBio({userView, settings}) {
 
     const [{user}] = useStateValue()
 
-    const User = useFetchUser(user?.email)
-    const UserLinks = useFetchLinksInBio(user?.email)
+    const User = useFetchUser(user)
+    const UserLinks = useFetchLinks(user)
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
