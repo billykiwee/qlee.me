@@ -13,7 +13,7 @@ import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
-import useFetchUser from '../../lib/database/user/user'
+import useFetchUser from '../../data/users/user'
 import useFetchLinksInBio from '../../lib/database/linkInBio/linksInBio'
 
 
@@ -25,8 +25,8 @@ export default function LinkInBio({userView, settings}) {
 
     const [{user}] = useStateValue()
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchLinksInBio(user)
+    const User = useFetchUser(user?.email)
+    const UserLinks = useFetchLinksInBio(user?.email)
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
@@ -38,17 +38,14 @@ export default function LinkInBio({userView, settings}) {
     }, [user?.email, userName])
 
 
-    console.log(UserLinks);
-
-
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
     
 
    // if (UserLinks.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
-
-   return (
+    if (user, UserLinks)
+    return (
         <>
 
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks)} onDragStart={onDragStratLinkInBio} >
