@@ -13,9 +13,8 @@ import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
-import { db } from '../../../App/database/firebase'
-import GetWidth from '../../../App/utils/GetWidth'
-import useFetchUser from '../../lib/database/user/User'
+import useFetchUser from '../../lib/database/user/user'
+import useFetchLinksInBio from '../../lib/database/linkInBio/linksInBio'
 
 
 
@@ -26,34 +25,33 @@ export default function LinkInBio({userView, settings}) {
 
     const [{user}] = useStateValue()
 
-    const [User, setUser] = useState([])
-    const [UserLinks, setUserLinks] = useState([])
+    const User = useFetchUser(user)
+    const UserLinks = useFetchLinksInBio(user)
     const [LinksBioSettings, setLinksBioSettings] = useState([])
 
     const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
 
     useEffect(e=> {
-        
-        fetchUser(setUser, user?.email)
-        fetchLinksInbio(setUserLinks, user?.email)
+    
         fetchSettings(setLinksBioSettings, user?.email)
         
     }, [user?.email, userName])
 
 
+    console.log(UserLinks);
+
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-
-    const lol = useFetchUser(user)
     
 
-   // if (UserLinks.some(e=> e.user === User.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User.LinkInBioID
-    return (
+   // if (UserLinks.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
+
+   return (
         <>
 
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks, setUserLinks)} onDragStart={onDragStratLinkInBio} >
+            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks)} onDragStart={onDragStratLinkInBio} >
                 <Main 
                     style={{
                         paddingTop  : '2rem',
@@ -237,7 +235,7 @@ function Head({props}) {
                                     type='file' 
                                     hidden 
                                     id='upload-img' 
-                                    onChange={fileInput => { uploadPhoto(fileInput, User.email) }}
+                                    onChange={fileInput => { uploadPhoto(fileInput, User?.email) }}
                                 />
                             </div>
                         </div>
@@ -246,7 +244,7 @@ function Head({props}) {
                 : 
                 (
                     <div className='display justify-c'>
-                        <img src={User.photoURL} width={80} height={80} className='border-r-100' />
+                        <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
                     </div>
                 )
             }
@@ -254,10 +252,10 @@ function Head({props}) {
                 <div className='grid gap'>
                     <div className='display justify-c'>
                         <span className='f-s-18'>@</span>
-                        <span className='f-s-25 f-w-400'>{User.name}</span>
+                        <span className='f-s-25 f-w-400'>{User?.name}</span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User.description}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User?.description}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>

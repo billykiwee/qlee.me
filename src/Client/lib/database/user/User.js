@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { db } from '../../../../App/database/firebase';
 
-export default function useFetchUser(user) {
+export default function useFetchLinksInBio(userEmail) {
 
     const [userData, setUserData] = useState()
 
     useEffect(() => {
-        if (!user) return
+        if (!userEmail) return
 
-        const query = db.collection('users').where('email', '==', user.email)
+        const query = db.collection('users').where('email', '==', userEmail.email)
 
-        const unsubscribe = query.onSnapshot(snapshot => {
+        const data = query.onSnapshot(snapshot => {
             if (snapshot.empty) {
-                console.error(`Aucun utilisateur trouvé avec l'email ${user.email}`)
+                console.error(`Aucun utilisateur trouvé avec l'email ${userEmail.email}`)
                 return null
             }
             const fetchedUser = snapshot.docs.map(doc => doc.data())
@@ -20,8 +20,8 @@ export default function useFetchUser(user) {
             setUserData(...fetchedUser)
         })
 
-        return unsubscribe
-    }, [user])
+        return data
+    }, [userEmail])
 
     return userData
 }
