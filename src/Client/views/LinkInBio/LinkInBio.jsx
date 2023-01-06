@@ -46,6 +46,7 @@ export default function LinkInBio({userView, settings}) {
 
 
 
+
     if (UserLinks.some(e=> e.user === User.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User.LinkInBioID
     return (
         <>
