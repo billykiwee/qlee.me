@@ -128,29 +128,26 @@ export default function App() {
         },
     }
 
+
+
     return (
         <BrowserRouter>
-            <Header/>
-                <Routes>
-                    {
-                        Object.values(router)
-                        .map((route, i)=> {
-
-                            route.element.props = props
-                            
-                            return (
-                                <Route 
-                                    key={i}
-                                    path={route.path} 
-                                    exact 
-                                    element={ <Main>{route.element}</Main> } 
-                                />
-                            )
-                        })
-                    }
-                </Routes>
-            <Footer />  
-        </BrowserRouter> 
-    )
+          <Header />
+          <Routes>
+            {Object.values(router).map((route, i) => {
+              const elementWithProps = React.cloneElement(route.element, {...props});
+              return (
+                <Route
+                  key={i}
+                  path={route.path}
+                  exact
+                  element={<Main>{elementWithProps}</Main>}
+                />
+              );
+            })}
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      );
 
 }
