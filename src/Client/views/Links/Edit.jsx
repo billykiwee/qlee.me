@@ -39,18 +39,20 @@ export default function Edit() {
     const [{user}] = useStateValue()
 
     const [User, setUser] = useState({})
-
+    const [UserLinks, setUserLinks] = useState([])
     const [Stats, setStats] = useState([])
     
 
     useEffect(e=> {
-        fetchUserLinks(setUser, user?.email)
-        fetchStats(setStats, LinkID)
         fetchUser(setUser, user?.email)
-    }, [user, LinkID])
+        fetchUserLinks(setUserLinks, user?.email)
+    }, [user?.email])
+
+    useEffect(e=> {
+        fetchStats(setStats, LinkID)
+    }, [LinkID])
 
 
-    const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
         db.collection('links').orderBy('date').onSnapshot(snapshot => {
@@ -71,9 +73,7 @@ export default function Edit() {
 
     const [editLink, seteditLink] = useState({})
 
-  
     const [QrCode,setQrCode] = useState(false)
-
 
 
 

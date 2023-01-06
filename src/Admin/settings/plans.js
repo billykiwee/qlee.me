@@ -1,6 +1,7 @@
 export const plans = {
     FREE : {
-        max_links: 10
+        max_links: 10,
+        features : {},
     },
     PRO : {
         price    : 4.9,

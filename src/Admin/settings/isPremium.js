@@ -6,16 +6,16 @@ export function isUserPremium(user) {
 
     if (userPlan !== 'FREE') {
         return {
-            user: user.email,
-            plan: userPlan,
+            user     : user.email,
+            plan     : userPlan,
             max_links: plans[userPlan]?.max_links,
-            features: plans[userPlan]?.features
+            features : plans[userPlan]?.features
         };
     } 
     else return {
-        user: user.email,
-        plan: 'FREE',
+        user     : user.email,
+        plan     : 'FREE',
         max_links: plans.FREE.max_links,
-        features: plans.FREE.features
+        features : plans.FREE.features
     }
 }
