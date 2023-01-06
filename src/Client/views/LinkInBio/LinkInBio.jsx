@@ -15,7 +15,7 @@ import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { db } from '../../../App/database/firebase'
 import GetWidth from '../../../App/utils/GetWidth'
-import FetchUser from '../../lib/database/user/User'
+import useFetchUser from '../../lib/database/user/User'
 
 
 
@@ -45,9 +45,6 @@ export default function LinkInBio({userView, settings}) {
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
-
-
-    console.log(FetchUser(user?.email));
 
     
 
