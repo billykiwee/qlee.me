@@ -11,6 +11,7 @@ import Login from '../../../Website/connection/Login'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { useFetchUser } from '../../data/Users/users'
 
 
 
@@ -20,12 +21,7 @@ export default function Profil() {
 
     const [{user}] = useStateValue()
 
-    const [User, setUser] = useState([])
-
-    useEffect(e=> {
-        fetchUser(setUser, user?.email)
-    }, [user])
-
+    const User =  useFetchUser(user)
 
 
     async function uploadPhoto(fileInput, userEmail) {
@@ -57,9 +53,9 @@ export default function Profil() {
 
     
     if (!user) return <Login />
-
+    if (User)
     return (
-        <Main>
+        <>
             <div className='grid gap-2rem blocks'>
                 <div className='grid gap-2rem'>
                     <div className='display gap-1rem'>
@@ -72,7 +68,7 @@ export default function Profil() {
                                     type='file' 
                                     hidden 
                                     id='upload-img' 
-                                    onChange={fileInput => { uploadPhoto(fileInput, User.email) }}
+                                    onChange={fileInput => { uploadPhoto(fileInput, User?.email) }}
                                 />
                             </div>
                         </div>
@@ -83,7 +79,7 @@ export default function Profil() {
                                 {
                                     isUserPremium(User).plan !== 'FREE' &&
                                     <div className='display justify-c yellow border-r-04 border-b h-1 p-04'>
-                                        <span className='display'>{isUserPremium(User).plan}</span>
+                                        <span className='display'>{isUserPremium(User)?.plan}</span>
                                     </div>
                                 }
                             </div>
@@ -118,12 +114,12 @@ export default function Profil() {
                         User : User
                     }} />
 
-                    <Inputs props={{
+                    {/* <Inputs props={{
                         label: 'Email',
                         input: 'email',
                         User : User
                     }} />
-                   {/*  <div className='grid gap'>
+                    <div className='grid gap'>
                         <span>Mot de passe</span>
                         <input className='div-input white h-3' type='password' defaultValue='*******' />
                     </div>
@@ -134,7 +130,7 @@ export default function Profil() {
                 </div>
 
             </div>
-        </Main>
+        </>
     )
 }
 

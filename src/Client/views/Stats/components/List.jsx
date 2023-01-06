@@ -26,8 +26,7 @@ export default function List({props}) {
     )
     : 
     (
-        props.UserLinks
-        .sort((a, b) => {
+        props.UserLinks?.sort((a, b) => {
             if (props.checkFilter === 'oldest') return a.date - b.date
             if (props.checkFilter === 'recent') return b.date - a.date
             return b.views - a.views
@@ -45,8 +44,7 @@ export default function List({props}) {
 
             <div  className='grid gap' id='div-links' >
                 {
-                    linksFilters
-                    .map(link=> {
+                    linksFilters?.map(link=> {
 
                         return (
                             

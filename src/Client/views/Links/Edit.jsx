@@ -29,6 +29,7 @@ import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
 import { useFetchStats } from '../../data/Stats/stats'
+import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
 
 
 
@@ -39,26 +40,13 @@ export default function Edit() {
 
     const [{user}] = useStateValue()
 
-    const [User, setUser] = useState({})
-    const [UserLinks, setUserLinks] = useState([])
+    const User = useFetchUser(user)
+    const UserLinks = useFetchUserLinks(user)
     const Stats = useFetchStats(LinkID)
     
 
-    useEffect(e=> {
-        fetchUser(setUser, user?.email)
-        fetchUserLinks(setUserLinks, user?.email)
-    }, [user?.email])
 
-    useEffect(e=> {
-        db.collection('links').orderBy('date').onSnapshot(snapshot => {
-            setUserLinks(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
-
-
-    const Link = UserLinks
-    .filter(data=> data.user === user?.email && data.id === LinkID)
-    .map(link=> link)[0]
+    const Link = UserLinks?.filter(data=> data.user === user?.email && data.id === LinkID).map(link=> link)[0]
 
 
     

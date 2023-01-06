@@ -31,14 +31,25 @@ export default function LinkInBio({userView, settings}) {
     const UserLinks = useFetchLinksInBio(user)
     const LinksBioSettings = useFetchLinkInBioSettings(user)
 
-    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
+    let background, blocks, menu, fontFamily, colorBtn, linkAsIcon
+
+    if (LinksBioSettings) {
+      ({
+        background,
+        blocks,
+        menu,
+        fontFamily,
+        colorBtn,
+        linkAsIcon
+      } = LinksBioSettings)
+    }
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)    
 
 
-   // if (UserLinks.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
- /*    if (user, UserLinks, LinksBioSettings)
+    if (UserLinks?.some(e=> e.user === User?.email) && userView?.email !== User?.email) window.location.href = '/edit/' + User?.LinkInBioID
+    if (user, UserLinks, LinksBioSettings)
     return (
         <>
 
@@ -187,7 +198,7 @@ export default function LinkInBio({userView, settings}) {
                 </div>
             </DragDropContext>
         </>
-    ) */
+    )
 }
 
 

@@ -1,8 +1,8 @@
+import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateValue } from '../../../App/provider/StateProvider'
-import getFavicon from '../../../App/utils/getFavicon'
 import '../../../App/css/stats.css'
 import { Block, HeadBlock } from './components/Block'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
@@ -12,7 +12,6 @@ import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
-import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
 
@@ -34,7 +33,7 @@ export default function Stats() {
     const LinkStat = useFetchStats(LinkID)
     
 
-    const TopLink = UserLinks.map(topLink=> topLink)
+    const TopLink = UserLinks?.map(topLink=> topLink)
     .sort((a, b) => b.views - a.views)
     .splice(0,1)[0]
         
@@ -77,14 +76,13 @@ export default function Stats() {
                     <h2 className='m-t-0'>Statistiques</h2>
 
                     {
-                        UserLinks === 'no link' 
+                        UserLinks === 'no links' 
                         ? <span>Pas de lien</span>
                         :  
-                        UserLinks.length < 1
+                        UserLinks?.length < 1
                         ? <Messages loader={true} /> 
                         :
-                        UserLinks
-                        .filter(isUserAuth=> isUserAuth.user === user?.email)
+                        UserLinks?.filter(isUserAuth=> isUserAuth.user === user?.email)
                         .filter(link=> link.id === ShowStat)
                         .map(topLink=> {
                         

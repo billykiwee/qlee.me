@@ -39,7 +39,7 @@ export function EditLinkInBio() {
 
     return (
     
-        <Main className='blocks gap-1rem' >
+        <div className='display align-top blocks gap-1rem' >
             <div className='grid'>
                 <h2>Mon link in bio</h2>
 
@@ -76,7 +76,7 @@ export function EditLinkInBio() {
                     <LinkInBio userView={user} links={UserLinks} /> 
                 </div>
             </div>
-        </Main> 
+        </div> 
     
     )
 }

@@ -18,7 +18,7 @@ export const onDragEndLinkInBio = (result, UserLinks, setUserLinks) => {
     
     getPosition() 
 
-    document.querySelector('.btn-drag').children[0].classList.remove('c-blue')
+    document.querySelector('.btn-drag')?.children[0].classList.remove('c-blue')
 }
 
 function reorderList(list, startIndex, endIndex) {
