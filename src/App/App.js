@@ -54,14 +54,14 @@ export default function App() {
 
     
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchUserLinks(user)
+    const fetchUser = useFetchUser(user)
+    const fetchUserLinks = useFetchUserLinks(user)
     
 
     const props = {
-        User,
-        UserLinks,
-        lol: 'bonkour'
+        user,
+        fetchUser,
+        fetchUserLinks,
     }
 
 
@@ -69,86 +69,85 @@ export default function App() {
     const router = {
         init : {
             path : '/*',
-            element : <Page404 props={props} />
+            element : <Page404 />
         },
         page404 : {
             path : '/page404',
-            element : <Page404 props={props} />
+            element : <Page404 />
         },
         home : {
             path : '/',
-            element : <Home props={props} />
+            element : <Home />
         },
         dashboard : {
             path : '/dashboard',
-            element : <Dashboard props={props} />
+            element : <Dashboard />
         },
         edit : {
             path : '/edit/:LinkID',
-            element : <Edit props={props} />
+            element : <Edit />
         },
         redirection : {
             path : '/:LinkID',
-            element : <Redirection props={props} />
+            element : <Redirection />
         },
         login : {
             path : '/login',
-            element : <Login props={props} />
+            element : <Login />
         },
         pricing : {
             path : '/pricing',
-            element : <Pricing props={props} />
+            element : <Pricing />
         },
         stats : {
             path : '/stats',
-            element : <Stats props={props} />
+            element : <Stats />
         },
         statsByLink : {
             path : '/stats/:LinkID',
-            element : <Stats props={props} />
+            element : <Stats />
         },
         payment : {
             path : '/payment/:plan',
-            element : <Payment props={props} />
+            element : <Payment />
         },
         linkinbio : {
             path : '/@:userName',
-            element : <LinkInBio props={props} />
+            element : <LinkInBio />
         },
         edit_linkinbio : {
             path : '/edit/@:userName',
-            element : <EditLinkInBio props={props} />
+            element : <EditLinkInBio />
         },
         profil : {
             path : '/profil',
-            element : <Profil props={props} />
+            element : <Profil />
         },
         terms : {
             path : '/terms',
-            element : <Terms props={props} />
+            element : <Terms />
         },
     }
 
     return (
         <BrowserRouter>
-            <Header/>
-                <Routes>
-                    {
-                        Object.values(router)
-                        .map((route, i)=> {
-                            return (
-                                <Route 
-                                    key={i}
-                                    path={route.path} 
-                                    exact 
-                                    element={ <Main>{route.element}</Main> } 
-                                />
-                            )
-                        })
-                    }
-                </Routes>
-            <Footer />  
-        </BrowserRouter> 
+            <Header />
+            <Routes>
+                {
+                    Object.values(router).map((route, i) => {
+                        return (
+                        <Route
+                            key={i}
+                            path={route.path}
+                            exact
+                            element={<Main>{React.cloneElement(route.element, { props: props })}</Main>}
+                        />
+                        );
+                    })
+                }
+            </Routes>
+            <Footer />
+      </BrowserRouter>
     )
 
 }

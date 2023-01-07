@@ -19,21 +19,16 @@ import { useFetchUser, useFetchUserLinks } from '../../data/Users/users';
 
 export default function Dashboard({ props }) {
 
-    const [{user}] = useStateValue()
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchUserLinks(user)
+    const { user, fetchUser, fetchUserLinks } = props
 
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
 
-    console.log(props);
-
 
     if (!user) return <Login />    
-    if (User && UserLinks)
     return (
 
         <>
@@ -44,8 +39,8 @@ export default function Dashboard({ props }) {
                     <div className='grid gap-2rem'>
 
                         <div className='grid' >
-                            <h2 className='m-t-0 m-b-1'>Bonjour, {User?.name}</h2>
-                            <Articles links={UserLinks} user={User} />
+                            <h2 className='m-t-0 m-b-1'>Bonjour, {fetchUser?.name}</h2>
+                            <Articles links={fetchUserLinks} user={fetchUser} />
                         </div>
 
                         <form className='grid gap-2rem ' 
@@ -55,8 +50,8 @@ export default function Dashboard({ props }) {
                                 createLink({
                                     elements: e.target.elements,
                                     setError,
-                                    User,
-                                    UserLinks,
+                                    fetchUser,
+                                    fetchUserLinks,
                                     setMsg 
                                 })
                             }}
@@ -110,7 +105,7 @@ export default function Dashboard({ props }) {
                                 </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small style={{color: 'black'}}>{UserLinks?.length} / {isUserPremium(User)?.max_links}</small>
+                                        <small style={{color: 'black'}}>{fetchUserLinks?.length} / {isUserPremium(fetchUser)?.max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -121,13 +116,13 @@ export default function Dashboard({ props }) {
                             </div>
                             <div className='grid gap'>
                                 {
-                                    UserLinks === 'no link' 
+                                    fetchUserLinks === 'no link' 
                                     ? <span>Pas de lien</span>
                                     :  
                                     (
-                                        UserLinks?.length < 1
+                                        fetchUserLinks?.length < 1
                                         ? <Messages loader={true} /> 
-                                        : <ListLink links={UserLinks} User={User} />
+                                        : <ListLink links={fetchUserLinks} User={fetchUser} />
                                     )
                                 }
                             </div>

@@ -4,10 +4,10 @@ import { db } from '../../../App/database/firebase';
 
 export function useFetchUser(user) {
 
-    const [userData, setUserData] = useState()
+    const [userData, setUserData] = useState([])
 
-    useEffect(() => {
-        if (!user) return
+   useEffect(() => {
+        if (!user) return null
 
         const query = db.collection('users').where('email', '==', user?.email)
 
@@ -21,7 +21,7 @@ export function useFetchUser(user) {
             setUserData(...fetchedUser)
         })
 
-        return data
+        return data 
     }, [user])
 
     return userData
@@ -29,30 +29,28 @@ export function useFetchUser(user) {
 
 
 export function useFetchUserLinks(user) {
-
-    const [linksData, setLinksData] = useState()
-
+    const [linksData, setLinksData] = useState([]);
+  
     useEffect(() => {
-        if (!user) return
-
-        const query = db.collection('links').where('user', '==', user?.email).orderBy('date', 'desc')
-
-        const data = query.onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                setLinksData('no links')
-            }
-
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-            
-            setLinksData(fetchedLinks?.sort((x,y)=> y.date - x.date).reverse())
-        })
-
-        return data
-    }, [user])
-
-    return linksData
-
-}
+      if (!user) return;
+  
+      const query = db.collection("links").where("user", "==", user?.email).orderBy("date", "desc");
+  
+      const data = query.onSnapshot(snapshot => {
+        if (snapshot.empty) {
+          setLinksData("no links");
+        }
+  
+        const fetchedLinks = snapshot.docs.map(doc => doc.data());
+  
+        setLinksData(fetchedLinks.sort((x, y) => y.date - x.date));
+      });
+  
+      return () => data();
+    }, [user]);
+  
+    return linksData;
+  }
 
 
 
