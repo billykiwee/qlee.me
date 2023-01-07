@@ -21,51 +21,29 @@ import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
-import { useFetchUser, useFetchUserLinks } from '../Client/data/Users/users'
-import { useFetchLinksInBio, useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
+import { useFetchUsers } from '../Client/data/Users/users'
+import { useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
 import { useFetchLinks } from '../Client/data/Links/links'
+
+import useGetAuth from '../Client/data/user/auth'
 
 
 
 export default function App() {
 
-    const [{user}, dispatch] = useStateValue('')
-    const auth = getAuth()
-
-    
-    useEffect(() => {
-        auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-                dispatch({
-                    type: 'SET_USER',
-                    user: authUser
-                })
-            } else { 
-                dispatch({
-                    type: 'SET_USER',
-                    user: null
-                })
-            }
-        })
-    }, [dispatch, auth])
-
-
-
-
+    const user = useGetAuth()
 
     const props = {
-        auth : {
-            user,
-        },
         user: {
-            profil     : useFetchUser(user),
+            auth       : user,
+            profil     : useFetchUsers(user),
             links      : useFetchLinks(user),
             link_in_bio: {
                 links   : useFetchLinks(user, 'link-in-bio'),
                 settings: useFetchLinkInBioSettings(user)
             },
         },
-        users      : useFetchUser(),
+        users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
     }

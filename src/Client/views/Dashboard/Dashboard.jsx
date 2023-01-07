@@ -1,45 +1,31 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Main from '../../../App/components/Main';
-import { useStateValue } from '../../../App/provider/StateProvider';
 import ListLink from './components/ListLink';
-import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
-import { fetchUser } from '../../lib/database/user/fetchUser';
 import { SnackBar } from '../../../App/components/SnackBar';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
-import { useFetchUser, useFetchUserLinks } from '../../data/Users/users';
 
 
 
 export default function Dashboard({ props }) {
 
-
     const { user } = props
-
 
     const Profil = user?.profil
     const UserLinks = user?.links
-    const UserLinksInBio = user?.link_in_bio?.links
 
-    const LinkInBio = {
-        userlinks: user?.link_in_bio?.links,
-        settings :  user?.link_in_bio?.settings
-    }
-
-    console.log(LinkInBio.settings);
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
 
 
-   /*  if (!user) return <Login />    
+    if (!user.auth) return <Login />    
     return (
 
         <>
@@ -50,8 +36,8 @@ export default function Dashboard({ props }) {
                     <div className='grid gap-2rem'>
 
                         <div className='grid' >
-                            <h2 className='m-t-0 m-b-1'>Bonjour, {fetchUser?.name}</h2>
-                            <Articles links={fetchUserLinks} user={fetchUser} />
+                            <h2 className='m-t-0 m-b-1'>Bonjour, {Profil.name}</h2>
+                            <Articles links={UserLinks} user={Profil} />
                         </div>
 
                         <form className='grid gap-2rem ' 
@@ -61,8 +47,8 @@ export default function Dashboard({ props }) {
                                 createLink({
                                     elements: e.target.elements,
                                     setError,
-                                    fetchUser,
-                                    fetchUserLinks,
+                                    Profil,
+                                    UserLinks,
                                     setMsg 
                                 })
                             }}
@@ -116,7 +102,7 @@ export default function Dashboard({ props }) {
                                 </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small style={{color: 'black'}}>{fetchUserLinks?.length} / {isUserPremium(fetchUser)?.max_links}</small>
+                                        <small style={{color: 'black'}}>{UserLinks.length} / {isUserPremium(Profil).max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -127,13 +113,13 @@ export default function Dashboard({ props }) {
                             </div>
                             <div className='grid gap'>
                                 {
-                                    fetchUserLinks === 'no link' 
+                                    UserLinks === 'no link' 
                                     ? <span>Pas de lien</span>
                                     :  
                                     (
-                                        fetchUserLinks?.length < 1
+                                        UserLinks.length < 1
                                         ? <Messages loader={true} /> 
-                                        : <ListLink links={fetchUserLinks} User={fetchUser} />
+                                        : <ListLink links={UserLinks} User={Profil} />
                                     )
                                 }
                             </div>
@@ -147,7 +133,7 @@ export default function Dashboard({ props }) {
 
             <SnackBar content={Msg} setMsg={setMsg} />
         </>
-    ) */
+    )
 }
 
 
