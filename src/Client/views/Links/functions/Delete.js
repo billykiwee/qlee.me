@@ -6,18 +6,16 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 
 export async function DeleteLink(props) {
 
-    const { link, setMsg, Stats, type, history } = props
+    const { link, setMsg, setPopUpMessage, Stats, type, history } = props
 
-    console.log(props);
-
-    setMsg({
+    setPopUpMessage({
         title      : 'Attention',
         message    : `Tu es sur le point de supprimer ${link.name}`,
         question   : 'Voulez-vous continuer ?',
         buttonText : 'Supprimer',
         buttonColor: 'red',
         valid      : () => deleteLinksSelected(link),
-        close      : () => setMsg([]),
+        close      : () => setPopUpMessage([]),
         statu      : 'question'
     })
 

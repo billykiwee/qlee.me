@@ -13,12 +13,12 @@ export default function Popup({content, children}) {
             <div className='fixed'>
                 <div className='grid white border-r-2 p-2 border-b gap'>
                     <div className='grid gap-2rem'>
-                        <div className='display justify-s-b align-top'>
+                        <div className='display justify-s-b '>
                             <div className='display gap'>
                                 <span className='f-s-20 f-w-500'>{content.title}</span>
                             </div>
                             <div className='display'>
-                                <button className='w-2 h-2' onClick={content.close}>
+                                <button className='w-3 h-3 border-r-100 hover' onClick={content.close}>
                                     <span className='display'>
                                         <img src='/images/x.svg' width={20} height={20} />
                                     </span>

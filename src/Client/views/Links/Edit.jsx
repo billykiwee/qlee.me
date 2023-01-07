@@ -269,6 +269,7 @@ export default function Edit() {
                                                         Stats,
                                                         link: Link,
                                                         setMsg,
+                                                        setPopUpMessage,
                                                         history
                                                     })
                                                 } 
