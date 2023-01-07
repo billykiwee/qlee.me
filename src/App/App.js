@@ -53,17 +53,29 @@ export default function App() {
 
 
 
-    let lol = useFetchLinks(user, 'link-in-bio')
-
-    console.log(lol);
-
     const props = {
-        user,
-        fetchUser             : useFetchUser(user),
-        fetchUserLinks        : useFetchUserLinks(user),
-        fetchLinksInBio       : useFetchLinksInBio(user),
-        fetchLinkInBioSettings: useFetchLinkInBioSettings(user),
+        auth : {
+            user,
+        },
+
+        users : {
+            user: useFetchUser(user),
+            all : useFetchUser(),
+        },
+
+        links                 : {
+            userLinks   : useFetchLinks(user),
+            all         : useFetchLinks(),
+        },
+
+        link_in_bio : {
+            userLinks_in_bio: useFetchLinks(user, 'link-in-bio'),
+            settings        : useFetchLinkInBioSettings(user),
+            all             : useFetchLinks(),
+        }
     }
+
+
 
     const router = {
         init          : { path : '/*', element : <Page404 /> },

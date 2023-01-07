@@ -8,8 +8,6 @@ export function useFetchLinks(user, type) {
   
     useEffect(() => {
 
-        if (!user) return
-
         const data = query(user, type).onSnapshot(snapshot => {
             if (snapshot.empty) {
                 setLinksData("no links")
@@ -30,17 +28,16 @@ export function useFetchLinks(user, type) {
 
 const query = (user, type) => {
 
+    if (user && type === "link-in-bio") {
+        return db
+        .collection("links")
+        .where("linkInBio", "==", true)
+    }
+    
     if (user) {
         return db
         .collection("links")
         .where("user", "==", user.email)
-    }
-
-    if (user && type === "link-in-bio") {
-        return db
-        .collection("links")
-        .where("user", "==", user.email)
-        .where("linkInBio", "==", true)
     }
 
     return db.collection("links").orderBy("date", "desc")
