@@ -22,7 +22,7 @@ import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
 import { useFetchUser, useFetchUserLinks } from '../Client/data/Users/users'
-import { useFetchLinksInBio, useFetchUserLinks } from '../Client/data/LinkInBio/links'
+import { useFetchLinksInBio, useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
 
 
 
@@ -57,11 +57,14 @@ export default function App() {
     const fetchUser = useFetchUser(user)
     const fetchUserLinks = useFetchUserLinks(user)
     const fetchLinksInBio = useFetchLinksInBio(user)
+    const fetchLinkInBioSettings = useFetchLinkInBioSettings(user)
 
     const props = {
         user,
         fetchUser,
         fetchUserLinks,
+        fetchLinksInBio,
+        fetchLinkInBioSettings
     }
 
     const router = {

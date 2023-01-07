@@ -23,11 +23,11 @@ export default function LinkInBio({ userView, props }) {
     const { userName } = useParams()
 
 
-    const { user, fetchUser, fetchUserLinks, LinksBioSettings } = props
+    const { user, fetchUser, fetchLinksInBio, fetchLinkInBioSettings } = props
 
     let background, blocks, menu, fontFamily, colorBtn, linkAsIcon
 
-    if (LinksBioSettings) {
+    if (fetchLinkInBioSettings) {
       ({
         background,
         blocks,
@@ -35,21 +35,22 @@ export default function LinkInBio({ userView, props }) {
         fontFamily,
         colorBtn,
         linkAsIcon
-      } = LinksBioSettings)
+      } = fetchLinkInBioSettings)
     }
+
+    console.log(fetchLinksInBio);
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
     
-    const ifUserIsOwner = fetchUserLinks?.some(e=> e.user === fetchUser?.email) && userView?.email !== fetchUser?.email
+    const ifUserIsOwner = fetchLinksInBio?.some(e=> e.user === fetchUser?.email) && userView?.email !== fetchUser?.email
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + fetchUser?.LinkInBioID
-    if (user, fetchUserLinks, LinksBioSettings)
     return (
         <>
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, fetchUserLinks)} onDragStart={onDragStratLinkInBio} >
+            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, fetchLinksInBio)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
                         display     : 'grid',
@@ -74,17 +75,16 @@ export default function LinkInBio({ userView, props }) {
                             props={{
                                 userView, 
                                 fetchUser, 
-                                fetchUserLinks 
+                                fetchLinksInBio 
                             }} 
                         />
                         
-                        <Droppable droppableId={fetchUserLinks?.length && 'fetchUserLinks'} >
+                        <Droppable droppableId={fetchLinksInBio?.length && 'fetchLinksInBio'} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={fetchUserLinks?.length && 'fetchUserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
+                                <div className='grid gap container' id={fetchLinksInBio?.length && 'fetchLinksInBio'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
-                                        fetchUserLinks
-                                        .filter(e=> !e.asIcon)
+                                        fetchLinksInBio?.filter(e=> !e.asIcon)
                                         .map((link, i)=> {
 
                                             return (
@@ -220,7 +220,7 @@ function Footer({userView}) {
 
 function Head({props}) {
 
-    const { userView, fetchUser, fetchUserLinks } = props
+    const { userView, fetchUser, fetchLinksInBio } = props
 
     return (
         <div className='grid gap-1rem p-1'>
@@ -262,9 +262,8 @@ function Head({props}) {
                 </div>
                 <div className='display gap-1rem justify-c'>
                     {
-                    fetchUserLinks
-                    .filter(e=> e.linkInBio === true && e.asIcon === true)
-                    .map((link, i)=> {
+                        fetchLinksInBio?.filter(e=> e.linkInBio === true && e.asIcon === true)
+                        .map((link, i)=> {
 
                             return (
                                 <a href={'https://'+ link.shortLink} className='link' key={i} >

@@ -19,7 +19,7 @@ export function useFetchLinksInBio(user) {
             setLinksInBio(fetchedLinks)
         })
 
-        return data
+        return () => data()
     }, [user])
 
     return linksInBio
@@ -27,7 +27,7 @@ export function useFetchLinksInBio(user) {
 
 
 
-export default function useFetchLinkInBioSettings(user) {
+export function useFetchLinkInBioSettings(user) {
 
     const [settings, setSettings] = useState()
 
@@ -42,7 +42,7 @@ export default function useFetchLinkInBioSettings(user) {
             setSettings(fetchedSettings)
         })
 
-        return data
+        return () => data()
     }, [user])
 
     return settings
