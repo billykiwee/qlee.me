@@ -12,24 +12,18 @@ import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
 import { useFetchUser } from '../../data/Users/users'
-import { useFetchLinksInBio } from '../../data/LinkInBio/links'
-import useFetchLinkInBioSettings from '../../data/LinkInBio/links'
 
 
 
 
 
 
-export default function LinkInBio({userView, settings}) {
+export default function LinkInBio({ userView, props }) {
 
     const { userName } = useParams()
 
 
-    const [{user}] = useStateValue()
-
-    const User = useFetchUser(user)
-    const UserLinks = useFetchLinksInBio(user)
-    const LinksBioSettings = useFetchLinkInBioSettings(user)
+    const { user, fetchUser, fetchUserLinks, LinksBioSettings } = props
 
     let background, blocks, menu, fontFamily, colorBtn, linkAsIcon
 
@@ -48,15 +42,14 @@ export default function LinkInBio({userView, settings}) {
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
     
-    const ifUserIsOwner = UserLinks?.some(e=> e.user === User?.email) && userView?.email !== User?.email
+    const ifUserIsOwner = fetchUserLinks?.some(e=> e.user === fetchUser?.email) && userView?.email !== fetchUser?.email
 
 
-    //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
-    if (user, UserLinks, LinksBioSettings)
+    //if (ifUserIsOwner) window.location.href = '/edit/' + fetchUser?.LinkInBioID
+    if (user, fetchUserLinks, LinksBioSettings)
     return (
         <>
-
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, UserLinks)} onDragStart={onDragStratLinkInBio} >
+            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, fetchUserLinks)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
                         display     : 'grid',
@@ -80,17 +73,17 @@ export default function LinkInBio({userView, settings}) {
                         <Head
                             props={{
                                 userView, 
-                                User, 
-                                UserLinks 
+                                fetchUser, 
+                                fetchUserLinks 
                             }} 
                         />
                         
-                        <Droppable droppableId={UserLinks?.length && 'UserLinks'} >
+                        <Droppable droppableId={fetchUserLinks?.length && 'fetchUserLinks'} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={UserLinks?.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
+                                <div className='grid gap container' id={fetchUserLinks?.length && 'fetchUserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
-                                        UserLinks
+                                        fetchUserLinks
                                         .filter(e=> !e.asIcon)
                                         .map((link, i)=> {
 
@@ -205,6 +198,7 @@ export default function LinkInBio({userView, settings}) {
             </DragDropContext>
         </>
     )
+    
 }
 
 
@@ -226,7 +220,7 @@ function Footer({userView}) {
 
 function Head({props}) {
 
-    const { userView, User, UserLinks } = props
+    const { userView, fetchUser, fetchUserLinks } = props
 
     return (
         <div className='grid gap-1rem p-1'>
@@ -236,14 +230,14 @@ function Head({props}) {
                 (
                     <div className='display justify-c'>
                         <div className='edit-image-link'>
-                            <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
+                            <img src={fetchUser?.photoURL} width={80} height={80} className='border-r-100' />
                             <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
                                 <PencilSquareIcon width={16} />
                                 <input 
                                     type='file' 
                                     hidden 
                                     id='upload-img' 
-                                    onChange={fileInput => { uploadPhoto(fileInput, User?.email) }}
+                                    onChange={fileInput => { uploadPhoto(fileInput, fetchUser?.email) }}
                                 />
                             </div>
                         </div>
@@ -252,7 +246,7 @@ function Head({props}) {
                 : 
                 (
                     <div className='display justify-c'>
-                        <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
+                        <img src={fetchUser?.photoURL} width={80} height={80} className='border-r-100' />
                     </div>
                 )
             }
@@ -260,15 +254,15 @@ function Head({props}) {
                 <div className='grid gap'>
                     <div className='display justify-c'>
                         <span className='f-s-18'>@</span>
-                        <span className='f-s-25 f-w-400'>{User?.name}</span>
+                        <span className='f-s-25 f-w-400'>{fetchUser?.name}</span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User?.description}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{fetchUser?.description}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>
                     {
-                    UserLinks
+                    fetchUserLinks
                     .filter(e=> e.linkInBio === true && e.asIcon === true)
                     .map((link, i)=> {
 
