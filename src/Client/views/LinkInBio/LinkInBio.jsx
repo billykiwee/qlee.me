@@ -51,7 +51,7 @@ export default function LinkInBio({userView, settings}) {
     const ifUserIsOwner = UserLinks?.some(e=> e.user === User?.email) && userView?.email !== User?.email
 
 
-    if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
+    //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     if (user, UserLinks, LinksBioSettings)
     return (
         <>
@@ -85,10 +85,10 @@ export default function LinkInBio({userView, settings}) {
                             }} 
                         />
                         
-                        <Droppable droppableId={UserLinks.length && 'UserLinks'} >
+                        <Droppable droppableId={UserLinks?.length && 'UserLinks'} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={UserLinks.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
+                                <div className='grid gap container' id={UserLinks?.length && 'UserLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
                                         UserLinks
                                         .filter(e=> !e.asIcon)

@@ -43,16 +43,16 @@ export function EditLinkInBio() {
 
     return (
     
-        <div className='grid blocks gap-1rem' >
+        <div className='grid blocks gap-2rem' >
             <div className='grid'>
                 <h2>Mon link in bio</h2>
 
                 <div className='grid gap-1rem p-1'>
 
                     <div className='display justify-s-b'>
-                        <span>Lien icon</span>
+                        <label className='f-s-20'>Lien icon</label>
                     </div>
-                    <div className='grid gap-1rem'  >
+                    <div className='display gap wrap grey border-r-04 p-1'  >
                         {
                             UserLinks
                             .filter(e=> e.linkInBio === true)
@@ -63,17 +63,17 @@ export function EditLinkInBio() {
                         }
                     </div>
                     <form>
-                        <div className='grid justify-s-b gap-1rem p-1 border-r-04 grey'>
+                        <div className='grid justify-s-b gap-1rem'>
                             <label className='f-s-20'>Blocks</label>
 
-                            <div className='grid'>
+                            <div className='grid p-1 border-r-04 grey'>
                                 <div className='display justify-s-b gap'>
                                     <span>Border</span>
                                     <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
                                 </div>
                                 <div className='display justify-s-b gap'>
                                     <span>Color</span>
-                                    <label className='w-3 h-3 border-r-100' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
+                                    <label className='w-3 h-3 border-r-100 border' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
                                     <input type='color' className='opacity-0 absolute' onChange={e=> {
                                         db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.color'] : e.target.value } )
 
@@ -82,19 +82,18 @@ export function EditLinkInBio() {
                                 </div>
                             </div>
 
-                            <div className='grid'>
+                            <div className='grid p-1 border-r-04 grey'>
                                 <div className='display justify-s-b gap'>
                                     <span>Background</span>
-                                    <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
                                 </div>
                                 <div className='display justify-s-b gap'>
                                     <span>Color</span>
-                                    <label className='w-3 h-3 border-r-100' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
+                                    <label className='w-3 h-3 border-r-100 border' htmlFor='background-color' style={{background : background?.color}} />
                                     <input type='color' className='opacity-0 absolute' onChange={e=> {
                                         db.collection('link-in-bio').doc('@' + userName).update({ ['background.color'] : e.target.value } )
 
                                         e.target.parentElement.children[1].style.background = e.target.value 
-                                    }} id='color' />
+                                    }} id='background-color'/>
                                 </div>
                             </div>
                             
@@ -127,23 +126,21 @@ export function EditLinkInBio() {
 function LinksAsIcon({ ul, putLinkAsIcon }) {
   
     return (
-        <div className={'p-1 white shadow border-r-04 h-2'} >
-            <label className='display gap-04 click' htmlFor={'l-' + ul.id}>
-                <SwitchInput 
-                    dimension={0.6} 
-                    checked={ul.asIcon} 
-                    id={'l-' + ul.id}
-                    onChange={(e) => {
-                        putLinkAsIcon({
-                            id: ul.id,
-                            checked: e.target.checked,
-                        })
-                    }}
-                />
-                <img src={ul.icon ?? getFavicon(ul.url)} width={16} className='border-r-100' />
-                <span>{ul.name}</span>
-            </label>
-        </div>
+        <label className='display gap-04 click' htmlFor={'l-' + ul.id}>
+            <SwitchInput 
+                dimension={0.6} 
+                checked={ul.asIcon} 
+                id={'l-' + ul.id}
+                onChange={(e) => {
+                    putLinkAsIcon({
+                        id: ul.id,
+                        checked: e.target.checked,
+                    })
+                }}
+            />
+            <img src={ul.icon ?? getFavicon(ul.url)} width={16} className='border-r-100' />
+            <span>{ul.name}</span>
+        </label>
     )
   }
   
