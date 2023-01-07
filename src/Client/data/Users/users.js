@@ -50,7 +50,7 @@ export function useFetchUserLinks(user) {
     }, [user])
   
     return linksData
-  }
+}
 
 
 

@@ -4,7 +4,7 @@ export default function Background({color, img, blur}) {
     return (
         <div style={{
             backgroundImage   : !color && `url(${img}`,
-            filter            : `blur(${blur}px)`,
+            filter            : !color && `blur(${blur}px)`,
             position          : 'fixed',
             width             : '100%',
             right             : 0,

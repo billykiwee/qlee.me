@@ -23,6 +23,7 @@ import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
 import { useFetchUser, useFetchUserLinks } from '../Client/data/Users/users'
 import { useFetchLinksInBio, useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
+import { useFetchLinks } from '../Client/data/Links/links'
 
 
 
@@ -52,19 +53,16 @@ export default function App() {
 
 
 
-    
+    let lol = useFetchLinks(user, 'link-in-bio')
 
-    const fetchUser = useFetchUser(user)
-    const fetchUserLinks = useFetchUserLinks(user)
-    const fetchLinksInBio = useFetchLinksInBio(user)
-    const fetchLinkInBioSettings = useFetchLinkInBioSettings(user)
+    console.log(lol);
 
     const props = {
         user,
-        fetchUser,
-        fetchUserLinks,
-        fetchLinksInBio,
-        fetchLinkInBioSettings
+        fetchUser             : useFetchUser(user),
+        fetchUserLinks        : useFetchUserLinks(user),
+        fetchLinksInBio       : useFetchLinksInBio(user),
+        fetchLinkInBioSettings: useFetchLinkInBioSettings(user),
     }
 
     const router = {
