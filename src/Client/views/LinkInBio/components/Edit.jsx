@@ -1,11 +1,13 @@
 import React, { useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import Main from '../../../../App/components/Main'
 import { SwitchInput } from '../../../../App/components/Switch'
 import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
+import { useFetchUser } from '../../../data/Users/users'
 import fetchSettings from '../../../lib/database/linkInBio/fetchSetting'
 import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
@@ -13,8 +15,10 @@ import LinkInBio from '../LinkInBio'
 
 export function EditLinkInBio() {
 
+    const { userName } = useParams()
     const [{user}] = useStateValue()
 
+    const User = useFetchUser(user)
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {
@@ -48,7 +52,7 @@ export function EditLinkInBio() {
                     <div className='display justify-s-b'>
                         <span>Lien icon</span>
                     </div>
-                    <div className='grid gap'  >
+                    <div className='grid gap-1rem'  >
                         {
                             UserLinks
                             .filter(e=> e.linkInBio === true)
@@ -58,6 +62,44 @@ export function EditLinkInBio() {
                             })
                         }
                     </div>
+                    <form>
+                        <div className='grid justify-s-b gap-1rem p-1 border-r-04 grey'>
+                            <label className='f-s-20'>Blocks</label>
+
+                            <div className='grid'>
+                                <div className='display justify-s-b gap'>
+                                    <span>Border</span>
+                                    <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
+                                </div>
+                                <div className='display justify-s-b gap'>
+                                    <span>Color</span>
+                                    <label className='w-3 h-3 border-r-100' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
+                                    <input type='color' className='opacity-0 absolute' onChange={e=> {
+                                        db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.color'] : e.target.value } )
+
+                                        e.target.parentElement.children[1].style.background = e.target.value 
+                                    }} id='color' />
+                                </div>
+                            </div>
+
+                            <div className='grid'>
+                                <div className='display justify-s-b gap'>
+                                    <span>Background</span>
+                                    <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
+                                </div>
+                                <div className='display justify-s-b gap'>
+                                    <span>Color</span>
+                                    <label className='w-3 h-3 border-r-100' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
+                                    <input type='color' className='opacity-0 absolute' onChange={e=> {
+                                        db.collection('link-in-bio').doc('@' + userName).update({ ['background.color'] : e.target.value } )
+
+                                        e.target.parentElement.children[1].style.background = e.target.value 
+                                    }} id='color' />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
             <div className='relative overflow-hidden border-r-1'>
