@@ -8,6 +8,8 @@ export async function DeleteLink(props) {
 
     const { link, setMsg, Stats, type, history } = props
 
+    console.log(props);
+
     setMsg({
         title      : 'Attention',
         message    : `Tu es sur le point de supprimer ${link.name}`,
