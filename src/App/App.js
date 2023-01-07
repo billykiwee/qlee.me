@@ -57,22 +57,17 @@ export default function App() {
         auth : {
             user,
         },
-
-        users : {
-            user: useFetchUser(user),
-            all : useFetchUser(),
+        user: {
+            profil     : useFetchUser(user),
+            links      : useFetchLinks(user),
+            link_in_bio: {
+                links   : useFetchLinks(user, 'link-in-bio'),
+                settings: useFetchLinkInBioSettings(user)
+            },
         },
-
-        links                 : {
-            userLinks   : useFetchLinks(user),
-            all         : useFetchLinks(),
-        },
-
-        link_in_bio : {
-            userLinks_in_bio: useFetchLinks(user, 'link-in-bio'),
-            settings        : useFetchLinkInBioSettings(user),
-            all             : useFetchLinks(),
-        }
+        users      : useFetchUser(),
+        links      : useFetchLinks(),
+        link_in_bio: useFetchLinks(),
     }
 
 

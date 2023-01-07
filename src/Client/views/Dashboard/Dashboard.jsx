@@ -20,16 +20,26 @@ import { useFetchUser, useFetchUserLinks } from '../../data/Users/users';
 export default function Dashboard({ props }) {
 
 
-    const { auth, users, links, link_in_bio  } = props
+    const { user } = props
 
-    console.log(auth, users, links, link_in_bio );
+
+    const Profil = user?.profil
+    const UserLinks = user?.links
+    const UserLinksInBio = user?.link_in_bio?.links
+
+    const LinkInBio = {
+        userlinks: user?.link_in_bio?.links,
+        settings :  user?.link_in_bio?.settings
+    }
+
+    console.log(LinkInBio.settings);
 
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
 
 
-    /* if (!user) return <Login />    
+   /*  if (!user) return <Login />    
     return (
 
         <>
