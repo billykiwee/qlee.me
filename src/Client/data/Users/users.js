@@ -3,29 +3,29 @@ import { db } from '../../../App/database/firebase';
 
 
 export function useFetchUser(user) {
-
-    const [userData, setUserData] = useState([])
-
-   useEffect(() => {
-        if (!user) return null
-
-        const query = db.collection('users').where('email', '==', user?.email)
-
-        const data = query.onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                console.error(`Aucun utilisateur trouvé avec l'email ${user?.email}`)
-                return null
-            }
-            const fetchedUser = snapshot.docs.map(doc => doc.data())
-            
-            setUserData(...fetchedUser)
-        })
-
-        return data 
-    }, [user])
-
-    return userData
-}
+    const [userData, setUserData] = useState([]);
+  
+    useEffect(() => {
+      if (!user) return;
+  
+      const query = db.collection("users").where("email", "==", user?.email);
+  
+      const data = query.onSnapshot(snapshot => {
+        if (snapshot.empty) {
+          console.error(`Aucun utilisateur trouvé avec l'email ${user?.email}`);
+          return;
+        }
+        const fetchedUser = snapshot.docs.map(doc => doc.data());
+  
+        setUserData(...fetchedUser);
+      });
+  
+      return () => data();
+    }, [user]);
+  
+    return userData;
+  }
+  
 
 
 export function useFetchUserLinks(user) {
