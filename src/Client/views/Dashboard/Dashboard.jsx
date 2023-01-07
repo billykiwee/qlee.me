@@ -29,6 +29,7 @@ export default function Dashboard({ props }) {
     const [Error, setError] = useState('')
 
 
+    console.log(props);
 
 
     if (!user) return <Login />    

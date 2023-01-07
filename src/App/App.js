@@ -61,6 +61,7 @@ export default function App() {
     const props = {
         User,
         UserLinks,
+        lol: 'bonkour'
     }
 
 
@@ -68,63 +69,63 @@ export default function App() {
     const router = {
         init : {
             path : '/*',
-            element : <Page404 />
+            element : <Page404 props={props} />
         },
         page404 : {
             path : '/page404',
-            element : <Page404 />
+            element : <Page404 props={props} />
         },
         home : {
             path : '/',
-            element : <Home />
+            element : <Home props={props} />
         },
         dashboard : {
             path : '/dashboard',
-            element : <Dashboard />
+            element : <Dashboard props={props} />
         },
         edit : {
             path : '/edit/:LinkID',
-            element : <Edit />
+            element : <Edit props={props} />
         },
         redirection : {
             path : '/:LinkID',
-            element : <Redirection />
+            element : <Redirection props={props} />
         },
         login : {
             path : '/login',
-            element : <Login />
+            element : <Login props={props} />
         },
         pricing : {
             path : '/pricing',
-            element : <Pricing />
+            element : <Pricing props={props} />
         },
         stats : {
             path : '/stats',
-            element : <Stats />
+            element : <Stats props={props} />
         },
         statsByLink : {
             path : '/stats/:LinkID',
-            element : <Stats />
+            element : <Stats props={props} />
         },
         payment : {
             path : '/payment/:plan',
-            element : <Payment />
+            element : <Payment props={props} />
         },
         linkinbio : {
             path : '/@:userName',
-            element : <LinkInBio />
+            element : <LinkInBio props={props} />
         },
         edit_linkinbio : {
             path : '/edit/@:userName',
-            element : <EditLinkInBio />
+            element : <EditLinkInBio props={props} />
         },
         profil : {
             path : '/profil',
-            element : <Profil />
+            element : <Profil props={props} />
         },
         terms : {
             path : '/terms',
-            element : <Terms />
+            element : <Terms props={props} />
         },
     }
 
