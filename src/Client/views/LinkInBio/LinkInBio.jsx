@@ -59,7 +59,6 @@ export default function LinkInBio({ userView, props }) {
             height: !userView && '100vh'
         }}>
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
-                
                 <div style={{
                     display     : 'grid',
                     alignContent: 'space-between',

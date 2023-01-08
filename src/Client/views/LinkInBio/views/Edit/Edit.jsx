@@ -140,21 +140,21 @@ export function EditLinkInBio({ props }) {
                     </div>
                     
                 </div>
-                <div className='relative overflow-hidden border-r-1'>
-                    <div className='' style={{
-                        backgroundImage   : !background?.color && `url(${background?.img?.url}`,
-                        filter            : `blur(${background?.img?.blur}px)`,
-                        left              : 0,
-                        right             : 0,
-                        height            : '100%',
-                        position          : 'absolute',
-                        backgroundSize    : 'cover',
-                        backgroundPosition: 'center',
-                        backgroundColor   : background?.color
-                    }} />
-                    
-                    <div className='border border-r-1 shadow'>
-                        <div>
+                <div>
+                    <div className='relative overflow-hidden border-r-1'>
+                        <div style={{
+                            backgroundImage   : !background?.color && `url(${background?.img?.url}`,
+                            filter            : `blur(${background?.img?.blur}px)`,
+                            left              : 0,
+                            right             : 0,
+                            height            : '100%',
+                            position          : 'absolute',
+                            backgroundSize    : 'cover',
+                            backgroundPosition: 'center',
+                            backgroundColor   : background?.color
+                        }} />
+                        
+                        <div className='border border-r-1 shadow'>
                             <LinkInBio userView={User} links={UserLinks} props={props} /> 
                         </div>
                     </div>
