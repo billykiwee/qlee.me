@@ -59,7 +59,8 @@ export default function LinkInBio({ userView, props }) {
                         display     : 'grid',
                         alignContent: 'space-between',
                         alignItems  : 'end',
-                        height      : '100%'
+                        height      : '100%',
+                        marginTop   : '-4rem;'
                     }}
                 >
 
