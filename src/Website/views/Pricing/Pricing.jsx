@@ -2,26 +2,18 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
-import { plans } from '../../../Admin/settings/plans'
-import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
-import { useStateValue } from '../../../App/provider/StateProvider'
-import formatCurrency from '../../../App/utils/formatCurrency'
-import { fetchUser } from '../../../Client/lib/database/user/fetchUser'
 import { Plans } from './data/plans'
 
 
-export default function Pricing() {
+export default function Pricing({ props }) {
 
     const history = useNavigate()
 
-    const [{user}] = useStateValue()
+    const { user } = props
 
-    const [User, setUser] = useState({})
+    const User = user?.profil
 
-    useEffect(e=> {
-        fetchUser(setUser, user?.email)
-    }, [user])
 
     return (
         <>

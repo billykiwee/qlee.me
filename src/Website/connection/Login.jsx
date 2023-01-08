@@ -10,8 +10,6 @@ import Main from '../../App/components/Main'
 import '../../App/css/login.css'
 import { getUnsplashImage } from '../../Client/lib/api/unsplash/unsplash'
 import { generateLetterImage } from '../../App/utils/generateLetterImage'
-import { fetchUser } from '../../Client/lib/database/user/fetchUser'
-import Dashboard from '../../Client/views/Dashboard/Dashboard'
 
 
 export default function Signup() {

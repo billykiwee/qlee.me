@@ -1,20 +1,9 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
-import { db, storage } from '../../../App/database/firebase'
 import getFavicon from '../../../App/utils/getFavicon'
-import formatDate from '../../../App/utils/formatDate'
-import QRCode from 'react-qr-code'
-import { minimizeString } from '../../../App/utils/minimizeString'
-import { isValidUrl } from '../../../App/utils/isValidUrl'
-import Popup, { PopUpcontent } from '../../../App/components/Popup'
-import { useStateValue } from '../../../App/provider/StateProvider'
-import Main from '../../../App/components/Main'
+import Popup from '../../../App/components/Popup'
 import Messages from '../../../App/utils/Messages'
-import { serverTimestamp } from 'firebase/firestore'
-import { download } from '../../lib/htmlToImage/download'
-import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
-import { fetchUser } from '../../lib/database/user/fetchUser'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
 import { BookmarkIcon, ChartPieIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
 import { addToLinkInBio } from './lib/addToLinkInBio'
@@ -23,11 +12,12 @@ import { SwitchInput } from '../../../App/components/Switch'
 import { formatNumber } from '../../../App/utils/formatNumber'
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import { SnackBar } from '../../../App/components/SnackBar'
-import UniqueID from '../../../App/utils/uniqueID'
 import QrCodeSection from './QrCode'
 import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
+import { useFetchAllLinks } from '../../data/links'
+
 
 
 
@@ -59,6 +49,8 @@ export default function Edit({ props }) {
 
     const [QrCode,setQrCode] = useState(false)
 
+
+    console.log(useFetchAllLinks(LinkID));
 
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>

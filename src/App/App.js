@@ -72,7 +72,7 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header props={props} />
             <Routes>
                 {
                     Object.values(router).map((route, i) => {
@@ -87,7 +87,7 @@ export default function App() {
                     })
                 }
             </Routes>
-            <Footer />
+            <Footer props={props} />
       </BrowserRouter>
     )
 

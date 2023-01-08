@@ -1,38 +1,30 @@
-import { useState, useEffect } from 'react';
-import { db } from '../../App/database/firebase';
+import { useState, useEffect } from 'react'
+import { db } from '../../App/database/firebase'
 
 
-export function useFetchLinks(LinkID) {
+export function useFetchAllLinks(LinkID) {
 
-    const [Links, setLinks] = useState([]);
-  
+    const [linksData, setLinksData] = useState([])
+
     useEffect(() => {
-        if (!user) return
-    
-        const query = db.collection("links").where("id", "==", LinkID)
-    
-        const data = query.onSnapshot(snapshot => {
+
+        const data = db.collection('links').onSnapshot(snapshot => {
             if (snapshot.empty) {
-                console.error(`no user found with email: ${user?.email}`)
-                return
+                setLinksData("no links")
             }
+    
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
     
-            setLinks(...fetchedLinks)
+            if (!LinkID) {
+                setLinksData(fetchedLinks.sort((x, y) => y.date - x.date))
+            }
+
+            setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
         })
     
         return () => data()
-    }, [user])
+
+    }, [LinkID])
   
-    return Links
-}
-  
-
-
-const query = (LinkID) => {
-    if (LinkID) {
-        return db.collection("links").where("id", "==", LinkID)
-    }
-
-    return db.collection("links")
+    return linksData
 }

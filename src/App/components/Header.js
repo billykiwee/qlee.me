@@ -1,34 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { getDevice } from '../../Client/lib/getDevice'
-import { ProfilImg } from '../../Website/Home'
-import { db } from '../database/firebase'
 import { useStateValue } from '../provider/StateProvider'
 import { ArrowDownCircleIcon, Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
-import { fetchLinks } from '../../Client/lib/database/links/fetchLinks'
-import { fetchUser } from '../../Client/lib/database/user/fetchUser'
 import { toggleTheme } from '../functions/setTheme'
+import { useFetchUser } from '../../Client/data/user/user'
 
 
-export default function Header({visible}) {
+export default function Header({props}) {
 
-
-    const [{user}] = useStateValue()
-
-    const [User, setUser] = useState([])
-
-    useEffect(e=> {
-       fetchUser(setUser, user?.email)
-    }, [user])
-
+    const User = props?.user?.profil
 
     const [Menu, setMenu] = useState(false)
 
 
     const menu = [
         {
-            name: user ? 'Mon compte' : 'Se connecter',
-            link:  user ? '/profil' : '/login',
+            name: User ? 'Mon compte' : 'Se connecter',
+            link:  User ? '/profil' : '/login',
             icon: <UserIcon width={16} className='c-black' />
         },
         {
@@ -132,7 +121,7 @@ export default function Header({visible}) {
                     </button>
                     <div className='display gap-04 border p-04 h-2 border-r-2'>
                         {
-                            user 
+                            User 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
                                 <img src={User?.photoURL ?? '/images/user-solid.svg'} className='border-r-100' width={32} height={32} />

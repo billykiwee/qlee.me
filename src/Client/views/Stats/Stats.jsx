@@ -99,9 +99,9 @@ export default function Stats({ props }) {
                                             </div>
                                         </div>
 
-                                        <Block statType={data.device} title='Appareil' device />
-                                        <Block statType={data.reference} title='Source du trafic' icon='globe' url />
-                                        <Block statType={data.localisation} title='Localisation' icon='localisation' country />
+                                        <Block User={User} statType={data.device} title='Appareil' device />
+                                        <Block User={User} statType={data.reference} title='Source du trafic' icon='globe' url />
+                                        <Block User={User} statType={data.localisation} title='Localisation' icon='localisation' country />
                                     
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >

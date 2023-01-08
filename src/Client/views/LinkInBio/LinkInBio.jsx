@@ -17,12 +17,14 @@ export default function LinkInBio({ userView, props }) {
 
     const { userName } = useParams()
 
+    const { user } = props
 
-    const { user, fetchUser, fetchLinksInBio, fetchLinkInBioSettings } = props
+    const LinkInBio = user?.link_in_bio?.links
+    const LinkInBioSettings = user?.link_in_bio?.settings
 
     let background, blocks, menu, fontFamily, colorBtn, linkAsIcon
 
-    if (fetchLinkInBioSettings) {
+    if (LinkInBioSettings) {
       ({
         background,
         blocks,
@@ -30,10 +32,10 @@ export default function LinkInBio({ userView, props }) {
         fontFamily,
         colorBtn,
         linkAsIcon
-      } = fetchLinkInBioSettings)
+      } = LinkInBioSettings)
     }
 
-    console.log(fetchLinksInBio);
+    console.log(LinkInBio);
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  

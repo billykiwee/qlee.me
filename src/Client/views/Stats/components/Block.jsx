@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
-import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { isValidUrl } from '../../../../App/utils/isValidUrl'
-import { fetchUser } from '../../../lib/database/user/fetchUser'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Links/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
@@ -13,15 +11,7 @@ import { CopyClip } from '../../Links/lib/CopyClip'
 import formatDate from '../../../../App/utils/formatDate'
 
 
-export const Block = ({statType, url, title, country, device, click}) => {
-
-    const [{user}] = useStateValue()
-
-    const [User, setUser] = useState([])
-
-    useEffect(e=> {
-        fetchUser(setUser, user?.email)
-    }, [user]) 
+export const Block = ({User, statType, url, title, country, device, click}) => {
       
 
     return (
