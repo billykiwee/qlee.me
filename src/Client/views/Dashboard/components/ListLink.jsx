@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/24/solid'
+import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
@@ -55,7 +55,7 @@ export default function ListLink({links, User}) {
                     links.length < isUserPremium(User).max_links 
                     ?
                     <div className='display gap'>
-                        <img src='/images/info.svg' className='w-1 h-1 opacity' />
+                        <InformationCircleIcon width={20} className='c-black' />
                         <small className='c-grey f-w-300'>
                             Il te reste {isUserPremium(User).max_links - links.length} {isUserPremium(User).max_links - links.length > 1 ? 'disponibles' : 'disponible'}
                         </small>
@@ -63,7 +63,7 @@ export default function ListLink({links, User}) {
                     :
                     <div className='grid gap-04'>
                         <div className='display gap'>
-                            <img src='/images/info.svg' className='w-1 h-1'  />
+                            <InformationCircleIcon width={20} className='c-black' />
                             <small className='c-red f-w-300'>Tu dois upgrade ton compte</small>
                         </div>
                         <div className='display justify-c'>

@@ -25,7 +25,10 @@ export default function LinkInBio({ userView, props }) {
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
-    }, [User])
+
+        document.querySelector('body').style.background = background.color
+
+    }, [User, LinkInBioSettings])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
@@ -44,6 +47,7 @@ export default function LinkInBio({ userView, props }) {
         }
 
     }, [openSet])
+
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID

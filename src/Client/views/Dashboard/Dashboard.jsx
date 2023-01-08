@@ -26,13 +26,6 @@ export default function Dashboard({ props }) {
 
 
 
-  window.onclick = e=> {
-    db.collection('links').doc('kfkfkfk').update({
-        lol: 'e'
-    })
-  }
-
-
     if (!auth) return <Login />    
     return (
 
