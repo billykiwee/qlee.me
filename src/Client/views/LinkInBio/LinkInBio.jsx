@@ -16,7 +16,7 @@ export default function LinkInBio({ userView, props }) {
     const { user } = props
 
     const User = user?.profil
-    const LinkInBioLinks = user?.link_in_bio?.links
+    const [LinkInBioLinks, setLinkInBioLinks] = useState(user?.link_in_bio?.links)
     const LinkInBioSettings = user?.link_in_bio?.settings[0]
 
     let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
@@ -73,10 +73,10 @@ export default function LinkInBio({ userView, props }) {
                             }} 
                         />
                         
-                        <Droppable droppableId={'LinkInBioLinks'} >
+                        <Droppable droppableId={LinkInBioLinks[0]?.id} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={'LinkInBioLinks'} {...provided.droppableProps} ref={provided.innerRef} >
+                                <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
                                         LinkInBioLinks
                                         .filter(e=> !e.asIcon)
