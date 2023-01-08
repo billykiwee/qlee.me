@@ -50,8 +50,6 @@ export default function Edit({ props }) {
     const [QrCode,setQrCode] = useState(false)
 
 
-    console.log(useFetchAllLinks(LinkID));
-
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (

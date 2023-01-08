@@ -29,8 +29,16 @@ export default function LinkInBio({ userView, props }) {
     .some(e=> e.user === User.email) && userView?.email !== User.email
 
 
-    const [openSet, setOpenSet] = useState()
+    const [openSet, setOpenSet] = useState('')
+    useEffect(e=> {
 
+        if (openSet) {
+            window.onclick = e => {
+                if (!e.target.closest('.openSet')) setOpenSet('')
+            }
+        }
+
+    }, [openSet])
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
@@ -121,26 +129,29 @@ export default function LinkInBio({ userView, props }) {
                                                                     <div className='display justify-c w-100p'>
                                                                         <span className='f-s-16'>{link.name}</span>
                                                                     </div>
+
                                                                     {
                                                                         userView && 
                                                                         <div className='display gap'>
-                                                                            <div  className='display justify-c hover border-r-100 w-2 h-2' onClick={e=> setOpenSet(link.id) }>
+                                                                            <div className='display justify-c hover border-r-100 w-2 h-2 openSet' onClick={e=> setOpenSet(openSet === '' ? link.id : link.id ) }>
                                                                                 <EllipsisHorizontalIcon width={28} /> 
 
-                                                                                <div className='grid p-04 white border border-r-04 disable absolute' style={{
-                                                                                    display : openSet === link.id ? 'flex' : 'none',
-                                                                                    right   : 0,
-                                                                                    top     : '2rem',
-                                                                                    position: 'absolute',
-                                                                                    zIndex  : 9,
-                                                                                }}>
+                                                                                <div className='grid p-04 white border border-r-04 disable absolute' 
+                                                                                    style={{
+                                                                                        display : openSet === link.id ? 'flex' : 'none',
+                                                                                        right   : 0,
+                                                                                        top     : '2rem',
+                                                                                        position: 'absolute',
+                                                                                        zIndex  : 9,
+                                                                                    }}
+                                                                                >
                                                                                     <Link to={'/edit/'+ link.id}>
-                                                                                        <div className='display gap hover p-04 border-r-04'>
+                                                                                        <div className='display gap hover p-04 border-r-04 h-2'>
                                                                                             <PencilSquareIcon width={12} />
                                                                                             <small>Modifier</small>
                                                                                         </div>
                                                                                     </Link>
-                                                                                    <div className='display gap hover p-04 border-r-04' onClick={e=> deleteLinkFromBio(link.id) }>
+                                                                                    <div className='display gap hover p-04 border-r-04 h-2' onClick={e=> deleteLinkFromBio(link.id) }>
                                                                                         <TrashIcon width={12} className='c-red' />
                                                                                         <small>Supprimer</small>
                                                                                     </div>
@@ -156,6 +167,7 @@ export default function LinkInBio({ userView, props }) {
                                                                             />
                                                                         </div>  
                                                                     }
+
                                                                 </div>
                                                             }
                                                         </div>

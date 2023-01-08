@@ -3,51 +3,29 @@ import { db } from '../../App/database/firebase';
 
 
 export function useFetchUsers(user) {
-    const [userData, setUserData] = useState([]);
-  
+
+    const [Users, setUsers] = useState([])
+
     useEffect(() => {
-        if (!user) return
-    
-        const query = db.collection("users").where("email", "==", user?.email)
-    
-        const data = query.onSnapshot(snapshot => {
+
+        const data = db.collection('users').onSnapshot(snapshot => {
             if (snapshot.empty) {
-                console.error(`no user found with email: ${user?.email}`)
-                return
+                setUsers("no users")
             }
-            const fetchedUser = snapshot.docs.map(doc => doc.data())
     
-            setUserData(...fetchedUser)
+            const fetchedUsers = snapshot.docs.map(doc => doc.data())
+    
+            if (!user) {
+                setUsers(fetchedUsers)
+            }
+
+            setUsers(fetchedUsers.filter(e=> e.email === user?.email)[0])
         })
     
         return () => data()
+
     }, [user])
   
-    return userData
+    return Users
 }
   
-
-
-export function useFetchUserLinks(user) {
-    const [linksData, setLinksData] = useState([]);
-  
-    useEffect(() => {
-        if (!user) return
-    
-        const query = db.collection("links").where("user", "==", user?.email).orderBy("date", "desc")
-    
-        const data = query.onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                setLinksData("no links")
-            }
-    
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-    
-            setLinksData(fetchedLinks.sort((x, y) => y.date - x.date))
-        })
-    
-        return () => data()
-    }, [user])
-  
-    return linksData
-}
