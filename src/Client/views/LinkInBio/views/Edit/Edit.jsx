@@ -55,11 +55,14 @@ export function EditLinkInBio({ props }) {
                                     <label className='f-s-20'>Blocks</label>
                                     <div className='display justify-s-b gap'>
                                         <span>Border</span>
-                                        <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
+                                        <div className='display grey gap p-1'>
+                                            <div className='click w-3 h-2 border' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '0.4' } )} />
+                                            <div className='click w-3 h-2 border border-r-2' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '100' } )} />
+                                        </div>
                                     </div>
                                     <div className='display justify-s-b gap'>
                                         <span>Color</span>
-                                        <label className='w-3 h-3 border-r-100 border' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
+                                        <label className='w-3 h-3 border-r-100 border click' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
                                         <input type='color' className='opacity-0 absolute' onChange={e=> {
                                             db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.color'] : e.target.value } )
 
@@ -80,13 +83,19 @@ export function EditLinkInBio({ props }) {
                                     </div>
                                     <div className='display justify-s-b gap'>
                                         <span>Color</span>
-                                        <label className='w-3 h-3 border-r-100 border' htmlFor='background-color' style={{background : background?.color}} />
+                                        <label className='w-3 h-3 border-r-100 border click' htmlFor='background-color' style={{background : background?.color}} />
                                         <input type='color' className='opacity-0 absolute' onChange={e=> {
                                             db.collection('link-in-bio').doc('@' + userName).update({ ['background.color'] : e.target.value } )
 
                                             e.target.parentElement.children[1].style.background = e.target.value 
                                         }} id='background-color'/>
                                     </div>
+                                </div>
+
+                                <div>
+                                    <button className='display h-4 p-1 blue'>
+                                        <span className='f-s-16 c-black'>Enregistré</span>
+                                    </button>
                                 </div>
                                 
                             </div>
@@ -105,7 +114,8 @@ export function EditLinkInBio({ props }) {
                         backgroundPosition: 'center',
                         backgroundColor   : background?.color
                     }} />
-                    <div className='p-1'>
+                    
+                    <div className='border border-r-1 shadow'>
                         <LinkInBio userView={User} links={UserLinks} props={props} /> 
                     </div>
                 </div>

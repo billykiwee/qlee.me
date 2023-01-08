@@ -9,6 +9,7 @@ import { Footer } from './components/Footer'
 import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
 import Main from '../../../App/components/Main'
+import { toggleTheme } from '../../../App/functions/setTheme'
 
 
 export default function LinkInBio({ userView, props }) {
@@ -28,8 +29,7 @@ export default function LinkInBio({ userView, props }) {
     useEffect(e=> {
         setLinkInBioLinks(Links)
 
-        document.querySelector('body').style.background = background?.color
-
+        //document.querySelector('body').style.background = background?.color
     }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
@@ -59,14 +59,13 @@ export default function LinkInBio({ userView, props }) {
             height: !userView && '100vh'
         }}>
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
-                <div 
-                    style={{
-                        display     : 'grid',
-                        alignContent: 'space-between',
-                        alignItems  : 'end',
-                        height      : '100%'
-                    }}
-                >
+                
+                <div style={{
+                    display     : 'grid',
+                    alignContent: 'space-between',
+                    alignItems  : 'end',
+                    height      : '100%'
+                }}>
 
                     {
                         !userView &&
@@ -123,10 +122,8 @@ export default function LinkInBio({ userView, props }) {
                         </Droppable>
                     </div>
                             
-
                     {
-                        ifUserIsOwner &&
-                        <Footer />
+                        ifUserIsOwner && <Footer />
                     }
 
                 </div>

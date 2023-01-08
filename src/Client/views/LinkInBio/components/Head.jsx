@@ -37,8 +37,10 @@ export function Head({props}) {
             <div className='grid gap-1rem'>
                 <div className='grid gap'>
                     <div className='display justify-c'>
-                        <span className='f-s-18'>@</span>
-                        <span className='f-s-25 f-w-400'>{User?.name}</span>
+                        <span className='f-s-25 f-w-400' style={{color: 'black'}}>
+                            <span className='f-s-18'>@</span>
+                            {User?.name}
+                        </span>
                     </div>
                     <div className='display justify-c'>
                         <span className='f-s-16 c-grey f-w-300 text-align-c'>{User?.description}</span>
