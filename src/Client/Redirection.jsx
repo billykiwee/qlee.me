@@ -50,9 +50,27 @@ export default function Redirection() {
     }
 
 
+    function checkURL() {
+
+        db.ref('links').once('id')
+        .then(snapshot=> {
+          /*   if (snapshot.hasChild(LinkID)) {
+                return true;
+            } else {
+                return false;
+            } */
+
+            console.log(snapshot.val());
+        })
+    }
+
+
+    console.log(checkURL());
+
+
     useEffect(() => {
-        fetchData()
-      }, [LinkID])
+       // fetchData()
+    }, [LinkID])
       
  
     useEffect(e=> {

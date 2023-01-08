@@ -150,7 +150,7 @@ export default function Home() {
     }, [])
 
     return (
-        <Main className='main-home'>
+        <>
 
             <div className='grid blocks w-100p'>
                 <div className='display justify-s-b align-top'>
@@ -361,7 +361,7 @@ export default function Home() {
 
             </Swiper> */}
 
-        </Main>
+        </>
     )
 }
 
