@@ -38,11 +38,11 @@ export default function Redirection() {
             .doc(statID)
             .set(stat)
 
-            window.location.href = link.url
+            window.location = link.url
 
         } catch (err) {
             console.log(err)
-            window.location.href = '/page404'
+            window.location = '/page404'
         }
     }
 

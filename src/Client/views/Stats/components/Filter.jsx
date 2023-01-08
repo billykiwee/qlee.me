@@ -56,7 +56,7 @@ export default function Filter({props}) {
                             }}
                             className={(props.Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border'} 
                         >
-                            <MagnifyingGlassIcon width={20} className='c-grey' />
+                            <MagnifyingGlassIcon width={20} className='c-black' />
                         </button>
                     </div>
 
