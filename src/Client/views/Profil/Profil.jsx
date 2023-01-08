@@ -15,13 +15,13 @@ import { useFetchUser } from '../../data/Users/users'
 
 
 
-export default function Profil() {
+export default function Profil({ props }) {
+
+    const { user } = props
 
     const history = useNavigate()
 
-    const [{user}] = useStateValue()
-
-    const User =  useFetchUser(user)
+    const User =  user?.profil
 
 
     async function uploadPhoto(fileInput, userEmail) {

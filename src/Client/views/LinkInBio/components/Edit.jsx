@@ -7,18 +7,18 @@ import { SwitchInput } from '../../../../App/components/Switch'
 import { db } from '../../../../App/database/firebase'
 import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
-import { useFetchUser } from '../../../data/Users/users'
 import fetchSettings from '../../../lib/database/linkInBio/fetchSetting'
 import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
 
-export function EditLinkInBio() {
+export function EditLinkInBio({ props }) {
+
+    const { user } = props
 
     const { userName } = useParams()
-    const [{user}] = useStateValue()
 
-    const User = useFetchUser(user)
+    const User = user?.profil
     const [UserLinks, setUserLinks] = useState([])
 
     useEffect(e=> {

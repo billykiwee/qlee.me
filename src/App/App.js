@@ -23,9 +23,9 @@ import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
 import { useFetchUsers } from '../Client/data/Users/users'
 import { useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
-import { useFetchLinks } from '../Client/data/Links/links'
 
-import useGetAuth from '../Client/data/user/auth'
+import useGetAuth from '../Client/data/auth/auth'
+import { useFetchLinks } from '../Client/data/user/links'
 
 
 
@@ -35,7 +35,6 @@ export default function App() {
 
     const props = {
         user: {
-            auth       : user,
             profil     : useFetchUsers(user),
             links      : useFetchLinks(user),
             link_in_bio: {
@@ -43,6 +42,7 @@ export default function App() {
                 settings: useFetchLinkInBioSettings(user)
             },
         },
+        auth       : user,
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),

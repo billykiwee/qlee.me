@@ -20,16 +20,17 @@ import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
 
 
 
-export default function Stats() {
+export default function Stats({ props }) {
+
+    const { user } = props
 
     const history = useNavigate()
 
     const { LinkID } = useParams()
 
-    const [{user}] = useStateValue()
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchUserLinks(user)
+    const User = user?.profil
+    const UserLinks = user?.links
     const LinkStat = useFetchStats(LinkID)
     
 

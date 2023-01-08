@@ -14,7 +14,7 @@ import Login from '../../../Website/connection/Login'
 
 export default function Dashboard({ props }) {
 
-    const { user } = props
+    const { auth, user } = props
 
     const Profil = user?.profil
     const UserLinks = user?.links
@@ -25,7 +25,7 @@ export default function Dashboard({ props }) {
 
 
 
-    if (!user.auth) return <Login />    
+    if (!auth) return <Login />    
     return (
 
         <>

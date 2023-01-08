@@ -33,20 +33,23 @@ import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
 
 
 
-export default function Edit() {
+export default function Edit({ props }) {
+
+    const { user } = props
 
     const history = useNavigate()
     const { LinkID } = useParams()
 
-    const [{user}] = useStateValue()
+    const User = user?.profil
 
-    const User = useFetchUser(user)
-    const UserLinks = useFetchUserLinks(user)
+    const UserLinks = user?.links
     const Stats = useFetchStats(LinkID)
     
 
 
-    const Link = UserLinks?.filter(data=> data.user === user?.email && data.id === LinkID).map(link=> link)[0]
+    const Link = UserLinks
+    .filter(data=> data.user === User.email && data.id === LinkID)
+    .map(link=> link)[0]
 
 
     
@@ -69,6 +72,7 @@ export default function Edit() {
             :
             <>
                 <Popup content={PopUpMessage} />
+
                 <div className='display'>
                     <h2>Modifier le lien</h2>
                 </div>
