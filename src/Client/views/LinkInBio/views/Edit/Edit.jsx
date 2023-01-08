@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { SwitchInput } from '../../../../App/components/Switch'
-import { db } from '../../../../App/database/firebase'
-import getFavicon from '../../../../App/utils/getFavicon'
-import LinkInBio from '../LinkInBio'
+import { SwitchInput } from '../../../../../App/components/Switch'
+import { db } from '../../../../../App/database/firebase'
+import getFavicon from '../../../../../App/utils/getFavicon'
+import LinkInBio from '../../LinkInBio'
+import { LinksAsIcon } from './components/LinkAsIcon'
 
 
 export function EditLinkInBio({ props }) {
@@ -112,25 +113,3 @@ export function EditLinkInBio({ props }) {
     )
 }
 
-
-function LinksAsIcon({ ul, putLinkAsIcon }) {
-  
-    return (
-        <label className='display gap-04 click' htmlFor={'l-' + ul.id}>
-            <SwitchInput 
-                dimension={0.6} 
-                checked={ul.asIcon} 
-                id={'l-' + ul.id}
-                onChange={(e) => {
-                    putLinkAsIcon({
-                        id: ul.id,
-                        checked: e.target.checked,
-                    })
-                }}
-            />
-            <img src={ul.icon ?? getFavicon(ul.url)} width={16} className='border-r-100' />
-            <span>{ul.name}</span>
-        </label>
-    )
-  }
-  

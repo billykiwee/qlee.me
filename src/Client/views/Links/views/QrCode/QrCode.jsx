@@ -1,11 +1,11 @@
 import { ArrowDownOnSquareIcon } from '@heroicons/react/24/outline'
 import { ArrowDownIcon, ChevronDownIcon, ChevronUpIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
-import QRCode from 'react-qr-code'
-import { SwitchInput } from '../../../App/components/Switch'
-import { colors } from '../../../App/utils/generateLetterImage'
-import getFavicon from '../../../App/utils/getFavicon'
-import { download } from '../../lib/htmlToImage/download'
+import { SwitchInput } from '../../../../../App/components/Switch'
+import { colors } from '../../../../../App/utils/generateLetterImage'
+import getFavicon from '../../../../../App/utils/getFavicon'
+import { download } from '../../../../lib/htmlToImage/download'
+import QrCodeSvg, { EditQrCode } from './components/Edit'
 
 
 
@@ -29,7 +29,7 @@ export default function QrCodeSection({Link, QrCode}) {
 
             <div className='border border-r-1 p-2 grid gap-2rem justify-s-a white '>
                 <div className='display justify-c'>
-                    <QRCODE 
+                    <EditQrCode 
                         style={{
                             frameActive,
                             frameColor,
@@ -134,65 +134,3 @@ export default function QrCodeSection({Link, QrCode}) {
 }
 
 
-const QRCODE = ({style, link}) => {
-
-    if (style.frameActive)
-    return (
- 
-        <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
-            <div className='display white p-1 border-r-04 justify-c' style={{background : 'white'}}>
-                {
-                    style.logo &&
-                    <div 
-                        style={{ 
-                            backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
-                            backgroundPosition: 'center', 
-                            backgroundSize: 'cover' 
-                        }}
-                        className='w-2 h-2 border-r-100 absolute white' 
-                    />
-                }
-                <QRCode
-                    bgColor='white'
-                    fgColor={style.lineColor ?? 'black'}
-                    className='click qr-code-svg'
-                    level='H'
-                    size={144}
-                    value={link.shortLink}
-                />
-            </div> 
-            {
-                style.text &&
-                <div className='display justify-c'>
-                    <span className='f-s-25'>{style.text}</span>  
-                </div> 
-            }
-        </div> 
-    )
-
-    else return (
-        <div className='grid gap-1rem border-r-1 gap-1rem p-1' id='qr-code-img' > 
-            <div className='display p-1 border-r-04 justify-c'>
-                {
-                    style.logo &&
-                    <div 
-                        style={{ 
-                            backgroundImage : `url(${link?.icon || getFavicon(link?.url)})`, 
-                            backgroundPosition: 'center', 
-                            backgroundSize: 'cover' 
-                        }}
-                        className='w-2 h-2 border-r-100 absolute white' 
-                    />
-                }
-                <QRCode
-                    bgColor='red'
-                    fgColor={style.lineColor ?? 'black'}
-                    className='click qr-code-svg'
-                    level='H'
-                    size={144}
-                    value={link.shortLink}
-                />
-            </div> 
-        </div> 
-    )
-}
