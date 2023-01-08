@@ -8,6 +8,7 @@ import { Head } from './components/Head'
 import { Footer } from './components/Footer'
 import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
+import Main from '../../../App/components/Main'
 
 
 export default function LinkInBio({ userView, props }) {
@@ -29,11 +30,7 @@ export default function LinkInBio({ userView, props }) {
 
         document.querySelector('body').style.background = background?.color
 
-        if (!window.location.href.includes('edit')) {
-            document.querySelector('main').style.paddingTop = '4rem'
-        }
-
-    }, [User, LinkInBioSettings])
+    }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
@@ -57,7 +54,10 @@ export default function LinkInBio({ userView, props }) {
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     return (
-        <>
+        <div style={{
+            margin: '2rem',
+            height: !userView && '100vh'
+        }}>
             <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
@@ -131,7 +131,7 @@ export default function LinkInBio({ userView, props }) {
 
                 </div>
             </DragDropContext>
-        </>
+        </div>
     )
     
 }

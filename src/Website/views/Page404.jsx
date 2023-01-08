@@ -5,7 +5,7 @@ import Main from '../../App/components/Main'
 
 export default function Page404() {
     return (
-        <>
+        <Main>
             <div className='grid gap-2rem'>
                 <div className='grid'>
                     <h2>Petite ereur ? 🤔</h2>
@@ -19,6 +19,6 @@ export default function Page404() {
                     </Link>
                 </div>
             </div>
-        </>
+        </Main>
     )
 }

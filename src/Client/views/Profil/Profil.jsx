@@ -8,6 +8,7 @@ import Login from '../../../Website/connection/Login'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import Main from '../../../App/components/Main'
 
 
 
@@ -51,7 +52,7 @@ export default function Profil({ props }) {
     if (!user) return <Login />
     if (User)
     return (
-        <>
+        <Main>
             <div className='grid gap-2rem blocks'>
                 <div className='grid gap-2rem'>
                     <div className='display gap-1rem'>
@@ -126,7 +127,7 @@ export default function Profil({ props }) {
                 </div>
 
             </div>
-        </>
+        </Main>
     )
 }
 

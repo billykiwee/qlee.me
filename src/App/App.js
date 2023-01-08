@@ -18,7 +18,7 @@ import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit/Edit'
-import Main from './components/Main'
+
 
 import useGetAuth from '../Client/data/auth/auth'
 import { useFetchUsers } from '../Client/data/users'
@@ -81,7 +81,7 @@ export default function App() {
                             key={i}
                             path={route.path}
                             exact
-                            element={<Main>{React.cloneElement(route.element, { props: props })}</Main>}
+                            element={React.cloneElement(route.element, { props: props })}
                         />
                         );
                     })

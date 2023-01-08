@@ -18,6 +18,7 @@ import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
 import { useFetchAllLinks } from '../../data/links'
 import { db } from '../../../App/database/firebase'
+import Main from '../../../App/components/Main'
 
 
 
@@ -54,7 +55,7 @@ export default function Edit({ props }) {
 
     if (PopUpMessage?.loader) return <Messages loader={PopUpMessage?.loader}/>
     return (
-        <>
+        <Main>
         {
             PopUpMessage?.loader
             ? <Messages loader={PopUpMessage?.loader}/>
@@ -285,7 +286,7 @@ export default function Edit({ props }) {
             </>
             }
 
-        </>
+        </Main>
 
     )
 }

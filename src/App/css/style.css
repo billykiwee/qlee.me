@@ -59,7 +59,7 @@ main {
     flex: 1 0 0;
     display: flex;
     flex-direction: column;
-    padding-top: 8rem;
+    padding-top: 10rem;
     max-width: 1000px;
 
 }

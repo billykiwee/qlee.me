@@ -59,7 +59,7 @@ export default function Stats({ props }) {
 
 
     return (
-        <>
+        <Main>
 
             <Popup content={Msg} />
 
@@ -172,7 +172,7 @@ export default function Stats({ props }) {
                 </div>
 
             </div>
-        </>
+        </Main>
     )
 }
 

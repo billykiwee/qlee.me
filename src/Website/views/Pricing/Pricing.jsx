@@ -2,6 +2,7 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
+import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
 import { Plans } from './data/plans'
 
@@ -16,7 +17,7 @@ export default function Pricing({ props }) {
 
 
     return (
-        <>
+        <Main>
 
 
             <div className='grid gap-2rem'>
@@ -113,7 +114,7 @@ export default function Pricing({ props }) {
 
             <FAQ /> 
 
-        </>
+        </Main>
     )
 }
 

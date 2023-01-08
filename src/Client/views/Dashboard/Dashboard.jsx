@@ -10,6 +10,7 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import { db } from '../../../App/database/firebase';
+import Main from '../../../App/components/Main';
 
 
 
@@ -29,7 +30,7 @@ export default function Dashboard({ props }) {
     if (!auth) return <Login />    
     return (
 
-        <>
+        <Main>
             <div className='grid gap-3rem blocks w-100' >
 
 
@@ -133,7 +134,7 @@ export default function Dashboard({ props }) {
             </div>
 
             <SnackBar content={Msg} setMsg={setMsg} />
-        </>
+        </Main>
     )
 }
 
