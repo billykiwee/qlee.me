@@ -17,6 +17,7 @@ import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
 import { useFetchAllLinks } from '../../data/links'
+import { db } from '../../../App/database/firebase'
 
 
 

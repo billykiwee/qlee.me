@@ -9,6 +9,7 @@ import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
+import { db } from '../../../App/database/firebase';
 
 
 
@@ -23,6 +24,13 @@ export default function Dashboard({ props }) {
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
+
+
+  window.onclick = e=> {
+    db.collection('links').doc('kfkfkfk').update({
+        lol: 'e'
+    })
+  }
 
 
     if (!auth) return <Login />    
