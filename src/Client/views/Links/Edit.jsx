@@ -102,7 +102,7 @@ export default function Edit({ props }) {
                                                     </div>
                                                     <div className='display justify-c gap-04'>
                                                         <EyeIcon width={22} />
-                                                        <span className='f-s-20'>{formatNumber(Link?.views)} clics</span>
+                                                        <span className='f-s-20'>{formatNumber(Stats.length)} clics</span>
                                                     </div>
                                                    
                                                 </div>

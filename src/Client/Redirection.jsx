@@ -30,16 +30,13 @@ export default function Redirection() {
                 reference  : document.referrer ?? null,
                 device     : getDevice(),
                 performance: performance.now() - startLoading,
-                date       : serverTimestamp()
+                date       : serverTimestamp(),
             }
 
-            await db.collection('stats')
+            await db
+            .collection('stats')
             .doc(statID)
             .set(stat)
-
-            await db.collection('links')
-            .doc(link.id)
-            .update({ views: link.views + 1 })
 
             window.location.href = link.url
 
@@ -50,26 +47,8 @@ export default function Redirection() {
     }
 
 
-    function checkURL() {
-
-        db.ref('links').once('id')
-        .then(snapshot=> {
-          /*   if (snapshot.hasChild(LinkID)) {
-                return true;
-            } else {
-                return false;
-            } */
-
-            console.log(snapshot.val());
-        })
-    }
-
-
-    console.log(checkURL());
-
-
     useEffect(() => {
-       // fetchData()
+       fetchData()
     }, [LinkID])
       
  
