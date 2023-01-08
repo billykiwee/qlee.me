@@ -48,7 +48,21 @@ export function EditLinkInBio({ props }) {
                                 })
                             }
                         </div>
-                        <form>
+
+                        <div className='grid p-1 border-r-04 grey gap border'>
+                            <label className='f-s-20'>Header</label>
+                            <div className='display justify-s-b gap'>
+                                <span>Title</span>
+                                <label className='w-3 h-3 border-r-100 border click' htmlFor='background-color' style={{background : background?.color}} />
+                                <input type='color' className='opacity-0 absolute' onChange={e=> {
+                                    db.collection('link-in-bio').doc('@' + userName).update({ ['background.color'] : e.target.value } )
+
+                                    e.target.parentElement.children[1].style.background = e.target.value 
+                                }} id='background-color'/>
+                            </div>
+                        </div>
+
+                        <div>
                             <div className='grid justify-s-b gap-1rem'>
 
                                 <div className='grid p-1 border-r-04 grey border'>
@@ -122,8 +136,9 @@ export function EditLinkInBio({ props }) {
                                 </div>
                                 
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    
                 </div>
                 <div className='relative overflow-hidden border-r-1'>
                     <div className='' style={{
@@ -139,7 +154,9 @@ export function EditLinkInBio({ props }) {
                     }} />
                     
                     <div className='border border-r-1 shadow'>
-                        <LinkInBio userView={User} links={UserLinks} props={props} /> 
+                        <div>
+                            <LinkInBio userView={User} links={UserLinks} props={props} /> 
+                        </div>
                     </div>
                 </div>
             </div> 

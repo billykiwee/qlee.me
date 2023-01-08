@@ -37,7 +37,7 @@ export function Head({props}) {
             <div className='grid gap-1rem'>
                 <div className='grid gap'>
                     <div className='display justify-c'>
-                        <span className='f-s-25 f-w-400' style={{color: 'black'}}>
+                        <span className='f-s-25 f-w-400' style={{filter : 'invert(1)', color: 'black'}}>
                             <span className='f-s-18'>@</span>
                             {User?.name}
                         </span>
