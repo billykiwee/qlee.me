@@ -30,27 +30,21 @@ export function useFetchLinks(user, type) {
 const query = (user, type) => {
 
     if (user && type === "link-in-bio") {
-        return db
-        .collection("links")
-        .where("linkInBio", "==", true)
+        return db.collection("links").where("linkInBio", "==", true)
     }
 
     if (user && type === "link-in-bio_settings") {
-        return db
-        .collection("link-in-bio")
-        .where("user", "==", user?.email)
+        return db.collection("link-in-bio").where("user", "==", user?.email)
     }
 
     if (type === "stats") {
-        return db
-        .collection("stats")
+        return db.collection("stats")
     }
     
     if (user) {
-        return db
-        .collection("links")
-        .where("user", "==", user?.email)
+        return db.collection("links").where("user", "==", user?.email)
     }
 
     return db.collection("links").orderBy("date", "desc")
 }
+
