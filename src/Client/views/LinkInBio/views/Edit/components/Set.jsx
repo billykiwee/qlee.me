@@ -1,7 +1,7 @@
 import { ArrowsPointingOutIcon, EllipsisHorizontalIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { deleteLinkFromBio } from '../functions/delete'
+import { deleteLinkFromBio } from '../../../functions/delete'
 
 
 export default function Set({ props }) {

@@ -25,8 +25,6 @@ export function EditLinkInBio({ props }) {
         })
     }
 
- 
-
     return (
     
         <div className='grid blocks gap-2rem' >
