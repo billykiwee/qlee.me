@@ -19,35 +19,28 @@ export default function LinkInBio({ userView, props }) {
 
     const { user } = props
 
-    const LinkInBio = user?.link_in_bio?.links
+    const User = user?.profil
+    const LinkInBioLinks = user?.link_in_bio?.links
     const LinkInBioSettings = user?.link_in_bio?.settings
 
-    let background, blocks, menu, fontFamily, colorBtn, linkAsIcon
+    const { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings
 
-    if (LinkInBioSettings) {
-      ({
-        background,
-        blocks,
-        menu,
-        fontFamily,
-        colorBtn,
-        linkAsIcon
-      } = LinkInBioSettings)
-    }
-
-    console.log(LinkInBio);
+    console.log(LinkInBioLinks);
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
     
-    const ifUserIsOwner = fetchLinksInBio?.some(e=> e.user === fetchUser?.email) && userView?.email !== fetchUser?.email
+    const ifUserIsOwner = LinkInBioLinks.some(e=> e.user === User.email) && userView?.email !== User.email
 
 
-    //if (ifUserIsOwner) window.location.href = '/edit/' + fetchUser?.LinkInBioID
+    console.log(text);
+
+
+    //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     return (
         <>
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, fetchLinksInBio)} onDragStart={onDragStratLinkInBio} >
+            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
                         display     : 'grid',
@@ -66,22 +59,23 @@ export default function LinkInBio({ userView, props }) {
                         />
                     }
 
-                    <div className='grid gap-1rem' style={{ fontFamily: `${fontFamily}` }} >  
+                    <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  
                         
                         <Head
                             props={{
                                 userView, 
-                                fetchUser, 
-                                fetchLinksInBio 
+                                User, 
+                                LinkInBioLinks 
                             }} 
                         />
                         
-                        <Droppable droppableId={fetchLinksInBio?.length && 'fetchLinksInBio'} >
+                        <Droppable droppableId={'LinkInBioLinks'} >
                             {(provided) => (
 
-                                <div className='grid gap container' id={fetchLinksInBio?.length && 'fetchLinksInBio'} {...provided.droppableProps} ref={provided.innerRef} >
+                                <div className='grid gap container' id={'LinkInBioLinks'} {...provided.droppableProps} ref={provided.innerRef} >
                                     {
-                                        fetchLinksInBio?.filter(e=> !e.asIcon)
+                                        LinkInBioLinks
+                                        .filter(e=> !e.asIcon)
                                         .map((link, i)=> {
 
                                             return (
@@ -99,7 +93,7 @@ export default function LinkInBio({ userView, props }) {
                                                                 <a href={'https://' + link.shortLink} className='relative'>
                                                                     <div className='display border white border-r-1 border-b p-1 hover click h-2' >
                                                                         {
-                                                                            blocks.img &&
+                                                                            blocks?.img &&
                                                                             <div className='display justify-c absolute'>
                                                                                 <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                                                                             </div>
@@ -118,12 +112,12 @@ export default function LinkInBio({ userView, props }) {
                                                                 :
                                                                 <div className='display border white border-r-1 border-b p-1 click h-2' 
                                                                     style={{
-                                                                        background  : blocks.color,
-                                                                        borderRadius: blocks.radius + 'px'
+                                                                        background  : blocks?.color,
+                                                                        borderRadius: blocks?.radius + 'px'
                                                                     }}
                                                                 >
                                                                     {
-                                                                        blocks.img &&
+                                                                        blocks?.img &&
                                                                         <div className='display justify-c absolute'>
                                                                             <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                                                                         </div>
@@ -217,7 +211,7 @@ function Footer({userView}) {
 
 function Head({props}) {
 
-    const { userView, fetchUser, fetchLinksInBio } = props
+    const { userView, User, LinkInBioLinks } = props
 
     return (
         <div className='grid gap-1rem p-1'>
@@ -227,14 +221,14 @@ function Head({props}) {
                 (
                     <div className='display justify-c'>
                         <div className='edit-image-link'>
-                            <img src={fetchUser?.photoURL} width={80} height={80} className='border-r-100' />
+                            <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
                             <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
                                 <PencilSquareIcon width={16} />
                                 <input 
                                     type='file' 
                                     hidden 
                                     id='upload-img' 
-                                    onChange={fileInput => { uploadPhoto(fileInput, fetchUser?.email) }}
+                                    onChange={fileInput => { uploadPhoto(fileInput, User?.email) }}
                                 />
                             </div>
                         </div>
@@ -243,7 +237,7 @@ function Head({props}) {
                 : 
                 (
                     <div className='display justify-c'>
-                        <img src={fetchUser?.photoURL} width={80} height={80} className='border-r-100' />
+                        <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
                     </div>
                 )
             }
@@ -251,15 +245,15 @@ function Head({props}) {
                 <div className='grid gap'>
                     <div className='display justify-c'>
                         <span className='f-s-18'>@</span>
-                        <span className='f-s-25 f-w-400'>{fetchUser?.name}</span>
+                        <span className='f-s-25 f-w-400'>{User?.name}</span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{fetchUser?.description}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User?.description}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>
                     {
-                        fetchLinksInBio?.filter(e=> e.linkInBio === true && e.asIcon === true)
+                        LinkInBioLinks?.filter(e=> e.linkInBio === true && e.asIcon === true)
                         .map((link, i)=> {
 
                             return (

@@ -1,14 +1,8 @@
 import React, { useRef } from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Main from '../../../../App/components/Main'
 import { SwitchInput } from '../../../../App/components/Switch'
 import { db } from '../../../../App/database/firebase'
-import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
-import fetchSettings from '../../../lib/database/linkInBio/fetchSetting'
-import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import LinkInBio from '../LinkInBio'
 
 
@@ -19,26 +13,18 @@ export function EditLinkInBio({ props }) {
     const { userName } = useParams()
 
     const User = user?.profil
-    const [UserLinks, setUserLinks] = useState([])
+    const UserLinks = user?.links?.links
+    const LinkInBioSettings = user?.link_in_bio?.settings
 
-    useEffect(e=> {
-        fetchUserLinks(setUserLinks, user?.email)
-    }, [user])
+    const { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings
 
+        
     function putLinkAsIcon(data) {
         db.collection('links').doc(data.id).update({
             asIcon : data.checked
         })
     }
 
-
-    const [LinksBioSettings, setLinksBioSettings] = useState([])
-
-    const { background, blocks, menu, fontFamily, colorBtn, linkAsIcon } = LinksBioSettings
-
-    useEffect(e=> {
-        fetchSettings(setLinksBioSettings, user?.email)
-    }, [user?.email])
  
 
     return (
@@ -114,7 +100,7 @@ export function EditLinkInBio({ props }) {
                     backgroundColor   : background?.color
                 }} />
                 <div className='p-1'>
-                    <LinkInBio userView={user} links={UserLinks} /> 
+                    <LinkInBio userView={User} links={UserLinks} props={props} /> 
                 </div>
             </div>
         </div> 
