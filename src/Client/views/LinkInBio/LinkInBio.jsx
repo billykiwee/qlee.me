@@ -9,10 +9,6 @@ import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
 
-
-
-
-
 export default function LinkInBio({ userView, props }) {
 
     const { userName } = useParams()
@@ -21,20 +17,20 @@ export default function LinkInBio({ userView, props }) {
 
     const User = user?.profil
     const LinkInBioLinks = user?.link_in_bio?.links
-    const LinkInBioSettings = user?.link_in_bio?.settings
+    const LinkInBioSettings = user?.link_in_bio?.settings[0]
 
-    const { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings
-
-    console.log(LinkInBioLinks);
+    let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
     
-    const ifUserIsOwner = LinkInBioLinks.some(e=> e.user === User.email) && userView?.email !== User.email
+    const ifUserIsOwner = LinkInBioLinks
+    .some(e=> e.user === User.email) && userView?.email !== User.email
 
 
-    console.log(text);
+    const [openSet, setOpenSet] = useState()
+
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
@@ -128,19 +124,15 @@ export default function LinkInBio({ userView, props }) {
                                                                     {
                                                                         userView && 
                                                                         <div className='display gap'>
-                                                                            <div  className='display justify-c hover border-r-100 w-2 h-2' onClick={e=> {
-                                                                                const detail = document.querySelector('#details-'+ link.id)
-
-                                                                                detail.style.display = detail.style.display == 'none' ? 'flex' : 'none'
-
-                                                                            }}>
+                                                                            <div  className='display justify-c hover border-r-100 w-2 h-2' onClick={e=> setOpenSet(link.id) }>
                                                                                 <EllipsisHorizontalIcon width={28} /> 
 
-                                                                                <div className='grid p-04 white border border-r-04 disable absolute' id={'details-'+ link.id} style={{
-                                                                                    right: 0,
-                                                                                    top: '2rem',
+                                                                                <div className='grid p-04 white border border-r-04 disable absolute' style={{
+                                                                                    display : openSet === link.id ? 'flex' : 'none',
+                                                                                    right   : 0,
+                                                                                    top     : '2rem',
                                                                                     position: 'absolute',
-                                                                                    zIndex: 9,
+                                                                                    zIndex  : 9,
                                                                                 }}>
                                                                                     <Link to={'/edit/'+ link.id}>
                                                                                         <div className='display gap hover p-04 border-r-04'>
@@ -153,7 +145,6 @@ export default function LinkInBio({ userView, props }) {
                                                                                         <small>Supprimer</small>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
 
                                                                             <DragBtn 

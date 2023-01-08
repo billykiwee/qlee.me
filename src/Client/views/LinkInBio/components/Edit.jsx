@@ -14,9 +14,9 @@ export function EditLinkInBio({ props }) {
 
     const User = user?.profil
     const UserLinks = user?.links?.links
-    const LinkInBioSettings = user?.link_in_bio?.settings
+    const LinkInBioSettings = user?.link_in_bio?.settings[0]
 
-    const { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings
+    let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
         
     function putLinkAsIcon(data) {
@@ -50,9 +50,9 @@ export function EditLinkInBio({ props }) {
                     </div>
                     <form>
                         <div className='grid justify-s-b gap-1rem'>
-                            <label className='f-s-20'>Blocks</label>
 
                             <div className='grid p-1 border-r-04 grey'>
+                                <label className='f-s-20'>Blocks</label>
                                 <div className='display justify-s-b gap'>
                                     <span>Border</span>
                                     <input type='range' min={0} max={100} onChange={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : e.target.value } )} />
@@ -65,6 +65,12 @@ export function EditLinkInBio({ props }) {
 
                                         e.target.parentElement.children[1].style.background = e.target.value 
                                     }} id='color' />
+                                </div>
+                                <div className='display justify-s-b gap'>
+                                    <span>Logo</span>
+                                    <input type='checkbox' checked={blocks?.img} onChange={e=> {
+                                        db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.img'] : e.target.checked } )
+                                    }}  />
                                 </div>
                             </div>
 
