@@ -48,11 +48,11 @@ export default function App() {
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
-        snackBar   : setSnackBar({bon: 'bn'}),
-        /* popUp      : setPopUp(), */
+        snackBar : (content) => { return content }
     }
 
 
+    console.log(props.snackBar());
 
 
     const router = {
@@ -87,7 +87,9 @@ export default function App() {
                                 exact
                                 element={
                                     <>
-                                        <SnackBar content={props.snackBar} />
+                                        {
+                                            props.snackBar() && <SnackBar content={props.snackBar()} />
+                                        }
                                         {React.cloneElement(route.element, { props: props })}
                                     </>
                                 }

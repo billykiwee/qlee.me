@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-export function SnackBar({content}) {
+export function SnackBar({ content }) {
 
 /* 
     function deleteData(id) {
@@ -25,7 +25,6 @@ export function SnackBar({content}) {
     }, [])
  */
 
-    console.log(content);
 
     if (Object.values(content).length > 0)
     return (
@@ -61,7 +60,7 @@ export function SnackBar({content}) {
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)}  >
+                                <button className='border-r-100 w-3 h-3 hover' /* onClick={e=> deleteData(id)}  */ >
                                     <span className='f-s-16'>OK</span>
                                 </button>
                             </div>

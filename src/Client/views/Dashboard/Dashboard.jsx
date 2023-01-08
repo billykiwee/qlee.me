@@ -27,10 +27,7 @@ export default function Dashboard({ props }) {
     const [Error, setError] = useState('')
 
     
-    setSnackBar({
-        text: 'bonjour',
-        subtext: 'lol'
-    })
+
 
     if (!auth) return <Login />    
     return (
@@ -138,7 +135,7 @@ export default function Dashboard({ props }) {
 
             </div>
 
-            <SnackBar content={Msg} setMsg={setMsg} />
+            {/* <SnackBar content={Msg} setMsg={setMsg} /> */}
         </Main>
     )
 }
