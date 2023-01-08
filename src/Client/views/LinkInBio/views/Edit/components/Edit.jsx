@@ -22,7 +22,7 @@ export function Edit({ props }) {
                 </div>
             }
             <div className='display justify-c w-100p'>
-                <span className='f-s-16'>{link.name}</span>
+                <span className='f-s-16' style={{color: blocks?.textColor}} >{link.name}</span>
             </div>
 
             <Set props={props} />

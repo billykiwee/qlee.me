@@ -51,33 +51,56 @@ export function EditLinkInBio({ props }) {
                         <form>
                             <div className='grid justify-s-b gap-1rem'>
 
-                                <div className='grid p-1 border-r-04 grey'>
+                                <div className='grid p-1 border-r-04 grey border'>
                                     <label className='f-s-20'>Blocks</label>
-                                    <div className='display justify-s-b gap'>
-                                        <span>Border</span>
-                                        <div className='display grey gap p-1'>
-                                            <div className='click w-3 h-2 border' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '0.4' } )} />
-                                            <div className='click w-3 h-2 border border-r-2' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '100' } )} />
+
+                                    <div className='grid gap'>
+                                        <div className='display justify-s-b gap'>
+                                            <span>Border</span>
+                                            <div className='display gap'>
+                                                <div className='display gap'>   
+                                                    <input type='radio' id='radius10' name='radius' />
+                                                    <label className='click w-3 h-2 border' htmlFor='radius10' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '4' } )} />
+                                                </div>
+                                                <div className='display gap'>   
+                                                    <input type='radio' id='radius100' name='radius' />
+                                                    <label className='click w-3 h-2 border border-r-100' htmlFor='radius100' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '1000' } )} />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='display justify-s-b gap'>
+                                            <span>Color</span>
+                                            <label className='w-3 h-2 border-r-100 border click' htmlFor='textColor' style={{background : blocks?.color}}  />
+                                            <input type='color' className='opacity-0 absolute' onChange={e=> {
+                                                db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.color'] : e.target.value } )
+
+                                                e.target.parentElement.children[1].style.background = e.target.value 
+                                            }} id='textColor' />
+                                        </div>
+
+                                        <div className='display justify-s-b gap'>
+                                            <span>Text Color</span>
+                                            <label className='w-3 h-2 border-r-100 border click' htmlFor='color' style={{background : blocks?.textColor}} />
+                                            <input type='color' className='opacity-0 absolute' onChange={e=> {
+                                                db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.textColor'] : e.target.value } )
+
+                                                e.target.parentElement.children[1].style.background = e.target.value 
+                                            }} id='color' />
+                                        </div>
+
+                                        <div className='display justify-s-b gap'>
+                                            <span>Logo</span>
+                                            <input type='checkbox' checked={blocks?.img} onChange={e=> {
+                                                db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.img'] : e.target.checked } )
+                                            }}  />
                                         </div>
                                     </div>
-                                    <div className='display justify-s-b gap'>
-                                        <span>Color</span>
-                                        <label className='w-3 h-3 border-r-100 border click' htmlFor='color' style={{background : blocks?.color}} value={blocks?.radius} />
-                                        <input type='color' className='opacity-0 absolute' onChange={e=> {
-                                            db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.color'] : e.target.value } )
 
-                                            e.target.parentElement.children[1].style.background = e.target.value 
-                                        }} id='color' />
-                                    </div>
-                                    <div className='display justify-s-b gap'>
-                                        <span>Logo</span>
-                                        <input type='checkbox' checked={blocks?.img} onChange={e=> {
-                                            db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.img'] : e.target.checked } )
-                                        }}  />
-                                    </div>
                                 </div>
 
-                                <div className='grid p-1 border-r-04 grey'>
+                                <div className='grid p-1 border-r-04 grey gap border'>
+                                    <label className='f-s-20'>Frame</label>
                                     <div className='display justify-s-b gap'>
                                         <span>Background</span>
                                     </div>
