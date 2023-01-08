@@ -35,10 +35,13 @@ export default function App() {
 
     const props = {
         user: {
-            profil     : useFetchUsers(user),
-            links      : useFetchLinks(user),
+            profil: useFetchUsers(user),
+            links : {
+                links: useFetchLinks({user}),
+                stats: useFetchLinks({type: 'stats'}),
+            },
             link_in_bio: {
-                links   : useFetchLinks(user, 'link-in-bio'),
+                links   : useFetchLinks({user, type: 'link-in-bio'}),
                 settings: useFetchLinkInBioSettings(user)
             },
         },

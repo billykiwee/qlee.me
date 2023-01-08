@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { db } from '../../../App/database/firebase'
 
 
-export function useFetchLinks(user, type) {
+export function useFetchLinks({ props }) {
+
+    const { user, type } = props ?? undefined
 
     const [linksData, setLinksData] = useState([])
   
@@ -28,16 +30,15 @@ export function useFetchLinks(user, type) {
 
 const query = (user, type) => {
 
-    if (user && type === "link-in-bio") {
+    if (type === "link-in-bio") {
         return db
         .collection("links")
         .where("linkInBio", "==", true)
     }
 
-    if (user && type === "stats") {
+    if (type === "stats") {
         return db
-        .collection("links")
-        .where("linkInBio", "==", type.split('?ID=')[1])
+        .collection("stats")
     }
     
     if (user) {

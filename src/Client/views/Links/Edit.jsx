@@ -42,10 +42,10 @@ export default function Edit({ props }) {
 
     const User = user?.profil
 
-    const UserLinks = user?.links
-    const Stats = useFetchStats(LinkID)
+    const UserLinks = user?.links?.links
+    const Stats = user?.links?.stats.filter(e=> e.LinkID === LinkID)
     
-
+    console.log(Stats);
 
     const Link = UserLinks
     .filter(data=> data.user === User.email && data.id === LinkID)
