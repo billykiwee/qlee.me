@@ -17,7 +17,7 @@ export default function Dashboard({ props }) {
     const { auth, user } = props
 
     const Profil = user?.profil
-    const UserLinks = user?.links
+    const UserLinks = user?.links?.links
 
 
     const [Msg, setMsg] = useState([])

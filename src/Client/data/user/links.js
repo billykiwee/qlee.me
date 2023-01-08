@@ -21,7 +21,7 @@ export function useFetchLinks(user, type) {
     
         return () => data()
 
-    }, [user])
+    }, [user, type])
   
     return linksData
 }
@@ -35,6 +35,11 @@ const query = (user, type) => {
         .where("linkInBio", "==", true)
     }
 
+    if (type === "link-in-bio_settings") {
+        return db
+        .collection("link-in-bio")
+    }
+
     if (type === "stats") {
         return db
         .collection("stats")
@@ -43,7 +48,7 @@ const query = (user, type) => {
     if (user) {
         return db
         .collection("links")
-        .where("user", "==", user.email)
+        .where("user", "==", user?.email)
     }
 
     return db.collection("links").orderBy("date", "desc")

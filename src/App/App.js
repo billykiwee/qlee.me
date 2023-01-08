@@ -22,7 +22,6 @@ import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
 import { useFetchUsers } from '../Client/data/Users/users'
-import { useFetchLinkInBioSettings } from '../Client/data/LinkInBio/links'
 
 import useGetAuth from '../Client/data/auth/auth'
 import { useFetchLinks } from '../Client/data/user/links'
@@ -31,7 +30,28 @@ import { useFetchLinks } from '../Client/data/user/links'
 
 export default function App() {
 
-    const user = useGetAuth()
+    const [{user}, dispatch] = useStateValue('')
+    const auth = getAuth()
+
+    
+    useEffect(() => {
+        const data = auth.onAuthStateChanged(authUser => {
+            if (authUser) {
+                dispatch({
+                    type: 'SET_USER',
+                    user: authUser
+                })
+            } else { 
+                dispatch({
+                    type: 'SET_USER',
+                    user: null
+                })
+            }
+        })
+
+        return () => data()
+    }, [dispatch, auth])
+    
     
     const props = {
         user: {
@@ -42,7 +62,7 @@ export default function App() {
             },
             link_in_bio: {
                 links   : useFetchLinks(user, 'link-in-bio'),
-                settings: useFetchLinkInBioSettings(user)
+                settings: useFetchLinks(user, 'link-in-bio_settings')
             },
         },
         auth       : user,
@@ -50,6 +70,7 @@ export default function App() {
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
     }
+
 
 
 
@@ -71,6 +92,7 @@ export default function App() {
         terms         : { path : '/terms', element : <Terms /> },
     }
 
+    if (auth)
     return (
         <BrowserRouter>
             <Header />
