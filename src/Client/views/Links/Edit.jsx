@@ -28,8 +28,7 @@ import QrCodeSection from './QrCode'
 import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
-import { useFetchStats } from '../../data/Stats/stats'
-import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
+
 
 
 
@@ -45,7 +44,6 @@ export default function Edit({ props }) {
     const UserLinks = user?.links?.links
     const Stats = user?.links?.stats.filter(e=> e.LinkID === LinkID)
     
-    console.log(Stats);
 
     const Link = UserLinks
     .filter(data=> data.user === User.email && data.id === LinkID)

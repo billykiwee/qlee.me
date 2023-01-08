@@ -33,8 +33,8 @@
 }
 
 [data-theme="dark"] {
-    --white: #343b3d;
-    --background: #252c2e;
+    --white: #21272a;
+    --background: #191d1f;
     --black: white;
     --grey: #f8f8f80f;
 }

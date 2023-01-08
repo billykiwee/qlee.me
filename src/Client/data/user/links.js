@@ -29,15 +29,16 @@ export function useFetchLinks(user, type) {
 
 const query = (user, type) => {
 
-    if (type === "link-in-bio") {
+    if (user && type === "link-in-bio") {
         return db
         .collection("links")
         .where("linkInBio", "==", true)
     }
 
-    if (type === "link-in-bio_settings") {
+    if (user && type === "link-in-bio_settings") {
         return db
         .collection("link-in-bio")
+        .where("user", "==", user?.email)
     }
 
     if (type === "stats") {

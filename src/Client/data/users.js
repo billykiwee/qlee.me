@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { db } from '../../../App/database/firebase';
+import { db } from '../../App/database/firebase';
 
 
 export function useFetchUsers(user) {

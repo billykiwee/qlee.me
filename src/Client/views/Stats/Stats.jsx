@@ -2,21 +2,15 @@ import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunc
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
-import { useStateValue } from '../../../App/provider/StateProvider'
 import '../../../App/css/stats.css'
 import { Block, HeadBlock } from './components/Block'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
-import { fetchUser } from '../../lib/database/user/fetchUser'
 import { GoToPricing } from '../Links/Edit'
-import { fetchUserLinks } from '../../lib/database/links/fetchUserLinks'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import Messages from '../../../App/utils/Messages'
 import Popup from '../../../App/components/Popup'
-
-import { useFetchStats } from '../../data/Stats/stats'
-import { useFetchUser, useFetchUserLinks } from '../../data/Users/users'
 
 
 
@@ -24,17 +18,15 @@ export default function Stats({ props }) {
 
     const { user } = props
 
-    const history = useNavigate()
-
     const { LinkID } = useParams()
 
 
-    const User = user?.profil
-    const UserLinks = user?.links
-    const LinkStat = useFetchStats(LinkID)
+    const User      = user?.profil
+    const UserLinks = user?.links?.links
+    const LinkStat  = user?.links?.stats.filter(e=> e.LinkID === LinkID)
     
 
-    const TopLink = UserLinks?.map(topLink=> topLink)
+    const TopLink = UserLinks.map(topLink=> topLink)
     .sort((a, b) => b.views - a.views)
     .splice(0,1)[0]
         
@@ -80,10 +72,11 @@ export default function Stats({ props }) {
                         UserLinks === 'no links' 
                         ? <span>Pas de lien</span>
                         :  
-                        UserLinks?.length < 1
+                        UserLinks.length < 1
                         ? <Messages loader={true} /> 
                         :
-                        UserLinks?.filter(isUserAuth=> isUserAuth.user === user?.email)
+                        UserLinks
+                        .filter(isUserAuth=> isUserAuth.user === User.email)
                         .filter(link=> link.id === ShowStat)
                         .map(topLink=> {
                         

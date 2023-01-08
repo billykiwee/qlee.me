@@ -2,17 +2,12 @@ import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, Envelo
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link, useParams } from 'react-router-dom'
-import Main from '../../../App/components/Main'
-import { useStateValue } from '../../../App/provider/StateProvider'
 import getFavicon from '../../../App/utils/getFavicon'
 import { uploadPhoto } from '../Profil/functions/uploadPhoto'
 import { deleteLinkFromBio } from './functions/delete'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import DragBtn from './components/DragBtn'
 import Background from './components/Background'
-import fetchSettings from '../../lib/database/linkInBio/fetchSetting'
-import { useFetchUser } from '../../data/Users/users'
-
 
 
 

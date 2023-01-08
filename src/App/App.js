@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useStateValue } from './provider/StateProvider'
-import { getAuth } from "firebase/auth"
 
 import Home from '../Website/Home'
 
@@ -21,37 +19,16 @@ import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
 import Main from './components/Main'
-import { useFetchUsers } from '../Client/data/Users/users'
 
 import useGetAuth from '../Client/data/auth/auth'
+import { useFetchUsers } from '../Client/data/users'
 import { useFetchLinks } from '../Client/data/user/links'
 
 
 
 export default function App() {
 
-    const [{user}, dispatch] = useStateValue('')
-    const auth = getAuth()
-
-    
-    useEffect(() => {
-        const data = auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-                dispatch({
-                    type: 'SET_USER',
-                    user: authUser
-                })
-            } else { 
-                dispatch({
-                    type: 'SET_USER',
-                    user: null
-                })
-            }
-        })
-
-        return () => data()
-    }, [dispatch, auth])
-    
+    const user = useGetAuth()
     
     const props = {
         user: {
@@ -92,7 +69,7 @@ export default function App() {
         terms         : { path : '/terms', element : <Terms /> },
     }
 
-    if (auth)
+
     return (
         <BrowserRouter>
             <Header />
