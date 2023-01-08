@@ -17,7 +17,7 @@ import Payment from '../Website/views/Payment'
 import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
-import { EditLinkInBio } from '../Client/views/LinkInBio/components/Edit'
+import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit'
 import Main from './components/Main'
 
 import useGetAuth from '../Client/data/auth/auth'

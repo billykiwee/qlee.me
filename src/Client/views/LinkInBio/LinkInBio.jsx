@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link, useParams } from 'react-router-dom'
 import getFavicon from '../../../App/utils/getFavicon'
-import { uploadPhoto } from '../Profil/functions/uploadPhoto'
-import { deleteLinkFromBio } from './functions/delete'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
-import DragBtn from './components/DragBtn'
 import Background from './components/Background'
+import Set from './components/Set'
+import { Head } from './components/Head'
+import { Footer } from './components/Footer'
 
 export default function LinkInBio({ userView, props }) {
 
@@ -27,6 +27,10 @@ export default function LinkInBio({ userView, props }) {
         setLinkInBioLinks(Links)
 
         document.querySelector('body').style.background = background?.color
+
+        if (!window.location.href.includes('edit')) {
+            document.querySelector('main').style.paddingTop = '4rem'
+        }
 
     }, [User, LinkInBioSettings])
 
@@ -59,8 +63,7 @@ export default function LinkInBio({ userView, props }) {
                         display     : 'grid',
                         alignContent: 'space-between',
                         alignItems  : 'end',
-                        height      : '100%',
-                        marginTop   : '-4rem'
+                        height      : '100%'
                     }}
                 >
 
@@ -142,40 +145,13 @@ export default function LinkInBio({ userView, props }) {
 
                                                                     {
                                                                         userView && 
-                                                                        <div className='display gap'>
-                                                                            <div className='display justify-c hover border-r-100 w-2 h-2 openSet' onClick={e=> setOpenSet(openSet === '' ? link.id : link.id ) }>
-                                                                                <EllipsisHorizontalIcon width={28} /> 
-
-                                                                                <div className='grid p-04 white border border-r-04 disable absolute' 
-                                                                                    style={{
-                                                                                        display : openSet === link.id ? 'flex' : 'none',
-                                                                                        right   : 0,
-                                                                                        top     : '2rem',
-                                                                                        position: 'absolute',
-                                                                                        zIndex  : 9,
-                                                                                    }}
-                                                                                >
-                                                                                    <Link to={'/edit/'+ link.id}>
-                                                                                        <div className='display gap hover p-04 border-r-04 h-2'>
-                                                                                            <PencilSquareIcon width={12} />
-                                                                                            <small>Modifier</small>
-                                                                                        </div>
-                                                                                    </Link>
-                                                                                    <div className='display gap hover p-04 border-r-04 h-2' onClick={e=> deleteLinkFromBio(link.id) }>
-                                                                                        <TrashIcon width={12} className='c-red' />
-                                                                                        <small>Supprimer</small>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <DragBtn 
-                                                                                props={{
-                                                                                    link, 
-                                                                                    isDragDisabled, 
-                                                                                    setIsDragDisabled 
-                                                                                }}
-                                                                            />
-                                                                        </div>  
+                                                                        <Set props={{
+                                                                            openSet,
+                                                                            setOpenSet,
+                                                                            link,
+                                                                            isDragDisabled,
+                                                                            setIsDragDisabled
+                                                                        }} />
                                                                     }
 
                                                                 </div>
@@ -207,77 +183,3 @@ export default function LinkInBio({ userView, props }) {
 
 
 
-function Footer({userView}) {
-    if (!userView)
-    return (
-
-        <div className='display justify-c' style={{position: 'sticky', bottom: '1rem'}} >
-            <a href='/' className='display gap grey p-04 border-r-04' id='link-qlee'>
-                <img src='/favicon.ico' width={28} />
-                <small className='f-w-300'>Made by Qlee.me</small>
-            </a>
-        </div>
-    )
-}
-
-
-
-function Head({props}) {
-
-    const { userView, User, LinkInBioLinks } = props
-
-    return (
-        <div className='grid gap-1rem p-1'>
-            {
-                userView 
-                ? 
-                (
-                    <div className='display justify-c'>
-                        <div className='edit-image-link'>
-                            <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
-                            <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
-                                <PencilSquareIcon width={16} />
-                                <input 
-                                    type='file' 
-                                    hidden 
-                                    id='upload-img' 
-                                    onChange={fileInput => { uploadPhoto(fileInput, User?.email) }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                )
-                : 
-                (
-                    <div className='display justify-c'>
-                        <img src={User?.photoURL} width={80} height={80} className='border-r-100' />
-                    </div>
-                )
-            }
-            <div className='grid gap-1rem'>
-                <div className='grid gap'>
-                    <div className='display justify-c'>
-                        <span className='f-s-18'>@</span>
-                        <span className='f-s-25 f-w-400'>{User?.name}</span>
-                    </div>
-                    <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{User?.description}</span>
-                    </div>
-                </div>
-                <div className='display gap-1rem justify-c'>
-                    {
-                        LinkInBioLinks?.filter(e=> e.linkInBio === true && e.asIcon === true)
-                        .map((link, i)=> {
-
-                            return (
-                                <a href={'https://'+ link.shortLink} className='link' key={i} >
-                                    <img src={link.icon ?? getFavicon(link.url)} width={34} className='border-r-100' />
-                                </a>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-        </div>
-    )
-}
