@@ -41,7 +41,8 @@ export default function Stats({ props }) {
     useEffect(e=> {
         redirectIfNoLinkID()
 
-        history(TopLink?.id)
+        if (!LinkID) history(TopLink?.id)
+        
     }, [TopLink])
     
 

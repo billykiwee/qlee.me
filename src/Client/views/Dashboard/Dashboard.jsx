@@ -11,12 +11,13 @@ import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import { db } from '../../../App/database/firebase';
 import Main from '../../../App/components/Main';
+import { setSnackBar } from '../../../App/components/setSnackBar';
 
 
 
 export default function Dashboard({ props }) {
 
-    const { auth, user } = props
+    const { auth, user, snackBar } = props
 
     const Profil = user?.profil
     const UserLinks = user?.links?.links
@@ -25,7 +26,11 @@ export default function Dashboard({ props }) {
     const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
-
+    
+    setSnackBar({
+        text: 'bonjour',
+        subtext: 'lol'
+    })
 
     if (!auth) return <Login />    
     return (

@@ -23,6 +23,8 @@ import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit/Edit'
 import useGetAuth from '../Client/data/auth/auth'
 import { useFetchUsers } from '../Client/data/users'
 import { useFetchLinks } from '../Client/data/user/links'
+import { SnackBar } from './components/SnackBar'
+import { setSnackBar } from './components/setSnackBar'
 
 
 
@@ -46,6 +48,8 @@ export default function App() {
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
+        snackBar   : setSnackBar({bon: 'bn'}),
+        /* popUp      : setPopUp(), */
     }
 
 
@@ -77,13 +81,18 @@ export default function App() {
                 {
                     Object.values(router).map((route, i) => {
                         return (
-                        <Route
-                            key={i}
-                            path={route.path}
-                            exact
-                            element={React.cloneElement(route.element, { props: props })}
-                        />
-                        );
+                            <Route
+                                key={i}
+                                path={route.path}
+                                exact
+                                element={
+                                    <>
+                                        <SnackBar content={props.snackBar} />
+                                        {React.cloneElement(route.element, { props: props })}
+                                    </>
+                                }
+                            />
+                        )
                     })
                 }
             </Routes>

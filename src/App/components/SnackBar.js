@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-export function SnackBar({content, setMsg}) {
+export function SnackBar({content}) {
 
-
+/* 
     function deleteData(id) {
         
         document.querySelector('#' + id).classList.add('out')
@@ -23,8 +23,9 @@ export function SnackBar({content, setMsg}) {
             setMsg([])
         }, 4000)
     }, [])
+ */
 
-
+    console.log(content);
 
     if (Object.values(content).length > 0)
     return (
