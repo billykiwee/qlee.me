@@ -26,7 +26,7 @@ export default function LinkInBio({ userView, props }) {
     useEffect(e=> {
         setLinkInBioLinks(Links)
 
-        document.querySelector('body').style.background = background.color
+        document.querySelector('body').style.background = background?.color
 
     }, [User, LinkInBioSettings])
 
