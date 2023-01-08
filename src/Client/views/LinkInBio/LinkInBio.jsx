@@ -28,11 +28,8 @@ export default function LinkInBio({ userView, props }) {
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
+        //document.querySelector('body').style.background = background?.color
     }, [User])
-
-    useEffect(e=> {
-        document.querySelector('body').style.background = background?.color
-    }, [])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     

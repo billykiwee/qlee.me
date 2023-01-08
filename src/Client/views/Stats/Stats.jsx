@@ -18,6 +18,8 @@ export default function Stats({ props }) {
 
     const { user } = props
 
+    const history = useNavigate()
+    
     const { LinkID } = useParams()
 
 
@@ -38,6 +40,8 @@ export default function Stats({ props }) {
     
     useEffect(e=> {
         redirectIfNoLinkID()
+
+        history(TopLink?.id)
     }, [TopLink])
     
 
