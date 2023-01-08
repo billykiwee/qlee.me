@@ -26,5 +26,5 @@ done
 
 
 # cmd push
-./push-code.sh
+./push.sh
 

@@ -16,11 +16,16 @@ export default function LinkInBio({ userView, props }) {
     const { user } = props
 
     const User = user?.profil
-    const [LinkInBioLinks, setLinkInBioLinks] = useState(user?.link_in_bio?.links)
+    const Links = user?.link_in_bio?.links
+    const [LinkInBioLinks, setLinkInBioLinks] = useState([])
     const LinkInBioSettings = user?.link_in_bio?.settings[0]
 
     let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
+
+    useEffect(e=> {
+        setLinkInBioLinks(Links)
+    }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
@@ -44,7 +49,7 @@ export default function LinkInBio({ userView, props }) {
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     return (
         <>
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
+            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
                 <div 
                     style={{
                         display     : 'grid',
