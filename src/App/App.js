@@ -32,16 +32,16 @@ import { useFetchLinks } from '../Client/data/user/links'
 export default function App() {
 
     const user = useGetAuth()
-
+    
     const props = {
         user: {
             profil: useFetchUsers(user),
             links : {
-                links: useFetchLinks({user}),
-                stats: useFetchLinks({type: 'stats'}),
+                links: useFetchLinks(user),
+                stats: useFetchLinks(user, 'stats'),
             },
             link_in_bio: {
-                links   : useFetchLinks({user, type: 'link-in-bio'}),
+                links   : useFetchLinks(user, 'link-in-bio'),
                 settings: useFetchLinkInBioSettings(user)
             },
         },

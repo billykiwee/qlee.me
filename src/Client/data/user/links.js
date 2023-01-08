@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 import { db } from '../../../App/database/firebase'
 
 
-export function useFetchLinks({ props }) {
+export function useFetchLinks(user, type) {
 
-    const { user, type } = props ?? undefined
 
     const [linksData, setLinksData] = useState([])
-  
+
     useEffect(() => {
 
         const data = query(user, type).onSnapshot(snapshot => {
