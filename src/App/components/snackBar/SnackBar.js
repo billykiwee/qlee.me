@@ -1,41 +1,42 @@
-import { CheckBadgeIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import React, { useEffect, useState } from 'react'
+import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
+export function SnackBar({ props }) {
 
-export function SnackBar({ content }) {
+    const { data, remove } = props
 
-/* 
     function deleteData(id) {
-        
-        document.querySelector('#' + id).classList.add('out')
-        let remove = document.querySelector('#' + id).classList.value.split(' ')
 
-        if (remove.includes('out')) {
-            setTimeout(e=> {
-                setMsg([])
-            }, 400)
-        }
+        const el = document.querySelector('#' + id)
+        
+        el.classList.add('out')
+        
+        el.addEventListener('transitionend', function() {
+            remove(id)
+        })
     }
 
-    useEffect(e=> {
-        setTimeout(e=> {
-            setMsg([])
-        }, 4000)
+    /* useEffect(e=> {
+        if (Object.values(content).length) {
+            setTimeout(e=> {
+                snackBar([])
+            }, 4000)
+        }
     }, [])
  */
 
 
-    if (Object.values(content).length > 0)
+    console.log(data);
+
     return (
 
         <div className='sticky display grid gap-04 snackbar_div'>
         {
-            [content]
-            .map(data=> {
+            data
+            .map(item=> {
 
-                const { id, text, subtext, status, action } = data
-
+                const { id, text, subtext, status, action } = item
 
                 return (
                     <div className='white border border-r-04 shadow p-1 snackbar ' id={id} key={id} >
@@ -60,8 +61,8 @@ export function SnackBar({ content }) {
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' /* onClick={e=> deleteData(id)}  */ >
-                                    <span className='f-s-16'>OK</span>
+                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)}  >
+                                    <span className='f-s-16 c-black'>OK</span>
                                 </button>
                             </div>
                         </div>

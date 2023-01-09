@@ -1,32 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import ListLink from './components/ListLink';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
-import { SnackBar } from '../../../App/components/SnackBar';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
-import { db } from '../../../App/database/firebase';
 import Main from '../../../App/components/Main';
-import { setSnackBar } from '../../../App/components/setSnackBar';
-
 
 
 export default function Dashboard({ props }) {
 
+    
     const { auth, user, snackBar } = props
 
-    const Profil = user?.profil
+    const User = user?.profil
     const UserLinks = user?.links?.links
 
-
-    const [Msg, setMsg] = useState([])
     const [Error, setError] = useState('')
 
-    
 
 
     if (!auth) return <Login />    
@@ -40,8 +34,8 @@ export default function Dashboard({ props }) {
                     <div className='grid gap-2rem'>
 
                         <div className='grid' >
-                            <h2 className='m-t-0 m-b-1'>Bonjour, {Profil.name}</h2>
-                            <Articles links={UserLinks} user={Profil} />
+                            <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
+                            <Articles links={UserLinks} user={User} />
                         </div>
 
                         <form className='grid gap-2rem ' 
@@ -51,9 +45,9 @@ export default function Dashboard({ props }) {
                                 createLink({
                                     elements: e.target.elements,
                                     setError,
-                                    Profil,
+                                    User,
                                     UserLinks,
-                                    setMsg 
+                                    snackBar 
                                 })
                             }}
                         >
@@ -106,7 +100,7 @@ export default function Dashboard({ props }) {
                                 </div>
                                 <Link to='/pricing'>
                                     <div className='display gap-04 border-r-04 border-b yellow p-04 click hover-yellow'>
-                                        <small style={{color: 'black'}}>{UserLinks.length} / {isUserPremium(Profil).max_links}</small>
+                                        <small style={{color: 'black'}}>{UserLinks.length} / {isUserPremium(User).max_links}</small>
                                         <div className='display justify-c'>
                                             <span className='display'>
                                                 <img src='/images/lock-solid.svg' width={14} />
@@ -123,7 +117,7 @@ export default function Dashboard({ props }) {
                                     (
                                         UserLinks.length < 1
                                         ? <Messages loader={true} /> 
-                                        : <ListLink links={UserLinks} User={Profil} />
+                                        : <ListLink links={UserLinks} User={User} />
                                     )
                                 }
                             </div>
@@ -134,8 +128,6 @@ export default function Dashboard({ props }) {
                 </div>
 
             </div>
-
-            {/* <SnackBar content={Msg} setMsg={setMsg} /> */}
         </Main>
     )
 }

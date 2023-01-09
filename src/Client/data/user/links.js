@@ -16,7 +16,7 @@ export function useFetchLinks(user, type) {
     
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
     
-            setLinksData(fetchedLinks.sort((x, y) => y.date - x.date))
+            setLinksData(fetchedLinks.sort((x, y) => x.date - y.date))
         })
     
         return () => data()

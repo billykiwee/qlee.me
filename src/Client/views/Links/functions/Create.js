@@ -8,12 +8,11 @@ import { getHostName } from "../../../lib/getHostName"
 
 export function createLink(props) {
 
-    const { elements, setError, User, UserLinks, setMsg } = props
+    const { elements, setError, User, UserLinks, snackBar } = props
 
     const name = elements.name.value
     const url = elements.url.value
     
-
 
     const linkID = 'qlee.me/' + UniqueID('', 4)
                     
@@ -41,8 +40,7 @@ export function createLink(props) {
         }
 
         if (isUserPremium(User).max_links <= UserLinks.length) {
-            throw setMsg({
-                id     : UniqueID('msg', 5),
+            throw snackBar.add({
                 text   : 'Erreur',
                 subtext: `Tu as atteints la limite de ${isUserPremium(User).max_links} liens gratuits.`,
                 action : {
@@ -59,8 +57,7 @@ export function createLink(props) {
         await db.collection('links').doc(link.id).set(link)
     })
     .then(showPopup=> {
-        setMsg({
-            id     : UniqueID('msg', 5),
+        snackBar.add({
             text   : 'Bravo 🎉',
             subtext: `Le lien ${name} a bien été crée`,
             status : 'success'
@@ -68,7 +65,6 @@ export function createLink(props) {
     })
     .then(linkCreated=> {
         document.querySelectorAll('input').forEach(e=> e.value = '')
-
     })
     .catch(Popup=> {
         setError(Popup)

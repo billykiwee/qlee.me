@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Home from '../Website/Home'
@@ -23,8 +23,12 @@ import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit/Edit'
 import useGetAuth from '../Client/data/auth/auth'
 import { useFetchUsers } from '../Client/data/users'
 import { useFetchLinks } from '../Client/data/user/links'
-import { SnackBar } from './components/SnackBar'
-import { setSnackBar } from './components/setSnackBar'
+import { SnackBar } from './components/snackBar/SnackBar'
+import { useSnackBar } from './components/snackBar/reducer/useSnackBar'
+
+
+
+
 
 
 
@@ -48,11 +52,11 @@ export default function App() {
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
-        snackBar : (content) => { return content }
+        snackBar   : useSnackBar()
     }
 
+   
 
-    console.log(props.snackBar());
 
 
     const router = {
@@ -80,21 +84,18 @@ export default function App() {
             <Routes>
                 {
                     Object.values(router).map((route, i) => {
-                        return (
-                            <Route
-                                key={i}
-                                path={route.path}
-                                exact
-                                element={
-                                    <>
-                                        {
-                                            props.snackBar() && <SnackBar content={props.snackBar()} />
-                                        }
-                                        {React.cloneElement(route.element, { props: props })}
-                                    </>
-                                }
-                            />
-                        )
+                        return <Route
+                            key={i}
+                            path={route.path}
+                            exact
+                            element={
+                                <>
+                                    <SnackBar props={props.snackBar} />
+                                    {React.cloneElement(route.element, { props: props })}
+                                </>
+                            }
+                        />
+                        
                     })
                 }
             </Routes>
