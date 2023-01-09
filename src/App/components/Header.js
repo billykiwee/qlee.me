@@ -52,7 +52,7 @@ export default function Header({props}) {
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
 
 
-    console.log(GetWidth());
+    const width = GetWidth()
 
 
     if (!IsLinkInBio())
@@ -60,10 +60,10 @@ export default function Header({props}) {
         <header className='p-1 white shadow' >
             <div className='display justify-s-b'>
                 <div className='display gap click'>
-                   {/*  <Link to='/' >
+                    <Link to='/' >
                         <span className='display'>
                             {
-                                GetWidth() < 480
+                                width < 480
                                 ? <img src='/images/logo-icon.png' width={36} />
                                 : 
                                 (
@@ -99,7 +99,7 @@ export default function Header({props}) {
                                 )
                             }
                             </span>
-                    </Link> */}
+                    </Link>
                 </div>
                 <div className='display gap'>
                     <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
@@ -163,8 +163,7 @@ export default function Header({props}) {
 function IsLinkInBio() {
 
     const location = useLocation() 
+    if (location.pathname.includes('edit/@')) return false
 
-    const l = location?.pathname.split('')
-
-    return l.includes('@')
+    return location.pathname.includes('/@')
 }

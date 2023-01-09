@@ -37,7 +37,7 @@ export function EditLinkInBio({ props }) {
 
                         <div className='grid gap justify-s-b'>
                             <label className='f-s-20'>Lien icon</label>
-                            <div className='display gap wrap grey border-r-04 p-1'  >
+                            <div className='display gap wrap grey border-r-04 p-1 border'  >
                                 {
                                     UserLinks
                                     .filter(e=> e.linkInBio === true)

@@ -10,10 +10,11 @@ export default function Set({ props }) {
 
     return (
         <div className='display gap'>
-            <div className='display justify-c hover border-r-100 w-2 h-2 openSet' onClick={e=> setOpenSet(openSet === '' ? link.id : link.id ) }>
+            <div className='display justify-c hover border-r-100 w-2 h-2 shadow openSet' style={{background: 'white', color: 'black'}}
+                onClick={e=> setOpenSet(openSet === '' ? link.id : link.id ) }>
                 <EllipsisHorizontalIcon width={28}  /> 
 
-                <div className='grid p-04 white border border-r-04 disable absolute' 
+                <div className='grid p-04 white border border-r-04 disable absolute black c-black' 
                     style={{
                         display : openSet === link.id ? 'flex' : 'none',
                         right   : 0,
@@ -35,7 +36,7 @@ export default function Set({ props }) {
                 </div>
             </div>
 
-            <div className='w-2 h-2 display justify-c btn-drag' 
+            <div className='w-2 h-2 display justify-c btn-drag shadow border-r-100'  style={{background: 'white', color: 'black'}}
                 onMouseEnter={e=> {
                     setIsDragDisabled(false)
 

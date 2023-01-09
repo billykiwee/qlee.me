@@ -53,91 +53,92 @@ export default function LinkInBio({ userView, props }) {
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     return (
-        <div style={{
-            margin: '2rem',
-            height: !userView && '100vh'
-        }}>
-            <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
-                <div style={{
-                    display     : 'grid',
-                    alignContent: 'space-between',
-                    alignItems  : 'end',
-                    height      : '100%'
-                }}>
+        <>
+        
+            {
+                !userView &&
+                <Background 
+                    color = {background?.color}
+                    img   = {background?.img?.url}
+                    blur  = {background?.img?.blur}
+                />
+            }
 
-                    {
-                        userView &&
-                        <div className='zi-2 display justify-e'>
-                            <Link to={'/@' + userName}>
-                                <button className='display hover border-r-100 border h-2 w-2 shadow' style={{background: 'white'}}>
-                                    <ArrowUpRightIcon width={20} color='black' />
-                                </button>
-                            </Link>
-                        </div>
-                    }
+            <div style={{ padding: '2rem',height: !userView && '100vh' }} >
+                
+                <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
+                    <div style={{
+                        display     : 'grid',
+                        alignContent: 'space-between',
+                        alignItems  : 'end',
+                        height      : '100%'
+                    }}>
 
-                    {
-                        !userView &&
-                        <Background 
-                            color = {background?.color}
-                            img   = {background?.img?.url}
-                            blur  = {background?.img?.blur}
-                        />
-                    }
+                        {
+                            userView &&
+                            <div className='zi-2 display justify-e'>
+                                <Link to={'/@' + userName}>
+                                    <button className='display hover border-r-100 border h-2 w-2 shadow' style={{background: 'white'}}>
+                                        <ArrowUpRightIcon width={20} color='black' />
+                                    </button>
+                                </Link>
+                            </div>
+                        }
 
-                    <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  
-                        
-                        <Head
-                            props={{
-                                userView, 
-                                User, 
-                                LinkInBioLinks 
-                            }} 
-                        />
-                        
-                        <Droppable droppableId={LinkInBioLinks[0]?.id} >
-                            {(provided) => (
-
-                                <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
-                                    {
-                                        LinkInBioLinks
-                                        .filter(e=> !e.asIcon)
-                                        .map((link, i)=> {
-
-                                            return (
-                                                <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
-                                                    {(provided)=> (
-                                                        <div 
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            className={link.id}
-                                                        >
-                                                            {
-                                                                !userView 
-                                                                ? <Read props={{ link, blocks }} />
-                                                                : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
-                                                            }
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            )
-                                        })
-                                        .sort((a,b)=> a.position - b.position)
-
-                                    }
-                                </div>
-                            )}
-                        </Droppable>
-                    </div>
+                        <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  
                             
-                    {
-                        ifUserIsOwner && <Footer />
-                    }
+                            <Head
+                                props={{
+                                    userView, 
+                                    User, 
+                                    LinkInBioLinks 
+                                }} 
+                            />
+                            
+                            <Droppable droppableId={LinkInBioLinks[0]?.id} >
+                                {(provided) => (
 
-                </div>
-            </DragDropContext>
-        </div>
+                                    <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
+                                        {
+                                            LinkInBioLinks
+                                            .filter(e=> !e.asIcon)
+                                            .map((link, i)=> {
+
+                                                return (
+                                                    <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
+                                                        {(provided)=> (
+                                                            <div 
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                                className={link.id}
+                                                            >
+                                                                {
+                                                                    !userView 
+                                                                    ? <Read props={{ link, blocks }} />
+                                                                    : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
+                                                                }
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                )
+                                            })
+                                            .sort((a,b)=> a.position - b.position)
+
+                                        }
+                                    </div>
+                                )}
+                            </Droppable>
+                        </div>
+                                
+                        {
+                            ifUserIsOwner && <Footer />
+                        }
+
+                    </div>
+                </DragDropContext>
+            </div>
+        </>
     )
     
 }

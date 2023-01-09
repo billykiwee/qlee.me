@@ -23,7 +23,7 @@ export default function Articles({links, user}) {
             name: 'Link in bio',
             icon: <SwatchIcon width={22} className='c-black' />,
             img : 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-            link: '/@' + user?.name
+            link: '/edit/' + user?.link_in_bio
         }
     ]
 
