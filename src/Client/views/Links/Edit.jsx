@@ -26,7 +26,7 @@ import Main from '../../../App/components/Main'
 
 export default function Edit({ props }) {
 
-    const { user } = props
+    const { user, snackBar } = props
 
     const history = useNavigate()
     const { LinkID } = useParams()
@@ -44,7 +44,6 @@ export default function Edit({ props }) {
 
     
     const [PopUpMessage, setPopUpMessage] = useState({})
-    const [Msg, setMsg] = useState([])
 
 
     const [editLink, seteditLink] = useState({})
@@ -247,7 +246,7 @@ export default function Edit({ props }) {
                                                         Stats,
                                                         editLink,
                                                         seteditLink,
-                                                        setMsg,
+                                                        snackBar,
                                                         setPopUpMessage,
                                                         history,
                                                     }) 
@@ -262,7 +261,7 @@ export default function Edit({ props }) {
                                                     DeleteLink({
                                                         Stats,
                                                         link: Link,
-                                                        setMsg,
+                                                        snackBar,
                                                         setPopUpMessage,
                                                         history
                                                     })
@@ -281,8 +280,6 @@ export default function Edit({ props }) {
                         </div>
                     }
                 </div>
-
-                <SnackBar content={Msg} setMsg={setMsg} />
             </>
             }
 

@@ -6,7 +6,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 
 export async function DeleteLink(props) {
 
-    const { link, setMsg, setPopUpMessage, Stats, type, history } = props
+    const { link, snackBar, setPopUpMessage, Stats, type, history } = props
 
     setPopUpMessage({
         title      : 'Attention',
@@ -34,7 +34,7 @@ export async function DeleteLink(props) {
             })
             await faviconExist(link.id)
 
-            setMsg([])
+            snackBar([])
 
             history(type !== 'stats' && '/dashboard')
         } 

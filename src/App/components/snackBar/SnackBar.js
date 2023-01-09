@@ -27,11 +27,6 @@ export function SnackBar({ props }) {
     }, [])
  */
 
-    window.onabort = e => !navigator.onLine && add({
-        text   : "Pas de réseaux",
-        subtext: 'Verifie ta connexion internet !',
-        status : 'error'
-    })
 
     return (
 
