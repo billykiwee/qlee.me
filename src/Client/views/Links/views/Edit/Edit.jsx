@@ -3,7 +3,7 @@ import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../../../lib/database/upload/uploadPhoto'
-import { ChartPieIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, EyeIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { addToLinkInBio } from '../../lib/addToLinkInBio'
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
@@ -212,7 +212,7 @@ export default function Edit({ props }) {
 
                             </div>
 
-                            <div className='grid gap'>
+                            <div className='grid gap-1rem'>
                                 <div 
                                     className='display' 
                                     style={
@@ -239,8 +239,8 @@ export default function Edit({ props }) {
                                         <span className='f-s-16'>Modifier</span>
                                     </button>
                                 </div>
-                                <div className='display'>
-                                    <button className='red hover-red p-1 h-4 border-b border-r-1'
+                                <div className='display justify-c'>
+                                    <div className='display justify-c gap click red-secondary p-1 h-1 border-r-1'
                                         onClick={e=> 
                                             DeleteLink({
                                                 Stats,
@@ -251,8 +251,9 @@ export default function Edit({ props }) {
                                             })
                                         } 
                                     >
-                                        <span className='f-s-16'>Supprimer le lien</span>
-                                    </button>
+                                        <TrashIcon width={20} className='c-red' />
+                                        <span className='f-s-16 c-red'>Supprimer le lien</span>
+                                    </div>
                                 </div>
                             </div>
 

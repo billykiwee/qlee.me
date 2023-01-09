@@ -25,7 +25,7 @@ export default function Header({props}) {
         },
         {
             name: 'Link in bio',
-            link: '/dashboard',
+            link: '/edit/' + User.link_in_bio,
             icon: <SwatchIcon width={16} className='c-yellow' />
         },
         {
@@ -163,6 +163,5 @@ export default function Header({props}) {
 function IsLinkInBio() {
 
     const location = useLocation() 
-    console.log(location.pathname.includes('me/@'));
     return location.pathname.includes('me/@')
 }

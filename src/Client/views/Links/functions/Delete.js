@@ -15,7 +15,6 @@ export async function DeleteLink(props) {
         buttonText : 'Supprimer',
         buttonColor: 'red',
         valid      : () => deleteLinksSelected(link).then(e=> {
-            console.log('oii');
             snackBar.add({
                 id     : UniqueID('m-', 5),
                 text   : 'Modifications enregistrées 🎉',
@@ -23,7 +22,7 @@ export async function DeleteLink(props) {
                 status : 'success'
             })
         }),
-        statu      : 'question'
+        statu: 'question'
     })
 
     

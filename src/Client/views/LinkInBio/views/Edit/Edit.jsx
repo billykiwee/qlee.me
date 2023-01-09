@@ -73,11 +73,11 @@ export function EditLinkInBio({ props }) {
                                             <div className='display gap'>
                                                 <div className='display gap'>   
                                                     <input type='radio' id='radius10' name='radius' />
-                                                    <label className='click w-3 h-2 border' htmlFor='radius10' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '4' } )} />
+                                                    <label className='click w-3 h-2 border' style={{border: '1px solid var(--black)'}} htmlFor='radius10' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '6' } )} />
                                                 </div>
                                                 <div className='display gap'>   
                                                     <input type='radio' id='radius100' name='radius' />
-                                                    <label className='click w-3 h-2 border border-r-100' htmlFor='radius100' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '1000' } )} />
+                                                    <label className='click w-3 h-2 border border-r-100' style={{border: '1px solid var(--black)'}} htmlFor='radius100' onClick={e=> db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.radius'] : '1000' } )} />
                                                 </div>
                                             </div>
                                         </div>
