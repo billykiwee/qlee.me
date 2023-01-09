@@ -1,10 +1,11 @@
 import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export function SnackBar({ props }) {
 
-    const { data, remove } = props
+    const { snackBar, add, remove } = props
+
 
     function deleteData(id) {
 
@@ -26,14 +27,17 @@ export function SnackBar({ props }) {
     }, [])
  */
 
-
-    console.log(data);
+    window.onabort = e => !navigator.onLine && add({
+        text   : "Pas de réseaux",
+        subtext: 'Verifie ta connexion internet !',
+        status : 'error'
+    })
 
     return (
 
         <div className='sticky display grid gap-04 snackbar_div'>
         {
-            data
+            snackBar
             .map(item=> {
 
                 const { id, text, subtext, status, action } = item
