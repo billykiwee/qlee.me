@@ -16,7 +16,7 @@ export function EditLink(props) {
             message   : 'Tu es sur le point de modifier le lien court',
             buttonText: 'Continuer',
             valid     : () => editShortLink(props)
-            /* .then(e=> {
+            .then(e=> {
                 snackBar.add({
                     id     : UniqueID('m-', 5),
                     text   : 'Modifications enregistrées 🎉',
@@ -24,7 +24,7 @@ export function EditLink(props) {
                     status : 'success'
                 })
             })
-            .catch(error=> console.error(error)) */
+            .catch(error=> console.error(error))
         })
     }
 

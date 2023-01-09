@@ -16,7 +16,7 @@ import Popup from '../../../App/components/popUp/Popup'
 
 export default function Stats({ props }) {
 
-    const { user } = props
+    const { user, popUp } = props
 
     const history = useNavigate()
     
@@ -65,9 +65,6 @@ export default function Stats({ props }) {
 
     return (
         <Main>
-
-            <Popup content={Msg} />
-
             <div className='display blocks stats-blocks align-top gap-2rem'>
 
                 <div className='grid'>
@@ -164,14 +161,15 @@ export default function Stats({ props }) {
 
                     <List 
                         props={{
-                            Filter     : filter,
-                            LinkID     : LinkID,
-                            InputSearch: InputSearch,
-                            setShowStat: setShowStat,
-                            UserLinks  : UserLinks,
-                            checkFilter: checkFilter,
-                            setMsg     : setMsg,
-                            setShowStat: setShowStat,
+                            popUp,
+                            filter,
+                            LinkID,
+                            InputSearch,
+                            setShowStat,
+                            UserLinks,
+                            checkFilter,
+                            setMsg,
+                            setShowStat,
                         }} 
                     />
                 </div>

@@ -13,26 +13,29 @@ import { DeleteLink } from '../../Links/functions/Delete'
 
 export default function List({props}) {
 
-    const history = useNavigate()
 
-    const linksFilters = props.InputSearch.length 
+    const { LinkID, InputSearch, setShowStat, UserLinks, checkFilter, setMsg, popUp  } = props
+
+    const history = useNavigate()
+    
+    const linksFilters = InputSearch.length 
     ? 
     (
-        props.UserLinks
+        UserLinks
         .filter(link=> {
-            if (props.InputSearch)
-            return (link.name.toLowerCase()).includes(props.InputSearch) || (link.id.toLowerCase()).includes(props.InputSearch) || (getHostName(link.url).toLowerCase()).includes(props.InputSearch)
+            if (InputSearch)
+            return (link.name.toLowerCase()).includes(InputSearch) || (link.id.toLowerCase()).includes(InputSearch) || (getHostName(link.url).toLowerCase()).includes(InputSearch)
         })
     )
     : 
     (
-        props.UserLinks?.sort((a, b) => {
-            if (props.checkFilter === 'oldest') return a.date - b.date
-            if (props.checkFilter === 'recent') return b.date - a.date
+        UserLinks?.sort((a, b) => {
+            if (checkFilter === 'oldest') return a.date - b.date
+            if (checkFilter === 'recent') return b.date - a.date
             return b.views - a.views
         })
         .filter(e=> {
-            if (props.checkFilter === 'link-in-bio') return e.linkInBio
+            if (checkFilter === 'link-in-bio') return e.linkInBio
             else return e
         })
     )
@@ -44,16 +47,17 @@ export default function List({props}) {
 
             <div  className='grid gap' id='div-links' >
                 {
-                    linksFilters?.map(link=> {
+                    linksFilters
+                    ?.map(link=> {
 
                         return (
                             
                             <div className='display justify-s-b' id={'link-' + link.id} key={link.id}>
                                 <Link to={'/stats/' + link.id} key={link.id} className='w-100p' >
                                     <div    
-                                        style={{background: props.LinkID === link.id ? 'var(--hover-btn)' : ''}}
+                                        style={{background: LinkID === link.id ? 'var(--hover-btn)' : ''}}
                                         className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
-                                        key={link.id} onClick={e=> props.setShowStat(link.id)} 
+                                        key={link.id} onClick={e=> setShowStat(link.id)} 
                                     >
                                         <div className='display gap-1rem'>
                                             <img src={getFavicon(link)} className='border-r-100' width={30} />
@@ -90,11 +94,12 @@ export default function List({props}) {
                                     <div className='display w-2 h-2 justify-c click  hover border-r-100'
                                         onClick={e=> 
                                             DeleteLink({
-                                                link       : link,
-                                                setMsg     : props.setMsg,
-                                                setShowStat: props.setShowStat,
+                                                link,
+                                                setMsg,
+                                                setShowStat,
                                                 type       : 'stats',
-                                                history: history
+                                                history,
+                                                popUp
                                             })
                                         }
                                     >

@@ -56,7 +56,7 @@ export default function Edit({ props }) {
                 Link &&
                 <div className='grid gap-2rem' key={Link.id}>
 
-                    <div className='grid blocks gap-2rem'>
+                    <div className='grid blocks gap-1rem'>
 
                         <div className='grid gap-1rem'>
 
@@ -96,16 +96,16 @@ export default function Edit({ props }) {
                                     <div className='display justify-c wrap gap'>
                                         <div className='grid gap'>
                                             <Redirect to={'/stats/' + Link.id}>
-                                                <button className='grey h-3 border-r-04 p-lr-1 display gap hover'>
-                                                    <ChartPieIcon width={16} />
-                                                    <span className='f-s-14'>Statistiques</span>
+                                                <button className='grey h-3 border-r-2 p-lr-1 display gap hover'>
+                                                    <ChartPieIcon width={18} />
+                                                    <span className='f-s-16'>Statistiques</span>
                                                 </button>
                                             </Redirect>
                                         </div>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 border-r-04 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
-                                                <QrCodeIcon width={16} />
-                                                <span className='f-s-14'>Qr code</span>
+                                            <button className='grey h-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                                <QrCodeIcon width={18} />
+                                                <span className='f-s-16'>Qr code</span>
                                             </button>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@ export default function Edit({ props }) {
 
                         </div>
 
-                        <div className='grid gap-1rem'>
+                        <div className='grid gap-2rem'>
 
                             <div className='grid gap-1rem' >
 

@@ -1,31 +1,31 @@
-
-import { db, storage } from "../../../../App/database/firebase"
+import { db } from "../../../../App/database/firebase"
 import { getStorage, ref, deleteObject } from "firebase/storage";
+import UniqueID from "../../../../App/utils/uniqueID";
 
 
 
 export async function DeleteLink(props) {
 
-    const { link, snackBar, setPopUpMessage, Stats, type, history } = props
+    const { Stats, link, snackBar, popUp, history, type } = props
 
-    setPopUpMessage({
+    popUp.show({
         title      : 'Attention',
         message    : `Tu es sur le point de supprimer ${link.name}`,
         question   : 'Voulez-vous continuer ?',
         buttonText : 'Supprimer',
         buttonColor: 'red',
         valid      : () => deleteLinksSelected(link),
-        close      : () => setPopUpMessage([]),
         statu      : 'question'
     })
 
     
 
-    const deleteLinksSelected = async link => {
+    const deleteLinksSelected = async (link) => {
 
         try {
             await db.collection('links').doc(link.id).delete()
-            await Stats?.filter(e => e.LinkID === link.id)
+            await Stats
+            ?.filter(e => e.LinkID === link.id)
             .map(e => {
                 
                 db.collection('stats')
@@ -34,9 +34,17 @@ export async function DeleteLink(props) {
             })
             await faviconExist(link.id)
 
-            snackBar([])
+            popUp.show({})
 
             history(type !== 'stats' && '/dashboard')
+            .then(e=> {
+                snackBar.add({
+                    id     : UniqueID('m-', 5),
+                    text   : 'Modifications enregistrées 🎉',
+                    subtext: 'Le lien court à bien été modifié',
+                    status : 'success'
+                })
+            })
         } 
         catch (error) {
             console.error(error);
