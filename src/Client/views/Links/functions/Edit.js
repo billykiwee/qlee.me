@@ -32,7 +32,7 @@ export function EditLink(props) {
     const { 
         Link,
         LinkID,
-        user,
+        User,
         Stats,
         editLink,
         seteditLink,
@@ -42,12 +42,12 @@ export function EditLink(props) {
     } = props
 
 
-    const editShortLink = async (newID) => {
+    const editShortLink = async (newLink) => {
         try {
 
             if ((/\s/.test(editLink.shortLink))) throw 'space in shortlink'
-            
-            await db.collection('links').doc(newID.id).set(newID)
+
+            await db.collection('links').doc(newLink.id).set(newLink)
             await db.collection('links').doc(Link.id).delete() 
 
 
@@ -60,7 +60,7 @@ export function EditLink(props) {
                     await db.collection('stats')
                     .doc(e.statID)
                     .update({
-                        LinkID : newID
+                        LinkID : newLink.id
                     })
 
                     .then(e=> {
@@ -71,18 +71,15 @@ export function EditLink(props) {
                             status: 'success'
                         })
                     })
-                    .catch(e=> {
-                        console.log(e);
-                    })
+                    .catch(e=> console.log(e))
                 })
             }
-
 
             document.querySelectorAll('input').forEach(e=> e.value = '')
             setPopUpMessage({})
             seteditLink('')
 
-            history('/edit/' + newID.id)
+            //history('/edit/' + newLink.id)
 
         } catch (e) {
             console.log(e);
@@ -125,17 +122,17 @@ export function EditLink(props) {
 
     if (Object.keys(editLink) == 'shortLink') {
 
-        const newID = {
+        const newLink = {
             name     : Link.name,
             id       : editLink.shortLink,
-            user     : user?.email,
+            User     : User?.email,
             url      : Link.url,
             shortLink: 'qlee.me/' + editLink.shortLink,
             date     : serverTimestamp(),
             views    : Link.views
         }
 
-        editShortLink(newID)
+        editShortLink(newLink)
     }
     else editLinkNameOrURL()
 

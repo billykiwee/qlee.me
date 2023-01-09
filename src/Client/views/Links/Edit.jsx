@@ -242,7 +242,7 @@ export default function Edit({ props }) {
                                                     EditLink({
                                                         Link,
                                                         LinkID,
-                                                        user,
+                                                        User,
                                                         Stats,
                                                         editLink,
                                                         seteditLink,
