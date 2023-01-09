@@ -52,7 +52,7 @@ export default function Popup({ props }) {
                         <div className='display justify-c'>
                             <small className='f-w-300 c-grey'>{question}</small>
                         </div>
-                        <button className={buttonColor + ' h-3 border-r-1 border-b'} onClick={valid}>
+                        <button className={buttonColor + ' blue h-3 border-r-1 border-b'} onClick={valid}>
                             <span className='f-s-16'>{buttonText}</span>
                         </button>
                     </div>

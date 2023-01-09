@@ -37,7 +37,7 @@ export function EditLink(props) {
         editLink,
         seteditLink,
         snackBar,
-        setPopUpMessage,
+        popUp,
         history 
     } = props
 
@@ -73,9 +73,9 @@ export function EditLink(props) {
             })
 
             document.querySelectorAll('input').forEach(e=> e.value = '')
-            setPopUpMessage({})
             seteditLink('')
 
+            popUp.show({})
             history('/edit/' + newLink.id)
 
         } catch (e) {
@@ -115,6 +115,7 @@ export function EditLink(props) {
         document.querySelector('#error-'+ e.id).innerHTML = e.error
         })
     }
+    
 
 
     if (Object.keys(editLink) == 'shortLink') {
@@ -129,7 +130,13 @@ export function EditLink(props) {
             views    : Link.views
         }
 
-        editShortLink(newLink)
+        popUp.show({
+            title      : 'Le lien court va être modifier',
+            valid      : () => editShortLink(newLink),
+            buttonText: 'Continuer',
+            
+        })
+
     }
     else editLinkNameOrURL()
 
