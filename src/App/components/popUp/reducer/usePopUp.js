@@ -8,10 +8,10 @@ export function usePopUp() {
 
     const show = (content) => {
         dispatch({
-            type: 'SET_SNACKBAR',
-            popUp: popUp
+            type : 'SET_POPUP',
+            popUp: content
         })
     }
 
-    return { popUp, add, remove }
+    return { popUp, show }
 }

@@ -15,16 +15,12 @@ import UniqueID from '../../../App/utils/uniqueID';
 export default function Dashboard({ props }) {
 
     
-    const { auth, user, snackBar } = props
+    const { auth, user, snackBar, popUp } = props
 
     const User = user?.profil
     const UserLinks = user?.links?.links
 
     const [Error, setError] = useState('')
-
-
-
-    console.log(UniqueID());
 
 
     if (!auth) return <Login />    

@@ -25,6 +25,8 @@ import { useFetchUsers } from '../Client/data/users'
 import { useFetchLinks } from '../Client/data/user/links'
 import { SnackBar } from './components/snackBar/SnackBar'
 import { useSnackBar } from './components/snackBar/reducer/useSnackBar'
+import { usePopUp } from './components/popUp/reducer/usePopUp'
+import Popup from './components/popUp/Popup'
 
 
 
@@ -52,7 +54,8 @@ export default function App() {
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         link_in_bio: useFetchLinks(),
-        snackBar   : useSnackBar()
+        snackBar   : useSnackBar(),
+        popUp      : usePopUp()
     }
 
    
@@ -91,6 +94,7 @@ export default function App() {
                             element={
                                 <>
                                     <SnackBar props={props.snackBar} />
+                                    <Popup props={props.popUp} />
                                     {React.cloneElement(route.element, { props: props })}
                                 </>
                             }

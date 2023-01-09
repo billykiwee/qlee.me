@@ -1,6 +1,7 @@
 export const initialState = {
-    user      : null,
-    snackBar  : [],
+    user    : null,
+    snackBar: [],
+    popUp   : {},
 }
 
 const reducer = (state, action) => {
@@ -15,6 +16,11 @@ const reducer = (state, action) => {
         case 'SET_SNACKBAR' : return {
             ...state,
             snackBar : action.snackBar
+        }
+
+        case 'SET_POPUP' : return {
+            ...state,
+            popUp : action.popUp
         }
 
         default : return state
