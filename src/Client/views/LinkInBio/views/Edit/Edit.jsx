@@ -35,18 +35,17 @@ export function EditLinkInBio({ props }) {
 
                     <div className='grid gap-1rem p-1'>
 
-                        <div className='display justify-s-b'>
+                        <div className='grid gap justify-s-b'>
                             <label className='f-s-20'>Lien icon</label>
-                        </div>
-                        <div className='display gap wrap grey border-r-04 p-1'  >
-                            {
-                                UserLinks
-                                .filter(e=> e.linkInBio === true)
-                                .sort((a,b)=> a.position - b.position)
-                                .map(ul=> {
-                                    return <LinksAsIcon ul={ul} putLinkAsIcon={putLinkAsIcon} key={ul.id} />
-                                })
-                            }
+                            <div className='display gap wrap grey border-r-04 p-1'  >
+                                {
+                                    UserLinks
+                                    .filter(e=> e.linkInBio === true)
+                                    .map(ul=> {
+                                        return <LinksAsIcon ul={ul} putLinkAsIcon={putLinkAsIcon} key={ul.id} />
+                                    })
+                                }
+                            </div>
                         </div>
 
                         <div className='grid p-1 border-r-04 grey gap border'>

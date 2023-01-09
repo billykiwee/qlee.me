@@ -90,7 +90,6 @@ export default function LinkInBio({ userView, props }) {
                                     {
                                         LinkInBioLinks
                                         .filter(e=> !e.asIcon)
-                                        .sort((a,b)=> a.position - b.position)
                                         .map((link, i)=> {
 
                                             return (
@@ -112,6 +111,7 @@ export default function LinkInBio({ userView, props }) {
                                                 </Draggable>
                                             )
                                         })
+                                        .sort((a,b)=> a.position - b.position)
 
                                     }
                                 </div>

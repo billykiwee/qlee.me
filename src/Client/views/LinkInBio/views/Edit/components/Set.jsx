@@ -23,12 +23,12 @@ export default function Set({ props }) {
                     }}
                 >
                     <Link to={'/edit/'+ link.id}>
-                        <div className='display gap hover p-04 border-r-04 h-2'>
+                        <div className='display gap hover p-1 border-r-04 h-1'>
                             <PencilSquareIcon width={12} />
                             <small>Modifier</small>
                         </div>
                     </Link>
-                    <div className='display gap hover p-04 border-r-04 h-2' onClick={e=> deleteLinkFromBio(link.id) }>
+                    <div className='display gap hover p-1 border-r-04 h-1' onClick={e=> deleteLinkFromBio(link.id) }>
                         <TrashIcon width={12} className='c-red' />
                         <small>Supprimer</small>
                     </div>
