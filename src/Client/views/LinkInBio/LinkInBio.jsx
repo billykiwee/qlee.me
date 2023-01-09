@@ -8,8 +8,7 @@ import { Head } from './components/Head'
 import { Footer } from './components/Footer'
 import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
-import Main from '../../../App/components/Main'
-import { toggleTheme } from '../../../App/functions/setTheme'
+
 
 
 export default function LinkInBio({ userView, props }) {

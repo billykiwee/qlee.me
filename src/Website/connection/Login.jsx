@@ -14,7 +14,6 @@ import { generateLetterImage } from '../../App/utils/generateLetterImage'
 
 export default function Signup() {
 
-
     const history = useNavigate()
 
     const [{user}] = useStateValue()

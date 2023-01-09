@@ -7,8 +7,6 @@ export function EditLink(props) {
 
     const { editLink, seteditLink, popUp, snackBar } = props
 
-    console.log(Object.keys(editLink));
-
     if (Object.keys(editLink).toString() === 'shortLink') {
         popUp.show({
 
@@ -54,7 +52,6 @@ export function EditLink(props) {
 async function editNameOrURL(props) {
 
     const { Link, editLink } = props
-
 
     if (Link.name) {
         if (Link.name.length > 40) {
@@ -102,12 +99,13 @@ async function editShortLink(props) {
         await db.collection('links').doc(newLink.id).set(newLink)
         await db.collection('links').doc(Link.id).delete() 
 
+        
         Stats
         .filter(e=> e.LinkID === LinkID)
-        .map(async e=> {
+        .map(async stat=> {
 
             await db.collection('stats')
-            .doc(e.statID)
+            .doc(stat.statID)
             .update({
                 LinkID : newLink.id
             })

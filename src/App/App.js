@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Home from '../Website/Home'
 
@@ -57,11 +57,6 @@ export default function App() {
         snackBar   : useSnackBar(),
         popUp      : usePopUp()
     }
-
-   
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    })
 
 
 

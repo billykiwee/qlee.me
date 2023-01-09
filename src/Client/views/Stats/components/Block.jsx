@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { isValidUrl } from '../../../../App/utils/isValidUrl'

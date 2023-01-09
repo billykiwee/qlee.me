@@ -5,26 +5,30 @@ import { useEffect } from 'react'
 
 export default function Filter({props}) {
 
+
+    const { Search, setInputSearch, setFilter, setSearch, checkFilter, setCheckFilter } = props
+
+
     const filters = [
         {
             name: 'popular',
             text: 'Populaire',
-            icon: <StarIcon width={16} className='c-grey' />
+            icon: <StarIcon width={16} />
         },
         {
             name: 'recent',
             text: 'Le plus récent',
-            icon: <ForwardIcon width={16} className='c-grey' />
+            icon: <ForwardIcon width={16} />
         },
         {
             name: 'oldest',
             text: 'Le plus ancient',
-            icon: <BackwardIcon width={16} className='c-grey' />
+            icon: <BackwardIcon width={16} />
         },
         {
             name: 'link-in-bio',
             text: 'Link in bio',
-            icon: <SwatchIcon width={16} className='c-grey' />
+            icon: <SwatchIcon width={16} />
         }
     ]
 
@@ -51,10 +55,10 @@ export default function Filter({props}) {
                     <div className='display'>
                         <button 
                             onClick={e=> {
-                                props.setFilter(false)
-                                props.setSearch(props.Search ? false : true)
+                                setFilter(false)
+                                setSearch(Search ? false : true)
                             }}
-                            className={(props.Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border'} 
+                            className={(Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border'} 
                         >
                             <MagnifyingGlassIcon width={20} className='c-black' />
                         </button>
@@ -67,11 +71,11 @@ export default function Filter({props}) {
                                     <div className='display gap'>
                                         {
                                             filters.map((fil,i)=> {
-                                                if (fil.name === props.checkFilter)
+                                                if (fil.name === checkFilter)
                                                 return <span className='display' key={i}>{fil.icon}</span>
                                             })
                                         }
-                                        <span className='c-black f-s-14'>{filters.filter(e=> e.name === props.checkFilter).map(e=> e.text).toString()}</span>
+                                        <span className='c-black f-s-14'>{filters.filter(e=> e.name === checkFilter).map(e=> e.text).toString()}</span>
                                     </div>
                                     {
                                         isOpen ? <ChevronUpIcon width={12} /> : <ChevronDownIcon width={12} />
@@ -82,11 +86,11 @@ export default function Filter({props}) {
                                         filters.map((item, i) => {
                                             return (
                                                 <div 
-                                                    className={(item.name === props.checkFilter && 'grey') + " dropdown-item hover click display gap"} 
-                                                    onClick={e => {props.setCheckFilter(item.name); setOpen(false) }}
+                                                    className={(item.name === checkFilter && 'grey') + " dropdown-item hover click display gap"} 
+                                                    onClick={e => {setCheckFilter(item.name); setOpen(false) }}
                                                     key={i}
                                                 >
-                                                    <span className='display'>{item.icon}</span>
+                                                    <span className='display c-grey'>{item.icon}</span>
                                                     <span className='c-black f-s-14'>{item.text}</span>
                                                 </div>
                                             )
@@ -99,9 +103,9 @@ export default function Filter({props}) {
                     </div>
                 </div>
                 {
-                    props.Search &&
+                    Search &&
                     <div className='display'>
-                        <input className='div-input grey h-3 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> props.setInputSearch(e.target.value.toLowerCase())} />
+                        <input className='div-input grey h-3 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> setInputSearch(e.target.value.toLowerCase())} />
                     </div>
                 }
             </div>
