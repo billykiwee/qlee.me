@@ -1,6 +1,5 @@
-import React, { Children, useEffect, useState } from 'react'
-import '../css/popup.css'
-
+import React from 'react'
+import '../../css/popup.css'
 
 
 export default function Popup({content, children}) {

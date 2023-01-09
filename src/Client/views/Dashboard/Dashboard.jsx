@@ -9,6 +9,7 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import Main from '../../../App/components/Main';
+import UniqueID from '../../../App/utils/uniqueID';
 
 
 export default function Dashboard({ props }) {
@@ -21,6 +22,9 @@ export default function Dashboard({ props }) {
 
     const [Error, setError] = useState('')
 
+
+
+    console.log(UniqueID());
 
 
     if (!auth) return <Login />    

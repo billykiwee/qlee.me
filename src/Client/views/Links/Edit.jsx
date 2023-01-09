@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import getFavicon from '../../../App/utils/getFavicon'
-import Popup from '../../../App/components/Popup'
+import Popup from '../../../App/components/popUp/Popup'
 import Messages from '../../../App/utils/Messages'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'

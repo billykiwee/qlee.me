@@ -11,7 +11,7 @@ export function useSnackBar() {
             type: 'SET_SNACKBAR',
             snackBar: [
                 ...snackBar,
-                { id: UniqueID('sb', 4), ...content },
+                { id: UniqueID('sb'), ...content },
             ]
         })
     }

@@ -10,7 +10,7 @@ import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import Messages from '../../../App/utils/Messages'
-import Popup from '../../../App/components/Popup'
+import Popup from '../../../App/components/popUp/Popup'
 
 
 

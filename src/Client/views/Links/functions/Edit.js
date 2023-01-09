@@ -51,35 +51,32 @@ export function EditLink(props) {
             await db.collection('links').doc(Link.id).delete() 
 
 
-            if (Stats.some(e=> e.LinkID === LinkID)) {
+            Stats
+            .filter(e=> e.LinkID === LinkID)
+            .map(async e=> {
 
-                Stats
-                .filter(e=> e.LinkID === LinkID)
-                .map(async e=> {
-
-                    await db.collection('stats')
-                    .doc(e.statID)
-                    .update({
-                        LinkID : newLink.id
-                    })
-
-                    .then(e=> {
-                        snackBar.add({
-                            id: UniqueID('m-', 5),
-                            text: 'Modifications enregistrées 🎉',
-                            subtext: 'Le lien court à bien été modifié',
-                            status: 'success'
-                        })
-                    })
-                    .catch(e=> console.log(e))
+                await db.collection('stats')
+                .doc(e.statID)
+                .update({
+                    LinkID : newLink.id
                 })
-            }
+
+                .then(e=> {
+                    snackBar.add({
+                        id: UniqueID('m-', 5),
+                        text: 'Modifications enregistrées 🎉',
+                        subtext: 'Le lien court à bien été modifié',
+                        status: 'success'
+                    })
+                })
+                .catch(e=> console.log(e))
+            })
 
             document.querySelectorAll('input').forEach(e=> e.value = '')
             setPopUpMessage({})
             seteditLink('')
 
-            //history('/edit/' + newLink.id)
+            history('/edit/' + newLink.id)
 
         } catch (e) {
             console.log(e);
@@ -125,7 +122,7 @@ export function EditLink(props) {
         const newLink = {
             name     : Link.name,
             id       : editLink.shortLink,
-            User     : User?.email,
+            user     : User?.email,
             url      : Link.url,
             shortLink: 'qlee.me/' + editLink.shortLink,
             date     : serverTimestamp(),
