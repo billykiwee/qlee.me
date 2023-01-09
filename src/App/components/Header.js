@@ -163,5 +163,6 @@ export default function Header({props}) {
 function IsLinkInBio() {
 
     const location = useLocation() 
+    console.log(location.pathname.includes('me/@'));
     return location.pathname.includes('me/@')
 }
