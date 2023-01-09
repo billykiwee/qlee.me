@@ -1,4 +1,4 @@
-import { BackwardIcon, ChevronDownIcon, ChevronUpIcon, ForwardIcon, FunnelIcon, MagnifyingGlassIcon, StarIcon, SwatchIcon } from '@heroicons/react/24/solid'
+import { BackwardIcon, ChevronDownIcon, ChevronUpIcon, ForwardIcon, MagnifyingGlassIcon, StarIcon, SwatchIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -50,7 +50,7 @@ export default function Filter({props}) {
             zIndex  : 9,
             marginTop: width > 740 && '4rem'
         }}>
-            <div className='grid gap-1rem white border-r-1 border p-1'>
+            <div className='grid gap-1rem white border-r-1 border p-04'>
                 <div className='display justify-s-b'>
                     <div className='display'>
                         <button 

@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { signOut } from "firebase/auth"
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Login from '../../../Website/connection/Login'
-
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
-
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import Main from '../../../App/components/Main'
 

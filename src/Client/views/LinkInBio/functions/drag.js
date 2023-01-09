@@ -30,14 +30,10 @@ function reorderList(list, startIndex, endIndex) {
 
 
 
-async function getPosition() {
+function getPosition() {
     const container = document.querySelector('.container')
-    const array     = container.childNodes
-    return array
-}
-
-getPosition()
-.then(array=> {
+    const array     = container?.childNodes
+    
     Object.values(array).map((e, index)=> {
 
         const id = e.classList.value
@@ -46,4 +42,4 @@ getPosition()
             position: index
         })
     })
-})
+}

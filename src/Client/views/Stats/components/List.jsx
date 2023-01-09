@@ -1,12 +1,8 @@
-import { CheckIcon } from '@heroicons/react/24/outline'
+import React from 'react'
 import { BookmarkIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid'
-import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { db } from '../../../../App/database/firebase'
-import { useStateValue } from '../../../../App/provider/StateProvider'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
-import { fetchUserLinks } from '../../../lib/database/links/fetchUserLinks'
 import { getHostName } from '../../../lib/getHostName'
 import { DeleteLink } from '../../Links/functions/Delete'
 

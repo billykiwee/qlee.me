@@ -1,16 +1,15 @@
-import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import '../../../App/css/stats.css'
 import { Block, HeadBlock } from './components/Block'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
-import { GoToPricing } from '../Links/Edit'
+import { GoToPricing } from '../Links/views/Edit/Edit'
 import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import Messages from '../../../App/utils/Messages'
-import Popup from '../../../App/components/popUp/Popup'
 
 
 
@@ -148,14 +147,14 @@ export default function Stats({ props }) {
                 <div className='grid gap-1rem' >
                     <Filter 
                         props={{
-                            Filter        : filter,
-                            Search        : Search,
-                            InputSearch   : InputSearch,
-                            setInputSearch: setInputSearch,
-                            setFilter     : setFilter,
-                            setSearch     : setSearch,
-                            checkFilter    : checkFilter,
-                            setCheckFilter: setCheckFilter,
+                            filter,
+                            Search,
+                            InputSearch,
+                            setInputSearch,
+                            setFilter,
+                            setSearch,
+                            checkFilter,
+                            setCheckFilter,
                         }} 
                     />
 

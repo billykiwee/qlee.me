@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from '../Website/Home'
 
 import Dashboard from '../Client/views/Dashboard/Dashboard'
-import Edit from '../Client/views/Links/Edit'
+import Edit from '../Client/views/Links/views/Edit/Edit'
 import Header from './components/Header'
 
 import Footer from './components/Footer'

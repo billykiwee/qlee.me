@@ -24,7 +24,10 @@ export const dataFilter = (LinkStat) => {
         device      : Object.values(countByDevice),
         reference   : Object.values(countByReference),
         localisation: Object.values(countByCountry),
-        performance : { performance, speed : countPerformance }
+        performance : { 
+            performance, 
+            speed: countPerformance
+        }
     } 
 
 }

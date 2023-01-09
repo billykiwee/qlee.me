@@ -1,9 +1,11 @@
 export function countBy(array) {
+
     const iterate =  array.reduce((acc, curr) => {
-        if (curr in acc) 
+        if (curr in acc) {
             acc[curr]++
-        else 
-            acc[curr] = 1
+        }
+        else acc[curr] = 1
+        
         return acc
     }, {})
 

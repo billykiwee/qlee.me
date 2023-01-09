@@ -1,5 +1,5 @@
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import { auth, db, storage} from '../../../../App/database/firebase'
+import { db, storage } from '../../../../App/database/firebase'
 
 export async function uploadPhoto(fileInput, userEmail) {
 
