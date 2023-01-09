@@ -1,3 +1,4 @@
+import { XCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import '../../css/popup.css'
 
@@ -6,8 +7,7 @@ export default function Popup({ props }) {
 
     const { popUp, show } = props
 
-
-    const { title, close, statu, message, valid, question, buttonText, buttonColor } = popUp
+    const { title, statu, message, valid, question, buttonText, buttonColor } = popUp
 
 
     if (Object.values(popUp).length)
@@ -21,30 +21,21 @@ export default function Popup({ props }) {
                                 <span className='f-s-20 f-w-500'>{title}</span>
                             </div>
                             <div className='display'>
-                                <button className='w-3 h-3 border-r-100 hover' onClick={close}>
+                                <button className='w-3 h-3 border-r-100 hover' onClick={e=> show({}) }>
                                     <span className='display'>
-                                        <img src='/images/x.svg' width={20} height={20} />
+                                        <XMarkIcon  width={20} className='c-black' />
                                     </span>
                                 </button>
                             </div>
                         </div>
 
                         <div className='grid gap grey border-r-04 p-2'>
-                            {
-                                statu === 'success' &&
-                                <div className='display justify-c'>
-                                    <img src='/images/success.svg' width={44} height={44} />
-                                </div>
-                                ||
-                                statu === 'error' &&
-                                <div className='display justify-c'>
-                                    <span className='f-s-2rem'>❌</span>
-                                </div>
-                                ||
-                                <div className='display justify-c'>
-                                    <span className='f-s-2rem'>🤔</span>
-                                </div>
-                            }
+                            <div className='display justify-c'>
+                                {
+                                    statu === 'success' && <img src='/images/success.svg' width={44} height={44} />
+                                }
+                                <span className='f-s-2rem'>{statu === 'error' ? '❌' : '🤔' }</span>
+                            </div>
                             <span className='text-align-c'>{message}</span>
                         </div>
                     </div>
