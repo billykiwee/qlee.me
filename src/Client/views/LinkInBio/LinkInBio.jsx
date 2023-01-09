@@ -53,7 +53,7 @@ export default function LinkInBio({ userView, props }) {
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
     return (
-        <>
+        <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
             {
                 !userView &&
@@ -64,7 +64,7 @@ export default function LinkInBio({ userView, props }) {
                 />
             }
 
-            <div style={{ padding: '2rem',height: !userView && '100vh' }} >
+            <div style={{ padding: '2rem', height: !userView && '100vh' }} >
                 
                 <DragDropContext onDragEnd={result=> onDragEndLinkInBio(result, LinkInBioLinks, setLinkInBioLinks)} onDragStart={onDragStratLinkInBio} >
                     <div style={{
@@ -78,7 +78,7 @@ export default function LinkInBio({ userView, props }) {
                             userView &&
                             <div className='zi-2 display justify-e'>
                                 <Link to={'/@' + userName}>
-                                    <button className='display hover border-r-100 border h-2 w-2 shadow' style={{background: 'white'}}>
+                                    <button className='display hover border-r-100 border h-3 w-3 shadow' style={{background: 'white'}}>
                                         <ArrowUpRightIcon width={20} color='black' />
                                     </button>
                                 </Link>
@@ -138,7 +138,7 @@ export default function LinkInBio({ userView, props }) {
                     </div>
                 </DragDropContext>
             </div>
-        </>
+        </div>
     )
     
 }

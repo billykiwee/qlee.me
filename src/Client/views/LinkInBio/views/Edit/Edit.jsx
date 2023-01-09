@@ -146,14 +146,13 @@ export function EditLinkInBio({ props }) {
                             filter            : `blur(${background?.img?.blur}px)`,
                             left              : 0,
                             right             : 0,
-                            height            : '100%',
                             position          : 'absolute',
                             backgroundSize    : 'cover',
                             backgroundPosition: 'center',
                             backgroundColor   : background?.color
                         }} />
                         
-                        <div className='border border-r-1 shadow'>
+                        <div className='border border-r-1 shadow' style={{background: background?.color}}>
                             <LinkInBio userView={User} links={UserLinks} props={props} /> 
                         </div>
                     </div>

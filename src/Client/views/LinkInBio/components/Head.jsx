@@ -52,8 +52,6 @@ export function Head({props}) {
                         .filter(e=> e.asIcon)
                         .map((link, i)=> {
 
-                            console.log(link);
-
                             return (
                                 <a href={'https://'+ link.shortLink} className='link' key={i} >
                                     <img src={link.icon ?? getFavicon(link.url)} width={34} className='border-r-100' />
