@@ -66,24 +66,23 @@ export default function LinkInBio({ userView, props }) {
                 }}>
 
                     {
+                        userView &&
+                        <div className='zi-2 display justify-e'>
+                            <Link to={'/@' + userName}>
+                                <button className='display hover border-r-100 border h-2 w-2 shadow' style={{background: 'white'}}>
+                                    <ArrowUpRightIcon width={20} color='black' />
+                                </button>
+                            </Link>
+                        </div>
+                    }
+
+                    {
                         !userView &&
-                        <>
-                            <div className='zi-2 display justify-e'>
-                                <div>
-                                    <Link to={'/@' + userName}>
-                                        <button className='display hover white border-r-100 border h-2 w-2 shadow'>
-                                            <ArrowUpRightIcon width={20} color='black' />
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-                       
-                            <Background 
-                                color = {background?.color}
-                                img   = {background?.img?.url}
-                                blur  = {background?.img?.blur}
-                            />
-                        </>
+                        <Background 
+                            color = {background?.color}
+                            img   = {background?.img?.url}
+                            blur  = {background?.img?.blur}
+                        />
                     }
 
                     <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  

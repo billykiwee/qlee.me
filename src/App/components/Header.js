@@ -7,7 +7,7 @@ import { GetWidth } from '../utils/GetWidth'
 
 export default function Header({props}) {
 
-    const User = props?.user?.profil
+    const User = props.user?.profil
 
     const [Menu, setMenu] = useState(false)
 
@@ -47,29 +47,20 @@ export default function Header({props}) {
         }
     }, [Menu])
 
-
-
-
-    const location = useLocation()    
-
-    function isLinkInBio() {
-        if (location.pathname.includes('edit/@')) return false
-        return location.pathname.includes('/@')
-    }
     
 
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
 
 
+    console.log(GetWidth());
 
 
-
-    if (!isLinkInBio())
+    if (!IsLinkInBio())
     return (
-        <header className='p-1 white shadow '>
+        <header className='p-1 white shadow' >
             <div className='display justify-s-b'>
                 <div className='display gap click'>
-                    <Link to='/' >
+                   {/*  <Link to='/' >
                         <span className='display'>
                             {
                                 GetWidth() < 480
@@ -108,7 +99,7 @@ export default function Header({props}) {
                                 )
                             }
                             </span>
-                    </Link>
+                    </Link> */}
                 </div>
                 <div className='display gap'>
                     <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
@@ -164,4 +155,16 @@ export default function Header({props}) {
             }
         </header>
     )
+}
+
+
+
+
+function IsLinkInBio() {
+
+    const location = useLocation() 
+
+    const l = location?.pathname.split('')
+
+    return l.includes('@')
 }

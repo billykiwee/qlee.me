@@ -81,27 +81,27 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <Header props={props} />
             <Routes>
                 {
                     Object.values(router).map((route, i) => {
                         return <Route
-                            key={i}
-                            path={route.path}
-                            exact
-                            element={
-                                <>
+                        key={i}
+                        path={route.path}
+                        exact
+                        element={
+                            <>
+                                <Header props={props} />
                                     <SnackBar props={props.snackBar} />
                                     <Popup props={props.popUp} />
                                     {React.cloneElement(route.element, { props: props })}
-                                </>
+                                <Footer props={props} />
+                            </>
                             }
                         />
                         
                     })
                 }
             </Routes>
-            <Footer props={props} />
       </BrowserRouter>
     )
 
