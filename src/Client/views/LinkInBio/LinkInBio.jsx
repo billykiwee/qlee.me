@@ -1,4 +1,4 @@
-import { ArrowsPointingOutIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { ArrowsPointingOutIcon, ArrowUpRightIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link, useParams } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { Head } from './components/Head'
 import { Footer } from './components/Footer'
 import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
+import { LinksAsIcon } from './views/Edit/components/LinkAsIcon'
 
 
 
@@ -66,11 +67,23 @@ export default function LinkInBio({ userView, props }) {
 
                     {
                         !userView &&
-                        <Background 
-                            color = {background?.color}
-                            img   = {background?.img?.url}
-                            blur  = {background?.img?.blur}
-                        />
+                        <>
+                            <div className='zi-2 display justify-e'>
+                                <div>
+                                    <Link to={'/@' + userName}>
+                                        <button className='display hover white border-r-100 border h-2 w-2 shadow'>
+                                            <ArrowUpRightIcon width={20} color='black' />
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                       
+                            <Background 
+                                color = {background?.color}
+                                img   = {background?.img?.url}
+                                blur  = {background?.img?.blur}
+                            />
+                        </>
                     }
 
                     <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  

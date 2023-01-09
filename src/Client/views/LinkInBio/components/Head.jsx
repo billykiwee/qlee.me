@@ -48,8 +48,11 @@ export function Head({props}) {
                 </div>
                 <div className='display gap-1rem justify-c'>
                     {
-                        LinkInBioLinks?.filter(e=> e.linkInBio === true && e.asIcon === true)
+                        LinkInBioLinks
+                        .filter(e=> e.asIcon)
                         .map((link, i)=> {
+
+                            console.log(link);
 
                             return (
                                 <a href={'https://'+ link.shortLink} className='link' key={i} >
