@@ -9,7 +9,7 @@ export function EditQrCode({ style, link }) {
     return (
  
         <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
-            <div className='display white p-1 border-r-04 justify-c' style={{background : 'white'}}>
+            <div className='display white p-1 border-r-04 justify-c' style={{background : 'white'}} >
                 {
                     style.logo &&
                     <div 
@@ -34,7 +34,7 @@ export function EditQrCode({ style, link }) {
 
     else return (
         <div className='grid gap-1rem border-r-1 gap-1rem p-1' id='qr-code-img' > 
-            <div className='display p-1 border-r-04 justify-c'>
+            <div className='display p-1 border-r-04 justify-c' style={{background : 'white'}} >
                 {
                     style.logo &&
                     <div 

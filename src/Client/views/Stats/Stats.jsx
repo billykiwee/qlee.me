@@ -16,7 +16,7 @@ import Popup from '../../../App/components/popUp/Popup'
 
 export default function Stats({ props }) {
 
-    const { user, popUp } = props
+    const { user, popUp, snackBar } = props
 
     const history = useNavigate()
     
@@ -162,6 +162,7 @@ export default function Stats({ props }) {
                     <List 
                         props={{
                             popUp,
+                            snackBar,
                             filter,
                             LinkID,
                             InputSearch,

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { getDevice } from '../../Client/lib/getDevice'
-import { useStateValue } from '../provider/StateProvider'
-import { ArrowDownCircleIcon, Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
+import { Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
 import { toggleTheme } from '../functions/setTheme'
 import { GetWidth } from '../utils/GetWidth'
 
@@ -44,11 +42,9 @@ export default function Header({props}) {
 
 
     useEffect(e=> {
-
         window.onclick = e => {
             if (!e.target.closest('header')) setMenu(false)
         }
-
     }, [Menu])
 
 

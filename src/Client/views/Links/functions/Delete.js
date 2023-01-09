@@ -14,7 +14,15 @@ export async function DeleteLink(props) {
         question   : 'Voulez-vous continuer ?',
         buttonText : 'Supprimer',
         buttonColor: 'red',
-        valid      : () => deleteLinksSelected(link),
+        valid      : () => deleteLinksSelected(link).then(e=> {
+            console.log('oii');
+            snackBar.add({
+                id     : UniqueID('m-', 5),
+                text   : 'Modifications enregistrées 🎉',
+                subtext: 'Le lien court à bien été modifié',
+                status : 'success'
+            })
+        }),
         statu      : 'question'
     })
 
@@ -37,14 +45,6 @@ export async function DeleteLink(props) {
             popUp.show({})
 
             history(type !== 'stats' && '/dashboard')
-            .then(e=> {
-                snackBar.add({
-                    id     : UniqueID('m-', 5),
-                    text   : 'Modifications enregistrées 🎉',
-                    subtext: 'Le lien court à bien été modifié',
-                    status : 'success'
-                })
-            })
         } 
         catch (error) {
             console.error(error);

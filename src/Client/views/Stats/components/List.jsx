@@ -14,7 +14,7 @@ import { DeleteLink } from '../../Links/functions/Delete'
 export default function List({props}) {
 
 
-    const { LinkID, InputSearch, setShowStat, UserLinks, checkFilter, setMsg, popUp  } = props
+    const { LinkID, InputSearch, setShowStat, UserLinks, checkFilter, setMsg, popUp, snackBar } = props
 
     const history = useNavigate()
     
@@ -91,7 +91,7 @@ export default function List({props}) {
                                     </div>
                                 </Link>
                                 <div className='display p-04'>
-                                    <div className='display w-2 h-2 justify-c click  hover border-r-100'
+                                    <div className='display w-2 h-2 justify-c click hover border-r-100'
                                         onClick={e=> 
                                             DeleteLink({
                                                 link,
@@ -99,7 +99,8 @@ export default function List({props}) {
                                                 setShowStat,
                                                 type       : 'stats',
                                                 history,
-                                                popUp
+                                                popUp,
+                                                snackBar
                                             })
                                         }
                                     >
