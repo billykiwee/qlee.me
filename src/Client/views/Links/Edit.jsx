@@ -1,8 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import getFavicon from '../../../App/utils/getFavicon'
-import Popup from '../../../App/components/popUp/Popup'
-import Messages from '../../../App/utils/Messages'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../lib/database/upload/uploadPhoto'
 import { BookmarkIcon, ChartPieIcon, EyeIcon, QrCodeIcon } from '@heroicons/react/24/solid'
@@ -16,8 +14,6 @@ import QrCodeSection from './views/QrCode/QrCode'
 import { DeleteLink } from './functions/Delete'
 import { IsLinkInBio } from './lib/IsLinkInBio'
 import { EditLink } from './functions/Edit'
-import { useFetchAllLinks } from '../../data/links'
-import { db } from '../../../App/database/firebase'
 import Main from '../../../App/components/Main'
 
 
@@ -42,13 +38,10 @@ export default function Edit({ props }) {
     .map(link=> link)[0]
 
 
-    
-    const [PopUpMessage, setPopUpMessage] = useState({})
-
 
     const [editLink, seteditLink] = useState({})
 
-    const [QrCode,setQrCode] = useState(false)
+    const [QrCode, setQrCode] = useState(false)
 
 
 
@@ -127,7 +120,7 @@ export default function Edit({ props }) {
 
                         </div>
 
-                        <div className='grid gap-2rem'>
+                        <div className='grid gap-1rem'>
 
                             <div className='grid gap-1rem' >
 
@@ -254,7 +247,7 @@ export default function Edit({ props }) {
                                                 Stats,
                                                 link: Link,
                                                 snackBar,
-                                                setPopUpMessage,
+                                                popUp,
                                                 history
                                             })
                                         } 
