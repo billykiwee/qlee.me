@@ -4,7 +4,6 @@ import { ProfilImg } from '../../Website/Home'
 import { useStateValue } from '../provider/StateProvider'
 
 export default function Footer() {
-    const [{user}] = useStateValue()
 
     const socialMedia = {
         GitHub : {

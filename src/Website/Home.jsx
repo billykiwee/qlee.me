@@ -64,17 +64,17 @@ export default function Home({ props }) {
     const steps = [
         {
             name: 'Create',
-            text: "Create links easily, organize all the links the way you want. Make it right now, it's free !",
+            text: "Create links easily",
             icon: <PencilSquareIcon width={38} className='c-blue' />
         },
         {
-            name: 'Integrate',
-            text: "Create links easily, organize all the links the way you want. Make it right now, it's free !",
+            name: 'Manage',
+            text: "Update, edit and custom your links",
             icon: <LinkIcon width={38} className='c-blue' />
         },
         {
             name: 'Share',
-            text: "Create links easily, organize all the links the way you want. Make it right now, it's free !",
+            text: "Share your links all around you",
             icon: <ShareIcon width={38}  className='c-blue' />
         },
     ]
@@ -244,7 +244,7 @@ export default function Home({ props }) {
 
             <div className='steps-div' style={style}>
                 <div className='title-steps'>
-                    <h1 className='m-0'>Easy peasy</h1>
+                    <h1 className='m-0'>How ?</h1>
                 </div>
                 <div className='display gap-1rem steps m-t-2'>
                     {

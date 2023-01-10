@@ -1,7 +1,12 @@
+import { BuildingOfficeIcon, LockOpenIcon, PencilIcon, SwatchIcon, UserIcon } from "@heroicons/react/24/solid"
+import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
-export function Menu() {
+export function Menu({ props }) {
 
-    const menu = [
+    const { User, menu, setMenu } = props
+
+    const list = [
         {
             name: User ? 'Mon compte' : 'Se connecter',
             link:  User ? '/profil' : '/login',
@@ -28,12 +33,20 @@ export function Menu() {
             icon:  <BuildingOfficeIcon width={16} className='c-black' />
         }
     ]
-    
+
+    useEffect(e=> {
+        window.onclick = e => {
+            if (!e.target.closest('header')) setMenu(false)
+        }
+    }, [setMenu])
+
+
+    if (menu)
     return (
         <div className='display justify-c menu m-t-1'>
             <div className='grid w-100p'>
                 {
-                    menu.map((menu, i)=> {
+                    list.map((menu, i)=> {
                         return (
                             <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false) }>
                                 <button className='h-3 hover border-r-1 display gap p-1'>
