@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 import Main from '../App/components/Main'
-import { BanknotesIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowRightIcon, BanknotesIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { formatNumber } from '../App/utils/formatNumber';
 import formatCurrency from '../App/utils/formatCurrency';
 import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
@@ -112,6 +112,11 @@ export default function Home() {
         },
         {
             name: 'Links',
+            text: "Create a link in bio page with yours links in one clic",
+            icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><ArrowRightIcon width={30} className='c-white' /></div>
+        },
+        {
+            name: 'Links in bio',
             text: "Create a link in bio page with yours links in one clic",
             icon: <div className='display justify-c yellow border-r-100 ' style={{width: '66px', height: '66px'}}><SwatchIcon width={40} className='c-white' /></div>
         },
@@ -228,9 +233,9 @@ export default function Home() {
                 </div>
                 <div className='grid gap-2rem'>
                     {
-                        features.map(feature=> {
+                        features.map((feature, i)=> {
                             return (
-                                <div className='display gap-2rem align-top p-1' key={feature.name} style={{borderBottom: '1px solid #d2d2d2'}}>
+                                <div className='display gap-2rem align-top p-1' key={feature.name} style={{borderBottom: i !== features.length-1 ? '1px solid #d2d2d2': ''}}>
                                     <div className='grid'>
                                         <div className='display'>
                                             <div className='steps-blocks-head'>
