@@ -6,17 +6,17 @@ export default function Footer() {
 
     const socialMedia = {
         GitHub : {
-            logo1 : <BsGithub />,
+            logo1 : <BsGithub size={24} />,
             name : 'GitHub',
             link: 'https://github.com/billykiwee'
         },
         LinkedIn : {
-            logo1 : <BsLinkedin />,
+            logo1 : <BsLinkedin size={24} />,
             name : 'LinkedIn',
             link: 'https://www.linkedin.com/in/billy-turpin-a5b283217/'
         },
         Twitter : {
-            logo1 : <BsTwitter />,
+            logo1 : <BsTwitter size={24} />,
             name : 'Twitter',
             link: 'https://twitter.com/billy_kiwee'
         }
@@ -37,19 +37,20 @@ export default function Footer() {
         <footer className='white'>
             <div className='display justify-s-b'>
                 <div className='align-top display justify-s-b'>
-                    <div className='display gap-04'>
+                    <div className='display gap-1rem'>
                         {
                             Object.values(socialMedia).map(socialMedia=> {
                                 return (
-                                    <a 
-                                        key={socialMedia.name}
-                                        href={socialMedia.link}
-                                        className='w-2 h-2 border-r-04 click' 
-                                        onMouseMove={e=> e.target.style = 'opacity: 0.6'}
-                                        onMouseLeave={e=> e.target.style = 'opacity: unset'}
+                                    <div 
+                                        onMouseEnter={e=> {
+                                            e.target.style.color = 'var(--blue)'
+                                        }}
+                                        onMouseOut={e=> e.target.style.color = ''}
                                     >
-                                        <span className='display w-2 h-2'>{socialMedia.logo1}</span>
-                                    </a>
+                                        <a key={socialMedia.name} href={socialMedia.link} className='display  w-2 h-2 border-r-04 click'>
+                                            <span className='display justify-c c-black'>{socialMedia.logo1}</span>
+                                        </a>
+                                    </div>
                                 )
                             })
                         }
