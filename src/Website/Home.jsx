@@ -349,8 +349,9 @@ export default function Home({ props }) {
                     <div className='display gap-2rem'>
                         <SwatchIcon width={28} color='black' />
                         <div className='grid'>
-                            <span className='f-s-2rem f-w-600 '>{AllLinks.length}</span>
-                            <NumberIncreaser num={100} />
+                            <span className='f-s-2rem f-w-600 '>
+                                <NumberIncreaser num={AllLinks.length} />
+                            </span>
                             <div className='display gap-1rem'>
                                 <span className='f-w-300'>Created links</span>
                             </div>
@@ -387,22 +388,23 @@ export default function Home({ props }) {
 }
 
 
-export const NumberIncreaser = (num) => {
+export const NumberIncreaser = (getNum) => {
 
-    console.log(num);
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState();
+
+    console.log(getNum);
   
     useEffect(() => {
-      const interval = setInterval(() => {
-        if (number >= 100) {
-          clearInterval(interval)
-          return
-        }
-        setNumber(number + 1)
-      }, 50)
+        const interval = setInterval(() => {
+            if (number >= getNum.num) {
+                clearInterval(interval)
+                return
+            }
+            setNumber(number + 1)
+        }, 10)
   
-      return () => clearInterval(interval)
-    }, [number])
+        return () => clearInterval(interval)
+    }, [getNum])
   
     return <span>{number}</span>
 }
