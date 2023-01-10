@@ -350,28 +350,32 @@ export default function Home({ props }) {
             </div>
 
             <div className='grid yellow p-2 border-r-2' style={{style, color: 'black'}}>
-                <h2 className='m-t-0'>Some numbers</h2>
+                <h1 className='m-t-0'>Some numbers</h1>
 
-                <div className='grid gap-1rem'>
-                    <div className='display gap-2rem'>
-                        <SwatchIcon width={28} color='black' />
-                        <div className='grid'>
-                            <span className='f-s-2rem f-w-600 '>
-                                <NumberIncreaser num={AllLinks.length} />
-                            </span>
-                            <div className='display gap-1rem'>
-                                <span className='f-w-300'>Created links</span>
+                <div className='grid gap-2rem blocks'>
+                    <div className='display gap-2rem justify-s-a'>
+                        <div className='grid gap'>
+                            <div className='display justify-c'>
+                                <SwatchIcon width={40} color='black' />
+                            </div>
+                            <div className='grid gap-04'>
+                                <span className='f-s-2rem f-w-600 display justify-c'>
+                                    <NumberIncreaser num={AllLinks.length} />
+                                </span>
+                                <span className='f-s-18 f-w-300'>Created links</span>
                             </div>
                         </div>
                     </div>
-                    <div className='display gap-2rem'>
-                        <UserIcon width={28} color='black' />
-                        <div className='grid'>
-                            <span className='f-s-2rem f-w-600'>
-                                <NumberIncreaser num={users?.length} />
-                            </span>
-                            <div className='display gap-1rem e'>
-                                <span className='f-w-300'>Users</span>
+                    <div className='display gap-2rem justify-c'>
+                        <div className='grid gap'>
+                            <div className='display justify-c'>
+                                <UserIcon width={40} color='black' />
+                            </div>
+                            <div className='grid gap-04'>
+                                <span className='f-s-2rem f-w-600 display justify-c'>
+                                    <NumberIncreaser num={users?.length} />
+                                </span>
+                                <span className='f-s-18 f-w-300'>Users</span>
                             </div>
                         </div>
                     </div>
