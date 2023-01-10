@@ -18,8 +18,7 @@ export function useFetchUsers(user) {
             if (!user) {
                 setUsers(fetchedUsers)
             }
-
-            setUsers(fetchedUsers.filter(e=> e.email === user?.email)[0])
+            else setUsers(fetchedUsers.filter(e=> e.email === user?.email)[0])
         })
     
         return () => data()

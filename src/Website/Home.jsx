@@ -17,7 +17,9 @@ import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
 import { GetWidth } from '../App/utils/GetWidth';
 
-export default function Home() {
+export default function Home({ props }) {
+
+    const { users } = props
 
     const subjects = [
         {
@@ -158,6 +160,7 @@ export default function Home() {
     }, [])
 
 
+
     const style = { paddingTop: '4rem', paddingBottom: '4rem' }
 
     return (
@@ -226,8 +229,8 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='display justify-s-b align-top' style={style}>
-                <div>
+            <div className='grid justify-s-b align-top blocks' style={style}>
+                <div className='grid'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h1 className='m-t-04'>All that you need</h1>
                 </div>
@@ -330,27 +333,27 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='grid yellow p-2 border-r-2' style={style}>
+            <div className='grid yellow p-2 border-r-2' style={{style, color: 'black'}}>
                 <h2 className='m-t-0'>Some numbers</h2>
 
                 <div className='grid gap-1rem'>
-                    <div className='display justify-s-b align-top'>
+                    <div className='display gap-2rem'>
+                        <SwatchIcon width={28} color='black' />
                         <div className='grid'>
                             <span className='f-s-2rem f-w-600 '>{formatNumber(AllLinks.length)}</span>
                             <div className='display gap-1rem'>
-                                <span className='opacity f-w-300'>Created links</span>
+                                <span className='f-w-300'>Created links</span>
                             </div>
                         </div>
-                        <SwatchIcon width={28} className='c-black' />
                     </div>
-                    <div className='display justify-s-b align-top'>
+                    <div className='display gap-2rem'>
+                        <UserIcon width={28} color='black' />
                         <div className='grid'>
-                            <span className='f-s-2rem f-w-600'>{formatNumber(293)}</span>
+                            <span className='f-s-2rem f-w-600'>{formatNumber(users?.length)}</span>
                             <div className='display gap-1rem e'>
-                                <span className='opacity f-w-300'>Users</span>
+                                <span className='f-w-300'>Users</span>
                             </div>
                         </div>
-                        <UserIcon width={28} className='c-black' />
                     </div>
                 </div>
             </div>
