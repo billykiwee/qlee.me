@@ -213,11 +213,11 @@ export default function Home({ props }) {
             </div>
 
             <div className='grid justify-s-b align-top blocks' style={style}>
-                <div className='grid p-2'>
+                <div className='grid'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h1 className='m-t-04'>All that you need</h1>
                 </div>
-                <div className='grid gap-2rem'>
+                <div className='grid gap-2rem p-2'>
                     {
                         features.map((feature, i)=> {
                             return (

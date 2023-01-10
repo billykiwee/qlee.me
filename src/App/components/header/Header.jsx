@@ -1,51 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon, UsersIcon } from '@heroicons/react/24/solid'
-import { toggleTheme } from '../functions/setTheme'
-import { GetWidth } from '../utils/GetWidth'
+import { toggleTheme } from '../../functions/setTheme'
+import { GetWidth } from '../../utils/GetWidth'
+import { Menu } from './components/menu'
 
 
 export default function Header({props}) {
 
     const User = props.user?.profil
 
-    const [Menu, setMenu] = useState(false)
-
-
-    const menu = [
-        {
-            name: User ? 'Mon compte' : 'Se connecter',
-            link:  User ? '/profil' : '/login',
-            icon: <UserIcon width={16} className='c-black' />
-        },
-        {
-            name: 'Créer un lien',
-            link: '/dashboard',
-            icon: <PencilIcon width={16} className='c-black' />
-        },
-        {
-            name: 'Link in bio',
-            link: '/edit/' + User.link_in_bio,
-            icon: <SwatchIcon width={16} className='c-yellow' />
-        },
-        {
-            name: 'Pricing',
-            link: '/pricing',
-            icon:  <LockOpenIcon width={16} className='c-black' />
-        },
-        {
-            name: 'Terms',
-            link: '/terms',
-            icon:  <BuildingOfficeIcon width={16} className='c-black' />
-        }
-    ]
+    const [menu, setmenu] = useState(false)
 
 
     useEffect(e=> {
         window.onclick = e => {
-            if (!e.target.closest('header')) setMenu(false)
+            if (!e.target.closest('header')) setmenu(false)
         }
-    }, [Menu])
+    }, [menu])
 
     
 
@@ -112,7 +84,7 @@ export default function Header({props}) {
                             User 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURL ?? '/images/user-solid.svg'} className='border-r-100' width={32} height={32} />
+                                <img src={User?.photoURLs ?? '/images/user.svg'} className='border-r-100' width={32} height={32} />
                             </Link>
                             : 
                             <div className='display justify-c'>
@@ -126,7 +98,7 @@ export default function Header({props}) {
                                 </Link>
                             </div>
                         }
-                        <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(Menu === false ? true : false)} >
+                        <button className='hamburger border-r-100 hover ' onClick={e=> setmenu(menu === false ? true : false)} >
                             <span className='display'>
                                 <Bars2Icon width={20} className='c-black' />
                             </span>
@@ -134,25 +106,7 @@ export default function Header({props}) {
                     </div>
                 </div>
             </div>
-            {
-                Menu &&
-                <div className='display justify-c menu m-t-1'>
-                    <div className='grid w-100p'>
-                        {
-                            menu.map((menu, i)=> {
-                                return (
-                                    <Link to={menu.link} className={'w-100p'} key={menu.name} onClick={e=> setMenu(false) }>
-                                        <button className='h-3 hover border-r-1 display gap p-1'>
-                                            {menu.icon}
-                                            <span className='f-s-16 c-black'>{menu.name}</span>
-                                        </button>
-                                    </Link>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-            }
+            <Menu />
         </header>
     )
 }
