@@ -150,7 +150,7 @@ export default function Home() {
     }, [])
 
     return (
-        <Main>
+        <Main className='grid' style={{gap: '10rem'}}>
 
             <div className='grid blocks w-100p'>
                 <div className='display justify-s-b align-top'>
@@ -320,10 +320,8 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='yellow p-2 border-r-2'>
-                <div>
-                    <h2 className='m-t-0'>Some numbers</h2>
-                </div>
+            <div className='grid yellow p-2 border-r-2'>
+                <h2 className='m-t-0'>Some numbers</h2>
 
                 <div className='grid gap-1rem'>
                     <div className='display justify-s-b align-top'>
