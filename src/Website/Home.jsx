@@ -14,12 +14,17 @@ import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
 import { GetWidth } from '../App/utils/GetWidth';
 import { useContext } from 'react';
+import { PropsContext } from '../App/provider/context';
 
 
 export default function Home({ props }) {
 
 
-    const { users, stats } = props
+    const { users, stats } = useContext(PropsContext)
+
+    console.log(users);
+
+   /*  const { users, stats } = props */
 
     const subjects = [
         {
@@ -196,6 +201,7 @@ export default function Home({ props }) {
 
     const style = { }
 
+    if (2+2 === 3)
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
 
