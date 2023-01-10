@@ -113,7 +113,7 @@ export default function Home({ props }) {
             icon: <div className='display justify-c blue border-r-100 ' style={{width: '66px', height: '66px'}}><ScissorsIcon width={40} /></div>
         },
         {
-            name: 'Links',
+            name: 'Redirect',
             text: "Create a link in bio page with yours links in one clic",
             icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><ArrowRightIcon width={30} className='c-white' /></div>
         },
@@ -132,19 +132,29 @@ export default function Home({ props }) {
 
     const tempateLinks = [
         {
-            name: 'Ma boutique de vetement',
+            name     : 'Ma boutique de vetement',
             shortLink: 'ma-boutique',
-            check: true
+            check    : true,
+            icon     : 'www.facbook.com'
         },
         {
-            name: 'Mon instagram',
+            name     : 'Mon instagram',
             shortLink: '@joe',
-            check: true
+            check    : true,
+            icon     : 'www.twitch.com'
         },
         {
-            name: 'Ma boutique de vetement',
+            name     : 'Ma boutique de vetement',
             shortLink: 'ma-boutique',
-            check: false
+            check    : false,
+            icon     : 'www.youtube.com'
+        }
+        ,
+        {
+            name     : 'Ma boutique de vetement',
+            shortLink: 'ma-boutique',
+            check    : true,
+            icon     : 'www.goody.com'
         }
     ]
 
@@ -161,7 +171,7 @@ export default function Home({ props }) {
 
 
 
-    const style = { paddingTop: '4rem', paddingBottom: '4rem' }
+    const style = { }
 
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
@@ -308,28 +318,28 @@ export default function Home({ props }) {
             
             </div>
 
-            <div className='display justify-s-b' style={style}>
-                <div className='display w-50'>
-                    <h2>Manage your links as you wish</h2>
+            <div className='grid justify-s-b blocks' style={style}>
+                <div className='display p-2'>
+                    <h1>Manage your links as you wish</h1>
                 </div>
-                <div className='grid gap w-50'>
-                    <img src='/images/capture.png' width='100%' />
-                   {/*  {
+                <div className='grid gap p-2'>
+                    {
                         tempateLinks.map(t=> {
                             let checked = t.check
 
-                            console.log(checked);
                             return (
-                                <div className='display border border-r-1 border-b white p-1'>
-                                    <img src={getFavicon('www.youtube.com')} width={30} className='border-r-100' />
-                                    <div className='display gap-04 '>
+                                <div className='display justify-s-b border border-r-1 border-b white p-1'>
+                                    <div className='display gap'>
+                                        <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
                                         <span className='f-s-16'>{t.name}</span>
-                                        <SwitchInput checked={checked} onChange={e=> checked = e.target.checked} />
+                                    </div>
+                                    <div className='display gap-04 '>
+                                        <SwitchInput dimension={0.9} checked={checked} onChange={e=> checked ? false : true} />
                                     </div>
                                 </div>
                             )
                         })
-                    } */}
+                    }
                 </div>
             </div>
 
