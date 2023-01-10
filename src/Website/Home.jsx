@@ -9,16 +9,15 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 import Main from '../App/components/Main'
 import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
-import { formatNumber } from '../App/utils/formatNumber';
-import formatCurrency from '../App/utils/formatCurrency';
 import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
-import ListLink from '../Client/views/Dashboard/components/ListLink';
 import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
 import { GetWidth } from '../App/utils/GetWidth';
+import { useContext } from 'react';
 
 
 export default function Home({ props }) {
+
 
     const { users, stats } = props
 
@@ -338,7 +337,7 @@ export default function Home({ props }) {
             </div>
 
             <div className='grid justify-s-b blocks' style={style}>
-                <div className='display p-2'>
+                <div className='display'>
                     <h1 className='m-0'>Manage your links as you wish</h1>
                 </div>
                 <div className='grid gap p-2'>
@@ -352,7 +351,7 @@ export default function Home({ props }) {
                                         <span className='f-s-16'>{t.name}</span>
                                     </div>
                                     <div className='display gap-04 '>
-                                        <SwitchInput dimension={0.9} checked={t.check} />
+                                        <SwitchInput dimension={0.9} checked={t.check} onChange={e=> t.check = false} />
                                     </div>
                                 </div>
                             )

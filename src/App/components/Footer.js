@@ -37,18 +37,13 @@ export default function Footer() {
         <footer className='white'>
             <div className='display justify-s-b'>
                 <div className='align-top display justify-s-b'>
-                    <div className='display gap-1rem'>
+                    <div className='display gap'>
                         {
                             Object.values(socialMedia).map(socialMedia=> {
                                 return (
-                                    <div 
-                                        onMouseEnter={e=> {
-                                            e.target.style.color = 'var(--blue)'
-                                        }}
-                                        onMouseOut={e=> e.target.style.color = ''}
-                                    >
-                                        <a key={socialMedia.name} href={socialMedia.link} className='display  w-2 h-2 border-r-04 click'>
-                                            <span className='display justify-c c-black'>{socialMedia.logo1}</span>
+                                    <div key={socialMedia.name}>
+                                        <a href={socialMedia.link} className='display justify-c w-2 h-2 border-r-04 click'>
+                                            <span className='display justify-c c-grey'>{socialMedia.logo1}</span>
                                         </a>
                                     </div>
                                 )
