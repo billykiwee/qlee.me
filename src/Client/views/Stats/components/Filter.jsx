@@ -58,7 +58,7 @@ export default function Filter({props}) {
                                 setFilter(false)
                                 setSearch(Search ? false : true)
                             }}
-                            className={(Search ? 'grey' : 'white') + ' h-3 w-3 p-1 border-r-2 border'} 
+                            className={(Search ? 'grey' : 'white') + ' h-3 w-3 p-1 hover border-r-2 border'} 
                         >
                             <MagnifyingGlassIcon width={20} className='c-black' />
                         </button>
@@ -66,7 +66,7 @@ export default function Filter({props}) {
 
                     <div className='display gap'>
                         <div className='display gap'>
-                            <div className='dropdown border-r-2 border click w-100p'>
+                            <div className='dropdown hover border-r-2 border click w-100p'>
                                 <div className='dropdown-header display gap' onClick={e=> setOpen(isOpen ? false : true)} >
                                     <div className='display gap'>
                                         {
