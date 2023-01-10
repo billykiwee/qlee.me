@@ -1,28 +1,23 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs'
 
 export default function Footer() {
 
     const socialMedia = {
         GitHub : {
-            logo1 : '/images/github.svg',
-            logo2: '/images/github-white.svg',
+            logo1 : <BsGithub />,
             name : 'GitHub',
-            color: '#1dd1a1',
             link: 'https://github.com/billykiwee'
         },
         LinkedIn : {
-            logo1 : '/images/linkedin.svg',
-            logo2: '/images/linkedin-white.svg',
+            logo1 : <BsLinkedin />,
             name : 'LinkedIn',
-            color: '#0A66C2',
             link: 'https://www.linkedin.com/in/billy-turpin-a5b283217/'
         },
         Twitter : {
-            logo1 : '/images/twitter.svg',
-            logo2: '/images/twitter-white.svg',
+            logo1 : <BsTwitter />,
             name : 'Twitter',
-            color: '#47ACDF',
             link: 'https://twitter.com/billy_kiwee'
         }
     }
@@ -53,9 +48,7 @@ export default function Footer() {
                                         onMouseMove={e=> e.target.style = 'opacity: 0.6'}
                                         onMouseLeave={e=> e.target.style = 'opacity: unset'}
                                     >
-                                        <span className='display w-2 h-2'>
-                                            <img src={socialMedia.logo1} id={'img-' + socialMedia.name} />
-                                        </span>
+                                        <span className='display w-2 h-2'>{socialMedia.logo1}</span>
                                     </a>
                                 )
                             })

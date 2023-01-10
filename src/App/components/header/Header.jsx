@@ -57,7 +57,9 @@ export default function Header({ props }) {
                         </span>
                     </Link>
                 </div>
+
                 <div className='display gap'>
+
                     <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                         <span className='display'>
                             {theme === 'light' ? <MoonIcon width={18} className='c-black' /> : <SunIcon width={20} className='c-yellow' />}
@@ -68,7 +70,7 @@ export default function Header({ props }) {
                             User 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURLs ?? '/images/user.svg'} className='border-r-100' width={32} height={32} />
+                                <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={32} height={32} />
                             </Link>
                             : 
                             <div className='display justify-c'>

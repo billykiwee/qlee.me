@@ -363,7 +363,7 @@ export default function Home({ props }) {
 
             <div className='grid p-2 border-r-2' style={{style, color: 'black'}}>
                 <div className='display justify-c'>
-                    <h1 className='m-t-0'>Some numbers</h1>
+                    <h1 className='m-t-0 c-black'>Some numbers</h1>
                 </div>
 
                 <div className='grid gap blocks'>
@@ -373,7 +373,7 @@ export default function Home({ props }) {
                                 <div className='display gap-2rem justify-c p-2 border-r-2 shadow yellow'>
                                     <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
 
-                                        <div className='grid gap'>
+                                        <div className='grid gap' style={{color: 'black'}}>
                                             <div className='f-s-2rem f-w-500 display justify-c gap-1rem'>
                                                 {stat.icon}
                                                 <NumberIncreaser length={stat.number} />
