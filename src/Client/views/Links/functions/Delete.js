@@ -17,8 +17,8 @@ export async function DeleteLink(props) {
         valid      : () => deleteLinksSelected(link).then(e=> {
             snackBar.add({
                 id     : UniqueID('m-', 5),
-                text   : 'Modifications enregistrées 🎉',
-                subtext: 'Le lien court à bien été modifié',
+                text   : 'À la poubelle ! 🗑',
+                subtext: 'Le lien à été supprimé',
                 status : 'success'
             })
         }),

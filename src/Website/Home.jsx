@@ -15,6 +15,7 @@ import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
 import ListLink from '../Client/views/Dashboard/components/ListLink';
 import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
+import { GetWidth } from '../App/utils/GetWidth';
 
 export default function Home() {
 
@@ -142,6 +143,8 @@ export default function Home() {
 
 
 
+    const width = GetWidth()
+
 
     const [AllLinks, setAllLinks] = useState([])
 
@@ -149,10 +152,13 @@ export default function Home() {
         fetchLinks(setAllLinks)
     }, [])
 
-    return (
-        <Main className='grid' style={{gap: '10rem'}}>
 
-            <div className='grid blocks w-100p'>
+    const style = { paddingTop: '4rem', paddingBottom: '4rem' }
+
+    return (
+        <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
+
+            <div className='grid blocks w-100p' style={style}>
                 <div className='display justify-s-b align-top'>
 
                     <div className='grid gap-3rem w-100p'>
@@ -185,7 +191,7 @@ export default function Home() {
                     <img src='favicon.ico' width='288px' height='288px' />
                 </div>
             </div>
-            <div className='steps-div'>
+            <div className='steps-div' style={style}>
                 <div className='title-steps'>
                     <small className='link'>MAKE IT EASY</small>
                     <h2 className='m-t-04'>Features design for you</h2>
@@ -215,7 +221,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='steps-div'>
+            <div className='steps-div' style={style}>
                 <div className='title-steps'>
                     <small className='link'>ALL IN ONE</small>
                     <h2 className='m-t-04'>All that you need</h2>
@@ -246,7 +252,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='subject-div'>
+            <div className='subject-div' style={style}>
                 <div className='grid'>
                     <div className='title-subject'>
                         <small className='link'>FOR ALL TYPE OF LINKS</small>
@@ -295,7 +301,7 @@ export default function Home() {
             </div>
 
 
-            <div className='display justify-s-b'>
+            <div className='display justify-s-b' style={style}>
                 <div className='display w-50'>
                     <h2>Manage your links as you wish</h2>
                 </div>
@@ -320,7 +326,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='grid yellow p-2 border-r-2'>
+            <div className='grid yellow p-2 border-r-2' style={style}>
                 <h2 className='m-t-0'>Some numbers</h2>
 
                 <div className='grid gap-1rem'>
