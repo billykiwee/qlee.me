@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css"
+import "swiper/css/pagination"
 // import required modules
 import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
@@ -168,7 +168,14 @@ export default function Home({ props }) {
 
     useEffect(e=> {
         fetchLinks(setAllLinks)
+
     }, [])
+
+
+
+
+    
+
 
 
     const style = { }
@@ -360,7 +367,9 @@ export default function Home({ props }) {
                     <div className='display gap-2rem'>
                         <UserIcon width={28} color='black' />
                         <div className='grid'>
-                            <span className='f-s-2rem f-w-600'>{formatNumber(users?.length)}</span>
+                            <span className='f-s-2rem f-w-600'>
+                                <NumberIncreaser num={users?.length} />
+                            </span>
                             <div className='display gap-1rem e'>
                                 <span className='f-w-300'>Users</span>
                             </div>
@@ -388,23 +397,41 @@ export default function Home({ props }) {
 }
 
 
-export const NumberIncreaser = (getNum) => {
+export function NumberIncreaser(length) {
 
-    const [number, setNumber] = useState();
+    const [number, setNumber] = useState(0)
+    const [start, setStart] = useState(false)
 
-    console.log(getNum);
-  
+    useEffect(e=> {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setStart(true)
+                    observer.disconnect()
+                }
+            })
+        })
+        const myElement = document.querySelector('.NumberIncreaser')
+        observer.observe(myElement)
+    }, [])
+
+
     useEffect(() => {
+
         const interval = setInterval(() => {
-            if (number >= getNum.num) {
-                clearInterval(interval)
-                return
+            if (start) {
+
+                if (number >= length.num) {
+                    clearInterval(interval)
+                    return
+                }
+                setNumber(number + 1)
             }
-            setNumber(number + 1)
         }, 10)
   
         return () => clearInterval(interval)
-    }, [getNum])
+
+    }, [start, number, length])
   
-    return <span>{number}</span>
+    return <span className='NumberIncreaser' >{number}</span>
 }
