@@ -136,8 +136,8 @@ export default function Dashboard({ props }) {
 
 
 
-const CasinoNumberIncreaser = () => {
-    const [number, setNumber] = useState(0);
+export const NumberIncreaser = () => {
+    const [number, setNumber] = useState();
   
     useEffect(() => {
       const interval = setInterval(() => {

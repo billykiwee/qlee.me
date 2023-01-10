@@ -17,6 +17,7 @@ import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
 import { GetWidth } from '../App/utils/GetWidth';
 
+
 export default function Home({ props }) {
 
     const { users } = props
@@ -170,7 +171,6 @@ export default function Home({ props }) {
     }, [])
 
 
-
     const style = { }
 
     return (
@@ -209,38 +209,9 @@ export default function Home({ props }) {
                     <img src='favicon.ico' width='288px' height='288px' />
                 </div>
             </div>
-            <div className='steps-div' style={style}>
-                <div className='title-steps'>
-                    <small className='link'>MAKE IT EASY</small>
-                    <h2 className='m-t-04'>Features design for you</h2>
-                </div>
-                <div className='display gap-1rem steps'>
-                    {
-                        steps.map(step=> {
-                            return (
-                                <div className='steps-blocks' key={step.name}>
-                                    <div className='grid'>
-                                        <div className='justify-c display'>
-                                            <div className='steps-blocks-head'>
-                                                <div className='display justify-c border-r-100 p-1 blue-secondary steps-icon'>
-                                                    <span>{step.icon}</span>
-                                                </div>
-                                                <span className='f-s-20 f-w-500'>{step.name}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span className='display c-grey f-w-200 text-align-c'>{step.text}</span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
 
             <div className='grid justify-s-b align-top blocks' style={style}>
-                <div className='grid'>
+                <div className='grid p-2'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h1 className='m-t-04'>All that you need</h1>
                 </div>
@@ -261,7 +232,35 @@ export default function Home({ props }) {
                                             <span className='f-s-25 f-w-500'>{feature.name}</span>
                                             <span className='display c-grey f-w-200' >{feature.text}</span>
                                         </div>
-                                        <span className='link hover-link'>know more</span>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className='steps-div' style={style}>
+                <div className='title-steps'>
+                    <h1 className='m-0'>Easy peasy</h1>
+                </div>
+                <div className='display gap-1rem steps m-t-2'>
+                    {
+                        steps.map(step=> {
+                            return (
+                                <div className='p-1 gap grid' key={step.name}>
+                                    <div className='grid gap'>
+                                        <div className='justify-c display'>
+                                            <div className='steps-blocks-head'>
+                                                <div className='display justify-c border-r-100 p-1 blue-secondary steps-icon'>
+                                                    <span>{step.icon}</span>
+                                                </div>
+                                                <span className='f-s-20 f-w-500'>{step.name}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span className='display c-grey f-w-200 text-align-c'>{step.text}</span>
                                     </div>
                                 </div>
                             )
@@ -293,7 +292,7 @@ export default function Home({ props }) {
 
                 <Swiper 
                     className='w-100p'
-                    slidesPerView={1.8} 
+                    slidesPerView={width < 480 ? 2 : 3} 
                     spaceBetween={18}
                     loop
                     autoplay={{
@@ -320,12 +319,12 @@ export default function Home({ props }) {
 
             <div className='grid justify-s-b blocks' style={style}>
                 <div className='display p-2'>
-                    <h1>Manage your links as you wish</h1>
+                    <h1 className='m-0'>Manage your links as you wish</h1>
                 </div>
                 <div className='grid gap p-2'>
                     {
                         tempateLinks.map(t=> {
-                            let checked = t.check
+
 
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1'>
@@ -334,7 +333,7 @@ export default function Home({ props }) {
                                         <span className='f-s-16'>{t.name}</span>
                                     </div>
                                     <div className='display gap-04 '>
-                                        <SwitchInput dimension={0.9} checked={checked} onChange={e=> checked ? false : true} />
+                                        <SwitchInput dimension={0.9} checked={t.check} />
                                     </div>
                                 </div>
                             )
@@ -350,7 +349,8 @@ export default function Home({ props }) {
                     <div className='display gap-2rem'>
                         <SwatchIcon width={28} color='black' />
                         <div className='grid'>
-                            <span className='f-s-2rem f-w-600 '>{formatNumber(AllLinks.length)}</span>
+                            <span className='f-s-2rem f-w-600 '>{AllLinks.length}</span>
+                            <NumberIncreaser num={100} />
                             <div className='display gap-1rem'>
                                 <span className='f-w-300'>Created links</span>
                             </div>
@@ -386,3 +386,23 @@ export default function Home({ props }) {
     )
 }
 
+
+export const NumberIncreaser = (num) => {
+
+    console.log(num);
+    const [number, setNumber] = useState(0);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (number >= 100) {
+          clearInterval(interval)
+          return
+        }
+        setNumber(number + 1)
+      }, 50)
+  
+      return () => clearInterval(interval)
+    }, [number])
+  
+    return <span>{number}</span>
+}
