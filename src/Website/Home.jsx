@@ -133,29 +133,24 @@ export default function Home({ props }) {
 
     const tempateLinks = [
         {
-            name     : 'Ma boutique de vetement',
-            shortLink: 'ma-boutique',
+            name     : 'Ma boutique',
             check    : true,
+            icon     : 'www.goody.com'
+        },
+        {
+            name     : 'Mon facebook',
+            check    : false,
             icon     : 'www.facbook.com'
         },
         {
             name     : 'Mon instagram',
-            shortLink: '@joe',
             check    : true,
             icon     : 'www.twitch.com'
         },
         {
-            name     : 'Ma boutique de vetement',
-            shortLink: 'ma-boutique',
-            check    : false,
-            icon     : 'www.youtube.com'
-        }
-        ,
-        {
-            name     : 'Ma boutique de vetement',
-            shortLink: 'ma-boutique',
+            name     : 'Ma youtube',
             check    : true,
-            icon     : 'www.goody.com'
+            icon     : 'www.youtube.com'
         }
     ]
 
@@ -332,10 +327,9 @@ export default function Home({ props }) {
                     {
                         tempateLinks.map(t=> {
 
-
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1'>
-                                    <div className='display gap'>
+                                    <div className='display gap-1rem'>
                                         <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
                                         <span className='f-s-16'>{t.name}</span>
                                     </div>
@@ -356,86 +350,68 @@ export default function Home({ props }) {
                     <div className='display gap-2rem justify-s-a'>
                         <div className='grid gap'>
                             <div className='display justify-c'>
-                                <SwatchIcon width={40} color='black' />
+                                <SwatchIcon width={60} color='black' />
                             </div>
                             <div className='grid gap-04'>
                                 <span className='f-s-2rem f-w-600 display justify-c'>
-                                    <NumberIncreaser num={AllLinks.length} />
+                                    <NumberIncreaser length={AllLinks.length} />
                                 </span>
-                                <span className='f-s-18 f-w-300'>Created links</span>
+                                <span className='f-s-18 f-w-300 text-align-c'>Created links</span>
                             </div>
                         </div>
                     </div>
                     <div className='display gap-2rem justify-c'>
                         <div className='grid gap'>
                             <div className='display justify-c'>
-                                <UserIcon width={40} color='black' />
+                                <UserIcon width={60} color='black' />
                             </div>
                             <div className='grid gap-04'>
                                 <span className='f-s-2rem f-w-600 display justify-c'>
-                                    <NumberIncreaser num={users?.length} />
+                                    <NumberIncreaser length={users?.length} />
                                 </span>
-                                <span className='f-s-18 f-w-300'>Users</span>
+                                <span className='f-s-18 f-w-300 text-align-c'>Users</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-           {/*  <Swiper 
-                className='w-100p'
-                style={{height: '80vh'}}
-                direction={"vertical"}
-                navigation={true}
-                mousewheel={true}
-                keyboard={true}
-                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            >
-
-                <SwiperSlide className='display justify-c'></SwiperSlide>
-
-            </Swiper> */}
-
         </Main>
     )
 }
 
 
-export function NumberIncreaser(length) {
+export function NumberIncreaser({length}) {
 
     const [number, setNumber] = useState(0)
-    const [start, setStart] = useState(false)
+    const [start, setStart]   = useState(false)
 
-    useEffect(e=> {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setStart(true)
-                    observer.disconnect()
-                }
-            })
+    useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => setStart(entry.isIntersecting))
         })
-        const myElement = document.querySelector('.NumberIncreaser')
-        observer.observe(myElement)
-    }, [])
 
+        const targetNode = document.querySelector('.NumberIncreaser')
+        if (targetNode) observer.observe(targetNode)
+
+        return () => observer.disconnect()
+    }, [])
 
     useEffect(() => {
 
-        const interval = setInterval(() => {
-            if (start) {
-
-                if (number >= length.num) {
+        let interval = null
+        if (start) {
+            interval = setInterval(() => {
+                if (number >= length) {
                     clearInterval(interval)
                     return
                 }
                 setNumber(number + 1)
-            }
-        }, 10)
-  
+            }, 10)
+        }
         return () => clearInterval(interval)
 
     }, [start, number, length])
-  
-    return <span className='NumberIncreaser' >{number}</span>
+
+    return <span className='NumberIncreaser'>{number}</span>
 }
