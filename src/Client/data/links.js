@@ -28,3 +28,27 @@ export function useFetchAllLinks(LinkID) {
   
     return linksData
 }
+
+
+export function useFetchStatsLinks() {
+
+    const [StatsLinks, setStatsLinks] = useState([])
+
+    useEffect(() => {
+
+        const data = db.collection('stats').onSnapshot(snapshot => {
+            if (snapshot.empty) {
+                setStatsLinks("no stats")
+            }
+
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+
+            setStatsLinks(fetchedLinks)
+        })
+    
+        return () => data()
+
+    }, [])
+  
+    return StatsLinks
+}

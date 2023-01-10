@@ -27,6 +27,7 @@ import { SnackBar } from './components/snackBar/SnackBar'
 import { useSnackBar } from './components/snackBar/reducer/useSnackBar'
 import { usePopUp } from './components/popUp/reducer/usePopUp'
 import Popup from './components/popUp/Popup'
+import { useFetchStatsLinks } from '../Client/data/links'
 
 
 
@@ -53,6 +54,7 @@ export default function App() {
         auth       : user,
         users      : useFetchUsers(),
         links      : useFetchLinks(),
+        stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinks(),
         snackBar   : useSnackBar(),
         popUp      : usePopUp()

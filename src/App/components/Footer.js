@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ProfilImg } from '../../Website/Home'
-import { useStateValue } from '../provider/StateProvider'
 
 export default function Footer() {
 
@@ -41,7 +39,7 @@ export default function Footer() {
 
     if (!isLinkInBio())
     return (
-        <footer>
+        <footer className='white'>
             <div className='display justify-s-b'>
                 <div className='align-top display justify-s-b'>
                     <div className='display gap-04'>

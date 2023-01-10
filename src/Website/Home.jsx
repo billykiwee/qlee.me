@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 import Main from '../App/components/Main'
-import { ArrowRightIcon, BanknotesIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { formatNumber } from '../App/utils/formatNumber';
 import formatCurrency from '../App/utils/formatCurrency';
 import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
@@ -20,7 +20,7 @@ import { GetWidth } from '../App/utils/GetWidth';
 
 export default function Home({ props }) {
 
-    const { users } = props
+    const { users, stats } = props
 
     const subjects = [
         {
@@ -106,7 +106,6 @@ export default function Home({ props }) {
         }
     ]
 
-
     const features = [
         {
             name: 'Cut',
@@ -129,7 +128,6 @@ export default function Home({ props }) {
             icon:  <div className='display justify-c orange border-r-100 ' style={{width: '66px', height: '66px'}}><RocketLaunchIcon width={40} /></div>
         },
     ]
-
 
     const tempateLinks = [
         {
@@ -156,15 +154,34 @@ export default function Home({ props }) {
 
 
 
-    const width = GetWidth()
-
-
     const [AllLinks, setAllLinks] = useState([])
 
     useEffect(e=> {
         fetchLinks(setAllLinks)
 
     }, [])
+
+    const Stats = [
+        {
+            title : 'Created inks',
+            number: AllLinks.length,
+            icon  : <SwatchIcon width={30} />
+        },
+        {
+            title : 'Users',
+            number: users.length,
+            icon  : <UserIcon width={30} />
+        },
+        {
+            title : 'Statistics',
+            number: stats.length,
+            icon  : <ChartPieIcon width={30} />
+        },
+    ]
+
+
+    const width = GetWidth()
+
 
 
 
@@ -272,10 +289,10 @@ export default function Home({ props }) {
             </div>
 
             <div className='subject-div' style={style}>
-                <div className='grid'>
-                    <div className='title-subject'>
-                        <small className='link'>FOR ALL TYPE OF LINKS</small>
-                        <h2 className='m-t-04'>For everyone</h2>
+                <div className='grid gap-2rem'>
+                    <div className='grid'>
+                        <small className='link f-w-600 f-s-20'>FOR ALL TYPE OF LINKS</small>
+                        <h1 className='m-0'>For everyone</h1>
                     </div>
 
                     <div className='subject-div-blocks'>
@@ -292,29 +309,25 @@ export default function Home({ props }) {
                     </div>
                 </div>
 
-                <Swiper 
-                    className='w-100p'
-                    slidesPerView={width < 480 ? 2 : 3} 
-                    spaceBetween={18}
+                <Swiper className='w-100p' 
+                    slidesPerView={width < 480 ? 2 : 3}  
+                    spaceBetween={18} 
                     loop
-                    autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    }}
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
                     modules={[Autoplay]}
                 >
-                        {
-                            exemples.map(exemple=> {
-                                return (
-                                    <SwiperSlide className='m-b-3' key={exemple.name}>
-                                        <div className='grid gap-1rem' >
-                                            <img src={exemple.img} className='exemples-img' />
-                                            <span className='exemples-name'>{exemple.name}</span>
-                                        </div>
-                                    </SwiperSlide>
-                                )
-                            })
-                        }
+                    {
+                        exemples.map(exemple=> {
+                            return (
+                                <SwiperSlide className='m-b-3' key={exemple.name}>
+                                    <div className='grid gap-1rem' >
+                                        <img src={exemple.img} className='exemples-img' />
+                                        <span className='exemples-name'>{exemple.name}</span>
+                                    </div>
+                                </SwiperSlide>
+                            )
+                        })
+                    }
                 </Swiper>
             
             </div>
@@ -344,35 +357,26 @@ export default function Home({ props }) {
             </div>
 
             <div className='grid yellow p-2 border-r-2' style={{style, color: 'black'}}>
-                <h1 className='m-t-0'>Some numbers</h1>
+                <h2 className='m-t-0'>Some numbers</h2>
 
-                <div className='grid gap-2rem blocks'>
-                    <div className='display gap-2rem justify-s-a'>
-                        <div className='grid gap'>
-                            <div className='display justify-c'>
-                                <SwatchIcon width={60} color='black' />
-                            </div>
-                            <div className='grid gap-04'>
-                                <span className='f-s-2rem f-w-600 display justify-c'>
-                                    <NumberIncreaser length={AllLinks.length} />
-                                </span>
-                                <span className='f-s-18 f-w-300 text-align-c'>Created links</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='display gap-2rem justify-c'>
-                        <div className='grid gap'>
-                            <div className='display justify-c'>
-                                <UserIcon width={60} color='black' />
-                            </div>
-                            <div className='grid gap-04'>
-                                <span className='f-s-2rem f-w-600 display justify-c'>
-                                    <NumberIncreaser length={users?.length} />
-                                </span>
-                                <span className='f-s-18 f-w-300 text-align-c'>Users</span>
-                            </div>
-                        </div>
-                    </div>
+                <div className='grid gap-2rem'>
+                    {
+                        Stats.map(stat=> {
+                            return (
+                                <div className='display gap p-1'>
+                                    <div className='display gap'>
+                                        <div className='display justify-c'>{stat.icon}</div>
+                                        <div className='display gap'>
+                                            <span className='f-s-2rem f-w-500 display justify-c'>
+                                                <NumberIncreaser length={stat.number} />
+                                            </span>
+                                            <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
 
