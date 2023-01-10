@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 import Main from '../App/components/Main'
-import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { formatNumber } from '../App/utils/formatNumber';
 import formatCurrency from '../App/utils/formatCurrency';
 import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
@@ -163,7 +163,7 @@ export default function Home({ props }) {
 
     const Stats = [
         {
-            title : 'Created inks',
+            title : 'Created links',
             number: AllLinks.length,
             icon  : <SwatchIcon width={30} />
         },
@@ -176,6 +176,11 @@ export default function Home({ props }) {
             title : 'Statistics',
             number: stats.length,
             icon  : <ChartPieIcon width={30} />
+        },
+        {
+            title : 'Countries',
+            number: 2933,
+            icon  : <GlobeEuropeAfricaIcon width={30} />
         },
     ]
 
@@ -234,7 +239,7 @@ export default function Home({ props }) {
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h1 className='m-t-04'>All that you need</h1>
                 </div>
-                <div className='grid gap-2rem p-2'>
+                <div className='grid gap-2rem p-1'>
                     {
                         features.map((feature, i)=> {
                             return (
@@ -259,7 +264,7 @@ export default function Home({ props }) {
                 </div>
             </div>
 
-            <div className='steps-div' style={style}>
+            {/* <div className='steps-div' style={style}>
                 <div className='title-steps'>
                     <h1 className='m-0'>How ?</h1>
                 </div>
@@ -286,7 +291,7 @@ export default function Home({ props }) {
                         })
                     }
                 </div>
-            </div>
+            </div> */}
 
             <div className='subject-div' style={style}>
                 <div className='grid gap-2rem'>
@@ -356,20 +361,23 @@ export default function Home({ props }) {
                 </div>
             </div>
 
-            <div className='grid yellow p-2 border-r-2' style={{style, color: 'black'}}>
-                <h2 className='m-t-0'>Some numbers</h2>
+            <div className='grid p-2 border-r-2' style={{style, color: 'black'}}>
+                <div className='display justify-c'>
+                    <h1 className='m-t-0'>Some numbers</h1>
+                </div>
 
-                <div className='grid gap-2rem'>
+                <div className='grid gap blocks'>
                     {
                         Stats.map(stat=> {
                             return (
-                                <div className='display gap p-1'>
-                                    <div className='display gap'>
-                                        <div className='display justify-c'>{stat.icon}</div>
-                                        <div className='display gap'>
-                                            <span className='f-s-2rem f-w-500 display justify-c'>
+                                <div className='display gap-2rem justify-c p-2 border-r-2 shadow yellow'>
+                                    <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
+
+                                        <div className='grid gap'>
+                                            <div className='f-s-2rem f-w-500 display justify-c gap-1rem'>
+                                                {stat.icon}
                                                 <NumberIncreaser length={stat.number} />
-                                            </span>
+                                            </div>
                                             <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
                                         </div>
                                     </div>
@@ -411,7 +419,7 @@ export function NumberIncreaser({length}) {
                     return
                 }
                 setNumber(number + 1)
-            }, 10)
+            }, 0)
         }
         return () => clearInterval(interval)
 
