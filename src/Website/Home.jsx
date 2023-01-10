@@ -108,17 +108,17 @@ export default function Home() {
         {
             name: 'Cut',
             text: "Short and manage your URLs in a seconde",
-            icon: <div className='display justify-c blue border-b border-r-1 ' style={{width: '100px', height: '88px'}}><ScissorsIcon width={44} /></div>
+            icon: <div className='display justify-c blue border-r-100 ' style={{width: '66px', height: '66px'}}><ScissorsIcon width={40} /></div>
         },
         {
             name: 'Links',
             text: "Create a link in bio page with yours links in one clic",
-            icon: <div className='display justify-c yellow border-b border-r-1 ' style={{width: '100px', height: '88px'}}><SwatchIcon width={44} className='c-white' /></div>
+            icon: <div className='display justify-c yellow border-r-100 ' style={{width: '66px', height: '66px'}}><SwatchIcon width={40} className='c-white' /></div>
         },
         {
             name: 'Stats',
             text: "Aanalyse your bests links to a better scale up",
-            icon:  <div className='display justify-c orange border-b border-r-1 ' style={{width: '100px', height: '88px'}}><RocketLaunchIcon width={44} /></div>
+            icon:  <div className='display justify-c orange border-r-100 ' style={{width: '66px', height: '66px'}}><RocketLaunchIcon width={40} /></div>
         },
     ]
 
@@ -221,29 +221,29 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='steps-div' style={style}>
-                <div className='title-steps'>
-                    <small className='link'>ALL IN ONE</small>
-                    <h2 className='m-t-04'>All that you need</h2>
+            <div className='display justify-s-b align-top' style={style}>
+                <div>
+                    <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
+                    <h1 className='m-t-04'>All that you need</h1>
                 </div>
-                <div className='display gap-1rem features'>
+                <div className='grid gap-2rem'>
                     {
                         features.map(feature=> {
                             return (
-                                <div className='features-blocks' key={feature.name}>
+                                <div className='display gap-2rem align-top p-1' key={feature.name} style={{borderBottom: '1px solid #d2d2d2'}}>
                                     <div className='grid'>
-                                        <div className='justify-c display'>
+                                        <div className='display'>
                                             <div className='steps-blocks-head'>
                                                 {feature.icon}
                                             </div>
                                         </div>
                                     </div>
                                     <div className='grid gap-1rem'>
-                                        <div className='grid gap text-align-c'>
+                                        <div className='grid gap'>
                                             <span className='f-s-25 f-w-500'>{feature.name}</span>
-                                            <span className='display c-grey f-w-200 text-align-c'>{feature.text}</span>
+                                            <span className='display c-grey f-w-200' >{feature.text}</span>
                                         </div>
-                                        <span className='link hover-link text-align-c'>know more</span>
+                                        <span className='link hover-link'>know more</span>
                                     </div>
                                 </div>
                             )
@@ -299,7 +299,6 @@ export default function Home() {
                 </Swiper>
             
             </div>
-
 
             <div className='display justify-s-b' style={style}>
                 <div className='display w-50'>

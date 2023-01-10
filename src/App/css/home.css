@@ -133,16 +133,6 @@
     gap: 1rem;
 }
 
-.features-blocks {
-    display: grid;
-    gap: 2rem;
-    width: 100%;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 2rem;
-    border-bottom: 10px solid #c1daff;
-}
-
 
 
 @media screen and (max-width: 780px) {
