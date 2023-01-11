@@ -7,12 +7,13 @@ import Login from '../../../Website/connection/Login'
 import { PencilSquareIcon } from '@heroicons/react/24/solid'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import Main from '../../../App/components/Main'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 
 
 
-export default function Profil({ props }) {
+export default function Profil() {
 
-    const { user } = props
+    const { user } = useStateProps()
 
     const history = useNavigate()
 

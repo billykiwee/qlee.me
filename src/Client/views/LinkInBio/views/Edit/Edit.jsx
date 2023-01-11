@@ -3,14 +3,15 @@ import { useParams } from 'react-router-dom'
 import Main from '../../../../../App/components/Main'
 import { SwitchInput } from '../../../../../App/components/Switch'
 import { db } from '../../../../../App/database/firebase'
+import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import LinkInBio from '../../LinkInBio'
 import { LinksAsIcon } from './components/LinkAsIcon'
 
 
-export function EditLinkInBio({ props }) {
+export function EditLinkInBio() {
 
-    const { user } = props
+    const { user } = useStateProps()
 
     const { userName } = useParams()
 
@@ -153,7 +154,7 @@ export function EditLinkInBio({ props }) {
                         }} />
                         
                         <div className='border border-r-1 shadow' style={{background: background?.color}}>
-                            <LinkInBio userView={User} links={UserLinks} props={props} /> 
+                            <LinkInBio userView={User} links={UserLinks} /> 
                         </div>
                     </div>
                 </div>

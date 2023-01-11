@@ -93,7 +93,7 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <Menu props={{ User: User, menu, setMenu }} />
+            <Menu props={{ User, menu, setMenu }} />
         </header>
     )
 }

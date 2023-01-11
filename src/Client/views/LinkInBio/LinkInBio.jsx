@@ -9,14 +9,15 @@ import { Footer } from './components/Footer'
 import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
 import { LinksAsIcon } from './views/Edit/components/LinkAsIcon'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 
 
 
-export default function LinkInBio({ userView, props }) {
+export default function LinkInBio({ userView }) {
 
     const { userName } = useParams()
 
-    const { user } = props
+    const { user } = useStateProps()
 
     const User = user?.profil
     const Links = user?.link_in_bio?.links

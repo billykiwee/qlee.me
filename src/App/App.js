@@ -42,30 +42,19 @@ export default function App() {
         terms         : { path : '/terms', element : <Terms /> },
     }
 
-
     return (
         <BrowserRouter>
-            <Routes>
-                {
-                    Object.values(router).map((route, i) => {
-                        return <Route
-                        key={i}
-                        path={route.path}
-                        exact
-                        element={
-                            <>
-                                <Header />
-                                    <SnackBar />
-                                    <Popup />
-                                    {route.element}
-                                <Footer />
-                            </>
-                            }
-                        />
-                        
-                    })
-                }
-            </Routes>
+            <Header />
+                <SnackBar />
+                <Popup />
+                <Routes>
+                    {
+                        Object.values(router).map((route, i) => {
+                            return <Route key={i} path={route.path} exact element={route.element} />
+                        })
+                    }
+                </Routes>
+            <Footer />
       </BrowserRouter>
     )
 

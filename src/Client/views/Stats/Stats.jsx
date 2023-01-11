@@ -10,12 +10,13 @@ import Filter from './components/Filter'
 import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import Messages from '../../../App/utils/Messages'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 
 
 
-export default function Stats({ props }) {
+export default function Stats() {
 
-    const { user, popUp, snackBar } = props
+    const { user, popUp, snackBar } = useStateProps()
 
     const history = useNavigate()
     

@@ -14,14 +14,12 @@ import { DeleteLink } from '../../functions/Delete'
 import { IsLinkInBio } from '../../lib/IsLinkInBio'
 import { EditLink } from '../../functions/Edit'
 import Main from '../../../../../App/components/Main'
+import { useStateProps } from '../../../../../App/provider/ContextProvider'
 
 
+export default function Edit() {
 
-
-
-export default function Edit({ props }) {
-
-    const { user, snackBar, popUp } = props
+    const { user, snackBar, popUp } = useStateProps()
 
     const history = useNavigate()
     const { LinkID } = useParams()

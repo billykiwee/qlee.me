@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Plans } from './data/plans'
 
 
@@ -11,7 +12,7 @@ export default function Pricing({ props }) {
 
     const history = useNavigate()
 
-    const { user } = props
+    const { user } = useStateProps()
 
     const User = user?.profil
 
