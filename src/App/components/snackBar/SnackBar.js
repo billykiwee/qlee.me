@@ -3,12 +3,12 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateProps } from '../../provider/ContextProvider'
 
-export function SnackBar({ props }) {
+export function SnackBar() {
 
     const { snackBar, add, remove } = useStateProps().snackBar
 
 
-    function deleteData(id) {
+    async function deleteData(id) {
 
         const el = document.querySelector('#' + id)
         
@@ -19,14 +19,18 @@ export function SnackBar({ props }) {
         })
     }
 
-    /* useEffect(e=> {
-        if (Object.values(content).length) {
-            setTimeout(e=> {
-                snackBar([])
-            }, 4000)
-        }
-    }, [])
- */
+    useEffect(e=> {
+
+
+        setTimeout(e=> {
+            deleteData(snackBar[0]?.id).then(e=> {
+                remove(snackBar[0]?.id)
+            })
+        }, 4000)    
+        console.log(snackBar);
+
+    }, [snackBar])
+
 
 
     return (

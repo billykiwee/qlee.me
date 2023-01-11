@@ -20,7 +20,7 @@ export default function Popup() {
                     <div className='grid gap-1rem'>
                         <div className='display justify-s-b '>
                             <div className='display gap'>
-                                { statu === 'error' && <ExclamationTriangleIcon /> }
+                                { statu === 'question' && <ExclamationTriangleIcon width={28} className='c-red' /> }
                                 <span className='f-s-20 f-w-500'>{title}</span>
                             </div>
                             <div className='display'>
@@ -47,7 +47,7 @@ export default function Popup() {
                             <small className='f-w-300 c-grey'>{question}</small>
                         </div>
                         <button className={buttonColor + ' blue h-3 border-r-1 border-b'} onClick={valid}>
-                            <span className='f-s-16'>{buttonText}</span>
+                            <span className='f-s-16' style={{color: 'white'}}>{buttonText}</span>
                         </button>
                     </div>
                 </div>
