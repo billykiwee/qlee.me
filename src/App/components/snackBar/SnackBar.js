@@ -8,26 +8,22 @@ export function SnackBar() {
     const { snackBar, add, remove } = useStateProps().snackBar
 
 
-    async function deleteData(id) {
+    function deleteData(id) {
 
         const el = document.querySelector('#' + id)
         
         el.classList.add('out')
-        
-        el.addEventListener('transitionend', function() {
-            remove(id)
-        })
+
+        console.log(id);
+        el.ontransitionend = () => remove(id)
     }
 
     useEffect(e=> {
 
-
-        setTimeout(e=> {
-            deleteData(snackBar[0]?.id).then(e=> {
-                remove(snackBar[0]?.id)
-            })
-        }, 4000)    
-        console.log(snackBar);
+        setInterval(e=> {
+            deleteData(snackBar[0]?.id)
+        }, 4000) 
+        
 
     }, [snackBar])
 
@@ -65,7 +61,7 @@ export function SnackBar() {
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)}  >
+                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)} id={'btn-delete-' + id} >
                                     <span className='f-s-16 c-black'>OK</span>
                                 </button>
                             </div>
