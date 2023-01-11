@@ -12,77 +12,42 @@ export function byEmail(e, userID, setMSG, history) {
 
     const email = elements.email.value
     const password = elements.password.value
+    console.log(email);
     
     const { Name, Email, Password } = loginConditions
 
-    async function Signup() {
 
-        if (!email.match(Email.rules.regex)) 
-            throw {
-                code : 'error-email',
-                error : 'Veuillez entrer un email valide'
-            }
-        else Password.error.innerHTML = ''
+   /*  if (!email.match(Email.rules.regex)) 
+        throw Email.error('Veuillez entrer un email valide')
 
+    if (password.length < Password.rules.length.min)
+        throw Password.error(`Le mot de passe doit contenir au moins ${Password.rules.length.min} caractères`)
 
-        if (password.length < Password.rules.length.min)
-            throw {
-                code : 'error-password',
-                error : `Le mot de passe doit contenir au moins ${Password.rules.length.min} caractères`
-            }
+    else if (!password.match(Password.rules.regex.special))
+        throw Password.error('Le mot de passe doit contenir un caractère spécial')
 
-        else if (!password.match(Password.rules.regex.special))
-            throw {
-                code : 'error-password',
-                error : 'Le mot de passe doit contenir un caractère spécial'
-            }
+    else if (!password.match(Password.rules.regex.number))
+        throw  Password.error('Le mot de passe doit contenir un nombre')
+    else Password.error('')
+ */
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(toDatabase=> {
 
-        else if (!password.match(Password.rules.regex.number))
-            throw {
-                code : 'error-password',
-                error : 'Le mot de passe doit contenir un nombre'
-            }
-
-        else Password.error.innerHTML = ''
-
-
-        return {
-            email : email, 
-            password :password 
-        }
-
-    }
-
-    Signup()
-    .then(validData=> {
-
-        const { email, password } = validData
-
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(toDatabase=> {
-
-            db.collection('users').doc(email).set({
-                plan    : 'FREE',
-                id      : userID,
-                name    : email.split('@')[0],
-                email   : email,
-                photoURL: generateLetterImage(email.split('')[0].toUpperCase()),
-                date    : serverTimestamp()
-            }) 
-        })
-        .then(redirect=> history('/dashboard') )
-        .catch(error => {
-            //console.error(error)
-            setMSG({
-                statu: 'error', 
-                msg: "L'adresse mail est associé à un autre compte"
-            })
+        db.collection('users').doc(email).set({
+            plan    : 'FREE',
+            id      : userID,
+            name    : email.split('@')[0],
+            email   : email,
+            photoURL: generateLetterImage(email.split('')[0].toUpperCase()),
+            date    : serverTimestamp()
+        }) 
+    })
+    .then(redirect=> history('/dashboard') )
+    .catch(error => {
+        //console.error(error)
+        setMSG({
+            statu: 'error', 
+            msg: "L'adresse mail est associé à un autre compte"
         })
     })
-    .catch(error => {
-
-        Object.values(loginConditions).map(condition=> {
-            return condition.error?.id === error.code ? condition.error.innerHTML = error.error : null
-        })
-    }) 
 }

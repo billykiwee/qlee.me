@@ -12,7 +12,7 @@ export const loginConditions = {
         rules : {
             regex : /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         },
-        error : document.querySelector('#error-email') 
+        error : (error) => document.querySelector('#error-email').innerHTML = error
     },
     Password : {
         rules : {
@@ -24,6 +24,6 @@ export const loginConditions = {
                 number : /.[1234567890]/
             }
         },
-        error : document.querySelector('#error-password') 
+        error : (error) => document.querySelector('#error-password') .innerHTML = error
     }
 }

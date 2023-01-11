@@ -20,9 +20,6 @@ export default function Login() {
 
     const userID = UniqueID('user', 16)
 
-
-
-
     const [HashPassword, setHashPassword] = useState(false)
 
     const [Loader, setLoader] = useState(false)
@@ -36,7 +33,6 @@ export default function Login() {
         })
 
     }, [])
-
 
 
     if (user) history('/dashboard')
@@ -56,7 +52,12 @@ export default function Login() {
                 <div className="form-block">
                     <div className='grid w-100p'>
 
-                        <ConntectWidth Google={e=> byGoogle(userID, history)} Facebook />
+                        <ConntectWidth 
+                            Google={e=> {
+                                byGoogle(userID, history); setLoader(true)}
+                            } 
+                            Facebook 
+                        />
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
@@ -76,7 +77,8 @@ export default function Login() {
                                         className='border-0 h-3 w-100p' 
                                         id='email' 
                                         required 
- 
+                                        onChange={e=> setMSG({})} 
+                                        onInvalid={e=> e.preventDefault()}
                                     />
                                 </div>
                                 <small className='c-red' id='error-email'></small>
@@ -95,7 +97,7 @@ export default function Login() {
                                         type={HashPassword ? "text" : "password"}  
                                         id='password'
                                         placeholder='*********'
-
+                                        onChange={e=> setMSG({})}
                                         required
                                     />
                                     <img 
