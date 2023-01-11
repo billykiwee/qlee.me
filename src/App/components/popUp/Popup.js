@@ -1,10 +1,10 @@
-import { XCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ExclamationTriangleIcon, XCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import '../../css/popup.css'
 import { useStateProps } from '../../provider/ContextProvider'
 
 
-export default function Popup({ props }) {
+export default function Popup() {
 
     const { popUp, show } = useStateProps().popUp
 
@@ -16,10 +16,11 @@ export default function Popup({ props }) {
     return (
         <div className='frame-popup'>
             <div className='fixed'>
-                <div className='grid white border-r-2 p-2 border-b gap'>
-                    <div className='grid gap-2rem'>
+                <div className='grid white border-r-1 p-2 border-b gap-2rem'>
+                    <div className='grid gap-1rem'>
                         <div className='display justify-s-b '>
                             <div className='display gap'>
+                                { statu === 'error' && <ExclamationTriangleIcon /> }
                                 <span className='f-s-20 f-w-500'>{title}</span>
                             </div>
                             <div className='display'>

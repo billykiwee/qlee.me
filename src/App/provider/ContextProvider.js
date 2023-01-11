@@ -27,7 +27,7 @@ export const PropsProvider = ({ children }) => {
             },
         },
         users      : useFetchUsers(),
-        links      : (linkID) => useFetchAllLinks(linkID),
+        links      : useFetchAllLinks(),
         stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinks(),
         snackBar   : useSnackBar(),

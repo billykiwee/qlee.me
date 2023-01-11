@@ -15,45 +15,48 @@ export default function List({links, User}) {
     const [linkListed, add] = useState(10)
 
     return (
-        <> 
-            {
-                links
-                .sort((a,b)=> b.date - a.date)
-                .map((link, i)=> {
-                    
-                    return (
+        <div className='grid gap-1rem'> 
 
-                        <article className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
-                            <div className='display gap-1rem'>
-                                <Link to={'/edit/' + link.id} className='display'>
-                                    <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
-                                </Link>
-                                <div className='grid '> 
-                                    <div className='display gap-04'>
-                                        <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
-                                        <IsLinkInBio Link={link} />
-                                    </div>
-                
-                                    <div className='grid gap'>
+            <div className='grid gap-1rem'> 
+                {
+                    links
+                    .sort((a,b)=> b.date - a.date)
+                    .map((link, i)=> {
+                        
+                        return (
+
+                            <article className='display gap p-1 border-b border-r-1 border justify-s-b white h-2' key={i} >
+                                <div className='display gap-1rem'>
+                                    <Link to={'/edit/' + link.id} className='display'>
+                                        <img src={getFavicon(link)} className='w-2 h-2 border-r-100' />
+                                    </Link>
+                                    <div className='grid '> 
                                         <div className='display gap-04'>
-                                            <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
-                                            <CopyClip link={link} />
+                                            <span className='f-s-16'>{minimizeString(link.name, 20)}</span>
+                                            <IsLinkInBio Link={link} />
+                                        </div>
+                    
+                                        <div className='grid gap'>
+                                            <div className='display gap-04'>
+                                                <a href={'https://' + link.shortLink}  rel="noopener noreferrer" className='hover-link link'>{link.shortLink}</a>
+                                                <CopyClip link={link} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <Link to={'/edit/' + link.id}>
-                                    <div className='display justify-c w-2 h-2 border-r-100 hover'>
-                                        <ChevronRightIcon width={20} className='c-black'  />
-                                    </div>
-                                </Link>
-                            </div>
-                        </article>
-                    )
-                })
-                .splice(0, linkListed)
-            }
+                                <div>
+                                    <Link to={'/edit/' + link.id}>
+                                        <div className='display justify-c w-2 h-2 border-r-100 hover'>
+                                            <ChevronRightIcon width={20} className='c-black'  />
+                                        </div>
+                                    </Link>
+                                </div>
+                            </article>
+                        )
+                    })
+                    .splice(0, linkListed)
+                }
+            </div>
 
             <div className='display'>
                 <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> add(linkListed + 10)}>
@@ -83,6 +86,6 @@ export default function List({links, User}) {
                     </div>
                 }
             </div>
-        </>
+        </div>
     )
 }

@@ -7,27 +7,23 @@ import { getDevice } from './lib/getDevice'
 import { fetchLink } from './lib/database/links/fetchLink'
 import { getAdress } from './lib/api/ipapi/getAdress'
 import Main from '../App/components/Main'
-import { useStateProps } from '../App/provider/ContextProvider'
 
 
 export default function Redirection() {
-
-    const { getLink } = useStateProps()
 
     const { LinkID } = useParams()
 
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
-
+    
 
     const fetchData = async () => {
         
         try {
-            const link = await getLink(LinkID)
+            const link   = await fetchLink(LinkID)
             const adress = await getAdress()
 
             console.log(link);
-
             const stat = {
                 LinkID,
                 statID,
@@ -43,11 +39,11 @@ export default function Redirection() {
             .doc(statID)
             .set(stat)
 
-           // window.location = link.url
+            window.location = link.url
 
         } catch (err) {
             console.log(err)
-           // window.location = '/page404'
+            window.location = '/page404'
         }
     }
 

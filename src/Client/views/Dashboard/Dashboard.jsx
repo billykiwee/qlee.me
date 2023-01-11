@@ -66,7 +66,7 @@ export default function Dashboard({ props }) {
                                         <div className='display w-100p'>
                                             <input type='text' id='url'
                                                 onChange={e=> setError('')}
-                                                className='div-input h-4 border-r-1 w-100p white' placeholder='Enter your website URL' 
+                                                className='div-input h-4 border-r-1 w-100p white' placeholder="Entrer l'URL du site" 
                                             />
                                         </div>
                                     </div>

@@ -220,7 +220,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className='display justify-e'>
+                <div className='display justify-c'>
                     <img src='favicon.ico' width='288px' height='288px' />
                 </div>
             </div>
