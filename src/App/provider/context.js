@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, useContext } from "react"
 import useGetAuth from "../../Client/data/auth/auth"
 import { useFetchStatsLinks } from "../../Client/data/links"
 import { useFetchLinks } from "../../Client/data/user/links"
@@ -12,7 +12,7 @@ export const PropsContext = createContext({})
 export const PropsProvider = ({children}) => {
 
     const user = useGetAuth()
-    
+
     const props = {
         user: {
             profil: useFetchUsers(user),
@@ -40,3 +40,5 @@ export const PropsProvider = ({children}) => {
         </PropsContext.Provider>
     )
 }
+
+export const Props = () => useContext(PropsContext)

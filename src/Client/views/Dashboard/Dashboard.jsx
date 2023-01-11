@@ -9,12 +9,15 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import Main from '../../../App/components/Main';
+import { useStateValue } from '../../../App/provider/StateProvider';
+import { Props } from '../../../App/provider/context';
 
 
 export default function Dashboard({ props }) {
 
     
-    const { auth, user, snackBar, popUp } = props
+    const { auth, user, snackBar, popUp } = Props
+    
 
     const User = user?.profil
     const UserLinks = user?.links?.links
@@ -134,22 +137,3 @@ export default function Dashboard({ props }) {
 
 
 
-
-
-export const NumberIncreaser = () => {
-    const [number, setNumber] = useState();
-  
-    useEffect(() => {
-      const interval = setInterval(() => {
-        if (number >= 100) {
-          clearInterval(interval)
-          return
-        }
-        setNumber(number + 1)
-      }, 50)
-  
-      return () => clearInterval(interval)
-    }, [number])
-  
-    return <span>{number}</span>
-}

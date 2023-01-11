@@ -6,8 +6,8 @@ import './App/css/header.css'
 import './App/css/home.css'
 import App from './App/App';
 import reducer, { initialState } from './App/provider/reducer'
-import { Context, StateProvider } from './App/provider/StateProvider'
-import { PropsProvider } from './App/provider/context';
+import { StateProvider } from './App/provider/StateProvider'
+import { PropsContext, PropsProvider } from './App/provider/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
@@ -15,7 +15,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
         <StateProvider initialState={initialState} reducer={reducer} >
-            <App />
+            <PropsProvider value={PropsContext}>
+                <App />
+            </PropsProvider>
         </StateProvider>
     </React.StrictMode>
 )
