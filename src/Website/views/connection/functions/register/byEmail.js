@@ -1,32 +1,41 @@
+import { serverTimestamp } from 'firebase/firestore'
 import React from 'react'
+import { db, auth } from '../../../../../App/database/firebase'
+import { generateLetterImage } from '../../../../../App/utils/generateLetterImage'
+import { loginConditions } from '../conditions'
 
-export function byEmail(props) {
+export function byEmail(elements, userID, setMSG, history) {
 
-    e.preventDefault() 
+    elements.preventDefault() 
+
+    const email = elements.name.value
+    const password = elements.password.value
+
+    const { Name, Email, Password } = loginConditions
 
     async function Signup() {
 
-        if (!Email.value.match(Email.rules.regex)) 
+        if (!email.match(Email.rules.regex)) 
             throw {
                 code : 'error-email',
                 error : 'Veuillez entrer un email valide'
             }
-        else Email.error.innerHTML = ''
+        else Password.error.innerHTML = ''
 
 
-        if (Password.value.length < Password.rules.length.min)
+        if (password.length < Password.rules.length.min)
             throw {
                 code : 'error-password',
                 error : `Le mot de passe doit contenir au moins ${Password.rules.length.min} caractères`
             }
 
-        else if (!Password.value.match(Password.rules.regex.special))
+        else if (!password.match(Password.rules.regex.special))
             throw {
                 code : 'error-password',
                 error : 'Le mot de passe doit contenir un caractère spécial'
             }
 
-        else if (!Password.value.match(Password.rules.regex.number))
+        else if (!password.match(Password.rules.regex.number))
             throw {
                 code : 'error-password',
                 error : 'Le mot de passe doit contenir un nombre'
@@ -36,8 +45,8 @@ export function byEmail(props) {
 
 
         return {
-            email : Email.value, 
-            password :Password.value 
+            email : email, 
+            password :password 
         }
 
     }

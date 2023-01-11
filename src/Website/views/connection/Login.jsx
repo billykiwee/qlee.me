@@ -11,8 +11,8 @@ import '../../../App/css/login.css'
 import { getUnsplashImage } from '../../../Client/lib/api/unsplash/unsplash'
 import { generateLetterImage } from '../../../App/utils/generateLetterImage'
 import { useStateProps } from '../../../App/provider/ContextProvider'
-
-
+import { byGoogle } from './functions/register/byGoogle'
+import { byEmail } from './functions/register/byEmail'
 
 
 export default function Login() {
@@ -32,40 +32,6 @@ export default function Login() {
     const userID = UniqueID('user', 16)
 
 
-    const loginConditions = {
-        Name : {
-            value : name,
-            rules : {
-                length : {
-                    min: 4,
-                    max : 16
-                }
-            }
-        },
-        Email : {
-            value : email,
-            rules : {
-                regex : /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-            },
-            error : document.querySelector('#error-email') 
-        },
-        Password : {
-            value: password,
-            rules : {
-                length : {
-                    min: 6
-                },
-                regex : {
-                    special: /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)&é"'(§è!çà)-^$`ù=:;,]/,
-                    number : /.[1234567890]/
-                }
-            },
-            error : document.querySelector('#error-password') 
-        }
-    }
-
-    const { Name, Email, Password } = loginConditions
-
 
 
     const [HashPassword, setHashPassword] = useState(false)
@@ -82,13 +48,6 @@ export default function Login() {
 
     }, [])
 
-
-    function byEmail(elements) {
-
-        const email = elements.name.value
-
-        console.log(email);
-    }
 
 
     if (user) history('/dashboard')
@@ -108,36 +67,11 @@ export default function Login() {
                 <div className="form-block">
                     <div className='grid w-100p'>
 
-                        <div className='grid m-b-1'>
-                            <div className='display justify-c'>
-                                <h2 className='text-align-c'>Se connecter avec</h2>
-                            </div>
-                            <div className='display justify-c gap'>
-                                <div className='display'>
-                                    <button type='submit' className='border border-r-1 white border-b hover h-3'>
-                                        <span className='f-s-16 opacity p-04 c-black'>Google</span>
-                                        <img src='/images/google.svg' width={36} />
-                                    </button>
-                                </div>
-                               {/*  <div className='display'>
-                                    <button className='border border-r-1 white border-b hover h-3' type='button' onClick={byGoogle}>
-                                        <span className='f-s-16 opacity p-04 c-black'>Facebook</span>
-                                        <img src='/images/facebook.svg' width={36} />
-                                    </button>
-                                </div> */}
-                            </div>
-                        </div>
-
-                        <div className='display border-top justify-c m-t-2 m-b-2 opacity'>
-                            <div className='display justify-c white absolute w-3'>
-                                <span className=''>ou</span>
-                            </div>
-                        </div>
-
+                        <ConntectWidth Google={e=> byGoogle()} />
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
-                        <form onSubmit={byEmail}>
+                        <form onSubmit={elements=> byEmail(elements, userID, setMSG, history)}>
                             <div className='grid w-100p m-b-1'>
                                 <div className='m-b-04'>
                                     <label>Email</label>
@@ -146,7 +80,7 @@ export default function Login() {
                                     <span className='display m-l-1'>
                                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                                     </span>
-                                    <input type="email" placeholder='mon-email@gmail.com' className='border-0 h-3 w-100p' required />
+                                    <input type="email" placeholder='mon-email@gmail.com' className='border-0 h-3 w-100p' name='email' required />
                                 </div>
                                 <small className='c-red' id='error-email'></small>
                             </div>
@@ -162,6 +96,7 @@ export default function Login() {
                                     <input  
                                         className='border-0 h-3 w-100p'
                                         type={HashPassword ? "text" : "password"}  
+                                        name='password'
                                         placeholder='*********'
                                         required
                                     />

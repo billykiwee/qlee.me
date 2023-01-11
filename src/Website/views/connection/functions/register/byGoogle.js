@@ -1,6 +1,9 @@
+import { getAdditionalUserInfo, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { serverTimestamp } from 'firebase/firestore'
 import React from 'react'
+import { db, auth } from '../../../../../App/database/firebase'
 
-export function byGoogle() {
+export function byGoogle(userID, history) {
 
     const provider = new GoogleAuthProvider()
 
