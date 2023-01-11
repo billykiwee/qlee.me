@@ -1,31 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { auth, db } from '../../../App/database/firebase'
 import { useNavigate } from 'react-router-dom'
-import { useStateValue } from '../../../App/provider/StateProvider'
-import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } from "firebase/auth"
-import { serverTimestamp } from 'firebase/firestore'
 import UniqueID from '../../../App/utils/uniqueID'
 import Messages from '../../../App/utils/Messages'
 import Main from '../../../App/components/Main'
 import '../../../App/css/login.css'
 import { getUnsplashImage } from '../../../Client/lib/api/unsplash/unsplash'
-import { generateLetterImage } from '../../../App/utils/generateLetterImage'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { byGoogle } from './functions/register/byGoogle'
 import { byEmail } from './functions/register/byEmail'
-
+import ConntectWidth from '../connection/components/ConnectWith'
 
 export default function Login() {
 
     const history = useNavigate()
 
-    const { user } = useStateProps()
-
-
-
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { user } = useStateProps().auth
 
     const [MSG, setMSG] = useState({})   
 
@@ -67,11 +56,12 @@ export default function Login() {
                 <div className="form-block">
                     <div className='grid w-100p'>
 
-                        <ConntectWidth Google={e=> byGoogle()} />
+                        <ConntectWidth Google={e=> byGoogle(userID, history)} Facebook />
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
-                        <form onSubmit={elements=> byEmail(elements, userID, setMSG, history)}>
+                        <form onSubmit={e=> byEmail(e, userID, setMSG, history)} >
+
                             <div className='grid w-100p m-b-1'>
                                 <div className='m-b-04'>
                                     <label>Email</label>
@@ -80,7 +70,14 @@ export default function Login() {
                                     <span className='display m-l-1'>
                                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                                     </span>
-                                    <input type="email" placeholder='mon-email@gmail.com' className='border-0 h-3 w-100p' name='email' required />
+                                    <input
+                                        type="email" 
+                                        placeholder='mon-email@gmail.com' 
+                                        className='border-0 h-3 w-100p' 
+                                        id='email' 
+                                        required 
+ 
+                                    />
                                 </div>
                                 <small className='c-red' id='error-email'></small>
                             </div>
@@ -96,8 +93,9 @@ export default function Login() {
                                     <input  
                                         className='border-0 h-3 w-100p'
                                         type={HashPassword ? "text" : "password"}  
-                                        name='password'
+                                        id='password'
                                         placeholder='*********'
+
                                         required
                                     />
                                     <img 
@@ -111,7 +109,7 @@ export default function Login() {
                             </div>
                             
                             <div className='grid m-t-1'>    
-                                <button className="blue f-s-16 border-r-1 h-4 border-b hover-blue" onClick={byEmail} type="submit">
+                                <button className="blue f-s-16 border-r-1 h-4 border-b hover-blue" type="submit">
                                     <span className='f-s-16 p-1'>Se connecter</span>
                                 </button>
                             </div>

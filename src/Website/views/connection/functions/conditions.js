@@ -1,13 +1,13 @@
 
 export const loginConditions = {
-    Name : {
+    /* Name : {
         rules : {
             length : {
                 min: 4,
                 max : 16
             }
         }
-    },
+    }, */
     Email : {
         rules : {
             regex : /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/

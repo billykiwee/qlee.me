@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function ConnectWith({Google}) {
+
     return (
         <>
             <div className='grid m-b-1'>
@@ -24,7 +25,7 @@ export default function ConnectWith({Google}) {
             </div>
 
             <div className='display border-top justify-c m-t-2 m-b-2 opacity'>
-                <div className='display justify-c white absolute w-3'>
+                <div className='display justify-c absolute w-3'>
                     <span className=''>ou</span>
                 </div>
             </div>

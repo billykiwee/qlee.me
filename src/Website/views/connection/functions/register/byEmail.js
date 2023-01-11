@@ -4,13 +4,15 @@ import { db, auth } from '../../../../../App/database/firebase'
 import { generateLetterImage } from '../../../../../App/utils/generateLetterImage'
 import { loginConditions } from '../conditions'
 
-export function byEmail(elements, userID, setMSG, history) {
+export function byEmail(e, userID, setMSG, history) {
 
-    elements.preventDefault() 
+    e.preventDefault() 
 
-    const email = elements.name.value
+    const elements = e.target.elements
+
+    const email = elements.email.value
     const password = elements.password.value
-
+    
     const { Name, Email, Password } = loginConditions
 
     async function Signup() {
