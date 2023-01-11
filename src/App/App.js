@@ -18,49 +18,11 @@ import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit/Edit'
-
-
-import useGetAuth from '../Client/data/auth/auth'
-import { useFetchUsers } from '../Client/data/users'
-import { useFetchLinks } from '../Client/data/user/links'
 import { SnackBar } from './components/snackBar/SnackBar'
-import { useSnackBar } from './components/snackBar/reducer/useSnackBar'
-import { usePopUp } from './components/popUp/reducer/usePopUp'
 import Popup from './components/popUp/Popup'
-import { useFetchStatsLinks } from '../Client/data/links'
-
-
-
-
-
 
 
 export default function App() {
-
-    const user = useGetAuth()
-    
-    const props = {
-        user: {
-            profil: useFetchUsers(user),
-            links : {
-                links: useFetchLinks(user),
-                stats: useFetchLinks(user, 'stats'),
-            },
-            link_in_bio: {
-                links   : useFetchLinks(user, 'link-in-bio'),
-                settings: useFetchLinks(user, 'link-in-bio_settings')
-            },
-        },
-        auth       : user,
-        users      : useFetchUsers(),
-        links      : useFetchLinks(),
-        stats      : useFetchStatsLinks(),
-        link_in_bio: useFetchLinks(),
-        snackBar   : useSnackBar(),
-        popUp      : usePopUp()
-    }
-
-
 
     const router = {
         init          : { path : '/*', element : <Page404 /> },
@@ -92,11 +54,11 @@ export default function App() {
                         exact
                         element={
                             <>
-                                <Header props={props} />
-                                    <SnackBar props={props.snackBar} />
-                                    <Popup props={props.popUp} />
-                                    {React.cloneElement(route.element, { props: props })}
-                                <Footer props={props} />
+                                <Header />
+                                    <SnackBar />
+                                    <Popup />
+                                    {route.element}
+                                <Footer />
                             </>
                             }
                         />

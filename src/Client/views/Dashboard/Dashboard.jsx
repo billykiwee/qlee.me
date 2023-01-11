@@ -9,14 +9,12 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import Main from '../../../App/components/Main';
-import { useStateValue } from '../../../App/provider/StateProvider';
-import { Props } from '../../../App/provider/context';
+import { useStateProps } from '../../../App/provider/ContextProvider';
 
 
 export default function Dashboard({ props }) {
 
-    
-    const { auth, user, snackBar, popUp } = Props
+    const { auth, user, snackBar, popUp } = useStateProps()
     
 
     const User = user?.profil

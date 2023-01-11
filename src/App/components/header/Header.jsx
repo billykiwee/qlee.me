@@ -4,11 +4,12 @@ import { Bars2Icon, BeakerIcon, BuildingOfficeIcon, LockOpenIcon, MoonIcon, Penc
 import { toggleTheme } from '../../functions/setTheme'
 import { GetWidth } from '../../utils/GetWidth'
 import { Menu } from './components/menu'
+import { useStateProps } from '../../provider/ContextProvider'
 
 
-export default function Header({ props }) {
+export default function Header() {
 
-    const User = props.user?.profil
+    const User = useStateProps().user.profil
 
     const [menu, setMenu] = useState(false)    
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
@@ -92,7 +93,7 @@ export default function Header({ props }) {
                     </div>
                 </div>
             </div>
-            <Menu props={{ User, menu, setMenu }} />
+            <Menu props={{ User: User, menu, setMenu }} />
         </header>
     )
 }

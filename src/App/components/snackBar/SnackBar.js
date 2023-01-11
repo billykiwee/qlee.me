@@ -1,10 +1,11 @@
 import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useStateProps } from '../../provider/ContextProvider'
 
 export function SnackBar({ props }) {
 
-    const { snackBar, add, remove } = props
+    const { snackBar, add, remove } = useStateProps().snackBar
 
 
     function deleteData(id) {

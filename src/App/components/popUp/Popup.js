@@ -1,11 +1,13 @@
 import { XCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import '../../css/popup.css'
+import { useStateProps } from '../../provider/ContextProvider'
 
 
 export default function Popup({ props }) {
 
-    const { popUp, show } = props
+    const { popUp, show } = useStateProps().popUp
+
 
     const { title, statu, message, valid, question, buttonText, buttonColor } = popUp
 

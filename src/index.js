@@ -7,7 +7,7 @@ import './App/css/home.css'
 import App from './App/App';
 import reducer, { initialState } from './App/provider/reducer'
 import { StateProvider } from './App/provider/StateProvider'
-import { PropsContext, PropsProvider } from './App/provider/context';
+import { PropsContext, PropsProvider } from './App/provider/ContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 

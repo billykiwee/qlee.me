@@ -9,11 +9,12 @@ import { useSnackBar } from "../components/snackBar/reducer/useSnackBar"
 
 export const PropsContext = createContext({})
 
-export const PropsProvider = ({children}) => {
+export const PropsProvider = ({ children }) => {
 
     const user = useGetAuth()
 
     const props = {
+        auth: user,
         user: {
             profil: useFetchUsers(user),
             links : {
@@ -25,7 +26,6 @@ export const PropsProvider = ({children}) => {
                 settings: useFetchLinks(user, 'link-in-bio_settings')
             },
         },
-        auth       : user,
         users      : useFetchUsers(),
         links      : useFetchLinks(),
         stats      : useFetchStatsLinks(),
@@ -41,4 +41,4 @@ export const PropsProvider = ({children}) => {
     )
 }
 
-export const Props = () => useContext(PropsContext)
+export const useStateProps = () => useContext(PropsContext)
