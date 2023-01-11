@@ -13,22 +13,27 @@ export async function byGoogle(userID, history, snackBar) {
         // If user log for the frist time
         const isFirstLogin = getAdditionalUserInfo(result).isNewUser
         
-        if (!isFirstLogin) history('/dashboard')
+        if (isFirstLogin) {
 
-        await db
-        .collection('users')
-        .doc(auth.currentUser.email)
-        .set({
-            plan    : 'FREE',
-            id      : userID,
-            name    : auth.currentUser.displayName,
-            email   : auth.currentUser.email,
-            photoURL: auth.currentUser.photoURL,
-            date    : serverTimestamp()
-        }) 
+            const { email, displayName, photoURL } = auth.currentUser
 
-        snackBar.add({ text:' Connexion réussi' })
-
+            await db
+            .collection('users')
+            .doc(email)
+            .set({
+                plan    : 'FREE',
+                id      : userID,
+                name    : displayName,
+                email,
+                photoURL,
+                date    : serverTimestamp()
+            }) 
+    
+            snackBar.add({
+                text:' Connexion réussie'
+            })
+        }
+        
         history('/dashboard')
     })
 }

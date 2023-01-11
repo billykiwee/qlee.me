@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import React, { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 
 import Home from '../Website/Home'
 
@@ -41,6 +41,14 @@ export default function App() {
         profil        : { path : '/profil', element : <Profil /> },
         terms         : { path : '/terms', element : <Terms /> },
     }
+
+
+    const { pathname } = useLocation(); 
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    
 
     return (
         <BrowserRouter>

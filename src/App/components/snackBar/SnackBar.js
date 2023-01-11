@@ -47,9 +47,9 @@ export function SnackBar() {
                             <div className='display gap-1rem'>
                                 <div className='w-2 display justify-c'>
                                     {
-                                        status === 'success'
-                                        ? <CheckCircleIcon width={28} className='c-green' />
-                                        : <ExclamationTriangleIcon width={28} className='c-red' />
+                                        status === 'error'
+                                        ? <ExclamationTriangleIcon width={28} className='c-red' />
+                                        : <CheckCircleIcon width={28} className='c-green' />
                                     }
                                 </div>
                                 <div className='grid'>
