@@ -1,5 +1,6 @@
 import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
@@ -9,12 +10,15 @@ import { IsLinkInBio } from '../../Links/lib/IsLinkInBio'
 
 
 
-export default function ListLink({links, User}) {
+export default function List({links, User}) {
+
+    const [linkListed, add] = useState(10)
 
     return (
         <> 
             {
                 links
+                .sort((a,b)=> b.date - a.date)
                 .map((link, i)=> {
                     
                     return (
@@ -47,8 +51,15 @@ export default function ListLink({links, User}) {
                             </div>
                         </article>
                     )
-                }).reverse()
+                })
+                .splice(0, linkListed)
             }
+
+            <div className='display'>
+                <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> add(linkListed + 10)}>
+                    <span className='f-s-16 c-black'>Afficher + ({linkListed + ' liens sur ' + links.length})</span>
+                </button>
+            </div>
             
             <div className='display justify-c m-t-1'>
                 {

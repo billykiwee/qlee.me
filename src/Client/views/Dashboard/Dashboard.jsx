@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import ListLink from './components/ListLink';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
 import Articles from './components/Articles';
@@ -10,6 +9,7 @@ import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/connection/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
+import List from './components/List';
 
 
 export default function Dashboard({ props }) {
@@ -117,7 +117,7 @@ export default function Dashboard({ props }) {
                                     (
                                         UserLinks.length < 1
                                         ? <Messages loader={true} /> 
-                                        : <ListLink links={UserLinks} User={User} />
+                                        : <List links={UserLinks} User={User} />
                                     )
                                 }
                             </div>

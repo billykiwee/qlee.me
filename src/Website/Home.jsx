@@ -5,7 +5,7 @@ import "swiper/css"
 import "swiper/css/pagination"
 // import required modules
 import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
-
+import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../App/components/Main'
 import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
@@ -14,11 +14,12 @@ import { SwitchInput } from '../App/components/Switch';
 import getFavicon from '../App/utils/getFavicon';
 import { GetWidth } from '../App/utils/GetWidth';
 import { useContext } from 'react';
+import { useStateProps } from '../App/provider/ContextProvider';
 
 
-export default function Home({ props }) {
+export default function Home() {
 
-    const { users, stats } = props
+    const { users, stats, links } = useStateProps()
 
     const subjects = [
         {
@@ -113,7 +114,7 @@ export default function Home({ props }) {
         {
             name: 'Redirect',
             text: "Create a link in bio page with yours links in one clic",
-            icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><ArrowRightIcon width={30} className='c-white' /></div>
+            icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><BiSubdirectoryRight size={38} className='c-white' /></div>
         },
         {
             name: 'Links in bio',
@@ -151,18 +152,10 @@ export default function Home({ props }) {
     ]
 
 
-
-    const [AllLinks, setAllLinks] = useState([])
-
-    useEffect(e=> {
-        fetchLinks(setAllLinks)
-
-    }, [])
-
     const Stats = [
         {
             title : 'Created links',
-            number: AllLinks.length,
+            number: links.length,
             icon  : <SwatchIcon width={30} />
         },
         {

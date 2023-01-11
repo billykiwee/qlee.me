@@ -77,7 +77,7 @@ export default function LinkInBio({ userView }) {
 
                         {
                             userView &&
-                            <div className='zi-2 display justify-e'>
+                            <div className='zi-2 display justify-e' style={{ position: 'absolute', right: '2rem', top: '2rem' }}>
                                 <Link to={'/@' + userName}>
                                     <button className='display hover border-r-100 border h-3 w-3 shadow' style={{background: 'white'}}>
                                         <ArrowUpRightIcon width={20} color='black' />
