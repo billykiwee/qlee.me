@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react"
 import useGetAuth from "../../Client/data/auth/auth"
-import { useFetchStatsLinks } from "../../Client/data/links"
+import { useFetchAllLinks, useFetchStatsLinks } from "../../Client/data/links"
 import { useFetchLinks } from "../../Client/data/user/links"
 import { useFetchUsers } from "../../Client/data/users"
 import { usePopUp } from "../components/popUp/reducer/usePopUp"
@@ -27,7 +27,7 @@ export const PropsProvider = ({ children }) => {
             },
         },
         users      : useFetchUsers(),
-        links      : useFetchLinks(),
+        links      : (linkID) => useFetchAllLinks(linkID),
         stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinks(),
         snackBar   : useSnackBar(),

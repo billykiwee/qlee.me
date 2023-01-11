@@ -18,8 +18,7 @@ export function useFetchAllLinks(LinkID) {
             if (!LinkID) {
                 setLinksData(fetchedLinks.sort((x, y) => y.date - x.date))
             }
-
-            setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
+            else setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
         })
     
         return () => data()
@@ -51,4 +50,27 @@ export function useFetchStatsLinks() {
     }, [])
   
     return StatsLinks
+}
+
+export function useGetLink(LinkID) {
+
+    const [linksData, setLinksData] = useState([])
+
+    useEffect(() => {
+
+        const data = db.collection('links').onSnapshot(snapshot => {
+            if (snapshot.empty) {
+                setLinksData("no links")
+            }
+    
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+    
+            setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
+        })
+    
+        return () => data()
+
+    }, [LinkID])
+  
+    return linksData
 }
