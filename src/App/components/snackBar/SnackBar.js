@@ -2,12 +2,10 @@ import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/so
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateProps } from '../../provider/ContextProvider'
-import { useStateValue } from '../../provider/StateProvider'
 
 export function SnackBar() {
 
-    const {  add, remove } = useStateProps().snackBar
-    const [{ snackBar }, dispatch] = useStateValue()
+    const { snackBar, add, remove } = useStateProps().snackBar
 
     function deleteData(id) {
 
@@ -17,17 +15,26 @@ export function SnackBar() {
         
         el.classList.add('out')
 
-       el.addEventListener('transitionend', e=> {
-
-            dispatch({
-                type: 'SET_SNACKBAR',
-                snackBar: snackBar.filter(e => e.id !== id),
-            })
-        }) 
+        el.ontransitionend = () => remove(id)
 
     }
 
+    useEffect(() => {
+        if (!snackBar.length) return
+    
 
+        const timeoutId = setTimeout(() => {
+
+            const el = document.querySelector('#' + snackBar[0].id)
+        
+            el.classList.add('out')
+    
+            el.ontransitionend = () => remove(snackBar[0].id)
+
+        }, 3000)
+    
+        return () => clearTimeout(timeoutId)
+    }, [snackBar])
 
 
 
