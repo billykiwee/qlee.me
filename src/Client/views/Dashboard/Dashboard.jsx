@@ -6,7 +6,7 @@ import { isUserPremium } from '../../../Admin/settings/isPremium';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
-import Login from '../../../Website/connection/Login'
+import Login from '../../../Website/views/connection/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import List from './components/List';
@@ -23,7 +23,7 @@ export default function Dashboard({ props }) {
     const [Error, setError] = useState('')
 
 
-    if (!auth) return <Login />    
+    if (auth) return <Login />    
     return (
 
         <Main>

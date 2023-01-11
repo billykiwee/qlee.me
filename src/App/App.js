@@ -8,7 +8,7 @@ import Edit from '../Client/views/Links/views/Edit/Edit'
 import Header from './components/header/Header'
 
 import Footer from './components/Footer'
-import Login from '../Website/connection/Login'
+import Login from '../Website/views/connection/Login'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Pricing/Pricing'
 import Stats from '../Client/views/Stats/Stats'

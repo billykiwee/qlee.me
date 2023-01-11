@@ -31,19 +31,20 @@ function reorderList(list, startIndex, endIndex) {
 
 
 async function getPosition() {
+
     const container = document.querySelector('.container')
-    const array     = container.childNodes
-    return array
-}
+    let array = []
 
-window.onload = e => getPosition()
-.then(array=> {
-    Object.values(array).map((e, index)=> {
+    const get = async () => array = container.childNodes
 
-        const id = e.classList.value
+    get().then(e=> {
+        Object.values(array).map((e, index)=> {
 
-        db.collection('links').doc(id).update({
-            position: index
+            const id = e.classList.value
+    
+            db.collection('links').doc(id).update({
+                position: index
+            })
         })
     })
-})
+}
