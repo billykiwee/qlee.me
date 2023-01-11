@@ -14,18 +14,17 @@ export default function Login() {
 
     const history = useNavigate()
 
-    const { user } = useStateProps().auth
+    const { auth, snackBar } = useStateProps()
 
     const [MSG, setMSG] = useState({})   
 
     const userID = UniqueID('user', 16)
 
     const [HashPassword, setHashPassword] = useState(false)
-
     const [Loader, setLoader] = useState(false)
 
-    const [UnsplashImg, setUnsplashImg] = useState('')
 
+    const [UnsplashImg, setUnsplashImg] = useState('')
     useEffect(e=> {
         getUnsplashImage('nature')
         .then(data => {
@@ -35,7 +34,7 @@ export default function Login() {
     }, [])
 
 
-    if (user) history('/dashboard')
+    if (auth) history('/dashboard')
     return (
         <Main>
             <div className='login' >
@@ -54,14 +53,14 @@ export default function Login() {
 
                         <ConntectWidth 
                             Google={e=> {
-                                byGoogle(userID, history); setLoader(true)}
+                                byGoogle(userID, history, snackBar); setLoader(true)}
                             } 
                             Facebook 
                         />
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
-                        <form onSubmit={e=> byEmail(e, userID, setMSG, history)} >
+                        <form onSubmit={e=> byEmail(e, userID, setMSG, history, snackBar)} >
 
                             <div className='grid w-100p m-b-1'>
                                 <div className='m-b-04'>
@@ -78,7 +77,6 @@ export default function Login() {
                                         id='email' 
                                         required 
                                         onChange={e=> setMSG({})} 
-                                        onInvalid={e=> e.preventDefault()}
                                     />
                                 </div>
                                 <small className='c-red' id='error-email'></small>

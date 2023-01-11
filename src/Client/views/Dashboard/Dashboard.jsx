@@ -16,14 +16,13 @@ export default function Dashboard({ props }) {
 
     const { auth, user, snackBar, popUp } = useStateProps()
     
-
     const User = user?.profil
     const UserLinks = user?.links?.links
 
     const [Error, setError] = useState('')
 
 
-    if (auth) return <Login />    
+    if (!auth) return <Login />
     return (
 
         <Main>
