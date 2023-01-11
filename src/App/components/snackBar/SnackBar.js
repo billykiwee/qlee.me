@@ -1,5 +1,5 @@
 import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateProps } from '../../provider/ContextProvider'
 
@@ -14,18 +14,24 @@ export function SnackBar() {
         
         el.classList.add('out')
 
-        console.log(id);
-        el.ontransitionend = () => remove(id)
+        el.addEventListener('transitionend', e=> {
+            remove(id)
+        })
     }
 
     useEffect(e=> {
 
         setInterval(e=> {
-            deleteData(snackBar[0]?.id)
-        }, 4000) 
-        
 
-    }, [snackBar])
+            deleteData(snackBar[0].id)
+    
+        }, 5000) 
+
+        return () => snackBar
+    }, [snackBar, remove])
+        
+    console.log(snackBar);
+
 
 
 

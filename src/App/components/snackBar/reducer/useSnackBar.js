@@ -19,7 +19,7 @@ export function useSnackBar() {
     const remove = (id) => {
         dispatch({
             type: 'SET_SNACKBAR',
-            snackBar: snackBar.filter((e) => e.id !== id),
+            snackBar: snackBar.filter(e => e.id !== id),
         })
     }
 
