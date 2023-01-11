@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useStateValue } from "../../../provider/StateProvider"
 import UniqueID from "../../../utils/uniqueID"
 
@@ -17,15 +18,6 @@ export function useSnackBar() {
     }
 
     const remove = (id) => {
-
-        if (!id) {
-            dispatch({
-                type: 'SET_SNACKBAR',
-                snackBar: snackBar.shift(),
-            })
-        }
-
-        else
         dispatch({
             type: 'SET_SNACKBAR',
             snackBar: snackBar.filter(e => e.id !== id),
