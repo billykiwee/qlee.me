@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
 import Articles from './components/Articles';
@@ -14,13 +14,18 @@ import List from './components/List';
 
 export default function Dashboard({ props }) {
 
-    const { auth, user, snackBar, popUp } = useStateProps()
+    const { auth, user, snackBar } = useStateProps()
     
     const User = user?.profil
     const UserLinks = user?.links?.links
 
     const [Error, setError] = useState('')
 
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+    
 
     if (!auth) return <Login />
     return (
