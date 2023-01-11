@@ -16,7 +16,6 @@ export function EditLink(props) {
             valid     : () => editShortLink(props)
             .then(e=> {
                 snackBar.add({
-                    id     : UniqueID('m-', 5),
                     text   : 'Modifications enregistrées 🎉',
                     subtext: 'Le lien court à bien été modifié',
                     status : 'success'
@@ -37,7 +36,6 @@ export function EditLink(props) {
         seteditLink({})
     
         snackBar.add({
-            id     : UniqueID('m-', 5),
             text   : 'Modifications enregistrées 🎉',
             subtext: 'Le lien à bien été modifié',
             status : 'success'

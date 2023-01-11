@@ -11,12 +11,21 @@ export function useSnackBar() {
             type: 'SET_SNACKBAR',
             snackBar: [
                 ...snackBar,
-                { id: UniqueID('sb'), ...content },
+                { id: UniqueID('sb', 4), ...content },
             ]
         })
     }
 
     const remove = (id) => {
+
+        if (!id) {
+            dispatch({
+                type: 'SET_SNACKBAR',
+                snackBar: snackBar.shift(),
+            })
+        }
+
+        else
         dispatch({
             type: 'SET_SNACKBAR',
             snackBar: snackBar.filter(e => e.id !== id),

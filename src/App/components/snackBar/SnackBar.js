@@ -14,7 +14,11 @@ export function SnackBar() {
         
         el.classList.add('out')
 
-        el.addEventListener('transitionend', e=> {
+       /*  el.addEventListener('transitionend', e=> {
+            remove(id)
+        }) */
+
+        setTimeout(e=> {
             remove(id)
         })
     }
@@ -23,12 +27,11 @@ export function SnackBar() {
 
         setInterval(e=> {
 
-            deleteData(snackBar[0].id)
+            deleteData(snackBar[0]?.id)
     
         }, 5000) 
 
-        return () => snackBar
-    }, [snackBar, remove])
+    }, [snackBar])
         
     console.log(snackBar);
 
@@ -67,7 +70,7 @@ export function SnackBar() {
                                 </div>
                             </div>
                             <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)} id={'btn-delete-' + id} >
+                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)} >
                                     <span className='f-s-16 c-black'>OK</span>
                                 </button>
                             </div>
