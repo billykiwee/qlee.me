@@ -15,23 +15,18 @@ export function SnackBar() {
         
         el.classList.add('out')
 
-        el.ontransitionend = () => remove(id)
+        setTimeout(e=> {
+            remove(id)
+        }, 400)
 
     }
 
     useEffect(() => {
         if (!snackBar.length) return
     
-
         const timeoutId = setTimeout(() => {
-
-            const el = document.querySelector('#' + snackBar[0].id)
-        
-            el.classList.add('out')
-    
-            el.ontransitionend = () => remove(snackBar[0].id)
-
-        }, 3000)
+            deleteData(snackBar[0].id)
+        }, 5000)
     
         return () => clearTimeout(timeoutId)
     }, [snackBar])

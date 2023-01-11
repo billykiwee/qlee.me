@@ -1092,7 +1092,6 @@ input[type=number] {
     position: fixed;
     z-index: 9;
     left: 1rem;
-    right: 1rem;
 }
 
 .snackbar.in {
