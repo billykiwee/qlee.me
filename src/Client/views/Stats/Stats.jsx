@@ -166,7 +166,7 @@ export default function Stats() {
                             filter,
                             LinkID,
                             InputSearch,
-                            setShowStat,
+                            ShowStat,
                             UserLinks,
                             checkFilter,
                             setMsg,

@@ -9,20 +9,16 @@ export function SnackBar() {
 
     function deleteData(id) {
 
-        if (!id) return 
-
-        const el = document.querySelector('#' + id)
-        
+        if (!id) return;
+        const el = document.querySelector(`#${id}`);
         el.classList.add('out')
+        const transitionDuration = document.querySelector('.out').style.animation
 
-        el.addEventListener('transitionend', onTransitionEnd);
-
-        function onTransitionEnd(event) {
-            if (event.propertyName === 'opacity' && event.target.id === id) {
-                el.removeEventListener('transitionend', onTransitionEnd);
-                remove(id);
-            }
-        }
+        console.log(transitionDuration);
+       /*  el.classList.add('out');
+        setTimeout(() => {
+            remove(id);
+        }, parseFloat(transitionDuration) * 1000); */
     }
 
     useEffect(() => {

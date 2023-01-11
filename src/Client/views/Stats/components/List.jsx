@@ -5,12 +5,13 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
 import { getHostName } from '../../../lib/getHostName'
 import { DeleteLink } from '../../Links/functions/Delete'
+import { useStateProps } from '../../../../App/provider/ContextProvider'
 
 
 export default function List({props}) {
 
 
-    const { LinkID, InputSearch, setShowStat, UserLinks, checkFilter, setMsg, popUp, snackBar } = props
+    const { LinkID, InputSearch, ShowStat, setShowStat, UserLinks, checkFilter, setMsg, popUp, snackBar } = props
 
     const history = useNavigate()
     
@@ -36,6 +37,8 @@ export default function List({props}) {
         })
     )
 
+    const { stats } = useStateProps()
+    const linkStatViews = (LinkID) => stats.filter(e=> e.LinkID === LinkID).length
 
 
     return (
@@ -81,7 +84,7 @@ export default function List({props}) {
                                         <div className='display gap-1rem'>
                                             <div className='display gap-04 opacity'>
                                                 <EyeIcon width={16} />
-                                                <small>{link.views}</small>
+                                                <small>{linkStatViews(link.id)}</small>
                                             </div>
                                         </div>
                                     </div>
