@@ -9,16 +9,15 @@ export function SnackBar() {
 
     function deleteData(id) {
 
-        if (!id) return;
-        const el = document.querySelector(`#${id}`);
-        el.classList.add('out')
-        const transitionDuration = document.querySelector('.out').style.animation
+        if (!id) return
 
-        console.log(transitionDuration);
-       /*  el.classList.add('out');
-        setTimeout(() => {
-            remove(id);
-        }, parseFloat(transitionDuration) * 1000); */
+        const el = document.querySelector(`#${id}`)
+        el.classList.add('out')
+
+        const elAnimation = document.querySelector('.out')
+        const animationDuration = window.getComputedStyle(elAnimation).animationDuration
+
+        setTimeout(() => remove(id), parseFloat(animationDuration) * 1000)
     }
 
     useEffect(() => {

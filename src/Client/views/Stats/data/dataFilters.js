@@ -19,6 +19,21 @@ export const dataFilter = (LinkStat) => {
     const countPerformance = performance.length && ((performance.reduce((x,y) => x + y) / performance.length / 1000)).toFixed(2) + 's'
 
 
+    const data = {
+        clics :  LinkStat.length,
+        device: {
+            filter: LinkStat.map(e=> e.device),
+            count : () => countBy(data.device)
+        },
+        reference: {
+            filter: LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin),
+            count : () => countBy(data.reference)
+        },
+    }
+
+   console.log( data.count);
+
+
     return {
         clics       : views,
         device      : Object.values(countByDevice),
