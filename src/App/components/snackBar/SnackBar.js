@@ -15,10 +15,14 @@ export function SnackBar() {
         
         el.classList.add('out')
 
-        setTimeout(e=> {
-            remove(id)
-        }, 400)
+        el.addEventListener('transitionend', onTransitionEnd);
 
+        function onTransitionEnd(event) {
+            if (event.propertyName === 'opacity' && event.target.id === id) {
+                el.removeEventListener('transitionend', onTransitionEnd);
+                remove(id);
+            }
+        }
     }
 
     useEffect(() => {
