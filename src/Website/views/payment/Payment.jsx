@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import Main from '../../App/components/Main';
+import Main from '../../../App/components/Main';
 import { Link, useParams } from 'react-router-dom'
-import { useStateValue } from '../../App/provider/StateProvider'
-import { db } from '../../App/database/firebase'
-import formatCurrency from '../../App/utils/formatCurrency'
-import UniqueID from '../../App/utils/uniqueID'
+import { useStateValue } from '../../../App/provider/StateProvider'
+import { db } from '../../../App/database/firebase'
+import formatCurrency from '../../../App/utils/formatCurrency'
+import UniqueID from '../../../App/utils/uniqueID'
 import { serverTimestamp } from 'firebase/firestore'
 import { CardCvcElement, CardExpiryElement, CardNumberElement, Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from 'axios'
-import Messages from '../../App/utils/Messages';
+import Messages from '../../../App/utils/Messages';
 import PhoneInput from 'react-phone-input-2'
 import { loadStripe } from '@stripe/stripe-js';
-import { plans } from '../../Admin/settings/plans';
+import { plans } from '../../../Admin/settings/plans';
+import CheckoutForm from './components/CheckoutFrom';
 
 
 
 export function Stripe({planID}) {
 
-
+/* 
     const [MSG, setMSG] = useState({})
 
     const orderID = 'order-' + UniqueID()
@@ -420,6 +421,11 @@ export function Stripe({planID}) {
             </div>
 
         </form>
+    ) */
+
+
+    return (
+        <CheckoutForm />
     )
 }
 

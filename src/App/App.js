@@ -13,7 +13,7 @@ import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Pricing/Pricing'
 import Stats from '../Client/views/Stats/Stats'
 import Redirection from '../Client/Redirection.jsx'
-import Payment from '../Website/views/Payment'
+import Payment from '../Website/views/payment/Payment'
 import LinkInBio from '../Client/views/LinkInBio/LinkInBio'
 import Profil from '../Client/views/Profil/Profil'
 import Terms from '../Website/views/Terms/Terms'
@@ -24,23 +24,23 @@ import Popup from './components/popUp/Popup'
 
 export default function App() {
 
-    const router = {
-        init          : { path : '/*', element : <Page404 /> },
-        page404       : { path : '/page404', element : <Page404 /> },
-        home          : { path : '/', element : <Home /> },
-        dashboard     : { path : '/dashboard', element : <Dashboard /> },
-        edit          : { path : '/edit/:LinkID', element : <Edit /> },
-        redirection   : { path : '/:LinkID', element : <Redirection /> },
-        login         : { path : '/login', element : <Login /> },
-        pricing       : { path : '/pricing', element : <Pricing /> },
-        stats         : { path : '/stats', element : <Stats /> },
-        statsByLink   : { path : '/stats/:LinkID', element : <Stats /> },
-        payment       : { path : '/payment/:plan', element : <Payment /> },
-        linkinbio     : { path : '/@:userName', element : <LinkInBio /> },
-        edit_linkinbio: { path : '/edit/@:userName', element : <EditLinkInBio /> },
-        profil        : { path : '/profil', element : <Profil /> },
-        terms         : { path : '/terms', element : <Terms /> },
-    }
+    const router = [
+        { path : '/*', element : <Page404 /> },
+        { path : '/page404', element : <Page404 /> },
+        { path : '/', element : <Home /> },
+        { path : '/dashboard', element : <Dashboard /> },
+        { path : '/edit/:LinkID', element : <Edit /> },
+        { path : '/:LinkID', element : <Redirection /> },
+        { path : '/login', element : <Login /> },
+        { path : '/pricing', element : <Pricing /> },
+        { path : '/stats', element : <Stats /> },
+        { path : '/stats/:LinkID', element : <Stats /> },
+        { path : '/payment/:plan', element : <Payment /> },
+        { path : '/@:userName', element : <LinkInBio /> },
+        { path : '/edit/@:userName', element : <EditLinkInBio /> },
+        { path : '/profil', element : <Profil /> },
+        { path : '/terms', element : <Terms /> },
+    ]
 
     return (
         <BrowserRouter>
@@ -49,7 +49,7 @@ export default function App() {
                 <Popup />
                 <Routes>
                     {
-                        Object.values(router).map((route, i) => {
+                        router.map((route, i) => {
                             return <Route key={i} path={route.path} exact element={route.element} />
                         })
                     }
