@@ -1,7 +1,7 @@
 import { ArrowsPointingOutIcon, ArrowUpRightIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import Background from './components/Background'
 import { Head } from './components/Head'
@@ -17,7 +17,7 @@ export default function LinkInBio({ userView }) {
 
     const { userName } = useParams()
 
-    const { user, header } = useStateProps()
+    const { user } = useStateProps()
 
     const User = user?.profil
     const Links = user?.link_in_bio?.links
@@ -29,8 +29,6 @@ export default function LinkInBio({ userView }) {
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
-
-        header(false)
     }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
@@ -51,6 +49,11 @@ export default function LinkInBio({ userView }) {
 
     }, [openSet])
 
+
+    const location = useLocation()
+    useEffect(e=> {
+        if (!userView) document.querySelector('header')?.remove()
+    }, [location])
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID

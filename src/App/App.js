@@ -20,8 +20,6 @@ import Terms from '../Website/views/Terms/Terms'
 import { EditLinkInBio } from '../Client/views/LinkInBio/views/Edit/Edit'
 import { SnackBar } from './components/snackBar/SnackBar'
 import Popup from './components/popUp/Popup'
-import { useStateProps } from './provider/ContextProvider'
-import { useStateValue } from './provider/StateProvider'
 
 
 export default function App() {
@@ -44,12 +42,11 @@ export default function App() {
         { path : '/terms', element : <Terms /> },
     ]
 
-    const [{header}] = useStateValue()
 
 
     return (
         <BrowserRouter>
-            <Header active={header} />
+            <Header active/>
                 <SnackBar />
                 <Popup />
                 <Routes>
@@ -60,7 +57,7 @@ export default function App() {
                     }
                 </Routes>
             <Footer />
-      </BrowserRouter>
+        </BrowserRouter>
     )
 
 }

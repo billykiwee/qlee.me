@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import Main from '../../../../../App/components/Main'
 import { SwitchInput } from '../../../../../App/components/Switch'
 import { db } from '../../../../../App/database/firebase'
@@ -27,6 +27,11 @@ export function EditLinkInBio() {
             asIcon : data.checked
         })
     }
+
+    const location = useLocation()
+    useEffect(e=> {
+            document.querySelector('header').style.display = 'block'
+    }, [location])
 
     return (
         <Main>

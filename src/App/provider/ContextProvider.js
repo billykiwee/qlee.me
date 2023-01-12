@@ -5,6 +5,7 @@ import { useFetchLinks } from "../../Client/data/user/links"
 import { useFetchUsers } from "../../Client/data/users"
 import { usePopUp } from "../components/popUp/reducer/usePopUp"
 import { useSnackBar } from "../components/snackBar/reducer/useSnackBar"
+import { useStateValue } from "./StateProvider"
 
 
 export const PropsContext = createContext({})
@@ -12,6 +13,7 @@ export const PropsContext = createContext({})
 export const PropsProvider = ({ children }) => {
 
     const user = useGetAuth()
+    const [{header}, dispatch] = useStateValue()
 
     const props = {
         auth: user,
@@ -32,7 +34,10 @@ export const PropsProvider = ({ children }) => {
         link_in_bio: useFetchLinks(),
         snackBar   : useSnackBar(),
         popUp      : usePopUp(),
-        header     : (state) => state
+        header     : (state) => dispatch({
+            type : 'SET_HEADER',
+            header: state
+        })
     }
 
     return (

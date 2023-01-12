@@ -15,9 +15,6 @@ export default function Header({ active }) {
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
     const width = GetWidth()
 
-    console.log(active);
-
-    if (active)
     if (!IsLinkInBio())
     return (
         <header className='p-1 white shadow' >

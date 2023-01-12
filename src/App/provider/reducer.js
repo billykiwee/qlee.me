@@ -2,7 +2,6 @@ export const initialState = {
     user    : null,
     snackBar: [],
     popUp   : {},
-    header  : null,
 }
 
 const reducer = (state, action) => {
@@ -23,12 +22,6 @@ const reducer = (state, action) => {
         case 'SET_POPUP' : return {
             ...state,
             popUp : action.popUp
-        }
-
-        case 'SET_HEADER' : return {
-            ...state,
-            header : action.header,
-            
         }
 
         default : return state
