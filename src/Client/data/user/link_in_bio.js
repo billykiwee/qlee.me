@@ -4,7 +4,7 @@ import { db } from '../../../App/database/firebase'
 
 export function useFetchLinkInBio() {
 
-    const [linksData, setLinksData] = useState([])
+    const [linksData, setLinksData] = useState({})
 
     useEffect(() => {
 

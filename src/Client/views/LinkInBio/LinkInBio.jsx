@@ -25,12 +25,51 @@ export default function LinkInBio({ userView }) {
     const [LinkInBioLinks, setLinkInBioLinks] = useState([])
     
 
-    const Settings = () => {
-        const { background, blocks, menu, text, colorBtn, linkAsIcon } = link_in_bio
-        return { background, blocks, menu, text, colorBtn, linkAsIcon }
+    const link_in_bio_Settings = () => {
+
+        if (!Object.values(link_in_bio).length) return {}
+
+        const { header, background, blocks, menu } = link_in_bio 
+
+        const settings = {
+            header : {
+                description : {
+                    color     : '',
+                    fontFamily: '',
+                    fontSize  : 0,
+                    fontWeight: 0,
+                    text      : '',
+                },
+                title : {
+                    color     : '',
+                    fontFamily: '',
+                    fontSize  : 0,
+                    fontWeight: 0,
+                }
+            },
+            background: {
+                color: '',
+                img  : {
+                    url : '',
+                    blur: 0,
+                }
+            }, 
+            blocks: {
+                color    : '',
+                icon     : '',
+                radius   : 0,
+                textColor: '',
+                colorBtn : '',
+            }, 
+            menu: false
+        }
+
+        return { header, background, blocks, menu }
     }
 
-    console.log(Settings());
+    const Settings = link_in_bio_Settings()
+
+
 
 
     const link_in_bio_Links = links
@@ -65,16 +104,16 @@ export default function LinkInBio({ userView }) {
 
 
 
-  /*   if (User?.email)
+    if (User?.email)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
             {
                 !userView &&
                 <Background 
-                    color = {background?.color}
-                    img   = {background?.img?.url}
-                    blur  = {background?.img?.blur}
+                    color = {Settings.background.color}
+                    img   = {Settings.background.img?.url}
+                    blur  = {Settings.background.img?.blur}
                 />
             }
 
@@ -99,7 +138,7 @@ export default function LinkInBio({ userView }) {
                             </div>
                         }
 
-                        <div className='grid gap-1rem' style={{ fontFamily: `${text?.fontFamily}` }} >  
+                        <div className='grid gap-1rem' style={{ fontFamily: `${Settings.text?.fontFamily}` }} >  
                             
                             <Head
                                 props={{
@@ -151,7 +190,7 @@ export default function LinkInBio({ userView }) {
                 </DragDropContext>
             </div>
         </div>
-    ) */
+    )
     
 }
 
