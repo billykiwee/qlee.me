@@ -14,6 +14,7 @@ export const onDragEndLinkInBio = (result, UserLinks, setUserLinks) => {
     if (!destination) return
 
     const newItems = reorderList(UserLinks, source.index, destination.index)
+    console.log(newItems);
     setUserLinks(newItems)
     
     getPosition() 

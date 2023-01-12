@@ -1,7 +1,8 @@
 
 export const settings = (link_in_bio) => {
-    if (!Object.values(link_in_bio).length) return
-    
+
+    if (!Object.values(link_in_bio).length) return {}
+
     const { header, background, blocks, text, menu } = link_in_bio 
 
     const Settings = {

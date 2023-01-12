@@ -20,24 +20,22 @@ export default function LinkInBio({ userView, username }) {
     const { links, link_in_bio } = useStateProps()
 
     const User = useGetUser(link_in_bio?.user)
-    const linkInBio = link_in_bio
     
-    const Settings = settings(linkInBio)
     
-    const [LinkInBioLinks, setLinkInBioLinks] = useState([])
-
     const link_in_bio_Links = links
     .filter(e=> e.user === link_in_bio?.user)
     .filter(e=> e.linkInBio)
-
-
+    
+    const Settings = settings(link_in_bio)
+    
+    const [LinkInBioLinks, setLinkInBioLinks] = useState([])
     useEffect(e=> {
         setLinkInBioLinks(link_in_bio_Links)
     }, [User])
 
+
+
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
-    
-    
 
     const [openSet, setOpenSet] = useState('')
     useEffect(e=> {
@@ -50,6 +48,7 @@ export default function LinkInBio({ userView, username }) {
 
     }, [openSet])
 
+    
 
     const location = useLocation()
     useEffect(e=> {
@@ -65,9 +64,9 @@ export default function LinkInBio({ userView, username }) {
             {
                 !userView &&
                 <Background 
-                    color = {Settings.background.color}
-                    img   = {Settings.background.img?.url}
-                    blur  = {Settings.background.img?.blur}
+                    color = {Settings?.background?.color}
+                    img   = {Settings?.background?.img?.url}
+                    blur  = {Settings?.background?.img?.blur}
                 />
             }
 
@@ -92,14 +91,14 @@ export default function LinkInBio({ userView, username }) {
                             </div>
                         }
 
-                        <div className='grid gap-1rem' style={{ fontFamily: `${Settings.text?.fontFamily}` }} >  
+                        <div className='grid gap-1rem' style={{ fontFamily: `${Settings?.text?.fontFamily}` }} >  
                             
                             <Head
                                 props={{
                                     userView, 
                                     User, 
                                     LinkInBioLinks,
-                                    linkInBio
+                                    link_in_bio
                                 }} 
                             />
                             
@@ -109,28 +108,37 @@ export default function LinkInBio({ userView, username }) {
                                     <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
                                         {
 
-                                            link_in_bio_Links
-                                            .sort((a,b)=> a.position - b.position)
+                                            LinkInBioLinks
                                             .map((link, i) => {
                                                 return (
                                                     <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
                                                         {(provided)=> (
                                                             <div 
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                                className={link.id}
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            className={link.id}
                                                             >
                                                                 {
                                                                     !userView 
                                                                     ? <Read props={{ link, blocks: Settings.blocks }} />
-                                                                    : <Edit props={{ link, blocks: Settings.blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
+                                                                    : <Edit 
+                                                                        props={{ 
+                                                                            link, 
+                                                                            blocks: Settings.blocks, 
+                                                                            openSet, 
+                                                                            setOpenSet, 
+                                                                            isDragDisabled, 
+                                                                            setIsDragDisabled 
+                                                                        }} 
+                                                                    />
                                                                 }
                                                             </div>
                                                         )}
                                                     </Draggable>
                                                 )
                                             })
+                                            .sort((a,b)=> a.position - b.position)
                                         }
                                     </div>
                                 )}

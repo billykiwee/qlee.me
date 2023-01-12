@@ -4,7 +4,7 @@ import { uploadPhoto } from "../../Profil/functions/uploadPhoto"
 
 export function Head({props}) {
 
-    const { userView, User, LinkInBioLinks, linkInBio } = props
+    const { userView, User, LinkInBioLinks, link_in_bio } = props
 
     return (
         <div className='grid gap-1rem p-1'>
@@ -43,7 +43,7 @@ export function Head({props}) {
                         </span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{linkInBio.description}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{link_in_bio.description}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>
