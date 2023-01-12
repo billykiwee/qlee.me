@@ -7,7 +7,7 @@ import { Menu } from './components/menu'
 import { useStateProps } from '../../provider/ContextProvider'
 
 
-export default function Header() {
+export default function Header({ active }) {
 
     const User = useStateProps().user.profil
 
@@ -15,7 +15,9 @@ export default function Header() {
     const [theme, setTheme] = useState(localStorage.getItem('theme'))
     const width = GetWidth()
 
+    console.log(active);
 
+    if (active)
     if (!IsLinkInBio())
     return (
         <header className='p-1 white shadow' >

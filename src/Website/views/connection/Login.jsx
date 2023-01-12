@@ -34,31 +34,9 @@ export default function Login() {
         .then(data => {
             setUnsplashImg(data)
         })
-
-
-
     }, [])
 
-
-    const getBase64FromUrl = async (url) => {
-
-        const data = await fetch(url)
-        const blob = await data.blob()
-
-        return new Promise((resolve) => {
-            const reader = new FileReader()
-            reader.readAsDataURL(blob)
-            reader.onloadend = () => {
-                const base64data = reader.result   
-                resolve(base64data)
-            }
-        })
-    }
-
-    const cors = 'cors-anywhere.herokuapp.com'
-      
-      getBase64FromUrl(cors + 'https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo').then(console.log)
-
+    
 
     if (auth) history('/dashboard')
     return (

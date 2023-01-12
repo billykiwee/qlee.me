@@ -31,7 +31,8 @@ export const PropsProvider = ({ children }) => {
         stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinks(),
         snackBar   : useSnackBar(),
-        popUp      : usePopUp()
+        popUp      : usePopUp(),
+        header     : (state) => state
     }
 
     return (

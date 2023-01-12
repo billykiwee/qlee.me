@@ -17,7 +17,7 @@ export default function LinkInBio({ userView }) {
 
     const { userName } = useParams()
 
-    const { user } = useStateProps()
+    const { user, header } = useStateProps()
 
     const User = user?.profil
     const Links = user?.link_in_bio?.links
@@ -29,7 +29,8 @@ export default function LinkInBio({ userView }) {
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
-        //document.querySelector('body').style.background = background?.color
+
+        header(false)
     }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
