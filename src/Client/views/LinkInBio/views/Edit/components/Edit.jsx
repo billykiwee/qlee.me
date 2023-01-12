@@ -12,11 +12,12 @@ export function Edit({ props }) {
         <div className='display border white border-r-1 border-b p-1 click h-2' 
             style={{
                 background  : blocks?.color,
-                borderRadius: blocks?.radius + 'px'
+                borderRadius: blocks?.radius + 'px',
+                color       : blocks.textColor
             }}
         >
             {
-                blocks?.img &&
+                blocks?.icon &&
                 <div className='display justify-c absolute'>
                     <img src={link.icon ?? getFavicon(link.url)} width={40} className='border-r-100' />
                 </div>

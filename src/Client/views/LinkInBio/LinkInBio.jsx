@@ -20,7 +20,9 @@ export default function LinkInBio({ userView, username }) {
     const { links, link_in_bio } = useStateProps()
 
     const User = useGetUser(link_in_bio?.user)
-    const Settings = settings(link_in_bio)
+    const linkInBio = link_in_bio
+    
+    const Settings = settings(linkInBio)
     
     const [LinkInBioLinks, setLinkInBioLinks] = useState([])
 
@@ -96,7 +98,8 @@ export default function LinkInBio({ userView, username }) {
                                 props={{
                                     userView, 
                                     User, 
-                                    LinkInBioLinks 
+                                    LinkInBioLinks,
+                                    linkInBio
                                 }} 
                             />
                             

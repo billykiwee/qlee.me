@@ -7,7 +7,11 @@ export function Read({ props }) {
 
     return (
         <a href={'https://' + link.shortLink} className='relative'>
-            <div className='display border white border-r-1 border-b p-1 hover click h-2' >
+            <div className='display border white border-r-1 border-b p-1 hover click h-2' style={{
+                background  : blocks?.color,
+                borderRadius: blocks?.radius + 'px',
+                color       : blocks.textColor
+            }}>
                 {
                     blocks?.icon &&
                     <div className='display justify-c absolute'>

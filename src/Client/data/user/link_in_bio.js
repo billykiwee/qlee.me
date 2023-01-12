@@ -15,7 +15,13 @@ export function useFetchLinkInBio() {
     
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
 
-            const userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('/')[1])[0]
+            let userLinks
+
+            if (window.location.pathname.includes('edit/@')) {
+                userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('edit/')[1])[0]
+            }
+            else userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('/')[1])[0]
+
     
             setLinksData(userLinks)
         })

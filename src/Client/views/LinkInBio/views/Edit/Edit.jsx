@@ -146,7 +146,7 @@ export function EditLinkInBio() {
                     
                 </div>
                 <div>
-                    <div className='relative overflow-hidden border-r-1'>
+                    <div className='relative overflow-hidden border-r-1 w-100p'>
                         <div style={{
                             backgroundImage   : !background?.color && `url(${background?.img?.url}`,
                             filter            : `blur(${background?.img?.blur}px)`,
@@ -158,7 +158,7 @@ export function EditLinkInBio() {
                             backgroundColor   : background?.color
                         }} />
                         
-                        <div className='border border-r-1 shadow' style={{background: background?.color}}>
+                        <div className='border border-r-1 shadow w-100p p-b-2 p-t-2' style={{background: background?.color}}>
                             <LinkInBio userView={User} links={UserLinks} username={userName} /> 
                         </div>
                     </div>
