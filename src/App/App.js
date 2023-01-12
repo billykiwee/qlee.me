@@ -46,17 +46,21 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <Header active/>
                 <SnackBar />
                 <Popup />
                 <Routes>
                     {
                         router.map((route, i) => {
-                            return <Route key={i} path={route.path} exact element={route.element} />
+                            return <Route key={i} path={route.path} exact element={
+                                <>
+                                    <Header active={route.path !== '/@:userName'} />
+                                    {route.element}
+                                    <Footer />
+                                </>
+                            } />
                         })
                     }
                 </Routes>
-            <Footer />
         </BrowserRouter>
     )
 

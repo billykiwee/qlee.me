@@ -37,7 +37,6 @@ export default function LinkInBio({ userView, username }) {
     useEffect(e=> {
         setLinkInBioLinks(link_in_bio_Links)
 
-        document.querySelector('body').style.background = Settings?.background?.color
     }, [User])
 
 
@@ -56,12 +55,11 @@ export default function LinkInBio({ userView, username }) {
     }, [openSet])
 
     
-    useEffect(e=> {
-        if (!userView) document.querySelector('header').style.display = 'none'
-    }, [location])
 
 
 
+
+    if (DragDropContext)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
