@@ -19,6 +19,7 @@ async function getTransactions() {
         // En-têtes pour la requête
         const headers = {
             "X-MBX-APIKEY": API_KEY,
+            "X-MBX-SIGNATURE": SECRET_KEY
         };
 
         // Envoyer la requête
@@ -33,6 +34,9 @@ async function getTransactions() {
         // Récupérer les données de la réponse
         const data = response.data;
 
+
+        console.log(data);
+
         // Exporter les données en fichier CSV
         const csv = arrayToCsv(data);
         fs.writeFileSync("transactions_history.csv", csv);
@@ -43,12 +47,5 @@ async function getTransactions() {
     }
 }
 
-function createSignature(params, secretKey) {
-    // CODE TO CREATE SIGNATURE
-}
-
-function arrayToCsv(data) {
-    // CODE TO CONVERT ARRAY TO CSV
-}
 
 getTransactions();
