@@ -34,6 +34,7 @@
     "google-maps-reviews": "^0.3.0",
     "html-to-image": "^1.11.3",
     "html2canvas": "^1.4.1",
+    "json2xls": "^0.1.2",
     "process": "^0.11.10",
     "rainbow-code": "^2.1.7",
     "react": "^18.2.0",

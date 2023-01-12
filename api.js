@@ -1,33 +1,54 @@
-const axios = require('axios');
-const fs = require('fs');
-const json2xls = require('json2xls');
+const axios = require("axios");
+const fs = require("fs");
 
-// Insérez votre clé d'API Binance ici
-const api_key = "YOUR_API_KEY";
+const API_KEY = "8mb1EiUaYo2Dv6FjiELiSzywppyq94ugPghtcrqNQz20kV2Xp5OGH1hVpoSzsoXv";
+const SECRET_KEY = "BIIizjECn18tzDkAmOkNVZU8CaPtytcONJ8lhfFrElc510MDvWi0mObMIFCCVd29";
 
-// Définir les paramètres de la requête
-const params = {
-    symbol: "BTCUSDT",
-    limit: 500
-};
+async function getTransactions() {
+    try {
+        const timestamp = Date.now();
+        const url = "https://api.binance.com/api/v3/myTrades";
 
-// Ajouter la clé d'API à la requête
-const headers = {
-    "X-MBX-APIKEY": api_key
-};
+        // Paramètres pour la requête
+        const params = {
+            symbol: "BTCUSDT",
+            limit: 500,
+            timestamp
+        };
 
-axios.get('https://api.binance.com/api/v3/myTrades', {params, headers})
-    .then(response => {
+        // En-têtes pour la requête
+        const headers = {
+            "X-MBX-APIKEY": API_KEY,
+        };
+
+        // Envoyer la requête
+        const response = await axios.get(url, { params, headers });
+
         // Vérifier si la requête a réussi
         if (response.status !== 200) {
             console.log(`Error: ${response.status}`);
             return;
         }
+
+        // Récupérer les données de la réponse
         const data = response.data;
-        const xls = json2xls(data);
-        fs.writeFileSync('transactions_binance.xlsx', xls, 'binary');
-        console.log("Les transactions Binance ont été exportées en fichier Excel avec succès.");
-    })
-    .catch(error => {
+
+        // Exporter les données en fichier CSV
+        const csv = arrayToCsv(data);
+        fs.writeFileSync("transactions_history.csv", csv);
+        console.log("L'historique des transactions a été exporté en fichier CSV avec succès.");
+
+    } catch (error) {
         console.log(error);
-    });
+    }
+}
+
+function createSignature(params, secretKey) {
+    // CODE TO CREATE SIGNATURE
+}
+
+function arrayToCsv(data) {
+    // CODE TO CONVERT ARRAY TO CSV
+}
+
+getTransactions();
