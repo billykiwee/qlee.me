@@ -17,7 +17,7 @@ export default function LinkInBio({ userView }) {
 
     const { userName } = useParams()
 
-    const { user } = useStateProps()
+    const { user, links, link_in_bio } = useStateProps()
 
     const User = user?.profil
     const Links = user?.link_in_bio?.links
@@ -26,6 +26,15 @@ export default function LinkInBio({ userView }) {
 
     let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
+
+    console.log(link_in_bio);
+
+    function getLinkInBioByUsername(username) {
+        return links.map(link=> {
+            /* link.user = '' */
+        })
+        
+    }
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
@@ -52,11 +61,13 @@ export default function LinkInBio({ userView }) {
 
     const location = useLocation()
     useEffect(e=> {
-        if (!userView) document.querySelector('header')?.remove()
+        if (!userView) document.querySelector('header').style.display = 'none'
     }, [location])
 
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
+
+    if (User.email)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         

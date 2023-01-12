@@ -4,7 +4,6 @@ import { db } from '../../../App/database/firebase'
 
 export function useFetchLinks(user, type) {
 
-
     const [linksData, setLinksData] = useState([])
 
     useEffect(() => {

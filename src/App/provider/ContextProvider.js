@@ -2,6 +2,7 @@ import { createContext, useContext } from "react"
 import useGetAuth from "../../Client/data/auth/auth"
 import { useFetchAllLinks, useFetchStatsLinks } from "../../Client/data/links"
 import { useFetchLinks } from "../../Client/data/user/links"
+import { useFetchLinkInBio } from "../../Client/data/user/link_in_bio"
 import { useFetchUsers } from "../../Client/data/users"
 import { usePopUp } from "../components/popUp/reducer/usePopUp"
 import { useSnackBar } from "../components/snackBar/reducer/useSnackBar"
@@ -31,7 +32,7 @@ export const PropsProvider = ({ children }) => {
         users      : useFetchUsers(),
         links      : useFetchAllLinks(),
         stats      : useFetchStatsLinks(),
-        link_in_bio: useFetchLinks(),
+        link_in_bio: useFetchLinkInBio(),
         snackBar   : useSnackBar(),
         popUp      : usePopUp(),
         header     : (state) => dispatch({
