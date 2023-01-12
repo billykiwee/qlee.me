@@ -34,36 +34,48 @@ export default function Login() {
         })
 
 
-        uploadImageFromURL('https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo', 'billyturpin642@gmail.com')
+        uploadGoogleProfilePicture('https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo')
     }, [])
 
 
 
-    function uploadImageFromURL(url, email) {
-        try {
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-            fetch(proxyUrl + url)
-            .then(response => response.blob())
-            .then(async blob => {
-                const file = new File([blob], 'image.jpg')
-                const path = `users/photoURL/${email}`
-                
-                const fileRef = ref(storage, path)
+    const storageRef = storage
+    const databaseRef =db
+    
+    function uploadGoogleProfilePicture(email) {
 
-                await uploadBytesResumable(fileRef, file)
-
-                const downloadUrl = await getDownloadURL(ref(storage, path))
-
-                console.log(downloadUrl);
-                return downloadUrl
-            })
-        }
-        catch (error) {
-            console.log(error);
-        }
+        var userRef = db.ref("users/" + email);
+        userRef.on("value", function(snapshot) {
+            var googleProfilePicture = snapshot.val().photoURL;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', googleProfilePicture, true);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function(e) {
+                if (this.status === 200) {
+                    var uInt8Array = new Uint8Array(this.response);
+                    var i = uInt8Array.length;
+                    var binaryString = new Array(i);
+                    while (i--)
+                    {
+                        binaryString[i] = String.fromCharCode(uInt8Array[i]);
+                    }
+                    var data = binaryString.join('');
+                    var file = new File([uInt8Array], email + '.jpg', {type: 'image/jpeg'});
+                    var fileRef = storageRef.child('users/photoURL/' + email);
+                    fileRef.put(file).then(function(snapshot) {
+                        fileRef.getDownloadURL().then(function(url) {
+                            var userRef = databaseRef.child('users/' + email);
+                            userRef.update({
+                                photoURL: url
+                            });
+                        });
+                    });
+                }
+            };
+            xhr.send();
+        });
     }
-
-      
+    
 
 
     if (auth) history('/dashboard')
