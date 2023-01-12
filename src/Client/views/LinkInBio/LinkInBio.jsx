@@ -25,7 +25,12 @@ export default function LinkInBio({ userView }) {
     const [LinkInBioLinks, setLinkInBioLinks] = useState([])
     
 
-    let { background, blocks, menu, text, colorBtn, linkAsIcon } = link_in_bio || {}
+    const Settings = () => {
+        const { background, blocks, menu, text, colorBtn, linkAsIcon } = link_in_bio
+        return { background, blocks, menu, text, colorBtn, linkAsIcon }
+    }
+
+    console.log(Settings());
 
 
     const link_in_bio_Links = links
@@ -60,7 +65,7 @@ export default function LinkInBio({ userView }) {
 
 
 
-    if (User?.email)
+  /*   if (User?.email)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
@@ -146,7 +151,7 @@ export default function LinkInBio({ userView }) {
                 </DragDropContext>
             </div>
         </div>
-    )
+    ) */
     
 }
 
