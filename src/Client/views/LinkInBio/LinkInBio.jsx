@@ -12,12 +12,16 @@ import { LinksAsIcon } from './views/Edit/components/LinkAsIcon'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { getUser, useGetUser } from '../../data/user/getUser'
 import { settings } from './views/Edit/settings/settings'
+import { useFetchLinkInBio } from '../../data/user/link_in_bio'
 
 
 
 export default function LinkInBio({ userView, username }) {
 
-    const { links, link_in_bio } = useStateProps()
+    const location = useLocation()
+
+    const { links } = useStateProps()
+    const link_in_bio = useFetchLinkInBio(location)
 
     const User = useGetUser(link_in_bio?.user)
     
@@ -49,8 +53,6 @@ export default function LinkInBio({ userView, username }) {
     }, [openSet])
 
     
-
-    const location = useLocation()
     useEffect(e=> {
         if (!userView) document.querySelector('header').style.display = 'none'
     }, [location])

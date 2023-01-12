@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { db } from '../../../App/database/firebase'
 
 
-export function useFetchLinkInBio() {
+export function useFetchLinkInBio(location) {
 
     const [linksData, setLinksData] = useState({})
 
@@ -15,20 +15,20 @@ export function useFetchLinkInBio() {
     
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
 
-            let userLinks
 
-            if (window.location.pathname.includes('edit/@')) {
-                userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('edit/')[1])[0]
-            }
-            else userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('/')[1])[0]
+            const pathname = location.pathname
+            const pathnameControl = (control) => pathname.split(control === 'edit' ? 'fezfezedit/' : '/')[1]
 
-    
+            console.log(pathnameControl(pathname));
+
+            const userLinks = fetchedLinks.filter(e=> e.id === pathnameControl(pathname))[0]
+
             setLinksData(userLinks)
         })
     
         return () => data()
 
-    }, [window.location.href])
+    }, [location])
   
     return linksData
 }
