@@ -1,21 +1,21 @@
 import { db } from "../../../../App/database/firebase"
 
 
-export const addToLinkInBio = (isCheck, LinkID, user, linkData) => {
+export const addToLinkInBio = (isCheck, LinkID, user, link_in_bio_Links, linkData) => {
 
     const ref = db.collection('link-in-bio')
     .doc(user.link_in_bio)
-    .collection('links')
 
     db
     .collection('links')
     .doc(LinkID)
     .update({ linkInBio: isCheck })
 
+    
     if (isCheck) {
-        ref.doc(LinkID).set(linkData.filter(l=> { l.id, l.url, l.shortLink, l.icon, l.name }))
+
+        ref
+        .update({ links : [...link_in_bio_Links.map(e=> e.id), linkData.id]})
     }
-    else {
-        ref.doc(LinkID).delete()
-    }
+
 }
