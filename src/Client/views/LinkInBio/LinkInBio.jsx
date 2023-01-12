@@ -1,4 +1,4 @@
-import { ArrowsPointingOutIcon, ArrowUpRightIcon, ChevronRightIcon, EllipsisHorizontalIcon, EnvelopeOpenIcon, HandRaisedIcon, PencilIcon, PencilSquareIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { ArrowUpRightIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Link, useLocation, useParams } from 'react-router-dom'
@@ -11,66 +11,18 @@ import { Edit } from './views/Edit/components/Edit'
 import { LinksAsIcon } from './views/Edit/components/LinkAsIcon'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { getUser, useGetUser } from '../../data/user/getUser'
+import { settings } from './views/Edit/settings/settings'
 
 
 
-export default function LinkInBio({ userView }) {
-
-    const { userName } = useParams()
+export default function LinkInBio({ userView, username }) {
 
     const { links, link_in_bio } = useStateProps()
 
     const User = useGetUser(link_in_bio?.user)
-
-    const [LinkInBioLinks, setLinkInBioLinks] = useState([])
+    const Settings = settings(link_in_bio)
     
-
-    const link_in_bio_Settings = () => {
-
-        if (!Object.values(link_in_bio).length) return {}
-
-        const { header, background, blocks, menu } = link_in_bio 
-
-        const settings = {
-            header : {
-                description : {
-                    color     : '',
-                    fontFamily: '',
-                    fontSize  : 0,
-                    fontWeight: 0,
-                    text      : '',
-                },
-                title : {
-                    color     : '',
-                    fontFamily: '',
-                    fontSize  : 0,
-                    fontWeight: 0,
-                }
-            },
-            background: {
-                color: '',
-                img  : {
-                    url : '',
-                    blur: 0,
-                }
-            }, 
-            blocks: {
-                color    : '',
-                icon     : '',
-                radius   : 0,
-                textColor: '',
-                colorBtn : '',
-            }, 
-            menu: false
-        }
-
-        return { header, background, blocks, menu }
-    }
-
-    const Settings = link_in_bio_Settings()
-
-
-
+    const [LinkInBioLinks, setLinkInBioLinks] = useState([])
 
     const link_in_bio_Links = links
     .filter(e=> e.user === link_in_bio?.user)
@@ -130,7 +82,7 @@ export default function LinkInBio({ userView }) {
                         {
                             userView &&
                             <div className='zi-2 display justify-e' style={{ position: 'absolute', right: '2rem', top: '2rem' }}>
-                                <Link to={'/@' + userName}>
+                                <Link to={'/@' + username}>
                                     <button className='display hover border-r-100 border h-3 w-3 shadow' style={{background: 'white'}}>
                                         <ArrowUpRightIcon width={20} color='black' />
                                     </button>
@@ -168,8 +120,8 @@ export default function LinkInBio({ userView }) {
                                                             >
                                                                 {
                                                                     !userView 
-                                                                    ? <Read props={{ link, blocks }} />
-                                                                    : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
+                                                                    ? <Read props={{ link, blocks: Settings.blocks }} />
+                                                                    : <Edit props={{ link, blocks: Settings.blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
                                                                 }
                                                             </div>
                                                         )}
@@ -183,7 +135,7 @@ export default function LinkInBio({ userView }) {
                         </div>
                                 
                         {
-                            userView && <Footer />
+                            !userView && <Footer />
                         }
 
                     </div>

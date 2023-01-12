@@ -30,7 +30,7 @@ export function EditLinkInBio() {
 
     const location = useLocation()
     useEffect(e=> {
-            document.querySelector('header').style.display = 'block'
+        document.querySelector('header').style.display = 'block'
     }, [location])
 
     return (
@@ -159,7 +159,7 @@ export function EditLinkInBio() {
                         }} />
                         
                         <div className='border border-r-1 shadow' style={{background: background?.color}}>
-                            <LinkInBio userView={User} links={UserLinks} /> 
+                            <LinkInBio userView={User} links={UserLinks} username={userName} /> 
                         </div>
                     </div>
                 </div>
