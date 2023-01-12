@@ -33,6 +33,8 @@ export function EditLinkInBio() {
         document.querySelector('header').style.display = 'block'
     }, [location])
 
+
+
     return (
         <Main>
             <div className='grid blocks gap-2rem' >
@@ -110,8 +112,8 @@ export function EditLinkInBio() {
 
                                         <div className='display justify-s-b gap'>
                                             <span>Logo</span>
-                                            <input type='checkbox' checked={blocks?.img} onChange={e=> {
-                                                db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.img'] : e.target.checked } )
+                                            <input type='checkbox' checked={blocks?.icon} onChange={e=> {
+                                                db.collection('link-in-bio').doc('@' + userName).update({ ['blocks.icon'] : e.target.checked } )
                                             }}  />
                                         </div>
                                     </div>
