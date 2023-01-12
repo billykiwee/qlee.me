@@ -27,7 +27,6 @@ export default function LinkInBio({ userView }) {
     let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
 
-
     const link_in_bio_Links = links
     .filter(e=> e.user === link_in_bio?.user)
     .filter(e=> e.linkInBio)
@@ -41,9 +40,6 @@ export default function LinkInBio({ userView }) {
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
     
     
-    const ifUserIsOwner = LinkInBioLinks
-    .some(e=> e.user === User.email) && userView?.email !== User.email
-
 
     const [openSet, setOpenSet] = useState('')
     useEffect(e=> {
@@ -63,7 +59,6 @@ export default function LinkInBio({ userView }) {
     }, [location])
 
 
-    //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
 
 
     return (
@@ -114,30 +109,36 @@ export default function LinkInBio({ userView }) {
 
                                     <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
                                         {
-                                            link_in_bio_Links
-                                            .filter(e=> !e.asIcon)
-                                            .map((link, i)=> {
+                                            links
+                                            .map((link, i) =>
 
-                                                return (
-                                                    <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
-                                                        {(provided)=> (
-                                                            <div 
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                                className={link.id}
-                                                            >
-                                                                {
-                                                                    !userView 
-                                                                    ? <Read props={{ link, blocks }} />
-                                                                    : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
-                                                                }
-                                                            </div>
-                                                        )}
-                                                    </Draggable>
-                                                )
-                                            })
-                                            .sort((a,b)=> a.position - b.position)
+                                                link_in_bio_Links
+                                                .map(lIb_Links => {
+
+                                                    if (lIb_Links.id === link.id) {
+
+                                                        return (
+                                                            <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
+                                                                {(provided)=> (
+                                                                    <div 
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                        className={link.id}
+                                                                    >
+                                                                        {
+                                                                            !userView 
+                                                                            ? <Read props={{ link, blocks }} />
+                                                                            : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
+                                                                        }
+                                                                    </div>
+                                                                )}
+                                                            </Draggable>
+                                                        )
+                                                    }
+                                                })
+                                                .sort((a,b)=> a.position - b.position)
+                                            )
 
                                         }
                                     </div>
@@ -146,7 +147,7 @@ export default function LinkInBio({ userView }) {
                         </div>
                                 
                         {
-                            ifUserIsOwner && <Footer />
+                            userView && <Footer />
                         }
 
                     </div>

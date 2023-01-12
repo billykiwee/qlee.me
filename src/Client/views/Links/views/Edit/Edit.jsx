@@ -15,7 +15,8 @@ import { IsLinkInBio } from '../../lib/IsLinkInBio'
 import { EditLink } from '../../functions/Edit'
 import Main from '../../../../../App/components/Main'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
-import { addToLinkInBio } from '../../../LinkInBio/functions/add'
+import { addtoLinkInBio } from '../../../LinkInBio/functions/add'
+
 
 
 export default function Edit() {
@@ -193,7 +194,7 @@ export default function Edit() {
                                     >
                                         <div className='display'>
                                             <label htmlFor='active_views' className='display gap-1rem click'>
-                                                <SwitchInput dimension={0.8} checked={Link.linkInBio ? true : false} onChange={e=> addToLinkInBio(e.target.checked, LinkID, User, UserLinks.filter(e=> e.linkInBio), Link) } id='active_views'  />
+                                                <SwitchInput dimension={0.8} checked={Link.linkInBio ? true : false} onChange={e=> addtoLinkInBio(e.target.checked, LinkID, User, UserLinks.filter(e=> e.linkInBio), Link) } id='active_views'  />
                                                 <span className='f-w-300'>Ajouter a mon link in bio</span>
                                             </label>
                                         </div>
