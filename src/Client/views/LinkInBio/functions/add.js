@@ -11,11 +11,12 @@ export const addToLinkInBio = (isCheck, LinkID, user, link_in_bio_Links, linkDat
     .doc(LinkID)
     .update({ linkInBio: isCheck })
 
-    
-    if (isCheck) {
+    const links = link_in_bio_Links.map(e=> e.id)
 
-        ref
-        .update({ links : [...link_in_bio_Links.map(e=> e.id), linkData.id]})
-    }
-
+    ref
+    .update({ 
+        links : isCheck 
+        ? [...links, linkData.id] 
+        : links.filter(id=> id !== linkData.id)
+    })
 }

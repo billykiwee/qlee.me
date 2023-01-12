@@ -4,7 +4,7 @@ import getFavicon from '../../../../../App/utils/getFavicon'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../../../lib/database/upload/uploadPhoto'
 import { ChartPieIcon, EyeIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { addToLinkInBio } from '../../lib/addToLinkInBio'
+
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
 import { formatNumber } from '../../../../../App/utils/formatNumber'
@@ -15,6 +15,7 @@ import { IsLinkInBio } from '../../lib/IsLinkInBio'
 import { EditLink } from '../../functions/Edit'
 import Main from '../../../../../App/components/Main'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
+import { addToLinkInBio } from '../../../LinkInBio/functions/add'
 
 
 export default function Edit() {
