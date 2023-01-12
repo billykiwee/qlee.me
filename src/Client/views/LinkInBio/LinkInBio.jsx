@@ -27,14 +27,12 @@ export default function LinkInBio({ userView }) {
     let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
 
-    console.log(link_in_bio);
 
-    function getLinkInBioByUsername(username) {
-        return links.map(link=> {
-            /* link.user = '' */
-        })
-        
-    }
+    const link_in_bio_Links = links
+    .filter(e=> e.user === link_in_bio?.user)
+    .filter(e=> e.linkInBio)
+    
+
 
     useEffect(e=> {
         setLinkInBioLinks(Links)
@@ -67,7 +65,7 @@ export default function LinkInBio({ userView }) {
 
     //if (ifUserIsOwner) window.location.href = '/edit/' + User?.LinkInBioID
 
-    if (User.email)
+
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
@@ -116,7 +114,7 @@ export default function LinkInBio({ userView }) {
 
                                     <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
                                         {
-                                            LinkInBioLinks
+                                            link_in_bio_Links
                                             .filter(e=> !e.asIcon)
                                             .map((link, i)=> {
 

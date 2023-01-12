@@ -1,31 +1,28 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { db } from '../../../App/database/firebase'
 
 
 export function useFetchLinkInBio() {
 
     const [linksData, setLinksData] = useState([])
-    const location = useLocation()
 
     useEffect(() => {
 
-        const data = db.collection('link_in_bio').onSnapshot(snapshot => {
+        const data = db.collection('link-in-bio').onSnapshot(snapshot => {
             if (snapshot.empty) {
                 setLinksData("no links")
             }
     
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
 
-            console.log(location.href);
-            const userLinks = fetchedLinks.filter(e=> e.id === location.href)
+            const userLinks = fetchedLinks.filter(e=> e.id === window.location.pathname.split('/')[1])[0]
     
             setLinksData(userLinks)
         })
     
         return () => data()
 
-    }, [location])
+    }, [window.location.href])
   
     return linksData
 }
