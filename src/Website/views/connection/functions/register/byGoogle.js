@@ -3,6 +3,8 @@ import { serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import { db, auth } from '../../../../../App/database/firebase'
 
+
+
 export async function byGoogle(userID, history, snackBar) {
 
     const provider = new GoogleAuthProvider()
@@ -37,3 +39,4 @@ export async function byGoogle(userID, history, snackBar) {
         history('/dashboard')
     })
 }
+

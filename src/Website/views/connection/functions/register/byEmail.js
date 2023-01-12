@@ -16,6 +16,7 @@ export function byEmail(e, userID, setMSG, history, snackBar) {
     
     const { Name, Email, Password } = loginConditions
 
+    
     if (!email.match(Email.rules.regex)) throw Email.error('Veuillez entrer un email valide')
     else Email.error('')
 
@@ -38,12 +39,13 @@ export function byEmail(e, userID, setMSG, history, snackBar) {
         .collection('users')
         .doc(email)
         .set({
-            plan    : 'FREE',
-            id      : userID,
-            name    : email.split('@')[0],
-            email   : email,
-            photoURL: generateLetterImage(email.split('')[0].toUpperCase()),
-            date    : serverTimestamp()
+            plan       : 'FREE',
+            id         : userID,
+            name       : email.split('@')[0],
+            email      : email,
+            link_in_bio: email.split('@')[0],
+            photoURL   : generateLetterImage(email.split('')[0].toUpperCase()),
+            date       : serverTimestamp()
         }) 
 
         history('/dashboard')

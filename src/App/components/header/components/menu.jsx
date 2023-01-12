@@ -6,6 +6,7 @@ export function Menu({ props }) {
 
     const { User, menu, setMenu } = props
 
+
     const list = [
         {
             name: User ? 'Mon compte' : 'Se connecter',

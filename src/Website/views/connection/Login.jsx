@@ -9,6 +9,8 @@ import { useStateProps } from '../../../App/provider/ContextProvider'
 import { byGoogle } from './functions/register/byGoogle'
 import { byEmail } from './functions/register/byEmail'
 import ConntectWidth from '../connection/components/ConnectWith'
+import { db, storage } from '../../../App/database/firebase'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export default function Login() {
 
@@ -31,7 +33,37 @@ export default function Login() {
             setUnsplashImg(data)
         })
 
+
+        uploadImageFromURL('https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo', 'billyturpin642@gmail.com')
     }, [])
+
+
+
+    function uploadImageFromURL(url, email) {
+        try {
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+            fetch(proxyUrl + url)
+            .then(response => response.blob())
+            .then(async blob => {
+                const file = new File([blob], 'image.jpg')
+                const path = `users/photoURL/${email}`
+                
+                const fileRef = ref(storage, path)
+
+                await uploadBytesResumable(fileRef, file)
+
+                const downloadUrl = await getDownloadURL(ref(storage, path))
+
+                console.log(downloadUrl);
+                return downloadUrl
+            })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+      
 
 
     if (auth) history('/dashboard')

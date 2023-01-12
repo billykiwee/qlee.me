@@ -10,7 +10,7 @@ export default function Set({ props }) {
 
     return (
         <div className='display gap'>
-            <div className='display justify-c hover border-r-100 w-2 h-2 shadow openSet' style={{background: 'white', color: 'black'}}
+            <div className='display justify-c hover border-r-100 w-2 h-2 shadow openSet' style={{ background: 'white', color: 'black' }}
                 onClick={e=> setOpenSet(openSet === '' ? link.id : link.id ) }>
                 <EllipsisHorizontalIcon width={28}  /> 
 
@@ -25,12 +25,12 @@ export default function Set({ props }) {
                 >
                     <Link to={'/edit/'+ link.id}>
                         <div className='display gap hover p-1 border-r-04 h-1'>
-                            <PencilSquareIcon width={12} />
+                            <PencilSquareIcon width={18} className='c-grey' />
                             <small>Modifier</small>
                         </div>
                     </Link>
                     <div className='display gap hover p-1 border-r-04 h-1' onClick={e=> deleteLinkFromBio(link.id) }>
-                        <TrashIcon width={12} className='c-red' />
+                        <TrashIcon width={18} className='c-red' />
                         <small>Supprimer</small>
                     </div>
                 </div>

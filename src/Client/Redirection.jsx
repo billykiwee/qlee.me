@@ -23,7 +23,6 @@ export default function Redirection() {
             const link   = await fetchLink(LinkID)
             const adress = await getAdress()
 
-            console.log(link);
             const stat = {
                 LinkID,
                 statID,
