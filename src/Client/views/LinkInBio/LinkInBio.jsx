@@ -10,6 +10,7 @@ import { Read } from './views/Edit/components/Read'
 import { Edit } from './views/Edit/components/Edit'
 import { LinksAsIcon } from './views/Edit/components/LinkAsIcon'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import { getUser, useGetUser } from '../../data/user/getUser'
 
 
 
@@ -17,24 +18,23 @@ export default function LinkInBio({ userView }) {
 
     const { userName } = useParams()
 
-    const { user, links, link_in_bio } = useStateProps()
+    const { links, link_in_bio } = useStateProps()
 
-    const User = user?.profil
-    const Links = user?.link_in_bio?.links
+    const User = useGetUser(link_in_bio?.user)
+
     const [LinkInBioLinks, setLinkInBioLinks] = useState([])
-    const LinkInBioSettings = user?.link_in_bio?.settings[0]
+    
 
-    let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
+    let { background, blocks, menu, text, colorBtn, linkAsIcon } = link_in_bio || {}
 
 
     const link_in_bio_Links = links
     .filter(e=> e.user === link_in_bio?.user)
     .filter(e=> e.linkInBio)
-    
 
 
     useEffect(e=> {
-        setLinkInBioLinks(Links)
+        setLinkInBioLinks(link_in_bio_Links)
     }, [User])
 
     const [isDragDisabled, setIsDragDisabled] = useState(true)  
@@ -60,7 +60,7 @@ export default function LinkInBio({ userView }) {
 
 
 
-
+    if (User?.email)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
@@ -109,37 +109,29 @@ export default function LinkInBio({ userView }) {
 
                                     <div className='grid gap container' id={LinkInBioLinks[0]?.id} {...provided.droppableProps} ref={provided.innerRef} >
                                         {
-                                            links
-                                            .map((link, i) =>
 
-                                                link_in_bio_Links
-                                                .map(lIb_Links => {
-
-                                                    if (lIb_Links.id === link.id) {
-
-                                                        return (
-                                                            <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
-                                                                {(provided)=> (
-                                                                    <div 
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
-                                                                        className={link.id}
-                                                                    >
-                                                                        {
-                                                                            !userView 
-                                                                            ? <Read props={{ link, blocks }} />
-                                                                            : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
-                                                                        }
-                                                                    </div>
-                                                                )}
-                                                            </Draggable>
-                                                        )
-                                                    }
-                                                })
-                                                .sort((a,b)=> a.position - b.position)
-                                            )
-
+                                            link_in_bio_Links
+                                            .sort((a,b)=> a.position - b.position)
+                                            .map((link, i) => {
+                                                return (
+                                                    <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
+                                                        {(provided)=> (
+                                                            <div 
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                                className={link.id}
+                                                            >
+                                                                {
+                                                                    !userView 
+                                                                    ? <Read props={{ link, blocks }} />
+                                                                    : <Edit props={{ link, blocks, openSet, setOpenSet, isDragDisabled, setIsDragDisabled }} />
+                                                                }
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                )
+                                            })
                                         }
                                     </div>
                                 )}
