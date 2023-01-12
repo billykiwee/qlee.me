@@ -33,8 +33,11 @@ export default function LinkInBio({ userView, username }) {
     const Settings = settings(link_in_bio)
     
     const [LinkInBioLinks, setLinkInBioLinks] = useState([])
+
     useEffect(e=> {
         setLinkInBioLinks(link_in_bio_Links)
+
+        document.querySelector('body').style.background = Settings?.background?.color
     }, [User])
 
 

@@ -1,4 +1,5 @@
 node_modules
 .env
-push-code.sh
+push.sh
 tiktok.js
+api.js
