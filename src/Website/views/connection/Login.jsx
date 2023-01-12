@@ -12,6 +12,8 @@ import ConntectWidth from '../connection/components/ConnectWith'
 import { db, storage } from '../../../App/database/firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
+
+
 export default function Login() {
 
     const history = useNavigate()
@@ -34,53 +36,34 @@ export default function Login() {
         })
 
 
-        uploadGoogleProfilePicture('https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo')
+
     }, [])
 
 
+    const getBase64FromUrl = async (url) => {
 
-    const storageRef = storage
-    const databaseRef =db
-    
-    function uploadGoogleProfilePicture(email) {
+        const data = await fetch(url)
+        const blob = await data.blob()
 
-        var userRef = db.ref("users/" + email);
-        userRef.on("value", function(snapshot) {
-            var googleProfilePicture = snapshot.val().photoURL;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', googleProfilePicture, true);
-            xhr.responseType = 'arraybuffer';
-            xhr.onload = function(e) {
-                if (this.status === 200) {
-                    var uInt8Array = new Uint8Array(this.response);
-                    var i = uInt8Array.length;
-                    var binaryString = new Array(i);
-                    while (i--)
-                    {
-                        binaryString[i] = String.fromCharCode(uInt8Array[i]);
-                    }
-                    var data = binaryString.join('');
-                    var file = new File([uInt8Array], email + '.jpg', {type: 'image/jpeg'});
-                    var fileRef = storageRef.child('users/photoURL/' + email);
-                    fileRef.put(file).then(function(snapshot) {
-                        fileRef.getDownloadURL().then(function(url) {
-                            var userRef = databaseRef.child('users/' + email);
-                            userRef.update({
-                                photoURL: url
-                            });
-                        });
-                    });
-                }
-            };
-            xhr.send();
-        });
+        return new Promise((resolve) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(blob)
+            reader.onloadend = () => {
+                const base64data = reader.result   
+                resolve(base64data)
+            }
+        })
     }
-    
+
+    const cors = 'cors-anywhere.herokuapp.com'
+      
+      getBase64FromUrl(cors + 'https://lh3.googleusercontent.com/ogw/AOh-ky2823YFJ2_j2Xrii7Ws37e5x5c_i_5dZysF2UvK5A=s64-c-mo').then(console.log)
 
 
     if (auth) history('/dashboard')
     return (
         <Main>
+
             <div className='login' >
                 <div className='login-img'>
                     <a href={UnsplashImg.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
