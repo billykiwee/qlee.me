@@ -59,7 +59,6 @@ export default function LinkInBio({ userView, username }) {
 
 
 
-    if (User?.email)
     return (
         <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
         
@@ -116,10 +115,10 @@ export default function LinkInBio({ userView, username }) {
                                                     <Draggable draggableId={link.id} index={i} key={link.id} isDragDisabled={isDragDisabled}>
                                                         {(provided)=> (
                                                             <div 
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            className={link.id}
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                                className={link.id}
                                                             >
                                                                 {
                                                                     !userView 
