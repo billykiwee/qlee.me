@@ -122,8 +122,8 @@ export default function Stats() {
                                     <div className='grid gap'>
                                         {
                                             statistics
-                                            .map(stat=> {
-                                                return <Block User={User} statistic={stat} />
+                                            .map((stat, i)=> {
+                                                return <Block User={User} statistic={stat} key={i} />
                                             })
                                         }
                                     </div>
