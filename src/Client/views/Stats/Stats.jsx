@@ -1,4 +1,4 @@
-import { EyeIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
@@ -48,7 +48,6 @@ export default function Stats() {
     
 
 
-
     const [filter, setFilter] = useState(false)
     const [checkFilter, setCheckFilter] = useState('popular')
 
@@ -61,7 +60,42 @@ export default function Stats() {
 
 
     const [Msg, setMsg] = useState([])
-    
+
+
+    const statistics = [
+        {
+            title: 'Clics',
+            type : 'clics',
+            data : [{ name : 'clics', count: data.clics }],
+            icon :<EyeIcon width = {18}/>
+        },
+        {
+            title: 'Appareil',
+            type : 'device',
+            data : { device: data.device },
+            icon : <DevicePhoneMobileIcon width={18}/>
+        },
+        {
+            title: 'Source',
+            type : 'reference',
+            data : { device: data.reference },
+            icon : <GlobeEuropeAfricaIcon width={18}/>  
+        },
+        {
+            title: 'Localisation',
+            type : 'coutries',
+            data : { device: data.localisation },
+            icon : <MapPinIcon width={18}/>  
+        },
+        {
+            title: 'Performance',
+            type : 'performance',
+            data : { 
+                performance : [{ name : 'performance', count: data.performance }]
+            },
+            icon : <RocketLaunchIcon width={18} />
+        },
+    ]
 
     return (
         <Main>
@@ -88,11 +122,12 @@ export default function Stats() {
                                     <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
-                                        <Block User={User} statType={{ clics : [{ name : 'clics', count: data.clics }] }} title='Clics' />
-                                        <Block User={User} statType={{ device: data.device }} title='Appareil' device />
-                                        <Block User={User} statType={{ reference : data.reference }} title='Source du trafic' icon='globe' url />
-                                        <Block User={User} statType={{ localisation : data.localisation }} title='Localisation' icon='localisation' country />
-                                        <Block User={User} statType={{ performance : [{ name : 'performance', count: data.performance }] }} title='Clics' />
+                                        {
+                                            statistics
+                                            .map(stat=> {
+                                                return <Block User={User} statistic={stat} />
+                                            })
+                                        }
                                     </div>
                                 </div>
                             )

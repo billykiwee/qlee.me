@@ -9,18 +9,12 @@ import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, Rock
 import { ProgressBar } from './ProgressBar'
 
 
-export const Block = ({ User, statType, title }) => {
+export const Block = ({ User, statistic }) => {
 
-    const type = Object.keys(statType).toString()
+    const { title, data, type, icon } = statistic
 
-    const stats = Object.values(statType[type])
-    
-    const icon = (type) => {
-        if (type == 'clics') return <EyeIcon width={18}/> 
-        if (type == 'device') return <DevicePhoneMobileIcon width={18}/>
-        if (type == 'reference') return <GlobeEuropeAfricaIcon width={18}/>  
-        if (type == 'localisation') return <MapPinIcon width={18}/>  
-    }
+
+    console.log(data);
 
 
     return (
@@ -28,16 +22,18 @@ export const Block = ({ User, statType, title }) => {
         
             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
-                    {icon(type)}
+                    {icon}
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
                     {
-                        stats
+                        data.lenght
+                        ?
+                        data
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
 
-                            const sumCount = stats.map(e=> e.count).reduce((x,y)=> x + y)
+                            const sumCount = data.map(e=> e.count).reduce((x,y)=> x + y)
                             const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
 
@@ -88,13 +84,15 @@ export const Block = ({ User, statType, title }) => {
                             return (
                                 <div className='display justify-s-b'>
                                     <div className='display gap'>
-                                        <span>{stat.name.split('__')[1]}</span> 
+                                        <span>vitesse</span>
                                         <small className='c-grey f-s-12'>{stat.count}</small>
                                     </div>
-                                    <ProgressBar percentage={percentage} />
+                                    <span>{stat.count}</span>
                                 </div>
                             )
                         })
+
+                        : <small className='c-grey'>aucune données</small>
                     }
                 </div>
             </div>
