@@ -8,7 +8,7 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { GoToPricing } from '../Links/views/Edit/Edit'
 import Filter from './components/Filter'
 import List from './components/List'
-import { dataFilter } from './data/dataFilters'
+import { dataFilter } from './statistics/data/dataFilters'
 import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
@@ -66,31 +66,31 @@ export default function Stats() {
         {
             title: 'Clics',
             type : 'clics',
-            data : { name : 'clics', count: data.clics },
-            icon :<EyeIcon width = {18}/>
+            data : data.clics,
+            icon : <EyeIcon width = {18}/>
         },
         {
             title: 'Appareil',
             type : 'device',
-            data : { name : 'device', array: data.device } ,
+            data : data.device,
             icon : <DevicePhoneMobileIcon width={18}/>
         },
         {
             title: 'Source',
             type : 'reference',
-            data : { name : 'reference', array: data.reference },
-            icon : <GlobeEuropeAfricaIcon width={18}/>  
+            data : data.reference,
+            icon : <GlobeEuropeAfricaIcon width={18}/>
         },
         {
             title: 'Localisation',
             type : 'localisation',
-            data : { name : 'localisation', array: data.localisation } ,
-            icon : <MapPinIcon width={18}/>  
+            data : data.localisation,
+            icon : <MapPinIcon width={18}/>
         },
         {
             title: 'Performance',
             type : 'performance',
-            data : { name : 'performance', count: data.performance },
+            data : data.performance,
             icon : <RocketLaunchIcon width={18} />
         },
     ]

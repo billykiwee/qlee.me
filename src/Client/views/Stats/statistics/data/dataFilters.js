@@ -1,4 +1,5 @@
-import { countBy } from '../functions/countBy'
+import { countBy } from "../functions/countBy"
+
 
 export const dataFilter = (LinkStat) => {
 
@@ -14,9 +15,9 @@ export const dataFilter = (LinkStat) => {
             filter: LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin),
             count : () => countBy(stats.reference.filter)
         },
-        countries: {
+        localisation: {
             filter: LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country),
-            count : () => countBy(stats.countries.filter)
+            count : () => countBy(stats.localisation.filter)
         },
         performance: {
             filter: LinkStat.map(e=> e.performance),
@@ -32,15 +33,30 @@ export const dataFilter = (LinkStat) => {
         },
     }
 
-    const { clics, device, reference, countries, performance } = stats
+    const { clics, device, reference, localisation, performance } = stats
 
 
     return {
-        clics       : clics,
-        device      : device.count(),
-        reference   : reference.count(),
-        localisation: countries.count(),
-        performance : performance.count()
+        clics       : { 
+            name : 'clics',
+            count: clics 
+        },
+        device      : { 
+            name : 'device',
+            array: device.count() 
+        },
+        reference   : { 
+            name : 'reference',
+            array: reference.count() 
+        },
+        localisation: { 
+            name : 'localisation',
+            array: localisation.count() 
+        },
+        performance : { 
+            name : 'performance',
+            count: performance.count()
+         }
     } 
 
 }

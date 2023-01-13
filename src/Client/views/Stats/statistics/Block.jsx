@@ -14,7 +14,6 @@ export const Block = ({ User, statistic }) => {
 
     const stats = [data]
 
-
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
@@ -29,14 +28,14 @@ export const Block = ({ User, statistic }) => {
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
 
-                            if (type === 'clics' ) return <Clics data={{ stat }} />
-
-                            if (isUserPremium(User).plan !== 'ENTREPRISE') return  <GoToPricing /> 
+                            if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing /> 
 
                             if (type === 'device') return <Device data={{ stat }} />
                             if (type === 'reference') return <Reference data={{ stat }} />
                             if (type === 'localisation') return <Location data={{ stat }} />
                             if (type === 'performance') return <Performance data={{ stat }} />
+
+                            else return <Clics data={{ stat }} />
                         })   
                     }
                 </div>
