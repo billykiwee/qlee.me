@@ -12,7 +12,7 @@ export const Block = ({ User, statistic }) => {
 
     const { title, data, type, icon } = statistic
 
-    const stat = data 
+    const stat = data
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -23,31 +23,23 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
-                    <ListBlock props={{ type, stat, User }} />
+                    {
+                        type === 'clics' && <Clics stat={{ stat }} />
+                        ||
+                        isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
+                        ||
+                        type === 'device' && <Device stat={{ stat }} />
+                        ||
+                        type === 'reference' && <Reference stat={{ stat }} />
+                        ||
+                        type === 'localisation' && <Location stat={{ stat }} />
+                        ||
+                        type === 'performance' && <Performance stat={{ stat }} />
+                    }
                 </div>
             </div>
         </div>
     )
 }
 
-function ListBlock({ props }) {
 
-    const { type, stat, User  } = props
-
-    switch (type) {
-      case 'clics':
-        return <Clics stat={stat} />;
-      case 'device':
-        return <Device stat={stat} />;
-      case 'reference':
-        return <Reference stat={stat} />;
-      case 'localisation':
-        return <Location stat={stat} />;
-      case 'performance':
-        return <Performance stat={stat} />;
-      default:
-        if (isUserPremium(User).plan !== 'ENTREPRISE')
-          return <GoToPricing />;
-    }
-  }
-  
