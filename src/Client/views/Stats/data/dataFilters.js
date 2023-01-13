@@ -34,6 +34,7 @@ export const dataFilter = (LinkStat) => {
 
     const { clics, device, reference, countries, performance } = stats
 
+
     return {
         clics       : clics,
         device      : device.count(),

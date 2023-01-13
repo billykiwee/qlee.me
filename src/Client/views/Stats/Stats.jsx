@@ -88,42 +88,11 @@ export default function Stats() {
                                     <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
-                                        <Block User={User} statType={{ clics : data.clics }} title='Clics' />
+                                        <Block User={User} statType={{ clics : [{ name : 'clics', count: data.clics }] }} title='Clics' />
                                         <Block User={User} statType={{ device: data.device }} title='Appareil' device />
                                         <Block User={User} statType={{ reference : data.reference }} title='Source du trafic' icon='globe' url />
                                         <Block User={User} statType={{ localisation : data.localisation }} title='Localisation' icon='localisation' country />
-                                    
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
-                                                <div className='display gap'>
-                                                    <RocketLaunchIcon width={18} />
-                                                    <span>Performance</span>
-                                                </div>
-                                                {
-                                                    isUserPremium(User).plan === 'ENTREPRISE' 
-                                                    ? 
-                                                    (
-                                                        <div className='display justify-s-b'>
-                                                            {
-                                                                data.performance.speed
-                                                                ? 
-                                                                (
-                                                                    <>
-                                                                        <div className='display gap'>
-                                                                            <span>vitesse</span>
-                                                                            <small className='c-grey f-s-12'>{data.performance.performance.length}</small>
-                                                                        </div>
-                                                                        <span>{data.performance.speed}</span>
-                                                                    </>
-                                                                )
-                                                                : <small className='c-grey'>aucune données</small>
-                                                            }
-                                                        </div>
-                                                    )
-                                                    : <GoToPricing />
-                                                }
-                                            </div>
-                                        </div>
+                                        <Block User={User} statType={{ performance : [{ name : 'performance', count: data.performance }] }} title='Clics' />
                                     </div>
                                 </div>
                             )
