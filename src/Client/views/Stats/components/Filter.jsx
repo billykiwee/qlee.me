@@ -32,8 +32,6 @@ export default function Filter({props}) {
         }
     ]
 
-
-
     const [isOpen, setOpen] = useState(false)
 
     const [width, setWidth] = useState(window.innerWidth)

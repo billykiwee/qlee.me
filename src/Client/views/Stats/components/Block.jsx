@@ -4,7 +4,10 @@ import getFavicon from '../../../../App/utils/getFavicon'
 import { isValidUrl } from '../../../../App/utils/isValidUrl'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Links/views/Edit/Edit'
-import { ProgressBar } from './ProgressBar'
+import { Device } from '../statistics/Device'
+import Location from '../statistics/Location'
+import Performance from '../statistics/Performance'
+import { Reference } from '../statistics/Reference'
 
 
 export const Block = ({ User, statistic }) => {
@@ -43,82 +46,13 @@ export const Block = ({ User, statistic }) => {
 
                             if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing />
 
-                            if (type == 'device') {
+                            if (type == 'device') return <Device data={{stat, percentage}}  />
 
-                               if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
-                                
-                                return Object.values(stat.array)
-                                .sort((x, y)=> y.count - x.count)
-                                .map(array=> {                                    
-                                    return (
-                                        <div className='display justify-s-b'>
-                                            <div className='display gap'>
-                                                <span>{array.name}</span> 
-                                                <small className='c-grey f-s-12'>{array.count}</small>
-                                            </div>
-                                            <ProgressBar percentage={percentage(stat, array)} />
-                                        </div>
-                                    )
-                                })
-                            }
+                            if (type == 'reference') return <Reference data={{stat, percentage}}  />
 
-                            if (type == 'reference') {
-
-                                if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
-
-                                return Object.values(stat.array)
-                                .sort((x, y)=> y.count - x.count)
-                                .map(array=> {
-    
-                                    return (
-                                        <div className='display justify-s-b'>
-                                            <div className='display gap'>
-                                                <img src={getFavicon(array.name)} width={16} className='border-r-2' />
-                                                {
-                                                    isValidUrl(array.name) 
-                                                    ? <span>{getHostName(array.name)}</span> 
-                                                    : <span>autres</span>
-                                                }
-                                                <small className='c-grey f-s-12'>{array.count}</small>
-                                            </div>
-                                            <ProgressBar percentage={percentage(stat, array)} />
-                                        </div>
-                                    )
-                                })
-                            }
-
-                            if (type == 'localisation') {
-
-                                    if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
+                            if (type == 'localisation') return <Location data={{stat, percentage}} />
                             
-                                    return Object.values(stat.array)
-                                    .sort((x, y)=> y.count - x.count)
-                                    .map(array=> {
-                                        return (
-                                            <div className='display justify-s-b'>
-                                                <div className='display gap'>
-                                                    <span>{array.name.split('__')[1]}</span> 
-                                                    <small className='c-grey f-s-12'>{array.count}</small>
-                                                </div>
-                                                <ProgressBar percentage={percentage(stat, array)} />
-                                            </div>
-                                        )
-                                    })
-                            }
-                            
-                            if (type == 'performance') {
-                                if (!stat.count) return <small className='c-grey'>Aucune données</small>
-
-                                return (
-                                    <div className='display justify-s-b'>
-                                        <div className='display gap'>
-                                            <span>vitesse</span>
-                                            <small className='c-grey f-s-12'>{stat.length}</small>
-                                        </div>
-                                        <span>{stat.count}</span>
-                                    </div>
-                                ) 
-                            }
+                            if (type == 'performance') return <Performance data={{ stat, percentage }} />
                         })   
                     }
                 </div>
