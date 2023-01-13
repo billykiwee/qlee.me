@@ -1,8 +1,9 @@
 import React from 'react'
-import getFavicon from '../../../../App/utils/getFavicon'
-import { isValidUrl } from '../../../../App/utils/isValidUrl'
-import { getHostName } from '../../../lib/getHostName'
-import { ProgressBar } from '../components/ProgressBar'
+import getFavicon from '../../../../../App/utils/getFavicon'
+import { isValidUrl } from '../../../../../App/utils/isValidUrl'
+import { getHostName } from '../../../../lib/getHostName'
+import { ProgressBar } from '../../components/ProgressBar'
+
 
 export function Reference({ data }) {
 

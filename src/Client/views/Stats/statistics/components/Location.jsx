@@ -1,7 +1,8 @@
 import React from 'react'
-import { ProgressBar } from '../components/ProgressBar'
+import { ProgressBar } from '../../components/ProgressBar'
 
-export default function Location({ data }) {
+
+export function Location({ data }) {
 
     const { stat, percentage } = data
     

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Performance({data}) {
+export function Performance({data}) {
 
     const { stat } = data
 
