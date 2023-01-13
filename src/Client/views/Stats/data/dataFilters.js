@@ -4,26 +4,26 @@ export const dataFilter = (LinkStat) => {
 
     if (!LinkStat) return 
 
-    const data = {
+    const stats = {
         clics : LinkStat.length,
         device: {
             filter: LinkStat.map(e=> e.device),
-            count : () => countBy(data.device.filter)
+            count : () => countBy(stats.device.filter)
         },
         reference: {
             filter: LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin),
-            count : () => countBy(data.reference.filter)
+            count : () => countBy(stats.reference.filter)
         },
         countries: {
             filter: LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country),
-            count : () => countBy(data.countries.filter)
+            count : () => countBy(stats.countries.filter)
         },
         performance: {
             filter: LinkStat.map(e=> e.performance),
             count : () => {
-                if (data.performance.filter.length) {
-                    let lenght       = data.performance.filter.length
-                    let sort         = data.performance.filter.reduce((x,y) => x + y)
+                if (stats.performance.filter.length) {
+                    let lenght       = stats.performance.filter.length
+                    let sort         = stats.performance.filter.reduce((x,y) => x + y)
                     let result       = (sort / lenght) / 1000
                     let resultSecond = result.toFixed(2) + 's'
                     return resultSecond
@@ -32,8 +32,7 @@ export const dataFilter = (LinkStat) => {
         },
     }
 
-    const { clics, device, reference, countries, performance } = data
-
+    const { clics, device, reference, countries, performance } = stats
 
     return {
         clics       : clics,

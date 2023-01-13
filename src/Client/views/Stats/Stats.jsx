@@ -59,6 +59,7 @@ export default function Stats() {
 
     const data = dataFilter(LinkStat)
 
+
     const [Msg, setMsg] = useState([])
     
 
@@ -100,9 +101,9 @@ export default function Stats() {
                                             </div>
                                         </div>
 
-                                        <Block User={User} statType={data.device} title='Appareil' device />
-                                        <Block User={User} statType={data.reference} title='Source du trafic' icon='globe' url />
-                                        <Block User={User} statType={data.localisation} title='Localisation' icon='localisation' country />
+                                        <Block User={User} statType={{ device: data.device }} title='Appareil' device />
+                                        <Block User={User} statType={{ reference : data.reference }} title='Source du trafic' icon='globe' url />
+                                        <Block User={User} statType={{ localisation : data.localisation }} title='Localisation' icon='localisation' country />
                                     
                                         <div className='grid gap-1rem grey p-1 border-r-04'>
                                             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >

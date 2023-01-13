@@ -5,15 +5,39 @@ import { isValidUrl } from '../../../../App/utils/isValidUrl'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Links/views/Edit/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
-import { DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import { ProgressBar } from './ProgressBar'
 
 
 export const Block = ({ User, statType, url, title, country, device, click }) => {
-      
-    console.log(statType);
 
-    return (
+    const type = Object.keys(statType).toString()
+
+    if (type === 'device') {
+
+        const stat = statType[type]
+    
+       const sumCount = [statType].map(e=> e.count).reduce((x,y)=> x + y)
+       // const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+    
+       console.log(stat);
+
+      /*   return (
+            <div className={'display justify-s-b'} >
+                <div className='display gap'>
+                    <div className='display gap'>
+                        <span>{stat.name}</span> 
+                        <small className='c-grey f-s-12'>{stat.count}</small>
+                    </div>
+                </div>
+                <ProgressBar percentage={percentage} />
+            </div>
+        ) */
+    }
+
+
+
+   /*  return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
             
             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
@@ -36,11 +60,13 @@ export const Block = ({ User, statType, url, title, country, device, click }) =>
                         <div className='grid gap'>
                             {
                                 (
-                                    statType.length > 0 ? 
+                                    statType.length ? 
                                     (
                                         statType
                                         .sort((x, y)=> y.count - x.count)
                                         .map((stat, i)=> {
+
+                                            console.log(stat);
                         
                                             const sumCount = statType.map(e=> e.count).reduce((x,y)=> x + y)
                                             const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
@@ -89,5 +115,5 @@ export const Block = ({ User, statType, url, title, country, device, click }) =>
                 }
             </div>
         </div>
-    )
+    ) */
 }
