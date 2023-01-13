@@ -14,11 +14,6 @@ export const Block = ({ User, statistic }) => {
 
     const stats = [data]
 
-    const percentage = (stat, array) => {
-        const sumCount = Object.values(stat.array).map(e=> e.count).reduce((x,y)=> x + y)
-        return ((array.count / sumCount) * 100 ).toFixed(0)
-    }
-
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -35,15 +30,13 @@ export const Block = ({ User, statistic }) => {
                         .map(stat=> {
 
                             if (type === 'clics' ) return <Clics data={{ stat }} />
-                            else return isUserPremium(User).plan !== 'ENTREPRISE' 
-                                ? <GoToPricing /> 
-                                :
-                                <>
-                                    { type === 'device' && <Device data={{stat, percentage}}  /> }
-                                    { type === 'reference' && <Reference data={{stat, percentage}}  /> }
-                                    { type === 'localisation' && <Location data={{stat, percentage}} /> }
-                                    { type === 'performance' && <Performance data={{ stat, percentage }} /> }
-                                </>
+
+                            if (isUserPremium(User).plan !== 'ENTREPRISE') return  <GoToPricing /> 
+
+                            if (type === 'device') return <Device data={{ stat }} />
+                            if (type === 'reference') return <Reference data={{ stat }} />
+                            if (type === 'localisation') return <Location data={{ stat }} />
+                            if (type === 'performance') return <Performance data={{ stat }} />
                         })   
                     }
                 </div>
