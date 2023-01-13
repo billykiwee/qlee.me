@@ -88,19 +88,7 @@ export default function Stats() {
                                     <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
-
-                                        <div className='grid gap-1rem grey p-1 border-r-04'>
-                                            <div className='display justify-s-b '>
-                                                <div className='display gap'>
-                                                    <EyeIcon  width={18} />
-                                                    <span>Clics</span>
-                                                </div>
-                                                <div className='grid gap'>
-                                                    {data.clics}
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <Block User={User} statType={{ clics : data.clics }} title='Clics' />
                                         <Block User={User} statType={{ device: data.device }} title='Appareil' device />
                                         <Block User={User} statType={{ reference : data.reference }} title='Source du trafic' icon='globe' url />
                                         <Block User={User} statType={{ localisation : data.localisation }} title='Localisation' icon='localisation' country />

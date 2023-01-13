@@ -9,49 +9,61 @@ import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, Rock
 import { ProgressBar } from './ProgressBar'
 
 
-export const Block = ({ User, statType, url, title, country, device, click }) => {
+export const Block = ({ User, statType, title }) => {
 
     const type = Object.keys(statType).toString()
 
     const stats = Object.values(statType[type])
 
+    console.log(stats);
+    
+    const icon = (type) => {
+        if (type == 'clics') return <EyeIcon width={18}/> 
+        if (type == 'device') return <DevicePhoneMobileIcon width={18}/>
+        if (type == 'reference') return <GlobeEuropeAfricaIcon width={18}/>  
+        if (type == 'localisation') return <MapPinIcon width={18}/>  
+    }
+
+console.log(statType);
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
             <div className={isUserPremium(User).plan !== 'ENTREPRISE' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
-                    { click && <EyeIcon width={18}/> }
-                    { device && <DevicePhoneMobileIcon width={18}/> }
-                    { url && <GlobeEuropeAfricaIcon width={18}/> }
-                    { country && <MapPinIcon width={18}/> }
+                    {icon(type)}
                     <span>{title}</span>
                 </div>
-                {
-                    stats
-                    .sort((x, y)=> y.count - x.count)
-                    .map(stat=> {
+                <div className='grid gap'>
+                    {
+                        stats
+                        .sort((x, y)=> y.count - x.count)
+                        .map(stat=> {
 
-                        const sumCount = stats.map(e=> e.count).reduce((x,y)=> x + y)
-                        const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
+                            const sumCount = stats.map(e=> e.count).reduce((x,y)=> x + y)
+                            const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
-                        if (type == 'device')
-                        return (
-                            <div className='display justify-s-b' >
-                                <div className='display gap'>
+
+                            if (type === 'clics') 
+                            return (
+                                <div className='grid gap'>
+                                    {statType}
+                                </div>
+                            )
+
+                            if (type == 'device')
+                            return (
+                                <div className='display justify-s-b'>
                                     <div className='display gap'>
                                         <span>{stat.name}</span> 
                                         <small className='c-grey f-s-12'>{stat.count}</small>
                                     </div>
+                                    <ProgressBar percentage={percentage} />
                                 </div>
-                                <ProgressBar percentage={percentage} />
-                            </div>
-                        )
-
-                        if (type == 'reference')
-                        return (
-                            <div className='display justify-s-b' >
-                                <div className='display gap'>
+                            )
+                            if (type == 'reference')
+                            return (
+                                <div className='display justify-s-b'>
                                     <div className='display gap'>
                                         <img src={getFavicon(stat.name)} width={16} className='border-r-2' />
                                         {
@@ -61,12 +73,22 @@ export const Block = ({ User, statType, url, title, country, device, click }) =>
                                         }
                                         <small className='c-grey f-s-12'>{stat.count}</small>
                                     </div>
+                                    <ProgressBar percentage={percentage} />
                                 </div>
-                                <ProgressBar percentage={percentage} />
-                            </div>
-                        )
-                    })
-                }
+                            )
+                            if (type == 'localisation')
+                            return (
+                                <div className='display justify-s-b'>
+                                    <div className='display gap'>
+                                        <span>{stat.name.split('__')[1]}</span> 
+                                        <small className='c-grey f-s-12'>{stat.count}</small>
+                                    </div>
+                                    <ProgressBar percentage={percentage} />
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
     )
