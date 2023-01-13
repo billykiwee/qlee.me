@@ -7,6 +7,7 @@ export function Device({ data }) {
     
     if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
                                 
+
     return Object.values(stat.array)
     .sort((x, y)=> y.count - x.count)
     .map(array => {                                    

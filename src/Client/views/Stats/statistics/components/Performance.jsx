@@ -2,11 +2,10 @@ import React from 'react'
 
 export function Performance({data}) {
 
-    const { stat, active } = data
+    const { stat } = data
 
     if (!stat.count) return <small className='c-grey'>Aucune données</small>
 
-    if (active) 
     return (
         <div className='display justify-s-b'>
             <div className='display gap'>
