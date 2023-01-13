@@ -28,20 +28,47 @@ export const Block = ({ User, statistic }) => {
                         stats
                         .sort((x, y)=> y.count - x.count)
                         .map((stat, i)=> {
-                            console.log(stat);
 
-                            if (type === 'clics' ) return <Clics data={{ stat }} />
+                           /*  if (type === 'clics' ) return <Clics data={{ stat }} key={i} />
 
-                            if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing /> 
+                            if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing />  */
                     
-                            if (type === 'device') return <Device data={{ stat }} />
-                            if (type === 'reference') return <Reference data={{ stat }} />
-                            if (type === 'localisation') return <Location data={{ stat }} />
-                            if (type === 'performance') return <Performance data={{ stat }} />
+                            return <STATS type={type} stat={stat} />
                         })   
                     }
                 </div>
             </div>
         </div>
     )
+}
+
+
+const STATS = ({ type, stat }) => {
+
+    const statistics = [
+        {
+            type: 'clics',
+            element: <Clics data={{ stat }} />
+        },
+        {
+            type: 'device',
+            element: <Device data={{ stat }} />
+        },
+        {
+            type: 'reference',
+            element: <Reference data={{ stat }} />
+        },
+        {
+            type: 'localisation',
+            element: <Location data={{ stat }} />
+        },
+        {
+            type: 'performance',
+            element: <Performance data={{ stat }} />
+        }
+    ]
+
+    return statistics.map(statistic=> {
+        if (statistic.type === type) return statistic.element
+    })
 }

@@ -1,4 +1,5 @@
-import { countBy } from "../functions/countBy"
+import { countBy } from "../statistics/functions/countBy"
+
 
 
 export const dataFilter = (LinkStat) => {

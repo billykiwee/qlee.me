@@ -8,10 +8,11 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import { GoToPricing } from '../Links/views/Edit/Edit'
 import Filter from './components/Filter'
 import List from './components/List'
-import { dataFilter } from './statistics/data/dataFilters'
+
 import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
+import { dataFilter } from './data/dataFilters'
 
 
 
