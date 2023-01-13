@@ -13,7 +13,14 @@ export const Block = ({ User, statistic }) => {
 
     const { title, data, type, icon } = statistic
 
-    const stats = { [type] : [data] }
+    const stats = [data]
+
+    const percentage = (array) => {
+        const sumCount = Object.values(array).map(e=> e.count).reduce((x,y)=> x + y)
+
+        console.log(Object.values(array));
+        return ((array.count / sumCount) * 100 ).toFixed(0)
+    }
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -27,15 +34,9 @@ export const Block = ({ User, statistic }) => {
                     {
                         1 + 1 ===2
                         ?
-                        Object.values(stats)
+                        stats
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
-
-                            console.log(stat);
-
-                            const sumCount = stats.map(e=> e.count).reduce((x,y)=> x + y)
-                            const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
-
 
                             if (type === 'clics') 
                             return (
@@ -44,34 +45,44 @@ export const Block = ({ User, statistic }) => {
                                     <span>{stat.count}</span>
                                 </div>
                             )
-                            /* 
 
                             if (type == 'device')
-                            return (
-                                <div className='display justify-s-b'>
-                                    <div className='display gap'>
-                                        <span>{stat.name}</span> 
-                                        <small className='c-grey f-s-12'>{stat.count}</small>
+                            return Object.values(stat.array)
+                            .sort((x, y)=> y.count - x.count)
+                            .map(array=> {
+                                
+                                return (
+                                    <div className='display justify-s-b'>
+                                        <div className='display gap'>
+                                            <span>{array.name}</span> 
+                                            <small className='c-grey f-s-12'>{array.count}</small>
+                                        </div>
+                                        <ProgressBar percentage={percentage(array)} />
                                     </div>
-                                    <ProgressBar percentage={percentage} />
-                                </div>
-                            )
+                                )
+                            })
+
                             if (type == 'reference')
-                            return (
-                                <div className='display justify-s-b'>
-                                    <div className='display gap'>
-                                        <img src={getFavicon(stat.name)} width={16} className='border-r-2' />
-                                        {
-                                            isValidUrl(stat.name) 
-                                            ? <span>{getHostName(stat.name)}</span> 
-                                            : <span>autres</span>
-                                        }
-                                        <small className='c-grey f-s-12'>{stat.count}</small>
+                            return Object.values(stat.array)
+                            .sort((x, y)=> y.count - x.count)
+                            .map(array=> {
+
+                                return (
+                                    <div className='display justify-s-b'>
+                                        <div className='display gap'>
+                                            <img src={getFavicon(array.name)} width={16} className='border-r-2' />
+                                            {
+                                                isValidUrl(array.name) 
+                                                ? <span>{getHostName(array.name)}</span> 
+                                                : <span>autres</span>
+                                            }
+                                            <small className='c-grey f-s-12'>{array.count}</small>
+                                        </div>
+                                        <ProgressBar percentage={percentage(array)} />
                                     </div>
-                                    <ProgressBar percentage={percentage} />
-                                </div>
-                            )
-                            if (type == 'localisation')
+                                )
+                            })
+                           /* if (type == 'localisation')
                             return (
                                 <div className='display justify-s-b'>
                                     <div className='display gap'>
@@ -90,7 +101,7 @@ export const Block = ({ User, statistic }) => {
                                     </div>
                                     <span>{stat.count}</span>
                                 </div>
-                            ) */
+                            )  */
                         })
 
                         : <small className='c-grey'>aucune données</small>

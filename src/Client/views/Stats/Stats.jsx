@@ -72,19 +72,19 @@ export default function Stats() {
         {
             title: 'Appareil',
             type : 'device',
-            data : { name : 'device', count: data.device } ,
+            data : { name : 'device', array: data.device } ,
             icon : <DevicePhoneMobileIcon width={18}/>
         },
         {
             title: 'Source',
             type : 'reference',
-            data : { name : 'reference', count: data.reference },
+            data : { name : 'reference', array: data.reference },
             icon : <GlobeEuropeAfricaIcon width={18}/>  
         },
         {
             title: 'Localisation',
             type : 'countries',
-            data : { name : 'countries', count: data.localisation } ,
+            data : { name : 'countries', array: data.localisation } ,
             icon : <MapPinIcon width={18}/>  
         },
         {

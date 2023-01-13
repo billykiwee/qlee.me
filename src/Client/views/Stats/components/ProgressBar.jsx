@@ -5,10 +5,10 @@ export function ProgressBar({ percentage }) {
     return (
         <div className='display gap-1rem'>
             <div className='progress-bar-stat'>
-                <div className='blue border-r-2' style={{width: percentage}}></div>
+                <div className='blue border-r-2' style={{width: percentage + '%'}}></div>
             </div>
             <div className='display w-2 justify-c'>
-                <span>{percentage}</span>
+                <span>{percentage}%</span>
             </div>
         </div>
     )
