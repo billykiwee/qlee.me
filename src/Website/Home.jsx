@@ -21,6 +21,7 @@ export default function Home() {
 
     const { users, stats, links } = useStateProps()
 
+
     const subjects = [
         {
             icon: '👨🏻‍💻',
@@ -359,7 +360,8 @@ export default function Home() {
 
                 <div className='grid gap blocks'>
                     {
-                        Stats.map(stat=> {
+                        Stats.map((stat)=> {
+
                             return (
                                 <div className='display gap-2rem justify-c p-2 border-r-2 shadow yellow'>
                                     <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
@@ -367,7 +369,7 @@ export default function Home() {
                                         <div className='grid gap' style={{color: 'black'}}>
                                             <div className='f-s-2rem f-w-500 display justify-c gap-1rem'>
                                                 {stat.icon}
-                                                <NumberIncreaser length={stat.number} />
+                                                <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "")} />
                                             </div>
                                             <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
                                         </div>
@@ -384,7 +386,7 @@ export default function Home() {
 }
 
 
-export function NumberIncreaser({length}) {
+export function NumberIncreaser({ length, id}) {
 
     const [number, setNumber] = useState(0)
     const [start, setStart]   = useState(false)
@@ -394,7 +396,7 @@ export function NumberIncreaser({length}) {
             entries.forEach(entry => setStart(entry.isIntersecting))
         })
 
-        const targetNode = document.querySelector('.NumberIncreaser')
+        const targetNode = document.querySelector('#' + id)
         if (targetNode) observer.observe(targetNode)
 
         return () => observer.disconnect()
@@ -416,5 +418,5 @@ export function NumberIncreaser({length}) {
 
     }, [start, number, length])
 
-    return <span className='NumberIncreaser'>{number}</span>
+    return <span id={id}>{number}</span>
 }

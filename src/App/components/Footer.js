@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs'
 
-export default function Footer() {
+export default function Footer({ active }) {
 
     const socialMedia = {
         GitHub : {
@@ -22,17 +22,7 @@ export default function Footer() {
         }
     }
     
-
-
-    const location = useLocation()    
-
-    function isLinkInBio() {
-        return location.pathname.includes('/@')
-    }
-    
-    
-
-    if (!isLinkInBio())
+    if (active)
     return (
         <footer className='white'>
             <div className='display justify-s-b'>

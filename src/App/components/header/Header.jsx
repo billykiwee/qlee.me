@@ -17,9 +17,8 @@ export default function Header({ active }) {
 
 
     if (active)
-    if (!IsLinkInBio())
     return (
-        <header className='p-1 white shadow' >
+        <header className='white shadow p-1'  >
             <div className='display justify-s-b'>
                 <div className='display gap click'>
                     <Link to='/' >
@@ -99,11 +98,3 @@ export default function Header({ active }) {
     )
 }
 
-
-
-
-function IsLinkInBio() {
-
-    const location = useLocation() 
-    return location.pathname.includes('me/@')
-}

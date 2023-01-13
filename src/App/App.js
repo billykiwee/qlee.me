@@ -30,13 +30,13 @@ export default function App() {
         { path : '/', element : <Home /> },
         { path : '/dashboard', element : <Dashboard /> },
         { path : '/edit/:LinkID', element : <Edit /> },
-        { path : '/:LinkID', element : <Redirection /> },
+        { path : '/:LinkID', element : <Redirection /> , blank : true},
         { path : '/login', element : <Login /> },
         { path : '/pricing', element : <Pricing /> },
         { path : '/stats', element : <Stats /> },
         { path : '/stats/:LinkID', element : <Stats /> },
         { path : '/payment/:plan', element : <Payment /> },
-        { path : '/@:userName', element : <LinkInBio /> },
+        { path : '/@:userName', element : <LinkInBio /> , blank : true},
         { path : '/edit/@:userName', element : <EditLinkInBio /> },
         { path : '/profil', element : <Profil /> },
         { path : '/terms', element : <Terms /> },
@@ -50,14 +50,22 @@ export default function App() {
                 <Popup />
                 <Routes>
                     {
-                        router.map((route, i) => {
-                            return <Route key={i} path={route.path} exact element={
-                                <>
-                                    <Header active={route.path !== '/@:userName'} />
-                                    {route.element}
-                                    <Footer />
-                                </>
-                            } />
+                        router
+                        .map((route, i) => {
+                            return (
+                                <Route 
+                                    key={i} 
+                                    path={route.path} 
+                                    exact 
+                                    element={
+                                        <>
+                                            <Header active={!route.blank} />
+                                            {route.element}
+                                            <Footer active={!route.blank}/>
+                                        </>
+                                    } 
+                                />
+                            )
                         })
                     }
                 </Routes>
