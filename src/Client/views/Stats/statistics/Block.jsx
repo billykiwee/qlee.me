@@ -29,8 +29,9 @@ export const Block = ({ User, statistic }) => {
                     [data]
                     .sort((x, y) => x.count - y.count)
                     .map((stat, i) => {
-                        if (isUserPremium(User).plan === 'ENTREPRISE') return getComponentByType(type, stat, i);
-                        else return <GoToPricing />;
+                        if (type == 'clics') return <Clics data={{stat}} key={i} />
+                        if (isUserPremium(User).plan === 'ENTREPRISE') return <ByType type={type} stat={stat} key={i} />
+                        else return <GoToPricing key={i} />
                     })
                 }
                 </div>
@@ -40,19 +41,18 @@ export const Block = ({ User, statistic }) => {
 }
 
 
-const getComponentByType = (type, stat, key) => {
+const ByType = ({type, stat}) => {
+    
     switch (type) {
-      case 'clics':
-        return <Clics data={stat} key={key} />;
       case 'device':
-        return <Device data={stat} key={key} />;
+        return <Device data={{stat}} />
       case 'reference':
-        return <Reference data={stat} key={key} />;
+        return <Reference data={{stat}} />
       case 'localisation':
-        return <Location data={stat} key={key} />;
+        return <Location data={{stat}} />
       case 'performance':
-        return <Performance data={stat} key={key} />;
+        return <Performance data={{stat}} />
       default:
-        return null;
+        return null
     }
-  };
+}
