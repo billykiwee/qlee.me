@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { isUserPremium } from '../../../../Admin/settings/isPremium'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { minimizeString } from '../../../../App/utils/minimizeString'
-import { CopyClip } from '../../Links/lib/CopyClip'
-import { IsLinkInBio } from '../../Links/lib/IsLinkInBio'
+import { CopyClip } from '../../Links/views/Edit/components/CopyClip'
+import { IsLinkInBio } from '../../Links/views/Edit/components/IsLinkInBio'
 
 
 

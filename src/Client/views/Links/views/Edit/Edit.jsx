@@ -11,12 +11,12 @@ import { formatNumber } from '../../../../../App/utils/formatNumber'
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import QrCodeSection from '../QrCode/QrCode'
 import { DeleteLink } from '../../functions/Delete'
-import { IsLinkInBio } from '../../lib/IsLinkInBio'
+import { IsLinkInBio } from './components/IsLinkInBio'
 import { EditLink } from '../../functions/Edit'
 import Main from '../../../../../App/components/Main'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import { addtoLinkInBio } from '../../../LinkInBio/functions/add'
-import EditPhoto from '../../lib/EditPhoto'
+import LinkIcon from './components/LinkIcon'
 
 
 
@@ -61,18 +61,14 @@ export default function Edit() {
                             <div className='display align-top'>
                                 <div className='grid gap-1rem justfy-s-b border-r-1 border border-b p-1 white w-100p'>
                                     <div className='grid gap'>
-                                        <div className='display justify-c'>
-                                            <div className='edit-image-link'>
-                                                <img src={getFavicon(Link)} width={80} height={80} className='border-r-100' /> 
-                                                <EditPhoto upload={{ id: Link.id, LinkID }} />
-                                            </div>
-                                        </div>
+                                    
+                                        <LinkIcon upload={{ Link }} />
+
                                         <div className='grid gap-1rem text-align-c'>
                                             <div className='grid'>
                                                 <div className='display justify-c gap'>
                                                     <span className='f-s-20'>{Link?.name}</span>
                                                     <IsLinkInBio Link={Link} />
-
                                                 </div>
                                                 <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                             </div>

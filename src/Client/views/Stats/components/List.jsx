@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BookmarkIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { Link, useNavigate } from 'react-router-dom'
 import getFavicon from '../../../../App/utils/getFavicon'
@@ -10,23 +10,27 @@ import { useStateProps } from '../../../../App/provider/ContextProvider'
 
 export default function List({props}) {
 
-
     const { LinkID, InputSearch, ShowStat, setShowStat, UserLinks, checkFilter, setMsg, popUp, snackBar } = props
 
     const history = useNavigate()
+
+    const { stats } = useStateProps()
     
-    const linksFilters = InputSearch.length 
-    ? 
-    (
-        UserLinks
-        .filter(link=> {
-            if (InputSearch)
-            return (link.name.toLowerCase()).includes(InputSearch) || (link.id.toLowerCase()).includes(InputSearch) || (getHostName(link.url).toLowerCase()).includes(InputSearch)
-        })
-    )
-    : 
-    (
-        UserLinks?.sort((a, b) => {
+    const linksFilters = () => {
+        
+        if (InputSearch.length) {
+
+            return UserLinks
+            .filter(link=> {
+                return (
+                    link.name.toLowerCase()).includes(InputSearch) || 
+                    (link.id.toLowerCase()).includes(InputSearch) || 
+                    (getHostName(link.url).toLowerCase()).includes(InputSearch)
+            })
+        }
+
+        return UserLinks
+        .sort((a, b) => {
             if (checkFilter === 'oldest') return a.date - b.date
             if (checkFilter === 'recent') return b.date - a.date
             return b.views - a.views
@@ -35,10 +39,11 @@ export default function List({props}) {
             if (checkFilter === 'link-in-bio') return e.linkInBio
             else return e
         })
-    )
+    }
 
-    const { stats } = useStateProps()
     const linkStatViews = (LinkID) => stats.filter(e=> e.LinkID === LinkID).length
+
+    const [linkListed, add] = useState(10)
 
 
     return (
@@ -46,8 +51,7 @@ export default function List({props}) {
 
             <div  className='grid gap' id='div-links' >
                 {
-                    linksFilters
-                    ?.map(link=> {
+                    linksFilters().map(link=> {
 
                         return (
                             
@@ -109,7 +113,13 @@ export default function List({props}) {
                             </div>
                         )
                     })
+                    .splice(0, linkListed)
                 }
+                <div className='display'>
+                    <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> add(linkListed + 10)}>
+                        <span className='f-s-16 c-black'>Afficher + ({linkListed + ' liens sur ' + linksFilters.length})</span>
+                    </button>
+                </div>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ import { GoToPricing } from '../../Links/views/Edit/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom'
-import { CopyClip } from '../../Links/lib/CopyClip'
+import { CopyClip } from '../../Links/views/Edit/components/CopyClip'
 import formatDate from '../../../../App/utils/formatDate'
 
 
