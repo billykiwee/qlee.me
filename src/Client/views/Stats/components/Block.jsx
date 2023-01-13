@@ -33,8 +33,6 @@ export const Block = ({ User, statistic }) => {
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
 
-                            if (!Object.values(stat)[1]) return <small className='c-grey'>Aucune données</small>
-
                             if (type === 'clics') {
                                 return (
                                     <div className='display justify-s-b '>
@@ -107,16 +105,19 @@ export const Block = ({ User, statistic }) => {
                                      )
                                 })
                            }
-                            if (type == 'performance')
-                            return (
-                                <div className='display justify-s-b'>
-                                    <div className='display gap'>
-                                        <span>vitesse</span>
-                                        <small className='c-grey f-s-12'>{stat.length}</small>
+                            if (type == 'performance') {
+                                if (!stat.count) return <small className='c-grey'>Aucune données</small>
+
+                                return (
+                                    <div className='display justify-s-b'>
+                                        <div className='display gap'>
+                                            <span>vitesse</span>
+                                            <small className='c-grey f-s-12'>{stat.length}</small>
+                                        </div>
+                                        <span>{stat.count}</span>
                                     </div>
-                                    <span>{stat.count}</span>
-                                </div>
-                            ) 
+                                ) 
+                            }
                         })   
                     }
                 </div>
