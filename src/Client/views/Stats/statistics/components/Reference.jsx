@@ -14,10 +14,10 @@ export function Reference({ data }) {
 
     return Object.values(stat.array)
     .sort((x, y)=> y.count - x.count)
-    .map(array=> {
+    .map((array, i)=> {
 
         return (
-            <div className='display justify-s-b'>
+            <div className='display justify-s-b' key={i}>
                 <div className='display gap'>
                     <img src={getFavicon(array.name)} width={16} className='border-r-2' />
                     {

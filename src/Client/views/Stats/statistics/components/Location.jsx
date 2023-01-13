@@ -12,9 +12,9 @@ export function Location({ data }) {
     
     return Object.values(stat.array)
     .sort((x, y)=> y.count - x.count)
-    .map(array=> {
+    .map((array, i)=> {
         return (
-            <div className='display justify-s-b'>
+            <div className='display justify-s-b' key={i}>
                 <div className='display gap'>
                     <span>{array.name.split('__')[1]}</span> 
                     <small className='c-grey f-s-12'>{array.count}</small>

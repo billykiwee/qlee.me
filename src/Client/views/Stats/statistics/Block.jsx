@@ -14,6 +14,7 @@ export const Block = ({ User, statistic }) => {
 
     const stats = [data]
 
+    console.log(stats);
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -24,18 +25,14 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
-                    {
-                        stats
-                        .sort((x, y)=> y.count - x.count)
-                        .map((stat, i)=> {
-
-                           /*  if (type === 'clics' ) return <Clics data={{ stat }} key={i} />
-
-                            if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing />  */
-                    
-                            return <STATS type={type} stat={stat} />
-                        })   
-                    }
+                {
+                    [data]
+                    .sort((x, y) => x.count - y.count)
+                    .map((stat, i) => {
+                        if (isUserPremium(User).plan === 'ENTREPRISE') return getComponentByType(type, stat, i);
+                        else return <GoToPricing />;
+                    })
+                }
                 </div>
             </div>
         </div>
@@ -43,32 +40,19 @@ export const Block = ({ User, statistic }) => {
 }
 
 
-const STATS = ({ type, stat }) => {
-
-    const statistics = [
-        {
-            type: 'clics',
-            element: <Clics data={{ stat }} />
-        },
-        {
-            type: 'device',
-            element: <Device data={{ stat }} />
-        },
-        {
-            type: 'reference',
-            element: <Reference data={{ stat }} />
-        },
-        {
-            type: 'localisation',
-            element: <Location data={{ stat }} />
-        },
-        {
-            type: 'performance',
-            element: <Performance data={{ stat }} />
-        }
-    ]
-
-    return statistics.map(statistic=> {
-        if (statistic.type === type) return statistic.element
-    })
-}
+const getComponentByType = (type, stat, key) => {
+    switch (type) {
+      case 'clics':
+        return <Clics data={stat} key={key} />;
+      case 'device':
+        return <Device data={stat} key={key} />;
+      case 'reference':
+        return <Reference data={stat} key={key} />;
+      case 'localisation':
+        return <Location data={stat} key={key} />;
+      case 'performance':
+        return <Performance data={stat} key={key} />;
+      default:
+        return null;
+    }
+  };
