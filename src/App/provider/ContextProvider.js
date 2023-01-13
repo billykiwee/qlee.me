@@ -14,7 +14,6 @@ export const PropsContext = createContext({})
 export const PropsProvider = ({ children }) => {
 
     const user = useGetAuth()
-    const [{header}, dispatch] = useStateValue()
 
     const props = {
         auth: user,
