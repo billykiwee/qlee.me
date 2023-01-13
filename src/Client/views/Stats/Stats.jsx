@@ -83,8 +83,8 @@ export default function Stats() {
         },
         {
             title: 'Localisation',
-            type : 'countries',
-            data : { name : 'countries', array: data.localisation } ,
+            type : 'localisation',
+            data : { name : 'localisation', array: data.localisation } ,
             icon : <MapPinIcon width={18}/>  
         },
         {

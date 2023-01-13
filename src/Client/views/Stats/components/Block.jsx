@@ -15,12 +15,11 @@ export const Block = ({ User, statistic }) => {
 
     const stats = [data]
 
-    const percentage = (array) => {
-        const sumCount = Object.values(array).map(e=> e.count).reduce((x,y)=> x + y)
-
-        console.log(Object.values(array));
+    const percentage = (stat, array) => {
+        const sumCount = Object.values(stat.array).map(e=> e.count).reduce((x,y)=> x + y)
         return ((array.count / sumCount) * 100 ).toFixed(0)
     }
+
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -32,35 +31,37 @@ export const Block = ({ User, statistic }) => {
                 </div>
                 <div className='grid gap'>
                     {
-                        1 + 1 ===2
-                        ?
                         stats
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
 
-                            if (type === 'clics') 
-                            return (
-                                <div className='display justify-s-b '>
-                                    <span>{stat.name}</span> 
-                                    <span>{stat.count}</span>
-                                </div>
-                            )
+                            console.log(stat);
 
-                            if (type == 'device')
-                            return Object.values(stat.array)
-                            .sort((x, y)=> y.count - x.count)
-                            .map(array=> {
-                                
+                            if (type === 'clics') {
                                 return (
-                                    <div className='display justify-s-b'>
-                                        <div className='display gap'>
-                                            <span>{array.name}</span> 
-                                            <small className='c-grey f-s-12'>{array.count}</small>
-                                        </div>
-                                        <ProgressBar percentage={percentage(array)} />
+                                    <div className='display justify-s-b '>
+                                        <span>{stat.name}</span> 
+                                        <span>{stat.count}</span>
                                     </div>
                                 )
-                            })
+                            }
+
+                            if (type == 'device') {
+                                return Object.values(stat.array)
+                                .sort((x, y)=> y.count - x.count)
+                                .map(array=> {
+                                    
+                                    return (
+                                        <div className='display justify-s-b'>
+                                            <div className='display gap'>
+                                                <span>{array.name}</span> 
+                                                <small className='c-grey f-s-12'>{array.count}</small>
+                                            </div>
+                                            <ProgressBar percentage={percentage(stat, array)} />
+                                        </div>
+                                    )
+                                })
+                            }
 
                             if (type == 'reference')
                             return Object.values(stat.array)
@@ -78,33 +79,36 @@ export const Block = ({ User, statistic }) => {
                                             }
                                             <small className='c-grey f-s-12'>{array.count}</small>
                                         </div>
-                                        <ProgressBar percentage={percentage(array)} />
+                                        <ProgressBar percentage={percentage(stat, array)} />
                                     </div>
                                 )
                             })
-                           /* if (type == 'localisation')
-                            return (
-                                <div className='display justify-s-b'>
-                                    <div className='display gap'>
-                                        <span>{stat.name.split('__')[1]}</span> 
-                                        <small className='c-grey f-s-12'>{stat.count}</small>
+
+                           if (type == 'localisation')
+                           return Object.values(stat.array)
+                           .sort((x, y)=> y.count - x.count)
+                           .map(array=> {
+                                return (
+                                    <div className='display justify-s-b'>
+                                        <div className='display gap'>
+                                            <span>{array.name.split('__')[1]}</span> 
+                                            <small className='c-grey f-s-12'>{array.count}</small>
+                                        </div>
+                                        <ProgressBar percentage={percentage(stat, array)} />
                                     </div>
-                                    <ProgressBar percentage={percentage} />
-                                </div>
-                            )
+                                )
+                           })
                             if (type == 'performance')
                             return (
                                 <div className='display justify-s-b'>
                                     <div className='display gap'>
                                         <span>vitesse</span>
-                                        <small className='c-grey f-s-12'>{stat.count}</small>
+                                        <small className='c-grey f-s-12'>{stat.length}</small>
                                     </div>
                                     <span>{stat.count}</span>
                                 </div>
-                            )  */
-                        })
-
-                        : <small className='c-grey'>aucune données</small>
+                            ) 
+                        })   
                     }
                 </div>
             </div>
