@@ -13,9 +13,7 @@ export const Block = ({ User, statistic }) => {
 
     const { title, data, type, icon } = statistic
 
-
-    console.log(data);
-
+    const stats = { [type] : [data] }
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -27,13 +25,15 @@ export const Block = ({ User, statistic }) => {
                 </div>
                 <div className='grid gap'>
                     {
-                        data.lenght
+                        1 + 1 ===2
                         ?
-                        data
+                        Object.values(stats)
                         .sort((x, y)=> y.count - x.count)
                         .map(stat=> {
 
-                            const sumCount = data.map(e=> e.count).reduce((x,y)=> x + y)
+                            console.log(stat);
+
+                            const sumCount = stats.map(e=> e.count).reduce((x,y)=> x + y)
                             const percentage = ((stat.count / sumCount) * 100).toFixed(0) + '%'
 
 
@@ -44,6 +44,7 @@ export const Block = ({ User, statistic }) => {
                                     <span>{stat.count}</span>
                                 </div>
                             )
+                            /* 
 
                             if (type == 'device')
                             return (
@@ -89,7 +90,7 @@ export const Block = ({ User, statistic }) => {
                                     </div>
                                     <span>{stat.count}</span>
                                 </div>
-                            )
+                            ) */
                         })
 
                         : <small className='c-grey'>aucune données</small>

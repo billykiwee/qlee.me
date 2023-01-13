@@ -66,33 +66,31 @@ export default function Stats() {
         {
             title: 'Clics',
             type : 'clics',
-            data : [{ name : 'clics', count: data.clics }],
+            data : { name : 'clics', count: data.clics },
             icon :<EyeIcon width = {18}/>
         },
         {
             title: 'Appareil',
             type : 'device',
-            data : { device: data.device },
+            data : { name : 'device', count: data.device } ,
             icon : <DevicePhoneMobileIcon width={18}/>
         },
         {
             title: 'Source',
             type : 'reference',
-            data : { device: data.reference },
+            data : { name : 'reference', count: data.reference },
             icon : <GlobeEuropeAfricaIcon width={18}/>  
         },
         {
             title: 'Localisation',
-            type : 'coutries',
-            data : { device: data.localisation },
+            type : 'countries',
+            data : { name : 'countries', count: data.localisation } ,
             icon : <MapPinIcon width={18}/>  
         },
         {
             title: 'Performance',
             type : 'performance',
-            data : { 
-                performance : [{ name : 'performance', count: data.performance }]
-            },
+            data : { name : 'performance', count: data.performance },
             icon : <RocketLaunchIcon width={18} />
         },
     ]
