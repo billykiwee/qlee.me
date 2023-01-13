@@ -16,6 +16,7 @@ import { EditLink } from '../../functions/Edit'
 import Main from '../../../../../App/components/Main'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import { addtoLinkInBio } from '../../../LinkInBio/functions/add'
+import EditPhoto from '../../lib/EditPhoto'
 
 
 
@@ -63,15 +64,7 @@ export default function Edit() {
                                         <div className='display justify-c'>
                                             <div className='edit-image-link'>
                                                 <img src={getFavicon(Link)} width={80} height={80} className='border-r-100' /> 
-                                                <div className='display justify-c border-r-100 white shadow border hover-white absolute click p-04' onClick={e=> document.querySelector('#upload-img').click()}  > 
-                                                    <PencilSquareIcon width={16} />
-                                                    <input 
-                                                        type='file' 
-                                                        hidden 
-                                                        id='upload-img' 
-                                                        onChange={input => { uploadPhoto(input, LinkID) }}
-                                                    />
-                                                </div>
+                                                <EditPhoto upload={{ id: Link.id, LinkID }} />
                                             </div>
                                         </div>
                                         <div className='grid gap-1rem text-align-c'>

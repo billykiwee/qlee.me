@@ -34,11 +34,7 @@ export const PropsProvider = ({ children }) => {
         stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinkInBio(),
         snackBar   : useSnackBar(),
-        popUp      : usePopUp(),
-        header     : (state) => dispatch({
-            type : 'SET_HEADER',
-            header: state
-        })
+        popUp      : usePopUp()
     }
 
     return (

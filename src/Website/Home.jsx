@@ -369,7 +369,7 @@ export default function Home() {
                                         <div className='grid gap' style={{color: 'black'}}>
                                             <div className='f-s-2rem f-w-500 display justify-c gap-1rem'>
                                                 {stat.icon}
-                                                <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "")} />
+                                                <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "-")} />
                                             </div>
                                             <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
                                         </div>
