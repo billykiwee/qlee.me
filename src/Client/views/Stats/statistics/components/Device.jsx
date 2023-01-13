@@ -2,9 +2,7 @@ import React from 'react'
 import { ProgressBar } from '../../components/ProgressBar'
 import { percentage } from '../functions/percentage'
 
-export function Device({ data }) {
-
-    const { stat } = data
+export function Device({ stat }) {
     
     if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
                                 

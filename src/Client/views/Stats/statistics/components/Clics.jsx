@@ -1,10 +1,8 @@
 import React from 'react'
 import UniqueID from '../../../../../App/utils/uniqueID'
 
-export function Clics({ data }) {
+export function Clics({ stat }) {
 
-    const { stat } = data
-    
     return (
         <div className='display justify-s-b ' >
             <span>{stat.count}</span>

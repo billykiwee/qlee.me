@@ -12,31 +12,7 @@ export const Block = ({ User, statistic }) => {
 
     const { title, data, type, icon } = statistic
 
-    const stats = [data]
-
-    const statistics = [
-        {
-            type : 'clics',
-            element : (stat) => <Clics data={{ stat }} />
-        },
-        {
-            type : 'device',
-            element : (stat) => <Device data={{ stat }} />
-        },
-        {
-            type : 'reference',
-            element : (stat) => <Reference data={{ stat }} />
-        },
-        {
-            type : 'localisation',
-            element : (stat) => <Location data={{ stat }} />
-        },
-        {
-            type : 'performance',
-            element : (stat) => <Performance data={{ stat }} />
-        },
-    ]
-
+    const stat = data 
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -47,32 +23,31 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
-                    {
-                        [data]
-                        .sort((x, y) => x.count - y.count)
-                        .map((stat, i) => {
-
-                            return statistics
-                            .map(block=> {
-                                return (
-                                    <>
-                                        { block.element(stat)}
-                                    </>
-                                )
-                            })
-
-                          /*   if (type === 'clics') return <Clics data={{stat}} />
-                            if (isUserPremium(User).plan !== 'ENTREPRISE') return <GoToPricing />
-                            else if (type === 'device') return <Device data={{stat}} />
-                            if (type === 'reference') return <Reference data={{stat}} />
-                            if (type === 'localisation') return <Location data={{stat}} />
-                            if (type === 'performance') return <Performance data={{stat}} /> */
-                        })
-                    }
+                    <ListBlock props={{ type, stat, User }} />
                 </div>
             </div>
         </div>
     )
 }
 
+function ListBlock({ props }) {
 
+    const { type, stat, User  } = props
+
+    switch (type) {
+      case 'clics':
+        return <Clics stat={stat} />;
+      case 'device':
+        return <Device stat={stat} />;
+      case 'reference':
+        return <Reference stat={stat} />;
+      case 'localisation':
+        return <Location stat={stat} />;
+      case 'performance':
+        return <Performance stat={stat} />;
+      default:
+        if (isUserPremium(User).plan !== 'ENTREPRISE')
+          return <GoToPricing />;
+    }
+  }
+  

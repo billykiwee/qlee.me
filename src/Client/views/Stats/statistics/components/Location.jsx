@@ -3,9 +3,7 @@ import { ProgressBar } from '../../components/ProgressBar'
 import { percentage } from '../functions/percentage'
 
 
-export function Location({ data }) {
-
-    const { stat } = data
+export function Location({ stat }) {
     
     if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
     

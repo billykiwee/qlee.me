@@ -1,8 +1,6 @@
 import React from 'react'
 
-export function Performance({data}) {
-
-    const { stat } = data
+export function Performance({ stat }) {
 
     if (!stat.count) return <small className='c-grey'>Aucune données</small>
 
