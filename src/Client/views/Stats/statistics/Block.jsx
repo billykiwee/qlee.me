@@ -19,12 +19,44 @@ export const Block = ({ User, statistic }) => {
         return ((array.count / sumCount) * 100 ).toFixed(0)
     }
 
+    const isUserPremium = isUserPremium(User).plan === 'ENTREPRISE'
+
+    console.log(isUserPremium);
+    const STATS = ({ type, stat, percentage }) => {
+
+        const statistics = [
+            { 
+                type: 'clics', 
+                element: <Clics data={{ stat }} /> 
+            },
+            { 
+                type: 'device', 
+                element: <Device data={{ stat, percentage }} active={isUserPremium} /> 
+            },
+            { 
+                type: 'reference', 
+                element: <Reference data={{ stat, percentage }} active={isUserPremium} /> 
+            },
+            { 
+                type: 'localisation', 
+                element: <Location data={{ stat, percentage }} active={isUserPremium} /> 
+            },
+            { 
+                type: 'performance', 
+                element: <Performance data={{ stat }} active={isUserPremium} /> 
+            },
+        ]
+
+        return statistics.map(stat => {
+            if (stat.type === type) return stat.element
+        })
+    }
 
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
-            <div className={isUserPremium(User).plan !== 'ENTREPRISE' || type === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
+            <div className={isUserPremium !== 'ENTREPRISE' || type === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
                     {icon}
                     <span>{title}</span>
@@ -37,12 +69,8 @@ export const Block = ({ User, statistic }) => {
 
                             return (
                                 <div className='grid gap'>
-                                    { type === 'clics' && <Clics data={{ stat }} /> }
+                                    <STATS type={type} stat={stat} />
                                     { isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing /> }
-                                    { type === 'device' && <Device data={{stat, percentage}}  /> }
-                                    { type === 'reference' && <Reference data={{stat, percentage}}  /> }
-                                    { type === 'localisation' && <Location data={{stat, percentage}} /> }
-                                    { type === 'performance' && <Performance data={{ stat, percentage }} /> }
                                 </div>
                             )
                         })   

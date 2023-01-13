@@ -4,10 +4,11 @@ import { ProgressBar } from '../../components/ProgressBar'
 
 export function Location({ data }) {
 
-    const { stat, percentage } = data
+    const { stat, percentage, active } = data
     
     if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
-                            
+    
+    if (active) 
     return Object.values(stat.array)
     .sort((x, y)=> y.count - x.count)
     .map(array=> {
