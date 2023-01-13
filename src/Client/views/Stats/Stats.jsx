@@ -11,6 +11,7 @@ import List from './components/List'
 import { dataFilter } from './data/dataFilters'
 import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import { Head } from './components/Head'
 
 
 
@@ -83,7 +84,7 @@ export default function Stats() {
                             return (
                                 <div className='grid gap-2rem justfy-s-b border-r-2 border border-b p-1 white' key={topLink.id}>
                                     
-                                    <HeadBlock topLink={topLink} />
+                                    <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
 

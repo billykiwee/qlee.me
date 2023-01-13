@@ -16,16 +16,18 @@ export default function List({props}) {
 
     const { stats } = useStateProps()
     
+
     const linksFilters = () => {
         
         if (InputSearch.length) {
 
             return UserLinks
             .filter(link=> {
-                return (
-                    link.name.toLowerCase()).includes(InputSearch) || 
-                    (link.id.toLowerCase()).includes(InputSearch) || 
-                    (getHostName(link.url).toLowerCase()).includes(InputSearch)
+                const byName = link.name.toLowerCase()
+                const byID   = link.id.toLowerCase()
+                const byURL  = getHostName(link.url)
+
+                return (byName || byID || byURL).includes(InputSearch)
             })
         }
 
@@ -35,10 +37,7 @@ export default function List({props}) {
             if (checkFilter === 'recent') return b.date - a.date
             return b.views - a.views
         })
-        .filter(e=> {
-            if (checkFilter === 'link-in-bio') return e.linkInBio
-            else return e
-        })
+        .filter(e=> checkFilter === 'link-in-bio' ? e.linkInBio : e)
     }
 
     const linkStatViews = (LinkID) => stats.filter(e=> e.LinkID === LinkID).length
@@ -54,11 +53,10 @@ export default function List({props}) {
                     linksFilters().map(link=> {
 
                         return (
-                            
                             <div className='display justify-s-b' id={'link-' + link.id} key={link.id}>
                                 <Link to={'/stats/' + link.id} key={link.id} className='w-100p' >
                                     <div    
-                                        style={{background: LinkID === link.id ? 'var(--hover-btn)' : ''}}
+                                        style={{background: LinkID === link.id ? 'var(--grey)' : ''}}
                                         className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
                                         key={link.id} onClick={e=> setShowStat(link.id)} 
                                     >

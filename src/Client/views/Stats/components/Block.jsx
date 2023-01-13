@@ -5,14 +5,13 @@ import { isValidUrl } from '../../../../App/utils/isValidUrl'
 import { getHostName } from '../../../lib/getHostName'
 import { GoToPricing } from '../../Links/views/Edit/Edit'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
-import { BookmarkIcon, CalendarIcon, DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
-import { Link } from 'react-router-dom'
-import { CopyClip } from '../../Links/views/Edit/components/CopyClip'
-import formatDate from '../../../../App/utils/formatDate'
+import { DevicePhoneMobileIcon, EyeIcon, GlobeAltIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
+import { ProgressBar } from './ProgressBar'
 
 
-export const Block = ({User, statType, url, title, country, device, click}) => {
+export const Block = ({ User, statType, url, title, country, device, click }) => {
       
+    console.log(statType);
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
@@ -90,48 +89,5 @@ export const Block = ({User, statType, url, title, country, device, click}) => {
                 }
             </div>
         </div>
-    )
-}
-
-export function ProgressBar({percentage}) {
-    return (
-        <div className='display gap-1rem'>
-            <div className='progress-bar-stat'>
-                <div className='blue border-r-2' style={{width: percentage}}></div>
-            </div>
-            <div className='display w-2 justify-c'>
-                <span>{percentage}</span>
-            </div>
-        </div>
-    )
-}
-
-
-
-export function HeadBlock({topLink}) {
-    return (
-        <div className='grid gap'>
-            <Link to={'/edit/' + topLink.id} className='display justify-c'>
-                <img src={getFavicon(topLink)} width={80} height={80} className='border-r-100' /> 
-            </Link>
-            <div className='grid text-align-c'>
-                <div className='display justify-c gap-04'>
-                    <span className='f-s-20'>{topLink?.name}</span>
-                    {
-                        topLink?.linkInBio &&
-                        <BookmarkIcon width={12} className='c-yellow' />
-                    }
-                </div>
-                <div className='display gap justify-c'>
-                    <a className='f-s-20 link hover-link' href={'https://' + topLink?.shortLink}>{topLink?.shortLink}</a>
-                    <CopyClip link={topLink} />
-                </div>
-            </div>
-                <div className='display gap justify-c'>
-                    <CalendarIcon width={16} />
-                    <span>{formatDate(topLink.date, 'date')}</span>
-                </div>
-        </div>
-
     )
 }
