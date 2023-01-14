@@ -124,7 +124,7 @@ export default function Stats() {
                                         {
                                             statistics
                                             .map((stat, i)=> {
-                                                return <Block User={User} statistic={stat} key={i} />
+                                                return <Block User={User} statistic={stat.data} key={i} />
                                             })
                                         }
                                     </div>

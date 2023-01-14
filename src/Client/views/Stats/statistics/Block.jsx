@@ -14,6 +14,8 @@ export const Block = ({ User, statistic }) => {
 
     const stat = data
 
+    console.log(data);
+
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
@@ -23,7 +25,7 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
-                    {
+                   {/*  {
                         type === 'clics' && <Clics stat={{ stat }} />
                         ||
                         isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
@@ -35,7 +37,7 @@ export const Block = ({ User, statistic }) => {
                         type === 'localisation' && <Location stat={{ stat }} />
                         ||
                         type === 'performance' && <Performance stat={{ stat }} />
-                    }
+                    } */}
                 </div>
             </div>
         </div>
