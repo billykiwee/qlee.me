@@ -1,15 +1,6 @@
 import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from "@heroicons/react/24/solid"
-import { Clics } from "../statistics/components/Clics"
-import { Device } from "../statistics/components/Device"
-import { Location } from "../statistics/components/Location"
-import { Reference } from "../statistics/components/Reference"
-import { Performance } from "../statistics/components/Performance"
-import { countBy } from "../statistics/functions/countBy"
-import { percentage } from "../statistics/functions/percentage"
 
-
-
-export const dataFilter = (LinkStat) => {
+export const statistics = (LinkStat) => {
 
     if (!LinkStat) return 
 
@@ -22,11 +13,12 @@ export const dataFilter = (LinkStat) => {
     const performance = LinkStat.map(e=> e.performance)
 
 
-    const statistics = [
+    return [
         {
             title: 'Clics',
             name : 'clics',
             data : clics,
+            icon : <EyeIcon width={16} />
         },
         {
             title: 'Appareil',
@@ -36,7 +28,8 @@ export const dataFilter = (LinkStat) => {
                     app,
                     count: device.filter(x => x === app).length,
                 }
-            })
+            }),
+            icon : <DevicePhoneMobileIcon width={16} />
         },
         {
             title: 'Source',
@@ -47,7 +40,8 @@ export const dataFilter = (LinkStat) => {
                     count: reference.filter(x => x === url).length,
                     percentage: 0
                 }
-            })
+            }),
+            icon : <GlobeEuropeAfricaIcon width={16} />,
         },
         {
             title: 'Localisation',
@@ -58,21 +52,22 @@ export const dataFilter = (LinkStat) => {
                     count: localisation.filter(x => x === adress).length,
                     percentage: 0
                 }
-            })
+            }),
+            icon : <MapPinIcon width={16} />,
         },
         {
             title: 'Performance',
             name : 'performance',
             data : {
-                speed: {
-                    title: 'Vitesse',
-                    name : 'speed',
-                    data : ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2)
-                }
-            }
+                type : [
+                    {
+                        title: 'vitesse',
+                        name : 'speed',
+                        data : ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2) + ' s',
+                    }
+                ]
+            },
+            icon : <RocketLaunchIcon width={16} />
         }
     ]
-
-
-    return statistics
 }

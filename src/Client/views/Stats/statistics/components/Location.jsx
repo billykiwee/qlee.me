@@ -12,7 +12,6 @@ export function Location({ stat }) {
     return stat
     .sort((x, y)=> y.count - x.count)
     .map((item, i) => {      
-        console.log(item.adress.split('__')[0]);
 
         let sum =  stat.map(e=> e.count).reduce((x,y)=> x+y)
 

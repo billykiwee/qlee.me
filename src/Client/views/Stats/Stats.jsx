@@ -1,23 +1,15 @@
-import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import '../../../App/css/stats.css'
-import { Block, HeadBlock } from './statistics/Block'
-import { isUserPremium } from '../../../Admin/settings/isPremium'
-import { GoToPricing } from '../Links/views/Edit/Edit'
+import { Block } from './statistics/Block'
 import Filter from './components/Filter'
 import List from './components/List'
 
 import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
-import { dataFilter } from './data/dataFilters'
-import { Clics } from './statistics/components/Clics'
-import { Device } from './statistics/components/Device'
-import { Reference } from './statistics/components/Reference'
-import { Performance } from './statistics/components/Performance'
-import { Location } from './statistics/components/Location'
+import { statistics } from './data/statistics'
 
 
 
@@ -62,10 +54,7 @@ export default function Stats() {
 
 
 
-    const statistics = dataFilter(LinkStat)
-
-
-    const [Msg, setMsg] = useState([])
+    const Statistics = statistics(LinkStat)
 
 
 
@@ -95,7 +84,7 @@ export default function Stats() {
                                     
                                     <div className='grid gap'>
                                         {
-                                            statistics
+                                            Statistics
                                             .map((stat, i)=> {
                                                 return <Block stats={stat} User={User} key={i} />
                                             })
@@ -134,7 +123,6 @@ export default function Stats() {
                             ShowStat,
                             UserLinks,
                             checkFilter,
-                            setMsg,
                             setShowStat,
                         }} 
                     />
