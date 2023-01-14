@@ -18,7 +18,7 @@ export default function Header({ active }) {
 
     if (active)
     return (
-        <header className='white shadow p-1'  >
+        <header className='border shadow p-1' style={{background : 'var(--background)'}} >
             <div className='display justify-s-b'>
                 <div className='display gap click'>
                     <Link to='/' >
