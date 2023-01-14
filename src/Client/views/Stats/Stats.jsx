@@ -68,7 +68,6 @@ export default function Stats() {
     const [Msg, setMsg] = useState([])
 
 
-    console.log(data);
 
     return (
         <Main>

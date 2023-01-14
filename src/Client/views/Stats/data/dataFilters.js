@@ -40,6 +40,21 @@ export const dataFilter = (LinkStat) => {
         },
     }
 
+    const lol = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
+
+    const n = {
+        reference : lol.map(url=> {
+            return {
+                url,
+                count : lol.filter(x => x === url).length
+            }
+        }),
+        length : lol.length
+    }
+
+    console.log(n);
+
+
     const { clics, device, reference, localisation, performance } = stats
 
 
