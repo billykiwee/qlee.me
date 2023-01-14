@@ -63,7 +63,8 @@ export default function Stats() {
     const [Msg, setMsg] = useState([])
 
 
-    const statistics = [
+
+/*     const statistics = [
         {
             title: 'Clics',
             type : 'clics',
@@ -94,7 +95,10 @@ export default function Stats() {
             data : data.performance,
             icon : <RocketLaunchIcon width={18} />
         },
-    ]
+    ] */
+
+
+    console.log(data);
 
     return (
         <Main>
@@ -121,12 +125,19 @@ export default function Stats() {
                                     <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
-                                        {
+                                        {/* {
                                             statistics
                                             .map((stat, i)=> {
-                                                return <Block User={User} statistic={stat.data} key={i} />
+                                                return <Block User={User} statistic={stat} key={i} />
                                             })
-                                        }
+                                        } */}
+
+                                        {/* {
+                                            data.map(stat=> {
+                                                console.log(stat);
+                                                return
+                                            })
+                                        } */}
                                     </div>
                                 </div>
                             )

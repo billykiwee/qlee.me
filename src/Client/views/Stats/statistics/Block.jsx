@@ -12,7 +12,6 @@ export const Block = ({ User, statistic }) => {
 
     const { title, data, type, icon } = statistic
 
-    const stat = data
 
     console.log(data);
 
@@ -25,19 +24,19 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
-                   {/*  {
-                        type === 'clics' && <Clics stat={{ stat }} />
-                        ||
+                    {
+                        type === 'clics' && <Clics stat={{ data }} />
+                        &&
                         isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
-                        ||
-                        type === 'device' && <Device stat={{ stat }} />
-                        ||
-                        type === 'reference' && <Reference stat={{ stat }} />
-                        ||
-                        type === 'localisation' && <Location stat={{ stat }} />
-                        ||
-                        type === 'performance' && <Performance stat={{ stat }} />
-                    } */}
+                        &&
+                        type === 'device' && <Device stat={{ data }} />
+                        &&
+                        type === 'reference' && <Reference stat={{ data }} />
+                        &&
+                        type === 'localisation' && <Location stat={{ data }} />
+                        &&
+                        type === 'performance' && <Performance stat={{ data }} />
+                    }
                 </div>
             </div>
         </div>
