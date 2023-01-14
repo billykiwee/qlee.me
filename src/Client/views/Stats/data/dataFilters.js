@@ -1,4 +1,9 @@
 import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from "@heroicons/react/24/solid"
+import { Clics } from "../statistics/components/Clics"
+import { Device } from "../statistics/components/Device"
+import { Location } from "../statistics/components/Location"
+import { Reference } from "../statistics/components/Reference"
+import { Performance } from "../statistics/components/Performance"
 import { countBy } from "../statistics/functions/countBy"
 
 
@@ -42,32 +47,32 @@ export const dataFilter = (LinkStat) => {
         {
             title: 'Clics',
             type : 'clics',
+            icon : <EyeIcon width={18}/>,
             data : clics,
-            icon : <EyeIcon width = {18}/>
         },
         {
             title: 'Appareil',
             type : 'device',
-            data : device.count(),
-            icon : <DevicePhoneMobileIcon width={18}/>
+            icon : <DevicePhoneMobileIcon width={18}/>,
+            data : device.count()
         },
         {
             title: 'Source',
             type : 'reference',
-            data : reference.count(),
-            icon : <GlobeEuropeAfricaIcon width={18}/>
+            icon : <GlobeEuropeAfricaIcon width={18}/>,
+            data : reference.count()
         },
         {
             title: 'Localisation',
             type : 'localisation',
-            data : localisation.count(),
-            icon : <MapPinIcon width={18}/>
+            icon : <MapPinIcon width={18}/>,
+            data : localisation.count()
         },
         {
             title: 'Performance',
             type : 'performance',
-            data : performance.count(),
-            icon : <RocketLaunchIcon width={18} />
+            icon : <RocketLaunchIcon width={18} />,
+            data : performance.count()
         },
     ]
 }

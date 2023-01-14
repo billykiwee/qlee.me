@@ -13,6 +13,11 @@ import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
 import { dataFilter } from './data/dataFilters'
+import { Clics } from './statistics/components/Clics'
+import { Device } from './statistics/components/Device'
+import { Reference } from './statistics/components/Reference'
+import { Performance } from './statistics/components/Performance'
+import { Location } from './statistics/components/Location'
 
 
 
@@ -63,41 +68,6 @@ export default function Stats() {
     const [Msg, setMsg] = useState([])
 
 
-
-/*     const statistics = [
-        {
-            title: 'Clics',
-            type : 'clics',
-            data : data.clics,
-            icon : <EyeIcon width = {18}/>
-        },
-        {
-            title: 'Appareil',
-            type : 'device',
-            data : data.device,
-            icon : <DevicePhoneMobileIcon width={18}/>
-        },
-        {
-            title: 'Source',
-            type : 'reference',
-            data : data.reference,
-            icon : <GlobeEuropeAfricaIcon width={18}/>
-        },
-        {
-            title: 'Localisation',
-            type : 'localisation',
-            data : data.localisation,
-            icon : <MapPinIcon width={18}/>
-        },
-        {
-            title: 'Performance',
-            type : 'performance',
-            data : data.performance,
-            icon : <RocketLaunchIcon width={18} />
-        },
-    ] */
-
-
     console.log(data);
 
     return (
@@ -132,12 +102,29 @@ export default function Stats() {
                                             })
                                         } */}
 
-                                        {/* {
-                                            data.map(stat=> {
-                                                console.log(stat);
-                                                return
+                                        {
+                                            data
+                                            .map(stat=> {
+
+                                               return (
+                                                <>
+                                                    {
+                                                        stat.type === 'clics' && <Clics stat={stat.data} />
+                                                        &&
+                                                        isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
+                                                        &&
+                                                        stat.type === 'device' && <Device stat={stat.data} />
+                                                        &&
+                                                        stat.type === 'reference' && <Reference stat={stat.data} />
+                                                        &&
+                                                        stat.type === 'localisation' && <Location stat={stat.data} />
+                                                        &&
+                                                        stat.type === 'performance' && <Performance stat={stat.data} />
+                                                    }
+                                                </>
+                                               )
                                             })
-                                        } */}
+                                        }
                                     </div>
                                 </div>
                             )
