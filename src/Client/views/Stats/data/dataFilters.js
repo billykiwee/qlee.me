@@ -64,7 +64,11 @@ export const dataFilter = (LinkStat) => {
             title: 'Performance',
             name : 'performance',
             data : {
-                speed: ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2)
+                speed: {
+                    title: 'Vitesse',
+                    name : 'speed',
+                    data : ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2)
+                }
             }
         }
     ]

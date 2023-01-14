@@ -8,25 +8,29 @@ import { percentage } from '../functions/percentage'
 
 export function Reference({ stat }) {
 
-    if (!Object.values(stat.array).length) return <small className='c-grey'>Aucune données</small>
-
-    return Object.values(stat.array)
+    if (!stat.length) return <small className='c-grey'>Aucune données</small>
+                                    
+    return stat
     .sort((x, y)=> y.count - x.count)
-    .map((array, i)=> {
-
+    .map((item, i) => {      
+    
+        let sum =  stat.map(e=> e.count).reduce((x,y)=> x+y)
+    
         return (
             <div className='display justify-s-b' key={i}>
                 <div className='display gap'>
-                    <img src={getFavicon(array.name)} width={16} className='border-r-2' />
-                    {
-                        isValidUrl(array.name) 
-                        ? <span>{getHostName(array.name)}</span> 
-                        : <span>autres</span>
-                    }
-                    <small className='c-grey f-s-12'>{array.count}</small>
+                <img src={getFavicon(item.url)} width={16} className='border-r-2' />
+                {
+                    isValidUrl(item.url) 
+                    ? <span>{getHostName(item.url)}</span> 
+                    : <span>autres</span>
+                }
+                    <small className='c-grey f-s-12'>{item.count}</small>
                 </div>
-                <ProgressBar percentage={percentage(stat, array)} />
+                <ProgressBar percentage={percentage(sum, item.count)} /> 
             </div>
         )
     })
 }
+
+

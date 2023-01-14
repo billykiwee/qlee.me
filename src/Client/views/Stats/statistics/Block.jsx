@@ -27,12 +27,13 @@ export const Block = ({ stats, User }) => {
                         isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
                         ||
                         name === 'device' && <Device stat={data} />
-                       /*  ||
-                        name === 'reference' && <Reference stat={{ data }} />
+                       ||
+                        name === 'reference' && <Reference stat={data} />
+                       ||
+                        name === 'localisation' && <Location stat={data} />
+                        
                         ||
-                        name === 'localisation' && <Location stat={{ data }} />
-                        ||
-                        name === 'performance' && <Performance stat={{ data }} /> */
+                        name === 'performance' && <Performance stat={data} /> 
                     } 
                 </div>
             </div>
