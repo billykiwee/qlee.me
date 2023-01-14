@@ -8,35 +8,32 @@ import { Performance } from './components/Performance'
 import { Reference } from './components/Reference'
 
 
-export const Block = ({ data, User }) => {
+export const Block = ({ stats, User }) => {
 
-    const { title, data, icon } = data
-
-
-    console.log(data);
+    const { title, name, data, icon } = stats
 
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
-            <div className={isUserPremium(User).plan !== 'ENTREPRISE' || type === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
+            <div className={isUserPremium(User).plan !== 'ENTREPRISE' || name === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
                     {icon}
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
                     {
-                        type === 'clics' && <Clics stat={{ data }} />
+                        name === 'clics' && <Clics stat={data} />
                         ||
                         isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
                         ||
-                        type === 'device' && <Device stat={{ data }} />
+                        name === 'device' && <Device stat={data} />
+                       /*  ||
+                        name === 'reference' && <Reference stat={{ data }} />
                         ||
-                        type === 'reference' && <Reference stat={{ data }} />
+                        name === 'localisation' && <Location stat={{ data }} />
                         ||
-                        type === 'localisation' && <Location stat={{ data }} />
-                        ||
-                        type === 'performance' && <Performance stat={{ data }} />
-                    }
+                        name === 'performance' && <Performance stat={{ data }} /> */
+                    } 
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { Location } from "../statistics/components/Location"
 import { Reference } from "../statistics/components/Reference"
 import { Performance } from "../statistics/components/Performance"
 import { countBy } from "../statistics/functions/countBy"
+import { percentage } from "../statistics/functions/percentage"
 
 
 
@@ -33,7 +34,7 @@ export const dataFilter = (LinkStat) => {
             data : newArray(device).map(app=> {
                 return {
                     app,
-                    count: device.filter(x => x === app).length
+                    count: device.filter(x => x === app).length,
                 }
             })
         },
@@ -43,7 +44,8 @@ export const dataFilter = (LinkStat) => {
             data : newArray(reference).map(url=> {
                 return {
                     url,
-                    count: reference.filter(x => x === url).length
+                    count: reference.filter(x => x === url).length,
+                    percentage: 0
                 }
             })
         },
@@ -53,7 +55,8 @@ export const dataFilter = (LinkStat) => {
             data : newArray(localisation).map(adress=> {
                 return {
                     adress,
-                    count: localisation.filter(x => x === adress).length
+                    count: localisation.filter(x => x === adress).length,
+                    percentage: 0
                 }
             })
         },

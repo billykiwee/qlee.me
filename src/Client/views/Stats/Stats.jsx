@@ -97,7 +97,7 @@ export default function Stats() {
                                         {
                                             statistics
                                             .map((stat, i)=> {
-                                                return <Block data={{stat}} User={User} key={i} />
+                                                return <Block stats={stat} User={User} key={i} />
                                             })
                                         }
 
