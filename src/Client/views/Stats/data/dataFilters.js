@@ -12,82 +12,39 @@ export const dataFilter = (LinkStat) => {
 
     if (!LinkStat) return 
 
-    const stats = {
-        clics : LinkStat.length,
-        device: {
-            filter: LinkStat.map(e=> e.device),
-            count : () => countBy(stats.device.filter)
-        },
-        reference: {
-            filter: LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin),
-            count : () => countBy(stats.reference.filter)
-        },
-        localisation: {
-            filter: LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country),
-            count : () => countBy(stats.localisation.filter)
-        },
-        performance: {
-            filter: LinkStat.map(e=> e.performance),
-            count : () => {
-                if (stats.performance.filter.length) {
-                    let lenght       = stats.performance.filter.length
-                    let sort         = stats.performance.filter.reduce((x,y) => x + y)
-                    let result       = (sort / lenght) / 1000
-                    let resultSecond = result.toFixed(2) + 's'
-                    return resultSecond
-                }
-            }
-        },
-    }
+    const newArray = (array) => Array.from(new Set([...array]))
 
-    const lol = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
+    const clics = LinkStat.length
+    const device = LinkStat.map(e=> e.device)
+    const localisation = LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country)
+    const reference = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
+    const performance = LinkStat.map(e=> e.performance)
 
-    const n = {
-        reference : lol.map(url=> {
+
+    const statistics = {
+        clics : clics,
+        device: newArray(device).map(app=> {
             return {
-                url,
-                count : lol.filter(x => x === url).length
+                app,
+                count: device.filter(x => x === app).length
             }
         }),
-        length : lol.length
+        reference : newArray(reference).map(url=> {
+            return {
+                url,
+                count: reference.filter(x => x === url).length
+            }
+        }),
+        localisation : newArray(localisation).map(adress=> {
+            return {
+                adress,
+                count: localisation.filter(x => x === adress).length
+            }
+        }),
+        performance: {
+            speed : ((performance.filter.reduce((x,y) => x + y) / performance.length) / 1000).toFixed(2)
+        }
     }
 
-    console.log(n);
-
-
-    const { clics, device, reference, localisation, performance } = stats
-
-
-    return [
-        {
-            title: 'Clics',
-            type : 'clics',
-            icon : <EyeIcon width={18}/>,
-            data : clics,
-        },
-        {
-            title: 'Appareil',
-            type : 'device',
-            icon : <DevicePhoneMobileIcon width={18}/>,
-            data : device.count()
-        },
-        {
-            title: 'Source',
-            type : 'reference',
-            icon : <GlobeEuropeAfricaIcon width={18}/>,
-            data : reference.count()
-        },
-        {
-            title: 'Localisation',
-            type : 'localisation',
-            icon : <MapPinIcon width={18}/>,
-            data : localisation.count()
-        },
-        {
-            title: 'Performance',
-            type : 'performance',
-            icon : <RocketLaunchIcon width={18} />,
-            data : performance.count()
-        },
-    ]
+    return statistics
 }

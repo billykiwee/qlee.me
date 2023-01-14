@@ -101,29 +101,6 @@ export default function Stats() {
                                             })
                                         } */}
 
-                                        {
-                                            data
-                                            .map(stat=> {
-
-                                               return (
-                                                <>
-                                                    {
-                                                        stat.type === 'clics' && <Clics stat={stat.data} />
-                                                        &&
-                                                        isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
-                                                        &&
-                                                        stat.type === 'device' && <Device stat={stat.data} />
-                                                        &&
-                                                        stat.type === 'reference' && <Reference stat={stat.data} />
-                                                        &&
-                                                        stat.type === 'localisation' && <Location stat={stat.data} />
-                                                        &&
-                                                        stat.type === 'performance' && <Performance stat={stat.data} />
-                                                    }
-                                                </>
-                                               )
-                                            })
-                                        }
                                     </div>
                                 </div>
                             )
