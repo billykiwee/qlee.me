@@ -16,7 +16,7 @@ export default function Redirection() {
     const startLoading = performance.now()
     const statID = 's-' + new Date().getTime()
 
-    const fetchData = async () => {
+    const createStat = async () => {
         
         try {
             const link   = await fetchLink(LinkID)
@@ -47,8 +47,8 @@ export default function Redirection() {
 
 
     useEffect(() => {
-       fetchData()
-    }, [LinkID])
+       createStat()
+    }, [])
       
 
     return (
