@@ -8,9 +8,10 @@ import { Performance } from './components/Performance'
 import { Reference } from './components/Reference'
 
 
-export const Block = ({ User, statistic }) => {
+export const Block = ({ data, User }) => {
 
-    const { title, data, type, icon } = statistic
+    const { title, data, icon } = data
+
 
     console.log(data);
 
@@ -23,6 +24,19 @@ export const Block = ({ User, statistic }) => {
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
+                    {
+                        type === 'clics' && <Clics stat={{ data }} />
+                        ||
+                        isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
+                        ||
+                        type === 'device' && <Device stat={{ data }} />
+                        ||
+                        type === 'reference' && <Reference stat={{ data }} />
+                        ||
+                        type === 'localisation' && <Location stat={{ data }} />
+                        ||
+                        type === 'performance' && <Performance stat={{ data }} />
+                    }
                 </div>
             </div>
         </div>

@@ -21,30 +21,51 @@ export const dataFilter = (LinkStat) => {
     const performance = LinkStat.map(e=> e.performance)
 
 
-    const statistics = {
-        clics : clics,
-        device: newArray(device).map(app=> {
-            return {
-                app,
-                count: device.filter(x => x === app).length
+    const statistics = [
+        {
+            title: 'Clics',
+            name : 'clics',
+            data : clics,
+        },
+        {
+            title: 'Appareil',
+            name : 'device',
+            data : newArray(device).map(app=> {
+                return {
+                    app,
+                    count: device.filter(x => x === app).length
+                }
+            })
+        },
+        {
+            title: 'Source',
+            name : 'reference',
+            data : newArray(reference).map(url=> {
+                return {
+                    url,
+                    count: reference.filter(x => x === url).length
+                }
+            })
+        },
+        {
+            title: 'Localisation',
+            name : 'localisation',
+            data : newArray(localisation).map(adress=> {
+                return {
+                    adress,
+                    count: localisation.filter(x => x === adress).length
+                }
+            })
+        },
+        {
+            title: 'Performance',
+            name : 'performance',
+            data : {
+                speed: ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2)
             }
-        }),
-        reference : newArray(reference).map(url=> {
-            return {
-                url,
-                count: reference.filter(x => x === url).length
-            }
-        }),
-        localisation : newArray(localisation).map(adress=> {
-            return {
-                adress,
-                count: localisation.filter(x => x === adress).length
-            }
-        }),
-        performance: {
-            speed : ((performance.filter.reduce((x,y) => x + y) / performance.length) / 1000).toFixed(2)
         }
-    }
+    ]
+
 
     return statistics
 }

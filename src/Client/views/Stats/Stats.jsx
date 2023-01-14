@@ -62,7 +62,7 @@ export default function Stats() {
 
 
 
-    const data = dataFilter(LinkStat)
+    const statistics = dataFilter(LinkStat)
 
 
     const [Msg, setMsg] = useState([])
@@ -94,12 +94,12 @@ export default function Stats() {
                                     <Head topLink={topLink} />
                                     
                                     <div className='grid gap'>
-                                        {/* {
+                                        {
                                             statistics
                                             .map((stat, i)=> {
-                                                return <Block User={User} statistic={stat} key={i} />
+                                                return <Block data={{stat}} User={User} key={i} />
                                             })
-                                        } */}
+                                        }
 
                                     </div>
                                 </div>
