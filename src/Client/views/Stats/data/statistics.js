@@ -1,16 +1,15 @@
 import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, MapPinIcon, RocketLaunchIcon } from "@heroicons/react/24/solid"
+import { newArray } from "../../../../App/utils/newArray"
 
 export const statistics = (LinkStat) => {
 
     if (!LinkStat) return 
 
-    const newArray = (array) => Array.from(new Set([...array]))
-
-    const clics = LinkStat.length
-    const device = LinkStat.map(e=> e.device)
+    const clics        = LinkStat.length
+    const device       = LinkStat.map(e=> e.device)
     const localisation = LinkStat.map(e=> e.adress?.country_code + '__'+ e.adress?.country)
-    const reference = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
-    const performance = LinkStat.map(e=> e.performance)
+    const reference    = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
+    const performance  = LinkStat.map(e=> e.performance)
 
 
     return [
