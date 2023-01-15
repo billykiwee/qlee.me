@@ -19,11 +19,10 @@ import { useStateProps } from '../../../App/provider/ContextProvider';
 
 export function Stripe({planID}) {
 
-
-    const [MSG, setMSG] = useState({})
-
+    const { snackBar } = useStateProps()
     const user = useStateProps()?.user?.profil
-
+    
+    const [MSG, setMSG] = useState({})
     console.log(user);
     
 
@@ -103,12 +102,13 @@ export function Stripe({planID}) {
         try {
 
             const payment = {
-                id    : paymentMethod?.id,
-                amount: (amount * 100).toFixed(0),
-                date  : serverTimestamp()
+                id          : paymentMethod?.id,
+                formatAmount: amount,
+                amount      : (amount * 100).toFixed(0),
+                date        : serverTimestamp()
             }
 
-            await axios({
+            const response = await axios({
                 url   : 'http://localhost:8080/stripe/charge',
                 method: 'post',
                 data  : payment
@@ -120,6 +120,9 @@ export function Stripe({planID}) {
             .doc(payment.id)
             .set(payment)
     
+            snackBar.add({
+                text: 'Paiment réussi'
+            })
             console.log(user.email, payment, 'paiement réussi');
         }
         catch(error) {
@@ -183,17 +186,17 @@ export function Stripe({planID}) {
 
                     <div className='grid'>
                         <label>Nom</label>
-                        <input type='text' placeholder='Joe' className='div-input grey m-t-04' onChange={e=> setName(e.target.value)} id='name' />
+                        <input type='text' placeholder='Joe' className='div-input grey h-4 m-t-04' value={user.name ?? ''} onChange={e=> setName(e.target.value)} id='name' />
                     </div>
                     <div className='grid'>
                         <label>Email</label>
-                        <input type='email' placeholder={user?.email ?? 'mon-email@gmail.com'} className='div-input grey m-t-04' id='email' onChange={e=> setEmail(e.target.value)}/>
+                        <input type='email' placeholder={user?.email ?? 'mon-email@gmail.com'} value={user.email ?? ''} className='div-input h-4 grey m-t-04' id='email' onChange={e=> setEmail(e.target.value)}/>
                     </div>
                     
                     <div className='grid gap-1rem' >
                         <div className='grid gap'>
-                            <label className='display m-b-04'>Numéro de carte</label>
-                            <div className='display justify-s-b border border-r-04 p-1 div-input grey h-1' id='card_number' >
+                            <label className='display'>Numéro de carte</label>
+                            <div className='display justify-s-b border border-r-04 p-1 div-input grey h-4' id='card_number' >
                                 <div className='w-100p'>
                                     <CardNumberElement onChange={e=> setTypeCard(e.brand) } />
                                 </div>
@@ -229,17 +232,17 @@ export function Stripe({planID}) {
                         <div className='grid gap'>
                             <div className='display justify-s-b gap'>
                                 <div className='display gap justify-s-b w-100p align-top'>
-                                    <div className='grid w-100p'>
-                                        <label className='display m-b-04'>Date d'expiration</label>
-                                        <div className='display justify-s-b border border-r-04 p-1 div-input grey h-1' id='card_expiry'>
+                                    <div className='grid w-100p gap'>
+                                        <label className='display'>Date d'expiration</label>
+                                        <div className='display justify-s-b border border-r-04 p-1 div-input h-4 grey' id='card_expiry'>
                                             <div className=' w-100p'>
                                                 <CardExpiryElement className='c-white' />
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='grid w-100p'>
-                                        <label className='display m-b-04'>Code</label>
-                                        <div className='display justify-s-b border border-r-04 p-1 div-input grey h-1' id='card_cvc'>
+                                    <div className='grid w-100p gap'>
+                                        <label className='display'>Code</label>
+                                        <div className='display justify-s-b border border-r-04 p-1 div-input h-4 grey' id='card_cvc'>
                                             <div className='w-100p'>
                                                 <CardCvcElement className='c-white' />
                                             </div>
@@ -254,10 +257,6 @@ export function Stripe({planID}) {
                         </div>
                     </div>
 
-                    <div className='display gap'>
-                        <input type='checkbox' className='w-1' id='remember_payment' />
-                        <label htmlFor='remember_payment' className='c-grey f-w-300'>Se souvenir de ma carte</label>
-                    </div>
                     <div className='display w-100p'>
                         <div className='display w-100p'>
                             <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' disabled={!stripe}>
@@ -282,9 +281,12 @@ export default function Payment() {
 
     return (
         <Main>
-            <Elements stripe={stripePromise} >
-                <Stripe planID={plan.toLocaleUpperCase()} />
-            </Elements>
+            <div className='grid gap-1rem'>
+                <h1 className='m-0'>Paiement</h1>
+                <Elements stripe={stripePromise} >
+                    <Stripe planID={plan.toLocaleUpperCase()} />
+                </Elements>
+            </div>
         </Main>
     )
 };
