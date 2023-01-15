@@ -12,6 +12,8 @@ import PhoneInput from 'react-phone-input-2'
 import { loadStripe } from '@stripe/stripe-js';
 import { plans } from '../../../Admin/settings/plans';
 import { detectCardType } from './lib/detectCard';
+import { db } from '../../../App/database/firebase';
+import { useStateProps } from '../../../App/provider/ContextProvider';
 
 
 
@@ -20,11 +22,10 @@ export function Stripe({planID}) {
 
     const [MSG, setMSG] = useState({})
 
-    const orderID = 'order-' + UniqueID()
+    const user = useStateProps()?.user?.profil
 
-    const { ShopID } = useParams()
-    const [{user}] = useStateValue()
-
+    console.log(user);
+    
 
     const [ShowCart, setShowCart] = useState(true)
 
@@ -86,36 +87,45 @@ export function Stripe({planID}) {
     async function processPayment() {
 
         if (!stripe || !elements) return
-
+    
         // card number element as the card element
         const cardNumberElement = elements?.getElement(CardNumberElement)
-
+    
         const {error, paymentMethod} = await stripe.createPaymentMethod({ type: 'card', card: cardNumberElement })
-
+    
         if (error) setError({
             id : error.code.split('incomplete_')[1],
             message: error.message
         })
-
+    
         const amount = plans[planID].price
+    
+        try {
 
-         try {
-            const response = await axios({
-                url: 'http://localhost:8080/stripe/charge',
+            const payment = {
+                id    : paymentMethod?.id,
+                amount: (amount * 100).toFixed(0),
+                date  : serverTimestamp()
+            }
+
+            await axios({
+                url   : 'http://localhost:8080/stripe/charge',
                 method: 'post',
-                data : {
-                    amount: (amount * 100).toFixed(0),
-                    id: paymentMethod?.id
-                }
+                data  : payment
             })
 
-            console.log('paiement réussi');
+           await db.collection('users')
+            .doc(user.email)
+            .collection('transactions')
+            .doc(payment.id)
+            .set(payment)
+    
+            console.log(user.email, payment, 'paiement réussi');
         }
         catch(error) {
             console.log(error)
         }
     }
-
 
     const [typeCard, setTypeCard] = useState('')
 
