@@ -5,9 +5,8 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 
 
 export function Location({ stat }) {
-    
+
     if (!stat.length) return <small className='c-grey'>Aucune données</small>
-                                    
 
     return stat
     .sort((x, y)=> y.count - x.count)

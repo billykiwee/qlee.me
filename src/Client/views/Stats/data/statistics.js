@@ -11,7 +11,6 @@ export const statistics = (LinkStat) => {
     const reference    = LinkStat.filter(e=> e.reference !== '').map(e=> e.reference && new URL(e.reference).origin)
     const performance  = LinkStat.map(e=> e.performance)
 
-
     return [
         {
             title: 'Clics',
@@ -62,7 +61,7 @@ export const statistics = (LinkStat) => {
                     {
                         title: 'vitesse',
                         name : 'speed',
-                        data : ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2) + ' s',
+                        data : performance.length ? ((performance.reduce((x,y) => (x + y), 0) / performance.length) / 1000).toFixed(2) + ' s' : '',
                     }
                 ]
             },
