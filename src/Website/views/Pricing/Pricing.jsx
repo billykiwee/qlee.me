@@ -138,6 +138,7 @@ function FAQ() {
             a : 'No, you don’t. Onepage is a clouee or paid plans. As well as any additional plug-ins are not required.'
         },
     ]
+    
     return (
         <div className='grid gap-3rem m-t-4'>
             <div className='display justify-c p-2'>

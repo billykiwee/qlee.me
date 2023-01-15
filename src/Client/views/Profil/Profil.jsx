@@ -9,6 +9,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import Main from '../../../App/components/Main'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import formatDate from '../../../App/utils/formatDate'
+import formatCurrency from '../../../App/utils/formatCurrency'
 
 
 
@@ -49,7 +50,57 @@ export default function Profil() {
     }
 
 
+    const [showTransactions, setShowTransactions] = useState(5)
+
     const transactions = [
+        {
+            id    : 't-1',
+            type  : 'pay',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-2',
+            type  : 'pay',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-1',
+            type  : 'pay',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-2',
+            type  : 'pay',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-1',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-2',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-1',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-2',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
         {
             id    : 't-1',
             type  : 'withdraw',
@@ -135,18 +186,28 @@ export default function Profil() {
                         <span className='f-s-20'>Mes transactions</span>
                         <div className='grid gap'>
                             {
-                                transactions.map(transaction=> {
+                                transactions
+                                .map(transaction=> {
                                     const { id, type, amount, date } = transaction
+
                                     return (
-                                        <div className='display justify-s-b border white p-04 border-r-04'>
+                                        <div className='display justify-s-b border white p-04 border-r-04' key={id} >
                                             <div className='display gap'>
-                                                <span>{type}</span> : <span>{amount}</span>
+                                                <span>{type}</span> 
+                                                : 
+                                                <span className={type === 'withdraw' ? 'c-green' : 'c-red'}>{formatCurrency(amount)}</span>
                                             </div>
-                                            <span>{date.toDateString()}</span>
+                                            <small>{date.toDateString()}</small>
                                         </div>
                                     )
                                 })
+                                .splice(0, showTransactions)
                             }
+                            <div>
+                                <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
+                                    <span className='f-s-16'>Voir plus</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
