@@ -1,6 +1,6 @@
 
 export async function getUnsplashImage(subject) {
-    const apiKey = 'kj408nn4kDTQyU-H3nyemQ3bPkqEJf7CS5wUvAHNy0I'
+    const apiKey = process.env.UNSPLAH_API_KEY
     const url = `https://api.unsplash.com/photos/random?query=${subject}`
 
     const response = await fetch(url, {
@@ -11,8 +11,8 @@ export async function getUnsplashImage(subject) {
     const data = await response.json()
 
     return {
-        url: data.urls.regular,
-        author: data.user.name,
-        profileUrl: data.user.links.html
+      url       : data.urls.regular,
+      author    : data.user.name,
+      profileUrl: data.user.links.html
     }
 }
