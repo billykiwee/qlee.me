@@ -5,10 +5,11 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import { FAQ } from './components/Faq/Faq'
 import { Plans } from './data/plans'
 
 
-export default function Pricing({ props }) {
+export default function Pricing() {
 
     const history = useNavigate()
 
@@ -41,8 +42,6 @@ export default function Pricing({ props }) {
                     {
                         Object.values(Plans)
                         .map(plan => {
-                            
-                            const checkUserPlan = plan.plan.toUpperCase().includes(isUserPremium(User).plan)
 
                             return (
                                 <div className='grid' key={plan.plan}>
@@ -55,7 +54,7 @@ export default function Pricing({ props }) {
                                                     <span className='opacity'>{plan.subtitle}</span>
                                                 </div>
                                                 {
-                                                    checkUserPlan &&
+                                                    user.plan &&
                                                     <div>
                                                         <img src='/images/check.svg' width={22} />
                                                     </div>
@@ -73,33 +72,34 @@ export default function Pricing({ props }) {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <a href={plan.payment} className='w-100p'>
-                                                        <button 
-                                                            onClick={e=> checkUserPlan ? history('/dashboard') : ''}
-                                                            className={(plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'}
+                                                    <a href={user.plan === plan.plan ? history('/dashboard') : plan.payment} className='w-100p'>
+                                                        <button className={
+                                                                (plan.recommended 
+                                                                ? 'yellow hover-yellow' 
+                                                                : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'
+                                                            }
                                                         > 
-                                                            <span style={{
-                                                                color : plan.recommended ? 'black' : 'white'
-                                                            }}
-                                                            >{checkUserPlan ? 'Continuer' : 'Essayer'}</span> 
+                                                            <span style={{ color : plan.recommended ? 'black' : 'white' }}>
+                                                                {user.plan ? 'Continuer' : 'Essayer'}
+                                                            </span> 
                                                         </button>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div className='grid gap-04'>
-                                            {
-                                                plan.benefits &&
-                                                plan.benefits.map((benefit)=> {
-                                                    
-                                                    return (
-                                                        <div className='display gap hover border-r-1 h-2 click' key={benefit}>
-                                                            <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
-                                                            <p className='f-w-300'>{benefit[0]}</p>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-
+                                            <div className='grid gap-04 grey border-r-1 p-1 '>
+                                                {
+                                                    plan.benefits &&
+                                                    plan.benefits
+                                                    .map((benefit)=> {
+                                                        
+                                                        return (
+                                                            <div className='display gap hover border-r-1 h-2 click' key={benefit}>
+                                                                <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
+                                                                <p className='f-w-300'>{benefit[0]}</p>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
                                             </div>
                                         </div>
                         
@@ -113,57 +113,5 @@ export default function Pricing({ props }) {
 
             <FAQ /> 
         </Main>
-    )
-}
-
-
-
-function FAQ() {
-
-    const questions = [
-        {
-            q : 'Is access to Onepage free of charge?',
-            a : 'Yes, it is. By picking a free plan, you can create and host 1 Project with 3 pages. It’s self-sufficient for smaller businesses and individuals'
-        },
-        {
-            q : 'What’s the difference between Projects and Pages in your pricing plans',
-            a : 'Projects are a set of pages grouped under one domain & design settings. So, simply telling, 1 Project equals a Domain, like www.onepage.io'
-        },
-        {
-            q : 'Do I have to buy or install anything in addition to using Onepage?',
-            a : 'No, you don’t. Onepage is a cloud-based solution means hosting is already included in free or paid plans. As well as any additional plug-ins are not required.'
-        },
-        {
-            q : 'Do I have to buy or instnepage?',
-            a : 'No, you don’t. Onepage is a clouee or paid plans. As well as any additional plug-ins are not required.'
-        },
-    ]
-    
-    return (
-        <div className='grid gap-3rem m-t-4'>
-            <div className='display justify-c p-2'>
-                <div className='grid'>
-                    <span className='f-s-25 c-blue f-w-800 text-align-c'>FAQ</span>
-                    <h1 className='m-0 text-align-c'>Toujours une question ?</h1>
-                </div>
-            </div>
-            
-            <div className='grid gap-1rem align-top question' >
-                {
-                    questions.map((question, i)=> {
-                        return (
-                            <div className='grid gap-1rem p-1' key={i}>
-                                <div className='grid gap'>
-                                    <QuestionMarkCircleIcon className='c-grey w-3' />
-                                    <span className='f-s-25 f-w-500'>{question.q}</span>
-                                </div>
-                                <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            
-        </div>
     )
 }
