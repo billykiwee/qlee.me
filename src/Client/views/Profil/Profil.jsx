@@ -8,6 +8,7 @@ import { PencilSquareIcon } from '@heroicons/react/24/solid'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import Main from '../../../App/components/Main'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import formatDate from '../../../App/utils/formatDate'
 
 
 
@@ -46,6 +47,22 @@ export default function Profil() {
             [editValue[0]] : editValue[1]
         })
     }
+
+
+    const transactions = [
+        {
+            id    : 't-1',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
+        {
+            id    : 't-2',
+            type  : 'withdraw',
+            amount: 12.9,
+            date  : new Date(),
+        },
+    ]
 
     
     if (!user) return <Login />
@@ -97,33 +114,44 @@ export default function Profil() {
                 </div>
 
 
-                <div className='grid gap-1rem'>
-                    <Inputs props={{
-                        label: 'Nom',
-                        input: 'name',
-                        User : User
-                    }} />
+                <div className='grid gap-2rem'>
 
-                    <Inputs props={{
-                        label: 'Description',
-                        input: 'description',
-                        User : User
-                    }} />
+                    <div className='grid gap-1rem grey border-r-1 p-1'>
+                        <span className='f-s-20'>Mes informations</span>
+                        <Inputs props={{
+                            label: 'Nom',
+                            input: 'name',
+                            User : User
+                        }} />
 
-                    {/* <Inputs props={{
-                        label: 'Email',
-                        input: 'email',
-                        User : User
-                    }} />
-                    <div className='grid gap'>
-                        <span>Mot de passe</span>
-                        <input className='div-input white h-3' type='password' defaultValue='*******' />
+                        <Inputs uneditable props={{
+                            label: 'Email',
+                            input: 'email',
+                            User : User,
+                        }} />
                     </div>
-                    <div className='grid gap'>
-                        <span>Confirmer le mot de passe</span>
-                        <input className='div-input white h-3' type='password' defaultValue='*******' />
-                    </div> */}
+
+                    <div className='grid gap-1rem grey border-r-1 p-1'>
+                        <span className='f-s-20'>Mes transactions</span>
+                        <div className='grid gap'>
+                            {
+                                transactions.map(transaction=> {
+                                    const { id, type, amount, date } = transaction
+                                    return (
+                                        <div className='display justify-s-b border white p-04 border-r-04'>
+                                            <div className='display gap'>
+                                                <span>{type}</span> : <span>{amount}</span>
+                                            </div>
+                                            <span>{date.toDateString()}</span>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+
                 </div>
+                
 
             </div>
         </Main>
@@ -132,15 +160,17 @@ export default function Profil() {
 
 
 
-const Inputs = ({props}) => {
+const Inputs = ({ props, uneditable }) => {
+
+    const { User, label, input } = props
 
     return (
-        <div className='grid gap'>
-            <span>{props.label}</span>
+        <div className='grid gap' style={{ pointerEvents : uneditable ? 'none' : 'cursor' }} >
+            <span>{label}</span>
             <input 
                 className='div-input white h-3' 
                 type='text' 
-                placeholder={props.User?.[props.input]} 
+                placeholder={User?.[input]} 
             />
         </div>
     )
