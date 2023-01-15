@@ -25,17 +25,7 @@ export default function Login() {
     const [HashPassword, setHashPassword] = useState(false)
     const [Loader, setLoader] = useState(false)
 
-
-  /*   const [UnsplashImg, setUnsplashImg] = useState('')
-    useEffect(e=> {
-        getUnsplashImage('nature')
-        .then(data => {
-            setUnsplashImg(data)
-        })
-    }, []) */
-
     console.log(GetUnsplashImage('nature'));
-
 
     if (auth) history('/dashboard')
     return (
@@ -44,7 +34,7 @@ export default function Login() {
             <div className='login' >
                 <div className='login-img'>
                     {
-                        Object.values(GetUnsplashImage('nature')).length &&
+                        GetUnsplashImage('nature').url &&
                         <>
                             <a href={GetUnsplashImage('nature').profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
                                 <small className='display '>@ {GetUnsplashImage('nature').author}</small>

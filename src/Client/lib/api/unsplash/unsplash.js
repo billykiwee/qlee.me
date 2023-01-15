@@ -27,5 +27,5 @@ export function GetUnsplashImage(subject) {
 
   }, [subject])
 
-  return img
+  img.url && return img
 }
