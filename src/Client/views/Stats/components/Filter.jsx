@@ -13,22 +13,22 @@ export default function Filter({props}) {
         {
             name: 'popular',
             text: 'Populaire',
-            icon: <StarIcon width={16} />
+            icon: <StarIcon width={14} />
         },
         {
             name: 'recent',
             text: 'Le plus récent',
-            icon: <ForwardIcon width={16} />
+            icon: <ForwardIcon width={14} />
         },
         {
             name: 'oldest',
             text: 'Le plus ancient',
-            icon: <BackwardIcon width={16} />
+            icon: <BackwardIcon width={14} />
         },
         {
             name: 'link-in-bio',
             text: 'Link in bio',
-            icon: <SwatchIcon width={16} />
+            icon: <SwatchIcon width={14} />
         }
     ]
 
@@ -79,7 +79,7 @@ export default function Filter({props}) {
                                         isOpen ? <ChevronUpIcon width={12} /> : <ChevronDownIcon width={12} />
                                     }
                                 </div>
-                                <div className={`dropdown-body ${isOpen && 'open'}`}>
+                                <div className={`dropdown-body border ${isOpen && 'open'}`}>
                                     {
                                         filters.map((item, i) => {
                                             return (

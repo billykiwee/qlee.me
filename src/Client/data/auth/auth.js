@@ -15,7 +15,8 @@ export default function useGetAuth() {
                     type: 'SET_USER',
                     user: authUser
                 })
-            } else { 
+            } 
+            else { 
                 dispatch({
                     type: 'SET_USER',
                     user: null

@@ -46,7 +46,6 @@
   
   .dropdown-body {
     padding: 5px;
-    border-top: 1px solid var(--border);
     display: none;
   }
   
@@ -55,12 +54,13 @@
     position: absolute;
     z-index: 9;
     background:  var(--white);
-    border-radius: 0.4rem;
+    border-radius: 1rem;
     box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
   }
   
   .dropdown-item {
     padding: 10px;
+    border-radius: 0.4rem;
   }
   
   .dropdown-item:hover {

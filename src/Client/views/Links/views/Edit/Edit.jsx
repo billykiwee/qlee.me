@@ -113,7 +113,7 @@ export default function Edit() {
                                 <div className='grid gap-1rem white shadow border-r-1 border p-2' >
                                     <div className='grid gap w-100p'>
                                         <span>Modifier le nom</span>
-                                        <input type='text' className='div-input h-3 border-r-1 w-100p grey' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
+                                        <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
                                         <small className='c-red' id='error-name'></small>
                                     </div>
 
@@ -130,7 +130,7 @@ export default function Edit() {
                                                 : { pointerEvents: 'visible',  opacity: 1 }
                                             } 
                                         >
-                                            <input type='text' className='div-input h-3 border-r-1 w-100p grey' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
+                                            <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
                                         </div>
                                         <small className='c-red' id='error-url'></small>
                                     </div>
@@ -141,7 +141,7 @@ export default function Edit() {
                                             { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                         </div>
                                         <div 
-                                            className='display div-input h-3 border border-r-1 w-100p grey'
+                                            className='display div-input h-4 border border-r-1 w-100p grey'
                                             style={ 
                                                 isUserPremium(User).plan === 'FREE' 
                                                 ? { pointerEvents: 'none', opacity: 0.8} 
