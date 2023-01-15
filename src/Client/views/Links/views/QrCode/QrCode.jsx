@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { SwitchInput } from '../../../../../App/components/Switch'
 import { colors } from '../../../../../App/utils/generateLetterImage'
 import getFavicon from '../../../../../App/utils/getFavicon'
-import { download } from '../../../../lib/htmlToImage/download'
+import { download } from './functions/htmlToImage/download'
 import QrCodeSvg, { EditQrCode } from './components/Edit'
 
 

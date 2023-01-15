@@ -7,14 +7,14 @@ import "swiper/css/pagination"
 import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
-import Main from '../App/components/Main'
+import Main from '../../../App/components/Main'
 import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
-import { fetchLinks } from '../Client/lib/database/links/fetchLinks';
-import { SwitchInput } from '../App/components/Switch';
-import getFavicon from '../App/utils/getFavicon';
-import { GetWidth } from '../App/utils/GetWidth';
+import { fetchLinks } from '../../../Client/lib/database/links/fetchLinks';
+import { SwitchInput } from '../../../App/components/Switch';
+import getFavicon from '../../../App/utils/getFavicon';
+import { GetWidth } from '../../../App/utils/GetWidth';
 import { useContext } from 'react';
-import { useStateProps } from '../App/provider/ContextProvider';
+import { useStateProps } from '../../../App/provider/ContextProvider';
 
 
 export default function Home() {
@@ -336,7 +336,6 @@ export default function Home() {
                 <div className='grid gap p-2'>
                     {
                         tempateLinks.map(t=> {
-
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1'>
                                     <div className='display gap-1rem'>

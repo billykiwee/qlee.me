@@ -1,6 +1,6 @@
 import { db } from "../../../../App/database/firebase"
 
-export async function fetchLink(LinkID) {
+export async function getLink(LinkID) {
 
     const snapshot  = await db.collection('links').get()
     const userLinks = snapshot.docs.map(doc => doc.data())

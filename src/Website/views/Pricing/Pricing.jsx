@@ -19,8 +19,6 @@ export default function Pricing({ props }) {
 
     return (
         <Main>
-
-
             <div className='grid gap-2rem'>
                 <div className='grid'>
                     <div className='grid'>
@@ -114,7 +112,6 @@ export default function Pricing({ props }) {
             </div>
 
             <FAQ /> 
-
         </Main>
     )
 }

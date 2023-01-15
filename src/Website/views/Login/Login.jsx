@@ -8,7 +8,7 @@ import { GetUnsplashImage } from '../../../Client/lib/api/unsplash/unsplash'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { byGoogle } from './functions/register/byGoogle'
 import { byEmail } from './functions/register/byEmail'
-import ConntectWidth from '../connection/components/ConnectWith'
+import ConntectWidth from './components/ConnectWith'
 
 
 

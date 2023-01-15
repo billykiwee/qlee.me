@@ -1,14 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 
-import Home from '../Website/Home'
+import Home from '../Website/views/Home/Home'
 
 import Dashboard from '../Client/views/Dashboard/Dashboard'
 import Edit from '../Client/views/Links/views/Edit/Edit'
 import Header from './components/header/Header'
 
 import Footer from './components/Footer'
-import Login from '../Website/views/connection/Login'
+import Login from '../Website/views/Login/Login'
 import Page404 from '../Website/views/Page404'
 import Pricing from '../Website/views/Pricing/Pricing'
 import Stats from '../Client/views/Stats/Stats'
