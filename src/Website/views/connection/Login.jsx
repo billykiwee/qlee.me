@@ -4,13 +4,11 @@ import UniqueID from '../../../App/utils/uniqueID'
 import Messages from '../../../App/utils/Messages'
 import Main from '../../../App/components/Main'
 import '../../../App/css/login.css'
-import { getUnsplashImage } from '../../../Client/lib/api/unsplash/unsplash'
+import { GetUnsplashImage } from '../../../Client/lib/api/unsplash/unsplash'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { byGoogle } from './functions/register/byGoogle'
 import { byEmail } from './functions/register/byEmail'
 import ConntectWidth from '../connection/components/ConnectWith'
-import { db, storage } from '../../../App/database/firebase'
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 
 
@@ -28,15 +26,16 @@ export default function Login() {
     const [Loader, setLoader] = useState(false)
 
 
-    const [UnsplashImg, setUnsplashImg] = useState('')
+  /*   const [UnsplashImg, setUnsplashImg] = useState('')
     useEffect(e=> {
         getUnsplashImage('nature')
         .then(data => {
             setUnsplashImg(data)
         })
-    }, [])
+    }, []) */
 
-    
+    console.log(GetUnsplashImage('nature'));
+
 
     if (auth) history('/dashboard')
     return (
@@ -44,13 +43,18 @@ export default function Login() {
 
             <div className='login' >
                 <div className='login-img'>
-                    <a href={UnsplashImg.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
-                        <small className='display '>@ {UnsplashImg.author}</small>
-                    </a>
                     {
-                        !UnsplashImg
-                        ? <Messages loader={Loader} />
-                        : <img className='border-r-2' height='100%' src={UnsplashImg.url} alt={UnsplashImg.author + ' @ ' + UnsplashImg.profileUrl} />
+                        Object.values(GetUnsplashImage('nature')).length &&
+                        <>
+                            <a href={GetUnsplashImage('nature').profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
+                                <small className='display '>@ {GetUnsplashImage('nature').author}</small>
+                            </a>
+                            {
+                                !GetUnsplashImage('nature')
+                                ? <Messages loader={Loader} />
+                                : <img className='border-r-2' height='100%' src={GetUnsplashImage('nature').url} alt={GetUnsplashImage('nature').author + ' @ ' + GetUnsplashImage('nature').profileUrl} />
+                            }
+                        </>
                     }
                 </div>
                 <div className="form-block">
