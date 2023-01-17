@@ -1,7 +1,9 @@
-import { collection } from "firebase/firestore"
-import { db } from "../../../../App/database/firebase"
+import { useElements, useStripe } from "@stripe/react-stripe-js"
 
-async function processPayment() {
+export async function processPayment(props) {
+
+    const { stripe, elements } = props
+
 
     if (!stripe || !elements) return
 
@@ -18,28 +20,34 @@ async function processPayment() {
     const amount = plans[planID].price
 
     try {
-        const response = await axios({
-            url: 'http://localhost:8080/stripe/charge',
-            method: 'post',
-            data : {
-                amount: (amount * 100).toFixed(0),
-                id: paymentMethod?.id
-            }
-        })
-
 
         const payment = {
-            id : response.id
+            id          : paymentMethod?.id,
+            formatAmount: amount,
+            amount      : (amount * 100).toFixed(0),
+            date        : serverTimestamp()
         }
 
-        console.log(payment);
+        const response = await axios({
+            url   : 'http://localhost:8080/stripe/charge',
+            method: 'post',
+            data  : payment
+        })
 
-       /*  db.collection('users')
-        .doc('email')
-        collection('transactions')
-        .set({}) */
+        await db.collection('users')
+        .doc(user.email)
+        .update({ plan: planID })
 
-        console.log('paiement réussi');
+        await db.collection('users')
+        .doc(user.email)
+        .collection('transactions')
+        .doc(payment.id)
+        .set(payment)
+
+        snackBar.add({
+            text: 'Paiment réussi'
+        })
+        console.log(user.email, payment, 'paiement réussi')
     }
     catch(error) {
         console.log(error)
