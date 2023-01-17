@@ -4,7 +4,9 @@ import { uploadPhoto } from "../../Profil/functions/uploadPhoto"
 
 export function Head({props}) {
 
-    const { userView, User, LinkInBioLinks, link_in_bio } = props
+    const { userView, User, LinkInBioLinks, link_in_bio, Settings } = props
+
+    console.log( Settings?.header?.title?.color);
 
     return (
         <div className='grid gap-1rem p-1'>
@@ -37,13 +39,18 @@ export function Head({props}) {
             <div className='grid gap-1rem'>
                 <div className='grid gap'>
                     <div className='display justify-c'>
-                        <span className='f-s-25 f-w-400' style={{filter : 'invert(1)', color: 'black'}}>
-                            <span className='f-s-18'>@</span>
+                        <span className='f-s-25 f-w-400' 
+                            style={{
+                                color   : Settings?.header?.title?.color,
+                                fontSize: Settings.header?.title?.fontSize + 'px'
+                            }}
+                        >
+                            <span>@</span>
                             {User?.name}
                         </span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{link_in_bio.description}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{Settings.header?.title?.text}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>

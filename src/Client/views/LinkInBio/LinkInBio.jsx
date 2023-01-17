@@ -97,7 +97,8 @@ export default function LinkInBio({ userView, username }) {
                                     userView, 
                                     User, 
                                     LinkInBioLinks,
-                                    link_in_bio
+                                    link_in_bio,
+                                    Settings
                                 }} 
                             />
                             

@@ -15,10 +15,10 @@ export const settings = (link_in_bio) => {
                 text      : header.description.text,
             },
             title : {
-                color     : header.description.color,
-                fontFamily: header.description.fontFamily,
-                fontWeight: header.description.fontWeight,
-                fontSize  : header.description.fontSize,
+                color     : header.title.color,
+                fontFamily: header.title.fontFamily,
+                fontWeight: header.title.fontWeight,
+                fontSize  : header.title.fontSize,
             }
         },
         background: {
