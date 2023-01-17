@@ -12,6 +12,7 @@ import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
 import { db } from '../../../App/database/firebase';
 import { getDatabase, ref, onValue} from "firebase/database";
+import { useStateValue } from '../../../App/provider/StateProvider';
 
 
 export default function Dashboard() {
@@ -27,7 +28,7 @@ export default function Dashboard() {
     
     
     
-    console.log(useGetLinks(auth));
+    console.log(useGetLinks('link_in_bio'));
 
   /*   if (!auth) return <Login />
     return (
@@ -139,23 +140,49 @@ export default function Dashboard() {
 }
 
 
-function useGetLinks(auth) {
+function useGetLinks(data) {
 
-    const [Lol, setLol] = useState([])
+    const [Links, setLinks] = useState([])
+
+    const [{user}] = useStateValue()
+
+    let fetch 
 
     useEffect(e=> {
 
-        if (!auth) return 
+        if (!user) return 
 
-        db.collection('links')
-        .where('user', '==', auth.email)
-        .onSnapshot(snapshot=> {
-            setLol(snapshot.docs.map(doc => doc.data()))
-        })
+        if (data === 'links') {
+            fetch = db.collection('links')
+            .where('user', '==', user.email)
+            .onSnapshot(snapshot=> {
+                setLinks(snapshot.docs.map(doc => doc.data()))
+            })
+        }
 
-    }, [auth])
+        else if (data === 'link_in_bio') {
+            fetch =  db.collection('link-in-bio')
+            .where('user', '==', user.email)
+            .onSnapshot(snapshot=> {
+                setLinks(snapshot.docs.map(doc => doc.data()))
+            })
+        }
 
-    return Lol
+        else if (data === 'link_in_bio_Links') {
+            fetch =  db.collection('links')
+            .where('user', '==', user.email)
+            .where('linkInBio', '==', true)
+            .onSnapshot(snapshot=> {
+                setLinks(snapshot.docs.map(doc => doc.data()))
+            })
+        }
+
+
+        return () => fetch()
+
+    }, [user])
+
+    return Links
 }
 
 
