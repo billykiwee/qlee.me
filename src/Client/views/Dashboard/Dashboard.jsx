@@ -24,17 +24,10 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    const db = getDatabase()
-    useEffect(e=> {
-
-        const starCountRef = ref(db, 'user/' + auth.email);
-        onValue(starCountRef, (snapshot) => {
-          const data = snapshot.val();
-          console.log(data);
-          updateStarCount(postElement, data);
-        });
-    }, [])
     
+    
+    
+    console.log(useGetLinks(auth));
 
   /*   if (!auth) return <Login />
     return (
@@ -145,6 +138,25 @@ export default function Dashboard() {
     ) */
 }
 
+
+function useGetLinks(auth) {
+
+    const [Lol, setLol] = useState([])
+
+    useEffect(e=> {
+
+        if (!auth) return 
+
+        db.collection('links')
+        .where('user', '==', auth.email)
+        .onSnapshot(snapshot=> {
+            setLol(snapshot.docs.map(doc => doc.data()))
+        })
+
+    }, [auth])
+
+    return Lol
+}
 
 
 
