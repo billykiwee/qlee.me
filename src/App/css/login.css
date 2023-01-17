@@ -55,5 +55,8 @@ input:hover {
     background-color: var(--grey);
     padding: 2rem;
     border-radius: 2rem;
+}
 
+.login-popup:nth-child(2) {
+    display: none;
 }
