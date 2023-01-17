@@ -1,6 +1,6 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
@@ -72,7 +72,7 @@ export default function Pricing() {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <a href={user.plan === plan.plan ? history('/dashboard') : plan.payment} className='w-100p'>
+                                                    <Link to={!user ? '/login' : user.plan === plan.plan ? history('/dashboard') : plan.payment}  className='w-100p'>
                                                         <button className={
                                                                 (plan.recommended 
                                                                 ? 'yellow hover-yellow' 
@@ -83,7 +83,7 @@ export default function Pricing() {
                                                                 {user.plan ? 'Continuer' : 'Essayer'}
                                                             </span> 
                                                         </button>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                             <div className='grid gap-04 grey border-r-1 p-1 '>

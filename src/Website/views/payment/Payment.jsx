@@ -33,57 +33,11 @@ export function Stripe({ planID }) {
 
     const stripe = useStripe()
     const elements = useElements()
-
-
-
-    const [infos, setInfos] = useState({ name: '', email: '' })
-
-    useEffect(e=> {
-       if (user.name) setInfos({ name: user.name, email: user.email })
-    }, [user])
-
-    const handleChange = (event) => {
-      const data = event.target
-
-      console.log(data);
-      setInfos({ ...infos, [data]: data.value })
-    }
-    console.log(infos);
-
-    function CheckBeforeProcess(e) {
-
-        const { name, email } = infos
-
-        e.preventDefault()
-
-        const styleInput = { valid : 'border: 1px solid var(--green)', error: 'border: 1px solid var(--red)', normal: 'border: 1px solid var(--border)' }
-
-
-        for (const v in Object.values(infos)) {
-            if (Object.values(infos)[v]) document.querySelector('#' + Object.keys(infos)[v]).style = styleInput.normal
-        }
-        document.querySelectorAll('.div-input grey').forEach(e=> e.value === '' ? e.style = styleInput.error : null)
-
-        if (!name) {
-            throw setMSG({
-                statu: 'error', 
-                msg: 'Vous devez renseigner un nom'
-            })
-        } 
-        if (!email) {
-            throw setMSG({
-                statu: 'error', 
-                msg: 'Vous devez renseigner un email'
-            })
-        } 
-
-        processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })
-    }
     
 
     if (valid) return <ValidPayment />
     return (
-        <form onSubmit={e=> CheckBeforeProcess({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
+        <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
             
             <div className='grid justify-s-b gap align-top blocks' >
                 <div className='grid w-100p '>
@@ -124,7 +78,7 @@ export function Stripe({ planID }) {
                 {
                     MSG.loader 
                     ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-                    : <CheckoutForm props={{ user, error, planID, handleChange }} />
+                    : <CheckoutForm props={{ user, error, planID }} />
                 }
             </div>
         </form>
