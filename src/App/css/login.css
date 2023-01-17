@@ -57,6 +57,6 @@ input:hover {
     border-radius: 2rem;
 }
 
-.login-popup:nth-child(2) {
-    display: none;
+.login-popup:nth-child(0) {
+    padding: 0;
 }

@@ -1,11 +1,9 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
+
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
 import { useStateProps } from '../../../App/provider/ContextProvider'
-import Login from '../Login/Login'
 import { FAQ } from './components/Faq/Faq'
 import { Plans } from './data/plans'
 
@@ -18,23 +16,9 @@ export default function Pricing() {
 
     const User = user?.profil
 
-    const [login, setLogin] = useState(false)
-
-    const redirect = (plan) => {
-
-        if (!auth) setLogin(true) 
-        else return user.plan === plan.plan ? history('/dashboard') : plan.payment
-    }
-
     return (
         <Main>
 
-            {
-                login && 
-                <div className='login-popup'>
-                    <Login redirect />
-                </div>
-            }
             <div className='grid gap-2rem'>
                 <div className='grid'>
                     <div className='grid'>
@@ -87,18 +71,22 @@ export default function Pricing() {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <div onClick={e=> redirect(plan)}  className='w-100p'>
+                                                    <Link to={ 
+                                                        !auth 
+                                                        ? history('/login') 
+                                                        : user.plan === plan.plan ? history('/dashboard') : plan.payment 
+                                                    }  
+                                                    className='w-100p'>
                                                         <button className={
-                                                                (plan.recommended 
-                                                                ? 'yellow hover-yellow' 
-                                                                : 'blue hover-blue') + ' f-s-16 border-b p-1 h-4 border-r-1'
+                                                                (plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') 
+                                                                + ' f-s-16 border-b p-1 h-4 border-r-1'
                                                             }
                                                         > 
                                                             <span style={{ color : plan.recommended ? 'black' : 'white' }}>
                                                                 {user.plan ? 'Continuer' : 'Essayer'}
                                                             </span> 
                                                         </button>
-                                                    </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                             <div className='grid gap-04 grey border-r-1 p-1 '>
@@ -106,7 +94,7 @@ export default function Pricing() {
                                                     plan.benefits &&
                                                     plan.benefits
                                                     .map((benefit)=> {
-                                                        
+                                                
                                                         return (
                                                             <div className='display gap hover border-r-1 h-2 click' key={benefit}>
                                                                 <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>

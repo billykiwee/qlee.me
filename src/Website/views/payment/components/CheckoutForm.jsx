@@ -6,6 +6,7 @@ import axios from 'axios'
 import { db } from '../../../../App/database/firebase'
 import { plans } from '../../../../Admin/settings/plans'
 import formatCurrency from '../../../../App/utils/formatCurrency'
+import { CreditCardIcon } from '@heroicons/react/24/solid'
 
 
 
@@ -17,6 +18,8 @@ export default function CheckoutForm({ props }) {
 
 
     const [typeCard, setTypeCard] = useState('')
+
+    console.log(typeCard);
 
     return (
         <div className='grid white border border-r-1 p-2 shadow gap-1rem'>
@@ -46,24 +49,28 @@ export default function CheckoutForm({ props }) {
                         <div className='display gap-04'>
                             <div className="display">
                                 {
-                                    (!typeCard || typeCard === 'visa') &&
-                                    <img alt="" src="https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d9945bfe.svg"/>
+                                    typeCard === 'unknow' && 
+                                    <CreditCardIcon width={30} className='c-white' />
+                                }
+                                {
+                                    typeCard === 'visa' &&
+                                    <img alt="" width={30} src="https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d9945bfe.svg"/>
                                 }
                                 {
                                     typeCard === 'mastercard' &&
-                                    <img alt="" src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"/>
+                                    <img alt="" width={30} src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"/>
                                 }
                                 {
                                     typeCard === 'AmericanExpress' &&
-                                    <img alt="" src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"/>
+                                    <img alt="" width={30} src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"/>
                                 }
                                 {
                                     typeCard === 'amex' &&
-                                    <img alt="" src="https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg"/>
+                                    <img alt="" width={30} src="https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg"/>
                                 }
                                 {
                                     typeCard === 'discover' &&
-                                    <img alt="" src="https://js.stripe.com/v3/fingerprinted/img/discover-ac52cd46f89fa40a29a0bfb954e33173.svg"/>
+                                    <img alt="" width={30} src="https://js.stripe.com/v3/fingerprinted/img/discover-ac52cd46f89fa40a29a0bfb954e33173.svg"/>
                                 }
                             </div>
                         </div>
