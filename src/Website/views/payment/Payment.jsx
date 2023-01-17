@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Main from '../../../App/components/Main'
 import formatCurrency from '../../../App/utils/formatCurrency'
-import Messages from '../../../App/utils/Messages'
 import { loadStripe } from '@stripe/stripe-js'
 import { plans } from '../../../Admin/settings/plans'
 import CheckoutForm from './components/CheckoutForm'
@@ -10,10 +9,6 @@ import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import ValidPayment from './components/ValidPayment'
 import { useParams } from 'react-router-dom'
-import { useReducer } from 'react'
-import { useEffect } from 'react'
-
-
 
 
 export function Stripe({ planID }) {
