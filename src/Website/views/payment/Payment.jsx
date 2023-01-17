@@ -10,6 +10,8 @@ import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import ValidPayment from './components/ValidPayment'
 import { useParams } from 'react-router-dom'
+import { useReducer } from 'react'
+import { useEffect } from 'react'
 
 
 
@@ -34,13 +36,9 @@ export function Stripe({ planID }) {
 
 
 
-    const [infos, setInfo] = useState({ name : '', email: '' })
+    const [infos, setInfos] = useReducer((a, b)=> { 
 
-    function CheckBeforeProcess(e) {
-
-        const { name, email } = infos
-
-        e.preventDefault()
+        const newEvent =  { ...a, ...b }
 
         const styleInput = { valid : 'border: 1px solid var(--green)', error: 'border: 1px solid var(--red)', normal: 'border: 1px solid var(--border)' }
 
@@ -50,19 +48,32 @@ export function Stripe({ planID }) {
         }
         document.querySelectorAll('.div-input grey').forEach(e=> e.value === '' ? e.style = styleInput.error : null)
 
-        if (!name) {
+        if (!newEvent.name) {
             throw setMSG({
                 statu: 'error', 
                 msg: 'Vous devez renseigner un nom'
             })
         } 
-        if (!email) {
+        if (!newEvent.email) {
             throw setMSG({
                 statu: 'error', 
                 msg: 'Vous devez renseigner un email'
             })
         } 
+        return { ...a, ...b } 
 
+    }, { name: '', email: '' })
+
+    useEffect(e=> {
+       if (user.name) setInfos({ name: user.name, email: user.email })
+    }, [user])
+
+
+    function CheckBeforeProcess(e) {
+
+        e.preventDefault()
+
+        if (infos)
         processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })
     }
     
@@ -110,7 +121,7 @@ export function Stripe({ planID }) {
                 {
                     MSG.loader 
                     ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-                    : <CheckoutForm props={{ user, error, planID }} />
+                    : <CheckoutForm props={{ user, error, planID, infos }} />
                 }
             </div>
         </form>

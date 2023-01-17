@@ -12,7 +12,8 @@ import formatCurrency from '../../../../App/utils/formatCurrency'
 export default function CheckoutForm({ props }) {
 
 
-    const { user, error, planID } = props
+    const { user, error, planID, handleChange, infos } = props
+
 
 
     const [typeCard, setTypeCard] = useState('')
@@ -27,11 +28,11 @@ export default function CheckoutForm({ props }) {
 
             <div className='grid'>
                 <label>Nom</label>
-                <input type='text' className='div-input grey h-4 m-t-04' value={user.name ?? ''} id='name' />
+                <input type='text' className='div-input grey h-4 m-t-04' value={infos.name} id='name' onChange={handleChange} />
             </div>
             <div className='grid'>
                 <label>Email</label>
-                <input type='email' value={user.email ?? ''} className='div-input h-4 grey m-t-04' id='email' />
+                <input type='email' value={infos.email} className='div-input h-4 grey m-t-04' id='email'onChange={handleChange} />
             </div>
             
             <div className='grid gap-1rem' >
