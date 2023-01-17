@@ -28,11 +28,11 @@ export default function CheckoutForm({ props }) {
 
             <div className='grid'>
                 <label>Nom</label>
-                <input type='text' className='div-input grey h-4 m-t-04' value={infos.name} id='name' onChange={setInfos} />
+                <input type='text' className='div-input grey h-4 m-t-04' id='name' onChange={e=> setInfos({ name : e.target.value })} />
             </div>
             <div className='grid'>
                 <label>Email</label>
-                <input type='email' value={infos.email} className='div-input h-4 grey m-t-04' id='email'onChange={setInfos} />
+                <input type='email' className='div-input h-4 grey m-t-04' id='email'onChange={e=> setInfos({ email : e.target.value })} />
             </div>
             
             <div className='grid gap-1rem' >
