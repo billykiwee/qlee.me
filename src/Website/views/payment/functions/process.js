@@ -7,29 +7,11 @@ import { db } from "../../../../App/database/firebase"
 
 export async function processPayment(props) {
     
-    const { e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
+    const { e, Name, Email, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
     
     e.preventDefault()
     setMSG({ loader: true })
-    
-    for (const v in Object.values(infos)) {
-        if (Object.values(infos)[v]) document.querySelector('#' + Object.keys(infos)[v]).style = styleInput.normal
-    }
-    document.querySelectorAll('.div-input grey').forEach(e=> {
-        if (e.value === '') e.style = styleInput.error
-    })
-    if (!Name) {
-        throw setMSG({
-            statu: 'error', 
-            msg: 'Vous devez renseigner un nom'
-        })
-    } 
-    if (!Email) {
-        throw setMSG({
-            statu: 'error', 
-            msg: 'Vous devez renseigner un email'
-        })
-    } 
+
 
     if (!stripe || !elements) return
 
