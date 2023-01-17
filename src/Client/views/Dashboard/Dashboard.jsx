@@ -11,6 +11,7 @@ import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
 import { db } from '../../../App/database/firebase';
+import { getDatabase, ref, onValue} from "firebase/database";
 
 
 export default function Dashboard() {
@@ -21,9 +22,21 @@ export default function Dashboard() {
     const UserLinks = user?.links
 
     const [Error, setError] = useState('')
+
+
+    const db = getDatabase()
+    useEffect(e=> {
+
+        const starCountRef = ref(db, 'user/' + auth.email);
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          console.log(data);
+          updateStarCount(postElement, data);
+        });
+    }, [])
     
 
-    if (!auth) return <Login />
+  /*   if (!auth) return <Login />
     return (
 
         <Main>
@@ -129,7 +142,7 @@ export default function Dashboard() {
 
             </div>
         </Main>
-    )
+    ) */
 }
 
 
