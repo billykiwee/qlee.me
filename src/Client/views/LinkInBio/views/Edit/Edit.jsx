@@ -60,12 +60,12 @@ export function EditLinkInBio() {
                             <label className='f-s-20'>Header</label>
                             <div className='display justify-s-b gap'>
                                 <span>Title</span>
-                                <label className='w-3 h-3 border-r-100 border click' htmlFor='background-color' style={{background : background?.color}} />
+                                <label className='w-3 h-3 border-r-100 border click' htmlFor='title-color' style={{color : background?.color}} />
                                 <input type='color' className='opacity-0 absolute' onChange={e=> {
-                                    db.collection('link-in-bio').doc('@' + userName).update({ ['background.color'] : e.target.value } )
+                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.color'] : e.target.value } )
 
                                     e.target.parentElement.children[1].style.background = e.target.value 
-                                }} id='background-color'/>
+                                }} id='title-color'/>
                             </div>
                         </div>
 
@@ -137,8 +137,8 @@ export function EditLinkInBio() {
                                 </div>
 
                                 <div>
-                                    <button className='display h-4 p-1 blue'>
-                                        <span className='f-s-16 c-black'>Enregistré</span>
+                                    <button className='display h-4 p-1 blue border-r-1'>
+                                        <span className='f-s-16 c-black'>Enregistrer</span>
                                     </button>
                                 </div>
                                 

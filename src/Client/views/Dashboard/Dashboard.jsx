@@ -55,7 +55,7 @@ export default function Dashboard({ props }) {
                                 })
                             }}
                         >
-                            <div className='grid gap-1rem'>
+                            <div className='grid gap-1rem p-1 border-r-1 white'>
                                 <div>
                                     <span className='f-s-25 f-w-500'>Créer un lien</span>
                                 </div>
@@ -64,13 +64,13 @@ export default function Dashboard({ props }) {
                                         <div className='display w-100p'>
                                             <input type='text' id='name'
                                                 onChange={e=> setError('')} 
-                                                className='div-input h-4 border-r-1 w-100p white' placeholder='Créer le nom du lien' 
+                                                className='div-input h-4 border-r-1 w-100p grey' placeholder='Créer le nom du lien' 
                                             />
                                         </div>
                                         <div className='display w-100p'>
                                             <input type='text' id='url'
                                                 onChange={e=> setError('')}
-                                                className='div-input h-4 border-r-1 w-100p white' placeholder="Entrer l'URL du site" 
+                                                className='div-input h-4 border-r-1 w-100p grey' placeholder="Entrer l'URL du site" 
                                             />
                                         </div>
                                     </div>

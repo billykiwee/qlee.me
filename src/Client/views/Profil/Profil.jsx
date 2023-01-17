@@ -166,47 +166,50 @@ export default function Profil() {
 
 
                 <div className='grid gap-2rem'>
-
-                    <div className='grid gap-1rem grey border-r-1 p-1'>
+                    <div className='grid gap'>
                         <span className='f-s-20'>Mes informations</span>
-                        <Inputs props={{
-                            label: 'Nom',
-                            input: 'name',
-                            User : User
-                        }} />
+                        <div className='grid gap-1rem white border-r-1 p-1 border'>
+                            <Inputs props={{
+                                label: 'Nom',
+                                input: 'name',
+                                User : User
+                            }} />
 
-                        <Inputs uneditable props={{
-                            label: 'Email',
-                            input: 'email',
-                            User : User,
-                        }} />
+                            <Inputs uneditable props={{
+                                label: 'Email',
+                                input: 'email',
+                                User : User,
+                            }} />
+                        </div>
                     </div>
 
-                    <div className='grid gap-1rem grey border-r-1 p-1'>
+                    <div className='grid gap'>
                         <span className='f-s-20'>Mes transactions</span>
-                        <div className='grid gap'>
-                            {
-                                transactions
-                                .map(transaction=> {
-                                    const { id, type, amount, date } = transaction
+                        <div className='grid gap-1rem white border-r-1 p-1 border'>
+                            <div className='grid gap'>
+                                {
+                                    transactions
+                                    .map(transaction=> {
+                                        const { id, type, amount, date } = transaction
 
-                                    return (
-                                        <div className='display justify-s-b border white p-04 border-r-04' key={id} >
-                                            <div className='display gap'>
-                                                <span>{type}</span> 
-                                                : 
-                                                <span className={type === 'withdraw' ? 'c-green' : 'c-red'}>{formatCurrency(amount)}</span>
+                                        return (
+                                            <div className='display justify-s-b border grey p-04 border-r-04' key={id} >
+                                                <div className='display gap'>
+                                                    <span>{type}</span> 
+                                                    : 
+                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-red'}>{formatCurrency(amount)}</span>
+                                                </div>
+                                                <small>{date.toDateString()}</small>
                                             </div>
-                                            <small>{date.toDateString()}</small>
-                                        </div>
-                                    )
-                                })
-                                .splice(0, showTransactions)
-                            }
-                            <div>
-                                <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
-                                    <span className='f-s-16'>Voir plus</span>
-                                </button>
+                                        )
+                                    })
+                                    .splice(0, showTransactions)
+                                }
+                                <div>
+                                    <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
+                                        <span className='f-s-16'>Voir plus</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,7 +232,7 @@ const Inputs = ({ props, uneditable }) => {
         <div className='grid gap' style={{ pointerEvents : uneditable ? 'none' : 'cursor' }} >
             <span>{label}</span>
             <input 
-                className='div-input white h-3' 
+                className='div-input grey h-3' 
                 type='text' 
                 placeholder={User?.[input]} 
             />

@@ -37,7 +37,9 @@ export async function processPayment(props) {
             id          : paymentMethod?.id,
             formatAmount: amount,
             amount      : (amount * 100).toFixed(0),
-            date        : serverTimestamp()
+            date        : serverTimestamp(),
+            type        : 'plan',
+            user        : user.email
         }
 
         const response = await axios({
@@ -46,19 +48,15 @@ export async function processPayment(props) {
             data  : payment
         })
 
-        console.log(response);
-
 
         await db.collection('users')
         .doc(user.email)
         .update({ plan: planID })
 
-
-        await db.collection('users')
-        .doc(user.email)
-        .collection('transactions')
+        await db.collection('transactions')
         .doc(payment.id)
         .set(payment)
+
 
         setValid(true)
         setMSG({ loader: false })

@@ -1,9 +1,11 @@
 export const plans = {
     FREE : {
+        name: 'FREE',
         max_links: 10,
         features : {},
     },
     PRO : {
+        name: 'PRO',
         price    : 4.9,
         max_links: 300,
         features : {
@@ -13,6 +15,7 @@ export const plans = {
         }
     },
     ENTREPRISE: {
+        name: 'ENTREPRISE',
         price    : 12.9,
         max_links: 1000,
         features : {

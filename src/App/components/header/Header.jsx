@@ -66,7 +66,7 @@ export default function Header({ active }) {
                             {theme === 'light' ? <MoonIcon width={18} className='c-black' /> : <SunIcon width={20} className='c-yellow' />}
                         </span>
                     </button>
-                    <div className='display gap-04 border p-04 h-2 border-r-2'>
+                    <div className='display gap-04 p-04 h-2 border-r-2 white'>
                         {
                             User 
                             ?
