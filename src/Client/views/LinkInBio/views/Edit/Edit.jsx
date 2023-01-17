@@ -12,17 +12,16 @@ import Header from './settings/components/Header'
 
 export function EditLinkInBio() {
 
-    const { user } = useStateProps()
+    const { user, link_in_bio } = useStateProps()
 
     const { userName } = useParams()
 
     const User = user?.profil
     const UserLinks = user?.links?.links
-    const LinkInBioSettings = user?.link_in_bio?.settings[0]
+    const LinkInBioSettings = link_in_bio
 
     let { background, blocks, header, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
-    console.log(LinkInBioSettings);
         
     function putLinkAsIcon(data) {
         db.collection('links').doc(data.id).update({
@@ -60,7 +59,7 @@ export function EditLinkInBio() {
 
                         <Header props={{ userName, header }} />
 
-                        
+
                         <div className='grid p-1 border-r-04 white gap border'>
                             <div className='display justify-s-b gap'>
                                 <span>Description</span>
