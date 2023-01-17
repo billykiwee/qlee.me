@@ -1,7 +1,7 @@
 import { ArrowUpRightIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { onDragEndLinkInBio, onDragStratLinkInBio } from './functions/drag'
 import Background from './components/Background'
 import { Head } from './components/Head'
@@ -58,7 +58,7 @@ export default function LinkInBio({ userView, username }) {
 
     if (DragDropContext)
     return (
-        <div style={{width: '100%', maxWidth: '800px',margin: 'auto'}}>
+        <div style={{width: '100%', maxWidth: '800px', margin: 'auto'}}>
         
             {
                 !userView &&
@@ -82,11 +82,11 @@ export default function LinkInBio({ userView, username }) {
                         {
                             userView &&
                             <div className='zi-2 display justify-e' style={{ position: 'absolute', right: '2rem', top: '2rem' }}>
-                                <Link to={'/@' + username}>
+                                <a href={'/@' + username}>
                                     <button className='display hover border-r-100 border h-3 w-3 shadow' style={{background: 'white'}}>
                                         <ArrowUpRightIcon width={20} color='black' />
                                     </button>
-                                </Link>
+                                </a>
                             </div>
                         }
 

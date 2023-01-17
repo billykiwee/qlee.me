@@ -19,6 +19,12 @@ export const settings = (link_in_bio) => {
                 fontFamily: header.title.fontFamily,
                 fontWeight: header.title.fontWeight,
                 fontSize  : header.title.fontSize,
+            },
+            frame: {
+                active    : header.frame.active,
+                background: header.frame.background,
+                opacity   : header.frame.opacity,
+                radius    : header.frame.radius,
             }
         },
         background: {

@@ -4,12 +4,30 @@ import { uploadPhoto } from "../../Profil/functions/uploadPhoto"
 
 export function Head({props}) {
 
-    const { userView, User, LinkInBioLinks, link_in_bio, Settings } = props
+    const { userView, User, LinkInBioLinks, Settings } = props
 
-    console.log( Settings?.header?.title?.color);
 
     return (
-        <div className='grid gap-1rem p-1'>
+        <div className='grid gap-1rem p-1' >
+
+            <div  
+                style={
+                    Settings?.header?.frame?.active ? 
+                    {
+                        background  : Settings?.header?.frame?.background,
+                        borderRadius: Settings?.header?.frame?.radius + 'px',
+                        opacity  : Settings?.header?.frame?.opacity,
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                    }
+                    : null
+                }
+            />
+
             {
                 userView 
                 ? 

@@ -1,9 +1,9 @@
 import { db } from "../../../../../../../App/database/firebase"
 import { useStateProps } from "../../../../../../../App/provider/ContextProvider"
 
-export const Edit = (edit, value, link_in_bio) => {
+export const Edit = (edit, value, id) => {
 
-    const ref = db.collection('link-in-bio').doc('@' + link_in_bio.id)
+    const ref = db.collection('link-in-bio').doc(id)
 
     ref.update({ [edit] : value } )
 }
