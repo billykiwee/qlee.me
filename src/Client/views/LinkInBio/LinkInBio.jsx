@@ -54,14 +54,11 @@ export default function LinkInBio({ userView, username }) {
 
     }, [openSet])
 
-    
-
-
 
 
     if (DragDropContext)
     return (
-        <div style={{width: '100%', maxWidth: '1200px',margin: 'auto'}}>
+        <div style={{width: '100%', maxWidth: '800px',margin: 'auto'}}>
         
             {
                 !userView &&

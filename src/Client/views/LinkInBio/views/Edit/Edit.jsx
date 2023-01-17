@@ -44,7 +44,7 @@ export function EditLinkInBio() {
                     <div className='grid gap-1rem p-1'>
 
                         <div className='grid gap justify-s-b'>
-                            <label className='f-s-20'>Lien icon</label>
+                            <label className='f-s-20'>Wiget</label>
                             <div className='display gap wrap grey border-r-04 p-1 border'  >
                                 {
                                     UserLinks
