@@ -108,7 +108,7 @@ export default function CheckoutForm({ planID }) {
 
             <div className='display w-100p'>
                 <div className='display w-100p'>
-                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' disabled={!stripe}>
+                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1'>
                         <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
                     </button>
                 </div>

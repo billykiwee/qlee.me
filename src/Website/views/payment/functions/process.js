@@ -1,4 +1,4 @@
-import { useElements, useStripe } from "@stripe/react-stripe-js"
+import { CardNumberElement, useElements, useStripe } from "@stripe/react-stripe-js"
 
 export async function processPayment(props) {
 
