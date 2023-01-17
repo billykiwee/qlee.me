@@ -121,7 +121,7 @@ export function Stripe({ planID }) {
                 {
                     MSG.loader 
                     ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-                    : <CheckoutForm props={{ user, error, planID, infos }} />
+                    : <CheckoutForm props={{ user, error, planID, setInfos, infos }} />
                 }
             </div>
         </form>
