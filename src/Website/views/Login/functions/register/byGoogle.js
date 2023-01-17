@@ -5,7 +5,7 @@ import { db, auth } from '../../../../../App/database/firebase'
 
 
 
-export async function byGoogle(userID, history, snackBar) {
+export async function byGoogle(userID, history, snackBar, redirect) {
 
     const provider = new GoogleAuthProvider()
 
@@ -36,7 +36,7 @@ export async function byGoogle(userID, history, snackBar) {
             })
         }
         
-        history('/dashboard')
+        if (!redirect) history('/dashboard')
     })
 }
 

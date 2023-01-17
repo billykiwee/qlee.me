@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import UniqueID from '../../../App/utils/uniqueID'
 import Messages from '../../../App/utils/Messages'
 import Main from '../../../App/components/Main'
@@ -12,7 +12,7 @@ import ConntectWidth from './components/ConnectWith'
 
 
 
-export default function Login() {
+export default function Login({ redirect }) {
 
     const history = useNavigate()
 
@@ -51,14 +51,15 @@ export default function Login() {
 
                         <ConntectWidth 
                             Google={e=> {
-                                byGoogle(userID, history, snackBar); setLoader(true)}
+                                byGoogle(userID, history, snackBar, redirect)
+                                setLoader(true)}
                             } 
                             Facebook 
                         />
 
                         <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
-                        <form onSubmit={e=> byEmail(e, userID, setMSG, history, snackBar)} >
+                        <form onSubmit={e=> byEmail(e, userID, setMSG, history, snackBar, redirect)} >
 
                             <div className='grid w-100p m-b-1'>
                                 <div className='m-b-04'>

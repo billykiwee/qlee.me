@@ -5,6 +5,7 @@ import { isUserPremium } from '../../../Admin/settings/isPremium'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import Login from '../Login/Login'
 import { FAQ } from './components/Faq/Faq'
 import { Plans } from './data/plans'
 
@@ -17,10 +18,23 @@ export default function Pricing() {
 
     const User = user?.profil
 
+    const [login, setLogin] = useState(false)
 
+    const redirect = (plan) => {
+
+        if (!auth) setLogin(true) 
+        else return user.plan === plan.plan ? history('/dashboard') : plan.payment
+    }
 
     return (
         <Main>
+
+            {
+                login && 
+                <div className='login-popup'>
+                    <Login redirect />
+                </div>
+            }
             <div className='grid gap-2rem'>
                 <div className='grid'>
                     <div className='grid'>
@@ -73,7 +87,7 @@ export default function Pricing() {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <Link to={!auth ? '/login' : user.plan === plan.plan ? history('/dashboard') : plan.payment}  className='w-100p'>
+                                                    <div onClick={e=> redirect(plan)}  className='w-100p'>
                                                         <button className={
                                                                 (plan.recommended 
                                                                 ? 'yellow hover-yellow' 
@@ -84,7 +98,7 @@ export default function Pricing() {
                                                                 {user.plan ? 'Continuer' : 'Essayer'}
                                                             </span> 
                                                         </button>
-                                                    </Link>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className='grid gap-04 grey border-r-1 p-1 '>

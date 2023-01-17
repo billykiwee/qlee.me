@@ -5,7 +5,7 @@ import { generateLetterImage } from '../../../../../App/utils/generateLetterImag
 import { loginConditions } from '../conditions'
 
 
-export function byEmail(e, userID, setMSG, history, snackBar) {
+export function byEmail(e, userID, setMSG, history, snackBar, redirect) {
 
     e.preventDefault() 
 
@@ -48,7 +48,7 @@ export function byEmail(e, userID, setMSG, history, snackBar) {
             date       : serverTimestamp()
         }) 
 
-        history('/dashboard')
+        if (!redirect) history('/dashboard')
 
         snackBar.add({
             text:' Connexion réussie'
