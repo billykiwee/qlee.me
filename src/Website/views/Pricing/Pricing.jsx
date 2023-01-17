@@ -13,9 +13,10 @@ export default function Pricing() {
 
     const history = useNavigate()
 
-    const { user } = useStateProps()
+    const { auth, user } = useStateProps()
 
     const User = user?.profil
+
 
 
     return (
@@ -72,7 +73,7 @@ export default function Pricing() {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <Link to={!user ? '/login' : user.plan === plan.plan ? history('/dashboard') : plan.payment}  className='w-100p'>
+                                                    <Link to={!auth ? '/login' : user.plan === plan.plan ? history('/dashboard') : plan.payment}  className='w-100p'>
                                                         <button className={
                                                                 (plan.recommended 
                                                                 ? 'yellow hover-yellow' 
