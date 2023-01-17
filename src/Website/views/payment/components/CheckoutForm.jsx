@@ -20,7 +20,6 @@ export default function CheckoutForm({ props }) {
     const [typeCard, setTypeCard] = useState('')
 
 
-    if (MSG.loader) return <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
     return (
         <div className='grid white border border-r-1 p-1 shadow gap-1rem'>
                     
@@ -113,6 +112,10 @@ export default function CheckoutForm({ props }) {
                     </button>
                 </div>
             </div>
+
+            {
+                MSG.loader && <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
+            }
         </div>
     )
 }
