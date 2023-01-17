@@ -19,8 +19,9 @@ export function EditLinkInBio() {
     const UserLinks = user?.links?.links
     const LinkInBioSettings = user?.link_in_bio?.settings[0]
 
-    let { background, blocks, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
+    let { background, blocks, header, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 
+    console.log(LinkInBioSettings);
         
     function putLinkAsIcon(data) {
         db.collection('links').doc(data.id).update({
@@ -60,7 +61,7 @@ export function EditLinkInBio() {
                             <label className='f-s-20'>Header</label>
                             <div className='display justify-s-b gap'>
                                 <span>Title</span>
-                                <label className='w-3 h-3 border-r-100 border click' htmlFor='title-color' style={{color : background?.color}} />
+                                <label className='w-3 h-3 border-r-100 border click' htmlFor='title-color' style={{color : header.title?.color}} />
                                 <input type='color' className='opacity-0 absolute' onChange={e=> {
                                     db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.color'] : e.target.value } )
 
