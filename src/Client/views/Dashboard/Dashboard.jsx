@@ -10,9 +10,7 @@ import Login from '../../../Website/views/Login/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
-import { db } from '../../../App/database/firebase';
-import { getDatabase, ref, onValue} from "firebase/database";
-import { useStateValue } from '../../../App/provider/StateProvider';
+import { useDatabase } from '../../database/useDatabase';
 
 
 export default function Dashboard() {
@@ -23,10 +21,6 @@ export default function Dashboard() {
     const UserLinks = user?.links
 
     const [Error, setError] = useState('')
-
-
-    
-    console.log(useGetLinks('link_in_bio'));
 
 
     if (!auth) return <Login />
@@ -139,62 +133,9 @@ export default function Dashboard() {
 }
 
 
-function useGetLinks(data, linkID) {
-
-
-    const [Links, setLinks] = useState([])
-
-    const [{ user }] = useStateValue()
-
-    let fetch 
-
-    useEffect(e=> {
-
-        if (!user) return 
-
-        if (data === 'links') {
-            fetch = getLinks(setLinks, user)
-        }
-
-        if (data === 'links_Stats' && linkID) {
-            fetch = getLink_Stats(setLinks, linkID)
-        }
-
-        if (data === 'link_in_bio') {
-            fetch = getLink_in_bio(setLinks, user) 
-        }
-
-    }, [data, user, linkID])
-
-    return Links
-}
 
 
 
 
-function getLinks(setLinks, user) {
-    
-    db.collection('links')
-    .where('user', '==', user.email)
-    .onSnapshot(snapshot=> {
-        setLinks(snapshot.docs.map(doc => doc.data()))
-    })
-}
 
-function getLink_Stats(setLinks, linkID) {
-    
-    db.collection('stats')
-    .where('LinkID', '==', linkID)
-    .onSnapshot(snapshot=> {
-        setLinks(snapshot.docs.map(doc => doc.data()))
-    })
-}
 
-function getLink_in_bio(setLinks, user) {
-
-    db.collection('link-in-bio')
-    .where('user', '==', user.email)
-    .onSnapshot(snapshot=> {
-        setLinks(snapshot.docs.map(doc => doc.data())[0])
-    })
-}

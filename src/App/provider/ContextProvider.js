@@ -4,6 +4,7 @@ import { useFetchAllLinks, useFetchStatsLinks } from "../../Client/data/links"
 import { useFetchLinks, useFetchUsersLink_in_bio, useFetchUsersLink_in_bio_Settings } from "../../Client/data/user/links"
 import { useFetchLinkInBio } from "../../Client/data/user/link_in_bio"
 import { useFetchUsers } from "../../Client/data/users"
+import { useDatabase } from "../../Client/database/useDatabase"
 import { usePopUp } from "../components/popUp/reducer/usePopUp"
 import { useSnackBar } from "../components/snackBar/reducer/useSnackBar"
 
@@ -17,12 +18,9 @@ export const PropsProvider = ({ children }) => {
     const props = {
         auth: user,
         user: {
-            profil: useFetchUsers(user),
-            links: useFetchLinks(),
-            /* link_in_bio: {
-                links   : useFetchUsersLink_in_bio(user),
-                settings: useFetchUsersLink_in_bio_Settings(user, 'link-in-bio_settings')
-            }, */
+            profil     : useFetchUsers(user),
+            links      : useDatabase('links'),
+            link_in_bio: useDatabase('link_in_bio')
         },
         users      : useFetchUsers(),
         links      : useFetchAllLinks(),

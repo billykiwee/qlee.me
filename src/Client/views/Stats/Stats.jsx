@@ -26,6 +26,7 @@ export default function Stats() {
     const UserLinks = user?.links
     const LinkStat  = user?.links.filter(e=> e.LinkID === LinkID)
     
+    console.log(LinkStat);
 
     const TopLink = UserLinks.map(topLink=> topLink)
     .sort((a, b) => b.views - a.views)
