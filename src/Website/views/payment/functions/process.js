@@ -18,14 +18,16 @@ export async function processPayment(props) {
     // card number element as the card element
     const cardNumberElement = elements?.getElement(CardNumberElement)
 
-    console.log(cardNumberElement);
-
     const {error, paymentMethod} = await stripe.createPaymentMethod({ type: 'card', card: cardNumberElement })
 
-    if (error) setError({
-        id : error.code.split('incomplete_')[1],
-        message: error.message
-    })
+    if (error) {
+        setError({
+            id : error.code.split('incomplete_')[1],
+            message: error.message
+        })
+
+        setMSG({ loader: false })
+    }
 
     const amount = plans[planID].price
 

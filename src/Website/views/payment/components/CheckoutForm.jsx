@@ -15,7 +15,6 @@ export default function CheckoutForm({ props }) {
 
 
     const { stripe, user, MSG, error, planID } = props
-    
 
     const [typeCard, setTypeCard] = useState('')
 
@@ -30,11 +29,11 @@ export default function CheckoutForm({ props }) {
 
             <div className='grid'>
                 <label>Nom</label>
-                <input type='text' className='div-input grey h-4 m-t-04' id='name'  />
+                <input type='text' className='div-input grey h-4 m-t-04' id='name' value={user?.name} />
             </div>
             <div className='grid'>
                 <label>Email</label>
-                <input type='email' className='div-input h-4 grey m-t-04' id='email' />
+                <input type='email' className='div-input h-4 grey m-t-04' id='email' value={user?.email} />
             </div>
             
             <div className='grid gap-1rem' >
@@ -105,16 +104,16 @@ export default function CheckoutForm({ props }) {
                 </div>
             </div>
 
-            <div className='display w-100p'>
-                <div className='display w-100p'>
-                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit' >
-                        <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
-                    </button>
-                </div>
-            </div>
-
             {
-                MSG.loader && <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
+                MSG.loader ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
+                :
+                <div className='display w-100p'>
+                    <div className='display w-100p'>
+                        <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit' >
+                            <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
+                        </button>
+                    </div>
+                </div>
             }
         </div>
     )
