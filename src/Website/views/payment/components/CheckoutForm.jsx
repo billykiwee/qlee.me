@@ -47,7 +47,7 @@ export default function CheckoutForm({ props }) {
                         <div className='display gap-04'>
                             <div className="display">
                                 {
-                                    typeCard === 'unknown' && 
+                                    typeCard === 'unknown' || !typeCard && 
                                     <CreditCardIcon width={30} className='c-grey' />
                                 }
                                 {

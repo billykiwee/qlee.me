@@ -37,48 +37,51 @@ export function Stripe({ planID }) {
 
     if (valid) return <ValidPayment />
     return (
-        <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
-            
-            <div className='grid justify-s-b gap align-top blocks' >
-                <div className='grid w-100p '>
+        <>
+            <h1 className='m-0'>Paiement</h1>
+            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
+                
+                <div className='grid justify-s-b gap align-top blocks' >
                     <div className='grid w-100p '>
-                        <div className='grid white border border-r-1 p-1 shadow gap'>
+                        <div className='grid w-100p '>
+                            <div className='grid white border border-r-1 p-1 shadow gap'>
 
-                            <div className='grid m-b-1'>
-                                <div className='display justify-s-b m-t-1'>
-                                    <span className='f-s-20 m-0'>Récapitulatif</span>
-                                    <div className='display'>
-                                        <button onClick={e=> setShowCart(ShowCart === false ? true : false)} className='border grey hover' type='button' >
-                                            <span>{ShowCart === true ? 'Masquer' : 'Afficher'}</span>
-                                        </button>
+                                <div className='grid m-b-1'>
+                                    <div className='display justify-s-b m-t-1'>
+                                        <span className='f-s-20 m-0'>Récapitulatif</span>
+                                        <div className='display'>
+                                            <button onClick={e=> setShowCart(ShowCart === false ? true : false)} className='border grey hover' type='button' >
+                                                <span>{ShowCart === true ? 'Masquer' : 'Afficher'}</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className='grid' style={{display : ShowCart === true ? 'block' : 'none'}} >
-                                <div className='display justify-s-b align-top f-s-14'>
-                                    <div className='grid gap m-b-04 w-50'>
-                                        <span className='c-grey'>Article</span>
-                                        <span>Paiement récurrent {planID}</span>
-                                    </div>
-                                    <div className='grid gap'>
-                                        <span className='c-grey'>Prix TVA</span>
-                                        <span>{formatCurrency(plans[planID].price)}</span>
+                                <div className='grid' style={{display : ShowCart === true ? 'block' : 'none'}} >
+                                    <div className='display justify-s-b align-top f-s-14'>
+                                        <div className='grid gap m-b-04 w-50'>
+                                            <span className='c-grey'>Article</span>
+                                            <span>Paiement récurrent {planID}</span>
+                                        </div>
+                                        <div className='grid gap'>
+                                            <span className='c-grey'>Prix TVA</span>
+                                            <span>{formatCurrency(plans[planID].price)}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className='display justify-s-b f-w-500'>
-                                <span className='f-s-18'>Total :</span>
-                                <span className='f-s-20'>{formatCurrency(plans[planID].price)}</span>
+                                <div className='display justify-s-b f-w-500'>
+                                    <span className='f-s-18'>Total :</span>
+                                    <span className='f-s-20'>{formatCurrency(plans[planID].price)}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <CheckoutForm props={{ user, MSG, error, planID }} />
-            </div>
-        </form>
+                    <CheckoutForm props={{ user, MSG, error, planID }} />
+                </div>
+            </form>
+        </>
     ) 
 
 }
@@ -93,7 +96,6 @@ export default function Payment() {
     return (
         <Main>
             <div className='grid gap-1rem'>
-                <h1 className='m-0'>Paiement</h1>
                 <Elements stripe={stripePromise} >
                     <Stripe planID={planID.toLocaleUpperCase()} />
                 </Elements>
