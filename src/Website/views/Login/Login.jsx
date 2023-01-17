@@ -26,6 +26,7 @@ export default function Login({ redirect }) {
     const [Loader, setLoader] = useState(false)
 
 
+
     if (auth) history('/dashboard')
     return (
         <Main>
@@ -33,18 +34,19 @@ export default function Login({ redirect }) {
             <div className='login' >
                 <div className='login-img'>
                     {/* {
-                        GetUnsplashImage('nature')?.url &&
+                        unSplash?.url &&
                         <>
-                            <a href={GetUnsplashImage('nature').profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
-                                <small className='display '>@ {GetUnsplashImage('nature').author}</small>
+                            <a href={unSplash.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
+                                <small className='display '>@ {unSplash.author}</small>
                             </a>
                             {
-                                !GetUnsplashImage('nature')
+                                !unSplash
                                 ? <Messages loader={Loader} />
-                                : <img className='border-r-2' height='100%' src={GetUnsplashImage('nature').url} alt={GetUnsplashImage('nature').author + ' @ ' + GetUnsplashImage('nature').profileUrl} />
+                                : <img className='border-r-2' height='100%' src={unSplash.url} alt={unSplash.author + ' @ ' + unSplash.profileUrl} />
                             }
                         </>
                     } */}
+                    <img className='border-r-2' height='100%' src='https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80' />
                 </div>
                 <div className="form-block">
                     <div className='grid w-100p'>
@@ -108,7 +110,7 @@ export default function Login({ redirect }) {
                             </div>
                             
                             <div className='grid m-t-1'>    
-                                <button className="blue f-s-16 border-r-1 h-4 border-b hover-blue" type="submit">
+                                <button className="blue f-s-16 border-r-1 h-4 border-b hover-blue" >
                                     <span className='f-s-16 p-1'>Se connecter</span>
                                 </button>
                             </div>

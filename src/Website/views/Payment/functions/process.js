@@ -1,6 +1,5 @@
 import { CardNumberElement } from "@stripe/react-stripe-js"
 import axios from "axios"
-import e from "cors"
 import { serverTimestamp } from "firebase/firestore"
 import { plans } from "../../../../Admin/settings/plans"
 import { db } from "../../../../App/database/firebase"

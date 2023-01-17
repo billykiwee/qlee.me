@@ -1,12 +1,11 @@
 import { createContext, useContext } from "react"
 import useGetAuth from "../../Client/data/auth/auth"
 import { useFetchAllLinks, useFetchStatsLinks } from "../../Client/data/links"
-import { useFetchLinks } from "../../Client/data/user/links"
+import { useFetchLinks, useFetchUsersLink_in_bio, useFetchUsersLink_in_bio_Settings } from "../../Client/data/user/links"
 import { useFetchLinkInBio } from "../../Client/data/user/link_in_bio"
 import { useFetchUsers } from "../../Client/data/users"
 import { usePopUp } from "../components/popUp/reducer/usePopUp"
 import { useSnackBar } from "../components/snackBar/reducer/useSnackBar"
-import { useStateValue } from "./StateProvider"
 
 
 export const PropsContext = createContext({})
@@ -19,14 +18,11 @@ export const PropsProvider = ({ children }) => {
         auth: user,
         user: {
             profil: useFetchUsers(user),
-            links : {
-                links: useFetchLinks(user),
-                stats: useFetchLinks(user, 'stats'),
-            },
-            link_in_bio: {
-                links   : useFetchLinks(user, 'link-in-bio'),
-                settings: useFetchLinks(user, 'link-in-bio_settings')
-            },
+            links: useFetchLinks(),
+            /* link_in_bio: {
+                links   : useFetchUsersLink_in_bio(user),
+                settings: useFetchUsersLink_in_bio_Settings(user, 'link-in-bio_settings')
+            }, */
         },
         users      : useFetchUsers(),
         links      : useFetchAllLinks(),

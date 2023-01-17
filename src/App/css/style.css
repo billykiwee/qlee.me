@@ -1159,7 +1159,7 @@ input[type=number] {
   width: 24px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--white);
+  background-color: var(--grey);
   -webkit-transition: .2s;
   transition: .2s;
 }

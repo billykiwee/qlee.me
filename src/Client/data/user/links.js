@@ -1,10 +1,99 @@
 import { useState, useEffect } from 'react'
 import { db } from '../../../App/database/firebase'
+import { useStateValue } from '../../../App/provider/StateProvider'
 
 
-export function useFetchLinks(user, type) {
+export function useFetchLinks() {
+
+    const [{ user }] = useStateValue()
+
+    const [links, setLinks] = useState([])
+
+    useEffect(e=> {
+
+        if (!user) return
+
+        try {
+            db.collection("links")
+            .onSnapshot(snapshot=> {
+        
+                const fetchedLinks = snapshot.docs.map(doc => doc.data())
+
+                const userLinks = fetchedLinks.filter(e=> e.user === user.email)
+        
+                if (!userLinks.length) setLinks('no_data')
+                else setLinks(userLinks)
+            })
+    
+        } catch (error) {
+            console.log(error)
+        }
+
+    }, [user])
+
+    return links
+}
+
+export function useFetchUsersLink_in_bio(user) {
 
     const [linksData, setLinksData] = useState([])
+
+    useEffect(() => {
+
+        const data = db.collection("links")
+        .where("linkInBio", "==", true)
+        .onSnapshot(snapshot => {
+
+            if (snapshot.empty) {
+                setLinksData("no_data")
+            }
+    
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+    
+            setLinksData(fetchedLinks)
+        })
+    
+        return () => data()
+
+    }, [user])
+  
+    return linksData
+}
+
+export function useFetchUsersLink_in_bio_Settings(user) {
+
+
+    const [linksData, setLinksData] = useState([])
+
+    useEffect(() => {
+
+        const data = db.collection("link-in-bio")
+        .where("user", "==", user?.email)
+        .onSnapshot(snapshot => {
+
+            if (snapshot.empty) {
+                setLinksData("no_data")
+            }
+    
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+    
+            setLinksData(fetchedLinks)
+        })
+    
+        return () => data()
+
+    }, [user])
+  
+    return linksData
+}
+
+
+
+
+
+/* export function useFetchLinks(user, type) {
+
+    const [linksData, setLinksData] = useState('')
 
     useEffect(() => {
 
@@ -16,6 +105,8 @@ export function useFetchLinks(user, type) {
             const fetchedLinks = snapshot.docs.map(doc => doc.data())
     
             setLinksData(fetchedLinks.sort((x, y) => x.date - y.date))
+
+            console.log(fetchedLinks);
         })
     
         return () => data()
@@ -46,4 +137,4 @@ const query = (user, type) => {
 
     return db.collection("links").orderBy("date", "desc")
 }
-
+ */

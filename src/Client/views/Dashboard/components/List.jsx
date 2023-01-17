@@ -10,17 +10,19 @@ import { IsLinkInBio } from '../../Links/views/Edit/components/IsLinkInBio'
 
 
 
-export default function List({links, User}) {
+export function List({ links, User }) {
 
-    const [linkListed, add] = useState(10)
+    const [linkListed, add] = useState(links.length < 10 ? links.length : 10)
+
+
+    if (!links) return
 
     return (
         <div className='grid gap-1rem'> 
 
             <div className='grid gap-1rem'> 
                 {
-                    links
-                    .sort((a,b)=> b.date - a.date)
+                    links.sort((a,b)=> b.date - a.date)
                     .map((link, i)=> {
                         
                         return (

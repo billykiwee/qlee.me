@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
 import Articles from './components/Articles';
@@ -9,22 +9,18 @@ import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/views/Login/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
-import List from './components/List';
+import { List } from './components/List';
+import { db } from '../../../App/database/firebase';
 
 
-export default function Dashboard({ props }) {
+export default function Dashboard() {
 
     const { auth, user, snackBar } = useStateProps()
     
     const User = user?.profil
-    const UserLinks = user?.links?.links
+    const UserLinks = user?.links
 
     const [Error, setError] = useState('')
-
-    
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
     
 
     if (!auth) return <Login />
@@ -115,8 +111,8 @@ export default function Dashboard({ props }) {
                             </div>
                             <div className='grid gap'>
                                 {
-                                    UserLinks === 'no link' 
-                                    ? <span>Pas de lien</span>
+                                    UserLinks === 'no_data' 
+                                    ? <span>👻 Pas de lien pour le moment</span>
                                     :  
                                     (
                                         UserLinks.length < 1

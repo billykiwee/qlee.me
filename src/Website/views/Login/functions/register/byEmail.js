@@ -16,6 +16,7 @@ export function byEmail(e, userID, setMSG, history, snackBar, redirect) {
     
     const { Name, Email, Password } = loginConditions
 
+    console.log(elements);
     
     if (!email.match(Email.rules.regex)) throw Email.error('Veuillez entrer un email valide')
     else Email.error('')

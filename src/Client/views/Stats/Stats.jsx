@@ -23,8 +23,8 @@ export default function Stats() {
 
 
     const User      = user?.profil
-    const UserLinks = user?.links?.links
-    const LinkStat  = user?.links?.stats.filter(e=> e.LinkID === LinkID)
+    const UserLinks = user?.links
+    const LinkStat  = user?.links.filter(e=> e.LinkID === LinkID)
     
 
     const TopLink = UserLinks.map(topLink=> topLink)

@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 
 export function GetUnsplashImage(subject) {
 
-  const [img, setImg] = useState({})
+  const apiKey = 'kj408nn4kDTQyU-H3nyemQ3bPkqEJf7CS5wUvAHNy0I'
+  const url = `https://api.unsplash.com/photos/random?query=${subject}`
 
   async function fetchImg() {
 
     try {
-      const apiKey = 'kj408nn4kDTQyU-H3nyemQ3bPkqEJf7CS5wUvAHNy0I'
-      const url = `https://api.unsplash.com/photos/random?query=${subject}`
     
       const response = await fetch(url, {
         headers: {
           Authorization: `Client-ID ${apiKey}`
         }
-      });
+      })
+
       const data = await response.json()
   
-      setImg({
+      return {
         url       : data.urls.regular,
         author    : data.user.name,
         profileUrl: data.user.links.html
-      })
+      }
     }
     catch (err) {
       console.log(err);
@@ -31,7 +31,6 @@ export function GetUnsplashImage(subject) {
   useEffect(e=> {
     fetchImg()
 
-  }, [subject])
-
-   return img
+    console.log(fetchImg());
+  }, [])
 }
