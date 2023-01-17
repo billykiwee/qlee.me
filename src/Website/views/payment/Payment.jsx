@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Main from '../../../App/components/Main'
-import { useParams } from 'react-router-dom'
 import formatCurrency from '../../../App/utils/formatCurrency'
 import Messages from '../../../App/utils/Messages'
 import { loadStripe } from '@stripe/stripe-js'
@@ -9,6 +8,9 @@ import CheckoutForm from './components/CheckoutForm'
 import { processPayment } from './functions/process'
 import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import ValidPayment from './components/ValidPayment'
+import { useParams } from 'react-router-dom'
+
 
 
 
@@ -24,17 +26,16 @@ export function Stripe({ planID }) {
 
     const [error, setError] = useState({})
 
+    const [valid, setValid] = useState(false)
 
 
     const stripe = useStripe()
     const elements = useElements()
     
 
+    if (valid) return <ValidPayment />
     return (
-        <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar })} >
-
-            <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-
+        <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
             <div className='grid justify-s-b gap align-top blocks' >
 
                 <div className='grid w-100p '>
@@ -71,12 +72,12 @@ export function Stripe({ planID }) {
                             </div>
                         </div>
                     </div>
-
                 </div>
-                
-                <CheckoutForm props={{ user, error, planID }} />
+                {
+                    MSG.loader ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
+                    : <CheckoutForm props={{ user, error, planID }} />
+                }
             </div>
-
         </form>
     ) 
 

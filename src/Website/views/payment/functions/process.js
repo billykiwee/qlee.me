@@ -6,12 +6,12 @@ import { plans } from "../../../../Admin/settings/plans"
 import { db } from "../../../../App/database/firebase"
 
 export async function processPayment(props) {
-
     
-    const { e, stripe, elements, setError, planID, user, snackBar } = props
+    const { e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
     
     e.preventDefault()
-    
+
+    setMSG({ loader: true })
 
     if (!stripe || !elements) return
 
@@ -53,6 +53,9 @@ export async function processPayment(props) {
         .collection('transactions')
         .doc(payment.id)
         .set(payment)
+
+        setValid(true)
+        setMSG({ loader: false })
 
         snackBar.add({ text: 'Paiment réussi' })
         console.log(user.email, payment, 'paiement réussi')
