@@ -26,11 +26,9 @@ export default function Dashboard() {
 
 
     
-    
-    
-    console.log(useGetLinks('link_in_bio'));
 
-  /*   if (!auth) return <Login />
+
+    if (!auth) return <Login />
     return (
 
         <Main>
@@ -136,11 +134,12 @@ export default function Dashboard() {
 
             </div>
         </Main>
-    ) */
+    )
 }
 
 
-function useGetLinks(data) {
+function useGetLinks(data, linkID) {
+
 
     const [Links, setLinks] = useState([])
 
@@ -153,30 +152,16 @@ function useGetLinks(data) {
         if (!user) return 
 
         if (data === 'links') {
-            fetch = db.collection('links')
-            .where('user', '==', user.email)
-            .onSnapshot(snapshot=> {
-                setLinks(snapshot.docs.map(doc => doc.data()))
-            })
+            fetch = getLinks(setLinks, user)
         }
 
-        else if (data === 'link_in_bio') {
-            fetch =  db.collection('link-in-bio')
-            .where('user', '==', user.email)
-            .onSnapshot(snapshot=> {
-                setLinks(snapshot.docs.map(doc => doc.data()))
-            })
+        if (data === 'links_Stats' && linkID) {
+            fetch = getLink_Stats(setLinks, user, linkID)
         }
 
-        else if (data === 'link_in_bio_Links') {
-            fetch =  db.collection('links')
-            .where('user', '==', user.email)
-            .where('linkInBio', '==', true)
-            .onSnapshot(snapshot=> {
-                setLinks(snapshot.docs.map(doc => doc.data()))
-            })
+        if (data === 'link_in_bio') {
+            fetch = getLink_in_bio(setLinks, user) 
         }
-
 
         return () => fetch()
 
@@ -187,3 +172,28 @@ function useGetLinks(data) {
 
 
 
+
+function getLinks(setLinks, user) {
+    db.collection('links')
+    .where('user', '==', user.email)
+    .onSnapshot(snapshot=> {
+        setLinks(snapshot.docs.map(doc => doc.data()))
+    })
+}
+
+function getLink_Stats(setLinks, user, linkID) {
+    db.collection('stats')
+    .where('LinkID', '==', linkID)
+    .onSnapshot(snapshot=> {
+        setLinks(snapshot.docs.map(doc => doc.data()))
+    })
+}
+
+function getLink_in_bio(setLinks, user) {
+
+    db.collection('link-in-bio')
+    .where('user', '==', user.email)
+    .onSnapshot(snapshot=> {
+        setLinks(snapshot.docs.map(doc => doc.data()))
+    })
+}

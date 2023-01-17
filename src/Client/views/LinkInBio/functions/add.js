@@ -16,7 +16,7 @@ export const addtoLinkInBio = (isCheck, LinkID, user, link_in_bio_Links, linkDat
     ref
     .update({ 
         links : isCheck 
-        ? [...links, linkData.id] 
+        ? [...links, linkData] 
         : links.filter(id=> id !== linkData.id)
     })
 }
