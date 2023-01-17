@@ -36,7 +36,7 @@ export function Stripe({ planID }) {
 
 
 
-    const [infos, setInfos] = useReducer((a, b)=> { return { ...a, ...b } }, { name: '', email: '' })
+    const [infos, setInfos] = useState({ name: '', email: '' })
 
     useEffect(e=> {
        if (user.name) setInfos({ name: user.name, email: user.email })
@@ -44,8 +44,11 @@ export function Stripe({ planID }) {
 
     const handleChange = (event) => {
       const data = event.target
+
+      console.log(data);
       setInfos({ ...infos, [data]: data.value })
     }
+    console.log(infos);
 
     function CheckBeforeProcess(e) {
 
