@@ -17,7 +17,7 @@ import { useStateProps } from '../../../App/provider/ContextProvider';
 
 
 
-export function Stripe({planID}) {
+export function Stripe({ planID }) {
 
     const { snackBar } = useStateProps()
     const user = useStateProps()?.user?.profil
@@ -114,7 +114,11 @@ export function Stripe({planID}) {
                 data  : payment
             })
 
-           await db.collection('users')
+            await db.collection('users')
+            .doc(user.email)
+            .update({ plan: planID })
+
+            await db.collection('users')
             .doc(user.email)
             .collection('transactions')
             .doc(payment.id)

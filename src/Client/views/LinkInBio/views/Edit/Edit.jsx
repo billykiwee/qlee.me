@@ -45,7 +45,7 @@ export function EditLinkInBio() {
 
                         <div className='grid gap justify-s-b'>
                             <label className='f-s-20'>Wiget</label>
-                            <div className='display gap wrap grey border-r-04 p-1 border'  >
+                            <div className='display gap wrap white border-r-04 p-1 border'  >
                                 {
                                     UserLinks
                                     .filter(e=> e.linkInBio === true)
@@ -56,7 +56,7 @@ export function EditLinkInBio() {
                             </div>
                         </div>
 
-                        <div className='grid p-1 border-r-04 grey gap border'>
+                        <div className='grid p-1 border-r-04 white gap border'>
                             <label className='f-s-20'>Header</label>
                             <div className='display justify-s-b gap'>
                                 <span>Title</span>
@@ -72,7 +72,7 @@ export function EditLinkInBio() {
                         <div>
                             <div className='grid justify-s-b gap-1rem'>
 
-                                <div className='grid p-1 border-r-04 grey border'>
+                                <div className='grid p-1 border-r-04 white border'>
                                     <label className='f-s-20'>Blocks</label>
 
                                     <div className='grid gap'>
@@ -120,7 +120,7 @@ export function EditLinkInBio() {
 
                                 </div>
 
-                                <div className='grid p-1 border-r-04 grey gap border'>
+                                <div className='grid p-1 border-r-04 white gap border'>
                                     <label className='f-s-20'>Frame</label>
                                     <div className='display justify-s-b gap'>
                                         <span>Background</span>
