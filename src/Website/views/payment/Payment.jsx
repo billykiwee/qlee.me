@@ -42,7 +42,7 @@ export function Stripe({ planID }) {
             <div className='grid justify-s-b gap align-top blocks' >
                 <div className='grid w-100p '>
                     <div className='grid w-100p '>
-                        <div className='grid white border border-r-1 p-2 shadow gap'>
+                        <div className='grid white border border-r-1 p-1 shadow gap'>
 
                             <div className='grid m-b-1'>
                                 <div className='display justify-s-b m-t-1'>
@@ -75,11 +75,8 @@ export function Stripe({ planID }) {
                         </div>
                     </div>
                 </div>
-                {
-                    MSG.loader 
-                    ? <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
-                    : <CheckoutForm props={{ user, error, planID }} />
-                }
+
+                <CheckoutForm props={{ user, MSG, error, planID }} />
             </div>
         </form>
     ) 

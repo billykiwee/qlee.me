@@ -7,16 +7,18 @@ import { db } from "../../../../App/database/firebase"
 
 export async function processPayment(props) {
     
-    const { e, Name, Email, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
-    
+    const { e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
     e.preventDefault()
+    
     setMSG({ loader: true })
-
-
+    
     if (!stripe || !elements) return
+
 
     // card number element as the card element
     const cardNumberElement = elements?.getElement(CardNumberElement)
+
+    console.log(cardNumberElement);
 
     const {error, paymentMethod} = await stripe.createPaymentMethod({ type: 'card', card: cardNumberElement })
 
@@ -41,6 +43,8 @@ export async function processPayment(props) {
             method: 'post',
             data  : payment
         })
+
+        console.log(response);
 
 
         await db.collection('users')

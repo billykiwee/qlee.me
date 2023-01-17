@@ -7,22 +7,22 @@ import { db } from '../../../../App/database/firebase'
 import { plans } from '../../../../Admin/settings/plans'
 import formatCurrency from '../../../../App/utils/formatCurrency'
 import { CreditCardIcon } from '@heroicons/react/24/solid'
+import Messages from '../../../../App/utils/Messages'
 
 
 
 export default function CheckoutForm({ props }) {
 
 
-    const { user, error, planID } = props
-
-
+    const { stripe, user, MSG, error, planID } = props
+    
 
     const [typeCard, setTypeCard] = useState('')
 
-    console.log(typeCard);
 
+    if (MSG.loader) return <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
     return (
-        <div className='grid white border border-r-1 p-2 shadow gap-1rem'>
+        <div className='grid white border border-r-1 p-1 shadow gap-1rem'>
                     
             <div className='grid m-b-1 gap'>
                 <h2 className='f-s-25 m-0'>Vos informations</h2>
@@ -31,11 +31,11 @@ export default function CheckoutForm({ props }) {
 
             <div className='grid'>
                 <label>Nom</label>
-                <input type='text' className='div-input grey h-4 m-t-04' id='name' value={user.name} />
+                <input type='text' className='div-input grey h-4 m-t-04' id='name'  />
             </div>
             <div className='grid'>
                 <label>Email</label>
-                <input type='email' className='div-input h-4 grey m-t-04' id='email' value={user.email} />
+                <input type='email' className='div-input h-4 grey m-t-04' id='email' />
             </div>
             
             <div className='grid gap-1rem' >
@@ -108,7 +108,7 @@ export default function CheckoutForm({ props }) {
 
             <div className='display w-100p'>
                 <div className='display w-100p'>
-                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit'>
+                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit' >
                         <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
                     </button>
                 </div>
