@@ -1,9 +1,17 @@
-import { CardNumberElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { CardNumberElement } from "@stripe/react-stripe-js"
+import axios from "axios"
+import e from "cors"
+import { serverTimestamp } from "firebase/firestore"
+import { plans } from "../../../../Admin/settings/plans"
+import { db } from "../../../../App/database/firebase"
 
 export async function processPayment(props) {
 
-    const { stripe, elements } = props
-
+    
+    const { e, stripe, elements, setError, planID, user, snackBar } = props
+    
+    e.preventDefault()
+    
 
     if (!stripe || !elements) return
 
@@ -34,9 +42,11 @@ export async function processPayment(props) {
             data  : payment
         })
 
+
         await db.collection('users')
         .doc(user.email)
         .update({ plan: planID })
+
 
         await db.collection('users')
         .doc(user.email)
@@ -44,9 +54,7 @@ export async function processPayment(props) {
         .doc(payment.id)
         .set(payment)
 
-        snackBar.add({
-            text: 'Paiment réussi'
-        })
+        snackBar.add({ text: 'Paiment réussi' })
         console.log(user.email, payment, 'paiement réussi')
     }
     catch(error) {

@@ -35,7 +35,7 @@ export default function App() {
         { path : '/pricing', element : <Pricing /> },
         { path : '/stats', element : <Stats /> },
         { path : '/stats/:LinkID', element : <Stats /> },
-        { path : '/payment/:plan', element : <Payment /> },
+        { path : '/payment/:planID', element : <Payment /> },
         { path : '/@:userName', element : <LinkInBio /> , blank : true},
         { path : '/edit/@:userName', element : <EditLinkInBio /> },
         { path : '/profil', element : <Profil /> },

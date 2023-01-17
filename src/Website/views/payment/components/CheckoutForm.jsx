@@ -3,24 +3,16 @@ import { useStateProps } from '../../../../App/provider/ContextProvider'
 import { serverTimestamp } from 'firebase/firestore'
 import { CardCvcElement, CardExpiryElement, CardNumberElement, Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from 'axios'
-import { plans } from '../../../Admin/settings/plans'
 import { db } from '../../../../App/database/firebase'
-import { formatCurrency } from '@coingecko/cryptoformat'
+import { plans } from '../../../../Admin/settings/plans'
+import formatCurrency from '../../../../App/utils/formatCurrency'
 
 
 
-export default function CheckoutForm({ planID }) {
-    
+export default function CheckoutForm({ props }) {
 
 
-    const { snackBar } = useStateProps()
-    const user = useStateProps()?.user?.profil
-    
-    const [MSG, setMSG] = useState({})
-
-
-    const [error, setError] = useState({})
-
+    const { user, error, planID } = props
 
 
     const [typeCard, setTypeCard] = useState('')
@@ -108,7 +100,7 @@ export default function CheckoutForm({ planID }) {
 
             <div className='display w-100p'>
                 <div className='display w-100p'>
-                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1'>
+                    <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit'>
                         <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
                     </button>
                 </div>

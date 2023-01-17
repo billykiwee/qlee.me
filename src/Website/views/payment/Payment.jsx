@@ -8,6 +8,7 @@ import { plans } from '../../../Admin/settings/plans'
 import CheckoutForm from './components/CheckoutForm'
 import { processPayment } from './functions/process'
 import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 
 
 
@@ -15,7 +16,14 @@ export function Stripe({ planID }) {
 
     const [ShowCart, setShowCart] = useState(true)
 
+    const { snackBar } = useStateProps()
+    const user = useStateProps()?.user?.profil
+    
     const [MSG, setMSG] = useState({})
+
+
+    const [error, setError] = useState({})
+
 
 
     const stripe = useStripe()
@@ -23,7 +31,7 @@ export function Stripe({ planID }) {
     
 
     return (
-        <form onSubmit={e=> processPayment({ planID, stripe, elements })} >
+        <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar })} >
 
             <Messages statu={MSG.statu} msg={MSG.msg} loader={MSG.loader} />
 
@@ -66,7 +74,7 @@ export function Stripe({ planID }) {
 
                 </div>
                 
-                <CheckoutForm props={{  }} />
+                <CheckoutForm props={{ user, error, planID }} />
             </div>
 
         </form>
@@ -77,7 +85,7 @@ export function Stripe({ planID }) {
 
 export default function Payment() {
 
-    const { plan } = useParams()
+    const { planID } = useParams()
 
     const stripePromise = loadStripe('pk_test_51HKFx4L8AEDuYjhscUrD37Q7AP9kCKtBF8uG8xO6DCh5FKNrTuyLAecOgxZyXHPtaV4jduDf6fWoJBiGuqjjcK8c00z71QBckl')
 
@@ -86,7 +94,7 @@ export default function Payment() {
             <div className='grid gap-1rem'>
                 <h1 className='m-0'>Paiement</h1>
                 <Elements stripe={stripePromise} >
-                    <Stripe planID={plan.toLocaleUpperCase()} />
+                    <Stripe planID={planID.toLocaleUpperCase()} />
                 </Elements>
             </div>
         </Main>
