@@ -50,7 +50,12 @@ export function Head({props}) {
                         </span>
                     </div>
                     <div className='display justify-c'>
-                        <span className='f-s-16 c-grey f-w-300 text-align-c'>{Settings.header?.title?.text}</span>
+                        <span className='f-s-16 c-grey f-w-300 text-align-c' 
+                            style={{
+                                color   : Settings?.header?.description?.color,
+                                fontSize: Settings.header?.description?.fontSize + 'px'
+                            }}
+                        >{Settings?.header?.description?.text}</span>
                     </div>
                 </div>
                 <div className='display gap-1rem justify-c'>

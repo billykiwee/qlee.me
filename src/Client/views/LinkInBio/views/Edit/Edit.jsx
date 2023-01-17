@@ -7,6 +7,7 @@ import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import LinkInBio from '../../LinkInBio'
 import { LinksAsIcon } from './components/LinkAsIcon'
+import Header from './settings/components/Header'
 
 
 export function EditLinkInBio() {
@@ -57,28 +58,9 @@ export function EditLinkInBio() {
                             </div>
                         </div>
 
-                        <label className='f-s-20'>Header</label>
-                        <div className='grid p-1 border-r-04 white gap border'>
-                            <div className='display justify-s-b gap'>
-                                <span>Title</span>
-                            </div>
-                            <div className='display justify-s-b gap'>
-                                <span>color</span>
-                                <input type='color' className='opacity-0 absolute' onChange={e=> {
-                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.color'] : e.target.value } )
+                        <Header props={{ userName, header }} />
 
-                                    e.target.parentElement.children[1].style.background = e.target.value 
-                                }} id='title-color'/>
-                                <label htmlFor='title-color' className='f-s-25 f-w-600 click hover border-r-2 w-3 h-3 display justify-c' style={{color : header?.title?.color}}>A</label>
-                            </div>
-                            <div className='display justify-s-b gap'>
-                                <span>size</span>
-                                <input type='range' onChange={e=> {
-                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.fontSize'] : e.target.value } )
-                                }} id='title-fontSize' />
-                                <label htmlFor='title-fontSize' className='f-s-16 click hover border-r-2 w-3 h-3 display justify-c'>{header?.title?.fontSize + 'px'}</label>
-                            </div>
-                        </div>
+                        
                         <div className='grid p-1 border-r-04 white gap border'>
                             <div className='display justify-s-b gap'>
                                 <span>Description</span>
@@ -86,26 +68,26 @@ export function EditLinkInBio() {
                             <div className='grid justify-s-b gap'>
                                 <span>Text</span>
                                 <div>
-                                    <textarea className='grey' value={ header?.title?.text} onChange={e=> {
-                                        db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.text'] : e.target.value } )
+                                    <textarea className='grey' value={header?.description?.text} onChange={e=> {
+                                        db.collection('link-in-bio').doc('@' + userName).update({ ['header.description.text'] : e.target.value } )
                                     }} />
                                 </div>
                             </div>
                             <div className='display justify-s-b gap'>
                                 <span>color</span>
                                 <input type='color' className='opacity-0 absolute' onChange={e=> {
-                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.color'] : e.target.value } )
+                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.description.color'] : e.target.value } )
 
                                     e.target.parentElement.children[1].style.background = e.target.value 
-                                }} id='title-color'/>
-                                <label htmlFor='title-color' className='f-s-25 f-w-600 click hover border-r-2 w-3 h-3 display justify-c' style={{color : header?.title?.color}}>A</label>
+                                }} id='description-color'/>
+                                <label htmlFor='description-color' className='f-s-25 f-w-600 click hover border-r-2 w-3 h-3 display justify-c' style={{color : header?.description?.color}}>A</label>
                             </div>
                             <div className='display justify-s-b gap'>
                                 <span>size</span>
                                 <input type='range' onChange={e=> {
-                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.title.fontSize'] : e.target.value } )
-                                }} id='title-fontSize' />
-                                <label htmlFor='title-fontSize' className='f-s-16 click hover border-r-2 w-3 h-3 display justify-c'>{header?.title?.fontSize + 'px'}</label>
+                                    db.collection('link-in-bio').doc('@' + userName).update({ ['header.description.fontSize'] : e.target.value } )
+                                }} id='description-fontSize' />
+                                <label htmlFor='description-fontSize' className='f-s-16 click hover border-r-2 w-3 h-3 display justify-c'>{header?.description?.fontSize + 'px'}</label>
                             </div>
                         </div>
 
