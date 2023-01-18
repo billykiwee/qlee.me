@@ -6,13 +6,10 @@ export function links(setLinks, user) {
     .where('user', '==', user.email)
     .onSnapshot(snapshot=> {
 
+        if (snapshot.empty) return setLinks('no_data')
+
         const data = snapshot.docs.map(doc => doc.data())
-
-        if (data.length) {
-            setLinks(data)
-        }
-
-        if (snapshot.empty) setLinks('no_data')
-
+        
+        setLinks(data)
     })
 }

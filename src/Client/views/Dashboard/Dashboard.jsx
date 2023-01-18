@@ -22,6 +22,7 @@ export default function Dashboard() {
 
     const [Error, setError] = useState('')
 
+    console.log(UserLinks);
 
     if (!auth) return <Login />
     return (
