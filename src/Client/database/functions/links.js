@@ -1,10 +1,19 @@
 import { db } from "../../../App/database/firebase"
 
-export function links(setLinks, user) {
+export function links(user) {
 
-    db.collection('links')
-    .where('user', '==', user.email)
-    .onSnapshot(snapshot=> {
-        setLinks(snapshot.docs.map(doc => doc.data()))
+    return new Promise((resolve, reject)=> {
+        
+        db.collection('links')
+        .where('user', '==', user.email)
+        .onSnapshot(snapshot=> {
+
+            const data = snapshot.docs.map(doc => doc.data())
+
+            if (data.length) resolve(snapshot.empty)
+            else reject('_nodata')
+
+        })
     })
+        
 }
