@@ -30,7 +30,7 @@ export default function Edit() {
     const User = user?.profil
 
     const UserLinks = user?.links
-    const Stats = user?.links.filter(e=> e.LinkID === LinkID)
+    const Stats = user?.links?.filter(e=> e.LinkID === LinkID)
     
 
     const Link = UserLinks

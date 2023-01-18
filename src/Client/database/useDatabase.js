@@ -16,13 +16,7 @@ export function useDatabase(data) {
         if (!user) return 
 
         if (data === 'links') {
-            links(user)
-            .then(links=> {
-                setLinks(links)
-            })
-            .catch(e=> {
-                console.log('l');
-            })
+            links(setLinks, user)
         }
 
         if (data === 'links_Stats') {
