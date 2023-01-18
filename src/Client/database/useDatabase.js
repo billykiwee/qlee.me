@@ -4,7 +4,7 @@ import { links } from "./functions/links"
 import { link_in_bio } from "./functions/link_in_bio"
 import { stats } from "./functions/stat"
 
-export function useDatabase(data, linkID) {
+export function useDatabase(data) {
 
     const [Links, setLinks] = useState([])
 
@@ -18,15 +18,15 @@ export function useDatabase(data, linkID) {
             links(setLinks, user)
         }
 
-        if (data === 'links_Stats' && linkID) {
-            stats(setLinks, linkID)
+        if (data === 'links_Stats') {
+            stats(setLinks)
         }
 
         if (data === 'link_in_bio') {
             link_in_bio(setLinks, user) 
         }
 
-    }, [data, user, linkID])
+    }, [data, user])
 
     return Links
 }

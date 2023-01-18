@@ -16,7 +16,7 @@ export function EditLinkInBio() {
 
     const User = user?.profil
     const UserLinks = user?.links?.links
-    const LinkInBioSettings = user?.link_in_bio?.settings[0]
+    const LinkInBioSettings = user?.link_in_bio
 
     let { background, blocks, header, menu, text, colorBtn, linkAsIcon } = LinkInBioSettings || {}
 

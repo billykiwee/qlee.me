@@ -20,9 +20,10 @@ export const PropsProvider = ({ children }) => {
         user: {
             profil     : useFetchUsers(user),
             links      : useDatabase('links'),
+            stats      : useDatabase('links_Stats'),
             link_in_bio: useDatabase('link_in_bio')
         },
-        users      : useFetchUsers(),
+        users: useFetchUsers(),
         links      : useFetchAllLinks(),
         stats      : useFetchStatsLinks(),
         link_in_bio: useFetchLinkInBio(),

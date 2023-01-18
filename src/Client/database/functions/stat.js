@@ -1,9 +1,8 @@
 import { db } from "../../../App/database/firebase"
 
-export function stats(setLinks, linkID) {
+export function stats(setLinks) {
 
   db.collection('stats')
-  .where('LinkID', '==', linkID)
   .onSnapshot(snapshot=> {
       setLinks(snapshot.docs.map(doc => doc.data()))
   })
