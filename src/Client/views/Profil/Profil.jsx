@@ -15,7 +15,7 @@ import formatCurrency from '../../../App/utils/formatCurrency'
 
 export default function Profil() {
 
-    const { user } = useStateProps()
+    const { user, transactions } = useStateProps()
 
     const history = useNavigate()
 
@@ -51,69 +51,6 @@ export default function Profil() {
 
 
     const [showTransactions, setShowTransactions] = useState(5)
-
-    const transactions = [
-        {
-            id    : 't-1',
-            type  : 'pay',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-2',
-            type  : 'pay',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-1',
-            type  : 'pay',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-2',
-            type  : 'pay',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-1',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-2',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-1',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-2',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-1',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-        {
-            id    : 't-2',
-            type  : 'withdraw',
-            amount: 12.9,
-            date  : new Date(),
-        },
-    ]
 
     
     if (!user) return <Login />
@@ -190,16 +127,17 @@ export default function Profil() {
                                 {
                                     transactions
                                     .map(transaction=> {
-                                        const { id, type, amount, date } = transaction
+
+                                        const { id, type, formatAmount, date } = transaction
 
                                         return (
                                             <div className='display justify-s-b border grey p-04 border-r-04' key={id} >
                                                 <div className='display gap'>
                                                     <span>{type}</span> 
                                                     : 
-                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-red'}>{formatCurrency(amount)}</span>
+                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</span>
                                                 </div>
-                                                <small>{date.toDateString()}</small>
+                                                <small>{formatDate(date)}</small>
                                             </div>
                                         )
                                     })

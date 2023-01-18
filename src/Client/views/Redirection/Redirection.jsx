@@ -37,6 +37,11 @@ export default function Redirection() {
             .doc(statID)
             .set(stat)
 
+            await db
+            .collection('links')
+            .doc(LinkID)
+            .update({ views : link.views + 1 })
+
             window.location = link.url
 
         } catch (err) {

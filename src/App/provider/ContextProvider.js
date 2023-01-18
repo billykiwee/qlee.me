@@ -21,14 +21,15 @@ export const PropsProvider = ({ children }) => {
             profil     : useFetchUsers(user),
             links      : useDatabase('links'),
             stats      : useDatabase('links_Stats'),
-            link_in_bio: useDatabase('link_in_bio')
+            link_in_bio: useDatabase('link_in_bio'),
         },
-        users: useFetchUsers(),
-        links      : useFetchAllLinks(),
-        stats      : useFetchStatsLinks(),
-        link_in_bio: useFetchLinkInBio(),
-        snackBar   : useSnackBar(),
-        popUp      : usePopUp()
+        transactions: useDatabase('transactions'),
+        users       : useFetchUsers(),
+        links       : useFetchAllLinks(),
+        stats       : useFetchStatsLinks(),
+        link_in_bio : useFetchLinkInBio(),
+        snackBar    : useSnackBar(),
+        popUp       : usePopUp()
     }
 
     return (
