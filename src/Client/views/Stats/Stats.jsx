@@ -15,7 +15,7 @@ import { statistics } from './data/statistics'
 
 export default function Stats() {
 
-    const { user, popUp, snackBar } = useStateProps()
+    const { user, stats, popUp, snackBar } = useStateProps()
 
     const history = useNavigate()
     
@@ -24,7 +24,7 @@ export default function Stats() {
 
     const User      = user?.profil
     const UserLinks = user?.links
-    const LinkStat  = user?.stats.filter(e=> e.LinkID === LinkID)
+    const LinkStat  = stats.filter(e=> e.LinkID === LinkID)
     
 
     const TopLink = UserLinks.map(topLink=> topLink)
