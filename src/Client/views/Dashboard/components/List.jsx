@@ -56,13 +56,13 @@ export function List({ links, User }) {
                             </article>
                         )
                     })
-                    .splice(0, links.length < 10 ? links.length : linkListed)
+                    .splice(0, linkListed)
                 }
             </div>
 
             <div className='display'>
-                <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> add(linkListed + 10)}>
-                    <span className='f-s-16 c-black'>Afficher + ({linkListed + ' liens sur ' + links.length})</span>
+                <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> links.length > 10 && add(linkListed + 10)} >
+                    <span className='f-s-16 c-black'>Afficher + ({(links.length < 10 ? links.length : linkListed) + ' liens sur ' + links.length})</span>
                 </button>
             </div>
             

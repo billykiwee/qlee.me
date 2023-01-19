@@ -14,7 +14,8 @@ export async function DeleteLink(props) {
         question   : 'Voulez-vous continuer ?',
         buttonText : 'Supprimer',
         buttonColor: 'red',
-        valid      : () => deleteLinksSelected(link).then(e=> {
+        valid      : () => deleteLinksSelected(link)
+            .then(e=> {
             snackBar.add({
                 text   : 'À la poubelle ! 🗑',
                 subtext: 'Le lien à été supprimé',
