@@ -29,9 +29,10 @@ export default function Edit() {
 
     const User = user?.profil
 
-    const UserLinks = user?.links
-    const Stats = user?.links?.filter(e=> e.LinkID === LinkID)
+    const UserLinks = user?.links ?? []
+    const Stats = UserLinks.filter(e=> e.LinkID === LinkID)
     
+    console.log(UserLinks);
 
     const Link = UserLinks
     .filter(data=> data.user === User.email && data.id === LinkID)
