@@ -22,7 +22,15 @@ export default function Dashboard() {
 
     const [Error, setError] = useState('')
 
-    console.log(UserLinks);
+
+    const [count, setCount] = useState(true)
+
+
+    window.onclick = e => {
+        setCount(c=> c ? false : true)
+    }
+
+    console.log(count);
 
     if (!auth) return <Login />
     return (

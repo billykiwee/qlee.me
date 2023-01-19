@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { db } from "../../App/database/firebase"
 import { useStateValue } from "../../App/provider/StateProvider"
 import { links } from "./functions/links"
 import { link_in_bio } from "./functions/link_in_bio"
@@ -34,4 +35,29 @@ export function useDatabase(data) {
     }, [data, user])
 
     return Links
+}
+
+export function useFetchLinks() {
+
+    const [{ user }] = useStateValue()
+
+    const [Data, setData] = useState([])
+
+    useEffect(() => {
+
+        const data = db.collection('links')
+        .onSnapshot(snapshot => {
+
+            if (snapshot.empty) return setData("no_data")
+
+            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+
+            setData(fetchedLinks.filter(e=> e.email === user?.email))
+        })
+    
+        return () => data()
+
+    }, [])
+  
+    return Data
 }
