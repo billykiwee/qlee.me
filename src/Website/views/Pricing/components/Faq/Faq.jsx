@@ -1,12 +1,12 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 
 export function FAQ() {
 
     const questions = [
         {
-            q : 'Is access to Onepage free of charge?',
-            a : 'Yes, it is. By picking a free plan, you can create and host 1 Project with 3 pages. It’s self-sufficient for smaller businesses and individuals'
+            q : 'Le service est-il gratuit ou y a-t-il des frais supplémentaires pour des fonctionnalités avancées ?',
+            a : "Oui, le service est gratuit jusqu'à 10 liens. Les autres fonctionnalités comme les statistqiues sont payante."
         },
         {
             q : 'What’s the difference between Projects and Pages in your pricing plans',
@@ -35,16 +35,31 @@ export function FAQ() {
                 {
                     questions.map((question, i)=> {
                         return (
-                            <div className='grid gap-1rem p-1' key={i}>
+                            <div className='display justify-s-b grey border-r-1 p-1'>
+                                <div className='grid gap'>
+                                    <div>
+                                        <div>
+                                            <span>{question.q}</span>
+                                        </div>
+                                        <div className='grey hover border-r-2 h-2 w-2 display justify-c shadow border'>
+                                            <button>
+                                                <ChevronDownIcon width={20} className='c-black' />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
+                                </div>
+                            </div>  
+                        )
+                    })
+                }
+                {/* <div className='grid gap-1rem p-1' key={i}>
                                 <div className='grid gap'>
                                     <QuestionMarkCircleIcon className='c-grey w-3' />
                                     <span className='f-s-25 f-w-500'>{question.q}</span>
                                 </div>
                                 <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                            </div>
-                        )
-                    })
-                }
+                            </div> */}
             </div>
             
         </div>

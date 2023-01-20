@@ -43,8 +43,8 @@ export default function Pricing() {
                         .map(plan => {
 
                             return (
-                                <div className='grid' key={plan.plan} style={{ opacity : !plan.available ? 0.4 : 1 }} >
-                                    <div className='border-b border border-r-1 card-pricing white'  >
+                                <div className='grid' key={plan.plan} >
+                                    <div className='border-b border border-r-1 card-pricing white' style={{ opacity : !plan.available && 0.4 }}  >
 
                                         <div className='grid gap-2rem'>
                                             <div className='display justify-s-b align-top'>
@@ -71,22 +71,30 @@ export default function Pricing() {
                                                 </div>
                                 
                                                 <div className='display'>
-                                                    <Link to={ 
-                                                        !auth 
-                                                        ? history('/login') 
-                                                        : user.plan === plan.plan ? history('/dashboard') : plan.payment 
-                                                    }  
-                                                    className='w-100p'>
-                                                        <button className={
-                                                                (plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') 
-                                                                + ' f-s-16 border-b p-1 h-4 border-r-1'
-                                                            }
-                                                        > 
-                                                            <span style={{ color : plan.recommended ? 'black' : 'white' }}>
-                                                                {user.plan ? 'Continuer' : 'Essayer'}
-                                                            </span> 
+                                                    {
+                                                        !plan.available 
+                                                        ?
+                                                        <button className='green border-r-1 h-4 p-1 f-s-16 border-b'>
+                                                            <span>Bientôt</span>
                                                         </button>
-                                                    </Link>
+                                                        :
+                                                        <Link to={ 
+                                                            !auth 
+                                                            ? history('/login') 
+                                                            : user.plan === plan.plan ? history('/dashboard') : plan.payment 
+                                                        }  
+                                                        className='w-100p'>
+                                                            <button className={
+                                                                    (plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') 
+                                                                    + ' f-s-16 border-b p-1 h-4 border-r-1'
+                                                                }
+                                                            > 
+                                                                <span style={{ color : plan.recommended ? 'black' : 'white' }}>
+                                                                    {user.plan ? 'Continuer' : 'Essayer'}
+                                                                </span> 
+                                                            </button>
+                                                        </Link>
+                                                    }
                                                 </div>
                                             </div>
                                             <div className='grid gap-04 grey border-r-1 p-1 '>
