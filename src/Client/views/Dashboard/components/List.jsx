@@ -62,8 +62,7 @@ export function List({ links, User }) {
             </div>
 
             {
-                document.querySelector('.list').childNodes &&
-                document.querySelector('.list').childNodes.length !== linkListed &&
+                links.length > linkListed &&
                 <div className='display'>
                     <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> links.length > 10 && add(linkListed + 10)} >
                         <span className='f-s-16 c-black'>Afficher + ({(links.length < 10 ? links.length : linkListed) + ' liens sur ' + links.length})</span>
