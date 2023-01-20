@@ -1,24 +1,28 @@
-import { BuildingOfficeIcon, LockOpenIcon, MoonIcon, PencilIcon, SunIcon, SwatchIcon, UserIcon } from "@heroicons/react/24/solid"
-import { findByLabelText } from "@testing-library/react"
+
+import { BuildingOfficeIcon, LockOpenIcon, PencilIcon, UserIcon } from "@heroicons/react/24/outline"
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toggleTheme } from "../../../functions/setTheme"
+
 
 export function Menu({ props }) {
 
     const { User, menu, setMenu } = props
 
 
+    const [theme, setTheme] = useState(localStorage.getItem('theme'))
+
     const list = [
         {
             name: User ? 'Mon compte' : 'Se connecter',
             link:  User ? '/profil' : '/login',
-            icon: <UserIcon width={18} className='c-black' />
+            icon: <UserIcon width={18} className='currentColor' />
         },
         {
             name: 'Créer un lien',
             link: '/dashboard',
-            icon: <PencilIcon width={18} className='c-black' />
+            icon: <PencilIcon width={18} className='currentColor' />
         },
         /* {
             name: 'Link in bio',
@@ -28,12 +32,17 @@ export function Menu({ props }) {
         {
             name: 'Pricing',
             link: '/pricing',
-            icon:  <LockOpenIcon width={18} className='c-black' />
+            icon:  <LockOpenIcon width={18} className='currentColor' />
         },
         {
             name: 'Terms',
             link: '/terms',
-            icon:  <BuildingOfficeIcon width={18} className='c-black' />
+            icon:  <BuildingOfficeIcon width={18} className='currentColor' />
+        },
+        {
+            id: 'theme',
+            name: theme,
+            icon: theme === 'light' ? <MoonIcon width={18} /> : <SunIcon width={20} />
         }
     ]
 
@@ -44,35 +53,38 @@ export function Menu({ props }) {
     }, [setMenu])
 
 
-    const [theme, setTheme] = useState(localStorage.getItem('theme'))
-
     if (menu)
     return (
         <div className='menu'>
             <div className='grid w-100p'>
                 {
-                    list.map((menu, i)=> {
+                    list
+                    .map(menu => {
                         return (
-                            <Link to={menu.link} key={menu.name} onClick={e=> setMenu(false) }>
-                                <button className='h-3 border-r-1 display p-1 menu__btn' style={{
-                                    display       : 'flex',
-                                    alignItems    : 'stretch',
-                                    justifyContent: 'flex-start'
-                                }}>
-                                    <div className="display gap-1rem">
-                                        {menu.icon}
-                                        <span className='f-s-16 c-black'>{menu.name}</span>
-                                    </div>
-                                </button>
-                            </Link>
+                            <>
+                                {
+                                    menu.id === 'theme'
+                                    ?
+                                    <button className='h-3 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
+                                        <div className="display gap-1rem">
+                                            {menu.icon}
+                                            <span className='f-s-16'>{menu.name}</span>
+                                        </div>
+                                    </button>
+                                    :
+                                    <Link to={menu.link} key={menu.name} onClick={e=> setMenu(false) } >
+                                        <button className='h-3 border-r-1 display p-1 menu__btn' >
+                                            <div className="display gap-1rem">
+                                                {menu.icon}
+                                                <span className='f-s-16'>{menu.name}</span>
+                                            </div>
+                                        </button>
+                                    </Link>
+                                }
+                            </>
                         )
                     })
                 }
-                <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
-                        <span className='display'>
-                            {theme === 'light' ? <MoonIcon width={18} className='c-black' /> : <SunIcon width={20} className='c-black' />}
-                        </span>
-                    </button>
             </div>
         </div>
     )

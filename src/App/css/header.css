@@ -52,9 +52,27 @@ header {
     border-radius: 1rem;
     background-color: var(--background);
     padding: 1rem;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+    border: 1px solid var(--grey);
 }
 
 
 .menu > div {
     display: grid;
+}
+
+.menu__btn {
+    display        : flex;
+    align-items    : stretch;
+    justify-content: flex-start;
+    color: var(--black);
+}
+
+.menu__btn:hover {
+    color: var(--black);
+    background-color: var(--blue-secondary);
+}
+
+.menu__btn:hover {
+    color: var(--blue);
 }
