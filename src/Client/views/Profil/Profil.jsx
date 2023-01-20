@@ -122,9 +122,10 @@ export default function Profil() {
                         <span className='f-s-20'>Mes transactions</span>
                         <div className='grid gap-1rem' >
                             <div className='grid white border-r-04 border'>
-                                <div className='display gap p-1' style={{ borderBottom: '1px solid var(--grey)' }}>
-                                    <span>Type</span>
-                                    <span>Montant</span>
+                                <div className='display justify-s-b f-w-600' style={{ borderBottom: '1px solid var(--grey)' }}>
+                                    <span style={{width: '50%', borderRight: '1px solid var(--grey)' }} className='p-1'>Type</span>
+                                    <span style={{width: '20%', borderRight: '1px solid var(--grey)' }} className='text-align-e p-1' >Montant</span>
+                                    <span className='text-align-e p-1' style={{width: '30%'}}>Date</span>
                                 </div>
                                 {
                                     transactions
@@ -133,14 +134,12 @@ export default function Profil() {
                                         const { id, type, formatAmount, date } = transaction
 
                                         return (
-                                            <div className='display justify-s-b p-1' key={id} id={i}  style={{
+                                            <div className='display justify-s-b ' key={id} id={i}  style={{
                                                 borderBottom: i !== transactions.length-1 ? '1px solid var(--grey)' : '',
                                             }}>
-                                                <div className='display gap'>
-                                                    <span>{type}: </span>  
-                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</span>
-                                                </div>
-                                                <small>{formatDate(date, 'date').replaceAll('/', '-')}</small>
+                                                <span style={{width: '50%', borderRight: '1px solid var(--grey)'}} className='p-1'>{type}</span>  
+                                                <span style={{width: '20%', textAlign: 'end', borderRight: '1px solid var(--grey)'}} className={(type === 'withdraw' ? 'c-green' : 'c-blue ') + 'p-1'}>{formatCurrency(formatAmount)}</span>
+                                                <small style={{width: '30%', textAlign: 'end'}} className='p-1'>{formatDate(date, 'date').replaceAll('/', '-')}</small>
                                             </div>
                                         )
                                     })
