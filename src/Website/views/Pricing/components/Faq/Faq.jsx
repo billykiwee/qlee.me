@@ -1,4 +1,4 @@
-import { ChevronDownIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, MinusCircleIcon, PlusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useState } from 'react'
 
@@ -10,7 +10,7 @@ export function FAQ() {
     const questions = [
         {
             id : 'q-1',
-            q : 'Le service est-il gratuit ou y a-t-il des frais supplémentaires pour des fonctionnalités avancées ?',
+            q : 'Le service est-il gratuit ?',
             a : "Oui, le service est gratuit jusqu'à 10 liens. Les autres fonctionnalités comme les statistqiues sont payante."
         },
         {
@@ -39,44 +39,44 @@ export function FAQ() {
                 </div>
             </div>
             
-            <div className='grid gap-1rem align-top' >
-                {
-                    questions.map((question, i)=> {
-
-                        return (
-                            <div className='display grey border-r-1 p-1 w-100p'>
-                                <div className='grid gap-1rem w-100p'>
-                                    <div className='display justify-s-b gap'>
-                                        <div className='display gap'>
-                                            <QuestionMarkCircleIcon className='c-grey' width={26} />
-                                            <span>{question.q}</span>
+            <div className='display justify-c'>
+                <div className='grid gap' >
+                    {
+                        questions.map((question, i)=> {
+                            return (
+                                <div className='display white border-r-1 p-1 shadow'  >
+                                    <div className='grid gap-1rem w-100p'>
+                                        <div className='display justify-s-b gap'>
+                                            <div className='display gap'>
+                                                <span>{question.q}</span>
+                                            </div>
+                                            <div className='display justify-c click border-r-100 w-2 h-2 hover' onClick={e=> setShowQ(e=> e !== question.id ? question.id : '') } >
+                                                {
+                                                    showQ !== question.id 
+                                                    ? <PlusCircleIcon width={28} className='c-grey' />
+                                                    : <MinusCircleIcon width={28} className='c-grey' />
+                                                }
+                                            </div>
                                         </div>
-                                        <div className='grey hover border-r-2 h-2 w-2 display justify-c shadow border'>
-                                            <button onClick={e=> setShowQ(e=> e !== question.id ? question.id : '') } style={{
-                                                transform : showQ === question.id ? 'rotate(180deg)' : 'rotate(0deg)'
-                                            }}>
-                                                <ChevronDownIcon width={20} className='c-black' />
-                                            </button>
-                                        </div>
+                                        {
+                                            showQ === question.id &&
+                                            <div>
+                                                <small className='c-grey f-w-200 f-s-16'>{question.a}</small>
+                                            </div>
+                                        }
                                     </div>
-                                    {
-                                        showQ === question.id &&
-                                        <div>
-                                            <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                                        </div>
-                                    }
-                                </div>
-                            </div>  
-                        )
-                    })
-                }
-                {/* <div className='grid gap-1rem p-1' key={i}>
-                                <div className='grid gap'>
-                                    <QuestionMarkCircleIcon className='c-grey w-3' />
-                                    <span className='f-s-25 f-w-500'>{question.q}</span>
-                                </div>
-                                <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                            </div> */}
+                                </div>  
+                            )
+                        })
+                    }
+                    {/* <div className='grid gap-1rem p-1' key={i}>
+                                    <div className='grid gap'>
+                                        <QuestionMarkCircleIcon className='c-grey w-3' />
+                                        <span className='f-s-25 f-w-500'>{question.q}</span>
+                                    </div>
+                                    <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
+                                </div> */}
+                </div>
             </div>
             
         </div>
