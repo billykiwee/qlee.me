@@ -11,6 +11,7 @@ header {
     position: fixed;
     margin: 0;
     padding: 0;
+    height: 3rem;
 }
 
 
@@ -18,29 +19,6 @@ header {
     width: 32px;
     height: 32px;
 }
-
-/* 
-@media screen and (min-width: 700px) {
-
-    .menu > div {
-        display: flex;
-        flex-direction:row;
-    }
-
-    
-}
-
-@media screen and (max-width: 700px) {
-
-    .menu > div {
-        display: grid;
-    }
-    .menu > div > a > button{
-        justify-content: flex-start;
-    }
-
-    
-} */
 
 
 .menu {
@@ -75,4 +53,16 @@ header {
 
 .menu__btn:hover {
     color: var(--blue);
+}
+
+
+
+@media screen and (max-width: 700px) {
+
+    .menu {
+        position: relative;
+        right: inherit;
+        top: 1rem;
+    }
+
 }

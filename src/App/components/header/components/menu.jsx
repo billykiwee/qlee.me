@@ -41,7 +41,7 @@ export function Menu({ props }) {
         },
         {
             id: 'theme',
-            name: theme,
+            name: theme[0].toUpperCase() + theme.split(theme[0])[1],
             icon: theme === 'light' ? <MoonIcon width={18} /> : <SunIcon width={20} />
         }
     ]

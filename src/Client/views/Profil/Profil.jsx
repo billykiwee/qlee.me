@@ -99,10 +99,6 @@ export default function Profil() {
                             </button>
                         </div>
                     </div>
-                </div>
-
-
-                <div className='grid gap-2rem'>
                     <div className='grid gap'>
                         <span className='f-s-20'>Mes informations</span>
                         <div className='grid gap-1rem white border-r-1 p-1 border'>
@@ -119,23 +115,29 @@ export default function Profil() {
                             }} />
                         </div>
                     </div>
+                </div>
+
+
+                <div className='grid gap-2rem'>
 
                     <div className='grid gap'>
                         <span className='f-s-20'>Mes transactions</span>
-                        <div className='grid gap-1rem white border-r-1 p-1 border'>
-                            <div className='grid gap'>
+                        <div className='grid gap-1rem' >
+                            <div className='grid white border-r-04 border'>
                                 {
                                     transactions
-                                    .map(transaction=> {
+                                    .map((transaction, i)=> {
 
                                         const { id, type, formatAmount, date } = transaction
 
                                         return (
-                                            <div className='display justify-s-b border grey p-04 border-r-04' key={id} >
+                                            <div className='display justify-s-b p-04' key={id} id={i}  style={{
+                                                borderRadius: 0,
+                                                borderBottom: i !== transactions.length-1 ? '1px solid var(--grey)' : '',
+                                            }}>
                                                 <div className='display gap'>
-                                                    <span>{type}</span> 
-                                                    : 
-                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</span>
+                                                    <small>{type}: </small>  
+                                                    <small className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</small>
                                                 </div>
                                                 <small>{formatDate(date)}</small>
                                             </div>
@@ -143,11 +145,11 @@ export default function Profil() {
                                     })
                                     .splice(0, showTransactions)
                                 }
-                                <div>
-                                    <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
-                                        <span className='f-s-16'>Voir plus</span>
-                                    </button>
-                                </div>
+                            </div>
+                            <div>
+                                <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
+                                    <span className='f-s-16'>Voir plus</span>
+                                </button>
                             </div>
                         </div>
                     </div>
