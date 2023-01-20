@@ -1,4 +1,6 @@
-const initialTheme = 'dark'
+const getPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
+
+const initialTheme = getPreference
 
 const setTheme = theme => {
     localStorage.setItem('theme', theme)
