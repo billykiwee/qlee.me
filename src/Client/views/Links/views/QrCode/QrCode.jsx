@@ -6,7 +6,7 @@ import { colors } from '../../../../../App/utils/generateLetterImage'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import { download } from './functions/htmlToImage/download'
 import QrCodeSvg, { EditQrCode } from './components/Edit'
-
+import { ColorPicker, SketchPicker, TwitterPicker } from 'react-color'
 
 
 export default function QrCodeSection({Link, QrCode}) {
@@ -43,7 +43,7 @@ export default function QrCodeSection({Link, QrCode}) {
                 </div>
 
                 <div className='grid gap '>
-                    <div className='grid gap-1rem border-r-04 p-1'>
+                    <div className='grid gap-1rem border-r-04 grey p-1'>
                         <div className='display justify-s-b'>
                             <span>Cadre</span>
                             <div className='click display border-r-2 justify-c' >
@@ -70,9 +70,7 @@ export default function QrCodeSection({Link, QrCode}) {
                                         <div className='display wrap gap'>
                                             {
                                                 colors.map(c=> {
-                                                    return (
-                                                        <div className='border-r-2 w-2 h-2 click' style={{background : c}} onClick={e=> setframeColor(c)} />
-                                                    )
+                                                    return <div className='border-r-04 w-2 h-2 click' style={{background : c}} onClick={e=> setframeColor(c)} />
                                                 })
                                             }
                                         </div>
@@ -87,7 +85,7 @@ export default function QrCodeSection({Link, QrCode}) {
                         <div className='grid gap-1rem grey border-r-04  p-1'>
                             <div className='display justify-s-b'>
                                 <span>Lignes</span>
-                                <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setLine(line ? false : true)}>
+                                <div className='click display border-r-04 w-2 h-2 hover justify-c' onClick={e=> setLine(line ? false : true)}>
                                     { line ? <ChevronUpIcon width={20} /> : <ChevronDownIcon width={20} />  }
                                 </div>
                             </div>
@@ -99,10 +97,10 @@ export default function QrCodeSection({Link, QrCode}) {
                                     </div>
                                     <div className='display wrap gap'>
                                         {
-                                            colors.map(c=> {
-                                                return (
-                                                    <div className='border-r-2 w-2 h-2 click' style={{background : c}} onClick={e=> setLineColor(c)} key={c}/>
-                                                )
+                                            colors
+                                            .sort()
+                                            .map(c=> {
+                                                return <div className='border-r-04 w-2 h-2 click' style={{background : c}} onClick={e=> setLineColor(c)} key={c}/>
                                             })
                                         }
                                     </div>
