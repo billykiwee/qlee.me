@@ -110,12 +110,12 @@ export default function QrCodeSection({Link, QrCode}) {
                             }
                         </div>
                     </div>
-                    <div className='grid'>
+                   {/*  <div className='grid'>
                         <div className='display justify-s-b border-r-04 grey  p-1'>
                             <span>Logo</span>
                             <SwitchInput dimension={0.7} checked={logo} onChange={e=> setLogo(logo ? false : true)} />
                         </div>
-                    </div>
+                    </div> */}
                     <div className='display justify-c'>
                         <div className='display gap'>
                             <button className='blue-secondary h-3 p-1 border-r-2 display gap' onClick={e=> download(Link.name, frameActive ? 'qr-code-frame-img' : 'qr-code-img')} >

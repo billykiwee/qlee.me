@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { fetchLinks } from '../../../Client/lib/database/links/fetchLinks';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
@@ -171,17 +171,13 @@ export default function Home() {
         },
         {
             title : 'Countries',
-            number: 2933,
+            number: Array.from(new Set(stats.map(e=> e.adress.country))).length,
             icon  : <GlobeEuropeAfricaIcon width={30} />
         },
     ]
 
 
     const width = GetWidth()
-
-
-
-
 
     
 
@@ -245,7 +241,16 @@ export default function Home() {
                                     </div>
                                     <div className='grid gap-1rem'>
                                         <div className='grid gap'>
-                                            <span className='f-s-25 f-w-500'>{feature.name}</span>
+                                            <div className='display gap'>
+                                                <span className='f-s-25 f-w-500'>{feature.name}</span>
+                                                {
+                                                    feature.name === 'Links in bio' &&
+                                                    <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
+                                                        <MegaphoneIcon width={16} className='c-white' />
+                                                        <small>Bientôt</small>
+                                                    </div>
+                                                }
+                                            </div>
                                             <span className='display c-grey f-w-200' >{feature.text}</span>
                                         </div>
                                     </div>
@@ -338,9 +343,6 @@ export default function Home() {
                         tempateLinks
                         .map(t=> {
 
-                            let checked
-
-                            console.log(checked);
 
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1'>
@@ -348,8 +350,8 @@ export default function Home() {
                                         <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
                                         <span className='f-s-16'>{t.name}</span>
                                     </div>
-                                    <div className='display gap-04 ' onClick={e=> checked = false }  >
-                                        <SwitchInput dimension={0.9} checked={checked ?? t.check} />
+                                    <div className='display gap-04 ' >
+                                        <SwitchInput dimension={0.9} checked={t.check} />
                                     </div>
                                 </div>
                             )
