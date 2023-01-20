@@ -3,7 +3,7 @@ import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../../../lib/database/upload/uploadPhoto'
-import { ChartPieIcon, EyeIcon, MegaphoneIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, EyeIcon, MegaphoneIcon, PencilIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
 
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
@@ -51,7 +51,7 @@ export default function Edit() {
     return (
         <Main>
    
-            <div className='grid m-b-2'>
+            <div className='grid'>
                 <h2>Modifier le lien</h2>
             </div>
 
@@ -62,7 +62,6 @@ export default function Edit() {
                     <div className='grid blocks gap-1rem'>
 
                         <div className='grid gap-1rem'>
-
                             <div className='display align-top'>
                                 <div className='grid gap-1rem justfy-s-b border-r-1 border border-b p-1 white w-100p'>
                                     <div className='grid gap'>
@@ -86,175 +85,182 @@ export default function Edit() {
                                     </div>
                                     <div className='display justify-c wrap gap'>
                                         <div className='grid gap'>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                                <PencilIcon width={24} />
+                                            </button>
+                                        </div>
+                                        <div className='grid gap'>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                                <QrCodeIcon width={24} />
+                                            </button>
+                                        </div>
+                                        <div className='grid gap'>
                                             <Redirect to={'/stats/' + Link.id}>
-                                                <button className='grey h-3 border-r-2 p-lr-1 display gap hover'>
-                                                    <ChartPieIcon width={18} />
-                                                    <span className='f-s-16'>Statistiques</span>
+                                                <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover'>
+                                                    <ChartPieIcon width={24} />
                                                 </button>
                                             </Redirect>
                                         </div>
-                                        <div className='grid gap'>
-                                            <button className='grey h-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
-                                                <QrCodeIcon width={18} />
-                                                <span className='f-s-16'>Qr code</span>
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <QrCodeSection 
-                                Link={Link} 
-                                QrCode={QrCode}
-                                setQrCode={setQrCode}  
-                            />
-
                         </div>
+                        
 
-                        <div className='grid gap-1rem'>
+                        {
 
-                            <div className='grid gap-1rem' >
-
-                                <div className='grid gap-1rem white shadow border-r-1 border p-2' >
-                                    <div className='grid gap w-100p'>
-                                        <span>Modifier le nom</span>
-                                        <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
-                                        <small className='c-red' id='error-name'></small>
-                                    </div>
-
-                                    <div className='grid gap w-100p'>
-                                        <div className='display gap'>
-                                            <span>Modifier le lien principal</span>
-                                            { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
-                                        </div>
-                                        <div 
-                                            className='display h-3 border-r-1 w-100p white'
-                                            style={ 
-                                                isUserPremium(User).plan === 'FREE' 
-                                                ? { pointerEvents: 'none', opacity: 0.8} 
-                                                : { pointerEvents: 'visible',  opacity: 1 }
-                                            } 
-                                        >
-                                            <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
-                                        </div>
-                                        <small className='c-red' id='error-url'></small>
-                                    </div>
-
-                                    <div className='grid gap w-100p'>
-                                        <div className='display gap'>
-                                            <span>Modifier le lien court</span>
-                                            { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
-                                        </div>
-                                        <div 
-                                            className='display div-input h-4 border border-r-1 w-100p grey'
-                                            style={ 
-                                                isUserPremium(User).plan === 'FREE' 
-                                                ? { pointerEvents: 'none', opacity: 0.8} 
-                                                : { pointerEvents: 'visible',  opacity: 1 }
-                                            } 
-                                        >
-                                            <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
-                                            <input 
-                                                type='text' 
-                                                className='border-0 p-0 w-100p' 
-                                                placeholder='mon-lien' 
-                                                onChange={e=> {
-                                                    seteditLink({
-                                                        ...editLink, 
-                                                        shortLink: e.target.value 
-                                                    })
-                                                    checkShortLinkAvailable(e.target.value, UserLinks)
-                                                }} 
-                                                pattern="\S*"
-                                                onKeyPress={event=> event.key === ' ' && event.preventDefault()}
-                                            />
-                                        </div>
-                                        <small id='alert-shortlink'></small>
-                                    </div>
-                                </div>
-
-                                <div className='grid gap white shadow border-r-1 border p-2'>
-                                    <div className='display gap'>
-                                        <span>Fonctionnalités</span>
-                                        {/* { isUserPremium(User).plan === 'FREE' && <GoToPricing /> } */}
-                                        <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
-                                            <MegaphoneIcon width={16} className='c-white' />
-                                            <small>Bientôt</small>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className='grid gap opacity' 
-                                        style={ 
-                                           /*  isUserPremium(User).plan === 'FREE' 
-                                            ? { pointerEvents: 'none', opacity: 0.8} 
-                                            : { pointerEvents: 'visible',  opacity: 1 } */
-                                            { pointerEvents: 'none', opacity: 0.8 }
-                                        } 
-                                    >
-                                        <div className='display'>
-                                            <label htmlFor='active_views' className='display gap-1rem click'>
-                                                <SwitchInput dimension={0.8} checked={Link.linkInBio ? true : false} onChange={e=> addtoLinkInBio(e.target.checked, LinkID, User, UserLinks.filter(e=> e.linkInBio), Link) } id='active_views'  />
-                                                <span className='f-w-300'>Ajouter a mon link in bio</span>
-                                            </label>
-                                        </div>
-
-                                        <div className='display gap'>
-                                            <label htmlFor='active_adds' className='display gap-1rem click opacity'>
-                                                <SwitchInput dimension={0.8} id='active_adds' />
-                                                <span className='f-w-300'>Activer la monétisation</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                            QrCode ?
+                                <QrCodeSection 
+                                    Link={Link} 
+                                    QrCode={QrCode}
+                                    setQrCode={setQrCode}  
+                                />
+                            :
                             <div className='grid gap-1rem'>
-                                <div 
-                                    className='display' 
-                                    style={
-                                        !Object.values(editLink).toString().split(',').join('')
-                                        ? { pointerEvents: 'none', opacity: 0.8} 
-                                        : { pointerEvents: 'visible',  opacity: 1 }
-                                    }
-                                >
-                                    <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
-                                        onClick={e=> 
-                                            EditLink({
-                                                Link,
-                                                LinkID,
-                                                User,
-                                                Stats,
-                                                editLink,
-                                                seteditLink,
-                                                snackBar,
-                                                popUp,
-                                                history,
-                                            }) 
+
+                                <div className='grid gap-1rem' >
+
+                                    <div className='grid gap-1rem white shadow border-r-1 border p-2' >
+                                        <div className='grid gap w-100p'>
+                                            <span>Modifier le nom</span>
+                                            <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.name} onChange={e=> seteditLink({...editLink, name : e.target.value})} />
+                                            <small className='c-red' id='error-name'></small>
+                                        </div>
+
+                                        <div className='grid gap w-100p'>
+                                            <div className='display gap'>
+                                                <span>Modifier le lien principal</span>
+                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                            </div>
+                                            <div 
+                                                className='display h-3 border-r-1 w-100p white'
+                                                style={ 
+                                                    isUserPremium(User).plan === 'FREE' 
+                                                    ? { pointerEvents: 'none', opacity: 0.8} 
+                                                    : { pointerEvents: 'visible',  opacity: 1 }
+                                                } 
+                                            >
+                                                <input type='text' className='div-input h-4 border-r-1 w-100p grey' placeholder={Link.url} onChange={e=> seteditLink({...editLink, url : e.target.value})} />
+                                            </div>
+                                            <small className='c-red' id='error-url'></small>
+                                        </div>
+
+                                        <div className='grid gap w-100p'>
+                                            <div className='display gap'>
+                                                <span>Modifier le lien court</span>
+                                                { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                            </div>
+                                            <div 
+                                                className='display div-input h-4 border border-r-1 w-100p grey'
+                                                style={ 
+                                                    isUserPremium(User).plan === 'FREE' 
+                                                    ? { pointerEvents: 'none', opacity: 0.8} 
+                                                    : { pointerEvents: 'visible',  opacity: 1 }
+                                                } 
+                                            >
+                                                <span className='c-blue p-l-1 p-r-04'>qlee.me/</span>
+                                                <input 
+                                                    type='text' 
+                                                    className='border-0 p-0 w-100p' 
+                                                    placeholder='mon-lien' 
+                                                    onChange={e=> {
+                                                        seteditLink({
+                                                            ...editLink, 
+                                                            shortLink: e.target.value 
+                                                        })
+                                                        checkShortLinkAvailable(e.target.value, UserLinks)
+                                                    }} 
+                                                    pattern="\S*"
+                                                    onKeyPress={event=> event.key === ' ' && event.preventDefault()}
+                                                />
+                                            </div>
+                                            <small id='alert-shortlink'></small>
+                                        </div>
+                                    </div>
+
+                                    <div className='grid gap white shadow border-r-1 border p-2'>
+                                        <div className='display gap'>
+                                            <span>Fonctionnalités</span>
+                                            {/* { isUserPremium(User).plan === 'FREE' && <GoToPricing /> } */}
+                                            <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
+                                                <MegaphoneIcon width={16} className='c-white' />
+                                                <small>Bientôt</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='grid gap opacity' 
+                                            style={ 
+                                            /*  isUserPremium(User).plan === 'FREE' 
+                                                ? { pointerEvents: 'none', opacity: 0.8} 
+                                                : { pointerEvents: 'visible',  opacity: 1 } */
+                                                { pointerEvents: 'none', opacity: 0.8 }
+                                            } 
+                                        >
+                                            <div className='display'>
+                                                <label htmlFor='active_views' className='display gap-1rem click'>
+                                                    <SwitchInput dimension={0.8} checked={Link.linkInBio ? true : false} onChange={e=> addtoLinkInBio(e.target.checked, LinkID, User, UserLinks.filter(e=> e.linkInBio), Link) } id='active_views'  />
+                                                    <span className='f-w-300'>Ajouter a mon link in bio</span>
+                                                </label>
+                                            </div>
+
+                                            <div className='display gap'>
+                                                <label htmlFor='active_adds' className='display gap-1rem click opacity'>
+                                                    <SwitchInput dimension={0.8} id='active_adds' />
+                                                    <span className='f-w-300'>Activer la monétisation</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div className='grid gap-1rem'>
+                                    <div 
+                                        className='display' 
+                                        style={
+                                            !Object.values(editLink).toString().split(',').join('')
+                                            ? { pointerEvents: 'none', opacity: 0.8} 
+                                            : { pointerEvents: 'visible',  opacity: 1 }
                                         }
                                     >
-                                        <span className='f-s-16'>Modifier</span>
-                                    </button>
-                                </div>
-                                <div className='display justify-c'>
-                                    <div className='display justify-c gap click red-secondary p-1 h-1 border-r-1'
-                                        onClick={e=> 
-                                            DeleteLink({
-                                                Stats,
-                                                link: Link,
-                                                snackBar,
-                                                popUp,
-                                                history
-                                            })
-                                        } 
-                                    >
-                                        <TrashIcon width={20} className='c-red' />
-                                        <span className='f-s-16 c-red'>Supprimer le lien</span>
+                                        <button className='border-r-1 blue p-1 h-4 p-lr-2 border-b hover-blue' 
+                                            onClick={e=> 
+                                                EditLink({
+                                                    Link,
+                                                    LinkID,
+                                                    User,
+                                                    Stats,
+                                                    editLink,
+                                                    seteditLink,
+                                                    snackBar,
+                                                    popUp,
+                                                    history,
+                                                }) 
+                                            }
+                                        >
+                                            <span className='f-s-16'>Modifier</span>
+                                        </button>
+                                    </div>
+                                    <div className='display justify-c'>
+                                        <div className='display justify-c gap click red-secondary p-1 h-1 border-r-1'
+                                            onClick={e=> 
+                                                DeleteLink({
+                                                    Stats,
+                                                    link: Link,
+                                                    snackBar,
+                                                    popUp,
+                                                    history
+                                                })
+                                            } 
+                                        >
+                                            <TrashIcon width={20} className='c-red' />
+                                            <span className='f-s-16 c-red'>Supprimer le lien</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
+                        }
 
                     </div>   
 

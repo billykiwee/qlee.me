@@ -18,11 +18,11 @@ export function Menu({ props }) {
             link: '/dashboard',
             icon: <PencilIcon width={16} className='c-black' />
         },
-        {
+        /* {
             name: 'Link in bio',
             link: '/edit/' + User.link_in_bio,
             icon: <SwatchIcon width={16} className='c-yellow' />
-        },
+        }, */
         {
             name: 'Pricing',
             link: '/pricing',
