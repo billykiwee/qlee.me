@@ -19,7 +19,7 @@ header {
     height: 32px;
 }
 
-
+/* 
 @media screen and (min-width: 700px) {
 
     .menu > div {
@@ -40,4 +40,21 @@ header {
     }
 
     
+} */
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    right: 1rem;
+    top: 6rem;
+    border-radius: 1rem;
+    background-color: var(--background);
+    padding: 1rem;
+}
+
+
+.menu > div {
+    display: grid;
 }

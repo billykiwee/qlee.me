@@ -12,7 +12,6 @@ export default function Header({ active }) {
     const User = useStateProps().user.profil
 
     const [menu, setMenu] = useState(false)    
-    const [theme, setTheme] = useState(localStorage.getItem('theme'))
     const width = GetWidth()
 
 
@@ -61,11 +60,6 @@ export default function Header({ active }) {
 
                 <div className='display gap'>
 
-                    <button className='hamburger border-r-100 hover' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
-                        <span className='display'>
-                            {theme === 'light' ? <MoonIcon width={18} className='c-black' /> : <SunIcon width={20} className='c-yellow' />}
-                        </span>
-                    </button>
                     <div className='display gap-04 p-04 h-2 border-r-2 white'>
                         {
                             User 
