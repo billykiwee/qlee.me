@@ -18,7 +18,7 @@ export default function List({props}) {
     
 
     const linksFilters = () => {
-        
+
         if (InputSearch.length) {
 
             return UserLinks
@@ -50,7 +50,10 @@ export default function List({props}) {
 
             <div  className='grid gap' id='div-links' >
                 {
-                    linksFilters().map(link=> {
+                    !linksFilters().length ? <small className='text-align-c'>Aucun résultat</small>
+                    :
+                    linksFilters()
+                    .map(link=> {
 
                         return (
                             <div className='display justify-s-b' id={'link-' + link.id} key={link.id}>

@@ -25,11 +25,11 @@ export default function Filter({props}) {
             text: 'Le plus ancient',
             icon: <BackwardIcon width={14} />
         },
-        {
+       /*  {
             name: 'link-in-bio',
             text: 'Link in bio',
             icon: <SwatchIcon width={14} />
-        }
+        } */
     ]
 
     const [isOpen, setOpen] = useState(false)
@@ -99,11 +99,14 @@ export default function Filter({props}) {
                     Search &&
                     <div className='display'>
                         <div style={{
-                            width: '3.2rem',
-                            position: 'absolute',
-                            top: '0',
-                            background: 'var(--grey)',
-                            height: '3rem',
+                            position    : 'absolute',
+                            top         : '-0.6rem',
+                            left        : '0.8rem',
+                            width       : 0,
+                            height      : 0,
+                            borderLeft  : '12px solid transparent',
+                            borderRight : '12px solid transparent',
+                            borderBottom: '12px solid var(--grey)',
                         }}/>
                         <input className='div-input grey h-4 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> setInputSearch(e.target.value.toLowerCase())} />
                     </div>

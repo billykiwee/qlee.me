@@ -122,6 +122,10 @@ export default function Profil() {
                         <span className='f-s-20'>Mes transactions</span>
                         <div className='grid gap-1rem' >
                             <div className='grid white border-r-04 border'>
+                                <div className='display gap p-1' style={{ borderBottom: '1px solid var(--grey)' }}>
+                                    <span>Type</span>
+                                    <span>Montant</span>
+                                </div>
                                 {
                                     transactions
                                     .map((transaction, i)=> {
@@ -129,15 +133,14 @@ export default function Profil() {
                                         const { id, type, formatAmount, date } = transaction
 
                                         return (
-                                            <div className='display justify-s-b p-04' key={id} id={i}  style={{
-                                                borderRadius: 0,
+                                            <div className='display justify-s-b p-1' key={id} id={i}  style={{
                                                 borderBottom: i !== transactions.length-1 ? '1px solid var(--grey)' : '',
                                             }}>
                                                 <div className='display gap'>
-                                                    <small>{type}: </small>  
-                                                    <small className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</small>
+                                                    <span>{type}: </span>  
+                                                    <span className={type === 'withdraw' ? 'c-green' : 'c-blue'}>{formatCurrency(formatAmount)}</span>
                                                 </div>
-                                                <small>{formatDate(date)}</small>
+                                                <small>{formatDate(date, 'date').replaceAll('/', '-')}</small>
                                             </div>
                                         )
                                     })
