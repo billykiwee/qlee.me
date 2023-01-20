@@ -43,7 +43,7 @@ export default function Pricing() {
                         .map(plan => {
 
                             return (
-                                <div className='grid' key={plan.plan}>
+                                <div className='grid' key={plan.plan} style={{ opacity : !plan.available ? 0.4 : 1 }} >
                                     <div className='border-b border border-r-1 card-pricing white'  >
 
                                         <div className='grid gap-2rem'>
@@ -53,7 +53,7 @@ export default function Pricing() {
                                                     <span className='opacity'>{plan.subtitle}</span>
                                                 </div>
                                                 {
-                                                    user.plan &&
+                                                    User.plan === plan.id &&
                                                     <div>
                                                         <img src='/images/check.svg' width={22} />
                                                     </div>

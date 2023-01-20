@@ -3,6 +3,7 @@ import { plans } from '../../../../Admin/settings/plans'
 
 export const Plans = {
     Free : {
+        id      : 'FREE',
         plan    : 'Free 💸',
         subtitle: 'Pour tous',
         price   : 0,
@@ -11,9 +12,11 @@ export const Plans = {
             ['Qr code', <QrCodeIcon width={18} />],
             ['Lien personalisable', <Cog6ToothIcon width={18} />],
         ],
+        available: true
     },
     Pro : {
         plan    : 'Pro 👨🏻‍💻',
+        id      : 'PRO',
         subtitle: 'Pour aller plus loin',
         price   : plans.PRO.price,
         benefits: [
@@ -24,8 +27,10 @@ export const Plans = {
         ],
         recommended: true,
         payment    : '/payment/pro',
+        available: true
     },
     Entrprise : {
+        id      : 'ENTREPRISE',
         plan    : 'Entreprise 🚀',
         subtitle: 'Booster votre présence',
         price   : plans.ENTREPRISE.price,
@@ -36,6 +41,7 @@ export const Plans = {
             ['Lien personalisable', <Cog6ToothIcon width={18} />],
             ['Statistiques', <ChartPieIcon width={18} />]
         ],
-        payment    : '/payment/entreprise',
+        payment  : '/payment/entreprise',
+        available: false
     }
 }

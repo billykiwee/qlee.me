@@ -3,7 +3,7 @@ import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import getFavicon from '../../../../../App/utils/getFavicon'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
 import { uploadPhoto } from '../../../../lib/database/upload/uploadPhoto'
-import { ChartPieIcon, EyeIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, EyeIcon, MegaphoneIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
 
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
@@ -111,7 +111,7 @@ export default function Edit() {
 
                         </div>
 
-                        <div className='grid gap-2rem'>
+                        <div className='grid gap-1rem'>
 
                             <div className='grid gap-1rem' >
 
@@ -176,14 +176,19 @@ export default function Edit() {
                                 <div className='grid gap white shadow border-r-1 border p-2'>
                                     <div className='display gap'>
                                         <span>Fonctionnalités</span>
-                                        { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
+                                        {/* { isUserPremium(User).plan === 'FREE' && <GoToPricing /> } */}
+                                        <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
+                                            <MegaphoneIcon width={16} className='c-white' />
+                                            <small>Bientôt</small>
+                                        </div>
                                     </div>
                                     
-                                    <div className='grid gap' 
+                                    <div className='grid gap opacity' 
                                         style={ 
-                                            isUserPremium(User).plan === 'FREE' 
+                                           /*  isUserPremium(User).plan === 'FREE' 
                                             ? { pointerEvents: 'none', opacity: 0.8} 
-                                            : { pointerEvents: 'visible',  opacity: 1 }
+                                            : { pointerEvents: 'visible',  opacity: 1 } */
+                                            { pointerEvents: 'none', opacity: 0.8 }
                                         } 
                                     >
                                         <div className='display'>
@@ -198,9 +203,6 @@ export default function Edit() {
                                                 <SwitchInput dimension={0.8} id='active_adds' />
                                                 <span className='f-w-300'>Activer la monétisation</span>
                                             </label>
-                                            <div className='display justify-c green border-r-1 p-04 h-1'>
-                                                <small>Bientot</small>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
