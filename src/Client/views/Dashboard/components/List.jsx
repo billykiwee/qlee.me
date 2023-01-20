@@ -15,12 +15,13 @@ export function List({ links, User }) {
     const [linkListed, add] = useState(10)
 
 
+
     if (!links) return
 
     return (
         <div className='grid gap-1rem'> 
 
-            <div className='grid gap-1rem'> 
+            <div className='grid gap-1rem list'> 
                 {
                     links.sort((a,b)=> b.date - a.date)
                     .map((link, i)=> {
@@ -60,11 +61,15 @@ export function List({ links, User }) {
                 }
             </div>
 
-            <div className='display'>
-                <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> links.length > 10 && add(linkListed + 10)} >
-                    <span className='f-s-16 c-black'>Afficher + ({(links.length < 10 ? links.length : linkListed) + ' liens sur ' + links.length})</span>
-                </button>
-            </div>
+            {
+                document.querySelector('.list').childNodes &&
+                document.querySelector('.list').childNodes.length !== linkListed &&
+                <div className='display'>
+                    <button className='white h-4 p-1 border-r-1 shadow border' onClick={e=> links.length > 10 && add(linkListed + 10)} >
+                        <span className='f-s-16 c-black'>Afficher + ({(links.length < 10 ? links.length : linkListed) + ' liens sur ' + links.length})</span>
+                    </button>
+                </div>
+            }
             
             <div className='display justify-c m-t-1'>
                 {
