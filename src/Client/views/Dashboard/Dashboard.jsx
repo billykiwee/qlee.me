@@ -6,7 +6,7 @@ import { isUserPremium } from '../../../Admin/settings/isPremium';
 import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
-import Login from '../../../Website/views/Login/Login'
+import Login from '../../../Website/pages/Login/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';

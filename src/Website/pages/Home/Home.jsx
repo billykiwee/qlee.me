@@ -129,7 +129,7 @@ export default function Home() {
         },
     ]
 
-    const tempateLinks = [
+    let tempateLinks = [
         {
             name     : 'Ma boutique',
             check    : true,
@@ -335,15 +335,21 @@ export default function Home() {
                 </div>
                 <div className='grid gap p-2'>
                     {
-                        tempateLinks.map(t=> {
+                        tempateLinks
+                        .map(t=> {
+
+                            let checked
+
+                            console.log(checked);
+
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1'>
                                     <div className='display gap-1rem'>
                                         <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
                                         <span className='f-s-16'>{t.name}</span>
                                     </div>
-                                    <div className='display gap-04 '>
-                                        <SwitchInput dimension={0.9} checked={t.check} onChange={e=> t.check = false} />
+                                    <div className='display gap-04 ' onClick={e=> checked = false }  >
+                                        <SwitchInput dimension={0.9} checked={checked ?? t.check} />
                                     </div>
                                 </div>
                             )

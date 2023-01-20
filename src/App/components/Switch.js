@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const SwitchInput = ({checked, onChange, id, dimension}) => {
+export const SwitchInput = ({ checked, onChange, id, dimension }) => {
     
     return (
         <label className="switch" style={{transform: `scale(${dimension})`}} >
