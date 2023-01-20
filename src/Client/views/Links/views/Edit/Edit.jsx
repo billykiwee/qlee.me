@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
-import getFavicon from '../../../../../App/utils/getFavicon'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
-import { uploadPhoto } from '../../../../lib/database/upload/uploadPhoto'
 import { ChartPieIcon, EyeIcon, MegaphoneIcon, PencilIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
 
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
@@ -47,10 +45,6 @@ export default function Edit() {
 
     const [QrCode, setQrCode] = useState(false)
 
-
-    const lol = 100_600_900
-
-    console.log(lol);
 
     return (
         <Main>
