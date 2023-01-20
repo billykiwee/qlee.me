@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { plans } from '../../../../../Admin/settings/plans'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
-import { PlansData } from './data/plans'
+import { PlansData } from '../data/plans'
 
 
 export default function Plans() {

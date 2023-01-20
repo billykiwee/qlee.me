@@ -51,7 +51,7 @@ export default function Edit() {
     return (
         <Main>
    
-            <div className='display'>
+            <div className='grid m-b-2'>
                 <h2>Modifier le lien</h2>
             </div>
 

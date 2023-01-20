@@ -10,7 +10,7 @@ export function EditQrCode({ style, link }) {
  
         <div className='grid gap-1rem border-r-1 gap-1rem p-1 border-b blue' id='qr-code-frame-img' style={{background: style.frameColor ?? 'var(--blue)'}} > 
             <div className='display white p-1 border-r-04 justify-c' style={{background : 'white'}} >
-                {
+                {/* {
                     style.logo &&
                     <div 
                         style={{ 
@@ -20,7 +20,7 @@ export function EditQrCode({ style, link }) {
                         }}
                         className='w-2 h-2 border-r-100 absolute white' 
                     />
-                }
+                } */}
                 <QrCodeSvg style={style} link={link} />
             </div> 
             {
@@ -35,7 +35,7 @@ export function EditQrCode({ style, link }) {
     else return (
         <div className='grid gap-1rem border-r-1 gap-1rem p-1' id='qr-code-img' > 
             <div className='display p-1 border-r-04 justify-c' style={{background : 'white'}} >
-                {
+               {/*  {
                     style.logo &&
                     <div 
                         style={{ 
@@ -45,7 +45,7 @@ export function EditQrCode({ style, link }) {
                         }}
                         className='w-2 h-2 border-r-100 absolute white' 
                     />
-                }
+                } */}
                <QrCodeSvg style={style} link={link} />
             </div> 
         </div> 

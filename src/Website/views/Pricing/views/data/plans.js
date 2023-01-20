@@ -1,5 +1,5 @@
 import { ArrowsRightLeftIcon, ChartPieIcon, Cog6ToothIcon, LinkIcon, QrCodeIcon, SwatchIcon } from '@heroicons/react/24/solid'
-import { plans } from '../../../../../../Admin/settings/plans'
+import { plans } from '../../../../../Admin/settings/plans'
 
 export const PlansData = {
     Free : {

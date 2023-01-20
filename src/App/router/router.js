@@ -5,12 +5,12 @@ import Edit from "../../Client/views/Links/views/Edit/Edit";
 import Profil from "../../Client/views/Profil/Profil";
 import Redirection from "../../Client/views/Redirection/Redirection";
 import Stats from "../../Client/views/Stats/Stats";
-import Home from "../../Website/pages/Home/Home";
-import Login from "../../Website/pages/Login/Login";
-import Page404 from "../../Website/pages/Page404";
-import Payment from "../../Website/pages/Payment/Payment";
-import Pricing from "../../Website/pages/Pricing/Pricing";
-import Terms from "../../Website/pages/Terms/Terms";
+import Home from "../../Website/views/Home/Home";
+import Login from "../../Website/views/Login/Login";
+import Page404 from "../../Website/views/Page404";
+import Payment from "../../Website/views/Payment/Payment";
+import Pricing from "../../Website/views/Pricing/Pricing";
+import Terms from "../../Website/views/Terms/Terms";
 
 export const router = [
     { path : '/*', element : <Page404 /> },
