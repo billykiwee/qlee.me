@@ -8,7 +8,6 @@ import { ChartPieIcon, EyeIcon, MegaphoneIcon, PencilIcon, QrCodeIcon, TrashIcon
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
 import { formatNumber } from '../../../../../App/utils/formatNumber'
-import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import QrCodeSection from '../QrCode/QrCode'
 import { DeleteLink } from '../../functions/Delete'
 import { IsLinkInBio } from './components/IsLinkInBio'
@@ -48,6 +47,11 @@ export default function Edit() {
 
     const [QrCode, setQrCode] = useState(false)
 
+
+    const lol = 100_600_900
+
+    console.log(lol);
+
     return (
         <Main>
    
@@ -85,7 +89,7 @@ export default function Edit() {
                                     </div>
                                     <div className='display justify-c wrap gap'>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(false)}>
                                                 <PencilIcon width={24} />
                                             </button>
                                         </div>
