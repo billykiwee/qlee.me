@@ -35,7 +35,7 @@ export default function Stats() {
 
     const [ShowStat, setShowStat] = useState(null)
     
-    const redirectIfNoLinkID = e => setShowStat(LinkID ?? TopLink?.id)
+    const redirectIfNoLinkID = e => setShowStat(e=> LinkID ?? TopLink?.id)
     
     useEffect(e=> {
         redirectIfNoLinkID()

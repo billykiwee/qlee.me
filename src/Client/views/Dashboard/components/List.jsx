@@ -23,7 +23,8 @@ export function List({ links, User }) {
 
             <div className='grid gap-1rem list'> 
                 {
-                    links.sort((a,b)=> b.date - a.date)
+                    links
+                    .sort((a,b)=> b.date - a.date)
                     .map((link, i)=> {
                         
                         return (
