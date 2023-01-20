@@ -43,9 +43,11 @@ export function FAQ() {
                 <div className='display justify-c w-100p'  >
                     <div className='grid gap w-100p' >
                         {
-                            questions.map((question, i)=> {
+                            questions
+                            .map((question, i)=> {
+
                                 return (
-                                    <div className='display white border-r-1 p-1 shadow' >
+                                    <div className='display white border-r-1 p-1 shadow'  key={i} >
                                         <div className='grid gap-1rem w-100p'>
                                             <div className='display justify-s-b gap'>
                                                 <div className='display gap'>
@@ -70,13 +72,6 @@ export function FAQ() {
                                 )
                             })
                         }
-                        {/* <div className='grid gap-1rem p-1' key={i}>
-                                        <div className='grid gap'>
-                                            <QuestionMarkCircleIcon className='c-grey w-3' />
-                                            <span className='f-s-25 f-w-500'>{question.q}</span>
-                                        </div>
-                                        <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                                    </div> */}
                     </div>
                 </div>
             </div>
