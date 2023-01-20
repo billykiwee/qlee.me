@@ -20,13 +20,13 @@ export function FAQ() {
         },
         {
             id : 'q-3',
-            q : 'Do I have to buy or install anything in addition to using Onepage?',
-            a : 'No, you don’t. Onepage is a cloud-based solution means hosting is already included in free or paid plans. As well as any additional plug-ins are not required.'
+            q : 'Puis-je arrêter mon abonnement à votre service ?',
+            a : "Oui, nos abonnements sont sans engagement. Vous pouvez à tout moment arrêter votre abonnement."
         },
         {
             id : 'q-4',
-            q : 'Do I have to buy or instnepage?',
-            a : 'No, you don’t. Onepage is a clouee or paid plans. As well as any additional plug-ins are not required.'
+            q : 'Le service est-il garanti de ne pas être banni par les réseaux sociaux ou les moteurs de recherche ?',
+            a : 'Oui, car les lien sont sous le nom domaine qlee.me qui utilise la technologie SSL'
         },
     ]
 
@@ -39,43 +39,45 @@ export function FAQ() {
                 </div>
             </div>
             
-            <div className='display justify-c'>
-                <div className='grid gap' >
-                    {
-                        questions.map((question, i)=> {
-                            return (
-                                <div className='display white border-r-1 p-1 shadow'  >
-                                    <div className='grid gap-1rem w-100p'>
-                                        <div className='display justify-s-b gap'>
-                                            <div className='display gap'>
-                                                <span>{question.q}</span>
+            <div className='display justify-c margin-auto w-100p' >
+                <div className='display justify-c w-100p'  >
+                    <div className='grid gap w-100p' >
+                        {
+                            questions.map((question, i)=> {
+                                return (
+                                    <div className='display white border-r-1 p-1 shadow' >
+                                        <div className='grid gap-1rem w-100p'>
+                                            <div className='display justify-s-b gap'>
+                                                <div className='display gap'>
+                                                    <span>{question.q}</span>
+                                                </div>
+                                                <div className='display justify-c click border-r-100 w-2 h-2 hover' onClick={e=> setShowQ(e=> e !== question.id ? question.id : '') } >
+                                                    {
+                                                        showQ !== question.id 
+                                                        ? <PlusCircleIcon width={28} className='c-grey' />
+                                                        : <MinusCircleIcon width={28} className='c-grey' />
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className='display justify-c click border-r-100 w-2 h-2 hover' onClick={e=> setShowQ(e=> e !== question.id ? question.id : '') } >
-                                                {
-                                                    showQ !== question.id 
-                                                    ? <PlusCircleIcon width={28} className='c-grey' />
-                                                    : <MinusCircleIcon width={28} className='c-grey' />
-                                                }
-                                            </div>
+                                            {
+                                                showQ === question.id &&
+                                                <div>
+                                                    <small className='c-grey f-w-200 f-s-16'>{question.a}</small>
+                                                </div>
+                                            }
                                         </div>
-                                        {
-                                            showQ === question.id &&
-                                            <div>
-                                                <small className='c-grey f-w-200 f-s-16'>{question.a}</small>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>  
-                            )
-                        })
-                    }
-                    {/* <div className='grid gap-1rem p-1' key={i}>
-                                    <div className='grid gap'>
-                                        <QuestionMarkCircleIcon className='c-grey w-3' />
-                                        <span className='f-s-25 f-w-500'>{question.q}</span>
-                                    </div>
-                                    <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
-                                </div> */}
+                                    </div>  
+                                )
+                            })
+                        }
+                        {/* <div className='grid gap-1rem p-1' key={i}>
+                                        <div className='grid gap'>
+                                            <QuestionMarkCircleIcon className='c-grey w-3' />
+                                            <span className='f-s-25 f-w-500'>{question.q}</span>
+                                        </div>
+                                        <span className='c-grey f-w-200 f-s-18'>{question.a}</span>
+                                    </div> */}
+                    </div>
                 </div>
             </div>
             
