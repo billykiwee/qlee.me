@@ -50,8 +50,6 @@ export default function Profil() {
     }
 
 
-    const [showTransactions, setShowTransactions] = useState(5)
-
     
     if (!user) return <Login />
     if (User)
@@ -143,13 +141,7 @@ export default function Profil() {
                                             </div>
                                         )
                                     })
-                                    .splice(0, showTransactions)
                                 }
-                            </div>
-                            <div>
-                                <button className='display justify-c border white p-04 border-r-04 c-black' onClick={e=> setShowTransactions(showTransactions + 5)}>
-                                    <span className='f-s-16'>Voir plus</span>
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -51,7 +51,7 @@ export default function Dashboard() {
                                 })
                             }}
                         >
-                            <div className='grid gap-1rem p-1 border-r-1 white'>
+                            <div className='grid gap-1rem p-1 border-r-1 white border border-b'>
                                 <div>
                                     <span className='f-s-25 f-w-500'>Créer un lien</span>
                                 </div>

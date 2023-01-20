@@ -42,21 +42,16 @@ export default function Filter({props}) {
     
 
     return (
-        <div className='grid gap-1rem' style={{
-            position: 'sticky',
-            top     : '6rem',
-            zIndex  : 9,
-            marginTop: width > 740 && '4rem'
-        }}>
-            <div className='grid gap-1rem white border-r-1 border p-04'>
-                <div className='display justify-s-b'>
+        <div className='grid gap-1rem' >
+            <div className='grid gap border-r-1 p-04'>
+                <div className='display gap'>
                     <div className='display'>
                         <button 
                             onClick={e=> {
                                 setFilter(false)
                                 setSearch(Search ? false : true)
                             }}
-                            className={(Search ? 'grey' : 'white') + ' h-3 w-3 p-1 hover border-r-2 border'} 
+                            className={(Search ? 'grey' : 'white') + ' h-3 w-3 p-1 hover border-r-1  border-b border'} 
                         >
                             <MagnifyingGlassIcon width={20} className='c-black' />
                         </button>
@@ -64,7 +59,7 @@ export default function Filter({props}) {
 
                     <div className='display gap'>
                         <div className='display gap'>
-                            <div className='dropdown hover border-r-2 border click w-100p'>
+                            <div className='dropdown hover border-r-1 border border-b click w-100p'>
                                 <div className='dropdown-header display gap' onClick={e=> setOpen(isOpen ? false : true)} >
                                     <div className='display gap'>
                                         {
@@ -103,7 +98,14 @@ export default function Filter({props}) {
                 {
                     Search &&
                     <div className='display'>
-                        <input className='div-input grey h-3 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> setInputSearch(e.target.value.toLowerCase())} />
+                        <div style={{
+                            width: '3.2rem',
+                            position: 'absolute',
+                            top: '0',
+                            background: 'var(--grey)',
+                            height: '3rem',
+                        }}/>
+                        <input className='div-input grey h-4 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> setInputSearch(e.target.value.toLowerCase())} />
                     </div>
                 }
             </div>
