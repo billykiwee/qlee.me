@@ -130,6 +130,7 @@ export default function Profil() {
                                 </div>
                                 {
                                     transactions
+                                    .sort((a,b) => b.date - a.date)
                                     .map((transaction, i)=> {
 
                                         const { id, type, formatAmount, date } = transaction
