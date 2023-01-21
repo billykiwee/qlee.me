@@ -22,42 +22,15 @@ export default function Home() {
 
 
     const subjects = [
-        {
-            icon: '👨🏻‍💻',
-            name: 'Work'
-        },
-        {
-            icon: '🏀',
-            name: 'Sport'
-        },
-        {
-            icon: '🎨',
-            name: 'Artists'
-        },
-        {
-            icon: '🎮',
-            name: 'Gamers'
-        },
-        {
-            icon: '🍔',
-            name: 'Food'
-        },
-        {
-            icon: '🎬',
-            name: 'Video creators'
-        },
-        {
-            icon: '🎙',
-            name: 'Podcasters'
-        },
-        {
-            icon: '📖',
-            name: 'Writers'
-        },
-        {
-            icon: '🎸',
-            name: 'Musicians'
-        },
+        { icon: '👨🏻‍💻', name: 'Work' },
+        { icon: '🏀', name: 'Sport' },
+        { icon: '🎨', name: 'Artists' },
+        { icon: '🎮', name: 'Gamers' },
+        { icon: '🍔', name: 'Food' },
+        { icon: '🎬', name: 'Video creators' },
+        { icon: '🎙', name: 'Podcasters' },
+        { icon: '📖', name: 'Writers' },
+        { icon: '🎸', name: 'Musicians' },
     ]
 
     const steps = [
@@ -79,30 +52,12 @@ export default function Home() {
     ]
 
     const exemples = [
-        {
-            name: '@Celine',
-            img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80'
-        },
-        {
-            name: '@HBO',
-            img: 'https://linktr.ee/_gatsby/image/3366c979a0e1dbf88ebae4f99acfcb3d/6a30f42b5bff44434c29c5c6b36ab839/hbo.avif?eu=0205d5faf0e45b2de94ef3064e19324860060ceb18abf477bdcfe18886fe5cda552ed622bb5723ea37c7aab77e3124cb335a42082ebde91c0e0544d461f049b03809765cdfe50063f1e28b53bd864f2de8b09b8d32583fcbe878424ad4726cadd87d21529d55854db49fcc5b63871653a1e7f7acc87eed4faac253450347fa857031b82f6ab3a4e6e876258a530bdf7e8789f88d296a2f3f66cf9ddad6fcb8e1ad89aa58b66ee56956ef9b434322302688f7b912c7&a=w%3D890%26h%3D890%26fm%3Davif%26q%3D75&cd=fae6508b0d22194261a6fbab5a6791af'
-        },
-        {
-            name: '@basket',
-            img: 'https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
-        },
-        {
-            name: '@Joyca',
-            img : 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
-        },
-        {
-            name: '@Seb',
-            img: 'https://images.unsplash.com/photo-1593757147298-e064ed1419e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
-        },
-        {
-            name: '@Cookin co',
-            img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
-        }
+        { name: '@Celine', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80' },
+        { name: '@HBO', img: 'https://linktr.ee/_gatsby/image/3366c979a0e1dbf88ebae4f99acfcb3d/6a30f42b5bff44434c29c5c6b36ab839/hbo.avif?eu=0205d5faf0e45b2de94ef3064e19324860060ceb18abf477bdcfe18886fe5cda552ed622bb5723ea37c7aab77e3124cb335a42082ebde91c0e0544d461f049b03809765cdfe50063f1e28b53bd864f2de8b09b8d32583fcbe878424ad4726cadd87d21529d55854db49fcc5b63871653a1e7f7acc87eed4faac253450347fa857031b82f6ab3a4e6e876258a530bdf7e8789f88d296a2f3f66cf9ddad6fcb8e1ad89aa58b66ee56956ef9b434322302688f7b912c7&a=w%3D890%26h%3D890%26fm%3Davif%26q%3D75&cd=fae6508b0d22194261a6fbab5a6791af' },
+        { name: '@basket', img: 'https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' },
+        { name: '@Joyca', img : 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' },
+        { name: '@Seb', img: 'https://images.unsplash.com/photo-1593757147298-e064ed1419e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80' },
+        { name: '@Cookin co', img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'  }
     ]
 
     const features = [
@@ -129,26 +84,10 @@ export default function Home() {
     ]
 
     let tempateLinks = [
-        {
-            name     : 'Ma boutique',
-            check    : true,
-            icon     : 'www.goody.com'
-        },
-        {
-            name     : 'Mon facebook',
-            check    : false,
-            icon     : 'www.facbook.com'
-        },
-        {
-            name     : 'Mon Twitch',
-            check    : true,
-            icon     : 'www.twitch.com'
-        },
-        {
-            name     : 'Ma youtube',
-            check    : true,
-            icon     : 'www.youtube.com'
-        }
+        { name : 'Ma boutique', check: true, icon : 'www.goody.com' },
+        { name : 'Mon facebook', check: false, icon : 'www.facbook.com' },
+        { name : 'Mon Twitch', check: true, icon : 'www.twitch.com' },
+        { name : 'Ma youtube', check: true, icon : 'www.youtube.com'  }
     ]
 
 
@@ -225,7 +164,7 @@ export default function Home() {
                     {
                         features.map((feature, i)=> {
                             return (
-                                <div className='display gap-2rem align-top p-1' key={feature.name} style={{borderBottom: i !== features.length-1 ? '1px solid #d2d2d2': ''}}>
+                                <div className='display gap-2rem align-top p-1' key={i} style={{borderBottom: i !== features.length-1 ? '1px solid #d2d2d2': ''}}>
                                     <div className='grid'>
                                         <div className='display'>
                                             <div className='steps-blocks-head'>
@@ -293,9 +232,10 @@ export default function Home() {
 
                     <div className='subject-div-blocks'>
                         {
-                            subjects.map(subject=> {
+                            subjects
+                            .map((subject, i)=> {
                                 return (
-                                    <div className='display subject-blocks' key={subject.name}>
+                                    <div className='display subject-blocks' key={i}>
                                         <span className='f-s-16'>{subject.icon}</span>
                                         <span>{subject.name}</span>
                                     </div>
@@ -313,7 +253,8 @@ export default function Home() {
                     modules={[Autoplay]}
                 >
                     {
-                        exemples.map(exemple=> {
+                        exemples
+                        .map(exemple=> {
                             return (
                                 <SwiperSlide className='m-b-3' key={exemple.name}>
                                     <div className='grid gap-1rem' >
@@ -339,7 +280,7 @@ export default function Home() {
 
 
                             return (
-                                <div className='display justify-s-b border border-r-1 border-b white p-1'>
+                                <div className='display justify-s-b border border-r-1 border-b white p-1' key={t.name}>
                                     <div className='display gap-1rem'>
                                         <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
                                         <span className='f-s-16'>{t.name}</span>
@@ -362,10 +303,10 @@ export default function Home() {
                 <div className='grid gap blocks'>
                     {
                         Stats
-                        .map((stat)=> {
+                        .map((stat, i)=> {
 
                             return (
-                                <div className='display gap-2rem justify-c p-1 border-b border-r-100 shadow yellow'>
+                                <div className='display gap-2rem justify-c p-1 border-b border-r-100 shadow yellow' key={i}>
                                     <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
 
                                         <div className='grid gap' style={{color: 'black'}}>
