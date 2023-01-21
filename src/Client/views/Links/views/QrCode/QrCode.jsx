@@ -26,7 +26,7 @@ export default function QrCodeSection({ Link }) {
     return (
         <div className='grid gap-1rem'>
 
-            <div className='border border-r-1 p-2 grid gap-2rem justify-s-a white '>
+            <div className='shadow border-r-1 p-2 grid gap-2rem justify-s-a white '>
                 <div className='display justify-c'>
                     <EditQrCode 
                         style={{
@@ -42,11 +42,11 @@ export default function QrCodeSection({ Link }) {
                 </div>
             </div>
             <div className='grid gap '>
-                <div className='grid gap-1rem border-r-1 white p-1'>
+                <div className='grid gap-1rem border-r-1 white p-1 shadow'>
                     <div className='display justify-s-b'>
                         <span>Cadre</span>
                         <div className='click display border-r-2 justify-c' >
-                            <SwitchInput dimension={0.7} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
+                            <SwitchInput dimension={0.8} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
                         </div>
                     </div>
                     {
@@ -54,7 +54,7 @@ export default function QrCodeSection({ Link }) {
                         <>
                             <div className='grid gap'>
                                 <span className='opacity'>texte</span>
-                                <input type="text" className='div-input grey' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
+                                <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
                             </div>
 
                             <div className='grid gap-1rem grey border-r-1 p-1'>
@@ -81,7 +81,7 @@ export default function QrCodeSection({ Link }) {
                 </div>
 
                 <div className='grid'>
-                    <div className='grid gap-1rem white border-r-1 p-1'>
+                    <div className='grid gap-1rem white border-r-1 p-1 shadow'>
                         <div className='display justify-s-b'>
                             <span>Lignes</span>
                             <div className='click display border-r-04 w-2 h-2 hover justify-c' onClick={e=> setLine(line ? false : true)}>

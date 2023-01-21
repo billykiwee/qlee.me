@@ -7,11 +7,11 @@ export default function ValidPayment() {
 
     return (
         <div>
-            <h1>Bienvenu chez toi !</h1>
+            <h2>Bienvenu chez toi !</h2>
             <div className='grid gap-1rem'>
                 <div className='grid gap white p-2 border-r-1 border'>
                     <div className='display justify-c'>
-                        <CheckCircleIcon width={88} className='c-green' />
+                        <CheckCircleIcon width={66} className='c-green' />
                     </div>
                     <span className='f-s-20 text-align-c'>Le paiment à été réalisé avec succès !</span>
                 </div>

@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ChartPieIcon, ChatBubbleLeftIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
@@ -160,7 +160,7 @@ export default function Home() {
                                                 {
                                                     feature.name === 'Links in bio' &&
                                                     <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
-                                                        <MegaphoneIcon width={16} className='c-white' />
+                                                        <ChatBubbleLeftIcon width={14} className='c-white' />
                                                         <small>Bientôt</small>
                                                     </div>
                                                 }
