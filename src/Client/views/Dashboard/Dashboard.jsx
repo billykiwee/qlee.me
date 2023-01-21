@@ -3,14 +3,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Messages from '../../../App/utils/Messages';
 import { isUserPremium } from '../../../Admin/settings/isPremium';
-import Articles from './components/Articles';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { createLink } from '../Links/functions/Create';
 import Login from '../../../Website/views/Login/Login'
 import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
-import { useDatabase } from '../../database/useDatabase';
 
 
 export default function Dashboard() {
@@ -27,9 +25,9 @@ export default function Dashboard() {
 
     window.onclick = () => {
         setLol(prev => { return {...prev, name: 'bonjour'}})
-        setLol(prev => { return {...prev, fristname: 'cool'}})
+        setLol(prev => { return {...prev, fristname: 'cool'} })
     }
-    console.log(lol);
+
 
 
     if (!auth) return <Login />
