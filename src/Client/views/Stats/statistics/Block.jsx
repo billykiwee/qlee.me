@@ -12,20 +12,23 @@ export const Block = ({ stats, User }) => {
 
     const { title, name, data, icon } = stats
 
+    console.log(name === 'clics');
+    
+
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
-            <div className={isUserPremium(User).plan !== 'ENTREPRISE' || name === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
+            <div className={isUserPremium(User).plan === 'FREE' || name === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
                 <div className='display gap' >
                     {icon}
                     <span>{title}</span>
                 </div>
                 <div className='grid gap'>
                     {
-                        name === 'clics' && <Clics stat={data} />
-                        ||
-                        isUserPremium(User).plan !== 'ENTREPRISE' && <GoToPricing />
-                        ||
+                        name === 'clics' ? <Clics stat={data} />
+                        :
+                        isUserPremium(User).plan === 'FREE' ? <GoToPricing />
+                        :
                         name === 'device' && <Device stat={data} />
                         ||
                         name === 'reference' && <Reference stat={data} />
