@@ -202,7 +202,7 @@ export default function Edit() {
                                             </div>
 
                                             <div className='display gap'>
-                                                <label htmlFor='active_adds' className='display gap-1rem click opacity'>
+                                                <label htmlFor='active_adds' className='display gap-1rem click'>
                                                     <SwitchInput dimension={0.8} id='active_adds' />
                                                     <span className='f-w-300'>Activer la monétisation</span>
                                                 </label>
