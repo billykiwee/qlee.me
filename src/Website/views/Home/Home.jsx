@@ -63,22 +63,22 @@ export default function Home() {
     const features = [
         {
             name: 'Cut',
-            text: "Short and manage your URLs in a seconde",
+            text: "Short et manage tes URLs en 1 seconde",
             icon: <div className='display justify-c blue border-r-100 ' style={{width: '66px', height: '66px'}}><ScissorsIcon width={40} /></div>
         },
         {
             name: 'Redirect',
-            text: "",
+            text: "L'utilisateur sera rediriger la où vous voulez, en toute sécurité !",
             icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><BiSubdirectoryRight size={38} className='c-white' /></div>
         },
         {
             name: 'Links in bio',
-            text: "Create a link in bio page with yours links in one clic",
+            text: "Créer un lik in bio avec tes URLs en un clic",
             icon: <div className='display justify-c yellow border-r-100 ' style={{width: '66px', height: '66px'}}><SwatchIcon width={40} className='c-white' /></div>
         },
         {
             name: 'Stats',
-            text: "Aanalyse your bests links to a better scale up",
+            text: "Analyse tes meilleurs liens pour un meilleur scale-up",
             icon:  <div className='display justify-c orange border-r-100 ' style={{width: '66px', height: '66px'}}><RocketLaunchIcon width={40} /></div>
         },
     ]
@@ -110,10 +110,10 @@ export default function Home() {
                 <div className='display justify-s-b align-top'>
 
                     <div className='grid gap-3rem w-100p'>
-                        <div className='grid gap-04 title-home'>
-                            <small className='link'>ONE SECOND TO</small>
+                        <div className='grid gap-04'>
+                            <span className='f-s-20 c-blue f-w-600'>ONE SECOND TO</span>
                             <h1 className='m-t-0 m-b-1'>Qlee your links</h1>
-                            <span className='opacity f-w-300'>Don't panic, that just the best URL shortener for your web presence you have never seen before !</span>
+                            <span className='opacity f-s-20 f-w-400'>Pas de panique, ceci est juste le meilleur URL shortener pour ta présence sur internet que tu n'as jamais vu !</span>
                         </div>
 
                         <div className='grid gap-1rem w-100p'>
@@ -165,7 +165,7 @@ export default function Home() {
                                                     </div>
                                                 }
                                             </div>
-                                            <span className='display c-grey f-w-200' >{feature.text}</span>
+                                            <span className='display c-grey f-s-18' >{feature.text}</span>
                                         </div>
                                     </div>
                                 </div>

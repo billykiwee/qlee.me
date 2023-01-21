@@ -15,8 +15,7 @@ export default function List({props}) {
     const history = useNavigate()
 
     const { stats } = useStateProps()
-    
-    console.log(checkFilter);
+
 
     const linksFilters = () => {
 
@@ -32,8 +31,6 @@ export default function List({props}) {
             })
         }
 
-        console.log(UserLinks);
-
         return UserLinks
         .sort((a, b) => {
             if (checkFilter === 'oldest') return a.date - b.date
@@ -43,7 +40,6 @@ export default function List({props}) {
         .filter(e=> checkFilter === 'link-in-bio' ? e.linkInBio : e)
     }
 
-    const linkStatViews = (LinkID) => stats.filter(e=> e.LinkID === LinkID).length
 
     const [linkListed, add] = useState(10)
 
@@ -92,7 +88,7 @@ export default function List({props}) {
                                         <div className='display gap-1rem'>
                                             <div className='display gap-04 opacity'>
                                                 <EyeIcon width={16} />
-                                                <small>{linkStatViews(link.id)}</small>
+                                                <small>{link.views}</small>
                                             </div>
                                         </div>
                                     </div>
