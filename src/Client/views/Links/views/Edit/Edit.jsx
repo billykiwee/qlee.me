@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link as Redirect, useNavigate, useParams } from 'react-router-dom'
 import { isUserPremium } from '../../../../../Admin/settings/isPremium'
-import { ChartPieIcon, EyeIcon, MegaphoneIcon, PencilIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, ChatBubbleLeftIcon, ChatBubbleOvalLeftEllipsisIcon, EyeIcon, MegaphoneIcon, PencilIcon, QrCodeIcon, TrashIcon } from '@heroicons/react/24/solid'
 
 import { checkShortLinkAvailable } from '../../lib/checkShortLinkAvailable'
 import { SwitchInput } from '../../../../../App/components/Switch'
@@ -83,12 +83,22 @@ export default function Edit() {
                                     </div>
                                     <nav className='display justify-c wrap gap'>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' style={{ background : QrCode }} onClick={e=> setNavSelected('edit')} >
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setNavSelected('edit')} 
+                                                style={ navSelected === 'edit' ? { 
+                                                    background : 'var(--blue-secondary)' ,
+                                                    color: 'var(--blue)'
+                                                } : null}
+                                            >
                                                 <PencilIcon width={24} />
                                             </button>
                                         </div>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setNavSelected('qr-code')}>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setNavSelected('qr-code')}
+                                                style={ navSelected === 'qr-code' ? { 
+                                                    background : 'var(--blue-secondary)' ,
+                                                    color: 'var(--blue)'
+                                                } : null}
+                                            >
                                                 <QrCodeIcon width={24} />
                                             </button>
                                         </div>
@@ -180,8 +190,8 @@ export default function Edit() {
                                             <span>Fonctionnalités</span>
                                             {/* { isUserPremium(User).plan === 'FREE' && <GoToPricing /> } */}
                                             <div className='display justify-c green border-r-04 p-04 h-1 gap-04'>
-                                                <MegaphoneIcon width={16} className='c-white' />
-                                                <small>Bientôt</small>
+                                                <ChatBubbleLeftIcon width={14} className='c-white' />
+                                                <small>Bientôt disponible</small>
                                             </div>
                                         </div>
                                         
@@ -250,7 +260,7 @@ export default function Edit() {
                                                 })
                                             } 
                                         >
-                                            <TrashIcon width={20} className='c-red' />
+                                            <TrashIcon width={16} className='c-red' />
                                             <span className='f-s-16 c-red'>Supprimer le lien</span>
                                         </div>
                                     </div>

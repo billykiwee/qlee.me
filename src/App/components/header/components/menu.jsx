@@ -52,7 +52,7 @@ export function Menu({ props }) {
             if (!e.target.closest('header')) setMenu(false)
         }
 
-    }, [setMenu])
+    })
 
 
     if (menu)

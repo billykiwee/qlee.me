@@ -52,9 +52,9 @@ export default function QrCodeSection({ Link }) {
                     {
                         frameActive && 
                         <>
-                            <div className='grid gap p-1 border-r-1 grey'>
+                            <div className='grid gap'>
                                 <span className='opacity'>texte</span>
-                                <input type="text" className='div-input white' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
+                                <input type="text" className='div-input grey' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
                             </div>
 
                             <div className='grid gap-1rem grey border-r-1 p-1'>

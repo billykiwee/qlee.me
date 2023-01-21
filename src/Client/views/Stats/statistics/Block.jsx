@@ -12,9 +12,6 @@ export const Block = ({ stats, User }) => {
 
     const { title, name, data, icon } = stats
 
-    console.log(name === 'clics');
-    
-
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         

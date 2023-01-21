@@ -72,11 +72,9 @@ export default function Stats() {
                     <h2 className='m-t-0 m-b-1'>Statistiques</h2>
 
                     {
-                        UserLinks === 'no links' 
-                        ? <span>Pas de lien</span>
+                        UserLinks === 'no links' ? <span>Pas de lien</span>
                         :  
-                        UserLinks.length < 1
-                        ? <Messages loader={true} /> 
+                        UserLinks.length < 1 ? <Messages loader={true} /> 
                         :
                         UserLinks
                         .filter(isUserAuth=> isUserAuth.user === User.email)
