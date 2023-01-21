@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import '../../../App/css/stats.css'
 import { Block } from './statistics/Block'
 import Filter from './components/Filter'
 import List from './components/List'
-
 import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
 import { statistics } from './data/statistics'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
+import { isUserPremium } from '../../../Admin/settings/isPremium'
 
 
 
@@ -37,11 +37,16 @@ export default function Stats() {
     const [ShowStat, setShowStat] = useState(null)
     
     const redirectIfNoLinkID = e => setShowStat(e=> LinkID ?? TopLink?.id)
+
+    const redirectIfLinkNoExist = !UserLinks.some(e=> e.id === LinkID)
+
     
     useEffect(e=> {
         redirectIfNoLinkID()
 
         if (!LinkID) history(TopLink?.id)
+
+        if (redirectIfLinkNoExist) history('/stats/' + TopLink?.id)
         
     }, [TopLink])
     
@@ -56,6 +61,8 @@ export default function Stats() {
 
 
     const Statistics = statistics(LinkStat)
+
+
 
 
 
@@ -98,14 +105,14 @@ export default function Stats() {
                     }
 
                     {
-                            
-                    }
-                    <div className='display justify-c'>
-                        <div className='display justify-c gap yellow border-r-2 h-2 p-1'>
-                            <LockClosedIcon width={14} color='black' />
-                            <small style={{color: 'black'}}>Upgrade ton compte pour voir toutes les statistiques</small>
+                        isUserPremium(User).plan === 'FREE' &&
+                        <div className='display justify-c'>
+                            <Link className='display justify-c gap yellow hover-yellow border-r-2 h-2 p-1' to='/pricing'>
+                                <LockClosedIcon width={14} color='black' />
+                                <small style={{color: 'black'}} className='text-align-c'>Upgrade ton compte pour voir toutes les statistiques</small>
+                            </Link>
                         </div>
-                    </div>
+                    }
                     
                 </div>
 
