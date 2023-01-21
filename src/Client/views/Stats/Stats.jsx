@@ -10,6 +10,7 @@ import Messages from '../../../App/utils/Messages'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { Head } from './components/Head'
 import { statistics } from './data/statistics'
+import { LockClosedIcon } from '@heroicons/react/24/solid'
 
 
 
@@ -62,7 +63,7 @@ export default function Stats() {
         <Main>
             <div className='display blocks stats-blocks align-top gap-2rem'>
 
-                <div className='grid'>
+                <div className='grid gap-2rem'>
                     <h2 className='m-t-0'>Statistiques</h2>
 
                     {
@@ -95,6 +96,16 @@ export default function Stats() {
                             )
                         })
                     }
+
+                    {
+                            
+                    }
+                    <div className='display justify-c'>
+                        <div className='display justify-c gap yellow border-r-2 h-2 p-1'>
+                            <LockClosedIcon width={14} color='black' />
+                            <small style={{color: 'black'}}>Upgrade ton compte pour voir toutes les statistiques</small>
+                        </div>
+                    </div>
                     
                 </div>
 

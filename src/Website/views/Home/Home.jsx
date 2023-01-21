@@ -113,7 +113,7 @@ export default function Home() {
         },
         {
             name: 'Redirect',
-            text: "Create a link in bio page with yours links in one clic",
+            text: "",
             icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><BiSubdirectoryRight size={38} className='c-white' /></div>
         },
         {
@@ -140,7 +140,7 @@ export default function Home() {
             icon     : 'www.facbook.com'
         },
         {
-            name     : 'Mon instagram',
+            name     : 'Mon Twitch',
             check    : true,
             icon     : 'www.twitch.com'
         },
@@ -330,7 +330,7 @@ export default function Home() {
 
             <div className='grid justify-s-b blocks'>
                 <div className='display'>
-                    <h1 className='m-0'>Manage your links as you wish</h1>
+                    <h2 className='m-0'>Manage your links as you wish</h2>
                 </div>
                 <div className='grid gap p-2'>
                     {
@@ -356,7 +356,7 @@ export default function Home() {
 
             <div className='grid p-2 border-r-2' style={{color: 'black'}}>
                 <div className='display justify-c'>
-                    <h1 className='m-t-0 c-black'>Some numbers</h1>
+                    <h2 className='m-t-0 c-black'>Some numbers</h2>
                 </div>
 
                 <div className='grid gap blocks'>
@@ -365,7 +365,7 @@ export default function Home() {
                         .map((stat)=> {
 
                             return (
-                                <div className='display gap-2rem justify-c p-2 border-r-2 shadow yellow'>
+                                <div className='display gap-2rem justify-c p-1 border-b border-r-100 shadow yellow'>
                                     <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
 
                                         <div className='grid gap' style={{color: 'black'}}>
