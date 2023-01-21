@@ -8,8 +8,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ArrowRightIcon, BanknotesIcon, ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
-import { fetchLinks } from '../../../Client/lib/database/links/fetchLinks';
+import { ChartPieIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
@@ -183,12 +182,11 @@ export default function Home() {
 
 
 
-    const style = { }
 
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
 
-            <div className='grid blocks w-100p' style={style}>
+            <div className='grid blocks w-100p'>
                 <div className='display justify-s-b align-top'>
 
                     <div className='grid gap-3rem w-100p'>
@@ -216,16 +214,12 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-
-                <div className='display justify-c'>
-                    <img src='favicon.ico' width='288px' height='288px' />
-                </div>
             </div>
 
-            <div className='grid justify-s-b align-top blocks' style={style}>
+            <div className='grid justify-s-b align-top blocks'>
                 <div className='grid'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
-                    <h1 className='m-t-04'>All that you need</h1>
+                    <h2 className='m-t-04'>All that you need</h2>
                 </div>
                 <div className='grid gap-2rem p-1'>
                     {
@@ -261,7 +255,7 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* <div className='steps-div' style={style}>
+            {/* <div className='steps-div'>
                 <div className='title-steps'>
                     <h1 className='m-0'>How ?</h1>
                 </div>
@@ -290,7 +284,7 @@ export default function Home() {
                 </div>
             </div> */}
 
-            <div className='subject-div' style={style}>
+            <div className='subject-div'>
                 <div className='grid gap-2rem'>
                     <div className='grid'>
                         <small className='link f-w-600 f-s-20'>FOR ALL TYPE OF LINKS</small>
@@ -334,7 +328,7 @@ export default function Home() {
             
             </div>
 
-            <div className='grid justify-s-b blocks' style={style}>
+            <div className='grid justify-s-b blocks'>
                 <div className='display'>
                     <h1 className='m-0'>Manage your links as you wish</h1>
                 </div>
@@ -360,14 +354,15 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='grid p-2 border-r-2' style={{style, color: 'black'}}>
+            <div className='grid p-2 border-r-2' style={{color: 'black'}}>
                 <div className='display justify-c'>
                     <h1 className='m-t-0 c-black'>Some numbers</h1>
                 </div>
 
                 <div className='grid gap blocks'>
                     {
-                        Stats.map((stat)=> {
+                        Stats
+                        .map((stat)=> {
 
                             return (
                                 <div className='display gap-2rem justify-c p-2 border-r-2 shadow yellow'>
