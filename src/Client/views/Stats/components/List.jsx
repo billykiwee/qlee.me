@@ -16,6 +16,7 @@ export default function List({props}) {
 
     const { stats } = useStateProps()
     
+    console.log(checkFilter);
 
     const linksFilters = () => {
 
@@ -30,6 +31,8 @@ export default function List({props}) {
                 return (byName || byID || byURL).includes(InputSearch)
             })
         }
+
+        console.log(UserLinks);
 
         return UserLinks
         .sort((a, b) => {

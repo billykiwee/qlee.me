@@ -75,7 +75,7 @@ export default function Profil() {
 
                         <div className='grid gap-04'>
                             <div className='display gap-1rem'>
-                                <h2 className='m-0'>{User?.name}</h2>
+                                <span className='m-0 f-s-2rem f-w-500'>{User?.name}</span>
                                 {
                                     isUserPremium(User).plan !== 'FREE' &&
                                     <div className='display justify-c yellow border-r-04 border-b h-1 p-04'>

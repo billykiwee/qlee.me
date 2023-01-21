@@ -34,11 +34,13 @@ export default function Filter({props}) {
 
     const [isOpen, setOpen] = useState(false)
 
-    const [width, setWidth] = useState(window.innerWidth)
+    useEffect(e=> {
+        window.onclick = e => {
+            if (!e.target.closest('div[class*="dropdown"]')) setOpen(false)
+        }
+    }, [setFilter])
 
-    useEffect(e=>{
-        window.addEventListener('resize', e=> setWidth(window.innerWidth))
-    })
+
     
 
     return (
