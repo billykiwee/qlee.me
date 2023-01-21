@@ -9,7 +9,7 @@ import QrCodeSvg, { EditQrCode } from './components/Edit'
 import { ColorPicker, SketchPicker, TwitterPicker } from 'react-color'
 
 
-export default function QrCodeSection({Link, QrCode}) {
+export default function QrCodeSection({ Link }) {
 
     const [frame, setFrame] = useState(false)
     const [frameActive, setframeActive] = useState(true)
@@ -23,7 +23,6 @@ export default function QrCodeSection({Link, QrCode}) {
 
 
 
-    if (QrCode)
     return (
         <div className='grid gap-1rem'>
 

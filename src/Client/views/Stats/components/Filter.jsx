@@ -74,13 +74,13 @@ export default function Filter({props}) {
                                         isOpen ? <ChevronUpIcon width={12} /> : <ChevronDownIcon width={12} />
                                     }
                                 </div>
-                                <div className={`dropdown-body border ${isOpen && 'open'}`}>
+                                <div className={`dropdown-body display gap-04 w-100p border ${isOpen && 'open'}`}>
                                     {
                                         filters.map((item, i) => {
                                             return (
                                                 <div 
                                                     className={(item.name === checkFilter && 'grey') + " dropdown-item hover click display gap"} 
-                                                    onClick={e => {setCheckFilter(item.name); setOpen(false) }}
+                                                    onClick={e => { setCheckFilter(item.name); setOpen(false) }}
                                                     key={i}
                                                 >
                                                     <span className='display c-grey'>{item.icon}</span>
@@ -108,7 +108,11 @@ export default function Filter({props}) {
                             borderRight : '12px solid transparent',
                             borderBottom: '12px solid var(--grey)',
                         }}/>
-                        <input className='div-input grey h-4 border-r-1 w-100p' placeholder='Rechercher un lien par son url ou son nom ' onChange={e=> setInputSearch(e.target.value.toLowerCase())} />
+                        <input 
+                            className='div-input grey h-4 border-r-1 w-100p' 
+                            placeholder='Rechercher un lien par son url ou son nom ' 
+                            onChange={e=> setInputSearch(e.target.value.toLowerCase())} 
+                        />
                     </div>
                 }
             </div>

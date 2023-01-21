@@ -36,19 +36,19 @@ export default function Stats() {
 
     const [ShowStat, setShowStat] = useState(null)
     
-    const redirectIfNoLinkID = e => setShowStat(e=> LinkID ?? TopLink?.id)
 
     const redirectIfLinkNoExist = !UserLinks.some(e=> e.id === LinkID)
 
     
     useEffect(e=> {
-        redirectIfNoLinkID()
+
+        setShowStat(e=> LinkID ?? TopLink?.id)
 
         if (!LinkID) history(TopLink?.id)
 
         if (redirectIfLinkNoExist) history('/stats/' + TopLink?.id)
         
-    }, [TopLink])
+    }, [LinkID, TopLink])
     
 
 
@@ -64,14 +64,12 @@ export default function Stats() {
 
 
 
-
-
     return (
         <Main>
             <div className='display blocks stats-blocks align-top gap-2rem'>
 
-                <div className='grid gap-2rem'>
-                    <h2 className='m-t-0'>Statistiques</h2>
+                <div className='grid gap-1rem'>
+                    <h2 className='m-t-0 m-b-1'>Statistiques</h2>
 
                     {
                         UserLinks === 'no links' 
@@ -97,7 +95,6 @@ export default function Stats() {
                                                 return <Block stats={stat} User={User} key={i} />
                                             })
                                         }
-
                                     </div>
                                 </div>
                             )

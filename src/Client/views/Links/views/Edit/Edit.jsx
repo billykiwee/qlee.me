@@ -44,20 +44,18 @@ export default function Edit() {
     const [editLink, seteditLink] = useState({})
 
     const [QrCode, setQrCode] = useState(false)
-
-    console.log(QrCode);
-
+    const [navSelected, setNavSelected] = useState('edit')
 
     return (
         <Main>
    
             <div className='grid'>
-                <h2>Modifier le lien</h2>
+                <h2 className='m-0'>Modifier le lien</h2>
             </div>
 
             {
                 Link &&
-                <div className='grid gap-2rem' key={Link.id}>
+                <div className='grid gap-2rem m-t-1' key={Link.id}>
 
                     <div className='grid blocks gap-1rem'>
 
@@ -85,12 +83,12 @@ export default function Edit() {
                                     </div>
                                     <nav className='display justify-c wrap gap'>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' style={{ background : QrCode }} onClick={e=> setQrCode(false)}>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' style={{ background : QrCode }} onClick={e=> setNavSelected('edit')} >
                                                 <PencilIcon width={24} />
                                             </button>
                                         </div>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(QrCode ? false : true)}>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setNavSelected('qr-code')}>
                                                 <QrCodeIcon width={24} />
                                             </button>
                                         </div>
@@ -109,10 +107,9 @@ export default function Edit() {
 
                         {
 
-                            QrCode ?
+                            navSelected === 'qr-code' ?
                                 <QrCodeSection 
                                     Link={Link} 
-                                    QrCode={QrCode}
                                     setQrCode={setQrCode}  
                                 />
                             :
