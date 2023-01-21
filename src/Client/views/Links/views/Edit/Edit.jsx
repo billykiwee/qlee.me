@@ -45,6 +45,8 @@ export default function Edit() {
 
     const [QrCode, setQrCode] = useState(false)
 
+    console.log(QrCode);
+
 
     return (
         <Main>
@@ -81,9 +83,9 @@ export default function Edit() {
                                             
                                         </div>
                                     </div>
-                                    <div className='display justify-c wrap gap'>
+                                    <nav className='display justify-c wrap gap'>
                                         <div className='grid gap'>
-                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' onClick={e=> setQrCode(false)}>
+                                            <button className='grey h-3 w-3 border-r-2 p-lr-1 display gap hover' style={{ background : QrCode }} onClick={e=> setQrCode(false)}>
                                                 <PencilIcon width={24} />
                                             </button>
                                         </div>
@@ -99,7 +101,7 @@ export default function Edit() {
                                                 </button>
                                             </Redirect>
                                         </div>
-                                    </div>
+                                    </nav>
                                 </div>
                             </div>
                         </div>

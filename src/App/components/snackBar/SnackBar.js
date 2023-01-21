@@ -31,7 +31,7 @@ export function SnackBar() {
     }, [snackBar])
 
 
-
+    if (snackBar.length)
     return (
 
         <div className='sticky display grid gap-04 snackbar_div'>

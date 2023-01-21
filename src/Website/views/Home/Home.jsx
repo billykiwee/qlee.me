@@ -92,35 +92,16 @@ export default function Home() {
 
 
     const Stats = [
-        {
-            title : 'Created links',
-            number: links.length,
-            icon  : <SwatchIcon width={30} />
-        },
-        {
-            title : 'Users',
-            number: users.length,
-            icon  : <UserIcon width={30} />
-        },
-        {
-            title : 'Statistics',
-            number: stats.length,
-            icon  : <ChartPieIcon width={30} />
-        },
-        {
-            title : 'Countries',
-            number: Array.from(new Set(stats.map(e=> e.adress.country))).length,
-            icon  : <GlobeEuropeAfricaIcon width={30} />
-        },
+        { title : 'Created links', number: links.length, icon  : <SwatchIcon width={30} /> },
+        { title : 'Users', number: users.length, icon  : <UserIcon width={30} /> },
+        { title : 'Sta tistics',number: stats.length,icon  : <ChartPieIcon width={30} /> },
+        { title : 'Countries', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={30} /> },
     ]
 
 
     const width = GetWidth()
 
     
-
-
-
 
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
@@ -278,7 +259,6 @@ export default function Home() {
                         tempateLinks
                         .map(t=> {
 
-
                             return (
                                 <div className='display justify-s-b border border-r-1 border-b white p-1' key={t.name}>
                                     <div className='display gap-1rem'>
@@ -295,7 +275,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='grid p-2 border-r-2' style={{color: 'black'}}>
+            <div className='grid p-2 border-r-2' style={{color: 'black'}} >
                 <div className='display justify-c'>
                     <h2 className='m-t-0 c-black'>Some numbers</h2>
                 </div>
@@ -310,7 +290,7 @@ export default function Home() {
                                     <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
 
                                         <div className='grid gap' style={{color: 'black'}}>
-                                            <div className='f-s-2rem f-w-500 display justify-c gap-1rem'>
+                                            <div className='f-s-2rem f-w-500 display justify-c gap'>
                                                 {stat.icon}
                                                 <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "-")} />
                                             </div>
