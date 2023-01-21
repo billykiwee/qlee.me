@@ -123,7 +123,7 @@ export default function Profil() {
                         <span className='f-s-20'>Mes transactions</span>
                         <div className='grid gap-1rem' >
                             <div className='grid white border-r-04 border'>
-                                <div className='display justify-s-b f-w-600' style={{ borderBottom: '1px solid var(--grey)', overflow: 'hidden', background: '#e5e5e5' }}>
+                                <div className='display justify-s-b f-w-600' style={{ borderBottom: '1px solid var(--grey)', overflow: 'hidden', background: 'var(--grey-2)' }}>
                                     <span style={{width: '50%'}} className='p-1'>Type</span>
                                     <span style={{minWidth: '20%'}} className='text-align-e p-1' >Montant</span>
                                     <span className='text-align-e p-1' style={{width: '30%'}}>Date</span>

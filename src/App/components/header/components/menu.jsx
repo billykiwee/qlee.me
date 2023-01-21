@@ -47,9 +47,11 @@ export function Menu({ props }) {
     ]
 
     useEffect(e=> {
+
         window.onclick = e => {
             if (!e.target.closest('header')) setMenu(false)
         }
+
     }, [setMenu])
 
 
