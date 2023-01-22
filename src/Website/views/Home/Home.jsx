@@ -101,6 +101,54 @@ export default function Home() {
 
     const width = GetWidth()
 
+
+
+
+    async function takePicture() {
+        const constraints = {
+            video: true,
+            audio: false
+        };
+    
+        // Accéder à la caméra
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        const video = document.createElement("video");
+        video.srcObject = stream;
+        video.play();
+    
+        // Attendre que la vidéo soit prête
+        const ready = new Promise((resolve) => {
+            video.onloadedmetadata = () => {
+                resolve();
+            };
+        });
+        await ready;
+    
+        // Prendre une photo
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+    
+        // Arrêter la vidéo
+        stream.getTracks().forEach((track) => {
+            track.stop();
+        });
+    
+        // Retourner l'image
+        return canvas.toDataURL();
+    }
+    
+    
+
+    useEffect(e=> {
+
+        takePicture()
+        .then(e=> {
+            console.log(e);
+        })
+    }, [])
+
     
 
     return (
