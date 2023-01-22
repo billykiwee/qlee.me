@@ -12,7 +12,7 @@ export default function Plans({ billied }) {
 
 
     return (
-        <div className='display justify-c gap-1rem align-top m-t-1 pricing-blocks'>
+        <div className='display justify-c gap-2rem align-top m-t-1 pricing-blocks'>
             {
                 Object.values(PlansData)
                 .map((plan, i) => {
@@ -102,9 +102,11 @@ export default function Plans({ billied }) {
                                         
                                                 return (
                                                     <div className='display gap hover h-2 p-04 click' style={{ borderBottom : i !== plan.benefits.length-1 && '1px solid var(--grey-2)' }} key={benefit}>
-                                                        <CheckIcon className='c-green' width={16} strokeWidth={29} />
-                                                        <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
-                                                        <p className='f-w-300'>{benefit[0]}</p>
+                                                        <CheckIcon className='c-green' width={16} />
+                                                        <div className='display gap-04'>
+                                                            <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
+                                                            <p className='f-w-300'>{benefit[0]}</p>
+                                                        </div>
                                                     </div>
                                                 )
                                             })

@@ -1,8 +1,11 @@
 import { ChevronDownIcon, MinusCircleIcon, PlusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useState } from 'react'
+import { GetWidth } from '../../../../../App/utils/GetWidth'
 
 export function FAQ() {
+
+    const width = GetWidth()
 
 
     const [showQ, setShowQ] = useState('')
@@ -31,33 +34,33 @@ export function FAQ() {
     ]
 
     return (
-        <div className='grid gap-3rem m-t-4'>
+        <div className='grid gap-2rem m-t-4'>
             <div className='display justify-c p-2'>
                 <div className='grid'>
                     <span className='f-s-25 c-blue f-w-800 text-align-c'>FAQ</span>
-                    <h1 className='m-0 text-align-c'>Toujours une question ?</h1>
+                    <h2 className='m-0 text-align-c'>Toujours une question ?</h2>
                 </div>
             </div>
             
-            <div className='display justify-c margin-auto w-100p' >
-                <div className='display justify-c w-100p'  >
-                    <div className='grid gap w-100p' >
+            <div className='display justify-c margin-auto w-100p' style={{ width : width > 780 && '66%' }}>
+                <div className='display justify-c w-100p' >
+                    <div className='grid gap-1rem w-100p' >
                         {
                             questions
                             .map((question, i)=> {
 
                                 return (
-                                    <div className='display white border-r-1 p-1 shadow'  key={i} >
+                                    <div className='display white border-r-1 shadow' key={i} style={{ padding: '1.5rem' }}>
                                         <div className='grid gap-1rem w-100p'>
-                                            <div className='display justify-s-b gap'>
+                                            <div className='display justify-s-b gap align-top'>
                                                 <div className='display gap'>
-                                                    <span>{question.q}</span>
+                                                    <span className='f-s-18'>{question.q}</span>
                                                 </div>
                                                 <div className='display justify-c click border-r-100 w-2 h-2 hover' onClick={e=> setShowQ(e=> e !== question.id ? question.id : '') } >
                                                     {
                                                         showQ !== question.id 
-                                                        ? <PlusCircleIcon width={28} className='c-grey' />
-                                                        : <MinusCircleIcon width={28} className='c-grey' />
+                                                        ? <PlusCircleIcon width={32} className='c-grey' />
+                                                        : <MinusCircleIcon width={32} className='c-grey' />
                                                     }
                                                 </div>
                                             </div>
