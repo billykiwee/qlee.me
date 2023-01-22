@@ -1,3 +1,4 @@
+import { CheckCircleIcon, CheckIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
@@ -101,6 +102,7 @@ export default function Plans({ billied }) {
                                         
                                                 return (
                                                     <div className='display gap hover h-2 p-04 click' style={{ borderBottom : i !== plan.benefits.length-1 && '1px solid var(--grey-2)' }} key={benefit}>
+                                                        <CheckIcon className='c-green' width={16} strokeWidth={29} />
                                                         <span className={'display justify-c c-black w-2'}>{benefit[1]}</span>
                                                         <p className='f-w-300'>{benefit[0]}</p>
                                                     </div>

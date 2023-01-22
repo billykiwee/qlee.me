@@ -22,7 +22,7 @@ export const router = [
     { path : '/pricing', element : <Pricing /> },
     { path : '/stats', element : <Stats /> },
     { path : '/stats/:LinkID', element : <Stats /> },
-    { path : '/payment/:planID/:billiedID', element : <Payment /> },
+    { path : '/payment/:planID/:billingID', element : <Payment /> },
     { path : '/:LinkID', element : <Redirection /> , blank : true},
     { path : '/@:userName', element : <LinkInBio /> , blank : true},
     { path : '/edit/@:userName', element : <EditLinkInBio /> },

@@ -6,7 +6,7 @@ import { db } from "../../../../App/database/firebase"
 
 export async function processPayment(props) {
     
-    const { e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG } = props
+    const { e, stripe, elements, setError, planID, billingID, total, user, snackBar, setValid, setMSG } = props
     e.preventDefault()
     
     setMSG({ loader: true })
@@ -28,7 +28,7 @@ export async function processPayment(props) {
         setMSG({ loader: false })
     }
 
-    const amount = plans[planID].price
+    const amount = total
 
     try {
 
@@ -38,7 +38,8 @@ export async function processPayment(props) {
             amount      : (amount * 100).toFixed(0),
             date        : serverTimestamp(),
             type        : 'plan',
-            user        : user.email
+            billingID,
+            user: user.email
         }
 
         const response = await axios({

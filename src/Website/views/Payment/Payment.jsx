@@ -32,11 +32,14 @@ export function Stripe({ props }) {
     const elements = useElements()
 
 
+    const total = billiedID === 'yearly' ? plans[planID].price?.[billiedID] * 12 : plans[planID].price?.[billiedID]
+
+
     if (valid) return <ValidPayment />
     return (
         <>
             <h2 className='m-0'>Paiement</h2>
-            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} className='grid' >
+            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, billiedID, total, user, snackBar, setValid, setMSG })} className='grid' >
                 
                 <div className='grid gap align-top blocks w-100p'>
                     <div className='grid w-100p '>
@@ -62,9 +65,11 @@ export function Stripe({ props }) {
                                         </div>
                                         <div className='grid gap'>
                                             <span className='c-grey'>Prix TVA</span>
-                                            <span>
+                                            <span className='text-align-e'>
                                                 {
-                                                    formatCurrency(plans[planID].price?.[billiedID] * (billiedID === 'yearly' && 12))
+                                                    billiedID === 'yearly' 
+                                                    ? formatCurrency(plans[planID].price?.[billiedID]) + ' x 12'
+                                                    : formatCurrency(plans[planID].price?.[billiedID])
                                                 }
                                             </span>
                                         </div>
@@ -73,17 +78,13 @@ export function Stripe({ props }) {
 
                                 <div className='display justify-s-b f-w-500'>
                                     <span className='f-s-18'>Total :</span>
-                                    <span>
-                                        {
-                                            formatCurrency(plans[planID].price?.[billiedID] * (billiedID === 'yearly' && 12))
-                                        }
-                                    </span>
+                                    <span className='f-s-25'>{formatCurrency(total)}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <CheckoutForm props={{ user, MSG, error, planID, billiedID }} />
+                    <CheckoutForm props={{ user, MSG, error, planID, billiedID, total }} />
                 </div>
             </form>
         </>
