@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
-// Import Swiper styles
+import './style/home.css'
+
 import "swiper/css"
 import "swiper/css/pagination"
 // import required modules
@@ -12,7 +13,6 @@ import { ChartPieIcon, ChatBubbleLeftIcon, GlobeEuropeAfricaIcon, LinkIcon, Mega
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
-import { useContext } from 'react';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 
 
@@ -92,10 +92,10 @@ export default function Home() {
 
 
     const Stats = [
-        { title : 'Created links', number: links.length, icon  : <SwatchIcon width={30} /> },
-        { title : 'Users', number: users.length, icon  : <UserIcon width={30} /> },
-        { title : 'Sta tistics',number: stats.length,icon  : <ChartPieIcon width={30} /> },
-        { title : 'Countries', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={30} /> },
+        { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={24} /> },
+        { title : 'Utilisateurs', number: users.length, icon  : <UserIcon width={24} /> },
+        { title : 'Statistiques',number: stats.length,icon  : <ChartPieIcon width={24} /> },
+        { title : 'Pays', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={24} /> },
     ]
 
 
@@ -287,10 +287,10 @@ export default function Home() {
                         .map((stat, i)=> {
 
                             return (
-                                <div className='display gap-2rem justify-c p-1 border-b border-r-100 shadow yellow' key={i}>
-                                    <div className={(width < 480 ? 'grid' : 'display') + ' gap align-top'}>
+                                <div className='display gap-1rem justify-c p-1 border-b border-r-1 shadow yellow margin-auto' style={{ width : width < 760 && '80%' }} key={i}>
+                                    <div className={(width < 780 ? 'grid' : 'display') + ' gap align-top'}>
 
-                                        <div className='grid gap' style={{color: 'black'}}>
+                                        <div className='grid' style={{color: 'black'}}>
                                             <div className='f-s-2rem f-w-500 display justify-c gap'>
                                                 {stat.icon}
                                                 <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "-")} />
