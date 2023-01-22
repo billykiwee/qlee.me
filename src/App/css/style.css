@@ -49,9 +49,11 @@ body {
     color: var(--black);
     background: var(--background);
     scroll-behavior: smooth;
-    font-family: 'Sora', sans-serif;
 }
 
+* {
+    font-family: 'Sora', sans-serif;
+}
 
 main {
     position: relative;
