@@ -104,55 +104,11 @@ export default function Home() {
 
 
 
-    async function takePicture() {
-        const constraints = {
-            video: {
-                facingMode: "user"
-            },
-            audio: false
-        };
-    
-        // Accéder à la caméra
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        const video = document.createElement("video");
-        video.srcObject = stream;
-        video.play();
-    
-        // Attendre que la vidéo soit prête
-        const ready = new Promise((resolve) => {
-            video.onloadedmetadata = () => {
-                resolve();
-            };
-        });
-        await ready;
-    
-        // Prendre une photo
-        const canvas = document.createElement("canvas");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext("2d").drawImage(video, 0, 0);
-    
-        // Arrêter la vidéo
-        stream.getTracks().forEach((track) => {
-            track.stop();
-        });
-    
-        // Retourner l'image
-        return canvas.toDataURL();
-    }
-    
-    
-    
+    const lol = [1,2,3,4,5]
 
-    useEffect(e=> {
+    const l = lol.find(e=> e === 5)
 
-        takePicture()
-        .then(e=> {
-            console.log(e);
-        })
-    }, [])
-
-    
+    console.log(l);
 
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
