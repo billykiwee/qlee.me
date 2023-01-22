@@ -92,7 +92,7 @@ export default function Plans({ billing }) {
                                 </div>
                             </div>
 
-                            <div className='card-pricing' >
+                            <div className='article__benefits' >
 
                                 <div className='grid gap-2rem'>
                                     <div className='grid gap-04'>

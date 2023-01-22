@@ -3,9 +3,7 @@
     display: flex;
 }
 
-.card-pricing {
-    width:  322px;
-    height: 244px;
+.article__benefits {
     padding: 1rem;
 }
 
@@ -28,7 +26,7 @@
     .pricing-blocks {
         justify-content: center;
     }
-    .card-pricing {
+    .article__benefits {
         width:  322px;
         height: 100%;
     }
@@ -47,7 +45,7 @@
 
     }   
     
-    .card-pricing {
+    .article__benefits {
         width:  unset;
     }
 }
@@ -59,4 +57,6 @@
 
 .article__plan {
     border : 1px solid var(--grey-2);
+    width: 322px;
+    height: 580px;
 }
