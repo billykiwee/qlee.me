@@ -158,7 +158,7 @@ export default function Edit() {
                                                 { isUserPremium(User).plan === 'FREE' && <GoToPricing /> }
                                             </div>
                                             <div 
-                                                className='display div-input h-4 border border-r-1 w-100p grey'
+                                                className='display div-input h-4 border-r-1 w-100p grey'
                                                 style={ 
                                                     isUserPremium(User).plan === 'FREE' 
                                                     ? { pointerEvents: 'none', opacity: 0.8} 

@@ -120,7 +120,7 @@ export default function Home() {
                             <div className='display div-input h-4 border border-r-1 w-100p white'>
                                 <div className='display w-100p'>
                                     <span className='link p-l-1 p-r-04'>qlee.me/</span>
-                                    <input className='border-0 p-0  w-100p' placeholder='mon-nom' />
+                                    <input className='border-0 p-0  w-100p' placeholder='mon-lien' />
                                 </div>
                             </div>
                             <div className='display justify-e'>
@@ -139,7 +139,7 @@ export default function Home() {
             <div className='grid justify-s-b align-top blocks'>
                 <div className='grid'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
-                    <h2 className='m-t-04'>All that you need</h2>
+                    <h2 className='m-t-04'>Tout ce dont tu as besoin</h2>
                 </div>
                 <div className='grid gap-2rem p-1'>
                     {
@@ -208,7 +208,7 @@ export default function Home() {
                 <div className='grid gap-2rem'>
                     <div className='grid'>
                         <small className='link f-w-600 f-s-20'>FOR ALL TYPE OF LINKS</small>
-                        <h1 className='m-0'>For everyone</h1>
+                        <h1 className='m-0'>Pour tout le monde</h1>
                     </div>
 
                     <div className='subject-div-blocks'>
@@ -252,7 +252,7 @@ export default function Home() {
 
             <div className='grid justify-s-b blocks'>
                 <div className='display'>
-                    <h2 className='m-0'>Manage your links as you wish</h2>
+                    <h2 className='m-0'>Manage tes liens comme tu veux</h2>
                 </div>
                 <div className='grid gap p-2'>
                     {
@@ -277,7 +277,7 @@ export default function Home() {
 
             <div className='grid p-2 border-r-2' style={{color: 'black'}} >
                 <div className='display justify-c'>
-                    <h2 className='m-t-0 c-black'>Some numbers</h2>
+                    <h2 className='m-t-0 c-black'>Quelques chiffres</h2>
                 </div>
 
                 <div className='grid gap blocks'>

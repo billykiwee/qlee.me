@@ -132,7 +132,6 @@ input {
     font-weight: 300;
     height: 3rem;
     border: 0;
-    border: 1px solid var(--border);
     border-radius: 0.4rem;
     background: transparent;
     box-sizing: border-box;
