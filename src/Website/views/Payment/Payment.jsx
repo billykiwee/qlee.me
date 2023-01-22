@@ -34,9 +34,9 @@ export function Stripe({ planID }) {
     return (
         <>
             <h1 className='m-0'>Paiement</h1>
-            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} >
+            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, user, snackBar, setValid, setMSG })} className='grid' >
                 
-                <div className='grid justify-s-b gap align-top blocks' >
+                <div className='grid gap align-top blocks w-100p'>
                     <div className='grid w-100p '>
                         <div className='grid w-100p '>
                             <div className='grid white border border-r-1 p-1 shadow gap'>
