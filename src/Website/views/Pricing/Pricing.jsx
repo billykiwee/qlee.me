@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import '../../../App/css/pricing.css'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import { GetWidth } from '../../../App/utils/GetWidth'
 import { FAQ } from './views/Faq/Faq'
 import Plans from './views/Plans/Plans'
 
@@ -16,6 +17,7 @@ export default function Pricing() {
 
     const [billied, setBillied] = useState('yearly')
     
+    const width = GetWidth()
 
     return (
         <Main>
@@ -28,7 +30,7 @@ export default function Pricing() {
                     </div>
 
                     <div className='display justify-c'>
-                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width: '80%' }}>
+                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780  && '50%' }}>
                             <button className={billied === 'yearly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('yearly')}>
                                 <span className='c-black f-s-16'>Paiement annuel</span>
                             </button>
