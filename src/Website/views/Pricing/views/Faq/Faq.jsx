@@ -52,7 +52,7 @@ export function FAQ() {
                                 return (
                                     <div className='display white border-r-1 shadow' key={i} style={{ padding: '1.5rem' }}>
                                         <div className='grid gap-1rem w-100p'>
-                                            <div className='display justify-s-b gap align-top'>
+                                            <div className='display justify-s-b gap'>
                                                 <div className='display gap'>
                                                     <span className='f-s-18'>{question.q}</span>
                                                 </div>
