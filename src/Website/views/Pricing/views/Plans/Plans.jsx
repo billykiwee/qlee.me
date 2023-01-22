@@ -24,7 +24,7 @@ export default function Plans({ billied }) {
                     }
                     
                     return (
-                        <div className='grid border-r-1 shadow' key={i} style={{ border : '1px solid var(--grey-2)' }} >
+                        <div className='grid border-r-1 shadow' key={i} style={{ border : '1px solid var(--grey-2)', opacity : !plan.available && 0.4 }} >
 
                             <div className='p-2 grid gap-1rem white' 
                                 style={{ 
@@ -91,7 +91,7 @@ export default function Plans({ billied }) {
                                 </div>
                             </div>
 
-                            <div className='card-pricing' style={{ opacity : !plan.available && 0.4, borderRadius: '0 0 1rem 1rem' }} >
+                            <div className='card-pricing' >
 
                                 <div className='grid gap-2rem'>
                                     <div className='grid gap-04'>

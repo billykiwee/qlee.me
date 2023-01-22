@@ -51,3 +51,8 @@
         width:  unset;
     }
 }
+
+
+.btn__select-billing:hover {
+    background-color: var(--blue-secondary);
+}

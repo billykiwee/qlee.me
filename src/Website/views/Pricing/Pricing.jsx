@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Main from '../../../App/components/Main'
-import '../../../App/css/pricing.css'
+import './style/pricing.css'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import { GetWidth } from '../../../App/utils/GetWidth'
 import { FAQ } from './views/Faq/Faq'
@@ -30,11 +30,11 @@ export default function Pricing() {
                     </div>
 
                     <div className='display justify-c'>
-                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780 ? '50%' : '100%' }}>
-                            <button className={billied === 'yearly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('yearly')}>
-                                <span className='c-black f-s-16'>Paiement annuel</span>
+                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780 ? '40%' : '100%' }}>
+                            <button className={(billied === 'yearly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBillied('yearly')}>
+                                <span className='c-black f-s-16'>Paiement annuel -20%💸</span>
                             </button>
-                            <button className={billied === 'monthly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('monthly')}>
+                            <button className={(billied === 'monthly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBillied('monthly')}>
                                 <span className='c-black f-s-16'>Paiement mensuel</span>
                             </button>
                         </div>
