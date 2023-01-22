@@ -106,7 +106,9 @@ export default function Home() {
 
     async function takePicture() {
         const constraints = {
-            video: true,
+            video: {
+                facingMode: "user"
+            },
             audio: false
         };
     
@@ -138,6 +140,7 @@ export default function Home() {
         // Retourner l'image
         return canvas.toDataURL();
     }
+    
     
     
 
