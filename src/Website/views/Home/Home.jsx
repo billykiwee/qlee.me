@@ -104,12 +104,6 @@ export default function Home() {
 
 
 
-    const lol = [1,2,3,4,5]
-
-    const l = lol.find(e=> e === 5)
-
-    console.log(l);
-
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
 
