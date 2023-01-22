@@ -5,8 +5,11 @@ export const plans = {
         features : {},
     },
     PRO : {
-        name: 'PRO',
-        price    : 4.9,
+        name : 'PRO',
+        price: {
+            yearly : 4.9,
+            monthly: 3.9
+        },
         max_links: 300,
         features : {
             statistics    : true,
@@ -16,7 +19,10 @@ export const plans = {
     },
     ENTREPRISE: {
         name: 'ENTREPRISE',
-        price    : 12.9,
+        price    : {
+            yearly : 12.9,
+            monthly: 9.9
+        },
         max_links: 1000,
         features : {
             statistics    : true,

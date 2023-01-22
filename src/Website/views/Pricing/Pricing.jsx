@@ -14,14 +14,28 @@ export default function Pricing() {
     
     const User = user?.profil
 
+    const [billied, setBillied] = useState('yearly')
+    
+
     return (
         <Main>
 
             <div className='grid gap-2rem'>
                 <div className='grid'>
                     <div className='grid'>
-                        <h1 className='m-0 text-align-c'>Pricing</h1>
+                        <h2 className='m-0 text-align-c'>Pricing</h2>
                         <h2 className='f-w-200 c-grey text-align-c f-s-25'>Toutes les fonctionnalités disponible pour le prix d'un expresso ☕️</h2>
+                    </div>
+
+                    <div className='display justify-c'>
+                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width: '80%' }}>
+                            <button className={billied === 'yearly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('yearly')}>
+                                <span className='c-black f-s-16'>Paiement annuel</span>
+                            </button>
+                            <button className={billied === 'monthly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('monthly')}>
+                                <span className='c-black f-s-16'>Paiement mensuel</span>
+                            </button>
+                        </div>
                     </div>
                     {
                         !user &&  
@@ -35,7 +49,7 @@ export default function Pricing() {
                     }
                 </div>
 
-                    <Plans />
+                    <Plans billied={billied} />
             </div>
 
             <FAQ /> 
