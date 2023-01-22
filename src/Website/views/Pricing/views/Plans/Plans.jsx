@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import { PlansData } from '../data/plans'
 
-export default function Plans({ billied }) {
+export default function Plans({ billing }) {
 
     const history = useNavigate()
     const { auth, user } = useStateProps()
@@ -24,7 +24,7 @@ export default function Plans({ billied }) {
                     }
                     
                     return (
-                        <div className='grid border-r-1 shadow' key={i} style={{ border : '1px solid var(--grey-2)', opacity : !plan.available && 0.4 }} >
+                        <article className='grid border-r-1 shadow article__plan' key={i} style={!plan.available && {opacity : 0.4, pointerEvents : 'none' }} >
 
                             <div className='p-2 grid gap-1rem white' 
                                 style={{ 
@@ -54,7 +54,7 @@ export default function Plans({ billied }) {
                                                     {
                                                         plan.id === 'FREE'
                                                         ? 0
-                                                        : plan.price?.[billied]
+                                                        : plan.price?.[billing]
                                                     }
                                                 </span>
                                                 <span className='f-s-20 m-l-04 opacity m-t-04'>/ mois</span>
@@ -73,7 +73,7 @@ export default function Plans({ billied }) {
                                             <Link to={ 
                                                 !auth 
                                                 ? history('/login') 
-                                                : user.plan === plan.plan ? history('/dashboard') : plan.payment + '/' + billied
+                                                : user.plan === plan.plan ? history('/dashboard') : plan.payment + '/' + billing
                                             }  
                                             className='w-100p'>
                                                 <button className={
@@ -115,7 +115,7 @@ export default function Plans({ billied }) {
                                 </div>
                 
                             </div>
-                        </div>
+                        </article>
                     )
                 })
             }

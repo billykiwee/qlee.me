@@ -15,7 +15,7 @@ export default function Pricing() {
     
     const User = user?.profil
 
-    const [billied, setBillied] = useState('yearly')
+    const [billing, setBilling] = useState('yearly')
     
     const width = GetWidth()
 
@@ -31,10 +31,10 @@ export default function Pricing() {
 
                     <div className='display justify-c'>
                         <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780 ? '40%' : '100%' }}>
-                            <button className={(billied === 'yearly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBillied('yearly')}>
+                            <button className={(billing === 'yearly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBilling('yearly')}>
                                 <span className='c-black f-s-16'>Paiement annuel -20%💸</span>
                             </button>
-                            <button className={(billied === 'monthly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBillied('monthly')}>
+                            <button className={(billing === 'monthly' && 'blue') + ' h-3 p-04 border-r-1 btn__select-billing'} onClick={e=> setBilling('monthly')}>
                                 <span className='c-black f-s-16'>Paiement mensuel</span>
                             </button>
                         </div>
@@ -51,7 +51,7 @@ export default function Pricing() {
                     }
                 </div>
 
-                    <Plans billied={billied} />
+                    <Plans billing={billing} />
             </div>
 
             <FAQ /> 

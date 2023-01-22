@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom'
 
 export function Stripe({ props }) {
 
-    const { planID, billiedID } = props
+    const { planID, billingID } = props
 
     const [ShowCart, setShowCart] = useState(true)
 
@@ -32,14 +32,14 @@ export function Stripe({ props }) {
     const elements = useElements()
 
 
-    const total = billiedID === 'yearly' ? plans[planID].price?.[billiedID] * 12 : plans[planID].price?.[billiedID]
+    const total = billingID === 'yearly' ? plans[planID].price?.[billingID] * 12 : plans[planID].price?.[billingID]
 
 
     if (valid) return <ValidPayment />
     return (
         <>
             <h2 className='m-0'>Paiement</h2>
-            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, billiedID, total, user, snackBar, setValid, setMSG })} className='grid' >
+            <form onSubmit={e=> processPayment({ e, stripe, elements, setError, planID, billingID, total, user, snackBar, setValid, setMSG })} className='grid' >
                 
                 <div className='grid gap align-top blocks w-100p'>
                     <div className='grid w-100p '>
@@ -61,15 +61,15 @@ export function Stripe({ props }) {
                                     <div className='display justify-s-b align-top f-s-14'>
                                         <div className='grid gap m-b-04 w-50'>
                                             <span className='c-grey'>Article</span>
-                                            <span>Paiement {billiedID === 'yearly' ? 'annuel' : 'mensuel' } {planID}</span>
+                                            <span>Paiement {billingID === 'yearly' ? 'annuel' : 'mensuel' } {planID}</span>
                                         </div>
                                         <div className='grid gap'>
                                             <span className='c-grey'>Prix TVA</span>
                                             <span className='text-align-e'>
                                                 {
-                                                    billiedID === 'yearly' 
-                                                    ? formatCurrency(plans[planID].price?.[billiedID]) + ' x 12'
-                                                    : formatCurrency(plans[planID].price?.[billiedID])
+                                                    billingID === 'yearly' 
+                                                    ? formatCurrency(plans[planID].price?.[billingID]) + ' x 12'
+                                                    : formatCurrency(plans[planID].price?.[billingID])
                                                 }
                                             </span>
                                         </div>
@@ -84,7 +84,7 @@ export function Stripe({ props }) {
                         </div>
                     </div>
 
-                    <CheckoutForm props={{ user, MSG, error, planID, billiedID, total }} />
+                    <CheckoutForm props={{ user, MSG, error, planID, billingID, total }} />
                 </div>
             </form>
         </>
