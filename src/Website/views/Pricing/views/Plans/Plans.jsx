@@ -9,6 +9,7 @@ export default function Plans({ billing }) {
     const history = useNavigate()
     const { auth, user } = useStateProps()
     const User = user?.profil
+    
 
 
     return (
@@ -24,7 +25,7 @@ export default function Plans({ billing }) {
                     }
                     
                     return (
-                        <article className='grid border-r-1 shadow article__plan' key={i} style={!plan.available && {opacity : 0.4, pointerEvents : 'none' }} >
+                        <article className='grid border-r-1 shadow article__plan' key={i} style={{opacity : !plan.available && 0.4, pointerEvents : !plan.available && 'none' }} >
 
                             <div className='p-2 grid gap-1rem white' 
                                 style={{ 
@@ -67,7 +68,7 @@ export default function Plans({ billing }) {
                                             !plan.available 
                                             ?
                                             <button className='green border-r-1 h-4 p-1 f-s-16 border-b'>
-                                                <span>Bientôt</span>
+                                                <span>Bientôt disponible</span>
                                             </button>
                                             :
                                             <Link to={ 

@@ -56,3 +56,7 @@
 .btn__select-billing:hover {
     background-color: var(--blue-secondary);
 }
+
+.article__plan {
+    border : 1px solid var(--grey-2);
+}
