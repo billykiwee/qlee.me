@@ -30,7 +30,7 @@ export default function Pricing() {
                     </div>
 
                     <div className='display justify-c'>
-                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780  && '50%' }}>
+                        <div className='display justify-s-b gap-04 blue-secondary h-3 p-04 border-r-1'  style={{ width : width > 780 ? '50%' : '100%' }}>
                             <button className={billied === 'yearly' && 'blue' + ' h-3 p-04 border-r-1'} onClick={e=> setBillied('yearly')}>
                                 <span className='c-black f-s-16'>Paiement annuel</span>
                             </button>
