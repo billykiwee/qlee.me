@@ -14,7 +14,7 @@ import Messages from '../../../../App/utils/Messages'
 export default function CheckoutForm({ props }) {
 
 
-    const { stripe, user, MSG, error, planID } = props
+    const { stripe, user, MSG, error, planID, billiedID } = props
 
     const [typeCard, setTypeCard] = useState('')
 
@@ -110,7 +110,7 @@ export default function CheckoutForm({ props }) {
                 <div className='display w-100p'>
                     <div className='display w-100p'>
                         <button className='blue c-white hover-blue border-r-1 f-s-16 h-4 p-1' type='submit' >
-                            <span>Payer {formatCurrency(plans[planID].price)} par mois</span>
+                            <span>Payer {formatCurrency(plans[planID].price?.[billiedID])} par mois</span>
                         </button>
                     </div>
                 </div>

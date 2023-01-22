@@ -72,7 +72,7 @@ export default function Plans({ billied }) {
                                             <Link to={ 
                                                 !auth 
                                                 ? history('/login') 
-                                                : user.plan === plan.plan ? history('/dashboard') : plan.payment 
+                                                : user.plan === plan.plan ? history('/dashboard') : plan.payment + '/' + billied
                                             }  
                                             className='w-100p'>
                                                 <button className={
