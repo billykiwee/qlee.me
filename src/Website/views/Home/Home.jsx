@@ -107,7 +107,7 @@ export default function Home() {
     return (
         <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
 
-            <div className='grid blocks w-100p'>
+            <section className='grid blocks w-100p'>
                 <div className='display justify-s-b align-top'>
 
                     <div className='grid gap-3rem w-100p'>
@@ -139,9 +139,9 @@ export default function Home() {
                         
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div className='grid justify-s-b align-top blocks'>
+            <section className='grid justify-s-b align-top blocks'>
                 <div className='grid'>
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h2 className='m-t-04'>Tout ce dont tu as besoin</h2>
@@ -178,7 +178,7 @@ export default function Home() {
                         })
                     }
                 </div>
-            </div>
+            </section>
 
             {/* <div className='steps-div'>
                 <div className='title-steps'>
@@ -209,7 +209,7 @@ export default function Home() {
                 </div>
             </div> */}
 
-            <div className='subject-div'>
+            <section className='subject-div'>
                 <div className='grid gap-2rem'>
                     <div className='grid'>
                         <small className='link f-w-600 f-s-20'>FOR ALL TYPE OF LINKS</small>
@@ -253,9 +253,9 @@ export default function Home() {
                     }
                 </Swiper>
             
-            </div>
+            </section>
 
-            <div className='grid justify-s-b blocks'>
+            <section className='grid justify-s-b blocks'>
                 <div className='display'>
                     <h2 className='m-0'>Gère tes liens comme tu veux</h2>
                 </div>
@@ -278,9 +278,9 @@ export default function Home() {
                         })
                     }
                 </div>
-            </div>
+            </section>
 
-            <div className='grid p-2 border-r-2' style={{color: 'black'}} >
+            <section className='grid p-2 border-r-2' style={{color: 'black'}} >
                 <div className='display justify-c'>
                     <h2 className='m-t-0 c-black'>Quelques chiffres</h2>
                 </div>
@@ -309,7 +309,7 @@ export default function Home() {
                         })
                     }
                 </div>
-            </div>
+            </section>
 
         </Main>
     )
