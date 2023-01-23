@@ -281,21 +281,23 @@ export default function Home() {
                     <h2 className='m-t-0 c-black'>Quelques chiffres</h2>
                 </div>
 
-                <div className='grid gap blocks'>
+                <div className='grid gap blocks' style={{alignItem: 'center'}}>
                     {
                         Stats
                         .map((stat, i)=> {
 
                             return (
-                                <div className='display gap-1rem justify-c p-1 border-b border-r-1 shadow yellow margin-auto' style={{ width : width < 760 && '80%' }} key={i}>
+                                <div className='display justify-c p-1 blue-secondary border-r-1' style={{ width : width < 760 && '80%' }} key={i}>
                                     <div className={(width < 780 ? 'grid' : 'display') + ' gap align-top'}>
 
-                                        <div className='grid' style={{color: 'black'}}>
-                                            <div className='f-s-2rem f-w-500 display justify-c gap'>
+                                        <div className='display gap c-black'>
+                                            <div className='display'>
                                                 {stat.icon}
-                                                <NumberIncreaser length={stat.number} id={stat.title.replace(/[^a-zA-Z0-9]/g, "-")} />
+                                            </div>  
+                                            <div className='f-s-2rem f-w-500 display justify-c gap'>
+                                                {stat.number} 
+                                                <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
                                             </div>
-                                            <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
                                         </div>
                                     </div>
                                 </div>

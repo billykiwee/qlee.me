@@ -65,7 +65,7 @@ export default function Header({ active }) {
                             User 
                             ?
                             <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={32} height={32} />
+                                <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={40} height={40} />
                             </Link>
                             : 
                             <div className='display justify-c'>
@@ -79,7 +79,7 @@ export default function Header({ active }) {
                                 </Link>
                             </div>
                         }
-                        <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(menu === false ? true : false)} >
+                        <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(menu === false ? true : false)} style={{width: '40px', height: '40px'}} >
                             <span className='display'>
                                 <Bars2Icon width={20} className='c-black' />
                             </span>

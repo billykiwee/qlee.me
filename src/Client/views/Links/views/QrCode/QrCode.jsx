@@ -26,9 +26,6 @@ export default function QrCodeSection({ Link }) {
 
 
 
-
-
-
     return (
         <div className='grid gap-1rem'>
 
