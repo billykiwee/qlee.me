@@ -60,7 +60,7 @@ export default function Header({ active }) {
 
                 <div className='display gap'>
 
-                    <div className='display gap-04 p-04 h-2 border-r-2 white'>
+                    <div className='display gap-04 border-r-2 white shadow' style={{ height : '40px' }}>
                         {
                             User 
                             ?
