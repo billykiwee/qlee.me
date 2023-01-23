@@ -22,6 +22,7 @@ export default function QrCodeSection({ Link }) {
     const [text, setText] = useState('Qlee me')
 
 
+    console.log(frameColor);
 
     return (
         <div className='grid gap-1rem'>
@@ -46,7 +47,12 @@ export default function QrCodeSection({ Link }) {
                     <div className='display justify-s-b'>
                         <span>Cadre</span>
                         <div className='click display border-r-2 justify-c' >
-                            <SwitchInput dimension={0.8} checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
+
+                            <label className="switch" style={{transform: `scale(${0.8})`}} >
+                                <input type="checkbox" checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
+                                <span className="slider round"></span>
+                            </label>
+
                         </div>
                     </div>
                     {
