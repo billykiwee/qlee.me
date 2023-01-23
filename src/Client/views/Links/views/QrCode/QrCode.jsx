@@ -13,13 +13,17 @@ export default function QrCodeSection({ Link }) {
 
     const [frame, setFrame] = useState(false)
     const [frameActive, setframeActive] = useState(true)
+
+    const [frameColorActive, setFrameColorActive] = useState(false)
     const [frameColor, setframeColor] = useState('')
+
 
     const [line, setLine] = useState(false)
     const [lineColor, setLineColor] = useState('')
     const [color, setColor] = useState('')
     const [logo, setLogo] = useState(true)
     const [text, setText] = useState('Qlee me')
+
 
 
 
@@ -67,12 +71,12 @@ export default function QrCodeSection({ Link }) {
                             <div className='grid gap-1rem grey border-r-1 p-1'>
                                 <div className='display justify-s-b'>
                                     <span className='opacity'>couleur</span>
-                                    <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setframeActive(frameActive ? false : true)}>
-                                        { frameColor ? <ChevronUpIcon width={20} /> : <ChevronDownIcon width={20} />  }
+                                    <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setFrameColorActive(frameColorActive ? false : true)}>
+                                        { frameColorActive ? <ChevronUpIcon width={20} /> : <ChevronDownIcon width={20} />  }
                                     </div>
                                 </div>
                                 {
-                                    frameColor &&
+                                    frameColorActive &&
                                     <div className='display wrap gap'>
                                         {
                                             colors.map(c=> {
