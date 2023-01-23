@@ -15,7 +15,8 @@ export default function Plans({ billing }) {
         if (!auth) return '/login'
 
         if (User.plan === plan.id || plan.id === 'FREE') return '/dashboard'
-        else return plan.payment + '/' + billing
+        
+        return plan.payment + '/' + billing
     }
     
 
@@ -79,8 +80,7 @@ export default function Plans({ billing }) {
                                                 <span>Bientôt disponible</span>
                                             </button>
                                             :
-                                            <Link to={redirect(plan)}
-                                            className='w-100p'>
+                                            <Link to={redirect(plan)} className='w-100p'>
                                                 <button className={
                                                         (plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') 
                                                         + ' f-s-16 border-b p-1 h-4 border-r-1'
