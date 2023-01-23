@@ -1,0 +1,8 @@
+{
+    "flex" : {
+        "prefix" : "dis",
+        "body" : [
+            "display"
+        ]
+    }
+}
