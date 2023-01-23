@@ -92,10 +92,10 @@ export default function Home() {
 
 
     const Stats = [
-        { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={24} /> },
-        { title : 'Utilisateurs', number: users.length, icon  : <UserIcon width={24} /> },
-        { title : 'Statistiques',number: stats.length,icon  : <ChartPieIcon width={24} /> },
-        { title : 'Pays', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={24} /> },
+        { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={16} /> },
+        { title : 'Utilisateurs', number: users.length, icon  : <UserIcon width={16} /> },
+        { title : 'Statistiques',number: stats.length,icon  : <ChartPieIcon width={16} /> },
+        { title : 'Pays', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={16} /> },
     ]
 
 
@@ -281,7 +281,7 @@ export default function Home() {
                     <h2 className='m-t-0 c-black'>Quelques chiffres</h2>
                 </div>
 
-                <div className='grid gap blocks' style={{alignItem: 'center'}}>
+                <div className='grid gap blocks' style={{alignItems: 'center'}}>
                     {
                         Stats
                         .map((stat, i)=> {
@@ -291,12 +291,12 @@ export default function Home() {
                                     <div className={(width < 780 ? 'grid' : 'display') + ' gap align-top'}>
 
                                         <div className='display gap c-black'>
-                                            <div className='display'>
-                                                {stat.icon}
-                                            </div>  
-                                            <div className='f-s-2rem f-w-500 display justify-c gap'>
-                                                {stat.number} 
-                                                <span className='f-s-18 f-w-300 text-align-c'>{stat.title}</span>
+                                            <div className='f-s-2rem f-w-500 grid text-align-c'>
+                                                {stat.number}   
+                                                <div className='display gap'>
+                                                    {stat.icon}
+                                                    <span className='f-s-18 f-w-300'>{stat.title}</span>
+                                                </div>  
                                             </div>
                                         </div>
                                     </div>
