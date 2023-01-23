@@ -21,8 +21,28 @@ export default function QrCodeSection({ Link }) {
     const [logo, setLogo] = useState(true)
     const [text, setText] = useState('Qlee me')
 
+    const [editQrCode, setEditCrCode] = useState({
+        frame : {
+            active    : true,
+            background: '',
+            text      : {
+                content: 'Qlee me',
+                color  : '',
+                size   : '20px'
+            }
+        },
+        background: 'var(--white)',
+        lines     : 'var(--black)',
+        logo      : {
+            active: false,
+            url   : ''
+        }
 
-    console.log(frameColor);
+    })
+
+
+    console.log(editQrCode);
+
 
     return (
         <div className='grid gap-1rem'>
@@ -49,18 +69,26 @@ export default function QrCodeSection({ Link }) {
                         <div className='click display border-r-2 justify-c' >
 
                             <label className="switch" style={{transform: `scale(${0.8})`}} >
-                                <input type="checkbox" checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
+                                <input type="checkbox" checked={editQrCode.frame.active} 
+                                    onChange={e=> 
+                                        setEditCrCode(prev => { {...prev}, frame : { active : e.target.checked } }) 
+                                    } 
+                                />
                                 <span className="slider round"></span>
                             </label>
 
                         </div>
                     </div>
                     {
-                        frameActive && 
+                        editQrCode.frame.active && 
                         <>
                             <div className='grid gap'>
                                 <span className='opacity'>texte</span>
-                                <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
+                                <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' 
+                                    onChange={e=> 
+                                        setEditCrCode({ frame : { text : e.target.value } })
+                                    } 
+                                />
                             </div>
 
                             <div className='grid gap-1rem grey border-r-1 p-1'>

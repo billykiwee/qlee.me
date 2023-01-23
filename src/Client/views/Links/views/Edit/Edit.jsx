@@ -74,11 +74,6 @@ export default function Edit() {
                                                 </div>
                                                 <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
                                             </div>
-                                            <div className='display justify-c gap-04'>
-                                                <EyeIcon width={22} />
-                                                <span className='f-s-20'>{formatNumber(Stats.length)} clics</span>
-                                            </div>
-                                            
                                         </div>
                                     </div>
                                     <nav className='display justify-c wrap gap'>
