@@ -134,6 +134,10 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
 
@@ -209,7 +213,7 @@ export default function Home() {
                 <div className='grid gap-2rem'>
                     <div className='grid'>
                         <small className='link f-w-600 f-s-20'>FOR ALL TYPE OF LINKS</small>
-                        <h1 className='m-0'>Pour tout le monde</h1>
+                        <h2 className='m-0'>Pour tout le monde</h2>
                     </div>
 
                     <div className='subject-div-blocks'>
@@ -253,7 +257,7 @@ export default function Home() {
 
             <div className='grid justify-s-b blocks'>
                 <div className='display'>
-                    <h2 className='m-0'>Manage tes liens comme tu veux</h2>
+                    <h2 className='m-0'>Gère tes liens comme tu veux</h2>
                 </div>
                 <div className='grid gap p-2'>
                     {
