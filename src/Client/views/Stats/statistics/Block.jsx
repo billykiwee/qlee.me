@@ -13,6 +13,7 @@ export const Block = ({ stats, User }) => {
     const { title, name, data, icon } = stats
 
 
+
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
