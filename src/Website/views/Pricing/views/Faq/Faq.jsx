@@ -12,25 +12,30 @@ export function FAQ() {
 
     const questions = [
         {
-            id : 'q-1',
+            id: 'q-1',
             q : 'Le service est-il gratuit ?',
             a : "Oui, le service est gratuit jusqu'à 10 liens. Les autres fonctionnalités comme les statistqiues sont payante."
         },
         {
-            id : 'q-2',
-            q : 'What’s the difference between Projects and Pages in your pricing plans',
-            a : 'Projects are a set of pages grouped under one domain & design settings. So, simply telling, 1 Project equals a Domain, like www.onepage.io'
+            id: 'q-2',
+            q : 'Puis-je partager des liens raccourcis sur les réseaux sociaux ou par e-mail ?',
+            a : "Oui, tous tes liens sont partageable sur toutes les plateformes de media sociaux."
         },
         {
-            id : 'q-3',
+            id: 'q-3',
             q : 'Puis-je arrêter mon abonnement à votre service ?',
             a : "Oui, nos abonnements sont sans engagement. Vous pouvez à tout moment arrêter votre abonnement."
         },
         {
-            id : 'q-4',
+            id: 'q-4',
             q : 'Le service est-il garanti de ne pas être banni par les réseaux sociaux ou les moteurs de recherche ?',
             a : 'Oui, car les lien sont sous le nom domaine qlee.me qui utilise la technologie SSL'
         },
+        {
+            id: 'q-5',
+            q : "Il y a t-il un support technique pour aider les utilisateurs en cas de problème ?",
+            a : "Oui, tu peux nous poser toute tes questions par mail : contact@kiwee.site"
+        }
     ]
 
     return (
