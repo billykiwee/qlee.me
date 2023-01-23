@@ -61,7 +61,7 @@ export default function Edit() {
 
                         <div className='grid gap-1rem'>
                             <div className='display align-top'>
-                                <div className='grid gap-1rem justfy-s-b border-r-1 border border-b p-1 white w-100p'>
+                                <div className='grid gap-1rem justfy-s-b border-r-1 border p-1 white w-100p'>
                                     <div className='grid gap'>
                                     
                                         <LinkIcon upload={{ Link }} />
