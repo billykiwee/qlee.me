@@ -9,6 +9,14 @@ export default function Plans({ billing }) {
     const history = useNavigate()
     const { auth, user } = useStateProps()
     const User = user?.profil
+
+
+    const redirect = (plan) => {
+        if (!auth) return '/login'
+
+        if (User.plan === plan.id || plan.id === 'FREE') return '/dashboard'
+        else return plan.payment + '/' + billing
+    }
     
 
 
@@ -71,11 +79,7 @@ export default function Plans({ billing }) {
                                                 <span>Bientôt disponible</span>
                                             </button>
                                             :
-                                            <Link to={ 
-                                                !auth 
-                                                ? history('/login') 
-                                                : user.plan === plan.plan ? history('/dashboard') : plan.payment + '/' + billing
-                                            }  
+                                            <Link to={redirect(plan)}
                                             className='w-100p'>
                                                 <button className={
                                                         (plan.recommended ? 'yellow hover-yellow' : 'blue hover-blue') 
@@ -83,7 +87,7 @@ export default function Plans({ billing }) {
                                                     }
                                                 > 
                                                     <span style={{ color : plan.recommended ? 'black' : 'white' }}>
-                                                        {user.plan ? 'Continuer' : 'Essayer'}
+                                                        {User.plan === plan.id || plan.id === 'FREE' ? 'Commencer' : 'Essayer'}
                                                     </span> 
                                                 </button>
                                             </Link>
