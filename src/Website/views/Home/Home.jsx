@@ -64,22 +64,22 @@ export default function Home() {
         {
             name: 'Cut',
             text: "Short et manage tes URLs en 1 seconde",
-            icon: <div className='display justify-c blue border-r-100 ' style={{width: '66px', height: '66px'}}><ScissorsIcon width={40} /></div>
+            icon: <div className='display justify-c blue border-r-100 section2-icon'><ScissorsIcon /></div>
         },
         {
             name: 'Redirect',
-            text: "L'utilisateur sera rediriger la où vous voulez, en toute sécurité !",
-            icon: <div className='display justify-c green border-r-100 ' style={{width: '66px', height: '66px'}}><BiSubdirectoryRight size={38} className='c-white' /></div>
+            text: "Redirige tes visiteurs là où tu veux, en toute sécurité !",
+            icon: <div className='display justify-c green border-r-100 section2-icon'><BiSubdirectoryRight className='c-white' /></div>
         },
         {
             name: 'Links in bio',
             text: "Créer un lik in bio avec tes URLs en un clic",
-            icon: <div className='display justify-c yellow border-r-100 ' style={{width: '66px', height: '66px'}}><SwatchIcon width={40} className='c-white' /></div>
+            icon: <div className='display justify-c yellow border-r-100 section2-icon'><SwatchIcon className='c-white' /></div>
         },
         {
             name: 'Stats',
             text: "Analyse tes meilleurs liens pour un meilleur scale-up",
-            icon:  <div className='display justify-c orange border-r-100 ' style={{width: '66px', height: '66px'}}><RocketLaunchIcon width={40} /></div>
+            icon:  <div className='display justify-c orange border-r-100 section2-icon'><RocketLaunchIcon /></div>
         },
     ]
 
@@ -95,7 +95,7 @@ export default function Home() {
         { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={16} /> },
         { title : 'Utilisateurs', number: users.length, icon  : <UserIcon width={16} /> },
         { title : 'Statistiques',number: stats.length,icon  : <ChartPieIcon width={16} /> },
-        { title : 'Pays', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={16} /> },
+        /* { title : 'Pays', number: Array.from(new Set(stats.map(e=> e.adress.country))).length, icon  : <GlobeEuropeAfricaIcon width={16} /> }, */
     ]
 
 
@@ -146,11 +146,11 @@ export default function Home() {
                     <span className='link f-w-600 f-s-20'>ALL IN ONE</span>
                     <h2 className='m-t-04'>Tout ce dont tu as besoin</h2>
                 </div>
-                <div className='grid gap-2rem p-1'>
+                <div className='grid gap-1rem p-1'>
                     {
                         features.map((feature, i)=> {
                             return (
-                                <div className='display gap-2rem align-top p-1' key={i} style={{borderBottom: i !== features.length-1 ? '1px solid #d2d2d2': ''}}>
+                                <div className='display gap-1rem align-top p-1 border-r-1 shadow white' key={i}>
                                     <div className='grid'>
                                         <div className='display'>
                                             <div className='steps-blocks-head'>
