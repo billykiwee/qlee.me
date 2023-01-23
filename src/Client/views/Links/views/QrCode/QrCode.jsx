@@ -21,27 +21,8 @@ export default function QrCodeSection({ Link }) {
     const [logo, setLogo] = useState(true)
     const [text, setText] = useState('Qlee me')
 
-    const [editQrCode, setEditCrCode] = useState({
-        frame : {
-            active    : true,
-            background: '',
-            text      : {
-                content: 'Qlee me',
-                color  : '',
-                size   : '20px'
-            }
-        },
-        background: 'var(--white)',
-        lines     : 'var(--black)',
-        logo      : {
-            active: false,
-            url   : ''
-        }
-
-    })
 
 
-    console.log(editQrCode);
 
 
     return (
@@ -69,32 +50,24 @@ export default function QrCodeSection({ Link }) {
                         <div className='click display border-r-2 justify-c' >
 
                             <label className="switch" style={{transform: `scale(${0.8})`}} >
-                                <input type="checkbox" checked={editQrCode.frame.active} 
-                                    onChange={e=> 
-                                        setEditCrCode(prev => { {...prev}, frame : { active : e.target.checked } }) 
-                                    } 
-                                />
+                                <input type="checkbox" checked={frameActive} onChange={e=> setframeActive(frameActive ? false : true)} />
                                 <span className="slider round"></span>
                             </label>
 
                         </div>
                     </div>
                     {
-                        editQrCode.frame.active && 
+                        frameActive && 
                         <>
                             <div className='grid gap'>
                                 <span className='opacity'>texte</span>
-                                <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' 
-                                    onChange={e=> 
-                                        setEditCrCode({ frame : { text : e.target.value } })
-                                    } 
-                                />
+                                <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
                             </div>
 
                             <div className='grid gap-1rem grey border-r-1 p-1'>
                                 <div className='display justify-s-b'>
                                     <span className='opacity'>couleur</span>
-                                    <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setframeColor(frameColor ? false : true)}>
+                                    <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setframeActive(frameActive ? false : true)}>
                                         { frameColor ? <ChevronUpIcon width={20} /> : <ChevronDownIcon width={20} />  }
                                     </div>
                                 </div>

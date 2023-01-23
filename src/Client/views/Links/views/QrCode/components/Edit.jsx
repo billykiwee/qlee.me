@@ -54,6 +54,8 @@ export function EditQrCode({ style, link }) {
 
 
 function QrCodeSvg({ style, link }) {
+
+    console.log(style);
     return (
         <QRCode
             bgColor='white'
