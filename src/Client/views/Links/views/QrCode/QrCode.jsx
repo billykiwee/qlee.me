@@ -77,7 +77,7 @@ export default function QrCodeSection({ Link }) {
                                     <div className='display wrap gap'>
                                         {
                                             colors.map(c=> {
-                                                return <div className='border-r-04 w-2 h-2 click' style={{background : c, border: frameColor === c ? '2px solid var(--red)' : ''}} onClick={e=> setframeColor(c)} />
+                                                return <div className='border-r-04 w-2 h-2 click' style={{background : c, borderRadius: frameColor === c && '3rem'}} onClick={e=> setframeColor(c)} />
                                             })
                                         }
                                     </div>
@@ -107,7 +107,7 @@ export default function QrCodeSection({ Link }) {
                                         colors
                                         .sort()
                                         .map(c=> {
-                                            return <div className='border-r-04 w-2 h-2 click' style={{background : c, border: lineColor === c ? '2px solid var(--red)' : ''}} onClick={e=> setLineColor(c)} key={c}/>
+                                            return <div className='border-r-04 w-2 h-2 click' style={{background : c, borderRadius: lineColor === c && '3rem'}} onClick={e=> setLineColor(c)} key={c}/>
                                         })
                                     }
                                 </div>

@@ -61,9 +61,9 @@ export function Menu({ props }) {
             <div className='grid w-100p'>
                 {
                     list
-                    .map(menu => {
+                    .map((menu, i) => {
                         return (
-                            <>
+                            <div key={i}>
                                 {
                                     menu.id === 'theme'
                                     ?
@@ -83,7 +83,7 @@ export function Menu({ props }) {
                                         </button>
                                     </Link>
                                 }
-                            </>
+                            </div>
                         )
                     })
                 }

@@ -14,11 +14,12 @@ import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
 import { useStateProps } from '../../../App/provider/ContextProvider';
+import { Link } from 'react-router-dom'
 
 
 export default function Home() {
 
-    const { users, stats, links } = useStateProps()
+    const { auth, users, stats, links } = useStateProps()
 
 
     const subjects = [
@@ -103,13 +104,15 @@ export default function Home() {
     const width = GetWidth()
 
 
+    console.log(auth);
+
 
 
     return (
-        <Main className='grid' style={{ gap: width < 480 ? '4rem' : '10rem' }} >
+        <Main className='grid' style={{ gap: width < 780 ? '5rem' : '10rem' }} >
 
-            <section className='display justify-c w-100p' >
-                <div className='display justify-s-b align-top' style={{ width: width < 780 ? '100%' : '60%' }}>
+            <section className='display w-100p' >
+                <div className='display justify-s-b align-top' style={{ width: width < 780 ? '100%' : '60%' }} >
 
                     <div className='grid gap-3rem w-100p'>
                         <div className='grid gap-04'>
@@ -119,13 +122,15 @@ export default function Home() {
                         </div>
 
                         <div className='grid gap-1rem w-100p'>
-                            <div className='display justify-e'>
-                                <button className='blue border-b p-1 border-r-1 h-4'>
-                                    <span className='f-s-16 c-white'>Créer un lien</span>
-                                </button>
-                            </div>
-                            <div className='display justify-c'>
-                                <span className='opacity'>C'est gratuit !</span>
+                            <div className='grid gap' style={{ width: width > 780 ? '100%' : '60%' }}>
+                                <Link to={!auth ? '/login' : 'dashboard'}  >
+                                        <button className='blue border-b p-1 border-r-1 h-4'>
+                                            <span className='f-s-16 c-white'>Créer un lien</span>
+                                        </button>
+                                </Link>
+                                <div className='display justify-c'>
+                                    <span className='opacity'>C'est gratuit !</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,7 +227,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <Swiper className='w-100p' 
+               {/*  <Swiper className='w-100p' 
                     slidesPerView={width < 480 ? 2 : 3}  
                     spaceBetween={18} 
                     loop
@@ -242,7 +247,7 @@ export default function Home() {
                             )
                         })
                     }
-                </Swiper>
+                </Swiper> */}
             
             </section>
 

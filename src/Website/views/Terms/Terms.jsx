@@ -9,7 +9,7 @@ export default function Terms() {
     return (
         <Main className='grid gap-2rem terms'>
 
-            <div>
+            <div className='border-r-1 p-1 white'>
                 <h1>Conditions d'utilisation</h1>
                 <p>Les présentes Conditions d'utilisation (les "Conditions") régissent l'utilisation du service de raccourcissement de liens (le "Service") proposé par <span className='c-blue'>Qlee.me</span>. Il est important de noter que Qlee.me est une propriété de la société <a className='link' href='https://www.kiwee.site'>Kiwee.site</a>. En utilisant le Service, vous acceptez d'être lié par les présentes Conditions. Si vous n'acceptez pas les présentes Conditions, vous ne devez pas utiliser le Service.</p>
 
@@ -35,7 +35,7 @@ export default function Terms() {
                 <p>Les présentes Conditions constituent l'intégralité de l'accord entre vous et <span className='c-blue'>Qlee.me</span> en ce qui concerne l'utilisation du Service. Si une disposition des présentes Conditions est jugée illégale ou inapplicable, elle sera réputée non écrite sans affecter la validité et l'applicabilité des dispositions restantes.</p>
             </div>
 
-            <div>
+            <div className='border-r-1 p-1 white'>
                 <h1>Conditions de vente</h1>
                 <p>Les présentes Conditions de vente régissent l'achat de notre service de paiement mensuel ou annuel (le "Service") proposé par <span className='c-blue'>Qlee.me</span>. En achetant le Service, vous acceptez d'être lié par les présentes Conditions de vente. Si vous n'acceptez pas les présentes Conditions de vente, vous ne devez pas acheter le Service.</p>
 

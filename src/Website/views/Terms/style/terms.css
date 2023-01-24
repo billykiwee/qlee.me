@@ -1,13 +1,13 @@
-.terms > h1 {
+.terms > div > h1 {
     font-size: 2rem;
 }
 
-.terms > h2 {
+.terms > div > h2 {
     font-size: 1.4rem;
     margin-bottom: 0;
     margin-top: 2rem;
 }
 
-.terms > p {
-    margin-top : 1rem;
+.terms > div > p {
+    margin-top : 0.4rem;
 }
