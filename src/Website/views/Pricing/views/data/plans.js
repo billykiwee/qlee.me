@@ -8,9 +8,8 @@ export const PlansData = {
         subtitle: 'Pour tous',
         price   : 0,
         benefits: [
-            ['10 liens', <svg stroke="var(--black)" fill="var(--black)" stroke-width="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
+            ['10 liens', <svg stroke="var(--black)" fill="var(--black)" strokeWidth="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
             ['Qr code', <QrCodeIcon width={18} />],
-            ['Lien personalisable', <Cog6ToothIcon width={18} />],
         ],
         available: true
     },
@@ -23,7 +22,7 @@ export const PlansData = {
             monthly: plans.PRO.price.monthly,
         },
         benefits: [
-            ['100 liens', <svg stroke="var(--black)" fill="var(--black)" stroke-width="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
+            ['100 liens', <svg stroke="var(--black)" fill="var(--black)" strokeWidth="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
             ['Qr code', <QrCodeIcon width={18} />],
             ['Lien personalisable', <Cog6ToothIcon width={18} />],
             ['Statistiques', <ChartPieIcon width={18} />]
@@ -41,7 +40,7 @@ export const PlansData = {
             monthly: plans.ENTREPRISE.price.monthly,
         },
         benefits: [
-            ['1000 liens', <svg stroke="var(--black)" fill="var(--black)" stroke-width="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
+            ['1000 liens', <svg stroke="var(--black)" fill="var(--black)" strokeWidth="0" viewBox="0 0 24 24" width='20' xmlns="http://www.w3.org/2000/svg"><path d="M14 13H8V5H6v9a1 1 0 0 0 1 1h7v3l5-4-5-4v3z"></path></svg>],
             ['Qr code', <QrCodeIcon width={18} />],
             ['Link in bio', <SwatchIcon width={18} />],
             ['Lien personalisable', <Cog6ToothIcon width={18} />],

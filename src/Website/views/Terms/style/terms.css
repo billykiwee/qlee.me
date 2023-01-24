@@ -1,13 +1,13 @@
-h1 {
+.terms > h1 {
     font-size: 2rem;
 }
 
-h2 {
+.terms > h2 {
     font-size: 1.4rem;
     margin-bottom: 0;
     margin-top: 2rem;
 }
 
-p {
+.terms > p {
     margin-top : 1rem;
 }

@@ -30,6 +30,9 @@
         width:  322px;
         height: 100%;
     }
+    .article__plan {
+        height: unset!important;
+    }
     .question {
         grid-template-columns: unset;
     }

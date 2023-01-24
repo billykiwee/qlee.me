@@ -7,7 +7,7 @@ export default function Terms() {
 
 
     return (
-        <Main className='grid gap-2rem'>
+        <Main className='grid gap-2rem terms'>
 
             <div>
                 <h1>Conditions d'utilisation</h1>
