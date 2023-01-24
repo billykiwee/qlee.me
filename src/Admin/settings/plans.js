@@ -10,7 +10,7 @@ export const plans = {
             yearly : 3.9,
             monthly: 4.9
         },
-        max_links: 300,
+        max_links: 100,
         features : {
             statistics    : true,
             edit_shortlink: true,
