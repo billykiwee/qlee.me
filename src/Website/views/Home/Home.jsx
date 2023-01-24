@@ -9,7 +9,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ChartPieIcon, ChatBubbleLeftIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ChartPieIcon, ChatBubbleLeftIcon, CheckIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
@@ -90,6 +90,19 @@ export default function Home() {
         { name : 'Ma youtube', check: true, icon : 'www.youtube.com'  }
     ]
 
+    useEffect(e=> {
+        setInterval(e=> {
+            tempateLinks.push([{
+                name : 'Mon site web',
+                check: false,
+                icon : 'www.goodidea.com'
+
+            }])
+        }, 3000)
+    })
+
+    console.log(tempateLinks);
+
 
     const Stats = [
         { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={16} /> },
@@ -105,10 +118,10 @@ export default function Home() {
 
 
     return (
-        <Main className='grid' style={{gap: width < 480 ? '4rem' : '10rem'}}>
+        <Main className='grid' style={{ gap: width < 480 ? '4rem' : '10rem' }} >
 
-            <section className='grid blocks w-100p'>
-                <div className='display justify-s-b align-top'>
+            <section className='display justify-c w-100p' >
+                <div className='display justify-s-b align-top' style={{ width: width < 780 ? '100%' : '60%' }}>
 
                     <div className='grid gap-3rem w-100p'>
                         <div className='grid gap-04'>
@@ -118,25 +131,15 @@ export default function Home() {
                         </div>
 
                         <div className='grid gap-1rem w-100p'>
-                            <div className='display div-input h-4 border border-r-1 w-100p white'>
-                                <div className='display w-100p'>
-                                    <span className='link p-l-1 p-r-04'>qlee.me/</span>
-                                    <input className='border-0 p-0  w-100p' placeholder='mon-lien' />
-                                </div>
-                            </div>
                             <div className='display justify-e'>
                                 <button className='blue border-b p-1 border-r-1 h-4'>
-                                    <span className='f-s-16 c-white'>Let's go</span>
+                                    <span className='f-s-16 c-white'>Créer un lien</span>
                                 </button>
                             </div>
                             <div className='display justify-c'>
                                 <span className='opacity'>C'est gratuit !</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        
                     </div>
                 </div>
             </section>
@@ -255,29 +258,35 @@ export default function Home() {
             
             </section>
 
-            <section className='grid justify-s-b blocks'>
-                <div className='display'>
-                    <h2 className='m-0'>Gère tes liens comme tu veux</h2>
-                </div>
-                <div className='grid gap p-2'>
-                    {
-                        tempateLinks
-                        .map(t=> {
+            <section className='grid justify-s-b'>
 
-                            return (
-                                <div className='display justify-s-b border border-r-1 border-b white p-1' key={t.name}>
-                                    <div className='display gap-1rem'>
-                                        <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
-                                        <span className='f-s-16'>{t.name}</span>
+                <div className='grid justify-s-b blocks'>
+                    <div className='grid gap'>
+                        <div>
+                            <h2 className='m-0'>Gère tes liens comme tu veux</h2>
+                        </div>
+                    </div>
+                    <div className='grid gap p-2'>
+                        {
+                            tempateLinks
+                            .map(t=> {
+
+                                return (
+                                    <div className='display justify-s-b border border-r-1 border-b white p-1' key={t.name}>
+                                        <div className='display gap-1rem'>
+                                            <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
+                                            <span className='f-s-16'>{t.name}</span>
+                                        </div>
+                                        <div className='display gap-04 ' >
+                                            <SwitchInput dimension={0.9} checked={t.check} />
+                                        </div>
                                     </div>
-                                    <div className='display gap-04 ' >
-                                        <SwitchInput dimension={0.9} checked={t.check} />
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
+
             </section>
 
             <section className='grid p-2 border-r-2' style={{color: 'black'}} >
