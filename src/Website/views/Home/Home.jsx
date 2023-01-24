@@ -83,25 +83,13 @@ export default function Home() {
         },
     ]
 
-    let tempateLinks = [
+    const [tempateLinks, seTempateLinkst] = useState([
         { name : 'Ma boutique', check: true, icon : 'www.goody.com' },
         { name : 'Mon facebook', check: false, icon : 'www.facbook.com' },
         { name : 'Mon Twitch', check: true, icon : 'www.twitch.com' },
         { name : 'Ma youtube', check: true, icon : 'www.youtube.com'  }
-    ]
+    ])
 
-    useEffect(e=> {
-        setInterval(e=> {
-            tempateLinks.push([{
-                name : 'Mon site web',
-                check: false,
-                icon : 'www.goodidea.com'
-
-            }])
-        }, 3000)
-    })
-
-    console.log(tempateLinks);
 
 
     const Stats = [
