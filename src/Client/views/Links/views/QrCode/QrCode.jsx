@@ -65,7 +65,7 @@ export default function QrCodeSection({ Link }) {
                                 <input type="text" className='div-input grey border-r-1 h-4' placeholder='Qlee me' onChange={e=> setText(e.target.value)} />
                             </div>
 
-                            <div className='grid gap-1rem grey border-r-1 p-1'>
+                            <div className='grid gap-1rem'>
                                 <div className='display justify-s-b'>
                                     <span className='opacity'>couleur</span>
                                     <div className='click display border-r-2 w-2 h-2 hover justify-c' onClick={e=> setFrameColorActive(frameColorActive ? false : true)}>

@@ -142,7 +142,7 @@ export default function Home() {
                     {
                         features.map((feature, i)=> {
                             return (
-                                <div className='display gap-1rem align-top p-1 border-r-1 shadow white' key={i}>
+                                <div className='display gap-1rem align-top p-2 border-r-1 shadow white' key={i}>
                                     <div className='grid'>
                                         <div className='display'>
                                             <div className='steps-blocks-head'>

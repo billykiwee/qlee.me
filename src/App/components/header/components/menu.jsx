@@ -16,11 +16,6 @@ export function Menu({ props }) {
 
     const list = [
         {
-            name: User ? 'Mon compte' : 'Se connecter',
-            link:  User ? '/profil' : '/login',
-            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={36} height={36} />
-        },
-        {
             name: 'Créer un lien',
             link: '/dashboard',
             icon: <PencilIcon width={22} className='currentColor' />
@@ -44,7 +39,12 @@ export function Menu({ props }) {
             id: 'theme',
             name: theme[0].toUpperCase() + theme.split(theme[0])[1],
             icon: theme === 'light' ? <MoonIcon width={22} /> : <SunIcon width={22} />
-        }
+        },
+        {
+            name: User ? 'Mon compte' : 'Se connecter',
+            link:  User ? '/profil' : '/login',
+            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={36} height={36} />
+        },
     ]
 
     useEffect(e=> {
