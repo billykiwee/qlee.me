@@ -17,7 +17,7 @@ export function Menu({ props }) {
         {
             name: User ? 'Mon compte' : 'Se connecter',
             link:  User ? '/profil' : '/login',
-            icon: <UserIcon width={18} className='currentColor' />
+            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={20} height={20} />
         },
         {
             name: 'Créer un lien',

@@ -61,24 +61,6 @@ export default function Header({ active }) {
                 <div className='display gap'>
 
                     <div className='display gap-04 border-r-2 white' style={{ height : '40px' }}>
-                        {
-                            User 
-                            ?
-                            <Link to='/dashboard' className='display avatar-header' >
-                                <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={40} height={40} />
-                            </Link>
-                            : 
-                            <div className='display justify-c'>
-                                <Link to='/login'>
-                                    <button className='hover-blue border-r-2 p-1 gap-04 blue' style={{height: '32px'}}>
-                                        <span className='display'>
-                                            <img src='/images/user-solid.svg' width={14} style={{filter:' invert(100%)'}} />
-                                        </span>
-                                        <span className='display'>Se connecter</span>
-                                    </button>
-                                </Link>
-                            </div>
-                        }
                         <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(menu === false ? true : false)} style={{width: '40px', height: '40px'}} >
                             <span className='display'>
                                 <Bars2Icon width={20} className='c-black' />
@@ -87,7 +69,7 @@ export default function Header({ active }) {
                     </div>
                 </div>
             </div>
-            <Menu props={{ User, menu, setMenu }} />
+            <Menu props={{ User, menu, setMenu, User }} />
         </header>
     )
 }
