@@ -17,7 +17,7 @@ export function Menu({ props }) {
         {
             name: User ? 'Mon compte' : 'Se connecter',
             link:  User ? '/profil' : '/login',
-            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={22} height={22} />
+            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={36} height={36} />
         },
         {
             name: 'Créer un lien',
@@ -57,8 +57,8 @@ export function Menu({ props }) {
 
     if (menu)
     return (
-        <div className='menu'>
-            <div className='grid w-100p'>
+        <div className='menu m-t-2'>
+            <div className='grid w-100p gap'>
                 {
                     list
                     .map((menu, i) => {
@@ -69,7 +69,7 @@ export function Menu({ props }) {
                                     ?
                                     <button className='h-3 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                                         <div className="display gap-1rem">
-                                            {menu.icon}
+                                            <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                             <span className='f-s-20'>{menu.name}</span>
                                         </div>
                                     </button>
@@ -77,7 +77,7 @@ export function Menu({ props }) {
                                     <Link to={menu.link} key={menu.name} onClick={e=> setMenu(false) } >
                                         <button className='h-3 border-r-1 display p-1 menu__btn' >
                                             <div className="display gap-1rem">
-                                                {menu.icon}
+                                                <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                                 <span className='f-s-20'>{menu.name}</span>
                                             </div>
                                         </button>
