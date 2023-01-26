@@ -10,7 +10,6 @@ import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
 
-
 export default function Dashboard() {
 
     const { auth, user, snackBar } = useStateProps()
@@ -21,12 +20,41 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
+    useEffect(e=> {
+
+        
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            var video = document.querySelector('video');
+            video.srcObject = stream;
+            video.onloadedmetadata = function(e) {
+                video.play();
+            };
+        })
+        .catch(function(err) {
+            console.log("The following error occurred: " + err.name);
+        });
+    
+
+
+        window.onclick = () => {
+            var canvas = document.querySelector('canvas');
+            var ctx = canvas.getContext('2d');
+            var video = document.querySelector('video');
+            ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+        }
+    }, [])
+
+
+
 
     if (!auth) return <Login />
     return (
 
         <Main>
             <div className='grid gap-3rem blocks w-100' >
+
+                <video className='video' />
 
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
@@ -129,6 +157,8 @@ export default function Dashboard() {
         </Main>
     )
 }
+
+
 
 
 
