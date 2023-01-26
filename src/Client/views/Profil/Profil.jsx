@@ -87,11 +87,11 @@ export default function Profil() {
                         </div>
                     </div>
                     <div className='display gap'>
-                        <div className='display'>
+                        {/* <div className='display'>
                             <button className='p-1 h-4 border-b blue hover-blue border border-r-1' onClick={editProfil} >
                                 <span className='f-s-16'>Modifier mes informations</span>
                             </button>
-                        </div>
+                        </div> */}
                         <div className='display'>
                             <button className='p-1 h-4 border-b white hover-white border border-r-1' onClick={e=> signOut(auth).then(e=> history('/')) }>
                                 <span className='f-s-16'>Se déconnecter</span>
