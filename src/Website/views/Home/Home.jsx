@@ -109,17 +109,6 @@ export default function Home() {
          }
     ])
 
-        setInterval(e=> {
-            setTempateLinkst(e=> e = tempateLinks)
-            console.log(tempateLinks);
-        }, 1000)
-
-
-
-    const l = tempateLinks.map(e=> e.check())
-
-
-    console.log(Math.floor(Math.random()* 10));
 
     const Stats = [
         { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={16} /> },
@@ -298,7 +287,7 @@ export default function Home() {
                                             <span className='f-s-16'>{t.name}</span>
                                         </div>
                                         <div className='display gap-04 ' >
-                                            <SwitchInput dimension={0.9} checked={t.check()} />
+                                            <SwitchInput dimension={0.9} checked={t.check} />
                                         </div>
                                     </div>
                                 )
