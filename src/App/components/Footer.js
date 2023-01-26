@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react'
 import { BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs'
+
 
 export default function Footer({ active }) {
 
@@ -43,7 +43,13 @@ export default function Footer({ active }) {
                 </div>
                 <div>
                     <a href='https://www.kiwee.site'>
-                        <small className='c-grey click'>made by Kiwee.site</small>
+                        <div className='c-grey click display gap'>
+                            <small>made by</small>
+                            <div className='display justify-c  border-r-1 blue p-04'>
+                                <img src='./images/kiwee.svg' width={18}/>
+                                <small style={{ color: 'white' }}>Kiwee</small>
+                            </div>
+                        </div>
                     </a>
                 </div>
             </div>
