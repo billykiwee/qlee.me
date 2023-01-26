@@ -14,13 +14,13 @@ export default function Header({ active }) {
     const [menu, setMenu] = useState(false)    
     const width = GetWidth()
 
-
+    
     if (active)
     return (
         <header className='shadow p-1' style={{ background : 'var(--background)', height : menu ? '100%' : '' }} >
             <div className='display justify-s-b'>
                 <div className='display gap click'>
-                    <Link to='/' >
+                    <Link to='/' onClick={e=> setMenu(false)}>
                         <span className='display'>
                             <svg height={48} viewBox="0 0 593 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 {

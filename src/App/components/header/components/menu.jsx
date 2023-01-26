@@ -17,12 +17,12 @@ export function Menu({ props }) {
         {
             name: User ? 'Mon compte' : 'Se connecter',
             link:  User ? '/profil' : '/login',
-            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={20} height={20} />
+            icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={22} height={22} />
         },
         {
             name: 'Créer un lien',
             link: '/dashboard',
-            icon: <PencilIcon width={18} className='currentColor' />
+            icon: <PencilIcon width={22} className='currentColor' />
         },
         /* {
             name: 'Link in bio',
@@ -32,17 +32,17 @@ export function Menu({ props }) {
         {
             name: 'Pricing',
             link: '/pricing',
-            icon:  <LockOpenIcon width={18} className='currentColor' />
+            icon:  <LockOpenIcon width={22} className='currentColor' />
         },
         {
             name: 'Terms',
             link: '/terms',
-            icon:  <BuildingOfficeIcon width={18} className='currentColor' />
+            icon:  <BuildingOfficeIcon width={22} className='currentColor' />
         },
         {
             id: 'theme',
             name: theme[0].toUpperCase() + theme.split(theme[0])[1],
-            icon: theme === 'light' ? <MoonIcon width={18} /> : <SunIcon width={20} />
+            icon: theme === 'light' ? <MoonIcon width={22} /> : <SunIcon width={22} />
         }
     ]
 
@@ -70,7 +70,7 @@ export function Menu({ props }) {
                                     <button className='h-3 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                                         <div className="display gap-1rem">
                                             {menu.icon}
-                                            <span className='f-s-16'>{menu.name}</span>
+                                            <span className='f-s-20'>{menu.name}</span>
                                         </div>
                                     </button>
                                     :
@@ -78,7 +78,7 @@ export function Menu({ props }) {
                                         <button className='h-3 border-r-1 display p-1 menu__btn' >
                                             <div className="display gap-1rem">
                                                 {menu.icon}
-                                                <span className='f-s-16'>{menu.name}</span>
+                                                <span className='f-s-20'>{menu.name}</span>
                                             </div>
                                         </button>
                                     </Link>
