@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toggleTheme } from "../../../functions/setTheme"
+import { GetWidth } from "../../../utils/GetWidth"
 
 
 export function Menu({ props }) {
@@ -54,10 +55,12 @@ export function Menu({ props }) {
 
     })
 
+    const width = GetWidth()
+
 
     if (menu)
     return (
-        <div className='menu m-t-2'>
+        <div className='menu m-t-2' style={{ width : width > 780 ? '40%' : '' }} >
             <div className='grid w-100p'>
                 {
                     list
