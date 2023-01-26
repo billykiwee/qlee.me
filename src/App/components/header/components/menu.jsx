@@ -58,7 +58,7 @@ export function Menu({ props }) {
     if (menu)
     return (
         <div className='menu m-t-2'>
-            <div className='grid w-100p gap'>
+            <div className='grid w-100p'>
                 {
                     list
                     .map((menu, i) => {
@@ -67,7 +67,7 @@ export function Menu({ props }) {
                                 {
                                     menu.id === 'theme'
                                     ?
-                                    <button className='h-3 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
+                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                                         <div className="display gap-1rem">
                                             <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                             <span className='f-s-20'>{menu.name}</span>
@@ -75,10 +75,10 @@ export function Menu({ props }) {
                                     </button>
                                     :
                                     <Link to={menu.link} key={menu.name} onClick={e=> setMenu(false) } >
-                                        <button className='h-3 border-r-1 display p-1 menu__btn' >
+                                        <button className='h-4 border-r-1 display p-1 menu__btn' >
                                             <div className="display gap-1rem">
                                                 <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
-                                                <span className='f-s-20'>{menu.name}</span>
+                                                <span className='f-s-18'>{menu.name}</span>
                                             </div>
                                         </button>
                                     </Link>
