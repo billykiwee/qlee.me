@@ -5,6 +5,7 @@ import Edit from "../../Client/views/Links/views/Edit/Edit";
 import Profil from "../../Client/views/Profil/Profil";
 import Redirection from "../../Client/views/Redirection/Redirection";
 import Stats from "../../Client/views/Stats/Stats";
+import Features from "../../Website/views/Features/Features";
 import Home from "../../Website/views/Home/Home";
 import Login from "../../Website/views/Login/Login";
 import Page404 from "../../Website/views/Page404";
@@ -27,5 +28,6 @@ export const router = [
     { path : '/@:userName', element : <LinkInBio /> , blank : true},
     { path : '/edit/@:userName', element : <EditLinkInBio /> },
     { path : '/profil', element : <Profil /> },
+    { path : '/features', element : <Features /> },
     { path : '/terms', element : <Terms /> },
 ]

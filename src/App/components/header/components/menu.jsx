@@ -2,6 +2,7 @@
 import { BuildingOfficeIcon, LockOpenIcon, PencilIcon, UserIcon } from "@heroicons/react/24/outline"
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react"
+import { BiLike } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { toggleTheme } from "../../../functions/setTheme"
 import { GetWidth } from "../../../utils/GetWidth"
@@ -25,6 +26,11 @@ export function Menu({ props }) {
             link: '/edit/' + User.link_in_bio,
             icon: <SwatchIcon width={18} className='c-yellow' />
         }, */
+        {
+            name: 'Fonctionnalités',
+            link: '/features',
+            icon:  <BiLike size={22} className='currentColor' />
+        },
         {
             name: 'Pricing',
             link: '/pricing',
