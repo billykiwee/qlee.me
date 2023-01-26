@@ -84,14 +84,42 @@ export default function Home() {
         },
     ]
 
-    const [tempateLinks, seTempateLinkst] = useState([
-        { name : 'Ma boutique', check: true, icon : 'www.goody.com' },
-        { name : 'Mon facebook', check: false, icon : 'www.facbook.com' },
-        { name : 'Mon Twitch', check: true, icon : 'www.twitch.com' },
-        { name : 'Ma youtube', check: true, icon : 'www.youtube.com'  }
+
+
+    const [tempateLinks, setTempateLinkst] = useState([
+        { 
+            name : 'Ma boutique', 
+            check: () => Math.floor(Math.random()* 10) > 2, 
+            icon : 'www.goody.com' 
+        },
+        { 
+            name : 'Mon facebook', 
+            check: () => Math.floor(Math.random()* 10) > 2, 
+            icon : 'www.facbook.com' 
+        },
+        { 
+            name : 'Mon Twitch', 
+            check: () => Math.floor(Math.random()* 10) > 2, 
+            icon : 'www.twitch.com' 
+        },
+        { 
+            name : 'Ma youtube', 
+            check: () => Math.floor(Math.random()* 10) > 2, 
+            icon : 'www.youtube.com' 
+         }
     ])
 
+        setInterval(e=> {
+            setTempateLinkst(e=> e = tempateLinks)
+            console.log(tempateLinks);
+        }, 1000)
 
+
+
+    const l = tempateLinks.map(e=> e.check())
+
+
+    console.log(Math.floor(Math.random()* 10));
 
     const Stats = [
         { title : 'Liens crées', number: links.length, icon  : <SwatchIcon width={16} /> },
@@ -102,6 +130,9 @@ export default function Home() {
 
 
     const width = GetWidth()
+
+
+
 
 
     return (
@@ -267,7 +298,7 @@ export default function Home() {
                                             <span className='f-s-16'>{t.name}</span>
                                         </div>
                                         <div className='display gap-04 ' >
-                                            <SwitchInput dimension={0.9} checked={t.check} />
+                                            <SwitchInput dimension={0.9} checked={t.check()} />
                                         </div>
                                     </div>
                                 )
