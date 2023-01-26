@@ -21,13 +21,6 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-    const [lol, setLol] = useState({})
-
-    window.onclick = () => {
-        setLol(prev => { return {...prev, name: 'bonjour'}})
-        setLol(prev => { return {...prev, fristname: 'cool'} })
-    }
-
 
     if (!auth) return <Login />
     return (

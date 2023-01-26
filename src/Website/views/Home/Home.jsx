@@ -104,10 +104,6 @@ export default function Home() {
     const width = GetWidth()
 
 
-    console.log(auth);
-
-
-
     return (
         <Main className='grid' style={{ gap: width < 780 ? '5rem' : '10rem' }} >
 
