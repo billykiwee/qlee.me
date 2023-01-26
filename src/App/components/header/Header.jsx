@@ -60,8 +60,8 @@ export default function Header({ active }) {
 
                 <div className='display gap'>
 
-                    <div className='display gap-04 border-r-2 white' style={{ height : '40px' }}>
-                        <button className='hamburger border-r-100 hover ' onClick={e=> setMenu(menu === false ? true : false)} style={{width: '40px', height: '40px'}} >
+                    <div className='display gap-04 border-r-2' >
+                        <button className='display justify-c white h-3 w-3 border-r-100 hover ' onClick={e=> setMenu(menu === false ? true : false)} >
                             <span className='display'>
                                 <Bars2Icon width={20} className='c-black' />
                             </span>
