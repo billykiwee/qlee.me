@@ -95,7 +95,7 @@ export function Stripe({ props }) {
 
 export default function Payment() {
 
-    const { planID, billiedID } = useParams()
+    const { planID, billingID } = useParams()
 
     const stripePromise = loadStripe('pk_test_51HKFx4L8AEDuYjhscUrD37Q7AP9kCKtBF8uG8xO6DCh5FKNrTuyLAecOgxZyXHPtaV4jduDf6fWoJBiGuqjjcK8c00z71QBckl')
 
@@ -103,7 +103,7 @@ export default function Payment() {
         <Main>
             <div className='grid gap-1rem'>
                 <Elements stripe={stripePromise} >
-                    <Stripe props={{ planID : planID.toLocaleUpperCase(), billiedID }} />
+                    <Stripe props={{ planID : planID.toLocaleUpperCase(), billingID }} />
                 </Elements>
             </div>
         </Main>

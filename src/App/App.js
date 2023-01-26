@@ -8,6 +8,8 @@ import { SnackBar } from './components/snackBar/SnackBar'
 import Popup from './components/popUp/Popup'
 import { router } from './router/router'
 
+
+
 export default function App() {
 
     return (

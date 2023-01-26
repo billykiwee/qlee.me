@@ -15,7 +15,7 @@ import formatCurrency from '../../../App/utils/formatCurrency'
 
 export default function Profil() {
 
-    const { user, transactions } = useStateProps()
+    const { auth, user, transactions } = useStateProps()
 
     const history = useNavigate()
 
@@ -52,7 +52,7 @@ export default function Profil() {
 
 
     
-    if (!user) return <Login />
+    if (!auth) return <Login />
     if (User)
     return (
         <Main>
@@ -163,6 +163,7 @@ export default function Profil() {
 const Inputs = ({ props, uneditable }) => {
 
     const { User, label, input } = props
+
 
     return (
         <div className='grid gap' style={{ pointerEvents : uneditable ? 'none' : 'cursor' }} >

@@ -14,11 +14,11 @@ export default function Plans({ billing }) {
     const redirect = (plan) => {
         if (!auth) return '/login'
 
-        if (User.plan === plan.id || plan.id === 'FREE') return '/dashboard'
+        //if (User.plan === plan.id || plan.id === 'FREE') return '/dashboard'
         
         return plan.payment + '/' + billing
     }
-    
+
 
 
     return (
