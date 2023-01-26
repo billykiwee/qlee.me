@@ -93,8 +93,8 @@ export default function Profil() {
                             </button>
                         </div> */}
                         <div className='display'>
-                            <button className='p-1 h-4 border-b white hover-white border border-r-1' onClick={e=> signOut(auth).then(e=> history('/')) }>
-                                <span className='f-s-16'>Se déconnecter</span>
+                            <button className='p-1 h-4 border-b white hover border border-r-1' onClick={e=> signOut(auth).then(e=> history('/')) }>
+                                <span className='f-s-16 c-black'>Se déconnecter</span>
                             </button>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ const Inputs = ({ props, uneditable }) => {
         <div className='grid gap' style={{ pointerEvents : uneditable ? 'none' : 'cursor' }} >
             <span>{label}</span>
             <input 
-                className='div-input grey h-3' 
+                className='div-input grey h-4 border-r-1' 
                 type='text' 
                 placeholder={User?.[input]} 
             />
