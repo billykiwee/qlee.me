@@ -15,7 +15,7 @@ import formatCurrency from '../../../App/utils/formatCurrency'
 
 export default function Profil() {
 
-    const { auth, user, transactions } = useStateProps()
+    const { auth : userAuth, snackBar, user, transactions } = useStateProps()
 
     const history = useNavigate()
 
@@ -50,9 +50,19 @@ export default function Profil() {
     }
 
 
+    const SignOut = async () => {
+        await signOut(auth)
+
+        snackBar.add({
+            text: 'Decconexion réussie'
+        })
+        history('/')
+    }
+
+
 
     
-    if (!auth) return <Login />
+    if (!userAuth) return <Login />
     if (User)
     return (
         <Main>
@@ -93,7 +103,7 @@ export default function Profil() {
                             </button>
                         </div> */}
                         <div className='display'>
-                            <button className='p-1 h-4 border-b white hover border border-r-1' onClick={e=> signOut(auth).then(e=> history('/')) }>
+                            <button className='p-1 h-4 border-b white hover border border-r-1' onClick={SignOut}>
                                 <span className='f-s-16 c-black'>Se déconnecter</span>
                             </button>
                         </div>

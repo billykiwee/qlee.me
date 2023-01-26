@@ -1,6 +1,6 @@
+import React from 'react'
 import { getAdditionalUserInfo, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { serverTimestamp } from 'firebase/firestore'
-import React from 'react'
 import { db, auth } from '../../../../../App/database/firebase'
 
 
@@ -30,13 +30,13 @@ export async function byGoogle(userID, history, snackBar, redirect) {
                 photoURL,
                 date    : serverTimestamp()
             }) 
-    
-            snackBar.add({
-                text:' Connexion réussie'
-            })
         }
         
         if (!redirect) history('/dashboard')
+
+        snackBar.add({
+            text:' Connexion réussie'
+        })
     })
 }
 
