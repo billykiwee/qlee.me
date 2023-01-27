@@ -1,18 +1,17 @@
-import { CameraIcon, ChartPieIcon, Cog6ToothIcon, EyeIcon, PencilIcon, QrCodeIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
+import { CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, PencilIcon, QrCodeIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateProps } from '../../../App/provider/ContextProvider'
+import getFavicon from '../../../App/utils/getFavicon'
 import { GetWidth } from '../../../App/utils/GetWidth'
+import Blocks from '../../../Client/views/LinkInBio/views/Edit/settings/components/Blocks'
+import { ProgressBar } from '../../../Client/views/Stats/components/ProgressBar'
 import { Block } from '../../../Client/views/Stats/statistics/Block'
 import { Clics } from '../../../Client/views/Stats/statistics/components/Clics'
 
 export default function Features() {
 
-
-    const {  user } = useStateProps()
-
-    const User = user?.profil
 
     const width = GetWidth()
 
@@ -85,8 +84,117 @@ export default function Features() {
                             </div>
                             <div className='display justify-c w-100p border-r-1 overflow-hidden' >
 
-                                <Clics stat={298393} />
-                               {/*  <img width={'80%'} height='100%' src='/images/statistics-feauture.png' /> */}
+                                <div className='grid gap-1rem w-100p'>
+                                 
+                                    <div className='display justify-s-b p-1 border-r-1 grey'>
+                                        <div className='display gap'>
+                                            <EyeIcon width={20} className='c-black' />
+                                            <span>Clics</span>
+                                        </div>
+                                        <div>
+                                            <span>9 838</span>
+                                        </div>
+                                    </div>
+
+                                    <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
+                                        <div className='display gap'>
+                                            <DevicePhoneMobileIcon width={20} className='c-black' />
+                                            <span>Appareil</span>
+                                        </div>
+
+                                        <div className='grid gap'>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>Mobile</span>
+                                                    <small className='c-grey'>8 559</small>
+                                                </div>
+                                                <ProgressBar percentage={87} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>Ordinateur</span>
+                                                    <small className='c-grey'>1 279</small>
+                                                </div>
+                                                <ProgressBar percentage={13} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
+                                        <div className='display gap'>
+                                            <GlobeEuropeAfricaIcon width={20} className='c-black' />
+                                            <span>Source du trafic</span>
+                                        </div>
+
+                                        <div className='grid gap'>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <img src={getFavicon('www.instagram.com')} className='border-r-100' width={14} />
+                                                    <span>Instagram</span>
+                                                    <small className='c-grey'>4 328</small>
+                                                </div>
+                                                <ProgressBar percentage={44} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <img src={getFavicon('www.facebook.com')} className='border-r-100' width={14} />
+                                                    <span>Facebook</span>
+                                                     <small className='c-grey'>2 754</small>
+                                                </div>
+                                                <ProgressBar percentage={28} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <img src={getFavicon('www.youtube.com')} className='border-r-100' width={14} />
+                                                    <span>Youtube</span>
+                                                     <small className='c-grey'>1 869</small>
+                                                </div>
+                                                <ProgressBar percentage={19} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <img src={getFavicon('www.twitch.com')} className='border-r-100' width={14} />
+                                                    <span>Twitch</span>
+                                                     <small className='c-grey'>885</small>
+                                                </div>
+                                                <ProgressBar percentage={9} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
+                                        <div className='display gap'>
+                                            <GlobeEuropeAfricaIcon width={20} className='c-black' />
+                                            <span>Localiation</span>
+                                        </div>
+
+                                        <div className='grid gap'>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>🇫🇷 France</span>
+                                                    <small className='c-grey'>6 394</small>
+                                                </div>
+                                                <ProgressBar percentage={65} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Angleterre</span>
+                                                    <small className='c-grey'>2 853</small>
+                                                </div>
+                                                <ProgressBar percentage={29} />
+                                            </div>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>🇪🇪 Estonie</span>
+                                                    <small className='c-grey'>590</small>
+                                                </div>
+                                                <ProgressBar percentage={6} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* <img width={'80%'} height='100%' src='/images/statistics-feauture.png' /> */}
                             </div>
                         </div>
                     </div>
