@@ -27,7 +27,9 @@ export function Reference({ stat }) {
                 }
                     <small className='c-grey f-s-12'>{item.count}</small>
                 </div>
-                <ProgressBar percentage={percentage(sum, item.count)} /> 
+                <div className='w-50p'>
+                    <ProgressBar percentage={percentage(sum, item.count)} /> 
+                </div>
             </div>
         )
     })

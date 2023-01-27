@@ -25,7 +25,6 @@ export default function QrCodeSection({ Link }) {
     const [text, setText] = useState('Qlee me')
 
 
-
     return (
         <div className='grid gap-1rem'>
 

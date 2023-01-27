@@ -9,6 +9,9 @@ import Blocks from '../../../Client/views/LinkInBio/views/Edit/settings/componen
 import { ProgressBar } from '../../../Client/views/Stats/components/ProgressBar'
 import { Block } from '../../../Client/views/Stats/statistics/Block'
 import {makeFriendly} from '../../../App/utils/makeFriendly'
+import Stats from './views/Stats'
+import QRCode from 'react-qr-code'
+import MdColorLens from 'react-icons/md'
 
 export default function Features() {
 
@@ -28,11 +31,11 @@ export default function Features() {
                         <div className='display gap-1rem'>
                             <h3 className='m-0'>Créer & Personaliser</h3>
                         </div>
-                        <div className='grid blocks align-top gap-1rem f-w-200'>
+                        <div className='grid blocks align-top gap-2rem f-w-200'>
                             <div className='grid gap-1rem p-1'>
-                                <span className='f-s-18'>
+                                <p className='f-s-18'>
                                     Créer facilement des liens URL raccourcis pour tes liens longs et encombrants et personnalise ces liens en modifiant le lien court, l'image et même l'URL principale.
-                                </span>
+                                </p>
                                 <div className='display gap'>
                                     <div className='display'>
                                         <Link className='display' to='/dashboard'>
@@ -61,11 +64,16 @@ export default function Features() {
                             <div className='display gap-1rem'>
                                 <h3 className='m-0'>Statistiques</h3>
                             </div>
-                            <div className={width < 780 ? 'grid' : 'display' + ' align-top gap-1rem f-w-200'} >
+                            <div className='grid blocks align-top gap-2rem f-w-200' >
                                 <div className='grid gap-1rem p-1'>
-                                    <span className='f-s-18'>
-                                    Analyse les statistiques de tes liens, comme le nombre de clics, le type d'appareil, la source du trafic, la localisation des utilisateurs et la performance. Cela te permettra de comprendre comment tes liens sont utilisés et comment tu peux améliorer leur performance.
-                                    </span>
+                                    <div className='grid gap'>
+                                        <p className='f-s-18'>
+                                            Analyse les statistiques de tes liens, comme le nombre de clics, le type d'appareil, la source du trafic, la localisation des utilisateurs et la performance.
+                                        </p>
+                                        <p className='f-s-18 m-t-0'>
+                                            Cela te permettra de comprendre comment tes liens sont utilisés et comment tu peux améliorer leur performance.
+                                        </p>
+                                    </div>
                                     <div className='display gap'>
                                         <div className='display'>
                                             <Link className='display' to='/dashboard'>
@@ -83,138 +91,7 @@ export default function Features() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='display justify-c border-r-1 w-100p' >
-
-                                    <div className='grid gap-1rem w-100p'>
-                                    
-                                        <div className='display justify-s-b p-1 border-r-1 grey'>
-                                            <div className='display gap'>
-                                                <EyeIcon width={20} className='c-black' />
-                                                <span>Clics</span>
-                                            </div>
-                                            <div>
-                                                <span>9 838</span>
-                                            </div>
-                                        </div>
-
-                                        <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
-                                            <div className='display gap'>
-                                                <DevicePhoneMobileIcon width={20} className='c-black' />
-                                                <span>Appareil</span>
-                                            </div>
-
-                                            <div className='grid gap'>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>Mobile</span>
-                                                        <small className='c-grey'>{makeFriendly(8559)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={87} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>Ordinateur</span>
-                                                        <small className='c-grey'>{makeFriendly(1279)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={13} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
-                                            <div className='display gap'>
-                                                <GlobeEuropeAfricaIcon width={20} className='c-black' />
-                                                <span>Source du trafic</span>
-                                            </div>
-
-                                            <div className='grid gap'>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <img src={getFavicon('www.instagram.com')} className='border-r-100' width={14} />
-                                                        <span>Instagram</span>
-                                                        <small className='c-grey'>{makeFriendly(4328)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={44} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <img src={getFavicon('www.facebook.com')} className='border-r-100' width={14} />
-                                                        <span>Facebook</span>
-                                                        <small className='c-grey'>{makeFriendly(2754)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={28} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <img src={getFavicon('www.youtube.com')} className='border-r-100' width={14} />
-                                                        <span>Youtube</span>
-                                                        <small className='c-grey'>{makeFriendly(1869)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={19} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <img src={getFavicon('www.twitch.com')} className='border-r-100' width={14} />
-                                                        <span>Twitch</span>
-                                                        <small className='c-grey'>{makeFriendly(885)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={9} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
-                                            <div className='display gap'>
-                                                <GlobeEuropeAfricaIcon width={20} className='c-black' />
-                                                <span>Localiation</span>
-                                            </div>
-
-                                            <div className='grid gap'>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>🇫🇷 France</span>
-                                                        <small className='c-grey'>{makeFriendly(6394)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={65} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Angleterre</span>
-                                                        <small className='c-grey'>{makeFriendly(2853)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={29} />
-                                                </div>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>🇪🇪 Estonie</span>
-                                                        <small className='c-grey'>{makeFriendly(590)}</small>
-                                                    </div>
-                                                    <ProgressBar percentage={6} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
-                                            <div className='display gap'>
-                                                <RocketLaunchIcon width={20} className='c-black' />
-                                                <span>Performance</span>
-                                            </div>
-
-                                            <div className='grid gap'>
-                                                <div className='display  justify-s-b'>
-                                                    <div className='display gap'>
-                                                        <span>Vitesse</span>
-                                                        <small className='c-grey'>{makeFriendly(9838)}</small>
-                                                    </div>
-                                                    <span>1,12s</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* <img width={'80%'} height='100%' src='/images/statistics-feauture.png' /> */}
-                                </div>
+                                <Stats />
                             </div>
                         </div>
                     </div>
@@ -246,7 +123,30 @@ export default function Features() {
                                 </div>
                             </div>
                             <div className='display justify-c w-100p border-r-1 overflow-hidden' >
-                                <img width={'80%'} height='100%' src='/images/myplaylist.svg' />
+                                <div className='grid gap-2rem'>
+                                    <div className='border-r-1 p-1' style={{ background : 'white' }}>
+                                        <QRCode
+                                            bgColor='white'
+                                            fgColor='black'
+                                            className='click qr-code-svg'
+                                            size={144}
+                                            value={'https://qlee.me'}
+                                        />
+                                    </div>
+
+                                    <div className='border-r-1 grey'>
+                                        <div>
+                                            <button className='grey border-r-100 w-3 h-3'>
+                                                <PencilIcon width={16} className='c-black' />
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button className='grey border-r-100 w-3 h-3'>
+                                                <MdColorLens width={16} className='c-black' />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
