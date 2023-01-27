@@ -4,6 +4,8 @@
     display: flex;
     justify-content: flex-end;
 }
+
+
 .progress-bar-stat > div { 
     height: 100%;
     animation: progressBar 800ms ease-in-out;
@@ -25,8 +27,8 @@
     .stats-blocks {
         display: grid;
     }
-    
 }
+
 
 
 
