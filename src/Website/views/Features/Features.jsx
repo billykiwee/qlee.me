@@ -1,13 +1,21 @@
-import { CameraIcon, ChartPieIcon, Cog6ToothIcon, PencilIcon, QrCodeIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
+import { CameraIcon, ChartPieIcon, Cog6ToothIcon, EyeIcon, PencilIcon, QrCodeIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
+import { useStateProps } from '../../../App/provider/ContextProvider'
 import { GetWidth } from '../../../App/utils/GetWidth'
+import { Block } from '../../../Client/views/Stats/statistics/Block'
+import { Clics } from '../../../Client/views/Stats/statistics/components/Clics'
 
 export default function Features() {
 
 
+    const {  user } = useStateProps()
+
+    const User = user?.profil
+
     const width = GetWidth()
+
 
     return (
         <Main>
@@ -76,7 +84,9 @@ export default function Features() {
                                 </div>
                             </div>
                             <div className='display justify-c w-100p border-r-1 overflow-hidden' >
-                                <img width={'80%'} height='100%' src='/images/myplaylist.svg' />
+
+                                <Clics stat={298393} />
+                               {/*  <img width={'80%'} height='100%' src='/images/statistics-feauture.png' /> */}
                             </div>
                         </div>
                     </div>
