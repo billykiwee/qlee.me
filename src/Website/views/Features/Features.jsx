@@ -16,7 +16,7 @@ export default function Features() {
 
                 <div className='grid gap m-t-2' style={{ width : width > 780 ? '80%' : '100%' }}>
 
-                    <div className='grid gap p-1 white border-r-1' >
+                    <div className='grid gap p-1 ' >
                         <div className='display gap-1rem'>
                             <span className='f-s-25'>Créer & Personaliser</span>
                         </div>
