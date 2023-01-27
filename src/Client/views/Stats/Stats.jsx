@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Main from '../../../App/components/Main'
-import '../../../App/css/stats.css'
+import './style/stats.css'
 import { Block } from './statistics/Block'
 import Filter from './components/Filter'
 import List from './components/List'
