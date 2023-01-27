@@ -20,8 +20,6 @@ export default function Dashboard() {
     const [Error, setError] = useState('')
 
 
-
-
     if (!auth) return <Login />
     return (
 
