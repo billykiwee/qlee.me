@@ -49,6 +49,18 @@ export default function Features() {
     ]
 
 
+    const [wordWrited, setWordWrited] = useState('')
+    const writeWord = () => {
+
+        const word = ['Spotify', 'My playlist', 'Music']
+
+        setWordWrited(word[Math.floor(Math.random() * word.length)])
+    }
+
+    useEffect(e=> {
+        setInterval(e=> writeWord(), 1500)
+    }, [])
+
     return (
         <Main>
             <h2 className='m-0'>Fonctionnalités</h2>
@@ -90,7 +102,10 @@ export default function Features() {
                                             <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} />
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    <span className='f-s-16 c-black'>{WriteText('Spotify')}</span>
+                                                    
+                                                    <div class="typewriter">
+                                                        <span>{wordWrited}</span>
+                                                    </div>
                                                 </div>
                             
                                                 <div className='grid gap'>
@@ -240,29 +255,3 @@ export default function Features() {
     )
 }
 
-
-function WriteText({ text, inputId }) {
-    const [index, setIndex] = useState(0);
-    const [currentText, setCurrentText] = useState('');
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex(index => {
-                if (index >= text.length) {
-                    clearInterval(interval);
-                    return 0;
-                }
-                return index + 1;
-            });
-        }, 100);
-        return () => clearInterval(interval);
-    }, [text]);
-
-    useEffect(() => {
-        setCurrentText(text.slice(0, index));
-    }, [index, text]);
-
-    return (
-        <span id={inputId}>{currentText}</span>
-    );
-}

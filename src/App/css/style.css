@@ -1193,3 +1193,29 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+
+
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter > span {
+    color: #fff;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: 2px solid var(--blue); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    letter-spacing: 2px; /* Adjust as needed */
+    animation: typing 1.5s steps(30, end) forwards, blink-caret .5s step-end infinite;
+    width: 0px;
+    display: flex;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--blue) }
+  }
