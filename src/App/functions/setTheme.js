@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useStateValue } from "../provider/StateProvider"
 
 const getPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
 
@@ -27,19 +26,7 @@ const setThemeOnInit = e => {
 setThemeOnInit()
 
 
-export const useGetTheme = () => {
+export const GetTheme = () => {
+    return toggleTheme()
 
-    const [{ theme }, dispatch] = useStateValue()
-
-    const change = (theme) => {
-        dispatch({
-            type: 'SET_THEME',
-            theme: theme
-        })
-        console.log(theme);
-    }
-
-    localStorage.setItem('theme', theme)
-
-   return { change, theme }
 }

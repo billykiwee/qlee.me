@@ -16,13 +16,13 @@ import { useState } from 'react'
 import { colors } from '../../../App/utils/generateLetterImage'
 import List from '../../../Client/views/Stats/components/List'
 import { minimizeString } from '../../../App/utils/minimizeString'
-import { useGetTheme } from '../../../App/functions/setTheme'
+import { GetTheme } from '../../../App/functions/setTheme'
 
 export default function Features() {
 
 
     const width = GetWidth()
-    const theme = useGetTheme()
+    const theme = GetTheme()
 
 
     const [qrCodeSettings, setqrCodeSettings] = useState({
