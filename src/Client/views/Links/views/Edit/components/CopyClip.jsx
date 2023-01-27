@@ -14,6 +14,7 @@ export function CopyClip({link}) {
         setTimeout(e=> div.style.display = 'none', 2000)
     }
 
+
     return (
         <div className='display'>
             <div className='display justify-c border-r-1 w-2 hover h-2 click' onClick={e=> copyClipboard(link)} >

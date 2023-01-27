@@ -14,6 +14,7 @@ import Main from '../../../../../App/components/Main'
 import { useStateProps } from '../../../../../App/provider/ContextProvider'
 import { addtoLinkInBio } from '../../../LinkInBio/functions/add'
 import LinkIcon from './components/LinkIcon'
+import { CopyClip } from './components/CopyClip'
 
 
 
@@ -66,13 +67,16 @@ export default function Edit() {
                                     
                                         <LinkIcon upload={{ Link }} />
 
-                                        <div className='grid gap-1rem text-align-c'>
+                                        <div className='display justify-c gap-1rem text-align-c'>
                                             <div className='grid'>
                                                 <div className='display justify-c gap'>
                                                     <span className='f-s-20'>{Link?.name}</span>
                                                     <IsLinkInBio Link={Link} />
                                                 </div>
-                                                <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
+                                                <div className='display gap'>
+                                                    <a href={'https://' + Link?.shortLink} className='f-s-20 link hover-link'>{Link?.shortLink}</a>
+                                                    <CopyClip link={Link} />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
