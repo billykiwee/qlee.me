@@ -1,5 +1,5 @@
 import { ArrowDownTrayIcon, CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, InboxIcon, PencilIcon, QrCodeIcon, RocketLaunchIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { useStateProps } from '../../../App/provider/ContextProvider'
@@ -15,6 +15,7 @@ import { MdColorLens } from 'react-icons/md'
 import { useState } from 'react'
 import { colors } from '../../../App/utils/generateLetterImage'
 import List from '../../../Client/views/Stats/components/List'
+import { minimizeString } from '../../../App/utils/minimizeString'
 
 export default function Features() {
 
@@ -36,9 +37,17 @@ export default function Features() {
         {
             name: 'Youtube',
             id  : 'link-1',
-            shortLink: 'youtube'
+            shortLink: 'youtube',
+            url: 'https://cdn-icons-png.flaticon.com/512/3670/3670147.png'
+        },
+        {
+            name: 'Instagram',
+            id  : 'link-2',
+            shortLink: 'instagtam',
+            url: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png'
         }
     ]
+
 
     return (
         <Main>
@@ -74,42 +83,41 @@ export default function Features() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='display justify-c w-100p border-r-1 overflow-hidden' >
-                                <div>
+                            <div className='display justify-c' >
+                                <div className='grid gap-1rem w-100p'>
+                                    <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click'>
+                                        <div className='display gap-1rem'>
+                                            <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} />
+                                            <div className='grid '> 
+                                                <div className='display gap-04'>
+                                                    <span className='f-s-16 c-black'>{WriteText('Spotify')}</span>
+                                                </div>
+                            
+                                                <div className='grid gap'>
+                                                    <div className='display gap-04'>
+                                                        <small href={'https://' + ''} className='hover-link link'>{'qlee.me/myPlaylist'}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {
-                                        links.map(link=> {
+                                        links
+                                        .map(link=> {
                                             return (
-                                                <div    
-                                                    className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
-                                                    key={link.id} onClick={e=> setShowStat(link.id)} 
-                                                >
+                                                <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click' key={link.id}>
                                                     <div className='display gap-1rem'>
-                                                        <img src={getFavicon(link)} className='border-r-100' width={30} />
+                                                        <img src={link.url} className='border-r-100' width={30} />
                                                         <div className='grid '> 
                                                             <div className='display gap-04'>
                                                                 <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>
-                                                                {/* {
-                                                                    link.linkInBio &&
-                                                                    <BookmarkIcon width={12} className='c-yellow' />
-                                                                } */}
                                                             </div>
                                         
                                                             <div className='grid gap'>
                                                                 <div className='display gap-04'>
-                                                                    <small href={'https://' + link.shortLink} className='hover-link link'>{link.shortLink}</small>
-                                                                    <div className='display'>
-                                                                        <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
-                                                                            <small>Copié</small>
-                                                                        </div>
-                                                                    </div>
+                                                                    <small href={'https://' + link.shortLink} className='hover-link link'>{'qlee.me/' + link.shortLink}</small>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='display gap-1rem'>
-                                                        <div className='display gap-04 opacity'>
-                                                            <EyeIcon width={16} />
-                                                            <small>{link.views}</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,4 +238,31 @@ export default function Features() {
             </div>
         </Main>
     )
+}
+
+
+function WriteText({ text, inputId }) {
+    const [index, setIndex] = useState(0);
+    const [currentText, setCurrentText] = useState('');
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex(index => {
+                if (index >= text.length) {
+                    clearInterval(interval);
+                    return 0;
+                }
+                return index + 1;
+            });
+        }, 100);
+        return () => clearInterval(interval);
+    }, [text]);
+
+    useEffect(() => {
+        setCurrentText(text.slice(0, index));
+    }, [index, text]);
+
+    return (
+        <span id={inputId}>{currentText}</span>
+    );
 }
