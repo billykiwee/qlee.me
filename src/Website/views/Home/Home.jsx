@@ -127,7 +127,7 @@ export default function Home() {
     return (
         <Main className='grid' style={{ gap: width < 780 ? '5rem' : '10rem' }} >
 
-            <section className='display w-100p' >
+            <section className='display justify-c w-100p' >
                 <div className='display justify-s-b align-top' style={{ width: width < 780 ? '100%' : '60%' }} >
 
                     <div className='grid gap-3rem w-100p'>

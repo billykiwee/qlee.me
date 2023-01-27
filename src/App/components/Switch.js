@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-export const SwitchInput = ({ checked, onChange, id, dimension }) => {
+export const SwitchInput = ({ checked, onChange, id, dimension, className, style }) => {
     
     const [checkedState, setCheckedState] = useState(checked)
 
 
+
+
     return (
-        <label className="switch" style={{transform: `scale(${dimension})`}} >
+        <label className={"switch " + className} style={{style, transform: `scale(${dimension})`}} >
 
             <input type="checkbox" checked={checkedState} id={id}
                 onChange={e=> {
