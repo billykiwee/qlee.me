@@ -16,12 +16,13 @@ import { useState } from 'react'
 import { colors } from '../../../App/utils/generateLetterImage'
 import List from '../../../Client/views/Stats/components/List'
 import { minimizeString } from '../../../App/utils/minimizeString'
+import { GetTheme } from '../../../App/functions/setTheme'
 
 export default function Features() {
 
 
     const width = GetWidth()
-
+    const theme = GetTheme()
 
 
     const [qrCodeSettings, setqrCodeSettings] = useState({
@@ -92,12 +93,12 @@ export default function Features() {
                             </div>
                             <div className='display justify-c  w-100p' >
                                 <div className='grid gap-1rem w-100p'>
-                                    <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click'>
+                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' style={{ background : theme === 'light' ? 'var--(black)' : 'var(--grey)' }} >
                                         <div className='display gap-1rem'>
                                             <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} height={30} />
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    <WriteWord />
+                                                    <WriteWord color={theme === 'light'? 'black' : 'white' } />
                                                 </div>
                             
                                                 <div className='grid gap'>
@@ -112,12 +113,12 @@ export default function Features() {
                                         links
                                         .map(link=> {
                                             return (
-                                                <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click' key={link.id}>
+                                                <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' key={link.id} style={{ background : theme === 'light' ? 'var--(black)' : 'var(--grey)' }}>
                                                     <div className='display gap-1rem'>
                                                         <img src={link.url} className='border-r-100' width={30} height={30} />
                                                         <div className='grid '> 
                                                             <div className='display gap-04'>
-                                                                <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>
+                                                                <span className='f-s-16' style={{ color: theme === 'light'? 'black' : 'white' }} >{minimizeString(link.name, 20)}</span>
                                                             </div>
                                         
                                                             <div className='grid gap'>
@@ -143,14 +144,9 @@ export default function Features() {
                             </div>
                             <div className='grid blocks align-top gap-2rem f-w-200' >
                                 <div className='grid gap-1rem p-1'>
-                                    <div className='grid gap'>
-                                        <p className='f-s-18'>
-                                            Analyse les statistiques de tes liens, comme le nombre de clics, le type d'appareil, la source du trafic, la localisation des utilisateurs et la performance.
-                                        </p>
-                                        <p className='f-s-18 m-t-0'>
-                                            Cela te permettra de comprendre comment tes liens sont utilisés et comment tu peux améliorer leur performance.
-                                        </p>
-                                    </div>
+                                    <p className='f-s-18'>
+                                        Analyse les statistiques pour comprendre comment tes liens sont utilisés par tes visiteurs et comment tu peux améliorer leur performance.
+                                    </p>
                                     <div className='display gap'>
                                         <div className='display'>
                                             <Link className='display' to='/dashboard'>
@@ -248,7 +244,8 @@ export default function Features() {
 }
 
 
-const WriteWord = () => {
+const WriteWord = ({color}) => {
+    
         
     const [wordWrited, setWordWrited] = useState('Spotify')
 
@@ -264,7 +261,7 @@ const WriteWord = () => {
     if (wordWrited)
     return (
         <div class="typewriter">
-            <span>{wordWrited}</span>
+            <span style={{color : color}}>{wordWrited}</span>
         </div>
     )
 }

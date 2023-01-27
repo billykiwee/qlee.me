@@ -18,3 +18,6 @@ const setThemeOnInit = e => {
 }
 
 setThemeOnInit()
+
+
+export const GetTheme = () => getPreference
