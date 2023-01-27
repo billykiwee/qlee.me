@@ -1,10 +1,11 @@
 import { DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, RocketLaunchIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import getFavicon from '../../../../App/utils/getFavicon'
-import { makeFriendly } from '../../../../App/utils/makeFriendly'
 import { ProgressBar } from '../../../../Client/views/Stats/components/ProgressBar'
 
 export default function Stats() {
+
+
     return (
         <div className='display justify-c border-r-1 w-100p' >
 
