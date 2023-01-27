@@ -1,4 +1,4 @@
-import { CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, PencilIcon, QrCodeIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
+import { CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, PencilIcon, QrCodeIcon, RocketLaunchIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
@@ -8,7 +8,7 @@ import { GetWidth } from '../../../App/utils/GetWidth'
 import Blocks from '../../../Client/views/LinkInBio/views/Edit/settings/components/Blocks'
 import { ProgressBar } from '../../../Client/views/Stats/components/ProgressBar'
 import { Block } from '../../../Client/views/Stats/statistics/Block'
-import { Clics } from '../../../Client/views/Stats/statistics/components/Clics'
+import {makeFriendly} from '../../../App/utils/makeFriendly'
 
 export default function Features() {
 
@@ -24,7 +24,7 @@ export default function Features() {
 
                 <div className='grid gap-2rem m-t-2'>
 
-                    <div className='grid gap p-2 white border-r-1 shadow' >
+                    <div className='grid gap white p-2 border-r-1 shadow' >
                         <div className='display gap-1rem'>
                             <h3 className='m-0'>Créer & Personaliser</h3>
                         </div>
@@ -56,11 +56,11 @@ export default function Features() {
                         </div>
                     </div>
                     
-                    <div className='grid gap p-2 white border-r-1 shadow' >
+                    <div className='grid gap white p-2 border-r-1 shadow' >
                         <div className='display gap-1rem'>
                             <h3 className='m-0'>Statistiques</h3>
                         </div>
-                        <div className='grid blocks align-top gap-1rem f-w-200'>
+                        <div className='grid blocks align-top gap-1rem f-w-200' >
                             <div className='grid gap-1rem p-1'>
                                 <span className='f-s-18'>
                                 Analyse les statistiques de tes liens, comme le nombre de clics, le type d'appareil, la source du trafic, la localisation des utilisateurs et la performance. Cela te permettra de comprendre comment tes liens sont utilisés et comment tu peux améliorer leur performance.
@@ -82,9 +82,9 @@ export default function Features() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='display justify-c w-100p border-r-1 overflow-hidden' >
+                            <div className='display justify-c border-r-1' >
 
-                                <div className='grid gap-1rem w-100p'>
+                                <div className='grid gap-1rem'>
                                  
                                     <div className='display justify-s-b p-1 border-r-1 grey'>
                                         <div className='display gap'>
@@ -106,14 +106,14 @@ export default function Features() {
                                             <div className='display  justify-s-b'>
                                                 <div className='display gap'>
                                                     <span>Mobile</span>
-                                                    <small className='c-grey'>8 559</small>
+                                                    <small className='c-grey'>{makeFriendly(8559)}</small>
                                                 </div>
                                                 <ProgressBar percentage={87} />
                                             </div>
                                             <div className='display  justify-s-b'>
                                                 <div className='display gap'>
                                                     <span>Ordinateur</span>
-                                                    <small className='c-grey'>1 279</small>
+                                                    <small className='c-grey'>{makeFriendly(1279)}</small>
                                                 </div>
                                                 <ProgressBar percentage={13} />
                                             </div>
@@ -131,7 +131,7 @@ export default function Features() {
                                                 <div className='display gap'>
                                                     <img src={getFavicon('www.instagram.com')} className='border-r-100' width={14} />
                                                     <span>Instagram</span>
-                                                    <small className='c-grey'>4 328</small>
+                                                    <small className='c-grey'>{makeFriendly(4328)}</small>
                                                 </div>
                                                 <ProgressBar percentage={44} />
                                             </div>
@@ -139,7 +139,7 @@ export default function Features() {
                                                 <div className='display gap'>
                                                     <img src={getFavicon('www.facebook.com')} className='border-r-100' width={14} />
                                                     <span>Facebook</span>
-                                                     <small className='c-grey'>2 754</small>
+                                                     <small className='c-grey'>{makeFriendly(2754)}</small>
                                                 </div>
                                                 <ProgressBar percentage={28} />
                                             </div>
@@ -147,7 +147,7 @@ export default function Features() {
                                                 <div className='display gap'>
                                                     <img src={getFavicon('www.youtube.com')} className='border-r-100' width={14} />
                                                     <span>Youtube</span>
-                                                     <small className='c-grey'>1 869</small>
+                                                     <small className='c-grey'>{makeFriendly(1869)}</small>
                                                 </div>
                                                 <ProgressBar percentage={19} />
                                             </div>
@@ -155,7 +155,7 @@ export default function Features() {
                                                 <div className='display gap'>
                                                     <img src={getFavicon('www.twitch.com')} className='border-r-100' width={14} />
                                                     <span>Twitch</span>
-                                                     <small className='c-grey'>885</small>
+                                                     <small className='c-grey'>{makeFriendly(885)}</small>
                                                 </div>
                                                 <ProgressBar percentage={9} />
                                             </div>
@@ -172,23 +172,41 @@ export default function Features() {
                                             <div className='display  justify-s-b'>
                                                 <div className='display gap'>
                                                     <span>🇫🇷 France</span>
-                                                    <small className='c-grey'>6 394</small>
+                                                    <small className='c-grey'>{makeFriendly(6394)}</small>
                                                 </div>
                                                 <ProgressBar percentage={65} />
                                             </div>
                                             <div className='display  justify-s-b'>
                                                 <div className='display gap'>
                                                     <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Angleterre</span>
-                                                    <small className='c-grey'>2 853</small>
+                                                    <small className='c-grey'>{makeFriendly(2853)}</small>
                                                 </div>
                                                 <ProgressBar percentage={29} />
                                             </div>
                                             <div className='display  justify-s-b'>
                                                 <div className='display gap'>
                                                     <span>🇪🇪 Estonie</span>
-                                                    <small className='c-grey'>590</small>
+                                                    <small className='c-grey'>{makeFriendly(590)}</small>
                                                 </div>
                                                 <ProgressBar percentage={6} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div className='grid gap-1rem justify-s-b p-1 border-r-1 grey'>
+                                        <div className='display gap'>
+                                            <RocketLaunchIcon width={20} className='c-black' />
+                                            <span>Performance</span>
+                                        </div>
+
+                                        <div className='grid gap'>
+                                            <div className='display  justify-s-b'>
+                                                <div className='display gap'>
+                                                    <span>Vitesse</span>
+                                                    <small className='c-grey'>{makeFriendly(9838)}</small>
+                                                </div>
+                                                <span>1,12s</span>
                                             </div>
                                         </div>
                                     </div>
@@ -199,8 +217,7 @@ export default function Features() {
                         </div>
                     </div>
                     
-
-                    <div className='grid gap p-2 white border-r-1 shadow' >
+                    <div className='grid gap white p-2 border-r-1 shadow' >
                         <div className='display gap-1rem'>
                             <h3 className='m-0'>Qr code</h3>
                         </div>
