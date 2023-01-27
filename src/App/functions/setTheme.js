@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-
 const getPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
 
 const initialTheme = getPreference

@@ -14,9 +14,7 @@ export function Menu({ props }) {
     const { User, menu, setMenu } = props
 
 
-   // const [theme, setTheme] = useState(localStorage.getItem('theme'))
-
-    const [{ theme }, dispatch] = useStateValue()
+    const [theme, setTheme] = useState(localStorage.getItem('theme'))
 
     const list = [
         {
@@ -68,11 +66,6 @@ export function Menu({ props }) {
     const width = GetWidth()
 
 
-    const changeTheme = () => {
-        dispatch
-    }
-
-
 
     if (menu)
     return (
@@ -86,7 +79,7 @@ export function Menu({ props }) {
                                 {
                                     menu.id === 'theme'
                                     ?
-                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> {changeTheme} }>
+                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
                                         <div className="display gap-1rem">
                                             <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                             <span className='f-s-20'>{menu.name}</span>

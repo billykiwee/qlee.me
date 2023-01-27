@@ -31,6 +31,12 @@
 
 
 
+.title__stats {
+  border-bottom: 1px solid var(--grey);
+  padding: 0 0 0.4rem;
+}
+
+
 
 
 /*  Dropdown stats */

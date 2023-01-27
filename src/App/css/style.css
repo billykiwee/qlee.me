@@ -1198,7 +1198,6 @@ input:checked + .slider:before {
 
 /* DEMO-SPECIFIC STYLES */
 .typewriter > span {
-    color: var(--white);
     overflow: hidden; /* Ensures the content is not revealed until the animation */
     border-right: 2px solid var(--blue); /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */

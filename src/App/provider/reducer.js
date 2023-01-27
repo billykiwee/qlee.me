@@ -1,5 +1,4 @@
 export const initialState = {
-    theme   : null,
     user    : null,
     snackBar: [],
     popUp   : {},
@@ -8,13 +7,6 @@ export const initialState = {
 const reducer = (state, action) => {
 
     switch(action.type) {
-
-        case 'SET_THEME' : return {
-            ...state,
-            theme : action.theme,
-            
-        }
-        
         case 'SET_USER' : return {
             ...state,
             user : action.user,

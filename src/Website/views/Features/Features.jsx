@@ -16,13 +16,13 @@ import { useState } from 'react'
 import { colors } from '../../../App/utils/generateLetterImage'
 import List from '../../../Client/views/Stats/components/List'
 import { minimizeString } from '../../../App/utils/minimizeString'
-import { GetTheme } from '../../../App/functions/setTheme'
+
+
 
 export default function Features() {
 
 
     const width = GetWidth()
-    const theme = GetTheme()
 
 
     const [qrCodeSettings, setqrCodeSettings] = useState({
@@ -93,12 +93,12 @@ export default function Features() {
                             </div>
                             <div className='display justify-c  w-100p' >
                                 <div className='grid gap-1rem w-100p'>
-                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' style={{ background : theme === 'light' ? 'var--(black)' : 'var(--grey)' }} >
+                                    <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' >
                                         <div className='display gap-1rem'>
                                             <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} height={30} />
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    <WriteWord color={theme === 'light'? 'black' : 'white' } />
+                                                    <WriteWord />
                                                 </div>
                             
                                                 <div className='grid gap'>
@@ -113,12 +113,12 @@ export default function Features() {
                                         links
                                         .map(link=> {
                                             return (
-                                                <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' key={link.id} style={{ background : theme === 'light' ? 'var--(black)' : 'var(--grey)' }}>
+                                                <div className='display gap p-1 border-b border-r-1 border justify-s-b h-2 click' key={link.id}>
                                                     <div className='display gap-1rem'>
                                                         <img src={link.url} className='border-r-100' width={30} height={30} />
                                                         <div className='grid '> 
                                                             <div className='display gap-04'>
-                                                                <span className='f-s-16' style={{ color: theme === 'light'? 'black' : 'white' }} >{minimizeString(link.name, 20)}</span>
+                                                                <span className='f-s-16' >{minimizeString(link.name, 20)}</span>
                                                             </div>
                                         
                                                             <div className='grid gap'>
@@ -244,7 +244,7 @@ export default function Features() {
 }
 
 
-const WriteWord = ({color}) => {
+const WriteWord = () => {
     
         
     const [wordWrited, setWordWrited] = useState('Spotify')
@@ -261,7 +261,7 @@ const WriteWord = ({color}) => {
     if (wordWrited)
     return (
         <div class="typewriter">
-            <span style={{color : color}}>{wordWrited}</span>
+            <span className='c-black'>{wordWrited}</span>
         </div>
     )
 }
