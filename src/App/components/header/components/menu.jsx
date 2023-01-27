@@ -47,7 +47,8 @@ export function Menu({ props }) {
             icon: theme === 'light' ? <MoonIcon width={22} /> : <SunIcon width={22} />
         },
         {
-            name: User ? 'Mon compte' : 'Se connecter',
+            id: 'user',
+            name: User ? User.name : 'Se connecter',
             link:  User ? '/profil' : '/login',
             icon: <img src={User?.photoURL ?? '/images/user.svg'} className='border-r-100' width={36} height={36} />
         },
@@ -66,13 +67,13 @@ export function Menu({ props }) {
 
     if (menu)
     return (
-        <div className='menu m-t-2' style={{ width : width > 780 ? '40%' : '' }} >
+        <div className='menu m-t-2' style={{ width : width > 780 ? '34%' : '' }} >
             <div className='grid w-100p'>
                 {
                     list
                     .map((menu, i) => {
                         return (
-                            <div key={i}>
+                            <div key={i} className={menu.id === 'user' && 'border-r-1 white'}>
                                 {
                                     menu.id === 'theme'
                                     ?

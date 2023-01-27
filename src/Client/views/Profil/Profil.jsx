@@ -10,6 +10,7 @@ import Main from '../../../App/components/Main'
 import { useStateProps } from '../../../App/provider/ContextProvider'
 import formatDate from '../../../App/utils/formatDate'
 import formatCurrency from '../../../App/utils/formatCurrency'
+import { BiLogOutCircle } from 'react-icons/bi'
 
 
 
@@ -103,8 +104,9 @@ export default function Profil() {
                             </button>
                         </div> */}
                         <div className='display'>
-                            <button className='p-1 h-4 border-b white hover border border-r-1' onClick={SignOut}>
-                                <span className='f-s-16 c-black'>Se déconnecter</span>
+                            <button className='p-1 h-3 red-secondary hover border-r-1 display gap' onClick={SignOut}>
+                                <BiLogOutCircle size={20} className='c-red' />
+                                <span className='f-s-16 c-red'>Se déconnecter</span>
                             </button>
                         </div>
                     </div>
