@@ -63,7 +63,7 @@ export default function List({props}) {
                                         key={link.id} onClick={e=> setShowStat(link.id)} 
                                     >
                                         <div className='display gap-1rem'>
-                                            <img src={getFavicon(link)} className='border-r-100' width={30} />
+                                            <img src={getFavicon(link)} className='border-r-100' width={30} height={30}/>
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
                                                     <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>

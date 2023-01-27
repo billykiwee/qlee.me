@@ -10,7 +10,7 @@ export function Performance({ stat }) {
 
         return (
             <div className='display justify-s-b' key={i}>
-                <div className='display gap'>
+                <div className='display gap w-50p'>
                     <span>{item.title}</span>
                 </div>
                 <span>{item.data}</span>

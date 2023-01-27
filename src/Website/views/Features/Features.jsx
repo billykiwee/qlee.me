@@ -46,20 +46,15 @@ export default function Features() {
             shortLink: 'instagtam',
             url: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png'
         }
+        ,
+        {
+            name: 'My Tiktok',
+            id  : 'link-3',
+            shortLink: 'tiktok',
+            url: 'https://vialmtv.tv/wp-content/uploads/2022/04/tik-tok.webp'
+        }
     ]
 
-
-    const [wordWrited, setWordWrited] = useState('')
-    const writeWord = () => {
-
-        const word = ['Spotify', 'My playlist', 'Music']
-
-        setWordWrited(word[Math.floor(Math.random() * word.length)])
-    }
-
-    useEffect(e=> {
-        setInterval(e=> writeWord(), 1500)
-    }, [])
 
     return (
         <Main>
@@ -95,17 +90,14 @@ export default function Features() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='display justify-c' >
+                            <div className='display justify-c  w-100p' >
                                 <div className='grid gap-1rem w-100p'>
                                     <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click'>
                                         <div className='display gap-1rem'>
-                                            <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} />
+                                            <img src={'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'} className='border-r-100' width={30} height={30} />
                                             <div className='grid '> 
                                                 <div className='display gap-04'>
-                                                    
-                                                    <div class="typewriter">
-                                                        <span>{wordWrited}</span>
-                                                    </div>
+                                                    <WriteWord />
                                                 </div>
                             
                                                 <div className='grid gap'>
@@ -122,7 +114,7 @@ export default function Features() {
                                             return (
                                                 <div className='display gap p-1 border-b border-r-1 grey border justify-s-b h-2 click' key={link.id}>
                                                     <div className='display gap-1rem'>
-                                                        <img src={link.url} className='border-r-100' width={30} />
+                                                        <img src={link.url} className='border-r-100' width={30} height={30} />
                                                         <div className='grid '> 
                                                             <div className='display gap-04'>
                                                                 <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>
@@ -185,8 +177,8 @@ export default function Features() {
                         <div className='display gap-1rem'>
                             <h3 className='m-0'>Qr code</h3>
                         </div>
-                        <div className='grid blocks align-top gap-1rem f-w-200'>
-                            <div className='grid gap-1rem p-1'>
+                        <div className='grid blocks align-top gap-2rem f-w-200'>
+                            <div className='grid gap-2rem p-1'>
                                 <span className='f-s-18'>
                                 Créer et de personnaliser des codes QR pour chaque lien. Tes liens seront encore plus accessibles pour tes utilisateurs, en leur offrant la possibilité de les scanner directement avec leur appareil mobile.
                                 </span>
@@ -254,4 +246,28 @@ export default function Features() {
         </Main>
     )
 }
+
+
+const WriteWord = () => {
+        
+    const [wordWrited, setWordWrited] = useState('Spotify')
+
+    const word = ['My playlist', 'Music']
+
+    useEffect(e=> {
+        setInterval(e=> {
+            setWordWrited(word[Math.floor(Math.random() * word.length)])
+        }, 1600)
+
+    }, [])
+
+    if (wordWrited)
+    return (
+        <div class="typewriter">
+            <span>{wordWrited}</span>
+        </div>
+    )
+}
+
+
 

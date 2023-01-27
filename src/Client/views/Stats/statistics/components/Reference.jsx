@@ -18,13 +18,13 @@ export function Reference({ stat }) {
     
         return (
             <div className='display justify-s-b' key={i}>
-                <div className='display gap'>
-                <img src={getFavicon(item.url)} width={16} className='border-r-2' />
-                {
-                    isValidUrl(item.url) 
-                    ? <span>{getHostName(item.url)}</span> 
-                    : <span>autres</span>
-                }
+                <div className='display gap w-50p'>
+                    <img src={getFavicon(item.url)} width={16} className='border-r-2' />
+                    {
+                        isValidUrl(item.url) 
+                        ? <span>{getHostName(item.url)}</span> 
+                        : <span>autres</span>
+                    }
                     <small className='c-grey f-s-12'>{item.count}</small>
                 </div>
                 <div className='w-50p'>

@@ -16,7 +16,7 @@ export function Location({ stat }) {
 
         return (
             <div className='display justify-s-b' key={i}>
-                <div className='display gap'>
+                <div className='display gap w-50p'>
 
                     { getUnicodeFlagIcon(item.adress.split('__')[0]) }
 
