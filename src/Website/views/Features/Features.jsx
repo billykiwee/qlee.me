@@ -56,6 +56,8 @@ export default function Features() {
         }
     ]
 
+    console.log(theme);
+
 
     return (
         <Main>

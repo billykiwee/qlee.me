@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 const getPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
 
 const initialTheme = getPreference
@@ -20,4 +22,17 @@ const setThemeOnInit = e => {
 setThemeOnInit()
 
 
-export const GetTheme = () => getPreference
+export const GetTheme = () => {
+
+    const [data, setData] = useState(localStorage.getItem('theme') || initialTheme)
+
+    useEffect(() => {
+        function handleStorageChange(e) {
+            if (e.key === 'myData') {
+                setData(e.newValue);
+            }
+        }
+
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+}
