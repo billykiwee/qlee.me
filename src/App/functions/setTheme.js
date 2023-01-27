@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useStateValue } from "../provider/StateProvider"
 
 const getPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
 
@@ -9,7 +10,11 @@ const setTheme = theme => {
     document.querySelector('html').setAttribute('data-theme', theme)
 }
 
-export const toggleTheme = theme => setTheme(theme === 'light' ? 'dark' : 'light')
+export const toggleTheme = theme => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+
+    return theme
+}
 
 const savedTheme = localStorage.getItem('theme')
 
@@ -22,17 +27,19 @@ const setThemeOnInit = e => {
 setThemeOnInit()
 
 
-export const GetTheme = () => {
+export const useGetTheme = () => {
 
-    const [data, setData] = useState(localStorage.getItem('theme') || initialTheme)
+    const [{ theme }, dispatch] = useStateValue()
 
-    useEffect(() => {
-        function handleStorageChange(e) {
-            if (e.key === 'myData') {
-                setData(e.newValue);
-            }
-        }
+    const change = (theme) => {
+        dispatch({
+            type: 'SET_THEME',
+            theme: theme
+        })
+        console.log(theme);
+    }
 
-        return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
+    localStorage.setItem('theme', theme)
+
+   return { change, theme }
 }

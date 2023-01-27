@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react"
 import { BiLike } from "react-icons/bi"
 import { Link } from "react-router-dom"
-import { toggleTheme } from "../../../functions/setTheme"
+import { useGetTheme } from "../../../functions/setTheme"
 import { GetWidth } from "../../../utils/GetWidth"
 
 
@@ -12,9 +12,9 @@ export function Menu({ props }) {
 
     const { User, menu, setMenu } = props
 
+    const theme = useGetTheme()?.theme
 
-    const [theme, setTheme] = useState(localStorage.getItem('theme'))
-
+    
     const list = [
         {
             name: 'Créer un lien',
@@ -65,6 +65,7 @@ export function Menu({ props }) {
     const width = GetWidth()
 
 
+
     if (menu)
     return (
         <div className='menu m-t-2' style={{ width : width > 780 ? '34%' : '' }} >
@@ -77,7 +78,7 @@ export function Menu({ props }) {
                                 {
                                     menu.id === 'theme'
                                     ?
-                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
+                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> theme.change(localStorage.getItem('theme'))}>
                                         <div className="display gap-1rem">
                                             <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                             <span className='f-s-20'>{menu.name}</span>

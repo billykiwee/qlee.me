@@ -16,13 +16,13 @@ import { useState } from 'react'
 import { colors } from '../../../App/utils/generateLetterImage'
 import List from '../../../Client/views/Stats/components/List'
 import { minimizeString } from '../../../App/utils/minimizeString'
-import { GetTheme } from '../../../App/functions/setTheme'
+import { useGetTheme } from '../../../App/functions/setTheme'
 
 export default function Features() {
 
 
     const width = GetWidth()
-    const theme = GetTheme()
+    const theme = useGetTheme()
 
 
     const [qrCodeSettings, setqrCodeSettings] = useState({
@@ -55,8 +55,6 @@ export default function Features() {
             url: 'https://vialmtv.tv/wp-content/uploads/2022/04/tik-tok.webp'
         }
     ]
-
-    console.log(theme);
 
 
     return (
