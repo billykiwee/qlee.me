@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { BiLike } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { toggleTheme } from "../../../functions/setTheme"
+import { useStateValue } from "../../../provider/StateProvider"
 import { GetWidth } from "../../../utils/GetWidth"
 
 
@@ -13,7 +14,9 @@ export function Menu({ props }) {
     const { User, menu, setMenu } = props
 
 
-    const [theme, setTheme] = useState(localStorage.getItem('theme'))
+   // const [theme, setTheme] = useState(localStorage.getItem('theme'))
+
+    const [{ theme }, dispatch] = useStateValue()
 
     const list = [
         {
@@ -65,6 +68,12 @@ export function Menu({ props }) {
     const width = GetWidth()
 
 
+    const changeTheme = () => {
+        dispatch
+    }
+
+
+
     if (menu)
     return (
         <div className='menu m-t-2' style={{ width : width > 780 ? '34%' : '' }} >
@@ -77,7 +86,7 @@ export function Menu({ props }) {
                                 {
                                     menu.id === 'theme'
                                     ?
-                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
+                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> {changeTheme} }>
                                         <div className="display gap-1rem">
                                             <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
                                             <span className='f-s-20'>{menu.name}</span>
