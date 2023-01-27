@@ -34,7 +34,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(8559)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={87} />
                             </div>
                         </div>
@@ -45,7 +45,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(1279)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={13} />
                             </div>
                         </div>
@@ -67,7 +67,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(4328)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={44} />
                             </div>
                         </div>
@@ -79,7 +79,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(2754)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={28} />
                             </div>
                         </div>
@@ -91,7 +91,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(1869)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={19} />
                             </div>
                         </div>
@@ -103,7 +103,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(885)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={9} />
                             </div>
                         </div>
@@ -124,7 +124,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(6394)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={65} />
                             </div>
                         </div>
@@ -135,7 +135,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(2853)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={29} />
                             </div>
                         </div>
@@ -146,7 +146,7 @@ export default function Stats() {
                                  <small className='c-grey'>{makeFriendly(590)}</small>
                                  */}
                             </div>
-                            <div className='w-50p'>
+                            <div className='w-50p display justify-e'>
                                 <ProgressBar percentage={6} />
                             </div>
                         </div>

@@ -17,7 +17,7 @@ export const Block = ({ stats, User }) => {
     return (
         <div className='grid gap-1rem grey p-1 border-r-04'>
         
-            <div className={!data.length && !data?.type?.length ? 'display justify-s-b' :  'grid gap-1rem'} >
+            <div className={name === 'clics' ? 'display justify-s-b' : 'grid gap-1rem'} >
 
                 <div className='display gap'>
                     {icon}
