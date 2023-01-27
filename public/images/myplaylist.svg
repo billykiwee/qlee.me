@@ -1,33 +1,4 @@
-import { ChartPieIcon, Cog6ToothIcon, PencilIcon, QrCodeIcon } from '@heroicons/react/24/solid'
-import React from 'react'
-import Main from '../../../App/components/Main'
-import { GetWidth } from '../../../App/utils/GetWidth'
-
-export default function Features() {
-
-
-    const width = GetWidth()
-
-    return (
-        <Main>
-            <h2 className='m-0'>Fonctionnalités</h2>
-
-            <div className='display justify-c'>
-
-                <div className='grid gap m-t-2'>
-
-                    <div className='grid gap p-1 ' >
-                        <div className='display gap-1rem'>
-                            <span className='f-s-25'>Créer & Personaliser</span>
-                        </div>
-                        <div className='grid blocks align-top'>
-                            <div className='display p-1'>
-                                <span>
-                                    Créer facilement des liens URL raccourcis pour tes liens longs et encombrants et personnalise ces liens en modifiant le lien court, l'image et même l'URL principale.
-                                </span>
-                            </div>
-                            <div className='display w-100p border-r-1 overflow-hidden' >
-                            <svg width="320" height="306" viewBox="0 0 320 306" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="320" height="306" viewBox="0 0 320 306" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_i_717_195)">
 <rect width="320" height="66" rx="22" fill="white"/>
 </g>
@@ -112,32 +83,3 @@ export default function Features() {
 </linearGradient>
 </defs>
 </svg>
-
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    <div className='grid gap p-1' >
-                        <div className='display gap-1rem'>
-                            <span className='f-s-25'>Statistiques</span>
-                        </div>
-                        <span>
-                            Analyse les statistiques de tes liens, comme le nombre de clics, le type d'appareil, la source du trafic, la localisation des utilisateurs et la performance. Cela te permettra de comprendre comment tes liens sont utilisés et comment tu peux améliorer leur performance.
-                        </span>
-                    </div>
-
-                    <div className='grid gap p-1' >
-                        <div className='display gap-1rem'>
-                            <span className='f-s-25'>Qr code</span>
-                        </div>
-                        <span>
-                            Créer et de personnaliser des codes QR pour chaque lien. Tes liens seront encore plus accessibles pour tes utilisateurs, en leur offrant la possibilité de les scanner directement avec leur appareil mobile.
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-        </Main>
-    )
-}
