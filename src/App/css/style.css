@@ -493,6 +493,10 @@ button:active {
     height: 2.5rem;
 }
 
+.w-50p {
+    width: 50%;
+}
+
 
 .click {
     cursor: pointer;
