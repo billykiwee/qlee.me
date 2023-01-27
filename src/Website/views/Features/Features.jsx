@@ -1,4 +1,4 @@
-import { CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, PencilIcon, QrCodeIcon, RocketLaunchIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
+import { ArrowDownTrayIcon, CameraIcon, ChartPieIcon, Cog6ToothIcon, DevicePhoneMobileIcon, EyeIcon, GlobeEuropeAfricaIcon, InboxIcon, PencilIcon, QrCodeIcon, RocketLaunchIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
@@ -11,13 +11,34 @@ import { Block } from '../../../Client/views/Stats/statistics/Block'
 import {makeFriendly} from '../../../App/utils/makeFriendly'
 import Stats from './views/Stats'
 import QRCode from 'react-qr-code'
-import MdColorLens from 'react-icons/md'
+import { MdColorLens } from 'react-icons/md'
+import { useState } from 'react'
+import { colors } from '../../../App/utils/generateLetterImage'
+import List from '../../../Client/views/Stats/components/List'
 
 export default function Features() {
 
 
     const width = GetWidth()
 
+
+
+    const [qrCodeSettings, setqrCodeSettings] = useState({
+        color: 'white',
+        frame: {
+            color: 'var(--blue)',
+            active: true
+        }
+    })
+
+
+    const links = [
+        {
+            name: 'Youtube',
+            id  : 'link-1',
+            shortLink: 'youtube'
+        }
+    ]
 
     return (
         <Main>
@@ -54,7 +75,48 @@ export default function Features() {
                                 </div>
                             </div>
                             <div className='display justify-c w-100p border-r-1 overflow-hidden' >
-                                <img width={'80%'} height='100%' src='/images/myplaylist.svg' />
+                                <div>
+                                    {
+                                        links.map(link=> {
+                                            return (
+                                                <div    
+                                                    className='display gap p-1 border-b border-r-1 hover border justify-s-b white h-2 click ' 
+                                                    key={link.id} onClick={e=> setShowStat(link.id)} 
+                                                >
+                                                    <div className='display gap-1rem'>
+                                                        <img src={getFavicon(link)} className='border-r-100' width={30} />
+                                                        <div className='grid '> 
+                                                            <div className='display gap-04'>
+                                                                <span className='f-s-16 c-black'>{minimizeString(link.name, 20)}</span>
+                                                                {/* {
+                                                                    link.linkInBio &&
+                                                                    <BookmarkIcon width={12} className='c-yellow' />
+                                                                } */}
+                                                            </div>
+                                        
+                                                            <div className='grid gap'>
+                                                                <div className='display gap-04'>
+                                                                    <small href={'https://' + link.shortLink} className='hover-link link'>{link.shortLink}</small>
+                                                                    <div className='display'>
+                                                                        <div className='display disable green absolute border-r-04 p-04' id={'link-' + link.id} >
+                                                                            <small>Copié</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='display gap-1rem'>
+                                                        <div className='display gap-04 opacity'>
+                                                            <EyeIcon width={16} />
+                                                            <small>{link.views}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,25 +186,37 @@ export default function Features() {
                             </div>
                             <div className='display justify-c w-100p border-r-1 overflow-hidden' >
                                 <div className='grid gap-2rem'>
-                                    <div className='border-r-1 p-1' style={{ background : 'white' }}>
-                                        <QRCode
-                                            bgColor='white'
-                                            fgColor='black'
-                                            className='click qr-code-svg'
-                                            size={144}
-                                            value={'https://qlee.me'}
-                                        />
+                                    <div className='display justify-c'>
+                                         <div className='display border-r-1 p-1' style={{ background : qrCodeSettings.color }}>
+                                            <QRCode
+                                                bgColor={qrCodeSettings.color}
+                                                fgColor='black'
+                                                className='click qr-code-svg'
+                                                size={144}
+                                                value={'https://qlee.me'}
+                                            />
+                                        </div>
                                     </div>
 
-                                    <div className='border-r-1 grey'>
+                                    <div className='display justify-s-a border-r-2 grey'>
                                         <div>
                                             <button className='grey border-r-100 w-3 h-3'>
-                                                <PencilIcon width={16} className='c-black' />
+                                                <span className='f-s-18'>Aa</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button className='grey border-r-100 w-3 h-3' onClick={e=> setqrCodeSettings(prev=> {return {...prev, color: colors[Math.floor(Math.random() * colors.length)]}} )}>
+                                                <MdColorLens size={20} className={'c-black'} />
                                             </button>
                                         </div>
                                         <div>
                                             <button className='grey border-r-100 w-3 h-3'>
-                                                <MdColorLens width={16} className='c-black' />
+                                                <InboxIcon width={20} className='c-black' />
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button className='grey border-r-100 w-3 h-3'>
+                                                <ArrowDownTrayIcon width={20} className='c-black' />
                                             </button>
                                         </div>
                                     </div>
