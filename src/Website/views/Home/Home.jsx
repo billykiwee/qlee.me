@@ -256,7 +256,7 @@ export default function Home() {
                     <div className='grid gap'>
                         <div className='grid'>
                             <span className='link f-w-600 f-s-20'>FEATURES</span>
-                            <h2 className='m-0'>Gère tes liens comme tu veux</h2>
+                            <h2 className='m-0'>Pourquoi Qlee.me ?</h2>
                         </div>
                     </div>
 
@@ -271,7 +271,7 @@ export default function Home() {
                                 modules={[Autoplay]}
                             >
                                  <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden shadow' style={{ height : '440px' }} >
                                         <div className='display'>
                                             <div className='grid gap w-100p text-align-c'>
 
@@ -293,7 +293,7 @@ export default function Home() {
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden shadow' style={{ height : '440px' }} >
                                         <div className='display'>
                                             <div className='grid gap w-100p text-align-c'>
 
@@ -315,7 +315,7 @@ export default function Home() {
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden shadow' style={{ height : '440px' }} >
                                         <div className='display'>
                                             <div className='grid gap w-100p text-align-c'>
                                                 <div className='display justify-c'>
