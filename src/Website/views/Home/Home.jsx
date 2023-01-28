@@ -9,7 +9,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ChartPieIcon, ChatBubbleLeftIcon, CheckIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ChartPieIcon, ChatBubbleLeftIcon, CheckIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilIcon, PencilSquareIcon, QrCodeIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom'
 import Links from '../Features/views/Links'
 import Qrcode from '../Features/views/Qrcode'
 import Statistics from '../Features/views/Statistics'
+import QRCode from 'react-qr-code'
 
 
 export default function Home() {
@@ -268,16 +269,23 @@ export default function Home() {
                                 loop
                                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                                 modules={[Autoplay]}
-                                pagination={true}
                             >
                                  <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white' style={{ height : '440px' }} >
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
                                         <div className='display'>
-                                            <div className='grid gap'>
-                                                <div className='display gap'>
-                                                    <PencilIcon width={18} className='c-black' />
-                                                    <span className='f-s-25'>Créer</span>
+                                            <div className='grid gap w-100p text-align-c'>
+
+                                                <div className='display justify-c'>
+                                                    <div className='grid gap'>
+                                                        <div className='display justify-c'>
+                                                            <span className='display justify-c border-r-100 h-4 w-4 grey'>
+                                                                <PencilIcon width={20} className='c-black' />
+                                                            </span>
+                                                        </div>
+                                                        <span className='f-s-25 '>Créer</span>
+                                                    </div>
                                                 </div>
+
                                                 <span className='f-s-18 opacity'>Créer et personalise tes liens à l'infinie</span>
                                             </div>
                                         </div>
@@ -287,8 +295,19 @@ export default function Home() {
                                 <SwiperSlide>
                                     <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
                                         <div className='display'>
-                                            <div className='grid gap'>
-                                                <span className='f-s-25'>Statistiques</span>
+                                            <div className='grid gap w-100p text-align-c'>
+
+                                                <div className='display justify-c'>
+                                                    <div className='grid gap'>
+                                                        <div className='display justify-c'>
+                                                            <span className='display justify-c border-r-100 h-4 w-4 grey'>
+                                                                <ChartPieIcon width={20} className='c-black' />
+                                                            </span>
+                                                        </div>
+                                                        <span className='f-s-25 '>Statistiques</span>
+                                                    </div>
+                                                </div>
+
                                                 <span className='f-s-18 opacity'>Analyse les performances de tes liens pour un meilleur scale up</span>
                                             </div>
                                         </div>
@@ -296,14 +315,34 @@ export default function Home() {
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white' style={{ height : '440px' }} >
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
                                         <div className='display'>
-                                            <div className='grid gap'>
-                                                <span className='f-s-25'>Qr code</span>
+                                            <div className='grid gap w-100p text-align-c'>
+                                                <div className='display justify-c'>
+                                                    <div className='grid gap'>
+                                                        <div className='display justify-c'>
+                                                            <span className='display justify-c border-r-100 h-4 w-4 grey'>
+                                                                <QrCodeIcon width={20} className='c-black' />
+                                                            </span>
+                                                        </div>
+                                                        <span className='f-s-25 '>Qr code</span>
+                                                    </div>
+                                                </div>
                                                 <span className='f-s-18 opacity'>Créer et personalise un Qrcode pour chachun de tes liens</span>
                                             </div>
                                         </div>
-                                        <Qrcode />
+
+                                        <div className='display justify-c'>
+                                            <div className='border-r-1 p-1' style={{background : 'white'}}>
+                                                <QRCode
+                                                    bgColor={'white'}
+                                                    fgColor='black'
+                                                    className='click qr-code-svg'
+                                                    size={160}
+                                                    value={'https://qlee.me'}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
