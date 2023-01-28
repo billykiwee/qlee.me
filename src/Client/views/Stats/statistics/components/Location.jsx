@@ -23,9 +23,7 @@ export function Location({ stat }) {
                     <span>{item.adress.split('__')[1]}</span> 
                     <small className='c-grey f-s-12'>{item.count}</small>
                 </div>
-                <div className='w-50p'>
-                    <ProgressBar percentage={percentage(sum, item.count)} /> 
-                </div>
+                <ProgressBar percentage={percentage(sum, item.count)} /> 
             </div>
         )
     })
