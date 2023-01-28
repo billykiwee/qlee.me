@@ -15,6 +15,7 @@ import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { Link } from 'react-router-dom'
+import Links from '../Features/views/Links'
 
 
 export default function Home() {
@@ -86,28 +87,6 @@ export default function Home() {
 
 
 
-    const [tempateLinks, setTempateLinkst] = useState([
-        { 
-            name : 'Ma boutique', 
-            check: () => Math.floor(Math.random()* 10) > 2, 
-            icon : 'www.goody.com' 
-        },
-        { 
-            name : 'Mon facebook', 
-            check: () => Math.floor(Math.random()* 10) > 2, 
-            icon : 'www.facbook.com' 
-        },
-        { 
-            name : 'Mon Twitch', 
-            check: () => Math.floor(Math.random()* 10) > 2, 
-            icon : 'www.twitch.com' 
-        },
-        { 
-            name : 'Ma youtube', 
-            check: () => Math.floor(Math.random()* 10) > 2, 
-            icon : 'www.youtube.com' 
-         }
-    ])
 
 
     const Stats = [
@@ -275,24 +254,13 @@ export default function Home() {
                             <h2 className='m-0'>Gère tes liens comme tu veux</h2>
                         </div>
                     </div>
-                    <div className='grid gap p-2'>
-                        {
-                            tempateLinks
-                            .map(t=> {
 
-                                return (
-                                    <div className='display justify-s-b border border-r-1 border-b white p-1' key={t.name}>
-                                        <div className='display gap-1rem'>
-                                            <img src={getFavicon(t.icon)} width={30} className='border-r-100' />
-                                            <span className='f-s-16'>{t.name}</span>
-                                        </div>
-                                        <div className='display gap-04 ' >
-                                            <SwitchInput dimension={0.9} checked={t.check} />
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
+                    <div className='grid gap p-2'>
+                        <div>
+                            <span>Fonctionnalités</span>
+                        </div>
+
+                        <Links />
                     </div>
                 </div>
 

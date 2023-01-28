@@ -67,6 +67,17 @@ export function Menu({ props }) {
 
 
 
+    const redirect = (menu) => {
+
+        if (menu.id === 'theme') {
+            setTheme(localStorage.getItem('theme'))
+            return toggleTheme(localStorage.getItem('theme')) 
+        }
+
+        window.location.href =  menu.link
+    }
+
+
     if (menu)
     return (
         <div className='menu m-t-2' style={{ width : width > 780 ? '34%' : '' }} >
@@ -76,25 +87,12 @@ export function Menu({ props }) {
                     .map((menu, i) => {
                         return (
                             <div key={i} className={menu.id === 'user' && 'border-r-1 white'}>
-                                {
-                                    menu.id === 'theme'
-                                    ?
-                                    <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> { toggleTheme(localStorage.getItem('theme')) ; setTheme(localStorage.getItem('theme'))}}>
-                                        <div className="display gap-1rem">
-                                            <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
-                                            <span className='f-s-20'>{menu.name}</span>
-                                        </div>
-                                    </button>
-                                    :
-                                    <Link to={menu.link} key={menu.name} onClick={e=> setMenu(false) } >
-                                        <button className='h-4 border-r-1 display p-1 menu__btn' >
-                                            <div className="display gap-1rem">
-                                                <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
-                                                <span className='f-s-18'>{menu.name}</span>
-                                            </div>
-                                        </button>
-                                    </Link>
-                                }
+                                <button className='h-4 border-r-1 display p-1 menu__btn' onClick={e=> redirect(menu)} >
+                                    <div className="display gap-1rem">
+                                        <span className="p-04 display justify-c h-2 w-2">{menu.icon}</span>
+                                        <span className='f-s-20'>{menu.name}</span>
+                                    </div>
+                                </button>
                             </div>
                         )
                     })
