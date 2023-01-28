@@ -11,11 +11,14 @@ import { router } from './router/router'
 
 
 export default function App() {
+    
 
     return (
         <BrowserRouter>
+
                 <SnackBar />
                 <Popup />
+                
                 <Routes>
                     {
                         router
