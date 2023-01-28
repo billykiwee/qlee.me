@@ -3,7 +3,7 @@ import React from 'react'
 import getFavicon from '../../../../App/utils/getFavicon'
 import { ProgressBar } from '../../../../Client/views/Stats/components/ProgressBar'
 
-export default function Stats() {
+export default function Statistics() {
 
 
     return (

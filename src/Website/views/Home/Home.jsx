@@ -16,6 +16,8 @@ import { GetWidth } from '../../../App/utils/GetWidth';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { Link } from 'react-router-dom'
 import Links from '../Features/views/Links'
+import Qrcode from '../Features/views/Qrcode'
+import Statistics from '../Features/views/Statistics'
 
 
 export default function Home() {
@@ -251,16 +253,51 @@ export default function Home() {
                 <div className='grid justify-s-b blocks'>
                     <div className='grid gap'>
                         <div>
-                            <h2 className='m-0'>Gère tes liens comme tu veux</h2>
+                            <h2 className='m'>Gère tes liens comme tu veux</h2>
+                        </div>
+
+                        <div>
+                            <span className='c-grey f-s-25'>Des fonctionnalités uniques</span>
                         </div>
                     </div>
 
-                    <div className='grid gap p-2'>
-                        <div>
-                            <span>Fonctionnalités</span>
-                        </div>
+                    <div className='grid gap-2rem'>
 
-                        <Links />
+                            <Swiper 
+                                className='w-100p' 
+                                slidesPerView={1}  
+                                spaceBetween={18} 
+                                /* loop
+                                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                modules={[Autoplay]}
+                                pagination={true} */
+                            >
+                                 <SwiperSlide>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white'>
+                                        <div>
+                                            <span className='f-s-25'>Créer et personnalise</span>
+                                        </div>
+                                        <Links />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '50%' }}>
+                                        <div>
+                                            <span className='f-s-25'>Statistiques</span>
+                                        </div>
+                                        <Statistics/>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white'>
+                                        <div>
+                                            <span className='f-s-25'>Qr code</span>
+                                        </div>
+                                        <Qrcode />
+                                    </div>
+                                </SwiperSlide>
+                            </Swiper>
+
                     </div>
                 </div>
 

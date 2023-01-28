@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Main from '../../../App/components/Main'
 import { GetWidth } from '../../../App/utils/GetWidth'
-import Stats from './views/Stats'
 import Links from './views/Links'
 import Qrcode from './views/Qrcode'
 import { VideoCameraIcon } from '@heroicons/react/24/solid'
+import Statistics from './views/Statistics'
 
 
 
@@ -81,7 +81,7 @@ export default function Features() {
                                     </div>
                                 </div>
 
-                                <Stats />
+                                <Statistics />
                             </div>
                         </div>
                     </div>
