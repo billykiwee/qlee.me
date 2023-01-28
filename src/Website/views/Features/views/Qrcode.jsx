@@ -23,7 +23,7 @@ export default function Qrcode() {
                             bgColor={qrCodeSettings.color}
                             fgColor='black'
                             className='click qr-code-svg'
-                            size={144}
+                            size={180}
                             value={'https://qlee.me'}
                         />
                     </div>

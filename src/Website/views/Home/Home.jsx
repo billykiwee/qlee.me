@@ -9,7 +9,7 @@ import { Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { BiSubdirectoryRight } from 'react-icons/bi'
 
 import Main from '../../../App/components/Main'
-import { ChartPieIcon, ChatBubbleLeftIcon, CheckIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ChartPieIcon, ChatBubbleLeftIcon, CheckIcon, GlobeEuropeAfricaIcon, LinkIcon, MegaphoneIcon, PencilIcon, PencilSquareIcon, RocketLaunchIcon, ScissorsIcon, ShareIcon, SwatchIcon, UserIcon } from '@heroicons/react/24/solid';
 import { SwitchInput } from '../../../App/components/Switch';
 import getFavicon from '../../../App/utils/getFavicon';
 import { GetWidth } from '../../../App/utils/GetWidth';
@@ -248,16 +248,14 @@ export default function Home() {
             
             </section>
 
+
             <section className='grid justify-s-b'>
 
                 <div className='grid justify-s-b blocks'>
                     <div className='grid gap'>
-                        <div>
-                            <h2 className='m'>Gère tes liens comme tu veux</h2>
-                        </div>
-
-                        <div>
-                            <span className='c-grey f-s-25'>Des fonctionnalités uniques</span>
+                        <div className='grid'>
+                            <span className='link f-w-600 f-s-20'>FEATURES</span>
+                            <h2 className='m-0'>Gère tes liens comme tu veux</h2>
                         </div>
                     </div>
 
@@ -267,31 +265,43 @@ export default function Home() {
                                 className='w-100p' 
                                 slidesPerView={1}  
                                 spaceBetween={18} 
-                                /* loop
-                                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                loop
+                                autoplay={{ delay: 4000, disableOnInteraction: false }}
                                 modules={[Autoplay]}
-                                pagination={true} */
+                                pagination={true}
                             >
                                  <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white'>
-                                        <div>
-                                            <span className='f-s-25'>Créer et personnalise</span>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white' style={{ height : '440px' }} >
+                                        <div className='display'>
+                                            <div className='grid gap'>
+                                                <div className='display gap'>
+                                                    <PencilIcon width={18} className='c-black' />
+                                                    <span className='f-s-25'>Créer</span>
+                                                </div>
+                                                <span className='f-s-18 opacity'>Créer et personalise tes liens à l'infinie</span>
+                                            </div>
                                         </div>
                                         <Links />
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '50%' }}>
-                                        <div>
-                                            <span className='f-s-25'>Statistiques</span>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white overflow-hidden' style={{ height : '440px' }} >
+                                        <div className='display'>
+                                            <div className='grid gap'>
+                                                <span className='f-s-25'>Statistiques</span>
+                                                <span className='f-s-18 opacity'>Analyse les performances de tes liens pour un meilleur scale up</span>
+                                            </div>
                                         </div>
-                                        <Statistics/>
+                                        <Statistics clics device reference />
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white'>
-                                        <div>
-                                            <span className='f-s-25'>Qr code</span>
+                                    <div className='grid gap-2rem p-2 m-1 border-r-1 white' style={{ height : '440px' }} >
+                                        <div className='display'>
+                                            <div className='grid gap'>
+                                                <span className='f-s-25'>Qr code</span>
+                                                <span className='f-s-18 opacity'>Créer et personalise un Qrcode pour chachun de tes liens</span>
+                                            </div>
                                         </div>
                                         <Qrcode />
                                     </div>
@@ -302,6 +312,7 @@ export default function Home() {
                 </div>
 
             </section>
+
 
             <section className='grid p-2 border-r-2' style={{color: 'black'}} >
                 <div className='display justify-c'>
