@@ -21,206 +21,190 @@
 
   <body>
     <div id="root"></div>
-    <main>
-      <div class="containerBF">
-        <div class="image-containerBF">
-          <img
-            class="image-before slider-image"
-           src="http://www.arth-paysage.com/01_Contenus/Articles/garanties//garantie-montage-3.jpg"
-            alt="color photo"
-          />
-          <img
-            class="image-after slider-image"
-            src="http://www.arth-paysage.com/01_Contenus/Articles/garanties//garantie-montage-3.jpg"
-            alt="black and white"
-          />
+  </div>
+    </div>
+
+    <div id="page">
+      <div class="wrapper">
+        <div class="before">
+          <img class="content-image" src="http://h.local/wp-content/uploads/2023/01/image-3-1.png" draggable="false"/>   </div>
+        <div class="after">
+          <img class="content-image" src="http://h.local/wp-content/uploads/2023/01/image-4-1.png" draggable="false"/>
         </div>
-        <!-- step="10" -->
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="50"
-          aria-label="Percentage of before photo shown"
-          class="slider"
-        />
-        <div class="slider-line" aria-hidden="true"></div>
-        <div class="slider-button" aria-hidden="true">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            viewBox="0 0 256 256"
-          >
-            <rect width="256" height="256" fill="none"></rect>
-            <line
-              x1="128"
-              y1="40"
-              x2="128"
-              y2="216"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            ></line>
-            <line
-              x1="96"
-              y1="128"
-              x2="16"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            ></line>
-            <polyline
-              points="48 160 16 128 48 96"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            ></polyline>
-            <line
-              x1="160"
-              y1="128"
-              x2="240"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            ></line>
-            <polyline
-              points="208 96 240 128 208 160"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            ></polyline>
-          </svg>
+        <div class="scroller">
+          <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="0 50 37 68 37 32 0 50" style="fill:#fff"/><polygon points="100 50 64 32 64 68 100 50" style="fill:#fff"/></svg>
         </div>
       </div>
-    <div class="video-containerBF">
-    <iframe src="https://www.youtube.com/embed/dzqDU9efnnk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-    </main>
-
-
+      </div>
 
 <style>
-  
-  *,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
+  /* You can remove this page div in your website */
+#page{
+  width:100%;
+  height:100%;
+  position:absolute;
+}
+
+/* Our normalize css */
+*{
+  margin:0;
   box-sizing: border-box;
 }
 
-iframe {
-  aspect-ratio: 16/9;
+/* Our wrapper */
+.wrapper{
+  width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%,-50%,0);
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
 }
 
-.video-containerBF {
-  margin: 2rem;
-  max-height: 300px;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-main {
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-}
-
-.containerBF {
-  display: grid;
-  place-content: center;
-  position: relative;
+/* Our image information */
+.before,
+.after {
+  width:100%;
+  height:100%;
+  background-repeat:no-repeat;
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top:0;
+  left:0;
+  pointer-events:none;
   overflow: hidden;
-  border-radius: 1rem;
-  --position: 50%;
 }
 
-.image-containerBF {
-  max-width: 800px;
-  max-height: 90vh;
-  aspect-ratio: 1/1;
+.content-image{
+  height:100%;
 }
 
-.slider-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left;
+.after{
+  width:125px;
 }
 
-.image-before {
+.scroller{
+  width: 50px;
+  height:50px;
   position: absolute;
-  inset: 0;
-  width: var(--position);
-  filter: grayscale(100%)
-}
-
-.slider {
-  position: absolute;
-  inset: 0;
+  left:100px;
+  top:50%;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background-color: transparent;
+  opacity:0.9;
+  pointer-events:auto;
   cursor: pointer;
-  opacity: 0;
-  /* for Firefox */
-  width: 100%;
-  height: 100%;
 }
 
-.slider:focus-visible ~ .slider-button {
-  outline: 5px solid black;
-  outline-offset: 3px;
+.scroller:hover{
+  opacity:1;
 }
 
-.slider-line {
+.scrolling{
+  pointer-events:none;
+  opacity:1;
+}
+
+.scroller__thumb{
+  width:100%;
+  height:100%;
+  padding:5px;
+}
+
+.scroller:before,
+.scroller:after{
+  content:" ";
+  display: block;
+  width: 7px;
+  height: 9999px;
   position: absolute;
-  inset: 0;
-  width: .2rem;
-  height: 100%;
-  background-color: #fff;
-  /* z-index: 10; */
-  left: var(--position);
-  transform: translateX(-50%);
-  pointer-events: none;
+  left: 50%;
+  margin-left: -3.5px;
+  z-index: 30;
+  transition:0.1s;
+}
+.scroller:before{
+  top:100%;
+}
+.scroller:after{
+  bottom:100%;
 }
 
-.slider-button {
-  position: absolute;
-  background-color: #fff;
-  color: black;
-  padding: .5rem;
-  border-radius: 100vw;
-  display: grid;
-  place-items: center;
-  top: 50%;
-  left: var(--position);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  /* z-index: 100; */
-  box-shadow: 1px 1px 1px hsl(0, 50%, 2%, .5);
+/* If you want to cahnge the colors, make sure you change the fill in the svgs to match */
+.scroller{
+  border: 5px solid #fff;
+}
+.scroller:before,
+.scroller:after{
+  background: #fff;
 }
 </style>
 
 <script>
-const containerBF = document.querySelector('.containerBF');
-document.querySelector('.slider').addEventListener('input', (e) => {
-  containerBF.style.setProperty('--position', `${e.target.value}%`);
-})
+// I hope this over-commenting helps. Let's do this!
+// Let's use the 'active' variable to let us know when we're using it
+let active = false;
+
+// First we'll have to set up our event listeners
+// We want to watch for clicks on our scroller
+document.querySelector('.scroller').addEventListener('mousedown',function(){
+  active = true;
+  // Add our scrolling class so the scroller has full opacity while active
+  document.querySelector('.scroller').classList.add('scrolling');
+});
+// We also want to watch the body for changes to the state,
+// like moving around and releasing the click
+// so let's set up our event listeners
+document.body.addEventListener('mouseup',function(){
+  active = false;
+  document.querySelector('.scroller').classList.remove('scrolling');
+});
+document.body.addEventListener('mouseleave',function(){
+  active = false;
+  document.querySelector('.scroller').classList.remove('scrolling');
+});
+
+// Let's figure out where their mouse is at
+document.body.addEventListener('mousemove',function(e){
+  if (!active) return;
+  // Their mouse is here...
+  let x = e.pageX;
+  // but we want it relative to our wrapper
+  x -= document.querySelector('.wrapper').getBoundingClientRect().left;
+  // Okay let's change our state
+  scrollIt(x);
+});
+
+// Let's use this function
+function scrollIt(x){
+    let transform = Math.max(0,(Math.min(x,document.querySelector('.wrapper').offsetWidth)));
+    document.querySelector('.after').style.width = transform+"px";
+    document.querySelector('.scroller').style.left = transform-25+"px";
+}
+
+// Let's set our opening state based off the width, 
+// we want to show a bit of both images so the user can see what's going on
+scrollIt(150);
+
+// And finally let's repeat the process for touch events
+// first our middle scroller...
+document.querySelector('.scroller').addEventListener('touchstart',function(){
+  active = true;
+  document.querySelector('.scroller').classList.add('scrolling');
+});
+document.body.addEventListener('touchend',function(){
+  active = false;
+  document.querySelector('.scroller').classList.remove('scrolling');
+});
+document.body.addEventListener('touchcancel',function(){
+  active = false;
+  document.querySelector('.scroller').classList.remove('scrolling');
+});
 </script>
   </body>
   
