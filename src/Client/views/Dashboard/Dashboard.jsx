@@ -35,13 +35,6 @@ export default function Dashboard() {
                         </div> */}
 
 
-                        <div>
-                            <div >
-                                <img src='http://www.arth-paysage.com/01_Contenus/Articles/elagage//elagage-montage-2.jpg' />
-                            </div>
-                        </div>
-                        
-
                         <form className='grid gap-2rem ' 
                             onSubmit={e=> {
                                 e.preventDefault()
