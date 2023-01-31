@@ -22,17 +22,17 @@ export default function Dashboard() {
 
 
 
-    const range = document.querySelector('#range')
+    const [range, setRange] = useState(0)
     const img1 = document.querySelector('#img-1')
     const img2 = document.querySelector('#img-2')
 
     useEffect(e=> {
 
+        if (range) {
+            img1.style.width = range + '%'
+        }
 
-
-        if (range.value) img1.style.width = range.value + '%'
-
-
+        console.log(range);
     }, [range])
 
 
@@ -51,15 +51,27 @@ export default function Dashboard() {
                         </div> */}
 
 
-                            <input type='range' style={{zIndex: 9,width: '100%', top: '25%', bottom: '25%'}} id='range' />
-                        <div className='display m-t-4'>
-                            <img id='img-1' style={{
-                                width: '100%',
-                                height: '100%'
-                            }} src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80' />
-                            <img id='img-2' style={{
-                                width: '100%',
-                            }} src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80' />
+                        <div className='display m-t-4' style={{height: '300px'}}>
+                            <div className='display justify-c' style={{position: 'absolute',zIndex: 12, width: '100%',}} >
+                                <input type='range'id='range' onChange={e=> setRange(e.target.value)} style={{width: '100%',}} />
+                            </div>
+                            <div id='img-1' style={{
+                                    zIndex:9,
+                                    width: '100%',
+                                    height: '100%',
+                                    backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
+                                    backgroundSize: 'cover',
+                                    filter: 'grayscale(0.9)'
+                                }}>
+                            </div>
+                            <div id='img-2' style={{
+                                    position: 'absolute',
+                                    width: '100%',
+                                    height: '100%',
+                                    backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
+                                    backgroundSize: 'cover'
+                                }}>
+                            </div>
 
                         </div>
 
