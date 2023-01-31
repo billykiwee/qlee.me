@@ -22,20 +22,6 @@ export default function Dashboard() {
 
 
 
-    const [range, setRange] = useState(0)
-    const img1 = document.querySelector('#img-1')
-    const img2 = document.querySelector('#img-2')
-
-    useEffect(e=> {
-
-        if (range) {
-            img1.style.width = range + '%'
-        }
-
-        console.log(range);
-    }, [range])
-
-
     if (!auth) return <Login />
     return (
 
@@ -49,27 +35,6 @@ export default function Dashboard() {
                             <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
                             <Articles links={UserLinks} user={User} />
                         </div> */}
-
-
-                        <div className='display m-t-4' style={{
-                                height: '300px',
-                                width: '100%',
-                                backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
-                                backgroundSize: 'cover'
-                            }}>
-                            <div className='display justify-c' style={{position: 'absolute',zIndex: 12, width: '100%',}} >
-                                <input type='range'id='range' onChange={e=> setRange(e.target.value)} style={{width: '100%',}} />
-                            </div>
-                            <img id='img-1' style={{
-                                    zIndex:9,
-                                    width: '100%',
-                                    height: '100%',
-                                    filter: 'grayscale(0.9)'
-                                }}
-                                src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80'
-                            />
-                        </div>
-
 
                         <form className='grid gap-2rem ' 
                             onSubmit={e=> {
