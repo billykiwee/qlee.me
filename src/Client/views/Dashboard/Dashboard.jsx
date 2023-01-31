@@ -10,6 +10,7 @@ import Main from '../../../App/components/Main';
 import { useStateProps } from '../../../App/provider/ContextProvider';
 import { List } from './components/List';
 
+
 export default function Dashboard() {
 
     const { auth, user, snackBar } = useStateProps()
@@ -18,6 +19,21 @@ export default function Dashboard() {
     const UserLinks = user?.links
 
     const [Error, setError] = useState('')
+
+
+
+    const range = document.querySelector('#range')
+    const img1 = document.querySelector('#img-1')
+    const img2 = document.querySelector('#img-2')
+
+    useEffect(e=> {
+
+
+
+        if (range.value) img1.style.width = range.value + '%'
+
+
+    }, [range])
 
 
     if (!auth) return <Login />
@@ -33,6 +49,19 @@ export default function Dashboard() {
                             <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
                             <Articles links={UserLinks} user={User} />
                         </div> */}
+
+
+                            <input type='range' style={{zIndex: 9,width: '100%', top: '25%', bottom: '25%'}} id='range' />
+                        <div className='display m-t-4'>
+                            <img id='img-1' style={{
+                                width: '100%',
+                                height: '100%'
+                            }} src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80' />
+                            <img id='img-2' style={{
+                                width: '100%',
+                            }} src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80' />
+
+                        </div>
 
 
                         <form className='grid gap-2rem ' 
