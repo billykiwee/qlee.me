@@ -51,28 +51,23 @@ export default function Dashboard() {
                         </div> */}
 
 
-                        <div className='display m-t-4' style={{height: '300px'}}>
+                        <div className='display m-t-4' style={{
+                                height: '300px',
+                                width: '100%',
+                                backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
+                                backgroundSize: 'cover'
+                            }}>
                             <div className='display justify-c' style={{position: 'absolute',zIndex: 12, width: '100%',}} >
                                 <input type='range'id='range' onChange={e=> setRange(e.target.value)} style={{width: '100%',}} />
                             </div>
-                            <div id='img-1' style={{
+                            <img id='img-1' style={{
                                     zIndex:9,
                                     width: '100%',
                                     height: '100%',
-                                    backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
-                                    backgroundSize: 'cover',
                                     filter: 'grayscale(0.9)'
-                                }}>
-                            </div>
-                            <div id='img-2' style={{
-                                    position: 'absolute',
-                                    width: '100%',
-                                    height: '100%',
-                                    backgroundImage: 'url(https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80)',
-                                    backgroundSize: 'cover'
-                                }}>
-                            </div>
-
+                                }}
+                                src='https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80'
+                            />
                         </div>
 
 
