@@ -31,11 +31,6 @@ export default function Dashboard() {
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
 
-                       {/*  <div className='grid' >
-                            <h2 className='m-t-0 m-b-1'>Bonjour, {User.name}</h2>
-                            <Articles links={UserLinks} user={User} />
-                        </div> */}
-
                         <form className='grid gap-2rem ' 
                             onSubmit={e=> {
                                 e.preventDefault()
