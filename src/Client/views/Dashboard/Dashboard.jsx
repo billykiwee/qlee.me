@@ -20,13 +20,13 @@ export default function Dashboard() {
 
     const [Error, setError] = useState('')
 
-
-
     if (!auth) return <Login />
     return (
 
         <Main>
+
             <div className='grid gap-3rem blocks w-100' >
+
 
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
@@ -124,10 +124,6 @@ export default function Dashboard() {
         </Main>
     )
 }
-
-
-
-
 
 
 
