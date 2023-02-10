@@ -177,16 +177,10 @@ export const Timer = () => {
 
     return (
         <>
-            <h1 className='display gap display justify-c' style={{fontSize: '170px'}}>
-                {
-                    Time.min > 0 &&
-                    <>
-                        <span>{Time.min}:</span>
-                    </>
-                }
-                <span>{Time.sec}.</span>
-                <small>{Time.ms}</small>
-            </h1>
+            <span className='display gap display justify-c m-t-4'>
+                <span style={{fontSize: '170px'}}>{Time.min > 0 && Time.min + ':'} {Time.sec}.</span>
+                <span style={{fontSize: '100px', width: '5rem', height: '6rem'}}>{Time.ms}</span>
+            </span>
 
            {/*  <div className="display wrap">
                 {
