@@ -185,7 +185,7 @@ export const Timer = () => {
                     </>
                 }
                 <span>{Time.sec}.</span>
-                <span>{Time.ms}</span>
+                <small>{Time.ms}</small>
             </h1>
 
            {/*  <div className="display wrap">
