@@ -199,7 +199,7 @@ export const Timer = () => {
                 }
             </div> */}
 
-            <div className="display gap">
+            <div className="display gap disable">
                 {
                     directions
                     .map(btn=> {
@@ -220,7 +220,7 @@ export const Timer = () => {
                 }
             </div>
 
-            <div className="display m-t-2">
+            <div className="display m-t-2 disable">
                 <div className="grid border">
                     <div className="grid border face" id="L">
                         <div className="absolute margin-auto display zi-2">L</div>
