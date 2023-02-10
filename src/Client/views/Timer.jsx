@@ -116,7 +116,7 @@ export const Timer = () => {
 
     const Time = {
         min,
-        sec: (sec < 10 ? `0${sec}` : sec),
+        sec,
         ms
     }
 
@@ -181,12 +181,10 @@ export const Timer = () => {
                 {
                     Time.min > 0 &&
                     <>
-                        <span>{Time.min}</span>
-                        <span>:</span>
+                        <span>{Time.min}:</span>
                     </>
                 }
-                <span>{Time.sec}</span>
-                <span>:</span>
+                <span>{Time.sec}.</span>
                 <span>{Time.ms}</span>
             </h1>
 
