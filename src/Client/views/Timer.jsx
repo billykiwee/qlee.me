@@ -135,8 +135,44 @@ export const Timer = () => {
         if (event.code === "Space") {
             event.preventDefault()
         }
+        if (event.code === ' ') {
+            event.preventDefault()
+        }
     })
 
+
+    const colors = ['red', 'yellow', 'white', 'blue', 'green', 'orange']
+    const faces = ['b','b','b','b','b','b']
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+
+    useEffect(e=> {
+
+       /*  const rand = () => colors[Math.floor(Math.random() * colors.length)]
+
+        faces
+        .map(c=> {
+            document.querySelectorAll('.cube').forEach(el=> {
+                el.style.background = rand()
+
+                el.class = 'c-' +  el.style.background
+            })
+        }) */
+
+
+    }, [])
+
+    const directions = [
+        'U', 'D', 'R', 'L', 'F', 'B',
+        'U-', 'D-', 'R-', 'L-', 'F-', 'B-',
+    ]
 
     return (
         <>
@@ -152,6 +188,166 @@ export const Timer = () => {
                 <span>:</span>
                 <span>{Time.ms}</span>
             </h1>
+
+           {/*  <div className="display wrap">
+                {
+                    faces
+                    .map(c=> {
+                        return shuffleArray(colors)
+                        .map((e, i)=> {
+
+                            document.querySelectorAll('.cubes').forEach(e=> {
+                                e.style.background = e
+                            })
+
+                            return <div className="w-2 h-2 border" style={{ background : e }}></div>
+                        })
+                    })
+                }
+            </div> */}
+
+            <div className="display gap">
+                {
+                    directions
+                    .map(btn=> {
+                        return (
+                            <div>
+                                <button className="w-2 h-2 black" id={'btn-' + btn} onClick={e=> {
+                                    
+                                    if (btn.includes('-')) {
+                                        const div = btn.split('-')[0]
+                                        document.querySelector('#'+ div).style.transform += `rotate(${-90}deg)` 
+                                    }
+                                    else document.querySelector('#'+btn).style.transform += `rotate(${90}deg)` 
+                                }
+                                    }>{btn}</button>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+            <div className="display m-t-2">
+                <div className="grid border">
+                    <div className="grid border face" id="L">
+                        <div className="absolute margin-auto display zi-2">L</div>
+
+                        <div className="display">
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube orange"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube orange"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube blue"></div>
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="grid border">
+                    <div className="grid border face" id="U">
+                        <div className="absolute margin-auto display zi-2">U</div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube red"></div>
+                            <div className="w-2 h-2 border cube orange"></div>
+                            <div className="w-2 h-2 border cube black"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube green"></div>
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                        </div>
+                    </div>
+                    <div className="grid border face" id="F">
+                        <div className="absolute margin-auto display zi-2">F</div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube orange"></div>
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube yellow"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube orange"></div>
+                            <div className="w-2 h-2 border cube yellow"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                        </div>
+                    </div>
+                    <div className="grid border face" id="D">
+                        <div className="absolute margin-auto display zi-2">D</div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube green"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                            <div className="w-2 h-2 border cube black"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube red"></div>
+                            <div className="w-2 h-2 border cube red"></div>
+                            <div className="w-2 h-2 border cube blue"></div>
+                        </div>
+                        <div className="display">
+                            <div className="w-2 h-2 border cube green"></div>
+                            <div className="w-2 h-2 border cube green"></div>
+                            <div className="w-2 h-2 border cube red"></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="display">
+                    <div className="grid border">
+                        <div className="grid border face" id="R">
+                            <div className="absolute margin-auto display zi-2">R</div>
+                            <div className="display">
+                                <div className="w-2 h-2 border cube orange"></div>
+                                <div className="w-2 h-2 border cube black"></div>
+                                <div className="w-2 h-2 border cube blue"></div>
+                            </div>
+                            <div className="display">
+                                <div className="w-2 h-2 border cube black"></div>
+                                <div className="w-2 h-2 border cube orange"></div>
+                                <div className="w-2 h-2 border cube red"></div>
+                            </div>
+                            <div className="display">
+                                <div className="w-2 h-2 border cube black"></div>
+                                <div className="w-2 h-2 border cube red"></div>
+                                <div className="w-2 h-2 border cube orange"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid border face" id="B">
+                        <div className="absolute margin-auto display zi-2">B</div>
+                        <div className="grid">
+                            <div className="display">
+                                <div className="w-2 h-2 border cube red"></div>
+                                <div className="w-2 h-2 border cube black"></div>
+                                <div className="w-2 h-2 border cube black"></div>
+                            </div>
+                            <div className="display">
+                                <div className="w-2 h-2 border cube red"></div>
+                                <div className="w-2 h-2 border cube red"></div>
+                                <div className="w-2 h-2 border cube yellow"></div>
+                            </div>
+                            <div className="display">
+                                <div className="w-2 h-2 border cube black"></div>
+                                <div className="w-2 h-2 border cube orange"></div>
+                                <div className="w-2 h-2 border cube black"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className="grid">     
                 {

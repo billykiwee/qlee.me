@@ -27,11 +27,10 @@ export default function Dashboard() {
 
             <div className='grid gap-3rem blocks w-100' >
 
-
                 <div className='grid gap'>
                     <div className='grid gap-2rem'>
 
-                        <form className='grid gap-2rem ' 
+                        <form className='grid gap-2rem form' 
                             onSubmit={e=> {
                                 e.preventDefault()
 
