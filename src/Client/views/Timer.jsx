@@ -135,9 +135,6 @@ export const Timer = () => {
         if (event.code === "Space") {
             event.preventDefault()
         }
-        if (event.code === ' ') {
-            event.preventDefault()
-        }
     })
 
 
