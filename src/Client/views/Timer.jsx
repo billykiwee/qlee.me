@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getDevice } from "./Redirection/functions/getDevice";
 
 export const Timer = () => {
 
@@ -82,7 +83,10 @@ export const Timer = () => {
                 }
             }
         }
-        onMouse()
+
+        if (getDevice() === 'mobile') {
+            onMouse()
+        }
 
 
         if (Value === 'ready') {
