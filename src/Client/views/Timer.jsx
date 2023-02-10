@@ -24,8 +24,8 @@ export const Timer = () => {
         function begin() {
     
             intMs = setInterval(e => {
-                setMs(ms => (ms + 1) % 100)
-            }, 10)
+                setMs(ms => (ms + 1) % 10)
+            }, 100)
     
             intSec = setInterval(e => {
                 setSec(sec => (sec + 1) % 60)
@@ -117,7 +117,7 @@ export const Timer = () => {
     const Time = {
         min,
         sec: (sec < 10 ? `0${sec}` : sec),
-        ms : (ms < 10 ? `0${ms}` : ms)
+        ms
     }
 
 
