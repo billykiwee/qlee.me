@@ -167,13 +167,14 @@ export const Timer = () => {
             })
         }) */
 
-
     }, [])
 
     const directions = [
         'U', 'D', 'R', 'L', 'F', 'B',
         'U-', 'D-', 'R-', 'L-', 'F-', 'B-',
     ]
+
+
 
     return (
         <>
