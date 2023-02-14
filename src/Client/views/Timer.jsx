@@ -166,16 +166,6 @@ export const Timer = () => {
                 el.class = 'c-' +  el.style.background
             })
         }) */
-
-
-        const foo = ['bonjour', 'super', 2,3,4,4]
-
-        const go = foo.map((e,i)=> {
-            return e + '_' + i
-        }).toString()
-
-        console.log(go);
-
     }, [])
 
     
