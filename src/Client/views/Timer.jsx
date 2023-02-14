@@ -167,10 +167,33 @@ export const Timer = () => {
             })
         }) */
 
-
     }, [])
 
+
+
     
+    const mouseMove = (event) => {
+
+        const [x, y] = [event.clientX, event.clientY]
+        const dim = {
+            x : event.target.clientWidth,
+            y : event.target.clientHeight,
+        }
+
+
+        let rotateY
+
+        if (y >= dim.y / 2) {
+            rotateY = (y / (dim.y / 2)) * 100
+        }
+        event.target.style = `
+            width: 30%;
+            transform: rotateY(${rotateY}deg) ;
+        `
+
+        console.log(dim);
+
+    }
 
 
 
@@ -198,7 +221,7 @@ export const Timer = () => {
                 }
             </div> */}
 
-            <img src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" />
+            <img onMouseMove={mouseMove} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" style={{width: '30%'}} />
 
            
 
