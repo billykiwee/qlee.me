@@ -171,6 +171,7 @@ export const Timer = () => {
 
 
 
+    const [style, setStyle] = useState({})
     
     const mouseMove = (event) => {
 
@@ -181,19 +182,28 @@ export const Timer = () => {
         }
 
 
-        let rotateY
+        console.log((x / dim.x) );
 
-        if (y >= dim.y / 2) {
-            rotateY = (y / (dim.y / 2)) * 100
-        }
-        event.target.style = `
-            width: 30%;
-            transform: rotateY(${rotateY}deg) ;
-        `
-
-        console.log(dim);
-
+        setStyle({
+            width: '30%',
+            border: '4px solid black',
+            transform: 
+                `
+                    rotateX(${ (x / dim.x) * 10 }deg) 
+                    translateX(${ (x / dim.x) }px) 
+                    translateY(${ (y / dim.x) }px)
+                `
+            ,
+        })
     }
+
+
+    
+    const mouseOut = (event) => {
+
+        setStyle({})
+    }
+
 
 
 
@@ -221,7 +231,10 @@ export const Timer = () => {
                 }
             </div> */}
 
-            <img onMouseMove={mouseMove} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" style={{width: '30%'}} />
+            <div className="display justify-c">
+                <img onMouseMove={mouseMove} onMouseOut={mouseOut} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" className="shadow" 
+                style={{width: '30%', transition: '0.4s', ...style}} />
+            </div>
 
            
 
