@@ -167,12 +167,18 @@ export const Timer = () => {
             })
         }) */
 
+
+        const foo = ['bonjour', 'super', 2,3,4,4]
+
+        const go = foo.map((e,i)=> {
+            return e + '_' + i
+        }).toString()
+
+        console.log(go);
+
     }, [])
 
-    const directions = [
-        'U', 'D', 'R', 'L', 'F', 'B',
-        'U-', 'D-', 'R-', 'L-', 'F-', 'B-',
-    ]
+    
 
 
 
@@ -200,26 +206,7 @@ export const Timer = () => {
                 }
             </div> */}
 
-            <div className="display gap disable">
-                {
-                    directions
-                    .map(btn=> {
-                        return (
-                            <div>
-                                <button className="w-2 h-2 black" id={'btn-' + btn} onClick={e=> {
-                                    
-                                    if (btn.includes('-')) {
-                                        const div = btn.split('-')[0]
-                                        document.querySelector('#'+ div).style.transform += `rotate(${-90}deg)` 
-                                    }
-                                    else document.querySelector('#'+btn).style.transform += `rotate(${90}deg)` 
-                                }
-                                    }>{btn}</button>
-                            </div>
-                        )
-                    })
-                }
-            </div>
+           
 
             <div className="display m-t-2 disable">
                 <div className="grid border">
