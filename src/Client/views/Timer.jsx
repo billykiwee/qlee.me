@@ -182,14 +182,13 @@ export const Timer = () => {
         }
 
 
-        console.log((x / dim.x) );
 
         setStyle({
             width: '30%',
             border: '4px solid black',
             transform: 
                 `
-                    rotateX(${ (x / dim.x) * 10 }deg) 
+                    rotateX(${ (dim.x + x) / 2 / 10 }deg) 
                     translateX(${ (x / dim.x) }px) 
                     translateY(${ (y / dim.x) }px)
                 `
