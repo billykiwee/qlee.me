@@ -166,6 +166,8 @@ export const Timer = () => {
                 el.class = 'c-' +  el.style.background
             })
         }) */
+
+
     }, [])
 
     
@@ -195,6 +197,8 @@ export const Timer = () => {
                     })
                 }
             </div> */}
+
+            <img src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" />
 
            
 
