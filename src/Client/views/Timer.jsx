@@ -184,23 +184,32 @@ export const Timer = () => {
         const [x, y] = [event.clientX - boundingRect.left, event.clientY - boundingRect.top]
 
 
+        let mouseX = 0
         let mouseY = 0
 
         if (x >= dim.x / 2) {
-            mouseY = 13 - ((x / dim.x) * 360) / 10
+            mouseY = 20 - ((x / dim.x) * 360) / 10
         }
         else {
-            mouseY = 13 - ((x / dim.x) * 360) / 10
+            mouseY = 20 - ((x / dim.x) * 360) / 10
         }
        
-        console.log(mouseY );
+        if (y >= dim.x / 2) {
+            mouseX = 20 - ((x / dim.x) * 360) / 10
+        }
+        else {
+            mouseX = 20 - ((x / dim.x) * 360) / 10
+        }
+
+        console.log( mouseX,mouseY );
 
         setStyle({
             border: '4px solid black',
             transform: 
                 `
+                    scale(1.1)
                     rotateY(${ mouseY }deg)
-                    rotateX(${ 0 }deg)
+                    rotateX(${ mouseX }deg)
                 `
             ,
         })
@@ -242,7 +251,7 @@ export const Timer = () => {
 
             <div className="display justify-c">
                 <img onMouseMove={mouseMove} onMouseOut={mouseOut} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" className="shadow" 
-                style={{width: '30%', transition: '0.2s', ...style}} />
+                style={{width: '30%', transition: '0.2s', boxShadow: '10px 10px 10px black', ...style}} />
             </div>
 
            
