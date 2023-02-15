@@ -240,12 +240,10 @@ export const Timer = () => {
 
 
     function isCloseToZero(x) {
-        return Math.abs(x) < 0.01
+        return Math.abs(x) < 100
     }
 
-    console.log(isCloseToZero(0.0001));  // true
-console.log(isCloseToZero(0.1));     // false
-console.log(isCloseToZero(-0.0005)); // true
+    console.log(isCloseToZero(10))
 
 
     return (
