@@ -187,8 +187,8 @@ export const Timer = () => {
         let mouseX = 0
         let mouseY = 0
 
-        if (x >= dim.x / 2) {
-            mouseY = 20 - ((x / dim.x) * 360) / 10
+       /*  if (x >= dim.x / 2) {
+            mouseY = -20 - ((x / dim.x) * 360) / 10
         }
         else {
             mouseY = 20 - ((x / dim.x) * 360) / 10
@@ -200,18 +200,31 @@ export const Timer = () => {
         else {
             mouseX = 20 - ((x / dim.x) * 360) / 10
         }
+         */
+        let position = ''
 
-        console.log( mouseX,mouseY );
+        if (x >= dim.x / 2) {
+            position += 'right-'
+        }
+        if (x <= dim.x / 2) {
+            position += 'left-'
+        }
+        if (y <= dim.y / 2) {
+            position += 'top'
+        }
+        else position += 'bottom'
+
+        console.log(position, x);
 
         setStyle({
             border: '4px solid black',
-            transform: 
+           /*  transform: 
                 `
-                    scale(1.1)
-                    rotateY(${ mouseY }deg)
+                    rotateZ(${ mouseX }deg)
                     rotateX(${ mouseX }deg)
+                    rotateY(${ mouseY }deg)
                 `
-            ,
+            , */
         })
     }
 
