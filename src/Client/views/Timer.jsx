@@ -239,6 +239,14 @@ export const Timer = () => {
 
 
 
+    function isCloseToZero(x) {
+        return Math.abs(x) < 0.01
+    }
+
+    console.log(isCloseToZero(0.0001));  // true
+console.log(isCloseToZero(0.1));     // false
+console.log(isCloseToZero(-0.0005)); // true
+
 
     return (
         <>
