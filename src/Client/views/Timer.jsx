@@ -264,13 +264,11 @@ export const Timer = () => {
                 }
             </div> */}
 
-            <div id="example-element" class="transition-all" style="transform: rotate3d(0, 1, 0.2, 3.142rad);">
-                <div class="face front">
+            <div className="display justify-c">
                 <img onMouseMove={mouseMove} onMouseOut={mouseOut} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" className="shadow" 
                 style={{width: '30%', transition: '0.2s', boxShadow: '10px 10px 10px black',transformStyle: 'preserve-3d', ...style}} />
-                </div>
-                <div class="face back black" ></div>
             </div>
+
 
            
 
