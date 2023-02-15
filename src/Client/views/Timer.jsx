@@ -184,17 +184,23 @@ export const Timer = () => {
         const [x, y] = [event.clientX - boundingRect.left, event.clientY - boundingRect.top]
 
 
+        let mouseY = 0
 
-
-        console.log(x,y);
-
+        if (x >= dim.x / 2) {
+            mouseY = 13 - ((x / dim.x) * 360) / 10
+        }
+        else {
+            mouseY = 13 - ((x / dim.x) * 360) / 10
+        }
+       
+        console.log(mouseY );
 
         setStyle({
             border: '4px solid black',
             transform: 
                 `
-                    
-                    rotateY(${ (y / dim.y) * 10  }deg)
+                    rotateY(${ mouseY }deg)
+                    rotateX(${ 0 }deg)
                 `
             ,
         })
