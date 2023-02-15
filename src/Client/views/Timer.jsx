@@ -182,15 +182,22 @@ export const Timer = () => {
         }
 
 
+        let varX 
+
+        if (x >= dim.x / 2) {
+            varX =-x / dim.x * 10
+
+            console.log('oui');
+        }
+        else console.log('non');
+
 
         setStyle({
-            width: '30%',
             border: '4px solid black',
             transform: 
                 `
-                    rotateX(${ (dim.x + x) / 2 / 10 }deg) 
-                    translateX(${ (x / dim.x) }px) 
-                    translateY(${ (y / dim.x) }px)
+                    
+                    rotateY(${ (y / dim.y) * 10  }deg)
                 `
             ,
         })
@@ -232,7 +239,7 @@ export const Timer = () => {
 
             <div className="display justify-c">
                 <img onMouseMove={mouseMove} onMouseOut={mouseOut} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" className="shadow" 
-                style={{width: '30%', transition: '0.4s', ...style}} />
+                style={{width: '30%', transition: '0.2s', ...style}} />
             </div>
 
            
