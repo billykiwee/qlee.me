@@ -175,21 +175,18 @@ export const Timer = () => {
     
     const mouseMove = (event) => {
 
-        const [x, y] = [event.clientX, event.clientY]
+        const boundingRect = event.target.getBoundingClientRect()
+
         const dim = {
             x : event.target.clientWidth,
             y : event.target.clientHeight,
         }
+        const [x, y] = [event.clientX - boundingRect.left, event.clientY - boundingRect.top]
 
 
-        let varX 
 
-        if (x >= dim.x / 2) {
-            varX =-x / dim.x * 10
 
-            console.log('oui');
-        }
-        else console.log('non');
+        console.log(x,y);
 
 
         setStyle({
