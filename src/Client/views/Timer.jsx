@@ -238,14 +238,6 @@ export const Timer = () => {
     }
 
 
-
-    function isCloseToZero(x) {
-        return Math.abs(x) < 100
-    }
-
-    console.log(isCloseToZero(10))
-
-
     return (
         <>
             <span className='display gap display justify-c m-t-4'>
