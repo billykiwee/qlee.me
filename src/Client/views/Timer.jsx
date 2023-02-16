@@ -248,14 +248,11 @@ export const Timer = () => {
         
         const sum = newArr.reduce((a,b)=> a+b)
 
-        const getArr = []
-        
-        while (sum >= ref) {
-            getArr.push(newArr)
+
+        while (ref === sum) {
+
+            console.log(newArr);
         }
-
-
-        console.log(getArr);
      
     }
 
