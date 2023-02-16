@@ -238,6 +238,27 @@ export const Timer = () => {
     }
 
 
+    const array = [1,1,2,3,4,5,6,7,8]
+
+    const ref = 10
+
+    const gteIndex = (array, ref) => {
+        
+        if (!array) return 
+
+        for (const n in array) {
+            if ( (n + n+1) === ref ) {
+                return [n, n+1]
+            }
+        }
+    }
+
+    useEffect(e=> {
+
+        console.log( gteIndex(array, ref) );
+    }, [])
+
+
     return (
         <>
             <span className='display gap display justify-c m-t-4'>
