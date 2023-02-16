@@ -240,25 +240,12 @@ export const Timer = () => {
 
     const array = [1,2,3,2,5,4,4,9]
 
-    const ref = 10
-
-    const gteIndex = (array, ref) => {
-
-        const newArr = array.sort(() => Math.random() - 0.5).slice(0,2)
-        
-        const sum = newArr.reduce((a,b)=> a+b)
-
-
-        while (ref === sum) {
-
-            console.log(newArr);
-        }
-     
-    }
+    const getMax = array.sort((a,b)=> b-a).at(0)
 
     useEffect(e=> {
 
-        gteIndex(array, ref)
+        console.log(getMax);
+
     }, [])
 
 
