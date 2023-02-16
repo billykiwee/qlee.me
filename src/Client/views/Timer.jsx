@@ -238,24 +238,24 @@ export const Timer = () => {
     }
 
 
-    const array = [1,1,2,3,4,5,6,7,8]
+    const array = ['A','B','C','D']
 
     const ref = 10
 
     const gteIndex = (array, ref) => {
         
-        if (!array) return 
+        for (var i = 0; i < array.length; i++) {
 
-        for (const n in array) {
-            if ( (n + n+1) === ref ) {
-                return [n, n+1]
-            }
+            const number = array[i]
+
+            console.log(number);
+        
         }
     }
 
     useEffect(e=> {
 
-        console.log( gteIndex(array, ref) );
+        gteIndex(array, ref)
     }, [])
 
 
