@@ -243,14 +243,20 @@ export const Timer = () => {
     const ref = 10
 
     const gteIndex = (array, ref) => {
+
+        const newArr = array.sort(() => Math.random() - 0.5).slice(0,2)
         
+        const sum = newArr.reduce((a,b)=> a+b)
 
-        for (const n in array) {
-
-          const r = array[(Math.random() * array.length)] + array[(Math.random() * array.length)]
-
-          console.log(array[(Math.random() * array.length)]);
+        const getArr = []
+        
+        while (sum >= ref) {
+            getArr.push(newArr)
         }
+
+
+        console.log(getArr);
+     
     }
 
     useEffect(e=> {
