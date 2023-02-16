@@ -246,10 +246,10 @@ export const Timer = () => {
         
         for (var i = 0; i < array.length; i++) {
 
-            const number = array[i]
 
-            console.log(number);
-        
+            const str = array[i] + array[i]
+
+            console.log(str);
         }
     }
 
