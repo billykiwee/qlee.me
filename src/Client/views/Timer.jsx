@@ -238,18 +238,18 @@ export const Timer = () => {
     }
 
 
-    const array = ['A','B','C','D']
+    const array = [1,2,3,2,5,4,4,9]
 
     const ref = 10
 
     const gteIndex = (array, ref) => {
         
-        for (var i = 0; i < array.length; i++) {
 
+        for (const n in array) {
 
-            const str = array[i] + array[i]
+          const r = array[(Math.random() * array.length)] + array[(Math.random() * array.length)]
 
-            console.log(str);
+          console.log(array[(Math.random() * array.length)]);
         }
     }
 
