@@ -1,3 +1,4 @@
+import { ArrayLesson } from "../../Client/views/Array";
 import Dashboard from "../../Client/views/Dashboard/Dashboard";
 import LinkInBio from "../../Client/views/LinkInBio/LinkInBio";
 import { EditLinkInBio } from "../../Client/views/LinkInBio/views/Edit/Edit";
@@ -32,4 +33,5 @@ export const router = [
     { path : '/features', element : <Features /> },
     { path : '/terms', element : <Terms /> },
     { path : '/Timer', element : <Timer /> },
+    { path : '/Array', element : <ArrayLesson /> },
 ]
