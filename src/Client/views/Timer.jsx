@@ -249,6 +249,55 @@ export const Timer = () => {
     }, [])
 
 
+
+    
+useEffect(e=> {
+    // Définir les paramètres de l'API
+    const endpoint = "https://api.openai.com/v1/questions";
+    const apiKey = "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";
+
+    // Récupérer l'élément HTML pour le champ de texte et le bouton
+    const inputField = document.getElementById("input-text");
+    const generateButton = document.getElementById("generate-button");
+
+    // Ajouter un événement de clic au bouton
+    generateButton.addEventListener("click", async () => {
+        const text = inputField.value;
+
+        
+        
+        // Configurer les paramètres de la requête
+        const params = {
+            "model": "text-davinci-002",
+            "prompt": text,
+            "temperature": 0.5,
+            "max_tokens": 5,
+            "stop": "."
+        };
+        
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+        };
+        
+        // Envoyer la requête à l'API
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(params)
+        });
+        
+        const data = await response.json();
+        
+        // Récupérer les questions générées
+        const questions = data.data;
+        
+        // Afficher les questions dans la console
+        console.log(questions);
+    });
+
+}, [])
+
     return (
         <>
             <span className='display gap display justify-c m-t-4'>
@@ -256,24 +305,12 @@ export const Timer = () => {
                 <span style={{fontSize: '100px', width: '5rem', height: '6rem'}}>{Time.ms}</span>
             </span>
 
-           {/*  <div className="display wrap">
-                {
-                    faces
-                    .map(c=> {
-                        return shuffleArray(colors)
-                        .map((e, i)=> {
+            <div className="margin-auto">
+                <input id='input-text' className="white" />
+                <button id="generate-button" className="blue h-3">Générer</button>
+            </div>
 
-                            document.querySelectorAll('.cubes').forEach(e=> {
-                                e.style.background = e
-                            })
-
-                            return <div className="w-2 h-2 border" style={{ background : e }}></div>
-                        })
-                    })
-                }
-            </div> */}
-
-            <div className="display justify-c">
+          {/*   <div className="display justify-c">
                 <img onMouseMove={mouseMove} onMouseOut={mouseOut} src="https://www.cards-capital.com/67155/dragon-blanc-aux-yeux-bleus.jpg" alt="" className="shadow" 
                 style={{width: '30%', transition: '0.2s', boxShadow: '10px 10px 10px black',transformStyle: 'preserve-3d', ...style}} />
             </div>
@@ -421,7 +458,7 @@ export const Timer = () => {
                         )
                     })
                 }
-            </div>
+            </div> */}
         </>
     )
 }
