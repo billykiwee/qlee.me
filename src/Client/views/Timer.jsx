@@ -254,8 +254,8 @@ export const Timer = () => {
 useEffect(e=> {
 
     // Définir les paramètres de l'API
-    const endpoint = "https://api.openai.com/v1/questions";
-    const apiKey = "";
+    const endpoint = "https://cors-anywhere.herokuapp.com/https://api.openai.com/v1/questions";
+    const apiKey = "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";
 
     // Récupérer l'élément HTML pour le champ de texte et le bouton
     const inputField = document.getElementById("input-text");
@@ -287,6 +287,8 @@ useEffect(e=> {
             headers: headers,
             body: JSON.stringify(params)
         });
+
+        console.log(response);
         
         const data = await response.json();
         
