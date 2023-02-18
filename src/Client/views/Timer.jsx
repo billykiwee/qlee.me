@@ -252,9 +252,10 @@ export const Timer = () => {
 
     
 useEffect(e=> {
+
     // Définir les paramètres de l'API
     const endpoint = "https://api.openai.com/v1/questions";
-    const apiKey = "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";
+    const apiKey = "";
 
     // Récupérer l'élément HTML pour le champ de texte et le bouton
     const inputField = document.getElementById("input-text");
