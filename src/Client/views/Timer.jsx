@@ -250,57 +250,6 @@ export const Timer = () => {
 
 
 
-    
-useEffect(e=> {
-
-    // Définir les paramètres de l'API
-    const endpoint = "https://cors-anywhere.herokuapp.com/https://api.openai.com/v1/questions";
-    const apiKey = "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";
-
-    // Récupérer l'élément HTML pour le champ de texte et le bouton
-    const inputField = document.getElementById("input-text");
-    const generateButton = document.getElementById("generate-button");
-
-    // Ajouter un événement de clic au bouton
-    generateButton.addEventListener("click", async () => {
-        const text = inputField.value;
-
-        
-        
-        // Configurer les paramètres de la requête
-        const params = {
-            "model": "text-davinci-002",
-            "prompt": text,
-            "temperature": 0.5,
-            "max_tokens": 5,
-            "stop": "."
-        };
-        
-        const headers = {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`
-        };
-        
-        // Envoyer la requête à l'API
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(params)
-        });
-
-        console.log(response);
-        
-        const data = await response.json();
-        
-        // Récupérer les questions générées
-        const questions = data.data;
-        
-        // Afficher les questions dans la console
-        console.log(questions);
-    });
-
-}, [])
-
     return (
         <>
             <span className='display gap display justify-c m-t-4'>
