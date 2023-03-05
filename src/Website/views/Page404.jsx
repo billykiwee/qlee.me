@@ -8,7 +8,7 @@ export default function Page404() {
         <Main>
             <div className='grid gap-2rem'>
                 <div className='grid'>
-                    <h2>Petite ereur ? 🤔</h2>
+                    <h2>Petite erreur ? 🤔</h2>
                     <span>Ce lien n'est plus disponible.</span>
                 </div>
                 <div>
