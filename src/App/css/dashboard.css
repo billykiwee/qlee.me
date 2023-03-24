@@ -1,11 +1,9 @@
 @media screen and (min-width: 740px) {
-
-    .blocks {
-        flex-direction: unset;
-    }
-    .blocks > div {
-        display: flex;
-        width: 50%;
-    }
+  .blocks {
+    flex-direction: unset;
+  }
+  .blocks > div {
+    display: flex;
+    width: 50%;
+  }
 }
-

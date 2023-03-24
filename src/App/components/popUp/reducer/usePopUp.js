@@ -1,17 +1,14 @@
-import { useStateValue } from "../../../provider/StateProvider"
-import UniqueID from "../../../utils/uniqueID"
-
+import { useStateValue } from "../../../provider/StateProvider";
 
 export function usePopUp() {
-    
-    const [{ popUp }, dispatch] = useStateValue()
+  const [{ popUp }, dispatch] = useStateValue();
 
-    const show = (content) => {
-        dispatch({
-            type : 'SET_POPUP',
-            popUp: content
-        })
-    }
+  const show = (content) => {
+    dispatch({
+      type: "SET_POPUP",
+      popUp: content,
+    });
+  };
 
-    return { popUp, show }
+  return { popUp, show };
 }

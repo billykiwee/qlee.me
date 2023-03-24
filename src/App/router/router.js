@@ -1,4 +1,3 @@
-import { ArrayLesson } from "../../Client/views/Array";
 import Dashboard from "../../Client/views/Dashboard/Dashboard";
 import LinkInBio from "../../Client/views/LinkInBio/LinkInBio";
 import { EditLinkInBio } from "../../Client/views/LinkInBio/views/Edit/Edit";
@@ -6,7 +5,6 @@ import Edit from "../../Client/views/Links/views/Edit/Edit";
 import Profil from "../../Client/views/Profil/Profil";
 import Redirection from "../../Client/views/Redirection/Redirection";
 import Stats from "../../Client/views/Stats/Stats";
-import { Timer } from "../../Client/views/Timer";
 import Features from "../../Website/views/Features/Features";
 import Home from "../../Website/views/Home/Home";
 import Login from "../../Website/views/Login/Login";
@@ -32,6 +30,4 @@ export const router = [
   { path: "/profil", element: <Profil /> },
   { path: "/features", element: <Features /> },
   { path: "/terms", element: <Terms /> },
-  { path: "/Timer", element: <Timer /> },
-  { path: "/Array", element: <ArrayLesson /> },
 ];

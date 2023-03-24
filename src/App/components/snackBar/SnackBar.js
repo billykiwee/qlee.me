@@ -1,79 +1,81 @@
-import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useStateProps } from '../../provider/ContextProvider'
+import {
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/solid";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useStateProps } from "../../provider/ContextProvider";
 
 export function SnackBar() {
+  const { snackBar, remove } = useStateProps().snackBar;
 
-    const { snackBar, add, remove } = useStateProps().snackBar
+  function deleteData(id) {
+    if (!id) return;
 
-    function deleteData(id) {
+    const el = document.querySelector(`#${id}`);
+    el.classList.add("out");
 
-        if (!id) return
+    const elAnimation = document.querySelector(".out");
+    const animationDuration =
+      window.getComputedStyle(elAnimation).animationDuration;
 
-        const el = document.querySelector(`#${id}`)
-        el.classList.add('out')
+    setTimeout(() => remove(id), parseFloat(animationDuration) * 1000);
+  }
 
-        const elAnimation = document.querySelector('.out')
-        const animationDuration = window.getComputedStyle(elAnimation).animationDuration
+  useEffect(() => {
+    if (!snackBar.length) return;
 
-        setTimeout(() => remove(id), parseFloat(animationDuration) * 1000)
-    }
+    const timeoutId = setTimeout(() => {
+      deleteData(snackBar[0].id);
+    }, 5000);
 
-    useEffect(() => {
-        if (!snackBar.length) return
-    
-        const timeoutId = setTimeout(() => {
-            deleteData(snackBar[0].id)
-        }, 5000)
-    
-        return () => clearTimeout(timeoutId)
-    }, [snackBar])
+    return () => clearTimeout(timeoutId);
+  }, [snackBar]);
 
+  return (
+    <div className="sticky display grid gap-04 snackbar_div">
+      {snackBar
+        .map((item) => {
+          const { id, text, subtext, status, action } = item;
 
-
-    return (
-
-        <div className='sticky display grid gap-04 snackbar_div'>
-        {
-            snackBar
-            .map(item=> {
-
-                const { id, text, subtext, status, action } = item
-
-                return (
-                    <div className='white border border-r-04 shadow p-1 snackbar ' id={id} key={id} >
-                        <div className='display gap-2rem'>
-                            <div className='display gap-1rem'>
-                                <div className='w-2 display justify-c'>
-                                    {
-                                        status === 'error'
-                                        ? <ExclamationTriangleIcon width={28} className='c-red' />
-                                        : <CheckCircleIcon width={28} className='c-green' />
-                                    }
-                                </div>
-                                <div className='grid'>
-                                    <span className='f-w-500 f-s-16'>{text}</span>
-                                    <span className='opacity'>{subtext}</span>
-                                    {
-                                        action &&
-                                        <Link to={action.link}>
-                                            <span className='link hover-link '>{action.text}</span>
-                                        </Link>
-                                    }
-                                </div>
-                            </div>
-                            <div className='display justify-c'>
-                                <button className='border-r-100 w-3 h-3 hover' onClick={e=> deleteData(id)} >
-                                    <span className='f-s-16 c-black'>OK</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }).reverse()
-        }
-        </div>
-
-    )
+          return (
+            <div
+              className="white border border-r-04 shadow p-1 snackbar "
+              id={id}
+              key={id}
+            >
+              <div className="display gap-2rem">
+                <div className="display gap-1rem">
+                  <div className="w-2 display justify-c">
+                    {status === "error" ? (
+                      <ExclamationTriangleIcon width={28} className="c-red" />
+                    ) : (
+                      <CheckCircleIcon width={28} className="c-green" />
+                    )}
+                  </div>
+                  <div className="grid">
+                    <span className="f-w-500 f-s-16">{text}</span>
+                    <span className="opacity">{subtext}</span>
+                    {action && (
+                      <Link to={action.link}>
+                        <span className="link hover-link ">{action.text}</span>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+                <div className="display justify-c">
+                  <button
+                    className="border-r-100 w-3 h-3 hover"
+                    onClick={(e) => deleteData(id)}
+                  >
+                    <span className="f-s-16 c-black">OK</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })
+        .reverse()}
+    </div>
+  );
 }

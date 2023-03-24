@@ -1,63 +1,56 @@
 .avatar-header:hover {
-    box-shadow: 0px 0px 2px 4px rgb(0 0 0 / 10%);
-    border-radius: 40px;
+  box-shadow: 0px 0px 2px 4px rgb(0 0 0 / 10%);
+  border-radius: 40px;
 }
 
 header {
-    left: 0;
-    right: 0;
-    z-index: 9;
-    transition: 0.4s;
-    position: fixed;
-    margin: 0;
-    padding: 0;
-    height: 3rem;
-    transition: 0.3s ;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  transition: 0.4s;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  height: 3rem;
+  transition: 0.3s;
 }
-
 
 .hamburger {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
-
 
 .menu {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  position: relative;
 }
 
-
 .menu > div {
-    display: grid;
+  display: grid;
 }
 
 .menu__btn {
-    display        : flex;
-    align-items    : stretch;
-    justify-content: flex-start;
-    color: var(--black);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  color: var(--black);
 }
 
 .menu__btn:hover {
-    color: var(--black);
-    background-color: var(--blue-secondary);
+  color: var(--black);
+  background-color: var(--blue-secondary);
 }
 
 .menu__btn:hover {
-    color: var(--blue);
+  color: var(--blue);
 }
-
-
 
 @media screen and (max-width: 700px) {
-
-    .menu {
-        position: relative;
-        right: inherit;
-        top: 1rem;
-    }
-
+  .menu {
+    position: relative;
+    right: inherit;
+    top: 1rem;
+  }
 }
