@@ -1,1 +1,1 @@
-export const newArray = (array) => Array.from(new Set([...array]))
+export const newArray = (array) => Array.from(new Set([...array]));

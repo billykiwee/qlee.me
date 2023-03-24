@@ -1,66 +1,59 @@
-
 .pricing-blocks {
-    display: flex;
+  display: flex;
 }
 
 .article__benefits {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .question {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-
 @media screen and (max-width: 980px) {
-
-    .pricing-blocks {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
+  .pricing-blocks {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 780px) {
-
-    .pricing-blocks {
-        justify-content: center;
-    }
-    .article__benefits {
-        width:  322px;
-        height: 100%;
-    }
-    .article__plan {
-        width: 88%!important;;
-        height: unset!important;
-    }
-    .question {
-        grid-template-columns: unset;
-    }
+  .pricing-blocks {
+    justify-content: center;
+  }
+  .article__benefits {
+    width: 322px;
+    height: 100%;
+  }
+  .article__plan {
+    width: 88% !important;
+    height: unset !important;
+  }
+  .question {
+    grid-template-columns: unset;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  .pricing-blocks {
+    flex-wrap: grid;
+  }
+  .pricing-blocks > div {
+    width: 100%;
+  }
 
-    .pricing-blocks {
-        flex-wrap: grid;
-    }
-    .pricing-blocks > div {
-        width:  100%;
-
-    }   
-    
-    .article__benefits {
-        width:  unset;
-    }
+  .article__benefits {
+    width: unset;
+  }
 }
 
-
 .btn__select-billing:hover {
-    background-color: var(--blue-secondary);
+  background-color: var(--blue-secondary);
 }
 
 .article__plan {
-    border : 1px solid var(--grey-2);
-    width: 322px;
-    height: 580px;
+  border: 1px solid var(--grey-2);
+  width: 322px;
+  height: 580px;
 }

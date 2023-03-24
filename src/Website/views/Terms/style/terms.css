@@ -1,14 +1,14 @@
 .terms > div > h1 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .terms > div > h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0;
-    margin-top: 2rem;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+  margin-top: 2rem;
 }
 
 .terms > div > p {
-    margin-top : 0.4rem;
-    font-weight: 300;
+  margin-top: 0.4rem;
+  font-weight: 300;
 }

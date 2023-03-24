@@ -1,3 +1,3 @@
 export const percentage = (sum, value) => {
-    return ((value / sum) * 100 ).toFixed(0)
-}
+  return ((value / sum) * 100).toFixed(0);
+};

@@ -1,6 +1,5 @@
-
 export function makeFriendly(number) {
-    let n =  new Intl.NumberFormat('en-EN', {notation: 'compact'})
+  let n = new Intl.NumberFormat("en-EN", { notation: "compact" });
 
-    return n.format(number)
+  return n.format(number);
 }

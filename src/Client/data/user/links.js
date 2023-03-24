@@ -1,95 +1,80 @@
-import { useState, useEffect } from 'react'
-import { db } from '../../../App/database/firebase'
-import { useStateValue } from '../../../App/provider/StateProvider'
-
+import { useState, useEffect } from "react";
+import { db } from "../../../App/database/firebase";
+import { useStateValue } from "../../../App/provider/StateProvider";
 
 export function useFetchLinks() {
+  const [{ user }] = useStateValue();
 
-    const [{ user }] = useStateValue()
+  const [links, setLinks] = useState([]);
 
-    const [links, setLinks] = useState([])
+  useEffect(
+    (e) => {
+      if (!user) return;
 
-    useEffect(e=> {
+      try {
+        db.collection("links").onSnapshot((snapshot) => {
+          const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-        if (!user) return
+          const userLinks = fetchedLinks.filter((e) => e.user === user.email);
 
-        try {
-            db.collection("links")
-            .onSnapshot(snapshot=> {
-        
-                const fetchedLinks = snapshot.docs.map(doc => doc.data())
+          if (!userLinks.length) setLinks("no_data");
+          else setLinks(userLinks);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [user]
+  );
 
-                const userLinks = fetchedLinks.filter(e=> e.user === user.email)
-        
-                if (!userLinks.length) setLinks('no_data')
-                else setLinks(userLinks)
-            })
-    
-        } catch (error) {
-            console.log(error)
-        }
-
-    }, [user])
-
-    return links
+  return links;
 }
 
 export function useFetchUsersLink_in_bio(user) {
+  const [linksData, setLinksData] = useState([]);
 
-    const [linksData, setLinksData] = useState([])
+  useEffect(() => {
+    const data = db
+      .collection("links")
+      .where("linkInBio", "==", true)
+      .onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+          setLinksData("no_data");
+        }
 
-    useEffect(() => {
+        const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-        const data = db.collection("links")
-        .where("linkInBio", "==", true)
-        .onSnapshot(snapshot => {
+        setLinksData(fetchedLinks);
+      });
 
-            if (snapshot.empty) {
-                setLinksData("no_data")
-            }
-    
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-    
-            setLinksData(fetchedLinks)
-        })
-    
-        return () => data()
+    return () => data();
+  }, [user]);
 
-    }, [user])
-  
-    return linksData
+  return linksData;
 }
 
 export function useFetchUsersLink_in_bio_Settings(user) {
+  const [linksData, setLinksData] = useState([]);
 
+  useEffect(() => {
+    const data = db
+      .collection("link-in-bio")
+      .where("user", "==", user?.email)
+      .onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+          setLinksData("no_data");
+        }
 
-    const [linksData, setLinksData] = useState([])
+        const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-    useEffect(() => {
+        setLinksData(fetchedLinks);
+      });
 
-        const data = db.collection("link-in-bio")
-        .where("user", "==", user?.email)
-        .onSnapshot(snapshot => {
+    return () => data();
+  }, [user]);
 
-            if (snapshot.empty) {
-                setLinksData("no_data")
-            }
-    
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-    
-            setLinksData(fetchedLinks)
-        })
-    
-        return () => data()
-
-    }, [user])
-  
-    return linksData
+  return linksData;
 }
-
-
-
-
 
 /* export function useFetchLinks(user, type) {
 

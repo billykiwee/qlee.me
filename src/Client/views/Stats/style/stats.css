@@ -1,97 +1,89 @@
 .progress-bar-stat {
-    height: 8px;
-    width: 122px;
-    display: flex;
-    justify-content: flex-end;
+  height: 8px;
+  width: 122px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-
-.progress-bar-stat > div { 
-    height: 100%;
-    animation: progressBar 800ms ease-in-out;
+.progress-bar-stat > div {
+  height: 100%;
+  animation: progressBar 800ms ease-in-out;
 }
-
 
 @keyframes progressBar {
-    from {
-        width : 0%;
-    }
+  from {
+    width: 0%;
+  }
 }
 
 .stats-blocks {
-    display: flex;
+  display: flex;
 }
 
 @media screen and (max-width: 740px) {
-
-    .stats-blocks {
-        display: grid;
-    }
+  .stats-blocks {
+    display: grid;
+  }
 }
-
-
 
 .title__stats {
   border-bottom: 1px solid var(--grey);
   padding: 0 0 0.4rem;
 }
 
-
-
-
 /*  Dropdown stats */
 .dropdown {
-    background-color: var(--white);
-  }
-  
-  .dropdown-header {
-    padding: 15px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .dropdown-body {
-    padding: 5px;
-    display: none;
-  }
-  
-  .dropdown-body.open {
-    display: grid;
-    position: absolute;
-    z-index: 9;
-    background:  var(--white);
-    border-radius: 1rem;
-    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
-  }
-  
-  .dropdown-item {
-    padding: 10px;
-    border-radius: 0.4rem;
-  }
-  
-  .dropdown-item:hover {
-    cursor: pointer;
-  }
-  
-  .dropdown-item-dot {
-    opacity: 0;
-    color: #91A5BE;
-    transition: all .2s ease-in-out;
-  }
-  
-  .dropdown-item-dot.selected {
-    opacity: 1;
-  }
-  
-  .icon {
-    font-size: 13px;
-    color: #91A5BE;
-    transform: rotate(0deg);
-    transition: all .2s ease-in-out;
-  }
-  
-  .icon.open {
-    transform: rotate(90deg);
-  }
+  background-color: var(--white);
+}
+
+.dropdown-header {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-body {
+  padding: 5px;
+  display: none;
+}
+
+.dropdown-body.open {
+  display: grid;
+  position: absolute;
+  z-index: 9;
+  background: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+}
+
+.dropdown-item {
+  padding: 10px;
+  border-radius: 0.4rem;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+}
+
+.dropdown-item-dot {
+  opacity: 0;
+  color: #91a5be;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-item-dot.selected {
+  opacity: 1;
+}
+
+.icon {
+  font-size: 13px;
+  color: #91a5be;
+  transform: rotate(0deg);
+  transition: all 0.2s ease-in-out;
+}
+
+.icon.open {
+  transform: rotate(90deg);
+}

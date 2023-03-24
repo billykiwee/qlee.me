@@ -1,11 +1,9 @@
-import React from 'react'
-import UniqueID from '../../../../../App/utils/uniqueID'
+import React from "react";
 
 export function Clics({ stat }) {
-
-    return (
-        <div className='display justify-s-b ' >
-            <span>{stat}</span>
-        </div>
-    )
+  return (
+    <div className="display justify-s-b ">
+      <span>{stat}</span>
+    </div>
+  );
 }

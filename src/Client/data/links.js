@@ -1,76 +1,64 @@
-import { useState, useEffect } from 'react'
-import { db } from '../../App/database/firebase'
-
+import { useState, useEffect } from "react";
+import { db } from "../../App/database/firebase";
 
 export function useFetchAllLinks(LinkID) {
+  const [linksData, setLinksData] = useState([]);
 
-    const [linksData, setLinksData] = useState([])
+  useEffect(() => {
+    const data = db.collection("links").onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        setLinksData("no links");
+      }
 
-    useEffect(() => {
+      const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-        const data = db.collection('links').onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                setLinksData("no links")
-            }
-    
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-    
-            if (!LinkID) {
-                setLinksData(fetchedLinks.sort((x, y) => y.date - x.date))
-            }
-            else setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
-        })
-    
-        return () => data()
+      if (!LinkID) {
+        setLinksData(fetchedLinks.sort((x, y) => y.date - x.date));
+      } else setLinksData(fetchedLinks.filter((e) => e.id === LinkID)[0]);
+    });
 
-    }, [LinkID])
-  
-    return linksData
+    return () => data();
+  }, [LinkID]);
+
+  return linksData;
 }
 
-
 export function useFetchStatsLinks() {
+  const [StatsLinks, setStatsLinks] = useState([]);
 
-    const [StatsLinks, setStatsLinks] = useState([])
+  useEffect(() => {
+    const data = db.collection("stats").onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        setStatsLinks("no stats");
+      }
 
-    useEffect(() => {
+      const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-        const data = db.collection('stats').onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                setStatsLinks("no stats")
-            }
+      setStatsLinks(fetchedLinks);
+    });
 
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
+    return () => data();
+  }, []);
 
-            setStatsLinks(fetchedLinks)
-        })
-    
-        return () => data()
-
-    }, [])
-  
-    return StatsLinks
+  return StatsLinks;
 }
 
 export function useGetLink(LinkID) {
+  const [linksData, setLinksData] = useState([]);
 
-    const [linksData, setLinksData] = useState([])
+  useEffect(() => {
+    const data = db.collection("links").onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        setLinksData("no links");
+      }
 
-    useEffect(() => {
+      const fetchedLinks = snapshot.docs.map((doc) => doc.data());
 
-        const data = db.collection('links').onSnapshot(snapshot => {
-            if (snapshot.empty) {
-                setLinksData("no links")
-            }
-    
-            const fetchedLinks = snapshot.docs.map(doc => doc.data())
-    
-            setLinksData(fetchedLinks.filter(e=> e.id === LinkID)[0])
-        })
-    
-        return () => data()
+      setLinksData(fetchedLinks.filter((e) => e.id === LinkID)[0]);
+    });
 
-    }, [LinkID])
-  
-    return linksData
+    return () => data();
+  }, [LinkID]);
+
+  return linksData;
 }
