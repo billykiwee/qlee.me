@@ -1,6 +1,7 @@
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { useState } from "react";
+
 import { GetWidth } from "../../../../../App/utils/GetWidth";
 
 export function FAQ() {

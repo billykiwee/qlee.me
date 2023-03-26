@@ -60,7 +60,7 @@ export default function Plans({ billing }) {
                 </div>
                 {User.plan === plan.id && (
                   <div>
-                    <img src="/images/check.svg" width={22} />
+                    <img src="/images/check.svg" width={22} alt="" />
                   </div>
                 )}
               </div>

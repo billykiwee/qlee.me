@@ -28,7 +28,6 @@ import { Link } from "react-router-dom";
 import Links from "../Features/views/Links";
 import Statistics from "../Features/views/Statistics";
 import QRCode from "react-qr-code";
-import translate from "../../../App/translate/translate";
 
 export default function Home() {
   const { auth, users, stats, links } = useStateProps();
@@ -162,10 +161,8 @@ export default function Home() {
               <span className="f-s-20 c-blue f-w-600">ONE SECOND TO</span>
               <h1 className="m-t-0 m-b-1">Qlee your links</h1>
               <span className="opacity f-s-20 f-w-400">
-                {translate(
-                  "fr",
-                  "Pas de panique, ceci est juste le meilleur URL shortener pour ta présence sur internet que tu n'as jamais vu !"
-                )}
+                Pas de panique, ceci est juste le meilleur URL shortener pour ta
+                présence sur internet que tu n'as jamais vu !
               </span>
             </div>
 
@@ -176,15 +173,11 @@ export default function Home() {
               >
                 <Link to={!auth ? "/login" : "dashboard"}>
                   <button className="blue border-b p-1 border-r-1 h-4">
-                    <span className="f-s-16 c-white">
-                      {translate("fr", "Créer un lien")}
-                    </span>
+                    <span className="f-s-16 c-white">Create a link</span>
                   </button>
                 </Link>
                 <div className="display justify-c">
-                  <span className="opacity">
-                    {translate("en", "It's free !")}
-                  </span>
+                  <span className="opacity">It's free !</span>
                 </div>
               </div>
             </div>

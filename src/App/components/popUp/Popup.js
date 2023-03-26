@@ -1,8 +1,4 @@
-import {
-  ExclamationTriangleIcon,
-  XCircleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
+import { ExclamationTriangleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import "../../css/popup.css";
 import { useStateProps } from "../../provider/ContextProvider";
@@ -41,7 +37,12 @@ export default function Popup() {
               <div className="grid gap grey border-r-04 p-2">
                 <div className="display justify-c">
                   {statu === "success" && (
-                    <img src="/images/success.svg" width={44} height={44} />
+                    <img
+                      src="/images/success.svg"
+                      width={44}
+                      height={44}
+                      alt=""
+                    />
                   )}
                   <span className="f-s-2rem">
                     {statu === "error" ? "❌" : "🤔"}
