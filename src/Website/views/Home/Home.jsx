@@ -29,6 +29,9 @@ import Links from "../Features/views/Links";
 import Statistics from "../Features/views/Statistics";
 import QRCode from "react-qr-code";
 
+import en from "../../../en.json";
+import fr from "../../../fr.json";
+
 export default function Home() {
   const { auth, users, stats, links } = useStateProps();
 
@@ -149,8 +152,98 @@ export default function Home() {
 
   const width = GetWidth();
 
+  function translate(str) {
+    const variables = str?.variables;
+
+    const id = str.id;
+
+    const languages = { en, fr };
+
+    const userLang = navigator.language || navigator.userLanguage;
+
+    const defaultLang = "en" ?? userLang.split("-")[0];
+
+    const value = languages[defaultLang][id];
+
+    const regex = /{{\s*(\w+)\s*}}/g;
+
+    if (!value) {
+      return console.error(`The ID : "${id}" "not found in translations`);
+    }
+    if (variables) {
+      // Pas de variable
+
+      const errorVariables = () => {
+        const mustVariables = [];
+
+        value.replaceAll(regex, (key) => {
+          const variables = key.replaceAll("{{", "").replaceAll("}}", "");
+
+          mustVariables.push(variables);
+        });
+        console.error(
+          `This translations must contains those variables : ${mustVariables.join(
+            ", "
+          )}.`
+        );
+      };
+
+      if (!Object.values(variables).length) return errorVariables();
+
+      const mustVariables = [];
+
+      value.replaceAll(regex, (key) => {
+        const variables = key.replaceAll("{{", "").replaceAll("}}", "");
+
+        mustVariables.push(variables);
+      });
+
+      const ifVariablesDosentMatches = () => {
+        const missingElements = Object.keys(variables).filter(
+          (el) => !mustVariables.includes(el)
+        );
+        return console.error(
+          `The variable " ${missingElements.join(
+            ", "
+          )} " is not asignable to this translation. It must contains those variables : ${mustVariables.join(
+            ", "
+          )}`
+        );
+      };
+
+      ifVariablesDosentMatches();
+    }
+
+    const removeBrace = (value) => {
+      value.replaceAll("{{", "").replaceAll("}}", "");
+    };
+
+    if (variables) {
+      return value.replaceAll(regex, (key) => {
+        const getVariablesValues = key
+          .replaceAll("{{", "")
+          .replaceAll("}}", "");
+
+        return variables[getVariablesValues];
+      });
+    } else {
+      return removeBrace(value);
+    }
+  }
+
   return (
     <Main className="grid" style={{ gap: width < 780 ? "5rem" : "10rem" }}>
+      {translate({
+        id: "goodMorning-name",
+        variables: {
+          namde: "John",
+          namdefeee: "John",
+          mail: "joo@gmail.com",
+        },
+      })}
+
+      {translate({ id: "null" })}
+
       <section className="display justify-c w-100p">
         <div
           className="display justify-s-b align-top"
@@ -173,11 +266,11 @@ export default function Home() {
               >
                 <Link to={!auth ? "/login" : "dashboard"}>
                   <button className="blue border-b p-1 border-r-1 h-4">
-                    <span className="f-s-16 c-white">Create a link</span>
+                    <span className="f-s-16 c-white">Créer un lien</span>
                   </button>
                 </Link>
                 <div className="display justify-c">
-                  <span className="opacity">It's free !</span>
+                  <span className="opacity">C'est gratuit !</span>
                 </div>
               </div>
             </div>

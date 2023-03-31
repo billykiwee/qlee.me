@@ -9,7 +9,6 @@ import Login from "../../../Website/views/Login/Login";
 import Main from "../../../App/components/Main";
 import { useStateProps } from "../../../App/provider/ContextProvider";
 import { List } from "./components/List";
-import translate from "../../../translate";
 
 export default function Dashboard() {
   const { auth, user, snackBar } = useStateProps();
@@ -22,13 +21,6 @@ export default function Dashboard() {
   if (!auth) return <Login />;
   return (
     <Main>
-      <h1>{translate("en", "super je suig ezfez ezfrej ez ")}</h1>
-
-      {translate("en", "super je suig ezfez ezfrej ez ")}
-      {translate(
-        "en",
-        "super je suig ezfez zfzefz suig ezfez zfz suig ezfez zfz suig ezfez zfz ez "
-      )}
       <div className="grid gap-3rem blocks w-100">
         <div className="grid gap">
           <div className="grid gap-2rem">
