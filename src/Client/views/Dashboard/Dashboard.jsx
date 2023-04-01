@@ -38,10 +38,15 @@ export default function Dashboard() {
                 });
               }}
             >
-              <div className="grid gap-1rem p-2 border-r-1 white border border-b">
+              <div className="grid gap-1rem p-2 border-r-1 border border-b">
                 <div>
                   <span className="f-s-25 f-w-500">Créer un lien</span>
                 </div>
+                {Error && (
+                  <div className="display justify-c">
+                    <small className="c-red">{Error}</small>
+                  </div>
+                )}
                 <div className="grid gap-1rem">
                   <div className="grid gap">
                     <div className="display w-100p">
@@ -72,11 +77,6 @@ export default function Dashboard() {
                     </button>
                   </div>
                 </div>
-                {Error && (
-                  <div className="display justify-c">
-                    <small className="c-red">{Error}</small>
-                  </div>
-                )}
               </div>
             </form>
           </div>

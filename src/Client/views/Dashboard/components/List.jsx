@@ -24,7 +24,7 @@ export function List({ links, User }) {
           .map((link, i) => {
             return (
               <article
-                className="display gap p-1 border-b border-r-1 border justify-s-b white h-2"
+                className="display gap p-1 border-b border-r-1 border justify-s-b white h-3"
                 key={i}
               >
                 <div className="display gap-1rem">

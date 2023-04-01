@@ -17,26 +17,28 @@ export default function Redirection() {
   const createStat = async () => {
     try {
       const link = await getLink(LinkID);
+
       const adress = await getAdress();
 
-      const stat = {
-        LinkID,
-        statID,
-        adress,
-        reference: document.referrer ?? null,
-        device: getDevice(),
-        performance: performance.now() - startLoading,
-        date: serverTimestamp(),
-      };
+      if (Object.values(link).length) {
+        const stat = {
+          LinkID,
+          statID,
+          adress,
+          reference: document.referrer ?? null,
+          device: getDevice(),
+          performance: performance.now() - startLoading,
+          date: serverTimestamp(),
+        };
 
-      await db.collection("stats").doc(statID).set(stat);
+        db.collection("stats").doc(statID).set(stat);
 
-      await db
-        .collection("links")
-        .doc(LinkID)
-        .update({ views: link.views + 1 });
+        db.collection("links")
+          .doc(LinkID)
+          .update({ views: link.views + 1 });
 
-      window.location = link.url;
+        window.location = link.url;
+      }
     } catch (err) {
       console.log(err);
       window.location = "/page404";
