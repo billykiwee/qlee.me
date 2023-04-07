@@ -29,8 +29,6 @@ import Links from "../Features/views/Links";
 import Statistics from "../Features/views/Statistics";
 import QRCode from "react-qr-code";
 
-import { translate } from "../../../App/translate/translate";
-
 export default function Home() {
   const { auth, users, stats, links } = useStateProps();
 

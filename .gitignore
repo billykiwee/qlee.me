@@ -3,3 +3,4 @@ node_modules
 push.sh
 tiktok.js
 api.js
+server/data/firebase.json

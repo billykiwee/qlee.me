@@ -15,6 +15,8 @@
     "canvg": "^4.0.1",
     "cors": "^2.8.5",
     "country-flag-icons": "^1.5.5",
+    "dotenv": "^16.0.3",
+    "env": "^0.0.2",
     "env-cmd": "^10.1.0",
     "firebase": "^9.15.0",
     "firebase-admin": "^11.6.0",
