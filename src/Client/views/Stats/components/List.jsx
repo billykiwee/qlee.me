@@ -40,6 +40,8 @@ export default function List({ props }) {
 
   const [linkListed, add] = useState(10);
 
+  console.log(linksFilters());
+
   return (
     <div className="grid gap">
       <div className="grid gap" id="div-links">
