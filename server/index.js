@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path");
 require("dotenv").config();
+const { performance } = require("perf_hooks");
 
 var admin = require("firebase-admin");
 
 const json = require("./firebase.json");
+const { updateLink } = require("./data/update");
+const { serverTimestamp } = require("firebase/firestore");
+const { getStatistics } = require("./statistics/statistics");
 
 admin.initializeApp({
   credential: admin.credential.cert(json),
@@ -21,10 +25,6 @@ const app = express();
 const port = 3002;
 
 app.use(express.static(path.join(__dirname, "dist")));
-
-app.get("/", (req, res) => {
-  res.send("Qlee.me redirect is now in process");
-});
 
 async function getData(collectionRef) {
   const dataJSON = [];
@@ -44,38 +44,35 @@ async function getData(collectionRef) {
   return dataJSON;
 }
 
-getData(collectionRef)
-  .then((data) => {
-    app.get("/:id", (req, res) => {
-      const link = data.find((link) => link.id === req.params.id);
+app.get("/:id", async (req, res) => {
+  const startLoading = performance.now();
 
-      if (link) {
-        updateLink(link);
+  const link = await getLink(req.params.id);
+  if (link) {
+    await updateLink(link, collectionRef);
 
-        res.redirect(link.url);
-      }
-    });
+    // res.redirect(link.url);
 
-    app.listen(port, () => {
-      console.log(`Running on http://localhost:${port}`);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+    const end = performance.now();
+    const endLoading = end - startLoading;
 
-async function updateLink(link) {
-  const updateData = {
-    views: link.views + 1,
-  };
+    const stats = await getStatistics(req, link, endLoading);
 
-  collectionRef
-    .doc(link.id)
-    .update(updateData)
-    .then(() => {
-      console.log("Document mis à jour avec succès ! :", link);
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la mise à jour du document :", error);
-    });
+    res.write(`${JSON.stringify(stats, null, 2)} `);
+
+    res.send();
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Running on http://localhost:${port}`);
+});
+
+async function getLink(id) {
+  const snapshot = await collectionRef.doc(id).get();
+  if (snapshot.exists) {
+    return snapshot.data();
+  } else {
+    return null;
+  }
 }
