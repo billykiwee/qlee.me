@@ -16,7 +16,7 @@ async function getStatistics(req, link, endLoading) {
       ? "Mobile"
       : "Desktop";
 
-  const stats = {
+  return {
     adress,
     date: new Date(),
     device,
@@ -26,8 +26,6 @@ async function getStatistics(req, link, endLoading) {
     speed: (endLoading / 1000).toFixed(2),
     views: link.views,
   };
-
-  return stats;
 }
 module.exports = { getStatistics };
 

@@ -7,7 +7,12 @@ async function updateLink(link, collection) {
     .doc(link.id)
     .update(updateData)
     .then(() => {
-      console.log("Document mis à jour avec succès ! :", link);
+      const log = `
+✅ New update ${new Date().toDateString()} 
+|- api: http://localhost:3002/${link.id}/qlee.me-api.json
+`;
+
+      console.log(log);
     })
     .catch((error) => {
       console.error("Erreur lors de la mise à jour du document :", error);
