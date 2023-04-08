@@ -9,6 +9,7 @@ const { updateLink } = require("./data/update");
 
 const { getStatistics } = require("./statistics/statistics");
 const { getLink } = require("./data/get");
+const open = require("open");
 
 admin.initializeApp({
   credential: admin.credential.cert(json),
@@ -36,7 +37,10 @@ app.get("/:id", async (req, res) => {
   const end = performance.now();
   const endLoading = end - startLoading;
 
-  //const stats = await getStatistics(req, link, endLoading);
+  const statsCollection = db.collection("statistics");
+
+  const stats = await getStatistics(req, link, endLoading);
+  statsCollection.add(stats);
 
   //res.write(`${JSON.stringify(stats, null, 2)} `);
 

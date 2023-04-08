@@ -1,7 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
+const os = require("os");
 
 async function getStatistics(req, link, endLoading) {
-  const adress = await getAdress();
+  const ip = await getIP();
 
   const refferer = req.get("Referer")
     ? new URL(req.get("Referer")).hostname
@@ -17,10 +18,10 @@ async function getStatistics(req, link, endLoading) {
       : "Desktop";
 
   return {
-    adress,
     date: new Date(),
     device,
     id: uuidv4(),
+    ip,
     linkID: link.id,
     refferer,
     speed: (endLoading / 1000).toFixed(2),
@@ -29,19 +30,23 @@ async function getStatistics(req, link, endLoading) {
 }
 module.exports = { getStatistics };
 
-async function getAdress() {
+async function getIP() {
   return fetch("https://api.ipify.org?format=json")
     .then((response) => response.json())
     .then((data) => data.ip)
     .then(async (ip) => {
-      return fetch(`https://ipapi.co/${ip}/json/`)
-        .then((response) => response.json())
-        .then((adress) => {
-          return {
-            country: adress.country_name,
-            city: adress.city,
-            country_code: adress.country_code,
-          };
-        });
+      return ip;
+    });
+}
+
+async function getAdress(ip) {
+  return fetch(`https://ipapi.co/${ip}/json/`)
+    .then((response) => response.json())
+    .then((adress) => {
+      return {
+        country: adress.country_name,
+        city: adress.city,
+        country_code: adress.country_code,
+      };
     });
 }
