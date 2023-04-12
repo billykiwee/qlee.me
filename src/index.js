@@ -10,8 +10,6 @@ import { PropsContext, PropsProvider } from "./App/provider/ContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-console.log(process.env);
-
 root.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
