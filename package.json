@@ -44,7 +44,6 @@
     "react-scripts": "5.0.1",
     "stripe": "^9.12.0",
     "swiper": "^8.4.5",
-    "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
