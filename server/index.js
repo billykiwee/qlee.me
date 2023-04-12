@@ -9,7 +9,6 @@ const { updateLink } = require("./data/update");
 
 const { getStatistics } = require("./statistics/statistics");
 const { getLink } = require("./data/get");
-const open = require("open");
 
 admin.initializeApp({
   credential: admin.credential.cert(json),

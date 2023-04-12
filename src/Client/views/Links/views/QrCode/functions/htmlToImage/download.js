@@ -6,8 +6,6 @@ export async function download(name, QrCode) {
   htmlToImage
     .toPng(node)
     .then((dataUrl) => {
-      console.log(dataUrl);
-
       const link = document.createElement("a");
       link.download = name + "-QrCode.png";
       link.href = dataUrl;
