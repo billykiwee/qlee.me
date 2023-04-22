@@ -1,4 +1,7 @@
 const { exec } = require("child_process");
+const express = require("express");
+
+const app = express();
 
 const pushEveryXMinutes = 1;
 
@@ -22,4 +25,7 @@ function gitPush() {
   );
 }
 
-setTimeout(gitPush, pushEveryXMinutes * 1000);
+app.listen(8080, function () {
+  setTimeout(gitPush, pushEveryXMinutes * 1000);
+  console.log("push running");
+});
