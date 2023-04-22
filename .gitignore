@@ -1,6 +1,5 @@
 node_modules
 .env
 push.sh
-tiktok.js
 api.js
 server/firebase.json
