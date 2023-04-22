@@ -1,186 +1,168 @@
 .main-home {
-    gap: 6rem;
+  gap: 6rem;
 }
-
-
 
 .title-home > span {
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--grey-300);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--grey-300);
 }
 
-
 .steps {
-    display: flex;
+  display: flex;
 }
 
 .title-steps {
-
-    text-align: center;
+  text-align: center;
 }
 
 .title-steps > h2 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 .title-steps > small {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .steps-div {
-    border-radius: 2rem;
-    background-color: var(--blue-secondary);
-    padding: 4rem;
+  border-radius: 2rem;
+  background-color: var(--blue-secondary);
+  padding: 4rem;
 }
 
 .steps-blocks {
-    padding: 2rem;
-    border-radius: 2rem;
-    display: grid;
-    height: 254px;
-    align-content: space-around;
-    background-color: var(--white);
-    border-bottom: 10px solid #c1daff;
+  padding: 2rem;
+  border-radius: 2rem;
+  display: grid;
+  height: 254px;
+  align-content: space-around;
+  background-color: var(--white);
+  border-bottom: 10px solid #c1daff;
 }
 
 .steps-blocks-head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 .steps-blocks-head > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .steps-blocks-head > span {
-    text-align: center;
+  text-align: center;
 }
-
 
 .section2-icon {
-    width: 54px;
-    height: 54px;
-    display: flex;
+  width: 54px;
+  height: 54px;
+  display: flex;
 }
 .section2-icon > svg {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
-
 .subject-div {
-    display: grid;
-    justify-content: center;
-    gap: 2rem;
-    text-align: center;
+  display: grid;
+  justify-content: center;
+  gap: 2rem;
+  text-align: center;
 }
 
 .subject-div-blocks {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .subject-blocks {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    background-color: var(--grey);
-    padding: 0.6rem;
-    padding-left: 1.4rem;
-    padding-right: 1.4rem;
-    height: 20px;
-    border-radius: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: var(--grey);
+  padding: 0.6rem;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+  height: 20px;
+  border-radius: 2rem;
 }
 .subject-blocks:hover {
-    background-color: #e2e1e1a4;
+  background-color: #e2e1e1a4;
 }
 
 .exemples-div-blocks {
-    display: grid;
-    gap: 1rem;
+  display: grid;
+  gap: 1rem;
 }
-.exemples-div-blocks > div >img {
-    border-radius: 2rem;
+.exemples-div-blocks > div > img {
+  border-radius: 2rem;
 }
 .exemples-img {
-    border-radius: 2rem;
-    height: 444px;
+  border-radius: 2rem;
+  height: 444px;
 }
 .exemples-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--grey-300);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--grey-300);
 }
 
 .title-subject {
-    display: grid;
+  display: grid;
 }
 
 .title-subject > h2 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 .title-subject > small {
-    font-size: 1rem;
+  font-size: 1rem;
 }
-
-
 
 .features {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
-
-
 
 @media screen and (max-width: 780px) {
+  .features {
+    display: grid;
+  }
+  .features-blocks {
+    width: unset;
+  }
 
-    .features {
-        display: grid
-    }
-    .features-blocks {
-        width: unset;
-    }
-    
+  .p-2 {
+    padding: 2rem;
+  }
 
-    .p-2 {
-        padding: 2rem;
-    }
+  .title-home > span {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
 
+  .exemples-img {
+    height: 288px;
+  }
 
+  .steps {
+    display: grid;
+  }
+  .title-steps > small {
+    font-size: 14px;
+  }
+  .steps-div {
+    padding: 2rem;
+  }
 
-    .title-home > span {
-        font-size: 1.2rem;
-        font-weight: 400;
-    }
-
-    .exemples-img {
-        height: 288px;
-    }
-    
-
-    .steps {
-        display: grid;
-    }
-    .title-steps > small {
-        font-size: 14px;
-    }
-    .steps-div {
-        padding: 2rem;
-    }
-
-    .title-subject > h2 {
-        font-size: 2rem;
-    }
-    .title-subject > small {
-        font-size: 14px;
-    }
+  .title-subject > h2 {
+    font-size: 2rem;
+  }
+  .title-subject > small {
+    font-size: 14px;
+  }
 }
-
-
-
