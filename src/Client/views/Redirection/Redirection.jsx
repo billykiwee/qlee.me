@@ -46,7 +46,7 @@ export default function Redirection() {
   };
 
   useEffect(() => {
-    //createStat();
+    createStat();
   }, []);
 
   return (
