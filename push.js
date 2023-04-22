@@ -14,7 +14,7 @@ function gitPush() {
         );
         return;
       }
-      console.log(`Les modifications ont été poussées à ${date}`);
+      console.log(`git add . && git commit -m "${date}" && git push`);
     }
   );
 }
