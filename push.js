@@ -25,7 +25,4 @@ function gitPush() {
   );
 }
 
-app.listen(8080, () => {
-  setInterval(gitPush, pushEveryXMinutes * 1000);
-  console.log("push running");
-});
+setInterval(gitPush, pushEveryXMinutes * 1000);
