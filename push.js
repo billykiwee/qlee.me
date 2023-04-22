@@ -14,7 +14,10 @@ function gitPush() {
         );
         return;
       }
-      console.log(`git add . && git commit -m "${date}" && git push`);
+      console.log(
+        "\x1b[32m%s\x1b[0m",
+        `Les modifications ont été poussées à ${date}`
+      );
     }
   );
 }
