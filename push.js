@@ -25,4 +25,4 @@ function gitPush() {
   );
 }
 
-setInterval(gitPush, pushEveryXMinutes * 1000);
+setInterval(gitPush, pushEveryXMinutes * 1000 * 60);
