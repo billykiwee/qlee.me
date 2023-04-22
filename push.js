@@ -1,10 +1,12 @@
 const { exec } = require("child_process");
 
-setTimeout(gitPush, 10_000);
+const pushEveryXMinutes = 1;
 
 function gitPush() {
+  const date =
+    new Date().toDateString() + " " + new Date().toLocaleTimeString();
   exec(
-    `git add . && git commit -m "${new Date()}" && git push`,
+    `git add . && git commit -m "${date}" && git push`,
     (err, stdout, stderr) => {
       if (err) {
         console.error(
@@ -12,7 +14,9 @@ function gitPush() {
         );
         return;
       }
-      console.log(`Les modifications ont été poussées à ${new Date()}`);
+      console.log(`Les modifications ont été poussées à ${date}`);
     }
   );
 }
+
+setTimeout(gitPush, pushEveryXMinutes * 1000);
