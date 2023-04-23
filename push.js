@@ -8,8 +8,6 @@ const pushEveryXMinutes = 10;
 const args = process.argv.slice(2);
 const name = args.filter((a) => a !== "-m").join(" ");
 
-console.log(name);
-
 function gitPush() {
   const date =
     new Date().toDateString() + " " + new Date().toLocaleTimeString();
@@ -18,7 +16,7 @@ function gitPush() {
     `git add . && git commit -m "${name}" && git push`,
     (err, stdout, stderr) => {
       if (err) {
-        console.log(name);
+        console.log(stdout, stderr);
         return;
       }
       console.log("\x1b[32m%s\x1b[0m", `Push code done: ${name}`);
