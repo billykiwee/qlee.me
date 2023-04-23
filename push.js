@@ -20,7 +20,8 @@ function gitPush() {
         return;
       }
       console.log("\x1b[32m%s\x1b[0m", `Code pushed`);
-      console.log(`   ${name} at ${date}`);
+      console.log(`   message : ${name}`);
+      console.log(`   date : ${date}`);
     }
   );
 }
