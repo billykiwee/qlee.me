@@ -8,11 +8,7 @@ const name = args.filter((a) => a !== "-m").join(" ");
 
 const loop = {
   active: args.includes("-loop"),
-  time: args.map((a) => {
-    if (a !== "-loop") {
-      return a;
-    }
-  }),
+  time: args.toString().split("-loop"),
 };
 console.log(loop);
 
