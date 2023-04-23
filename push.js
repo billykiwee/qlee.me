@@ -19,7 +19,8 @@ function gitPush() {
         console.log(stdout);
         return;
       }
-      console.log("\x1b[32m%s\x1b[0m", `Push code done: ${name} at ${date}`);
+      console.log("\x1b[32m%s\x1b[0m", `Code pushed`);
+      console.log(`   ${name} at ${date}`);
     }
   );
 }
