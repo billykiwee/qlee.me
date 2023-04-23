@@ -1,12 +1,16 @@
 const { exec } = require("child_process");
 const express = require("express");
-
 const app = express();
 
-const pushEveryXMinutes = 10;
-
 const args = process.argv.slice(2);
+
 const name = args.filter((a) => a !== "-m").join(" ");
+
+const loop = {
+  active: args.includes("-loop"),
+  time: args.filter((a) => a !== "--loop"),
+};
+console.log(loop);
 
 function gitPush() {
   const date =
@@ -28,6 +32,9 @@ function gitPush() {
 
 app.listen(8080, () => {
   gitPush();
-  setInterval(gitPush, pushEveryXMinutes * 1000 * 60);
+
+  if (loop) {
+    setInterval(gitPush, loop.time * 1000 * 60);
+  }
   console.log("push running");
 });
