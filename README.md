@@ -1,4 +1,4 @@
-<a style="justify-content: center; display: flex;" href='https://qlee.me/' >
+<a style="justify-content: center; display: flex;margin:auto;" href='https://qlee.me/' >
   <img src="https://qlee.me/favicon.ico" width="166px" alt="Qlee.me logo" />
 </a>
 
