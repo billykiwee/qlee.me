@@ -9,10 +9,7 @@ Qlee me is the best URL shortener you have never seen !
 ## What you can do with
 
 Short a link from this :
-
-```bash
 https://www.facebook.com/groups/1646286722318242/?hoisted_section_header_type=recently_seen&multi_permalinks=3449625265317704
-```
 
 To this :
 
