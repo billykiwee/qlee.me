@@ -6,7 +6,7 @@ const app = express();
 const pushEveryXMinutes = 10;
 
 const args = process.argv.slice(2);
-const name = args.filter((a) => a !== "-m");
+const name = args.filter((a) => a !== "-m").join(" ");
 
 console.log(name);
 
