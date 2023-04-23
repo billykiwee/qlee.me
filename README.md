@@ -10,11 +10,15 @@ Qlee me is the best URL shortener you have never seen !
 
 Short a link from this :
 
-``bash https://www.facebook.com/groups/1646286722318242/?hoisted_section_header_type=recently_seen&multi_permalinks=3449625265317704`
+```bash
+https://www.facebook.com/groups/1646286722318242/?hoisted_section_header_type=recently_seen&multi_permalinks=3449625265317704
+```
 
 To this :
 
-``bash qlee.me/github@billy`
+```bash
+qlee.me/github@billy
+```
 
 - Put those links to a Link in bio page to share all of your links on social media
 - Generate and customize a QrCode for every links
