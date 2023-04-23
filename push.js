@@ -10,7 +10,7 @@ const name = args.filter((a) => a !== "-m").join(" ");
 
 function gitPush() {
   const date =
-    new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
+    new Date().toLocaleDateString() + " at " + new Date().toTimeString();
 
   exec(
     `git add . && git commit -m "${name}" && git push`,
