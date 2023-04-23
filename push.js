@@ -21,10 +21,7 @@ function gitPush() {
         console.log(name);
         return;
       }
-      console.log(
-        "\x1b[32m%s\x1b[0m",
-        `Les modifications ont été poussées à ${name}`
-      );
+      console.log("\x1b[32m%s\x1b[0m", `Push code done: ${name}`);
     }
   );
 }
