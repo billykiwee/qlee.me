@@ -6,9 +6,9 @@ const app = express();
 const pushEveryXMinutes = 10;
 
 const args = process.argv.slice(2);
-const name = args[0];
+const name = args;
 
-console.log(process.argv);
+console.log(name);
 
 function gitPush() {
   const date =
