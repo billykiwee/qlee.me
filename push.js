@@ -8,7 +8,7 @@ const name = args.filter((a) => a !== "-m").join(" ");
 
 const loop = {
   active: args.includes("-loop"),
-  time: args.filter((a) => a !== "--loop"),
+  time: args.filter((a) => a !== "-loop"),
 };
 console.log(loop);
 
