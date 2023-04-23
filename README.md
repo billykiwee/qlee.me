@@ -14,7 +14,7 @@ https://www.facebook.com/groups/1646286722318242/?hoisted_section_header_type=re
 To this :
 
 ```bash
-qlee.me/github@billy
+qlee.me/facebook-team
 ```
 
 - Put those links to a Link in bio page to share all of your links on social media
