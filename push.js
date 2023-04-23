@@ -33,8 +33,8 @@ function gitPush() {
 app.listen(8080, () => {
   gitPush();
 
-  if (loop) {
+  /* if (loop) {
     setInterval(gitPush, loop.time * 1000 * 60);
-  }
+  } */
   console.log("push running");
 });
