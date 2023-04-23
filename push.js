@@ -8,6 +8,8 @@ const pushEveryXMinutes = 10;
 const args = process.argv.slice(2);
 const name = args[0];
 
+console.log(args);
+
 function gitPush() {
   const date =
     new Date().toDateString() + " " + new Date().toLocaleTimeString();
