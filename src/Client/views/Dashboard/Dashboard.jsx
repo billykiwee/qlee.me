@@ -9,6 +9,7 @@ import Login from "../../../Website/views/Login/Login";
 import Main from "../../../App/components/Main";
 import { useStateProps } from "../../../App/provider/ContextProvider";
 import { List } from "./components/List";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const { auth, user, snackBar } = useStateProps();
@@ -18,7 +19,7 @@ export default function Dashboard() {
 
   const [Error, setError] = useState("");
 
-  if (!auth) return <Login />;
+  if (auth === null) return <Login />;
   return (
     <Main>
       <div className="grid gap-3rem blocks w-100">
