@@ -10,16 +10,16 @@ const name = args.filter((a) => a !== "-m").join(" ");
 
 function gitPush() {
   const date =
-    new Date().toDateString() + " " + new Date().toLocaleTimeString();
+    new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
 
   exec(
     `git add . && git commit -m "${name}" && git push`,
     (err, stdout, stderr) => {
       if (err) {
-        console.log(stderr);
+        console.log(stdout);
         return;
       }
-      console.log("\x1b[32m%s\x1b[0m", `Push code done: ${name}`);
+      console.log("\x1b[32m%s\x1b[0m", `Push code done: ${name} at ${date}`);
     }
   );
 }
