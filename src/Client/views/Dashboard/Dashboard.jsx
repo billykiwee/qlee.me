@@ -9,7 +9,6 @@ import Login from "../../../Website/views/Login/Login";
 import Main from "../../../App/components/Main";
 import { useStateProps } from "../../../App/provider/ContextProvider";
 import { List } from "./components/List";
-import { useEffect } from "react";
 
 export default function Dashboard() {
   const { auth, user, snackBar } = useStateProps();
