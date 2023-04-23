@@ -16,6 +16,7 @@ function gitPush() {
     `git add . && git commit -m "${name}" && git push`,
     (err, stdout, stderr) => {
       if (err) {
+        console.log(name);
         return;
       }
       console.log(
