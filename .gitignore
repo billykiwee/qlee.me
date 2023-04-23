@@ -1,5 +1,5 @@
 node_modules
 .env
-push.sh
+push.js
 api.js
 server/firebase.json
