@@ -4,7 +4,7 @@ import UniqueID from "../../../App/utils/uniqueID";
 import Messages from "../../../App/utils/Messages";
 import Main from "../../../App/components/Main";
 import "../../../App/css/login.css";
-import { GetUnsplashImage } from "../../../Client/lib/api/unsplash";
+
 import { useStateProps } from "../../../App/provider/ContextProvider";
 import { byGoogle } from "./functions/register/byGoogle";
 import { byEmail } from "./functions/register/byEmail";
@@ -27,22 +27,10 @@ export default function Login({ redirect }) {
     <Main>
       <div className="login">
         <div className="login-img">
-          {/* {
-                        unSplash?.url &&
-                        <>
-                            <a href={unSplash.profileUrl} className='display absolute b-0 h-1 p-lr-1 white opacity' onMouseEnter={e=> e.target.style = 'opacity: 1; text-decoration: underline;'} onMouseLeave={e=> e.target.style= 'opacity: ; text-decoration: unset;'} >
-                                <small className='display '>@ {unSplash.author}</small>
-                            </a>
-                            {
-                                !unSplash
-                                ? <Messages loader={Loader} />
-                                : <img className='border-r-2' height='100%' src={unSplash.url} alt={unSplash.author + ' @ ' + unSplash.profileUrl} />
-                            }
-                        </>
-                    } */}
           <img
             className="border-r-2"
             height="100%"
+            alt=""
             src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80"
           />
         </div>
